@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using BusinessLogic_Tests.BusinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
@@ -8,6 +9,7 @@ namespace BusinessLogic_Tests
     public class SphereTests
     {
         private Sphere testSphere;
+
         private float testRadius = 5;
         private float testNegativeRadius = -5;
         private string testName = "Ball";
@@ -75,6 +77,30 @@ namespace BusinessLogic_Tests
             testSphere.Name = nameWithPaddings;
             //assert
             Assert.AreEqual(testSphere.Name, testName);
+        }
+
+        [TestMethod]
+        public void AddSphereToCollection()
+        {
+            //arrange
+            SphereCollection sphereCollection = new SphereCollection();
+            //act
+            bool state = sphereCollection.AddSphere(testName, testRadius);
+            //assert
+            Assert.IsTrue(state);
+        }
+
+        [TestMethod]
+        public void GetSphereFromCollection()
+        {
+            //arrange
+            SphereCollection sphereCollection = new SphereCollection();
+            //act
+            bool state = sphereCollection.AddSphere(testName, testRadius);
+            //assert
+            Sphere getSphere = sphereCollection.GetSphere(testName);
+            Assert.IsTrue(state);
+            Assert.AreEqual(testSphere, getSphere);
         }
     }
 
