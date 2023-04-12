@@ -45,7 +45,6 @@ namespace BusinessLogic_Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(BusinessLogicException), "Name cant have space padding")]
         public void NameWithLeftPaddingFail()
         {
             //arrange
@@ -57,7 +56,6 @@ namespace BusinessLogic_Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(BusinessLogicException), "Name cant have space padding")]
         public void NameWithRightPaddingFail()
         {
             //arrange
@@ -69,7 +67,6 @@ namespace BusinessLogic_Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(BusinessLogicException), "Name cant have space padding")]
         public void NameWithPaddingsFail()
         {
             //arrange

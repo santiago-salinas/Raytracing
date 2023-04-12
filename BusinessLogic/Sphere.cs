@@ -25,10 +25,13 @@ namespace BusinessLogic
             get { return _name; }
             set
             {
+                value = value.Trim();
+
                 if (String.IsNullOrEmpty(value))
                 {
                     throw new ArgumentNullException("Name cant be null");
                 }
+
                 _name = value;
             }
         }
