@@ -8,7 +8,8 @@ namespace BusinessLogic_Tests
     public class SphereTests
     {
         private Sphere testSphere;
-        private float testRadius = -5;
+        private float testRadius = 5;
+        private float testNegativeRadius = -5;
 
         [TestInitialize] 
         public void Initialize() {
@@ -31,7 +32,7 @@ namespace BusinessLogic_Tests
         {
             testSphere = new Sphere()
             {
-                Radius = testRadius,
+                Radius = testNegativeRadius,
             };
         }
     }

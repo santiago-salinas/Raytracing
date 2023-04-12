@@ -10,7 +10,13 @@ namespace BusinessLogic
         public float Radius
         {
             get { return _radius; }
-            set { _radius = value; }
+            set {
+                if (value <=0)
+                {
+                    throw new BusinessLogicException("Radius must be a value over zero >0");
+                }
+                _radius = value;
+            }
         }
     }
 }
