@@ -10,13 +10,16 @@ namespace BusinessLogic_Tests
         private Sphere testSphere;
         private float testRadius = 5;
         private float testNegativeRadius = -5;
+        private string testName = "Ball";
+        private string testNullName = "";
 
         [TestInitialize]
         public void Initialize()
         {
             testSphere = new Sphere()
             {
-                Radius = testRadius
+                Radius = testRadius,
+                Name = testName
             };
         }
 
@@ -33,6 +36,13 @@ namespace BusinessLogic_Tests
             testSphere.Radius = testNegativeRadius;
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(BusinessLogicException), "Name cant be null")]
+        public void NameCantBeNullTest()
+        {
+            //act
+            testSphere.Name = testNullName;
+        }
     }
 
 }

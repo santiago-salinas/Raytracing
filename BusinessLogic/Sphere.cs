@@ -7,6 +7,7 @@ namespace BusinessLogic
         public Sphere() { }
 
         private float _radius;
+        private string _name;
         public float Radius
         {
             get { return _radius; }
@@ -17,6 +18,12 @@ namespace BusinessLogic
                 }
                 _radius = value;
             }
+        }
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
         }
     }
 }
