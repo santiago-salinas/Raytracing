@@ -23,7 +23,14 @@ namespace BusinessLogic
         public string Name
         {
             get { return _name; }
-            set { _name = value; }
+            set
+            {
+                if (String.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException("Name cant be null");
+                }
+                _name = value;
+            }
         }
     }
 }
