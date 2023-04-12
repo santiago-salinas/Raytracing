@@ -27,12 +27,17 @@ namespace BusinessLogic
             {
                 value = value.Trim();
 
-                if (String.IsNullOrEmpty(value))
-                {
-                    throw new ArgumentNullException("Name cant be null");
-                }
+                CheckIfStringNull(value);
 
                 _name = value;
+            }
+        }
+
+        private void CheckIfStringNull(string value)
+        {
+            if (String.IsNullOrEmpty(value))
+            {
+                throw new ArgumentNullException("Name cant be null");
             }
         }
     }
