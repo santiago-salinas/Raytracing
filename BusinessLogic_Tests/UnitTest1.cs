@@ -43,6 +43,42 @@ namespace BusinessLogic_Tests
             //act
             testSphere.Name = testNullName;
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(BusinessLogicException), "Name cant have space padding")]
+        public void NameWithLeftPaddingFail()
+        {
+            //arrange
+            string nameWithLeftPadding = " " + testName;
+            //act
+            testSphere.Name = nameWithLeftPadding;
+            //assert
+            Assert.AreEqual(testSphere.Name, testName);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(BusinessLogicException), "Name cant have space padding")]
+        public void NameWithRightPaddingFail()
+        {
+            //arrange
+            string nameWithRightPadding = testName + " ";
+            //act
+            testSphere.Name = nameWithRightPadding;
+            //assert
+            Assert.AreEqual(testSphere.Name, testName);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(BusinessLogicException), "Name cant have space padding")]
+        public void NameWithPaddingsFail()
+        {
+            //arrange
+            string nameWithPaddings = " " + testName + " ";
+            //act
+            testSphere.Name = nameWithPaddings;
+            //assert
+            Assert.AreEqual(testSphere.Name, testName);
+        }
     }
 
 }
