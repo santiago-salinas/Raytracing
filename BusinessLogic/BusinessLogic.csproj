@@ -45,7 +45,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserCollections\UserObjectsCollection.cs" />
     <Compile Include="UserObject\Sphere.cs" />
-    <Compile Include="UserCollections\SphereCollection.cs" />
     <Compile Include="UserObject\UserObject.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

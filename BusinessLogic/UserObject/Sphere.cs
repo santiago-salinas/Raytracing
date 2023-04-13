@@ -18,6 +18,5 @@ namespace BusinessLogic
                 _radius = value;
             }
         }
-
     }
 }

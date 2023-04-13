@@ -32,7 +32,7 @@ namespace BusinessLogic
         }
 
 
-        public bool Equals(Sphere other)
+        public bool Equals(UserObject other)
         {
             return this.Name == other.Name;
         }
