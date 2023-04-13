@@ -12,6 +12,7 @@ namespace BusinessLogic_Tests
         private SphereCollection testSphereCollection;
         private float testRadius;
         private float testNegativeRadius;
+        private float differentTestRadius;
         private string testName;
         private string testNullName;
         
@@ -21,6 +22,7 @@ namespace BusinessLogic_Tests
         {
             testName = "Ball";
             testRadius = 5;
+            differentTestRadius = 10;
             testNullName = string.Empty;
             testNegativeRadius = -5;
 
@@ -118,6 +120,36 @@ namespace BusinessLogic_Tests
             //assert
             Assert.AreEqual(testSphere, getSphere);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(BusinessLogicException), "Sphere does not exist in the collection")]
+        public void RemoveSphereFromCollection()
+        {
+            //arrange
+            testSphereCollection = new SphereCollection();
+            testSphereCollection.AddSphere(testSphere);
+            //act
+            testSphereCollection.RemoveSphere(testName);
+            testSphereCollection.GetSphere(testName);
+            
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(BusinessLogicException), "Sphere with the same name already exists in the collection")]
+        public void CantAddSphereWithNameAlreadyInCollection()
+        {
+            //arrange
+            testSphereCollection = new SphereCollection();
+            testSphereCollection.AddSphere(testSphere);
+            Sphere newSphere = new Sphere();
+            newSphere.Name = testName;
+            newSphere.Radius = differentTestRadius;
+
+            //act
+            testSphereCollection.AddSphere(newSphere);    
+        }
+
+
     }
 
 }

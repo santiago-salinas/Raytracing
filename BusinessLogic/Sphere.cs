@@ -41,6 +41,7 @@ namespace BusinessLogic
             }
         }
 
+        
         public bool Equals(Sphere other)
         {
             return this.Name == other.Name && this.Radius == other.Radius;

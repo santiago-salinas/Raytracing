@@ -15,8 +15,7 @@ namespace BusinessLogic_Tests
             }
 
             public bool AddSphere(Sphere newElement)
-            {
-                
+            {               
                 _sphereList.Add(newElement);
 
                 return true;
@@ -30,7 +29,7 @@ namespace BusinessLogic_Tests
 
             public bool RemoveSphere(string element)
             {
-                return false;
+                return true;
             }
         }
     }
