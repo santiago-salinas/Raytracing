@@ -37,7 +37,12 @@ namespace BusinessLogic_Tests
 
             public bool RemoveSphere(string name)
             {
-                _sphereList.Remove(_sphereList.Find(s => s.Name == name));
+                Sphere sphere = _sphereList.Find(s => s.Name == name);
+                if(sphere == null)
+                {
+                    throw new BusinessLogicException("Sphere does not exist in the collection");
+                }
+                _sphereList.Remove(sphere);
                 return true;
             }
         }
