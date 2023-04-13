@@ -2,24 +2,14 @@
 
 namespace BusinessLogic
 {
-    public class Sphere
+    public abstract class UserObject
     {
-        public Sphere() { }
-
-        private float _radius;
-        private string _name;
-        public float Radius
+        public UserObject()
         {
-            get { return _radius; }
-            set {
-                if (value <=0)
-                {
-                    throw new BusinessLogicException("Radius must be a value over zero >0");
-                }
-                _radius = value;
-            }
         }
 
+        private string _name;
+        
         public string Name
         {
             get { return _name; }
@@ -41,10 +31,10 @@ namespace BusinessLogic
             }
         }
 
-        
+
         public bool Equals(Sphere other)
         {
-            return this.Name == other.Name && this.Radius == other.Radius;
+            return this.Name == other.Name;
         }
     }
 }

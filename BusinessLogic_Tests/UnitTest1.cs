@@ -59,49 +59,6 @@ namespace BusinessLogic_Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException), "Name cant be null")]
-        public void NameCantBeNullTest()
-        {
-            //arrange
-            testNullName = string.Empty;
-            //act
-            testSphere.Name = testNullName;
-        }
-
-        [TestMethod]
-        public void NameWithLeftPaddingFail()
-        {
-            //arrange
-            string nameWithLeftPadding = " " + testName;
-            //act
-            testSphere.Name = nameWithLeftPadding;
-            //assert
-            Assert.AreEqual(testSphere.Name, testName);
-        }
-
-        [TestMethod]
-        public void NameWithRightPaddingFail()
-        {
-            //arrange
-            string nameWithRightPadding = testName + " ";
-            //act
-            testSphere.Name = nameWithRightPadding;
-            //assert
-            Assert.AreEqual(testSphere.Name, testName);
-        }
-
-        [TestMethod]
-        public void NameWithPaddingsFail()
-        {
-            //arrange
-            string nameWithPaddings = " " + testName + " ";
-            //act
-            testSphere.Name = nameWithPaddings;
-            //assert
-            Assert.AreEqual(testSphere.Name, testName);
-        }
-
-        [TestMethod]
         public void AddSphereToCollection()
         {
             //act
@@ -164,4 +121,81 @@ namespace BusinessLogic_Tests
         
     }
 
+    [TestClass]
+    public class UserObjectTests
+    {
+        private UserObject testUserObject;
+        private string testName;
+        private string testNullName;
+
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            testName = "Ball";
+            testNullName = string.Empty;
+
+            testUserObject = new UniTestClassForUserObject()
+            {
+                Name = testName
+            };
+        }
+
+        [TestMethod]
+        public void UserObjectCreatedSuccesfullyTest()
+        {
+            //arrange
+            testName = "Ball";
+            //act
+            testUserObject = new UniTestClassForUserObject()
+            {
+                Name = testName
+            };
+            //Assert
+            Assert.IsNotNull(testUserObject);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException), "Name cant be null")]
+        public void NameCantBeNullTest()
+        {
+            //arrange
+            testNullName = string.Empty;
+            //act
+            testUserObject.Name = testNullName;
+        }
+
+        [TestMethod]
+        public void NameWithLeftPaddingFail()
+        {
+            //arrange
+            string nameWithLeftPadding = " " + testName;
+            //act
+            testUserObject.Name = nameWithLeftPadding;
+            //assert
+            Assert.AreEqual(testUserObject.Name, testName);
+        }
+
+        [TestMethod]
+        public void NameWithRightPaddingFail()
+        {
+            //arrange
+            string nameWithRightPadding = testName + " ";
+            //act
+            testUserObject.Name = nameWithRightPadding;
+            //assert
+            Assert.AreEqual(testUserObject.Name, testName);
+        }
+
+        [TestMethod]
+        public void NameWithPaddingsFail()
+        {
+            //arrange
+            string nameWithPaddings = " " + testName + " ";
+            //act
+            testUserObject.Name = nameWithPaddings;
+            //assert
+            Assert.AreEqual(testUserObject.Name, testName);
+        }
+    }
 }
