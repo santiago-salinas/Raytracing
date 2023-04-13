@@ -9,5 +9,6 @@ namespace BusinessLogic_Tests
 {
     internal class UniTestClassForUserObject : UserObject
     {
+        //To be able to make an instance of an abstract class, without changes
     }
 }
