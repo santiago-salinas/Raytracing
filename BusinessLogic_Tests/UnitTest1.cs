@@ -200,9 +200,9 @@ namespace BusinessLogic_Tests
     }
 
     [TestClass]
-    public class UserObjectsCollectionsTests
+    public class UserObjectsCollectionTests
     {
-        private UserObjectsCollections testCollection;
+        private UserObjectsCollection testCollection;
         private UserObject testUserObject;
         private string testName;
 
@@ -216,7 +216,7 @@ namespace BusinessLogic_Tests
             {
                 Name = testName
             };
-            testCollection = new UserObjectsCollections();
+            testCollection = new UserObjectsCollection();
         }
 
         [TestMethod]
@@ -239,7 +239,7 @@ namespace BusinessLogic_Tests
         public void GetUserObjectFromCollection()
         {
             //arrange
-            testCollection = new UserObjectsCollections();
+            testCollection = new UserObjectsCollection();
             //act
             testCollection.AddUserObject(testUserObject);
             UserObject getUserObject = testCollection.GetUserObject(testName);
@@ -252,7 +252,7 @@ namespace BusinessLogic_Tests
         public void RemoveUserObjectFromCollection()
         {
             //arrange
-            testCollection = new UserObjectsCollections();
+            testCollection = new UserObjectsCollection();
             testCollection.AddUserObject(testUserObject);
             //act
             testCollection.RemoveUserObject(testName);
@@ -264,7 +264,7 @@ namespace BusinessLogic_Tests
         public void CantRemoveUserObjectNotInCollection()
         {
             //arrange
-            testCollection = new UserObjectsCollections();
+            testCollection = new UserObjectsCollection();
             //act
             testCollection.RemoveUserObject(testName);
         }
@@ -276,7 +276,7 @@ namespace BusinessLogic_Tests
         public void CantAddUserObjectWithNameAlreadyInCollection()
         {
             //arrange
-            testCollection = new UserObjectsCollections();
+            testCollection = new UserObjectsCollection();
             testCollection.AddUserObject(testUserObject);
             UserObject newUserObject = new UniTestClassForUserObject();
             newUserObject.Name = testName;
