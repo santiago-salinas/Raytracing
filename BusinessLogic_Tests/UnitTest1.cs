@@ -59,49 +59,6 @@ namespace BusinessLogic_Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException), "Name cant be null")]
-        public void NameCantBeNullTest()
-        {
-            //arrange
-            testNullName = string.Empty;
-            //act
-            testSphere.Name = testNullName;
-        }
-
-        [TestMethod]
-        public void NameWithLeftPaddingFail()
-        {
-            //arrange
-            string nameWithLeftPadding = " " + testName;
-            //act
-            testSphere.Name = nameWithLeftPadding;
-            //assert
-            Assert.AreEqual(testSphere.Name, testName);
-        }
-
-        [TestMethod]
-        public void NameWithRightPaddingFail()
-        {
-            //arrange
-            string nameWithRightPadding = testName + " ";
-            //act
-            testSphere.Name = nameWithRightPadding;
-            //assert
-            Assert.AreEqual(testSphere.Name, testName);
-        }
-
-        [TestMethod]
-        public void NameWithPaddingsFail()
-        {
-            //arrange
-            string nameWithPaddings = " " + testName + " ";
-            //act
-            testSphere.Name = nameWithPaddings;
-            //assert
-            Assert.AreEqual(testSphere.Name, testName);
-        }
-
-        [TestMethod]
         public void AddSphereToCollection()
         {
             //act
@@ -178,7 +135,7 @@ namespace BusinessLogic_Tests
             testName = "Ball";
             testNullName = string.Empty;
 
-            testUserObject = new UserObject()
+            testUserObject = new UniTestClassForUserObject()
             {
                 Name = testName
             };
@@ -190,7 +147,7 @@ namespace BusinessLogic_Tests
             //arrange
             testName = "Ball";
             //act
-            testUserObject = new UserObject()
+            testUserObject = new UniTestClassForUserObject()
             {
                 Name = testName
             };

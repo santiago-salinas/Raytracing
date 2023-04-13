@@ -2,7 +2,7 @@
 
 namespace BusinessLogic
 {
-    public class UserObject
+    public abstract class UserObject
     {
         public UserObject()
         {
