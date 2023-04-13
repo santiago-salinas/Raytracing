@@ -40,5 +40,10 @@ namespace BusinessLogic
                 throw new ArgumentNullException("Name cant be null");
             }
         }
+
+        public bool Equals(Sphere other)
+        {
+            return this.Name == other.Name && this.Radius == other.Radius;
+        }
     }
 }

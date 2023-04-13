@@ -9,25 +9,42 @@ namespace BusinessLogic_Tests
     public class SphereTests
     {
         private Sphere testSphere;
-
-        private float testRadius = 5;
-        private float testNegativeRadius = -5;
-        private string testName = "Ball";
-        private string testNullName = "";
+        private SphereCollection testSphereCollection;
+        private float testRadius;
+        private float testNegativeRadius;
+        private string testName;
+        private string testNullName;
+        
 
         [TestInitialize]
         public void Initialize()
         {
+            testName = "Ball";
+            testRadius = 5;
+            testNullName = string.Empty;
+            testNegativeRadius = -5;
+
             testSphere = new Sphere()
             {
                 Radius = testRadius,
                 Name = testName
             };
+            testSphereCollection = new SphereCollection();
         }
 
         [TestMethod]
         public void SphereCreatedSuccesfullyTest()
         {
+            //arrange
+            testRadius = 5;
+            testName = "Ball";
+            //act
+            testSphere = new Sphere()
+            {
+                Radius = testRadius,
+                Name = testName
+            };
+            //Assert
             Assert.IsNotNull(testSphere);
         }
 
@@ -42,6 +59,8 @@ namespace BusinessLogic_Tests
         [ExpectedException(typeof(ArgumentNullException), "Name cant be null")]
         public void NameCantBeNullTest()
         {
+            //arrange
+            testNullName = string.Empty;
             //act
             testSphere.Name = testNullName;
         }
@@ -82,10 +101,8 @@ namespace BusinessLogic_Tests
         [TestMethod]
         public void AddSphereToCollection()
         {
-            //arrange
-            SphereCollection sphereCollection = new SphereCollection();
             //act
-            bool state = sphereCollection.AddSphere(testName, testRadius);
+            bool state = testSphereCollection.AddSphere(testSphere);
             //assert
             Assert.IsTrue(state);
         }
@@ -94,12 +111,11 @@ namespace BusinessLogic_Tests
         public void GetSphereFromCollection()
         {
             //arrange
-            SphereCollection sphereCollection = new SphereCollection();
+            testSphereCollection = new SphereCollection();
             //act
-            bool state = sphereCollection.AddSphere(testName, testRadius);
+            testSphereCollection.AddSphere(testSphere);
+            Sphere getSphere = testSphereCollection.GetSphere(testName);
             //assert
-            Sphere getSphere = sphereCollection.GetSphere(testName);
-            Assert.IsTrue(state);
             Assert.AreEqual(testSphere, getSphere);
         }
     }

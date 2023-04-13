@@ -9,18 +9,23 @@ namespace BusinessLogic_Tests
     {
         public class SphereCollection
         {
-            private List<Sphere> sphereList;
+            private List<Sphere> _sphereList;
             public SphereCollection() {
+                _sphereList = new List<Sphere>();
             }
 
-            public bool AddSphere(string name, float radius)
+            public bool AddSphere(Sphere newElement)
             {
-                return false;
+                
+                _sphereList.Add(newElement);
+
+                return true;
             }
 
             public Sphere GetSphere(string name)
             {
-                return new Sphere();
+                Sphere ret = _sphereList.Find(s => s.Name == name);
+                return ret;
             }
 
             public bool RemoveSphere(string element)
