@@ -131,7 +131,6 @@ namespace BusinessLogic_Tests
             //act
             testSphereCollection.RemoveSphere(testName);
             testSphereCollection.GetSphere(testName);
-            
         }
 
         [TestMethod]
