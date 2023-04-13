@@ -41,11 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Exceptions\GeneralException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sphere.cs" />
-    <Compile Include="SphereCollection.cs" />
-    <Compile Include="UserObject.cs" />
+    <Compile Include="UserCollections\UserObjectsCollections.cs" />
+    <Compile Include="UserObject\Sphere.cs" />
+    <Compile Include="UserCollections\SphereCollection.cs" />
+    <Compile Include="UserObject\UserObject.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

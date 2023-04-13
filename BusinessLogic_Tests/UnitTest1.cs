@@ -198,4 +198,91 @@ namespace BusinessLogic_Tests
             Assert.AreEqual(testUserObject.Name, testName);
         }
     }
-}
+
+    [TestClass]
+    public class UserObjectsCollectionsTests
+    {
+        private UserObjectsCollections testCollection;
+        private UserObject testUserObject;
+        private string testName;
+
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            testName = "TestObject";
+
+            testUserObject = new UniTestClassForUserObject()
+            {
+                Name = testName
+            };
+            testCollection = new UserObjectsCollections();
+        }
+
+        [TestMethod]
+        public void UserObjectsCollectionsCreatedSuccesfullyTest()
+        {
+            //Assert
+            Assert.IsNotNull(testCollection);
+        }
+
+        [TestMethod]
+        public void AddUserObjectToCollection()
+        {
+            //act
+            bool state = testCollection.AddUserObject(testUserObject);
+            //assert
+            Assert.IsTrue(state);
+        }
+
+        [TestMethod]
+        public void GetUserObjectFromCollection()
+        {
+            //arrange
+            testCollection = new UserObjectsCollections();
+            //act
+            testCollection.AddUserObject(testUserObject);
+            UserObject getUserObject = testCollection.GetUserObject(testName);
+            //assert
+            Assert.AreEqual(testUserObject, getUserObject);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(BusinessLogicException), "UserObject does not exist in the collection")]
+        public void RemoveUserObjectFromCollection()
+        {
+            //arrange
+            testCollection = new UserObjectsCollections();
+            testCollection.AddUserObject(testUserObject);
+            //act
+            testCollection.RemoveUserObject(testName);
+            testCollection.GetUserObject(testName);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(BusinessLogicException), "UserObject does not exist in the collection")]
+        public void CantRemoveUserObjectNotInCollection()
+        {
+            //arrange
+            testCollection = new UserObjectsCollections();
+            //act
+            testCollection.RemoveUserObject(testName);
+        }
+
+
+
+        [TestMethod]
+        [ExpectedException(typeof(BusinessLogicException), "UserObject with the same name already exists in the collection")]
+        public void CantAddUserObjectWithNameAlreadyInCollection()
+        {
+            //arrange
+            testCollection = new UserObjectsCollections();
+            testCollection.AddUserObject(testUserObject);
+            UserObject newUserObject = new UniTestClassForUserObject();
+            newUserObject.Name = testName;
+
+            //act
+            testCollection.AddUserObject(newUserObject);
+        }
+    }
+ }
