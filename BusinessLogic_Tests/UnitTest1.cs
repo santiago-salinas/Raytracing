@@ -2,6 +2,7 @@
 using BusinessLogic_Tests.BusinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.CodeDom;
 
 namespace BusinessLogic_Tests
 {
@@ -134,6 +135,18 @@ namespace BusinessLogic_Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(BusinessLogicException), "Sphere does not exist in the collection")]
+        public void CantRemoveSphereNotInCollection()
+        {
+            //arrange
+            testSphereCollection = new SphereCollection();
+            //act
+            testSphereCollection.RemoveSphere(testName);
+        }
+
+
+
+        [TestMethod]
         [ExpectedException(typeof(BusinessLogicException), "Sphere with the same name already exists in the collection")]
         public void CantAddSphereWithNameAlreadyInCollection()
         {
@@ -148,7 +161,7 @@ namespace BusinessLogic_Tests
             testSphereCollection.AddSphere(newSphere);    
         }
 
-
+        
     }
 
 }
