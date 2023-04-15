@@ -1,13 +1,12 @@
 ﻿using BusinessLogic;
-using BusinessLogic_Tests.BusinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.CodeDom;
+
 
 namespace BusinessLogic_Tests
 {
     [TestClass]
-    public class SphereTests
+    public class SphereUnitTest
     {
         private Sphere testSphere;
         private SphereCollection testSphereCollection;
@@ -119,7 +118,7 @@ namespace BusinessLogic_Tests
             testSphereCollection.AddSphere(testSphere);
             Sphere getSphere = testSphereCollection.GetSphere(testName);
             //assert
-            Assert.AreEqual(testSphere, getSphere);
+            Assert.ReferenceEquals(testSphere, getSphere);
         }
 
         [TestMethod]

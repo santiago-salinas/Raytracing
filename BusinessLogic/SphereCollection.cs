@@ -3,11 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
 
-namespace BusinessLogic_Tests
+namespace BusinessLogic
 {
-
-    namespace BusinessLogic
-    {
         public class SphereCollection
         {
             private List<Sphere> _sphereList;
@@ -47,4 +44,3 @@ namespace BusinessLogic_Tests
             }
         }
     }
-}
