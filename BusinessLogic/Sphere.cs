@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
@@ -11,8 +15,9 @@ namespace BusinessLogic
         public float Radius
         {
             get { return _radius; }
-            set {
-                if (value <=0)
+            set
+            {
+                if (value <= 0)
                 {
                     throw new BusinessLogicException("Radius must be a value over zero >0");
                 }
@@ -41,10 +46,11 @@ namespace BusinessLogic
             }
         }
 
-        
+
         public bool Equals(Sphere other)
         {
             return this.Name == other.Name && this.Radius == other.Radius;
         }
+
     }
 }
