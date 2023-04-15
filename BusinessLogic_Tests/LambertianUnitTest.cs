@@ -135,10 +135,11 @@ namespace BusinessLogic_Tests
         public void AddLambertianToCollection()
         {
             //act
-            bool state = testLambertianCollection.AddLambertian(testLambertian);
+            testLambertianCollection.AddLambertian(testLambertian);
+            bool added = testLambertianCollection.ContainsLambertian(testLambertian.Name);
             //assert
-            Assert.IsTrue(state);
-            
+            Assert.IsTrue(added);
+
         }
 
         [TestMethod]

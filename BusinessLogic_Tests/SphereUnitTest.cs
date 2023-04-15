@@ -104,9 +104,10 @@ namespace BusinessLogic_Tests
         public void AddSphereToCollection()
         {
             //act
-            bool state = testSphereCollection.AddSphere(testSphere);
+            testSphereCollection.AddSphere(testSphere);
+            bool added = testSphereCollection.ContainsSphere(testSphere.Name);
             //assert
-            Assert.IsTrue(state);
+            Assert.IsTrue(added);
         }
 
         [TestMethod]

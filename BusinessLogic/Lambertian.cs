@@ -11,6 +11,14 @@ namespace BusinessLogic
         private String _name;
         private Vector _color;
 
+        public Lambertian() { }
+
+        public Lambertian(string name, Vector color)
+        {
+            Name = name;
+            Color = color;
+        }
+
         public string Name
         {
             get { return _name; }
@@ -45,7 +53,8 @@ namespace BusinessLogic
                     throw new ArgumentException("Values must be natural numbers");
                 }
 
-                _color = value; }
+                _color = value; 
+            }
         }
 
         private void CheckIfStringNull(string value)

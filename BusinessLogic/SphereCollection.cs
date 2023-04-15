@@ -8,15 +8,26 @@ namespace BusinessLogic
         public class SphereCollection
         {
             private List<Sphere> _sphereList;
+
+            public List<Sphere> SphereList
+            {
+                get { return _sphereList; }
+                set { _sphereList = value; }
+            }
             public SphereCollection() {
                 _sphereList = new List<Sphere>();
             }
-            public bool AddSphere(Sphere newElement)
+
+            public bool ContainsSphere(string name)
+            {
+                Sphere sphere = _sphereList.Find(s => s.Name == name);
+                return sphere != null;
+            }
+            public void AddSphere(Sphere newElement)
             {
                 if(_sphereList.Find(s => s.Name == newElement.Name) == null)
                 {
                     _sphereList.Add(newElement);
-                    return true;
                 }
                 else
                 {
@@ -28,19 +39,22 @@ namespace BusinessLogic
             public Sphere GetSphere(string name)
             {
                 Sphere ret = _sphereList.Find(s => s.Name == name);
-                if(ret == null) throw new BusinessLogicException("Sphere does not exist in the collection");
+                bool exists =  ret != null;
+                if(!exists) throw new BusinessLogicException("Sphere does not exist in the collection");
                 return ret;
             }
 
-            public bool RemoveSphere(string name)
+            public void RemoveSphere(string name)
             {
                 Sphere sphere = _sphereList.Find(s => s.Name == name);
                 if(sphere == null)
                 {
                     throw new BusinessLogicException("Sphere does not exist in the collection");
                 }
-                _sphereList.Remove(sphere);
-                return true;
-            }
+                else
+                {
+                    _sphereList.Remove(sphere);
+                }                                  
+            }    
         }
     }

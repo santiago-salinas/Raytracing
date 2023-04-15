@@ -13,12 +13,23 @@ namespace BusinessLogic
         {
             _lambertianList = new List<Lambertian>();
         }
-        public bool AddLambertian(Lambertian newElement)
+
+        public List<Lambertian> LambertianList
+        {
+            get { return _lambertianList; }
+            set { _lambertianList = value;}
+        }
+
+        public bool ContainsLambertian(string name)
+        {
+            Lambertian lambertian = _lambertianList.Find(l => l.Name == name);
+            return lambertian != null;
+        }
+        public void AddLambertian(Lambertian newElement)
         {
             if (_lambertianList.Find(l => l.Name == newElement.Name) == null)
             {
-                _lambertianList.Add(newElement);
-                return true;
+                _lambertianList.Add(newElement);               
             }
             else
             {
@@ -34,7 +45,7 @@ namespace BusinessLogic
             return ret;
         }
 
-        public bool RemoveLambertian(string name)
+        public void RemoveLambertian(string name)
         {
             Lambertian lambertian = _lambertianList.Find(l => l.Name == name);
             if (lambertian == null)
@@ -42,7 +53,7 @@ namespace BusinessLogic
                 throw new BusinessLogicException("Lambertian does not exist in the collection");
             }
             _lambertianList.Remove(lambertian);
-            return true;
+            
         }
 
     }
