@@ -31,9 +31,7 @@ namespace BusinessLogic
             set
             {
                 value = value.Trim();
-
                 CheckIfStringNull(value);
-
                 _name = value;
             }
         }

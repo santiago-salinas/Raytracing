@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,9 +13,20 @@ namespace BusinessLogic
         private double _sndValue;
         private double _thrdValue;
 
-        public double FstValue { get; set; }
-        public double SndValue { get; set; }
-        public double ThrdValue { get; set; }
+        public double FstValue {
+            get { return _fstValue; }
+            set { _fstValue = value; } 
+        }
+        public double SndValue
+        {
+            get { return _sndValue; }
+            set { _sndValue = value; }
+        }
+        public double ThrdValue
+        {
+            get { return _thrdValue; }
+            set { _thrdValue = value; }
+        }
 
         public Vector()
         {
@@ -23,11 +35,6 @@ namespace BusinessLogic
 
         public Vector(int x, int y, int z)
         {
-            if (x < 0 || x > 255 || y < 0 || y > 255 || z < 0 || z > 255)
-            {
-                throw new ArgumentOutOfRangeException("Values must be natural and between 0 and 255");
-            }
-
             _fstValue = x;
             _sndValue = y;
             _thrdValue = z;

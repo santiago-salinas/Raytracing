@@ -118,7 +118,7 @@ namespace BusinessLogic_Tests
             testSphereCollection.AddSphere(testSphere);
             Sphere getSphere = testSphereCollection.GetSphere(testName);
             //assert
-            Assert.AreEqual(testSphere, getSphere);
+            Assert.ReferenceEquals(testSphere, getSphere);
         }
 
         [TestMethod]
