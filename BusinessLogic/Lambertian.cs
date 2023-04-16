@@ -31,12 +31,10 @@ namespace BusinessLogic
                 double y =  value.SndValue;
                 double z =  value.ThrdValue;
 
-                if (x < 0 || x > 255 
-                 || y < 0 || y > 255 
-                 || z < 0 || z > 255)
-                {
-                    throw new ArgumentOutOfRangeException("Values must be between 0 and 255");
-                }
+                ValueInRange(x, 0, 255);
+                ValueInRange(y, 0, 255);
+                ValueInRange(z, 0, 255);
+
 
                 if (x != Math.Floor(x) && 
                     y != Math.Floor(y) && 
@@ -46,6 +44,13 @@ namespace BusinessLogic
                 }
 
                 _color = value; }
+        }
+
+        private void ValueInRange (double value, double lowerBound, double upperBound)
+        {
+            if (value < lowerBound || value > upperBound) {
+                throw new ArgumentOutOfRangeException("Values must be between 0 and 255");
+            }
         }
 
         private void CheckIfStringNull(string value)
