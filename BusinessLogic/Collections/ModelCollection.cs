@@ -24,6 +24,11 @@ namespace BusinessLogic
         {
         }
 
+        public void DropCollection()
+        {
+            _modelList.Clear();
+        }
+
         public bool ContainsModel(string name)
         {
             Model ret = _modelList.Find(m => m.Name == name);

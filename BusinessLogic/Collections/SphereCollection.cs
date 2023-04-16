@@ -23,7 +23,11 @@ namespace BusinessLogic
             public SphereCollection() {
             }
 
-            public bool ContainsSphere(string name)
+        public void DropCollection()
+        {
+            _sphereList.Clear();
+        }
+        public bool ContainsSphere(string name)
             {
                 Sphere sphere = _sphereList.Find(s => s.Name == name);
                 return sphere != null;

@@ -45,7 +45,10 @@ namespace BusinessLogic_Tests
                 ModelShape = testSphere,
                 ModelColor = testLambertian
             };
+
             testModelCollection = new ModelCollection();
+            testSphereCollection = new SphereCollection();
+            testLambertianCollection = new LambertianCollection();
         }
 
         [TestMethod]
@@ -202,7 +205,7 @@ namespace BusinessLogic_Tests
             testModelCollection.AddModel(testModel);
 
             //act
-            testLambertianCollection.RemoveLambertian(sphereName);
+            testLambertianCollection.RemoveLambertian(lambertianName);
         }
 
         [TestMethod]
@@ -222,6 +225,15 @@ namespace BusinessLogic_Tests
             //act
             testSphereCollection.RemoveSphere(sphereName);
             testLambertianCollection.RemoveLambertian(lambertianName);
+        }
+
+        [TestCleanup]
+        public void TearDown()
+        {
+            testSphereCollection.DropCollection();
+            testLambertianCollection.DropCollection();
+            testModelCollection.DropCollection();
+
         }
     }
 }

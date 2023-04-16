@@ -24,6 +24,11 @@ namespace BusinessLogic
             set { _lambertianList = value;}
         }
 
+        public void DropCollection()
+        {
+            _lambertianList.Clear();
+        }
+
         public bool ContainsLambertian(string name)
         {
             Lambertian lambertian = _lambertianList.Find(l => l.Name == name);

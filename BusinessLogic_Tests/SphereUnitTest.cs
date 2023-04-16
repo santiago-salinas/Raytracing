@@ -159,6 +159,12 @@ namespace BusinessLogic_Tests
             testSphereCollection.AddSphere(newSphere);    
         }
 
+        [TestCleanup]
+        public void TearDown()
+        {
+            testSphereCollection.DropCollection();
+        }
+
     }
 
 }

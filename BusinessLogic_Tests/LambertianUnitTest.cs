@@ -188,6 +188,10 @@ namespace BusinessLogic_Tests
             testLambertianCollection.AddLambertian(newLambertian);
         }
 
-        
+        [TestCleanup]
+        public void TearDown()
+        {
+            testLambertianCollection.DropCollection();
+        }
     }
 }
