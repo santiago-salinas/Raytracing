@@ -8,7 +8,7 @@ namespace BusinessLogic_Tests
     public class LambertianUnitTest
     {
         private Lambertian testLambertian;
-        private LambertianCollection testLambertianCollection;
+        //private LambertianCollection testLambertianCollection;
         private Vector testColor;
         private Vector outOfBoundsVector;
         private Vector differentTestColor;
@@ -47,7 +47,7 @@ namespace BusinessLogic_Tests
                 Name = testName,
                 Color = testColor
             };
-            testLambertianCollection = new LambertianCollection();
+            //testLambertianCollection = new LambertianCollection();
         }
 
         [TestMethod]
@@ -132,8 +132,8 @@ namespace BusinessLogic_Tests
         public void AddLambertianToCollection()
         {
             //act
-            testLambertianCollection.AddLambertian(testLambertian);
-            bool added = testLambertianCollection.ContainsLambertian(testLambertian.Name);
+            LambertianCollection.AddLambertian(testLambertian);
+            bool added = LambertianCollection.ContainsLambertian(testLambertian.Name);
             //assert
             Assert.IsTrue(added);
 
@@ -144,8 +144,8 @@ namespace BusinessLogic_Tests
         {
             //arrange
             //act
-            testLambertianCollection.AddLambertian(testLambertian);
-            Lambertian getLambertian = testLambertianCollection.GetLambertian(testName);
+            LambertianCollection.AddLambertian(testLambertian);
+            Lambertian getLambertian = LambertianCollection.GetLambertian(testName);
             //assert
             Assert.ReferenceEquals(testLambertian, getLambertian);
         }
@@ -155,10 +155,10 @@ namespace BusinessLogic_Tests
         public void RemoveLambertianFromCollection()
         {
             //arrange
-            testLambertianCollection.AddLambertian(testLambertian);
+            LambertianCollection.AddLambertian(testLambertian);
             //act
-            testLambertianCollection.RemoveLambertian(testName);
-            testLambertianCollection.GetLambertian(testName);
+            LambertianCollection.RemoveLambertian(testName);
+            LambertianCollection.GetLambertian(testName);
         }
 
         [TestMethod]
@@ -166,7 +166,7 @@ namespace BusinessLogic_Tests
         public void CantRemoveLambertianNotInCollection()
         {
             //act
-            testLambertianCollection.RemoveLambertian(testName);
+            LambertianCollection.RemoveLambertian(testName);
         }
 
         [TestMethod]
@@ -174,19 +174,19 @@ namespace BusinessLogic_Tests
         public void CantAddLambertianWithNameAlreadyInCollection()
         {
             //arrange
-            testLambertianCollection.AddLambertian(testLambertian);
+            LambertianCollection.AddLambertian(testLambertian);
             Lambertian newLambertian = new Lambertian();
             newLambertian.Name = testName;
             newLambertian.Color = differentTestColor;
 
             //act
-            testLambertianCollection.AddLambertian(newLambertian);
+            LambertianCollection.AddLambertian(newLambertian);
         }
 
         [TestCleanup]
         public void TearDown()
         {
-            testLambertianCollection.DropCollection();
+            LambertianCollection.DropCollection();
         }
     }
 }

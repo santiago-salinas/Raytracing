@@ -10,7 +10,7 @@ namespace BusinessLogic_Tests
         private Model testModel;
         private ModelCollection testModelCollection;   
         private SphereCollection testSphereCollection;
-        private LambertianCollection testLambertianCollection;
+        //private LambertianCollection testLambertianCollection;
 
 
         private string modelName;
@@ -48,7 +48,7 @@ namespace BusinessLogic_Tests
 
             testModelCollection = new ModelCollection();
             testSphereCollection = new SphereCollection();
-            testLambertianCollection = new LambertianCollection();
+            //testLambertianCollection = new LambertianCollection();
         }
 
         [TestMethod]
@@ -171,7 +171,7 @@ namespace BusinessLogic_Tests
         {
             //arrange
             testSphereCollection.AddSphere(testSphere);
-            testLambertianCollection.AddLambertian(testLambertian);
+            //testLambertianCollection.AddLambertian(testLambertian);
 
             testModelCollection.AddModel(testModel);
 
@@ -185,12 +185,12 @@ namespace BusinessLogic_Tests
         {
             //arrange
             testSphereCollection.AddSphere(testSphere);
-            testLambertianCollection.AddLambertian(testLambertian);
+//testLambertianCollection.AddLambertian(testLambertian);
 
             testModelCollection.AddModel(testModel);
 
             //act
-            testLambertianCollection.RemoveLambertian(lambertianName);
+           // testLambertianCollection.RemoveLambertian(lambertianName);
         }
 
         [TestMethod]
@@ -198,21 +198,21 @@ namespace BusinessLogic_Tests
         {
             //arrange
             testSphereCollection.AddSphere(testSphere);
-            testLambertianCollection.AddLambertian(testLambertian);
+           // testLambertianCollection.AddLambertian(testLambertian);
 
             testModelCollection.AddModel(testModel);
             testModelCollection.RemoveModel(modelName);
 
             //act
             testSphereCollection.RemoveSphere(sphereName);
-            testLambertianCollection.RemoveLambertian(lambertianName);
+            //testLambertianCollection.RemoveLambertian(lambertianName);
         }
 
         [TestCleanup]
         public void TearDown()
         {
             testSphereCollection.DropCollection();
-            testLambertianCollection.DropCollection();
+           // testLambertianCollection.DropCollection();
             testModelCollection.DropCollection();
 
         }

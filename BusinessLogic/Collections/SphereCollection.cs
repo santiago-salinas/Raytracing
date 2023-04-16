@@ -5,7 +5,7 @@ using System.Xml.Linq;
 
 namespace BusinessLogic
 {
-        public class SphereCollection
+        public static class SphereCollection
         {
             static List<Sphere> _sphereList;
 
@@ -15,13 +15,13 @@ namespace BusinessLogic
                 set { _sphereList = value; }
             }
 
-            static SphereCollection()
+            /*static SphereCollection()
             {
                 _sphereList = new List<Sphere>();
             }
 
             public SphereCollection() {
-            }
+            }*/
 
         public void DropCollection()
         {

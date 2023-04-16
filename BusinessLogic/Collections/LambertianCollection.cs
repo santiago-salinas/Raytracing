@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    public class LambertianCollection
+    public static class LambertianCollection
     {
         static List<Lambertian> _lambertianList;
-        static LambertianCollection()
+        /*static LambertianCollection()
         {
             _lambertianList = new List<Lambertian>();
         }
-
-        public LambertianCollection()
+        */
+       /* public LambertianCollection()
         {
         }
 
@@ -22,19 +22,19 @@ namespace BusinessLogic
         {
             get { return _lambertianList; }
             set { _lambertianList = value;}
-        }
+        }*/
 
-        public void DropCollection()
+        public static void DropCollection()
         {
             _lambertianList.Clear();
         }
 
-        public bool ContainsLambertian(string name)
+        public static bool ContainsLambertian(string name)
         {
             Lambertian lambertian = _lambertianList.Find(l => l.Name == name);
-            return lambertian != null;
+            return lambertian != null;           
         }
-        public void AddLambertian(Lambertian newElement)
+        public static void AddLambertian(Lambertian newElement)
         {
             if (_lambertianList.Find(l => l.Name == newElement.Name) == null)
             {
@@ -47,22 +47,21 @@ namespace BusinessLogic
 
         }
 
-        public Lambertian GetLambertian(string name)
+        public static Lambertian GetLambertian(string name)
         {
             Lambertian ret = _lambertianList.Find(l => l.Name == name);
             if (ret == null) throw new BusinessLogicException("Lambertian does not exist in the collection");
             return ret;
         }
 
-        public void RemoveLambertian(string name)
+        public static void RemoveLambertian(string name)
         {
             Lambertian lambertian = _lambertianList.Find(l => l.Name == name);
             if (lambertian == null)
             {
                 throw new BusinessLogicException("Lambertian does not exist in the collection");
             }
-            _lambertianList.Remove(lambertian);
-            
+            _lambertianList.Remove(lambertian);            
         }
 
     }
