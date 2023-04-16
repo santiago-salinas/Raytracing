@@ -10,6 +10,8 @@ namespace BusinessLogic
     {
         private String _name;
         private Vector _color;
+        static double RGBLowerBound = 0;
+        static double RGBUpperBound = 255;
 
         public string Name
         {
@@ -31,9 +33,9 @@ namespace BusinessLogic
                 double y =  value.SndValue;
                 double z =  value.ThrdValue;
 
-                ValueInRange(x, 0, 255);
-                ValueInRange(y, 0, 255);
-                ValueInRange(z, 0, 255);
+                ValueInRange(x, RGBLowerBound, RGBUpperBound);
+                ValueInRange(y, RGBLowerBound, RGBUpperBound);
+                ValueInRange(z, RGBLowerBound, RGBUpperBound);
 
 
                 if (x != Math.Floor(x) && 
