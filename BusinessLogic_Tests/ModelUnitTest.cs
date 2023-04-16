@@ -106,7 +106,7 @@ namespace BusinessLogic_Tests
         }
 
         [TestMethod]
-        public void AddSphereToCollection()
+        public void AddModelToCollection()
         {
             //act
             testModelCollection.AddModel(testModel);
@@ -116,52 +116,55 @@ namespace BusinessLogic_Tests
         }
 
         [TestMethod]
-        public void GetSphereFromCollection()
+        public void GetModelFromCollection()
         {
             //arrange
-            testSphereCollection = new SphereCollection();
+            testModelCollection = new ModelCollection();
             //act
-            testSphereCollection.AddSphere(testSphere);
-            Sphere getSphere = testSphereCollection.GetSphere(sphereName);
+            testModelCollection.AddModel(testModel);
+            Model getModel = testModelCollection.GetModel(modelName);
             //assert
-            Assert.ReferenceEquals(testSphere, getSphere);
+            Assert.ReferenceEquals(testModel, getModel);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(BusinessLogicException), "Sphere does not exist in the collection")]
-        public void RemoveSphereFromCollection()
+        [ExpectedException(typeof(BusinessLogicException), "Model does not exist in the collection")]
+        public void RemoveModelFromCollection()
         {
             //arrange
-            testSphereCollection = new SphereCollection();
-            testSphereCollection.AddSphere(testSphere);
+            testModelCollection = new ModelCollection();
+            testModelCollection.AddModel(testModel);
             //act
-            testSphereCollection.RemoveSphere(sphereName);
-            testSphereCollection.GetSphere(sphereName);
+            testModelCollection.RemoveModel(modelName);
+            testModelCollection.GetModel(modelName);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(BusinessLogicException), "Sphere does not exist in the collection")]
-        public void CantRemoveSphereNotInCollection()
+        [ExpectedException(typeof(BusinessLogicException), "Model does not exist in the collection")]
+        public void CantRemoveModelNotInCollection()
         {
             //arrange
-            testSphereCollection = new SphereCollection();
+            testModelCollection = new ModelCollection();
             //act
-            testSphereCollection.RemoveSphere(sphereName);
+            testModelCollection.RemoveModel(modelName);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(BusinessLogicException), "Sphere with the same name already exists in the collection")]
-        public void CantAddSphereWithNameAlreadyInCollection()
+        [ExpectedException(typeof(BusinessLogicException), "Model with the same name already exists in the collection")]
+        public void CantAddModelWithNameAlreadyInCollection()
         {
             //arrange
-            testSphereCollection = new SphereCollection();
-            testSphereCollection.AddSphere(testSphere);
-            Sphere newSphere = new Sphere();
-            newSphere.Name = sphereName;
-            newSphere.Radius = radius;
+            testModelCollection = new ModelCollection();
+            testModelCollection.AddModel(testModel);
+            Model newModel = new Model()
+            {
+                Name = modelName,
+                ModelShape = testSphere,
+                ModelColor = testLambertian
+            };
 
             //act
-            testSphereCollection.AddSphere(newSphere);
+            testModelCollection.AddModel(newModel);
         }
     }
 }
