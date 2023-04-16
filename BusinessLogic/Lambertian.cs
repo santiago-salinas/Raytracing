@@ -37,13 +37,9 @@ namespace BusinessLogic
                 ValueInRange(y, RGBLowerBound, RGBUpperBound);
                 ValueInRange(z, RGBLowerBound, RGBUpperBound);
 
-
-                if (x != Math.Floor(x) && 
-                    y != Math.Floor(y) && 
-                    z != Math.Floor(z))
-                {
-                    throw new ArgumentException("Values must be natural numbers");
-                }
+                DoubleHasNoDecimal(x);
+                DoubleHasNoDecimal(y);
+                DoubleHasNoDecimal(z);
 
                 _color = value; }
         }
@@ -52,6 +48,14 @@ namespace BusinessLogic
         {
             if (value < lowerBound || value > upperBound) {
                 throw new ArgumentOutOfRangeException("Values must be between 0 and 255");
+            }
+        }
+
+        private void DoubleHasNoDecimal(double value)
+        {
+            if (value != Math.Floor(value))
+            {
+                throw new ArgumentException("Values must be natural numbers");
             }
         }
 
