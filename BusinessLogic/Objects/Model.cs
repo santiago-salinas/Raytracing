@@ -12,9 +12,23 @@ namespace BusinessLogic
         private Sphere _shape;
         private Lambertian _color;
         public Model() { }
-        public String Name { 
-            get { return _name; } 
-            set { _name = value; } 
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                value = value.Trim();
+                CheckIfStringNull(value);
+                _name = value;
+            }
+        }
+
+        private void CheckIfStringNull(string value)
+        {
+            if (String.IsNullOrEmpty(value))
+            {
+                throw new ArgumentNullException("Name cant be null");
+            }
         }
 
         public Sphere ModelShape

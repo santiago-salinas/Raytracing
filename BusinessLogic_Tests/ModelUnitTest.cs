@@ -8,7 +8,9 @@ namespace BusinessLogic_Tests
     public class ModelUnitTest
     {
         private Model testModel;
-        private ModelCollection testModelCollection;        
+        private ModelCollection testModelCollection;   
+        private SphereCollection testSphereCollection;
+
         private string modelName;
         private string testNullName;
 
@@ -117,10 +119,10 @@ namespace BusinessLogic_Tests
         public void GetSphereFromCollection()
         {
             //arrange
-            testModelCollection = new SphereCollection();
+            testSphereCollection = new SphereCollection();
             //act
-            testModelCollection.AddSphere(testSphere);
-            Sphere getSphere = testModelCollection.GetModel(testName);
+            testSphereCollection.AddSphere(testSphere);
+            Sphere getSphere = testSphereCollection.GetSphere(sphereName);
             //assert
             Assert.ReferenceEquals(testSphere, getSphere);
         }
@@ -130,11 +132,11 @@ namespace BusinessLogic_Tests
         public void RemoveSphereFromCollection()
         {
             //arrange
-            testModelCollection = new SphereCollection();
-            testModelCollection.AddSphere(testSphere);
+            testSphereCollection = new SphereCollection();
+            testSphereCollection.AddSphere(testSphere);
             //act
-            testModelCollection.RemoveSphere(testName);
-            testModelCollection.GetSphere(testName);
+            testSphereCollection.RemoveSphere(sphereName);
+            testSphereCollection.GetSphere(sphereName);
         }
 
         [TestMethod]
@@ -142,30 +144,24 @@ namespace BusinessLogic_Tests
         public void CantRemoveSphereNotInCollection()
         {
             //arrange
-            testModelCollection = new SphereCollection();
+            testSphereCollection = new SphereCollection();
             //act
-            testModelCollection.RemoveSphere(testName);
+            testSphereCollection.RemoveSphere(sphereName);
         }
-
-
 
         [TestMethod]
         [ExpectedException(typeof(BusinessLogicException), "Sphere with the same name already exists in the collection")]
         public void CantAddSphereWithNameAlreadyInCollection()
         {
             //arrange
-            testModelCollection = new SphereCollection();
-            testModelCollection.AddSphere(testSphere);
+            testSphereCollection = new SphereCollection();
+            testSphereCollection.AddSphere(testSphere);
             Sphere newSphere = new Sphere();
-            newSphere.Name = testName;
-            newSphere.Radius = differentTestRadius;
+            newSphere.Name = sphereName;
+            newSphere.Radius = radius;
 
             //act
-            testModelCollection.AddSphere(newSphere);
+            testSphereCollection.AddSphere(newSphere);
         }
-
-
-
-
     }
 }

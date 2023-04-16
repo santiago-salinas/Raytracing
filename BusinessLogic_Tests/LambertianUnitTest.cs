@@ -42,7 +42,6 @@ namespace BusinessLogic_Tests
             
             testNullName = string.Empty;
 
-
             testLambertian = new Lambertian()
             {
                 Name = testName,
@@ -92,8 +91,6 @@ namespace BusinessLogic_Tests
         [ExpectedException(typeof(ArgumentNullException), "Name cant be null")]
         public void NameCantBeNullTest()
         {
-            //arrange
-            testNullName = string.Empty;
             //act
             testLambertian.Name = testNullName;
         }

@@ -41,15 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GeneralException.cs" />
-    <Compile Include="Lambertian.cs" />
-    <Compile Include="LambertianCollection.cs" />
-    <Compile Include="Model.cs" />
-    <Compile Include="ModelCollection.cs" />
+    <Compile Include="Exceptions\GeneralException.cs" />
+    <Compile Include="Objects\Lambertian.cs" />
+    <Compile Include="Collections\LambertianCollection.cs" />
+    <Compile Include="Objects\Model.cs" />
+    <Compile Include="Collections\ModelCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sphere.cs" />
-    <Compile Include="SphereCollection.cs" />
-    <Compile Include="Vector.cs" />
+    <Compile Include="Objects\Sphere.cs" />
+    <Compile Include="Collections\SphereCollection.cs" />
+    <Compile Include="Utilities\Vector.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

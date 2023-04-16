@@ -144,8 +144,6 @@ namespace BusinessLogic_Tests
             testSphereCollection.RemoveSphere(testName);
         }
 
-
-
         [TestMethod]
         [ExpectedException(typeof(BusinessLogicException), "Sphere with the same name already exists in the collection")]
         public void CantAddSphereWithNameAlreadyInCollection()
@@ -161,7 +159,6 @@ namespace BusinessLogic_Tests
             testSphereCollection.AddSphere(newSphere);    
         }
 
-        
     }
 
 }
