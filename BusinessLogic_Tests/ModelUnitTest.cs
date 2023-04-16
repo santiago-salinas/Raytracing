@@ -123,8 +123,6 @@ namespace BusinessLogic_Tests
         [TestMethod]
         public void GetModelFromCollection()
         {
-            //arrange
-            testModelCollection = new ModelCollection();
             //act
             testModelCollection.AddModel(testModel);
             Model getModel = testModelCollection.GetModel(modelName);
@@ -136,8 +134,6 @@ namespace BusinessLogic_Tests
         [ExpectedException(typeof(BusinessLogicException), "Model does not exist in the collection")]
         public void RemoveModelFromCollection()
         {
-            //arrange
-            testModelCollection = new ModelCollection();
             testModelCollection.AddModel(testModel);
             //act
             testModelCollection.RemoveModel(modelName);
@@ -148,8 +144,6 @@ namespace BusinessLogic_Tests
         [ExpectedException(typeof(BusinessLogicException), "Model does not exist in the collection")]
         public void CantRemoveModelNotInCollection()
         {
-            //arrange
-            testModelCollection = new ModelCollection();
             //act
             testModelCollection.RemoveModel(modelName);
         }
@@ -159,7 +153,6 @@ namespace BusinessLogic_Tests
         public void CantAddModelWithNameAlreadyInCollection()
         {
             //arrange
-            testModelCollection = new ModelCollection();
             testModelCollection.AddModel(testModel);
             Model newModel = new Model()
             {
@@ -177,10 +170,6 @@ namespace BusinessLogic_Tests
         public void CantDeleteSphereFromCollectionUsedByModel()
         {
             //arrange
-            testModelCollection = new ModelCollection();
-            testSphereCollection = new SphereCollection();
-            testLambertianCollection = new LambertianCollection();
-
             testSphereCollection.AddSphere(testSphere);
             testLambertianCollection.AddLambertian(testLambertian);
 
@@ -195,10 +184,6 @@ namespace BusinessLogic_Tests
         public void CantDeleteLambertianFromCollectionUsedByModel()
         {
             //arrange
-            testModelCollection = new ModelCollection();
-            testSphereCollection = new SphereCollection();
-            testLambertianCollection = new LambertianCollection();
-
             testSphereCollection.AddSphere(testSphere);
             testLambertianCollection.AddLambertian(testLambertian);
 
@@ -212,10 +197,6 @@ namespace BusinessLogic_Tests
         public void DeleteSphereAndLambertianAfterDeletingModel()
         {
             //arrange
-            testModelCollection = new ModelCollection();
-            testSphereCollection = new SphereCollection();
-            testLambertianCollection = new LambertianCollection();
-
             testSphereCollection.AddSphere(testSphere);
             testLambertianCollection.AddLambertian(testLambertian);
 

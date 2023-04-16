@@ -113,8 +113,6 @@ namespace BusinessLogic_Tests
         [TestMethod]
         public void GetSphereFromCollection()
         {
-            //arrange
-            testSphereCollection = new SphereCollection();
             //act
             testSphereCollection.AddSphere(testSphere);
             Sphere getSphere = testSphereCollection.GetSphere(testName);
@@ -127,7 +125,6 @@ namespace BusinessLogic_Tests
         public void RemoveSphereFromCollection()
         {
             //arrange
-            testSphereCollection = new SphereCollection();
             testSphereCollection.AddSphere(testSphere);
             //act
             testSphereCollection.RemoveSphere(testName);
@@ -139,7 +136,6 @@ namespace BusinessLogic_Tests
         public void CantRemoveSphereNotInCollection()
         {
             //arrange
-            testSphereCollection = new SphereCollection();
             //act
             testSphereCollection.RemoveSphere(testName);
         }
@@ -149,7 +145,6 @@ namespace BusinessLogic_Tests
         public void CantAddSphereWithNameAlreadyInCollection()
         {
             //arrange
-            testSphereCollection = new SphereCollection();
             testSphereCollection.AddSphere(testSphere);
             Sphere newSphere = new Sphere();
             newSphere.Name = testName;

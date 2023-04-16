@@ -143,7 +143,6 @@ namespace BusinessLogic_Tests
         public void GetLambertianFromCollection()
         {
             //arrange
-            testLambertianCollection = new LambertianCollection();
             //act
             testLambertianCollection.AddLambertian(testLambertian);
             Lambertian getLambertian = testLambertianCollection.GetLambertian(testName);
@@ -156,7 +155,6 @@ namespace BusinessLogic_Tests
         public void RemoveLambertianFromCollection()
         {
             //arrange
-            testLambertianCollection = new LambertianCollection();
             testLambertianCollection.AddLambertian(testLambertian);
             //act
             testLambertianCollection.RemoveLambertian(testName);
@@ -167,8 +165,6 @@ namespace BusinessLogic_Tests
         [ExpectedException(typeof(BusinessLogicException), "Lambertian does not exist in the collection")]
         public void CantRemoveLambertianNotInCollection()
         {
-            //arrange
-            testLambertianCollection = new LambertianCollection();
             //act
             testLambertianCollection.RemoveLambertian(testName);
         }
@@ -178,7 +174,6 @@ namespace BusinessLogic_Tests
         public void CantAddLambertianWithNameAlreadyInCollection()
         {
             //arrange
-            testLambertianCollection = new LambertianCollection();
             testLambertianCollection.AddLambertian(testLambertian);
             Lambertian newLambertian = new Lambertian();
             newLambertian.Name = testName;
