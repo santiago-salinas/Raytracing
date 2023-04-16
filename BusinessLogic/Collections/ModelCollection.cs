@@ -8,16 +8,20 @@ namespace BusinessLogic
 {
     public class ModelCollection
     {
-        private List<Model> _modelList;
+        static List<Model> _modelList;
 
         public List<Model> ModelList
         {
             get { return _modelList; }
             set { _modelList = value; }
         }
-        public ModelCollection()
+        static ModelCollection()
         {
             _modelList = new List<Model>();
+        }
+
+        public ModelCollection()
+        {
         }
 
         public bool ContainsModel(string name)

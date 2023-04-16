@@ -7,15 +7,20 @@ namespace BusinessLogic
 {
         public class SphereCollection
         {
-            private List<Sphere> _sphereList;
+            static List<Sphere> _sphereList;
 
             public List<Sphere> SphereList
             {
                 get { return _sphereList; }
                 set { _sphereList = value; }
             }
-            public SphereCollection() {
+
+            static SphereCollection()
+            {
                 _sphereList = new List<Sphere>();
+            }
+
+            public SphereCollection() {
             }
 
             public bool ContainsSphere(string name)

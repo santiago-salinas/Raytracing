@@ -8,10 +8,14 @@ namespace BusinessLogic
 {
     public class LambertianCollection
     {
-        private List<Lambertian> _lambertianList;
-        public LambertianCollection()
+        static List<Lambertian> _lambertianList;
+        static LambertianCollection()
         {
             _lambertianList = new List<Lambertian>();
+        }
+
+        public LambertianCollection()
+        {
         }
 
         public List<Lambertian> LambertianList
