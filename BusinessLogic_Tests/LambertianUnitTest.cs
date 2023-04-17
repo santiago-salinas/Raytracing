@@ -8,7 +8,6 @@ namespace BusinessLogic_Tests
     public class LambertianUnitTest
     {
         private Lambertian testLambertian;
-        //private LambertianCollection testLambertianCollection;
         private Vector testColor;
         private Vector outOfBoundsVector;
         private Vector differentTestColor;
@@ -47,7 +46,6 @@ namespace BusinessLogic_Tests
                 Name = testName,
                 Color = testColor
             };
-            //testLambertianCollection = new LambertianCollection();
         }
 
         [TestMethod]

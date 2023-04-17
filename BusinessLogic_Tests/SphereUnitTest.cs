@@ -9,7 +9,6 @@ namespace BusinessLogic_Tests
     public class SphereUnitTest
     {
         private Sphere testSphere;
-        private SphereCollection testSphereCollection;
         private float testRadius;
         private float testNegativeRadius;
         private float differentTestRadius;
@@ -31,7 +30,6 @@ namespace BusinessLogic_Tests
                 Radius = testRadius,
                 Name = testName
             };
-            testSphereCollection = new SphereCollection();
         }
 
         [TestMethod]
@@ -104,8 +102,8 @@ namespace BusinessLogic_Tests
         public void AddSphereToCollection()
         {
             //act
-            testSphereCollection.AddSphere(testSphere);
-            bool added = testSphereCollection.ContainsSphere(testSphere.Name);
+            SphereCollection.AddSphere(testSphere);
+            bool added = SphereCollection.ContainsSphere(testSphere.Name);
             //assert
             Assert.IsTrue(added);
         }
@@ -114,8 +112,8 @@ namespace BusinessLogic_Tests
         public void GetSphereFromCollection()
         {
             //act
-            testSphereCollection.AddSphere(testSphere);
-            Sphere getSphere = testSphereCollection.GetSphere(testName);
+            SphereCollection.AddSphere(testSphere);
+            Sphere getSphere = SphereCollection.GetSphere(testName);
             //assert
             Assert.ReferenceEquals(testSphere, getSphere);
         }
@@ -125,10 +123,10 @@ namespace BusinessLogic_Tests
         public void RemoveSphereFromCollection()
         {
             //arrange
-            testSphereCollection.AddSphere(testSphere);
+            SphereCollection.AddSphere(testSphere);
             //act
-            testSphereCollection.RemoveSphere(testName);
-            testSphereCollection.GetSphere(testName);
+            SphereCollection.RemoveSphere(testName);
+            SphereCollection.GetSphere(testName);
         }
 
         [TestMethod]
@@ -136,8 +134,8 @@ namespace BusinessLogic_Tests
         public void CantRemoveSphereNotInCollection()
         {
             //arrange
-            //act
-            testSphereCollection.RemoveSphere(testName);
+            //act   
+            SphereCollection.RemoveSphere(testName);
         }
 
         [TestMethod]
@@ -145,19 +143,19 @@ namespace BusinessLogic_Tests
         public void CantAddSphereWithNameAlreadyInCollection()
         {
             //arrange
-            testSphereCollection.AddSphere(testSphere);
+            SphereCollection.AddSphere(testSphere);
             Sphere newSphere = new Sphere();
             newSphere.Name = testName;
             newSphere.Radius = differentTestRadius;
 
             //act
-            testSphereCollection.AddSphere(newSphere);    
+            SphereCollection.AddSphere(newSphere);    
         }
 
         [TestCleanup]
         public void TearDown()
         {
-            testSphereCollection.DropCollection();
+            SphereCollection.DropCollection();
         }
 
     }

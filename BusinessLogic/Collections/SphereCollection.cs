@@ -7,32 +7,18 @@ namespace BusinessLogic
 {
         public static class SphereCollection
         {
-            static List<Sphere> _sphereList;
+            private static List<Sphere> _sphereList = new List<Sphere>();
 
-            public List<Sphere> SphereList
+            public static void DropCollection()
             {
-                get { return _sphereList; }
-                set { _sphereList = value; }
+                _sphereList.Clear();
             }
-
-            /*static SphereCollection()
-            {
-                _sphereList = new List<Sphere>();
-            }
-
-            public SphereCollection() {
-            }*/
-
-        public void DropCollection()
-        {
-            _sphereList.Clear();
-        }
-        public bool ContainsSphere(string name)
+            public static bool ContainsSphere(string name)
             {
                 Sphere sphere = _sphereList.Find(s => s.Name == name);
                 return sphere != null;
             }
-            public void AddSphere(Sphere newElement)
+            public static void AddSphere(Sphere newElement)
             {
                 if(_sphereList.Find(s => s.Name == newElement.Name) == null)
                 {
@@ -45,7 +31,7 @@ namespace BusinessLogic
                
             }
 
-            public Sphere GetSphere(string name)
+            public static Sphere GetSphere(string name)
             {
                 Sphere ret = _sphereList.Find(s => s.Name == name);
                 bool exists =  ret != null;
@@ -53,7 +39,7 @@ namespace BusinessLogic
                 return ret;
             }
 
-            public void RemoveSphere(string name)
+            public static void RemoveSphere(string name)
             {
                 Sphere sphere = _sphereList.Find(s => s.Name == name);
                 if(sphere == null)

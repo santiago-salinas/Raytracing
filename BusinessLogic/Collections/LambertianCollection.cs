@@ -8,22 +8,8 @@ namespace BusinessLogic
 {
     public static class LambertianCollection
     {
-        static List<Lambertian> _lambertianList;
-        /*static LambertianCollection()
-        {
-            _lambertianList = new List<Lambertian>();
-        }
-        */
-       /* public LambertianCollection()
-        {
-        }
-
-        public List<Lambertian> LambertianList
-        {
-            get { return _lambertianList; }
-            set { _lambertianList = value;}
-        }*/
-
+        static List<Lambertian> _lambertianList = new List<Lambertian>();
+        
         public static void DropCollection()
         {
             _lambertianList.Clear();
