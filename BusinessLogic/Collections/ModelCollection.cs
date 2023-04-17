@@ -6,36 +6,32 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    public class ModelCollection
+    public static class ModelCollection
     {
-        static List<Model> _modelList;
+        private static List<Model> _modelList = new List<Model>();
 
-        public List<Model> ModelList
-        {
-            get { return _modelList; }
-            set { _modelList = value; }
-        }
-        static ModelCollection()
-        {
-            _modelList = new List<Model>();
-        }
-
-        public ModelCollection()
-        {
-        }
-
-        public void DropCollection()
+        public static void DropCollection()
         {
             _modelList.Clear();
         }
 
-        public bool ContainsModel(string name)
+        public static bool ContainsModel(string name)
         {
             Model ret = _modelList.Find(m => m.Name == name);
             return ret != null;
         }
 
-        public void AddModel(Model newElement)
+        public static bool ExistsModelUsingTheLambertian(Lambertian lambertian)
+        {
+            Model ret = _modelList.Find(m => m.ModelColor == lambertian);
+            return ret != null;
+        }
+        public static bool ExistsModelUsingTheSphere(Sphere sphere)
+        {
+            Model ret = _modelList.Find(m => m.ModelShape == sphere);
+            return ret != null;
+        }
+        public static void AddModel(Model newElement)
         {
             if (!ContainsModel(newElement.Name))
             {
@@ -47,14 +43,14 @@ namespace BusinessLogic
             }
         }
 
-        public Model GetModel(string name)
+        public static Model GetModel(string name)
         {
             Model ret = _modelList.Find(m => m.Name == name);
             if (ret == null) throw new BusinessLogicException("Model does not exist in the collection");
             return ret;
         }
 
-        public void RemoveModel(string name)
+        public static void RemoveModel(string name)
         {
             Model model = _modelList.Find(s => s.Name == name);
             if (model == null)

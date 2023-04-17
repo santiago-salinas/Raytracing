@@ -46,9 +46,14 @@ namespace BusinessLogic
             if (lambertian == null)
             {
                 throw new BusinessLogicException("Lambertian does not exist in the collection");
+            }else if(ModelCollection.ExistsModelUsingTheLambertian(lambertian))
+            {
+                throw new BusinessLogicException("Cant delete lambertian used by existing model");
             }
-            _lambertianList.Remove(lambertian);            
+            else
+            {
+                _lambertianList.Remove(lambertian);
+            }           
         }
-
     }
 }

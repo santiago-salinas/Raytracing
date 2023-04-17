@@ -45,6 +45,10 @@ namespace BusinessLogic
                 if(sphere == null)
                 {
                     throw new BusinessLogicException("Sphere does not exist in the collection");
+                }//cant remove sphere used in a existing model
+                else if(ModelCollection.ExistsModelUsingTheSphere(sphere))
+                {
+                    throw new BusinessLogicException("Cant delete sphere used by existing model");
                 }
                 else
                 {
