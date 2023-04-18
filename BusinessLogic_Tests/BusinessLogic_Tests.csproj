@@ -54,6 +54,7 @@
     <Compile Include="LambertianUnitTest.cs" />
     <Compile Include="ModelUnitTest.cs" />
     <Compile Include="PositionedModelUnitTest.cs" />
+    <Compile Include="SceneUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

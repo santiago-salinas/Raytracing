@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace BusinessLogic
 {
@@ -26,6 +27,8 @@ namespace BusinessLogic
 
         public bool ContainsPositionedModel(PositionedModel positionedModel)
         {
+            Random gen = new Random();
+            return gen.Next(100) < 50 ? true : false;
         }
 
         public void DropPositionedModels()

@@ -200,6 +200,85 @@ namespace BusinessLogic_Tests
             Assert.IsFalse(isContainedByScene);
         }
 
+        [TestMethod]
+        public void AddSceneToCollection()
+        {
+            //act
+            SceneCollection.AddScene(testScene);
+            bool added = SceneCollection.ContainsScene(testScene.Name);
+            //assert
+            Assert.IsTrue(added);
+        }
+
+        [TestMethod]
+        public void GetSceneFromCollection()
+        {
+            //act
+            SceneCollection.AddScene(testScene);
+            Scene getScene = SceneCollection.GetScene(testName);
+            //assert
+            Assert.ReferenceEquals(testScene, getScene);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(BusinessLogicException), "Scene does not exist in the collection")]
+        public void RemoveSceneFromCollection()
+        {
+            SceneCollection.AddScene(testScene);
+            //act
+            SceneCollection.RemoveScene(testName);
+            SceneCollection.GetScene(testName);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(BusinessLogicException), "Scene does not exist in the collection")]
+        public void CantRemoveSceneNotInCollection()
+        {
+            //act
+            SceneCollection.RemoveScene(testName);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(BusinessLogicException), "Scene with the same name already exists in the collection")]
+        public void CantAddSceneWithNameAlreadyInCollection()
+        {
+            //arrange
+            SceneCollection.AddScene(testScene);
+            Scene newScene = new Scene()
+            {
+                Name = testName,
+                LookFrom = defaultLookFromVector,
+                LookAt = defaultLookAtVector,
+            };
+
+            //act
+            SceneCollection.AddScene(newScene);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(BusinessLogicException), "Cant delete model used by active scene")]
+        public void CantDeleteModelFromCollectionUsedByScene()
+        {
+            ModelCollection.AddModel(testModel);
+            testScene.AddPositionedModel(testPositionedModel);
+            SceneCollection.AddScene(testScene);
+
+            //act
+            ModelCollection.RemoveModel(testModel.Name);
+        }
+
+        [TestMethod]
+        public void DeleteModelAfterDeletingScene()
+        {
+            ModelCollection.AddModel(testModel);
+            testScene.AddPositionedModel(testPositionedModel);
+            SceneCollection.AddScene(testScene);
+
+            //act
+            SceneCollection.RemoveScene(testScene.Name);
+            ModelCollection.RemoveModel(testModel.Name);
+        }
+
         [TestCleanup]
         public void TearDown()
         {
