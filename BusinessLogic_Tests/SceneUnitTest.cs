@@ -285,6 +285,7 @@ namespace BusinessLogic_Tests
             SphereCollection.DropCollection();
             LambertianCollection.DropCollection();
             ModelCollection.DropCollection();
+            SceneCollection.DropCollection();
             testScene.DropPositionedModels();
         }
     }
