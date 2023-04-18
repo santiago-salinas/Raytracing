@@ -46,6 +46,7 @@
     <Compile Include="Collections\LambertianCollection.cs" />
     <Compile Include="Objects\Model.cs" />
     <Compile Include="Collections\ModelCollection.cs" />
+    <Compile Include="Objects\PositionedModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Objects\Sphere.cs" />
     <Compile Include="Collections\SphereCollection.cs" />
