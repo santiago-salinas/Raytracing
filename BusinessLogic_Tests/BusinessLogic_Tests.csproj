@@ -52,6 +52,7 @@
     <Compile Include="SphereUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LambertianUnitTest.cs" />
+    <Compile Include="ModelUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

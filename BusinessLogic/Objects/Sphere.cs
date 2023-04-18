@@ -8,7 +8,12 @@ namespace BusinessLogic
 {
     public class Sphere
     {
+
         public Sphere() { }
+        public Sphere(string name, float radius) {
+            Name = name;
+            Radius = radius;
+        }
 
         private float _radius;
         private string _name;

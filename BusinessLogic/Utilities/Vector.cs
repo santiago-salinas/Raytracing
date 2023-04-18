@@ -13,6 +13,22 @@ namespace BusinessLogic
         private double _sndValue;
         private double _thrdValue;
 
+        public Vector()
+        { }
+
+        public Vector(double x, double y, double z)
+        {
+            FstValue = x;
+            SndValue = y;
+            ThrdValue = z;
+        }
+        public Vector(int x, int y, int z)
+        {
+            FstValue = x;
+            SndValue = y;
+            ThrdValue = z;
+        }
+
         public double FstValue {
             get { return _fstValue; }
             set { _fstValue = value; } 
@@ -28,17 +44,9 @@ namespace BusinessLogic
             set { _thrdValue = value; }
         }
 
-        public Vector()
-        {
-            
-        }
+        
 
-        public Vector(int x, int y, int z)
-        {
-            _fstValue = x;
-            _sndValue = y;
-            _thrdValue = z;
-        }
+
 
     }
 }

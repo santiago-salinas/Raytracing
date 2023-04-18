@@ -13,6 +13,14 @@ namespace BusinessLogic
         static double RGBLowerBound = 0;
         static double RGBUpperBound = 255;
 
+        public Lambertian() { }
+
+        public Lambertian(string name, Vector color)
+        {
+            Name = name;
+            Color = color;
+        }
+
         public string Name
         {
             get { return _name; }
@@ -41,7 +49,8 @@ namespace BusinessLogic
                 DoubleHasNoDecimal(y);
                 DoubleHasNoDecimal(z);
 
-                _color = value; }
+                _color = value; 
+            }
         }
 
         private void ValueInRange (double value, double lowerBound, double upperBound)
