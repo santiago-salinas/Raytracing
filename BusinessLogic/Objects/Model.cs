@@ -42,5 +42,11 @@ namespace BusinessLogic
             get { return _color; }
             set { _color = value; }
         }
+
+        
+        public override bool Equals(object other)
+        {
+            return this.Name == ((Model)other).Name;
+        }
     }
 }

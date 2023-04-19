@@ -51,5 +51,11 @@ namespace BusinessLogic
                 _sceneList.Remove(scene);
             }
         }
+
+        public static bool ExistsSceneUsingModel(Model model)
+        {
+            Scene ret = _sceneList.Find(m => m.ContainsModel(model.Name));
+            return ret != null;
+        }
     }
 }

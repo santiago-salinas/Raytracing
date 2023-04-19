@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Xml.Linq;
 
 namespace BusinessLogic
 {
     public class Scene
     {
-        private List<Model> _positionedModellList;
+        private List<PositionedModel> _positionedModellList;
         private string _name;
 
         public Scene()
         {
-            _positionedModellList = new List<Model>();
+            _positionedModellList = new List<PositionedModel>();
         }
 
         public string Name {
@@ -34,25 +35,52 @@ namespace BusinessLogic
 
         public Vector LookFrom { get; set; }
         public Vector LookAt { get; set; }
+        public int FOV { get; set; }
 
-        public void AddPositionedModel(PositionedModel positionedModel) { 
-        
+
+        public void AddPositionedModel(PositionedModel newElement) {
+            if (_positionedModellList.Find(s => (s.PositionedModelModel == newElement.PositionedModelModel)&&(s.PositionedModelPosition == newElement.PositionedModelPosition)) == null)
+            {
+                _positionedModellList.Add(newElement);
+            }
+            else
+            {
+                throw new BusinessLogicException("Duplicated PositionedModel in Scene");
+            }
         }
 
-        public void RemovePositionedModel(PositionedModel positionedModel)
+        public void RemovePositionedModel(PositionedModel oldElement)
         {
-
+            PositionedModel positionedModel = _positionedModellList.Find(s => (s.PositionedModelModel == oldElement.PositionedModelModel) && (s.PositionedModelPosition == oldElement.PositionedModelPosition));
+            if (positionedModel == null)
+            {
+                throw new BusinessLogicException("PositionedModel is not in scene");
+            }
+            else
+            {
+                _positionedModellList.Remove(positionedModel);
+            }
         }
 
-        public bool ContainsPositionedModel(PositionedModel positionedModel)
+        public bool ContainsPositionedModel(PositionedModel element)
         {
-            Random gen = new Random();
-            return gen.Next(100) < 50 ? true : false;
+            PositionedModel positionedModel = _positionedModellList.Find(s => (s.PositionedModelModel == element.PositionedModelModel) && (s.PositionedModelPosition == element.PositionedModelPosition));
+            return positionedModel != null;
         }
+
+        public bool ContainsModel(string name)
+        {
+            foreach (PositionedModel model in _positionedModellList) {
+                if (model.PositionedModelModel.Name == name) { return true;}
+            }
+            return false;
+        }
+
 
         public void DropPositionedModels()
         {
-            
+            _positionedModellList.Clear();
         }
+
     }
 }

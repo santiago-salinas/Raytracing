@@ -44,9 +44,10 @@ namespace BusinessLogic_Tests
 
             testScene = new Scene()
             {
-            Name = testName,
-            LookFrom = defaultLookFromVector,
-            LookAt = defaultLookAtVector,
+                Name = testName,
+                LookFrom = defaultLookFromVector,
+                LookAt = defaultLookAtVector,
+                FOV = defaultFOV
             };
 
             modelName = "Wooden ball";
@@ -149,13 +150,14 @@ namespace BusinessLogic_Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException), "Duplicated PositionedModel in Scene")]
+        [ExpectedException(typeof(BusinessLogicException), "Duplicated PositionedModel in Scene")]
         public void CantHaveDuplicatedPositionedModelInScene()
         {
             //arrange
             bool isContainedByScene = testScene.ContainsPositionedModel(testPositionedModel);
             Assert.IsFalse(isContainedByScene);
             testScene.AddPositionedModel(testPositionedModel);
+            isContainedByScene = testScene.ContainsPositionedModel(testPositionedModel);
             Assert.IsTrue(isContainedByScene);
             //act
             testScene.AddPositionedModel(testPositionedModel);
@@ -173,6 +175,7 @@ namespace BusinessLogic_Tests
             //act
             testScene.RemovePositionedModel(testPositionedModel);
             //assert
+            isContainedByScene = testScene.ContainsPositionedModel(testPositionedModel);
             Assert.IsFalse(isContainedByScene);
         }
 
@@ -277,6 +280,21 @@ namespace BusinessLogic_Tests
             //act
             SceneCollection.RemoveScene(testScene.Name);
             ModelCollection.RemoveModel(testModel.Name);
+        }
+
+        [TestMethod]
+        public void ModelIsUsedByScene()
+        {
+            Assert.IsFalse(testScene.ContainsModel(testModel.Name));
+            ModelCollection.AddModel(testModel);
+            //act
+            testScene.AddPositionedModel(testPositionedModel);
+            //assert
+            Assert.IsTrue(testScene.ContainsModel(testModel.Name));
+            testScene.RemovePositionedModel(testPositionedModel);
+            Assert.IsFalse(testScene.ContainsModel(testModel.Name));
+
+
         }
 
         [TestCleanup]
