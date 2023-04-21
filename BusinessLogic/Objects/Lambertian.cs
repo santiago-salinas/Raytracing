@@ -75,5 +75,10 @@ namespace BusinessLogic
                 throw new ArgumentNullException("Name cant be null");
             }
         }
+
+        public override bool Equals(object other)
+        {
+            return this.Name == ((Lambertian)other).Name && this.Color == ((Lambertian)other).Color;
+        }
     }
 }

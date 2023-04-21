@@ -44,7 +44,14 @@ namespace BusinessLogic
             set { _thrdValue = value; }
         }
 
-        
+        public override bool Equals(object other)
+        {
+            bool evalFst = this.FstValue == ((Vector)other).FstValue;
+            bool evalSnd = this.SndValue == ((Vector)other).SndValue;
+            bool evalThrd = this.ThrdValue == ((Vector)other).ThrdValue;
+
+            return evalFst && evalSnd && evalThrd;
+        }
 
 
 

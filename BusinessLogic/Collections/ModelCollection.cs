@@ -57,6 +57,10 @@ namespace BusinessLogic
             {
                 throw new BusinessLogicException("Model does not exist in the collection");
             }
+            else if (SceneCollection.ExistsSceneUsingModel(model))
+            {
+                throw new BusinessLogicException("Cant delete sphere used by existing model");
+            }
             _modelList.Remove(model);           
         }
     }
