@@ -297,6 +297,42 @@ namespace BusinessLogic_Tests
 
         }
 
+        //test to check creation date
+        [TestMethod]
+        public void CreationDate()
+        {
+            //arrange
+            DateTime creationDate = DateTime.Now;
+            //act
+            Scene scene = new Scene()
+            {
+                Name = testName,
+                LookFrom = defaultLookFromVector,
+                LookAt = defaultLookAtVector,
+            };
+            //assert
+            Assert.IsTrue(scene.CreationDate >= creationDate);
+        }
+
+        //test to check last modification date
+        [TestMethod]
+        public void LastModificationDate()
+        {
+            //arrange
+            DateTime creationDate = DateTime.Now;
+            //act
+            Scene scene = new Scene()
+            {
+                Name = testName,
+                LookFrom = defaultLookFromVector,
+                LookAt = defaultLookAtVector,
+            };
+            //assert
+            Assert.IsTrue(scene.LastModificationDate >= creationDate);
+        }
+
+
+
         [TestCleanup]
         public void TearDown()
         {

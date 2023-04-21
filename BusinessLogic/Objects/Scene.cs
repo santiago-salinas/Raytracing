@@ -10,6 +10,10 @@ namespace BusinessLogic
         private List<PositionedModel> _positionedModellList;
         private string _name;
 
+        private DateTime _creationDate;
+        private DateTime _lastModificationDate;
+        private DateTime _lastRenderDate;
+
         public Scene()
         {
             _positionedModellList = new List<PositionedModel>();
@@ -25,6 +29,20 @@ namespace BusinessLogic
             }
         }
 
+        public DateTime CreationDate { 
+            get { return _creationDate; }
+            set { _creationDate = value; }
+        }
+        public DateTime LastModificationDate { 
+            get { return _lastModificationDate; } 
+            set { _lastModificationDate = value; }
+        }
+        public DateTime LastRenderDate { 
+            get { return _lastRenderDate; } 
+            set { _lastRenderDate = value;}
+        }
+        
+        
         private void CheckIfStringNull(string value)
         {
             if (String.IsNullOrEmpty(value))
@@ -39,9 +57,12 @@ namespace BusinessLogic
 
 
         public void AddPositionedModel(PositionedModel newElement) {
-            if (_positionedModellList.Find(s => (s.PositionedModelModel == newElement.PositionedModelModel)&&(s.PositionedModelPosition == newElement.PositionedModelPosition)) == null)
+            if (_positionedModellList.Find(
+                s => (s.PositionedModelModel == newElement.PositionedModelModel)
+                    && (s.PositionedModelPosition == newElement.PositionedModelPosition)) == null)
             {
                 _positionedModellList.Add(newElement);
+                LastModificationDate = DateTime.Now;
             }
             else
             {
@@ -59,6 +80,7 @@ namespace BusinessLogic
             else
             {
                 _positionedModellList.Remove(positionedModel);
+                LastModificationDate = DateTime.Now;
             }
         }
 
@@ -75,7 +97,6 @@ namespace BusinessLogic
             }
             return false;
         }
-
 
         public void DropPositionedModels()
         {
