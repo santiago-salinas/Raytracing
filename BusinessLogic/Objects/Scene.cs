@@ -19,7 +19,8 @@ namespace BusinessLogic
             _positionedModellList = new List<PositionedModel>();
         }
 
-        public string Name {
+        public string Name
+        {
             get { return _name; }
             set
             {
@@ -29,20 +30,23 @@ namespace BusinessLogic
             }
         }
 
-        public DateTime CreationDate { 
+        public DateTime CreationDate
+        {
             get { return _creationDate; }
             set { _creationDate = value; }
         }
-        public DateTime LastModificationDate { 
-            get { return _lastModificationDate; } 
+        public DateTime LastModificationDate
+        {
+            get { return _lastModificationDate; }
             set { _lastModificationDate = value; }
         }
-        public DateTime LastRenderDate { 
-            get { return _lastRenderDate; } 
-            set { _lastRenderDate = value;}
+        public DateTime LastRenderDate
+        {
+            get { return _lastRenderDate; }
+            set { _lastRenderDate = value; }
         }
-        
-        
+
+
         private void CheckIfStringNull(string value)
         {
             if (String.IsNullOrEmpty(value))
@@ -56,7 +60,8 @@ namespace BusinessLogic
         public int FOV { get; set; }
 
 
-        public void AddPositionedModel(PositionedModel newElement) {
+        public void AddPositionedModel(PositionedModel newElement)
+        {
             if (_positionedModellList.Find(
                 s => (s.PositionedModelModel == newElement.PositionedModelModel)
                     && (s.PositionedModelPosition == newElement.PositionedModelPosition)) == null)
@@ -92,10 +97,16 @@ namespace BusinessLogic
 
         public bool ContainsModel(string name)
         {
-            foreach (PositionedModel model in _positionedModellList) {
-                if (model.PositionedModelModel.Name == name) { return true;}
+            foreach (PositionedModel model in _positionedModellList)
+            {
+                if (model.PositionedModelModel.Name == name) { return true; }
             }
             return false;
+        }
+
+        public void RenderScene()
+        {
+            LastRenderDate = DateTime.Now;
         }
 
         public void DropPositionedModels()
