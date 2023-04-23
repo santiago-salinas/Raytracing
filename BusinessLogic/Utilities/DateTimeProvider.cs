@@ -15,12 +15,11 @@ namespace BusinessLogic.Utilities
             {
                 if (now == null)
                 {
-                    return DateTime.Now;
+                    now = DateTime.Now;
                 }
-                else
-                {
-                    return (DateTime)now;
-                }
+
+                return (DateTime)now;
+
             }
             set
             {
@@ -28,7 +27,7 @@ namespace BusinessLogic.Utilities
             } 
         }
 
-        public void Reset() => now = null;
+        public static void Reset() => now = null;
 
 
     }

@@ -55,6 +55,7 @@
     <Compile Include="ModelUnitTest.cs" />
     <Compile Include="PositionedModelUnitTest.cs" />
     <Compile Include="SceneUnitTest.cs" />
+    <Compile Include="UserUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

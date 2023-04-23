@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogic.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Xml.Linq;
@@ -17,7 +18,9 @@ namespace BusinessLogic
         public Scene()
         {
             _positionedModellList = new List<PositionedModel>();
+            
         }
+
 
         public string Name
         {

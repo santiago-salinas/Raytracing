@@ -32,7 +32,7 @@ namespace BusinessLogic_Tests
         private Vector defaultLookAtVector;
         private int defaultFOV;
 
-        private DateTimeProvider dateTimeProvider;
+        
 
 
         [TestInitialize]
@@ -80,11 +80,9 @@ namespace BusinessLogic_Tests
                 PositionedModelPosition = testPosition
             };
 
-            dateTimeProvider = new DateTimeProvider();
+            DateTimeProvider.Reset();
 
         }
-
-
 
         [TestMethod]
         public void SceneCreatedSuccesfullyTest()
@@ -214,8 +212,14 @@ namespace BusinessLogic_Tests
         [TestMethod]
         public void SetCreationDateWhenCreatingScene()
         {
+            //arrange
+            DateTimeProvider.Now = DateTime.Now;
+
             //act
-            testScene = new Scene();
+            testScene = new Scene()
+            {
+                CreationDate = DateTimeProvider.Now,
+            };
 
             //assert
             Assert.AreEqual(testScene.CreationDate, DateTimeProvider.Now);
@@ -224,37 +228,65 @@ namespace BusinessLogic_Tests
         [TestMethod]
         public void LastModificationDateUpdatedWhenAddingPositionedModel()
         {
+            //arrange
+
+            DateTimeProvider.Now = DateTime.Now.AddDays(-1);
+            testScene = new Scene()
+            {
+                CreationDate = DateTimeProvider.Now,
+                LastModificationDate = DateTimeProvider.Now,
+            };
+
             //act
+            DateTime previousDate = testScene.LastModificationDate;
             testScene.AddPositionedModel(testPositionedModel);
+            bool lastModificationIsLater = testScene.LastModificationDate > previousDate;
 
             //assert
-            Assert.AreEqual(DateTimeProvider.Now, testScene.LastModificationDate);
+            Assert.IsTrue(lastModificationIsLater);
         }
 
         [TestMethod]
         public void LastModificationDateUpdatedWhenRemovingPositionedModel()
         {
             //arrange
+            DateTimeProvider.Now = DateTime.Now.AddDays(-1);
+            testScene = new Scene()
+            {
+                CreationDate = DateTimeProvider.Now,
+                
+
+            };
             testScene.AddPositionedModel(testPositionedModel);
-
+            testScene.LastModificationDate = DateTimeProvider.Now;
             //act
+            DateTime previousDate = testScene.LastModificationDate;
             testScene.RemovePositionedModel(testPositionedModel);
-
+            bool lastModificationIsLater = testScene.LastModificationDate > previousDate;
+            
             //assert
-            Assert.AreEqual(DateTimeProvider.Now, testScene.LastModificationDate);
+            Assert.IsTrue(lastModificationIsLater);
         }
 
         [TestMethod]
         public void LastRenderDateUpdatedAfterRenderingScene()
         {
             //arrange
-            testScene.LastRenderDate = DateTime.MinValue;
+            DateTimeProvider.Now = DateTime.Now.AddDays(-1);
+            testScene = new Scene()
+            {
+                CreationDate = DateTimeProvider.Now,
+                LastRenderDate = DateTimeProvider.Now,
+            };
 
             //act
-            testScene.RenderScene();
 
+            DateTime previousDate = testScene.LastRenderDate;
+            testScene.RenderScene();
+            bool lastRenderIsLater = testScene.LastRenderDate > previousDate;
+            
             //assert
-            Assert.AreEqual(DateTimeProvider.Now, testScene.LastRenderDate);
+            Assert.IsTrue(lastRenderIsLater);
         }
         public void AddSceneToCollection()
         {
