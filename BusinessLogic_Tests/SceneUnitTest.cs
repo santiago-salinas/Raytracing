@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using BusinessLogic.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
@@ -28,8 +29,10 @@ namespace BusinessLogic_Tests
 
 
         private Vector defaultLookFromVector;
-        private Vector defaultLookAtVector ;
+        private Vector defaultLookAtVector;
         private int defaultFOV;
+
+        
 
 
         [TestInitialize]
@@ -38,8 +41,8 @@ namespace BusinessLogic_Tests
             testName = "Rolling Balls";
             testNullName = string.Empty;
 
-            defaultLookFromVector = new Vector(0,2,0);
-            defaultLookAtVector = new Vector(0,2,5);
+            defaultLookFromVector = new Vector(0, 2, 0);
+            defaultLookAtVector = new Vector(0, 2, 5);
             defaultFOV = 30;
 
             testScene = new Scene()
@@ -76,6 +79,9 @@ namespace BusinessLogic_Tests
                 PositionedModelModel = testModel,
                 PositionedModelPosition = testPosition
             };
+
+            DateTimeProvider.Reset();
+
         }
 
         [TestMethod]
@@ -87,7 +93,7 @@ namespace BusinessLogic_Tests
                 LookFrom = defaultLookFromVector,
                 LookAt = defaultLookAtVector,
             };
-            //Assert
+            //assert
             Assert.IsNotNull(testScene);
         }
 
@@ -204,6 +210,84 @@ namespace BusinessLogic_Tests
         }
 
         [TestMethod]
+        public void SetCreationDateWhenCreatingScene()
+        {
+            //arrange
+            DateTimeProvider.Now = DateTime.Now;
+
+            //act
+            testScene = new Scene()
+            {
+                CreationDate = DateTimeProvider.Now,
+            };
+
+            //assert
+            Assert.AreEqual(testScene.CreationDate, DateTimeProvider.Now);
+        }
+
+        [TestMethod]
+        public void LastModificationDateUpdatedWhenAddingPositionedModel()
+        {
+            //arrange
+
+            DateTimeProvider.Now = DateTime.Now.AddDays(-1);
+            testScene = new Scene()
+            {
+                CreationDate = DateTimeProvider.Now,
+                LastModificationDate = DateTimeProvider.Now,
+            };
+
+            //act
+            DateTime previousDate = testScene.LastModificationDate;
+            testScene.AddPositionedModel(testPositionedModel);
+            bool lastModificationIsLater = testScene.LastModificationDate > previousDate;
+
+            //assert
+            Assert.IsTrue(lastModificationIsLater);
+        }
+
+        [TestMethod]
+        public void LastModificationDateUpdatedWhenRemovingPositionedModel()
+        {
+            //arrange
+            DateTimeProvider.Now = DateTime.Now.AddDays(-1);
+            testScene = new Scene()
+            {
+                CreationDate = DateTimeProvider.Now,
+                
+
+            };
+            testScene.AddPositionedModel(testPositionedModel);
+            testScene.LastModificationDate = DateTimeProvider.Now;
+            //act
+            DateTime previousDate = testScene.LastModificationDate;
+            testScene.RemovePositionedModel(testPositionedModel);
+            bool lastModificationIsLater = testScene.LastModificationDate > previousDate;
+            
+            //assert
+            Assert.IsTrue(lastModificationIsLater);
+        }
+
+        [TestMethod]
+        public void LastRenderDateUpdatedAfterRenderingScene()
+        {
+            //arrange
+            DateTimeProvider.Now = DateTime.Now.AddDays(-1);
+            testScene = new Scene()
+            {
+                CreationDate = DateTimeProvider.Now,
+                LastRenderDate = DateTimeProvider.Now,
+            };
+
+            //act
+
+            DateTime previousDate = testScene.LastRenderDate;
+            testScene.RenderScene();
+            bool lastRenderIsLater = testScene.LastRenderDate > previousDate;
+            
+            //assert
+            Assert.IsTrue(lastRenderIsLater);
+        }
         public void AddSceneToCollection()
         {
             //act
@@ -296,42 +380,6 @@ namespace BusinessLogic_Tests
 
 
         }
-
-        //test to check creation date
-        [TestMethod]
-        public void CreationDate()
-        {
-            //arrange
-            DateTime creationDate = DateTime.Now;
-            //act
-            Scene scene = new Scene()
-            {
-                Name = testName,
-                LookFrom = defaultLookFromVector,
-                LookAt = defaultLookAtVector,
-            };
-            //assert
-            Assert.IsTrue(scene.CreationDate >= creationDate);
-        }
-
-        //test to check last modification date
-        [TestMethod]
-        public void LastModificationDate()
-        {
-            //arrange
-            DateTime creationDate = DateTime.Now;
-            //act
-            Scene scene = new Scene()
-            {
-                Name = testName,
-                LookFrom = defaultLookFromVector,
-                LookAt = defaultLookAtVector,
-            };
-            //assert
-            Assert.IsTrue(scene.LastModificationDate >= creationDate);
-        }
-
-
 
         [TestCleanup]
         public void TearDown()
