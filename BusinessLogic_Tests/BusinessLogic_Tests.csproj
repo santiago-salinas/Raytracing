@@ -55,6 +55,8 @@
     <Compile Include="ModelUnitTest.cs" />
     <Compile Include="PositionedModelUnitTest.cs" />
     <Compile Include="SceneUnitTest.cs" />
+    <Compile Include="RayUnitTest.cs" />
+    <Compile Include="VectorUnitTest.cs" />
     <Compile Include="UserUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
