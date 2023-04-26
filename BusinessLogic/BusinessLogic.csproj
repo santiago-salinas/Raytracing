@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Collections\SceneCollection.cs" />
     <Compile Include="Exceptions\GeneralException.cs" />
+    <Compile Include="Objects\Color.cs" />
     <Compile Include="Objects\Lambertian.cs" />
     <Compile Include="Collections\LambertianCollection.cs" />
     <Compile Include="Objects\Model.cs" />
