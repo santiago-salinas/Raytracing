@@ -21,7 +21,7 @@ namespace BusinessLogic_Tests
 
         private Lambertian testLambertian;
         private string lambertianName;
-        private Vector color;
+        private Color color;
 
         private PositionedModel testPositionedModel;
         private Vector testPosition;
@@ -57,7 +57,7 @@ namespace BusinessLogic_Tests
             sphereName = "Small sized sphere";
             radius = 5;
             lambertianName = "Oak color";
-            color = new Vector(133, 94, 66);
+            color = new Color(133, 94, 66);
 
             testSphere = new Sphere(sphereName, radius);
             testLambertian = new Lambertian(lambertianName, color);

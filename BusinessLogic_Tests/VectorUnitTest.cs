@@ -12,9 +12,9 @@ namespace BusinessLogic_Tests
         {
             Vector vec1 = new Vector()
             {
-                FstValue = -8,
-                SndValue = 2.1,
-                ThrdValue = 3.2,
+                FirstValue = -8,
+                SecondValue = 2.1,
+                ThirdValue = 3.2,
             };
 
             Vector vec2 = new Vector(-8, 2.1, 3.2);

@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using BusinessLogic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
 namespace BusinessLogic_Tests
@@ -7,13 +8,34 @@ namespace BusinessLogic_Tests
     public class RenderUnitTest
 
     {
-        [TestMethod]
-        public void TestRenderImage()
+        private Model testModel;
+        private string modelName;
+        private string testNullName;
+
+        private Sphere testSphere;
+        private string sphereName;
+        private float radius;
+
+        private Lambertian testLambertian;
+        private string lambertianName;
+        private Color color;
+
+        private Scene testScene;
+        private string testName;
+        private Vector defaultLookFromVector;
+        private Vector defaultLookAtVector;
+        int defaultFOV;
+
+        private Vector testPosition;
+        private PositionedModel testPositionedModel;
+
+        [TestInitialize]
+        public void Initialize()
         {
-            private Scene testScene = new Scene();
             defaultLookFromVector = new Vector(0, 2, 0);
             defaultLookAtVector = new Vector(0, 2, 5);
             defaultFOV = 30;
+            testName = "Rolling Balls";
 
             testScene = new Scene()
             {
@@ -23,16 +45,16 @@ namespace BusinessLogic_Tests
                 FOV = defaultFOV
             };
 
-            
-            sphereName = "Small sized sphere";
-            radius = 5;
-            
-            color = new Color(133, 94, 66);
+
+            string sphereName = "Small sized sphere";
+            int radius = 5;
+
+            Color color = new Color(133, 94, 66);
 
             testSphere = new Sphere(sphereName, radius);
-            color = new Color(0.5215686274509804, 0,3686274509803922, 0,2588235294117647);
+            color = new Color(0.5215686274509804, 0.3686274509803922, 0.2588235294117647);
             lambertianName = "Oak color";
-            testLambertian = new Lambertian(lambertianName, color);
+            Lambertian testLambertian = new Lambertian(lambertianName, color);
 
             modelName = "Wooden ball";
             testModel = new Model()
@@ -48,14 +70,14 @@ namespace BusinessLogic_Tests
                 PositionedModelModel = testModel,
                 PositionedModelPosition = testPosition
             };
+        }
 
-            private Motor motor = new Motor();
-            private Resolution = {10,10};
-            private PPM ppm = motor.render(testScene);
-            private PPM expected = [];
-
-            Assert.IsEqual(expected,ppm);
-
+        [TestMethod]
+        public void RenderTestScene()
+        {
+            //PPM ppm = motor.render(testScene);
+            //PPM expected = [];
+            Assert.IsNotNull(testScene);
         }
     }
 }

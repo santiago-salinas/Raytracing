@@ -4,15 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogic.Objects
+namespace BusinessLogic
 {
     public class Color
     {
         private double _redValue;
         private double _greenValue;
         private double _blueValue;
-
-      
 
         public Color(double r, double g, double b)
         {
