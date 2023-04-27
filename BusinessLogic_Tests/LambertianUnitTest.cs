@@ -19,12 +19,10 @@ namespace BusinessLogic_Tests
         public void Initialize()
         {
             testName = "Wood";
-            testColor = new Color(255,255,255);
+            testColor = new Color(1,1,1);
             
-            differentTestColor = new Color(125,0,230);
-            
-            outOfBoundsColor = new Color(-1,0,230);
-            
+            differentTestColor = new Color((float)125/255,0, (float)230/255);
+                        
             testNullName = string.Empty;
 
             testLambertian = new Lambertian()
@@ -50,9 +48,10 @@ namespace BusinessLogic_Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException),"Values must be between 0 and 255")]
+        [ExpectedException(typeof(ArgumentException),"Values must be between 0 and 255")]
         public void ValuesForVectorMustBeBetweenBounds()
         {
+          outOfBoundsColor = new Color((float)-1 / 255, 0, (float)230 / 255);
             testLambertian.Color = outOfBoundsColor;
         }
 

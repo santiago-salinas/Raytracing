@@ -49,7 +49,7 @@ namespace BusinessLogic_Tests
             string sphereName = "Small sized sphere";
             int radius = 5;
 
-            Color color = new Color(133, 94, 66);
+            Color color = new Color((float)133/255, (float)94 / 255, (float)66 / 255);
 
             testSphere = new Sphere(sphereName, radius);
             color = new Color(0.5215686274509804, 0.3686274509803922, 0.2588235294117647);
