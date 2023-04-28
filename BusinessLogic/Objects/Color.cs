@@ -21,7 +21,10 @@ namespace BusinessLogic
 
         public double Red
         {
-            get { return _redValue; }
+            get
+            {
+                return Math.Abs((int)Math.Round(_redValue * 255));
+            }
             set {
                 bool isBetweenBounds = value >= 0 && value <= 1;
                 if(isBetweenBounds)
@@ -36,7 +39,10 @@ namespace BusinessLogic
         }
         public double Green
         {
-            get { return _greenValue; }
+            get
+            {
+                return Math.Abs((int)Math.Round(_greenValue * 255));
+            }
             set {
                 bool isBetweenBounds = value >= 0 && value <= 1;
                 if (isBetweenBounds)
@@ -51,7 +57,10 @@ namespace BusinessLogic
         }
         public double Blue
         {
-            get { return _blueValue; }
+            get
+            {
+                return Math.Abs((int)Math.Round(_blueValue * 255));
+            }
             set {
                 bool isBetweenBounds = value >= 0 && value <= 1;
                 if (isBetweenBounds)

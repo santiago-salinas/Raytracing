@@ -1,6 +1,8 @@
 ﻿using BusinessLogic;
+using BusinessLogic.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Diagnostics;
 
 namespace BusinessLogic_Tests
 {
@@ -79,12 +81,8 @@ namespace BusinessLogic_Tests
         {
             Motor motor = new Motor(testScene);
             PPM ppm = motor.render();
-                
-            PPM expected = new PPM()
-            {
-                Width = 5,
-                Height = 5
-            } ;
+
+            PPM expected = new PPM(5, 5);
 
             Color color = new Color(0, 0.8, 0.2);
             Color color2 = new Color(0.2, 0.8, 0.2);
@@ -112,17 +110,17 @@ namespace BusinessLogic_Tests
             Color color24 = new Color(0.6, 0, 0.2);
             Color color25 = new Color(0.8, 0, 0.2);
 
-            expected.SavePixel(0,0,color);
-            expected.SavePixel(0, 1, color2);
-            expected.SavePixel(0, 2, color3);
-            expected.SavePixel(0, 3, color4);
-            expected.SavePixel(0, 4, color5);
+            expected.SavePixel(4,0,color);
+            expected.SavePixel(4, 1, color2);
+            expected.SavePixel(4, 2, color3);
+            expected.SavePixel(4, 3, color4);
+            expected.SavePixel(4, 4, color5);
 
-            expected.SavePixel(1, 0, color6);
-            expected.SavePixel(1, 1, color7);
-            expected.SavePixel(1, 2, color8);
-            expected.SavePixel(1, 3, color9);
-            expected.SavePixel(1, 4, color10);
+            expected.SavePixel(3, 0, color6);
+            expected.SavePixel(3, 1, color7);
+            expected.SavePixel(3, 2, color8);
+            expected.SavePixel(3, 3, color9);
+            expected.SavePixel(3, 4, color10);
 
             expected.SavePixel(2, 0, color11);
             expected.SavePixel(2, 1, color12);
@@ -130,17 +128,22 @@ namespace BusinessLogic_Tests
             expected.SavePixel(2, 3, color14);
             expected.SavePixel(2, 4, color15);
 
-            expected.SavePixel(3, 0, color16);
-            expected.SavePixel(3, 1, color17);
-            expected.SavePixel(3, 2, color18);
-            expected.SavePixel(3, 3, color19);
-            expected.SavePixel(3, 4, color20);
+            expected.SavePixel(1, 0, color16);
+            expected.SavePixel(1, 1, color17);
+            expected.SavePixel(1, 2, color18);
+            expected.SavePixel(1, 3, color19);
+            expected.SavePixel(1, 4, color20);
 
-            expected.SavePixel(4, 0, color21);
-            expected.SavePixel(4, 1, color22);
-            expected.SavePixel(4, 2, color23);
-            expected.SavePixel(4, 3, color24);
-            expected.SavePixel(4, 4, color25);
+            expected.SavePixel(0, 0, color21);
+            expected.SavePixel(0, 1, color22);
+            expected.SavePixel(0, 2, color23);
+            expected.SavePixel(0, 3, color24);
+            expected.SavePixel(0, 4, color25);
+
+            Trace.WriteLine((ppm.GetImageAscii()));
+            Trace.WriteLine((expected.GetImageAscii()));
+
+            Assert.IsTrue(ppm.GetImageAscii()==expected.GetImageAscii());
         }
     }
 }
