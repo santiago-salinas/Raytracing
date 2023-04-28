@@ -10,14 +10,14 @@ namespace BusinessLogic
     {
 
         public Sphere() { }
-        public Sphere(string name, float radius) {
+        public Sphere(string name, double radius) {
             Name = name;
             Radius = radius;
         }
 
-        private float _radius;
+        private double _radius;
         private string _name;
-        public float Radius
+        public double Radius
         {
             get { return _radius; }
             set

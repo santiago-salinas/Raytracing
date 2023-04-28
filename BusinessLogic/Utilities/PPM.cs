@@ -39,9 +39,9 @@ namespace BusinessLogic
         }
 
         public string GetImageAscii() {
-            string format = "P3\n";
-            string maxColorRange = "255\n";
-            string ppmAsString = format +  + _width + " " + _heigth + "\n" + maxColorRange;
+            string format = "P3\r\n";
+            string maxColorRange = "255\r\n";
+            string ppmAsString = format +  + _width + " " + _heigth + "\r\n" + maxColorRange;
             for(int row= 0; row < _heigth; row++)
             {
                 for (int column = 0; column < _width; column++)
@@ -50,7 +50,7 @@ namespace BusinessLogic
                     double green = _pixels[row, column].Green;
                     double blue = _pixels[row, column].Blue;
 
-                    ppmAsString += red + " " + green + " " + blue + "\n";
+                    ppmAsString += red + " " + green + " " + blue + "\r\n";
                 }
             }
             return ppmAsString;
