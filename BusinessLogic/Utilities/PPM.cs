@@ -39,17 +39,21 @@ namespace BusinessLogic
         }
 
         public string GetImageAscii() {
-            string ret = "P3\n";
-            ret += _width + " " + _heigth + "\n";
-            ret += 255 + "\n";
-            for(int j= 0; j < _heigth; j++)
+            string format = "P3\n";
+            string maxColorRange = "255\n";
+            string ppmAsString = format +  + _width + " " + _heigth + "\n" + maxColorRange;
+            for(int row= 0; row < _heigth; row++)
             {
-                for (int i = 0; i < _width; i++)
+                for (int column = 0; column < _width; column++)
                 {
-                    ret += _pixels[j, i].Red + " " + _pixels[j, i].Green + " " + _pixels[j, i].Blue + "\n";
+                    double red = _pixels[row, column].Red;
+                    double green = _pixels[row, column].Green;
+                    double blue = _pixels[row, column].Blue;
+
+                    ppmAsString += red + " " + green + " " + blue + "\n";
                 }
             }
-            return ret;
+            return ppmAsString;
         }
 
         public override bool Equals(object other)
