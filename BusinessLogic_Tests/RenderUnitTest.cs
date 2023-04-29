@@ -15,7 +15,7 @@ namespace BusinessLogic_Tests
 
         private Sphere testSphere;
         private string sphereName;
-        private float radius;
+        private double radius;
 
         private Lambertian testLambertian;
         private string lambertianName;
@@ -47,13 +47,13 @@ namespace BusinessLogic_Tests
             };
 
 
-            string sphereName = "Red Ball";
-            double radius = 0.5;
+            sphereName = "Red Ball";
+            radius = 0.5;
             testSphere = new Sphere(sphereName, radius);
 
-            Color color = new Color(1, 0, 0);
+            color = new Color(1, 0, 0);
             lambertianName = "Bright Red";
-            Lambertian testLambertian = new Lambertian(lambertianName, color);
+            testLambertian = new Lambertian(lambertianName, color);
 
             modelName = "Skydiving Red Ball";
             testModel = new Model()

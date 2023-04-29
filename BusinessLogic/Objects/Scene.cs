@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Utilities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Xml.Linq;
@@ -62,6 +63,10 @@ namespace BusinessLogic
         public Vector LookAt { get; set; }
         public int FOV { get; set; }
 
+        public List<PositionedModel> GetModels()
+        {
+            return _positionedModellList;
+        }
 
         public void AddPositionedModel(PositionedModel newElement)
         {

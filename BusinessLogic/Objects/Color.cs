@@ -74,6 +74,15 @@ namespace BusinessLogic
             }
         }
 
+        public Color Multiply(double value)
+        {
+            return new Color(_redValue * value, _greenValue * value, _blueValue * value);
+        }
+
+        public Color Add(Color other)
+        {
+            return new Color(_redValue + other._redValue, _greenValue + other._greenValue, _blueValue + other._blueValue);
+        }
         public override bool Equals(object other)
         {
             Color otherVector = (Color)other;
