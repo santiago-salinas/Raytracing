@@ -55,6 +55,7 @@
     <Compile Include="Objects\Sphere.cs" />
     <Compile Include="Collections\SphereCollection.cs" />
     <Compile Include="Objects\Scene.cs" />
+    <Compile Include="Utilities\HitRecord.cs" />
     <Compile Include="Utilities\Motor.cs" />
     <Compile Include="Utilities\PPM.cs" />
     <Compile Include="Utilities\DateTimeProvider.cs" />

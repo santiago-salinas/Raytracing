@@ -30,6 +30,11 @@ namespace BusinessLogic_Tests
         private Vector testPosition;
         private PositionedModel testPositionedModel;
 
+        private Sphere testSphereFloor;
+        private Vector testPositionFloor;
+        private Model testModelFloor;
+        private PositionedModel testPositionedModelFloor;
+
         [TestInitialize]
         public void Initialize()
         {
@@ -70,7 +75,29 @@ namespace BusinessLogic_Tests
                 PositionedModelPosition = testPosition
             };
 
+
+            sphereName = "Floor";
+            radius = 100;
+            testSphereFloor = new Sphere(sphereName, radius);
+
+            modelName = "Green Floor";
+            testModelFloor = new Model()
+            {
+                Name = modelName,
+                ModelShape = testSphereFloor,
+                ModelColor = testLambertian
+            };
+
+            testPositionFloor = new Vector(0, -100.5, -1);
+            testPositionedModelFloor = new PositionedModel()
+            {
+                PositionedModelModel = testModelFloor,
+                PositionedModelPosition = testPositionFloor
+            };
+
             testScene.AddPositionedModel(testPositionedModel);
+            testScene.AddPositionedModel(testPositionedModelFloor);
+
         }
 
         [TestMethod]
@@ -81,7 +108,7 @@ namespace BusinessLogic_Tests
 
             Trace.WriteLine((ppm.GetImageAscii()));
 
-            string expectedString = "P3\r\n5 5\r\n255\r\n175 207 255\r\n168 203 255\r\n160 198 255\r\n160 198 255\r\n168 203 255\r\n186 213 255\r\n183 212 255\r\n69 157 237\r\n186 157 237\r\n183 212 255\r\n197 220 255\r\n199 222 255\r\n69 98 237\r\n186 98 237\r\n199 222 255\r\n208 227 255\r\n214 230 255\r\n222 235 255\r\n222 235 255\r\n214 230 255\r\n217 232 255\r\n226 237 255\r\n235 243 255\r\n235 243 255\r\n226 237 255\r\n";
+            string expectedString = "P3\r\n5 5\r\n255\r\n175 207 255\r\n168 203 255\r\n160 198 255\r\n160 198 255\r\n168 203 255\r\n186 213 255\r\n183 212 255\r\n69 157 237\r\n186 157 237\r\n183 212 255\r\n197 220 255\r\n123 255 125\r\n69 98 237\r\n186 98 237\r\n132 255 125\r\n125 255 128\r\n126 255 128\r\n127 255 128\r\n128 255 128\r\n129 255 128\r\n126 255 128\r\n127 255 128\r\n127 255 128\r\n128 255 128\r\n128 255 128\r\n";
             Assert.IsTrue(expectedString==ppm.GetImageAscii());
         }
     }
