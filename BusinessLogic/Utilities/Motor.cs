@@ -8,15 +8,23 @@ namespace BusinessLogic
     public class Motor
     {
         private Scene _scene;
-        public Motor(Scene scene)
+        private Camera _camera;
+
+        public Motor(Scene scene, Camera camera)
         {
             _scene = scene;
+            _camera = camera;
         }
 
         public PPM render()
         {
-            Vector canvasHorizontal = new Vector(4, 0, 0);
-            Vector canvasVertical = new Vector(0, 2, 0);
+            int resolutionX = 5;
+            int resolutionY = 5;
+
+
+            int samplesPerPixel = 100;
+
+            
 
 
             PPM ppm = new PPM(5, 5);
@@ -25,17 +33,23 @@ namespace BusinessLogic
             {
                 for (double column = 0; column < ppm.Width; column++)
                 {
-                    double u = column / ppm.Width;
-                    double v = row / ppm.Heigth;
+                    double RedBuffer = 0;
+                    double GreenBuffer = 0;
+                    double BlueBuffer = 0;
+                    Color pixel;
 
-                    Vector horizontalPosition = canvasHorizontal.Multiply(u);
-                    Vector verticalPosition = canvasVertical.Multiply(v);
+                    for (int sample = 0; sample < samplesPerPixel; sample++)
+                    {
+                        double u = column / ppm.Width;
+                        double v = row / ppm.Heigth;
 
-                    Vector pointPosition = _scene.LookAt.Add(horizontalPosition.Add(verticalPosition));
+                        pixel = shootRay(_camera.GetRay(u, v));
+                        RedBuffer += pixel.Red/255;
+                        GreenBuffer += pixel.Green/255;
+                        BlueBuffer += pixel.Blue / 255;
+                    }
 
-                    Ray ray = new Ray(_scene.LookFrom, pointPosition);
-
-                    Color pixel = shootRay(ray);
+                    pixel = new Color(RedBuffer / samplesPerPixel, GreenBuffer / samplesPerPixel, BlueBuffer / samplesPerPixel);
 
                     ppm.SavePixel((int)row, (int)column, pixel);
 
@@ -44,6 +58,8 @@ namespace BusinessLogic
 
             return ppm;
         }
+        
+
         public Color shootRay(Ray ray)
         {
             HitRecord hitRecord = new HitRecord()

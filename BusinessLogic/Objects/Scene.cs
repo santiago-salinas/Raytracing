@@ -59,10 +59,6 @@ namespace BusinessLogic
             }
         }
 
-        public Vector LookFrom { get; set; }
-        public Vector LookAt { get; set; }
-        public int FOV { get; set; }
-
         public List<PositionedModel> GetModels()
         {
             return _positionedModellList;

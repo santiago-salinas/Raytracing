@@ -27,12 +27,7 @@ namespace BusinessLogic_Tests
         private Vector testPosition;
         private Vector testPositionAlternative;
 
-
-        private Vector defaultLookFromVector;
-        private Vector defaultLookAtVector;
-        private int defaultFOV;
-
-        
+           
 
 
         [TestInitialize]
@@ -41,16 +36,9 @@ namespace BusinessLogic_Tests
             testName = "Rolling Balls";
             testNullName = string.Empty;
 
-            defaultLookFromVector = new Vector(0, 2, 0);
-            defaultLookAtVector = new Vector(0, 2, 5);
-            defaultFOV = 30;
-
             testScene = new Scene()
             {
-                Name = testName,
-                LookFrom = defaultLookFromVector,
-                LookAt = defaultLookAtVector,
-                FOV = defaultFOV
+                Name = testName
             };
 
             modelName = "Wooden ball";
@@ -89,9 +77,7 @@ namespace BusinessLogic_Tests
         {
             testScene = new Scene()
             {
-                Name = testName,
-                LookFrom = defaultLookFromVector,
-                LookAt = defaultLookAtVector,
+                Name = testName
             };
             //assert
             Assert.IsNotNull(testScene);
@@ -333,9 +319,7 @@ namespace BusinessLogic_Tests
             SceneCollection.AddScene(testScene);
             Scene newScene = new Scene()
             {
-                Name = testName,
-                LookFrom = defaultLookFromVector,
-                LookAt = defaultLookAtVector,
+                Name = testName
             };
 
             //act
