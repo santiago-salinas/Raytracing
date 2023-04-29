@@ -46,14 +46,15 @@ namespace BusinessLogic
         }
         public Color shootRay(Ray ray)
         {
-            HitRecord hitRecord = new HitRecord(){
+            HitRecord hitRecord = new HitRecord()
+            {
                 IsHit = false,
             };
             double tMax = 3.4 * Math.Pow(10, 38);
 
             foreach (PositionedModel positionedModel in _scene.GetModels())
             {
-                HitRecord hit = positionedModel.PositionedModelModel.ModelShape.IsSphereHit(ray, positionedModel.PositionedModelPosition, 0, tMax);
+                HitRecord hit = IsPositionedModelHitByRay(positionedModel, ray, tMax);
                 if (hit.IsHit)
                 {
                     hitRecord = hit;
@@ -69,7 +70,8 @@ namespace BusinessLogic
                     (hitRecord.Normal.ThirdValue + 1) / 2);
                 return vectorColor;
             }
-            else {
+            else
+            {
                 return GetSkyBoxColor(ray);
             }
 
@@ -82,6 +84,11 @@ namespace BusinessLogic
             Color colorStart = new Color(1, 1, 1);
             Color colorEnd = new Color(0.5, 0.7, 1);
             return colorStart.Multiply(1 - posY).Add(colorEnd.Multiply(posY));
+        }
+
+        public HitRecord IsPositionedModelHitByRay(PositionedModel positionedModel, Ray ray, double tMax)
+        {
+            return positionedModel.IsModelHit(ray, 0, tMax);
         }
     }
 }
