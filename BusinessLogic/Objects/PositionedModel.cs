@@ -14,33 +14,25 @@ namespace BusinessLogic
 
         public Color shootRay(Ray ray)
         {
-            if (isSphereHit(ray))
+            if (PositionedModelModel.ModelShape.isSphereHit(ray, PositionedModelPosition))
             {
                 return PositionedModelModel.ModelColor.Color;
             }
             else
             {
-                
-                Vector vectorDirectionUnit = ray.Direction.GetUnit();
-                double posY = 0.5 * (vectorDirectionUnit.SecondValue + 1);
-                Color colorStart = new Color(1, 1, 1);
-                Color colorEnd = new Color(0.5, 0.7, 1);
-                return colorStart.Multiply(1 - posY).Add(colorEnd.Multiply(posY));
-                
-                //return new Color(0, 1, 1);
-                }
+                return GetSkyBoxColor(ray);
+            }
         }
 
-        // Mover a sphere, pasandole los datos de posicion
-        public bool isSphereHit(Ray ray)
+        public Color GetSkyBoxColor(Ray ray)
         {
-            var vectorOriginCenter = ray.Origin.Subtract(PositionedModelPosition);
-            var a = ray.Direction.Dot(ray.Direction);
-            var b = vectorOriginCenter.Dot(ray.Direction) * 2;
-            var c = vectorOriginCenter.Dot(vectorOriginCenter) - PositionedModelModel.ModelShape.Radius * PositionedModelModel.ModelShape.Radius;
-            var discriminant = b * b - 4 * a * c;
-            return discriminant > 0;
+            Vector vectorDirectionUnit = ray.Direction.GetUnit();
+            double posY = 0.5 * (vectorDirectionUnit.SecondValue + 1);
+            Color colorStart = new Color(1, 1, 1);
+            Color colorEnd = new Color(0.5, 0.7, 1);
+            return colorStart.Multiply(1 - posY).Add(colorEnd.Multiply(posY));
         }
+                
         public override bool Equals(object other)
         {
             bool evalModel = this.PositionedModelModel == ((PositionedModel)other).PositionedModelModel;

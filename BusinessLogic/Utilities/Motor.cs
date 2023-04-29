@@ -15,8 +15,8 @@ namespace BusinessLogic
 
         public PPM render()
         {
-            Vector vectorHorizontal = new Vector(4,0,0);
-            Vector vectorVertical = new Vector(0, 2, 0);
+            Vector canvasHorizontal = new Vector(4,0,0);
+            Vector canvasVertical = new Vector(0,2,0);
 
 
             PPM ppm = new PPM(5, 5);
@@ -30,8 +30,8 @@ namespace BusinessLogic
                         double u = column / ppm.Width;
                         double v = row / ppm.Heigth;
 
-                        Vector horizontalPosition = vectorHorizontal.Multiply(u);
-                        Vector verticalPosition = vectorVertical.Multiply(v);
+                        Vector horizontalPosition = canvasHorizontal.Multiply(u);
+                        Vector verticalPosition = canvasVertical.Multiply(v);
 
                         Vector pointPosition = _scene.LookAt.Add(horizontalPosition.Add(verticalPosition));
 

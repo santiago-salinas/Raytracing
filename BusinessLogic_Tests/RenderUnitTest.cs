@@ -36,7 +36,7 @@ namespace BusinessLogic_Tests
             defaultLookFromVector = new Vector(0, 0, 0);
             defaultLookAtVector = new Vector(-2, -1, -1);
             defaultFOV = 30;
-            testSceneName = "Rolling Balls";
+            testSceneName = "Skydiving Red Ball";
 
             testScene = new Scene()
             {
@@ -47,7 +47,7 @@ namespace BusinessLogic_Tests
             };
 
 
-            sphereName = "Red Ball";
+            sphereName = "Ball";
             radius = 0.5;
             testSphere = new Sphere(sphereName, radius);
 
@@ -55,7 +55,7 @@ namespace BusinessLogic_Tests
             lambertianName = "Bright Red";
             testLambertian = new Lambertian(lambertianName, color);
 
-            modelName = "Skydiving Red Ball";
+            modelName = "Red Ball";
             testModel = new Model()
             {
                 Name = modelName,
