@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\SceneCollection.cs" />
+    <Compile Include="Collections\UserCollection.cs" />
     <Compile Include="Exceptions\GeneralException.cs" />
     <Compile Include="Objects\Lambertian.cs" />
     <Compile Include="Collections\LambertianCollection.cs" />

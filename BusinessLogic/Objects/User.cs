@@ -15,12 +15,14 @@ namespace BusinessLogic.Objects
 
         public User() { }
 
-        public String UserName { 
-            get { return _userName;  } 
-            set {
+        public String UserName
+        {
+            get { return _userName; }
+            set
+            {
                 value = value.Trim();
                 CheckIfUserNameIsValid(value);
-                _userName = value; 
+                _userName = value;
             }
         }
 
@@ -34,24 +36,22 @@ namespace BusinessLogic.Objects
             }
         }
 
-        private bool CheckIfUserNameIsValid(string value)
+        public void CheckIfUserNameIsValid(string value)
         {
-            /*if (String.IsNullOrEmpty(value))
-            {
-                throw new BusinessLogicException("User name cannot be null");
-            }*/
-
             if (value.Length < 3 || value.Length > 20)
             {
                 throw new ArgumentException("User name must be between 3 and 20 characters long");
             }
 
-            return true;
+            if (value.Contains(" "))
+            {
+                throw new ArgumentException("User name cannot contain spaces");
+            }
         }
 
-        private void IsValidPassword(string value)
+        public void IsValidPassword(string value)
         {
-            if(!PasswordLengthIsBetweenBounds(value))
+            if (!PasswordLengthIsBetweenBounds(value))
             {
                 throw new ArgumentException("Password must be between 5 and 25 characters long");
             }
@@ -74,19 +74,19 @@ namespace BusinessLogic.Objects
         {
             return value.Any(char.IsUpper);
         }
-        
+
         private bool PasswordContainsDigit(string value)
         {
             return value.Any(char.IsDigit);
         }
 
-        
+
 
         public DateTime RegisterDate
         {
-            get { return _registerDate;  }
+            get { return _registerDate; }
             set { _registerDate = value; }
         }
-         
+
     }
 }
