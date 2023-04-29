@@ -29,7 +29,7 @@ namespace BusinessLogic.Objects
             set { _direction = value; }
         }
 
-        public Vector PointAt(float iPosX)
+        public Vector PointAt(double iPosX)
         {
             return _origin.Add(_direction.Multiply(iPosX)); // origin + (t * direction)
         }

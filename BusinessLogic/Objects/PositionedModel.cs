@@ -14,9 +14,18 @@ namespace BusinessLogic
 
         public Color shootRay(Ray ray)
         {
-            if (PositionedModelModel.ModelShape.isSphereHit(ray, PositionedModelPosition))
+            double tDistanceFromOrigin = PositionedModelModel.ModelShape.isSphereHit(ray, PositionedModelPosition);
+            if (tDistanceFromOrigin>0)
             {
-                return PositionedModelModel.ModelColor.Color;
+                Vector surfaceNormal = ray.PointAt(tDistanceFromOrigin).Subtract(PositionedModelPosition);
+                Vector unitSurfaceNormal = surfaceNormal.GetUnit();
+                Color vectorColor = new Color(
+                    (unitSurfaceNormal.FirstValue + 1)/2,
+                    (unitSurfaceNormal.SecondValue + 1)/2,
+                    (unitSurfaceNormal.ThirdValue + 1) / 2);
+                return vectorColor;
+
+                //return PositionedModelModel.ModelColor.Color;
             }
             else
             {

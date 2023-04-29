@@ -50,14 +50,20 @@ namespace BusinessLogic
             }
         }
 
-        public bool isSphereHit(Ray ray, Vector position)
+        public double isSphereHit(Ray ray, Vector position)
         {
-            var vectorOriginCenter = ray.Origin.Subtract(position);
-            var a = ray.Direction.Dot(ray.Direction);
-            var b = vectorOriginCenter.Dot(ray.Direction) * 2;
-            var c = vectorOriginCenter.Dot(vectorOriginCenter) - Radius * Radius;
-            var discriminant = b * b - 4 * a * c;
-            return discriminant > 0;
+            Vector vectorOriginCenter = ray.Origin.Subtract(position);
+            double a = ray.Direction.Dot(ray.Direction);
+            double b = vectorOriginCenter.Dot(ray.Direction) * 2;
+            double c = vectorOriginCenter.Dot(vectorOriginCenter) - Radius * Radius;
+            double discriminant = b * b - 4 * a * c;
+            if(discriminant < 0)
+            {
+                return -1;
+            }else
+            {
+                return (-1 * b - Math.Sqrt(discriminant)) / (2 * a);
+            }
         }
 
         public override bool Equals(object other)
