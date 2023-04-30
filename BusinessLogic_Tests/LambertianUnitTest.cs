@@ -8,9 +8,9 @@ namespace BusinessLogic_Tests
     public class LambertianUnitTest
     {
         private Lambertian testLambertian;
-        private Vector testColor;
-        private Vector outOfBoundsVector;
-        private Vector differentTestColor;
+        private Color testColor;
+        private Color outOfBoundsColor;
+        private Color differentTestColor;
         private string testName;
         private string testNullName;
 
@@ -19,26 +19,10 @@ namespace BusinessLogic_Tests
         public void Initialize()
         {
             testName = "Wood";
-            testColor = new Vector() {
-                FstValue = 255,
-                SndValue = 255,
-                ThrdValue = 255,
-            };
+            testColor = new Color(1,1,1);
             
-            differentTestColor = new Vector()
-            {
-                FstValue = 125,
-                SndValue = 0,
-                ThrdValue = 230,
-            };
-            
-            outOfBoundsVector = new Vector()
-            {
-                FstValue = -1,
-                SndValue = 0,
-                ThrdValue = 230,
-            };
-            
+            differentTestColor = new Color((float)125/255,0, (float)230/255);
+                        
             testNullName = string.Empty;
 
             testLambertian = new Lambertian()
@@ -64,10 +48,11 @@ namespace BusinessLogic_Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException),"Values must be between 0 and 255")]
+        [ExpectedException(typeof(ArgumentException),"Values must be between 0 and 255")]
         public void ValuesForVectorMustBeBetweenBounds()
         {
-            testLambertian.Color = outOfBoundsVector;
+          outOfBoundsColor = new Color((float)-1 / 255, 0, (float)230 / 255);
+            testLambertian.Color = outOfBoundsColor;
         }
 
         [TestMethod]
@@ -75,12 +60,7 @@ namespace BusinessLogic_Tests
         public void ValuesForColorAreNaturalNumbers()
         {
             //arrange
-            testColor = new Vector
-            {
-                FstValue = 2.22,
-                SndValue = 1.55,
-                ThrdValue = 51.5
-            };
+            testColor = new Color(2.22,1.55,51.5);
             //assert
             testLambertian.Color = testColor;
         }

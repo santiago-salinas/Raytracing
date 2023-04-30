@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLogic.Objects;
 
 namespace BusinessLogic
 {
     public class Lambertian
     {
         private String _name;
-        private Vector _color;
-        static double RGBLowerBound = 0;
-        static double RGBUpperBound = 255;
+        private Color _color;
+        //static double RGBLowerBound = 0;
+        //static double RGBUpperBound = 255;
 
         public Lambertian() { }
 
-        public Lambertian(string name, Vector color)
+        public Lambertian(string name, Color color)
         {
             Name = name;
             Color = color;
@@ -32,11 +33,11 @@ namespace BusinessLogic
             }
         }
 
-        public Vector Color
+        public Color Color
         {
             get { return _color; }
             set {
-
+                /*
                 double x =  value.FstValue;
                 double y =  value.SndValue;
                 double z =  value.ThrdValue;
@@ -48,12 +49,12 @@ namespace BusinessLogic
                 DoubleHasNoDecimal(x);
                 DoubleHasNoDecimal(y);
                 DoubleHasNoDecimal(z);
-
+                */
                 _color = value; 
             }
         }
 
-        private void ValueInRange (double value, double lowerBound, double upperBound)
+        /*private void ValueInRange (double value, double lowerBound, double upperBound)
         {
             if (value < lowerBound || value > upperBound) {
                 throw new ArgumentOutOfRangeException("Values must be between 0 and 255");
@@ -66,7 +67,7 @@ namespace BusinessLogic
             {
                 throw new ArgumentException("Values must be natural numbers");
             }
-        }
+        }*/
 
         private void CheckIfStringNull(string value)
         {

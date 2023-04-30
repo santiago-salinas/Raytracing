@@ -21,18 +21,13 @@ namespace BusinessLogic_Tests
 
         private Lambertian testLambertian;
         private string lambertianName;
-        private Vector color;
+        private Color color;
 
         private PositionedModel testPositionedModel;
         private Vector testPosition;
         private Vector testPositionAlternative;
 
-
-        private Vector defaultLookFromVector;
-        private Vector defaultLookAtVector;
-        private int defaultFOV;
-
-        
+           
 
 
         [TestInitialize]
@@ -41,23 +36,16 @@ namespace BusinessLogic_Tests
             testName = "Rolling Balls";
             testNullName = string.Empty;
 
-            defaultLookFromVector = new Vector(0, 2, 0);
-            defaultLookAtVector = new Vector(0, 2, 5);
-            defaultFOV = 30;
-
             testScene = new Scene()
             {
-                Name = testName,
-                LookFrom = defaultLookFromVector,
-                LookAt = defaultLookAtVector,
-                FOV = defaultFOV
+                Name = testName
             };
 
             modelName = "Wooden ball";
             sphereName = "Small sized sphere";
             radius = 5;
             lambertianName = "Oak color";
-            color = new Vector(133, 94, 66);
+            color = new Color((float)133/255, (float)94 / 255, (float)66 / 255);
 
             testSphere = new Sphere(sphereName, radius);
             testLambertian = new Lambertian(lambertianName, color);
@@ -89,9 +77,7 @@ namespace BusinessLogic_Tests
         {
             testScene = new Scene()
             {
-                Name = testName,
-                LookFrom = defaultLookFromVector,
-                LookAt = defaultLookAtVector,
+                Name = testName
             };
             //assert
             Assert.IsNotNull(testScene);
@@ -333,9 +319,7 @@ namespace BusinessLogic_Tests
             SceneCollection.AddScene(testScene);
             Scene newScene = new Scene()
             {
-                Name = testName,
-                LookFrom = defaultLookFromVector,
-                LookAt = defaultLookAtVector,
+                Name = testName
             };
 
             //act
