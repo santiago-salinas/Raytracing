@@ -14,6 +14,11 @@ namespace BusinessLogic
         private Vector _vertical;
         private Vector _origin;
 
+        private int _resolutionX;
+        private int _resolutionY;
+
+        private int _samplesPerPixel;
+
         public Vector LowerLeftCorner
         {
             get { return _lowerLeftCorner; }
@@ -36,6 +41,24 @@ namespace BusinessLogic
         {
             get { return _origin; }
             set { _origin = value; }
+        }
+
+        public int ResolutionX
+        {
+            get { return _resolutionX; }
+            set { _resolutionX = value; }
+        }
+
+        public int ResolutionY
+        {
+            get { return _resolutionY; }
+            set { _resolutionY = value; }
+        }
+
+        public int SamplesPerPixel
+        {
+            get { return _samplesPerPixel; }
+            set { _samplesPerPixel = value; }
         }
 
         public Ray GetRay(double u, double v)

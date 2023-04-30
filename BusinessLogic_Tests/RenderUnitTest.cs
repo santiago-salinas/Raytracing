@@ -108,7 +108,12 @@ namespace BusinessLogic_Tests
                 LowerLeftCorner = vectorLowerLeftCorner,
                 Horizontal = vectorHorizontal,
                 Vertical = vectorVertical,
-                Origin = origin
+                Origin = origin,
+
+                ResolutionX = 5,
+                ResolutionY = 5,
+
+                SamplesPerPixel = 1,
             };
 
 
@@ -118,6 +123,7 @@ namespace BusinessLogic_Tests
         public void RenderTestScene()
         {
             Motor motor = new Motor(testScene, camera);
+            motor.RandomOff();
             PPM ppm = motor.render();
 
             Trace.WriteLine((ppm.GetImageAscii()));
