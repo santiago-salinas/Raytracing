@@ -18,13 +18,20 @@ namespace UI
         public LogInPage()
         {
             InitializeComponent();
-            /*User testUser = new User()
+            UserCollection.AddUser(new User()
             {
                 UserName = "Test",
-                Password = "TestPassword1",
+                Password = "Test1",
                 RegisterDate = DateTime.Now,
-            };
-            UserCollection.AddUser(testUser);*/
+            });
+
+
+            Sphere sphere1 = new Sphere("Sphere 1", 2.5f);
+            Sphere sphere2 = new Sphere("Sphere 2", 3.0f);
+            Sphere sphere3 = new Sphere("Sphere 3", 1.8f);
+            SphereCollection.AddSphere(sphere1);
+            SphereCollection.AddSphere(sphere2);
+            SphereCollection.AddSphere(sphere3);
         }
 
 
