@@ -113,7 +113,7 @@ namespace BusinessLogic_Tests
                 ResolutionX = 5,
                 ResolutionY = 5,
 
-                SamplesPerPixel = 1,
+                SamplesPerPixel = 10,
             };
 
 
@@ -128,7 +128,7 @@ namespace BusinessLogic_Tests
 
             Trace.WriteLine((ppm.GetImageAscii()));
 
-            string expectedString = "P3\r\n5 5\r\n255\r\n175 207 255\r\n168 203 255\r\n160 198 255\r\n160 198 255\r\n168 203 255\r\n186 213 255\r\n183 212 255\r\n69 157 237\r\n186 157 237\r\n183 212 255\r\n197 220 255\r\n123 255 125\r\n69 98 237\r\n186 98 237\r\n132 255 125\r\n125 255 128\r\n126 255 128\r\n127 255 128\r\n128 255 128\r\n129 255 128\r\n126 255 128\r\n127 255 128\r\n127 255 128\r\n128 255 128\r\n128 255 128\r\n";
+            string expectedString = "P3\r\n5 5\r\n255\r\n166 202 255\r\n157 196 255\r\n151 193 255\r\n157 196 255\r\n166 202 255\r\n178 209 255\r\n172 205 255\r\n82 100 128\r\n172 205 255\r\n178 209 255\r\n191 217 255\r\n191 217 255\r\n96 108 128\r\n191 217 255\r\n191 217 255\r\n64 89 128\r\n64 89 128\r\n32 45 64\r\n64 89 128\r\n64 89 128\r\n64 89 128\r\n64 89 128\r\n16 22 32\r\n64 89 128\r\n64 89 128\r\n";
             Assert.IsTrue(expectedString == ppm.GetImageAscii());
         }
     }

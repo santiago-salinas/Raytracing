@@ -10,7 +10,7 @@ namespace BusinessLogic
     {
         public override double NextDouble()
         {
-            return 0.0;
+            return 0.5;
         }
     }
 }

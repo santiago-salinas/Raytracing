@@ -18,6 +18,8 @@ namespace BusinessLogic
         private int _samplesPerPixel;
 
         Random random = new Random();
+        private bool _isRandomActive;
+
 
         public Motor(Scene scene, Camera camera)
         {
@@ -25,16 +27,20 @@ namespace BusinessLogic
             _camera = camera;
             _samplesPerPixel = camera.SamplesPerPixel;
             random = new Random();
+            _isRandomActive = true;
+
         }
 
         public void RandomOff()
         {
             random = new RandomProvider();
+            _isRandomActive = false;
         }
 
         public void RandomOn()
         {
             random = new Random();
+            _isRandomActive = true;
         }
 
 
@@ -93,7 +99,7 @@ namespace BusinessLogic
 
             if (closestObjectHitRecord.IsHit)
             {
-                return GetNormalColor(closestObjectHitRecord);
+                return GetDifusedColor(closestObjectHitRecord);
             }
             else
             {
@@ -118,13 +124,13 @@ namespace BusinessLogic
             _blueBuffer += pixel.Blue / 255;
         }
 
-        public Color GetNormalColor(HitRecord hitRecord)
+        public Color GetDifusedColor(HitRecord hitRecord)
         {
-            Color vectorColor = new Color(
-                    (hitRecord.Normal.FirstValue + 1) / 2,
-                    (hitRecord.Normal.SecondValue + 1) / 2,
-                    (hitRecord.Normal.ThirdValue + 1) / 2);
-            return vectorColor;
+            Vector newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(GetRandomInUnitSphere());
+            Vector newVector = newVectorPoint.Subtract(hitRecord.Intersection);
+            Ray newRay = new Ray(hitRecord.Intersection, newVector);
+            Color color = shootRay(newRay);
+            return color.Multiply(0.5);
         }
 
         public Color GetSkyBoxColor(Ray ray)
@@ -145,5 +151,18 @@ namespace BusinessLogic
         {
             return positionedModel.IsModelHit(ray, 0, tMax);
         }
+
+        public Vector GetRandomInUnitSphere()
+        {
+            Vector vector;
+            do
+            {
+                Vector vectorTemp = new Vector(random.NextDouble(), random.NextDouble(), random.NextDouble());
+                vector = vectorTemp.Multiply(2).Subtract(new Vector(1, 1, 1));
+            } while (vector.SquaredLength() >= 1);
+
+            return vector;
+        }
+
     }
 }
