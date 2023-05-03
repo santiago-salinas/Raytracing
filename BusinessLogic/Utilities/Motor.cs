@@ -116,7 +116,7 @@ namespace BusinessLogic
 
         public Color GetAveragePixelAndReset()
         {
-            Color pixel = new Color(_redBuffer / _samplesPerPixel, _greenBuffer / _samplesPerPixel, _blueBuffer / _samplesPerPixel);
+            Color pixel = new Color((_redBuffer/255) / _samplesPerPixel, (_greenBuffer / 255) / _samplesPerPixel, (_blueBuffer / 255) / _samplesPerPixel);
             _redBuffer = 0;
             _greenBuffer = 0;
             _blueBuffer = 0;
@@ -125,9 +125,9 @@ namespace BusinessLogic
 
         public void AddToPixelBuffer(Color pixel)
         {
-            _redBuffer += pixel.Red / 255;
-            _greenBuffer += pixel.Green / 255;
-            _blueBuffer += pixel.Blue / 255;
+            _redBuffer += pixel.Red;
+            _greenBuffer += pixel.Green;
+            _blueBuffer += pixel.Blue;
         }
 
         public Color GetColor(HitRecord hitRecord, int depthLeft)
@@ -137,7 +137,7 @@ namespace BusinessLogic
             Ray newRay = new Ray(hitRecord.Intersection, newVector);
             Color color = shootRay(newRay, depthLeft-1);
             Color attenuation = hitRecord.Attenuation;
-            return new Color((color.Red/255 * attenuation.Red/255), (color.Green/255 * attenuation.Green / 255), (color.Blue / 255 * attenuation.Blue / 255));
+            return new Color((color.Red * attenuation.Red)/ 65025, (color.Green * attenuation.Green)/65025, (color.Blue * attenuation.Blue)/ 65025);
         }
 
         public Color GetSkyBoxColor(Ray ray)
