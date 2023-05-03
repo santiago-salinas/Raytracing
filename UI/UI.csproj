@@ -46,11 +46,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cards\LambertianCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Cards\LambertianCard.Designer.cs">
+      <DependentUpon>LambertianCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cards\ModelCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Cards\ModelCard.Designer.cs">
+      <DependentUpon>ModelCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cards\SphereCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Cards\SphereCard.Designer.cs">
       <DependentUpon>SphereCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cards\SceneCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Cards\SceneCard.Designer.cs">
+      <DependentUpon>SceneCard.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\AddSphereDialog.cs">
       <SubType>Form</SubType>
@@ -102,6 +120,9 @@
     <Compile Include="Tabs\ShapesTab.Designer.cs">
       <DependentUpon>ShapesTab.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Cards\SceneCard.resx">
+      <DependentUpon>SceneCard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Cards\SphereCard.resx">
       <DependentUpon>SphereCard.cs</DependentUpon>
     </EmbeddedResource>

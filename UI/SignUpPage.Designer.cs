@@ -49,7 +49,7 @@
             this.userNameTextBox.Location = new System.Drawing.Point(82, 129);
             this.userNameTextBox.Name = "userNameTextBox";
             this.userNameTextBox.Size = new System.Drawing.Size(322, 20);
-            this.userNameTextBox.TabIndex = 9;
+            this.userNameTextBox.TabIndex = 0;
             this.userNameTextBox.TextChanged += new System.EventHandler(this.usernameTextBoxChanged);
             // 
             // panel1
@@ -76,7 +76,7 @@
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(322, 20);
-            this.passwordTextBox.TabIndex = 9;
+            this.passwordTextBox.TabIndex = 1;
             this.passwordTextBox.TextChanged += new System.EventHandler(this.passwordTextBoxChanged);
             // 
             // panel3
@@ -94,7 +94,7 @@
             this.confirmPasswordTextbox.Name = "confirmPasswordTextbox";
             this.confirmPasswordTextbox.PasswordChar = '*';
             this.confirmPasswordTextbox.Size = new System.Drawing.Size(322, 20);
-            this.confirmPasswordTextbox.TabIndex = 9;
+            this.confirmPasswordTextbox.TabIndex = 2;
             this.confirmPasswordTextbox.TextChanged += new System.EventHandler(this.passwordConfirmTextBoxChanged);
             // 
             // usernameLabel

@@ -16,6 +16,19 @@ namespace BusinessLogic
             _lambertianList.Clear();
         }
 
+        public static List<Lambertian> GetLambertiansFromUser(User owner)
+        {
+            List<Lambertian> ret = new List<Lambertian>();
+            foreach (Lambertian s in _lambertianList)
+            {
+                if (s.Owner == owner)
+                {
+                    ret.Add(s);
+                }
+            }
+            return ret;
+        }
+
         public static bool ContainsLambertian(string name, User user)
         {
             Lambertian lambertian = _lambertianList.Find(l => l.Name == name && l.Owner == user);

@@ -28,36 +28,65 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.materialLabel = new System.Windows.Forms.Label();
+            this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.addMaterialButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // materialLabel
+            // flowLayoutPanel
             // 
-            this.materialLabel.AutoSize = true;
-            this.materialLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.materialLabel.Location = new System.Drawing.Point(338, 210);
-            this.materialLabel.Name = "materialLabel";
-            this.materialLabel.Size = new System.Drawing.Size(168, 31);
-            this.materialLabel.TabIndex = 1;
-            this.materialLabel.Text = "MATERIALS";
-            this.materialLabel.Click += new System.EventHandler(this.shapeLabel_Click);
+            this.flowLayoutPanel.AutoScroll = true;
+            this.flowLayoutPanel.Location = new System.Drawing.Point(250, 170);
+            this.flowLayoutPanel.Name = "flowLayoutPanel";
+            this.flowLayoutPanel.Size = new System.Drawing.Size(701, 387);
+            this.flowLayoutPanel.TabIndex = 5;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.LightGray;
+            this.pictureBox1.Image = global::UI.Properties.Resources.add;
+            this.pictureBox1.Location = new System.Drawing.Point(434, 65);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(57, 50);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            // 
+            // addMaterialButton
+            // 
+            this.addMaterialButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.addMaterialButton.BackColor = System.Drawing.Color.LightGray;
+            this.addMaterialButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addMaterialButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.addMaterialButton.Location = new System.Drawing.Point(421, 44);
+            this.addMaterialButton.Name = "addMaterialButton";
+            this.addMaterialButton.Size = new System.Drawing.Size(371, 95);
+            this.addMaterialButton.TabIndex = 6;
+            this.addMaterialButton.Text = "     Add new material";
+            this.addMaterialButton.UseVisualStyleBackColor = false;
+            this.addMaterialButton.Click += new System.EventHandler(this.addMaterialButton_Click);
             // 
             // MaterialsTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.materialLabel);
+            this.ClientSize = new System.Drawing.Size(1200, 650);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.addMaterialButton);
+            this.Controls.Add(this.flowLayoutPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MaterialsTab";
             this.Text = "MaterialsTab";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label materialLabel;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button addMaterialButton;
     }
 }

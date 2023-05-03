@@ -32,7 +32,7 @@ namespace UI
         {
             if(scenesTab == null)
             {
-                scenesTab = new ScenesTab();
+                scenesTab = new ScenesTab(loggedUser);
                 scenesTab.FormClosed += scenesTabClosed;
                 scenesTab.MdiParent = this;
                 scenesTab.Dock = DockStyle.Fill;
@@ -53,7 +53,7 @@ namespace UI
         {
             if (modelsTab == null)
             {
-                modelsTab = new ModelsTab();
+                modelsTab = new ModelsTab(loggedUser);
                 modelsTab.FormClosed += modelsTabClosed;
                 modelsTab.MdiParent = this;
                 modelsTab.Dock = DockStyle.Fill;
@@ -74,7 +74,7 @@ namespace UI
         {
             if (materialsTab == null)
             {
-                materialsTab = new MaterialsTab();
+                materialsTab = new MaterialsTab(loggedUser);
                 materialsTab.FormClosed += materialsTabClosed;
                 materialsTab.MdiParent = this;
                 materialsTab.Dock = DockStyle.Fill;
