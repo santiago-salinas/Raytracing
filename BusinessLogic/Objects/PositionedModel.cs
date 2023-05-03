@@ -39,6 +39,7 @@ namespace BusinessLogic
                         TDistanceFromOrigin = t,
                         Intersection = intersectionPoint,
                         Normal = normal,
+                        Attenuation = PositionedModelModel.ModelColor.Color,
                     };
                 }
                 else

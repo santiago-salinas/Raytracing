@@ -12,6 +12,7 @@ namespace BusinessLogic
         private double _tDistanceFromOrigin;
         private Vector _intersection;
         private Vector _normal;
+        private Color _attenuation;
 
         public bool IsHit
         {
@@ -35,6 +36,12 @@ namespace BusinessLogic
         {
             get { return _normal; }
             set { _normal = value; }
+        }
+
+        public Color Attenuation
+        {
+            get { return _attenuation; }
+            set { _attenuation = value; }
         }
     }
 }

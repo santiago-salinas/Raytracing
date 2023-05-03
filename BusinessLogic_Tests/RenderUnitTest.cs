@@ -25,7 +25,7 @@ namespace BusinessLogic_Tests
         private string testSceneName;
         private Vector defaultLookFromVector;
         private Vector defaultLookAtVector;
-        int defaultFOV;
+        private int defaultFOV;
 
         private Vector testPosition;
         private PositionedModel testPositionedModel;
@@ -33,6 +33,9 @@ namespace BusinessLogic_Tests
         private Sphere testSphereFloor;
         private Vector testPositionFloor;
         private Model testModelFloor;
+        private Color colorFloor;
+        private string lambertianNameFloor;
+        private Lambertian testLambertianFloor;
         private PositionedModel testPositionedModelFloor;
 
         private Camera camera;
@@ -40,10 +43,8 @@ namespace BusinessLogic_Tests
         [TestInitialize]
         public void Initialize()
         {
-            defaultLookFromVector = new Vector(0, 0, 0);
-            defaultLookAtVector = new Vector(-2, -1, -1);
-            defaultFOV = 30;
-            testSceneName = "Skydiving Red Ball";
+            
+            testSceneName = "Standing Blue Ball";
 
             testScene = new Scene()
             {
@@ -55,11 +56,11 @@ namespace BusinessLogic_Tests
             radius = 0.5;
             testSphere = new Sphere(sphereName, radius);
 
-            color = new Color(1, 0, 0);
-            lambertianName = "Bright Red";
+            color = new Color(0.1, 0.2, 0.5);
+            lambertianName = "Bloo passport";
             testLambertian = new Lambertian(lambertianName, color);
 
-            modelName = "Red Ball";
+            modelName = "Blue Ball";
             testModel = new Model()
             {
                 Name = modelName,
@@ -78,13 +79,16 @@ namespace BusinessLogic_Tests
             sphereName = "Floor";
             radius = 100;
             testSphereFloor = new Sphere(sphereName, radius);
+            colorFloor = new Color(0.8, 0.8, 0.0);
+            lambertianNameFloor = "Touch Grass Green";
+            testLambertianFloor = new Lambertian(lambertianNameFloor, colorFloor);
 
             modelName = "Green Floor";
             testModelFloor = new Model()
             {
                 Name = modelName,
                 ModelShape = testSphereFloor,
-                ModelColor = testLambertian
+                ModelColor = testLambertianFloor
             };
 
             testPositionFloor = new Vector(0, -100.5, -1);
@@ -98,24 +102,20 @@ namespace BusinessLogic_Tests
             testScene.AddPositionedModel(testPositionedModelFloor);
 
 
-            Vector vectorLowerLeftCorner = new Vector(-2, -1, -1);
-            Vector vectorHorizontal = new Vector(4, 0, 0);
-            Vector vectorVertical = new Vector(0, 2, 0);
             Vector origin = new Vector(0, 0, 0);
 
-            camera = new Camera
-            {
-                LowerLeftCorner = vectorLowerLeftCorner,
-                Horizontal = vectorHorizontal,
-                Vertical = vectorVertical,
-                Origin = origin,
+            Vector lookAt = new Vector(0, 0.5, -2);
+            Vector vectorUp = new Vector(0, 1, 0);
 
-                ResolutionX = 5,
-                ResolutionY = 5,
+            int samplesPerPixel = 10;
+            int depth = 50;
 
-                SamplesPerPixel = 10,
-            };
+            camera = new Camera(origin, lookAt, vectorUp, 40, 5, 5, samplesPerPixel, depth);
 
+            defaultLookFromVector = new Vector(-10,-10 , -10);
+            defaultLookAtVector = new Vector(-40, -1, -1);
+            defaultFOV = 30;
+           
 
         }
 
@@ -128,7 +128,7 @@ namespace BusinessLogic_Tests
 
             Trace.WriteLine((ppm.GetImageAscii()));
 
-            string expectedString = "P3\r\n5 5\r\n255\r\n166 202 255\r\n157 196 255\r\n151 193 255\r\n157 196 255\r\n166 202 255\r\n178 209 255\r\n172 205 255\r\n82 100 128\r\n172 205 255\r\n178 209 255\r\n191 217 255\r\n191 217 255\r\n96 108 128\r\n191 217 255\r\n191 217 255\r\n64 89 128\r\n64 89 128\r\n32 45 64\r\n64 89 128\r\n64 89 128\r\n64 89 128\r\n64 89 128\r\n16 22 32\r\n64 89 128\r\n64 89 128\r\n";
+            string expectedString = "P3\r\n5 5\r\n255\r\n166 202 255\r\n157 196 255\r\n151 193 255\r\n157 196 255\r\n166 202 255\r\n178 209 255\r\n172 205 255\r\n17 40 128\r\n172 205 255\r\n178 209 255\r\n191 217 255\r\n191 217 255\r\n19 43 128\r\n191 217 255\r\n191 217 255\r\n102 143 0\r\n102 143 0\r\n10 29 0\r\n102 143 0\r\n102 143 0\r\n102 143 0\r\n102 143 0\r\n8 23 0\r\n102 143 0\r\n102 143 0\r\n";
             Assert.IsTrue(expectedString == ppm.GetImageAscii());
         }
     }

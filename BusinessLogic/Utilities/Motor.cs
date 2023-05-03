@@ -62,7 +62,7 @@ namespace BusinessLogic
                         double u = (column + randomU) / ppm.Width;
                         double v = (row + randomV) / ppm.Heigth;
 
-                        pixel = shootRay(_camera.GetRay(u, v));
+                        pixel = shootRay(_camera.GetRay(u, v), _camera.MaxDepth);
 
                         AddToPixelBuffer(pixel);
                     }
@@ -79,7 +79,7 @@ namespace BusinessLogic
 
 
 
-        public Color shootRay(Ray ray)
+        public Color shootRay(Ray ray, int depthLeft)
         {
             HitRecord closestObjectHitRecord = new HitRecord()
             {
@@ -99,7 +99,14 @@ namespace BusinessLogic
 
             if (closestObjectHitRecord.IsHit)
             {
-                return GetDifusedColor(closestObjectHitRecord);
+                if (depthLeft > 0)
+                {
+                    return GetColor(closestObjectHitRecord, depthLeft);
+                }
+                else
+                {
+                    return new Color(0, 0, 0);
+                }
             }
             else
             {
@@ -116,7 +123,6 @@ namespace BusinessLogic
             return pixel;
         }
 
-
         public void AddToPixelBuffer(Color pixel)
         {
             _redBuffer += pixel.Red / 255;
@@ -124,13 +130,14 @@ namespace BusinessLogic
             _blueBuffer += pixel.Blue / 255;
         }
 
-        public Color GetDifusedColor(HitRecord hitRecord)
+        public Color GetColor(HitRecord hitRecord, int depthLeft)
         {
             Vector newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(GetRandomInUnitSphere());
             Vector newVector = newVectorPoint.Subtract(hitRecord.Intersection);
             Ray newRay = new Ray(hitRecord.Intersection, newVector);
-            Color color = shootRay(newRay);
-            return color.Multiply(0.5);
+            Color color = shootRay(newRay, depthLeft-1);
+            Color attenuation = hitRecord.Attenuation;
+            return new Color((color.Red/255 * attenuation.Red/255), (color.Green/255 * attenuation.Green / 255), (color.Blue / 255 * attenuation.Blue / 255));
         }
 
         public Color GetSkyBoxColor(Ray ray)
