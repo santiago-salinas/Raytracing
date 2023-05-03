@@ -18,6 +18,8 @@ namespace BusinessLogic
         private int _samplesPerPixel;
 
         Random random = new Random();
+        private bool _isRandomActive;
+
 
         public Motor(Scene scene, Camera camera)
         {
@@ -25,16 +27,20 @@ namespace BusinessLogic
             _camera = camera;
             _samplesPerPixel = camera.SamplesPerPixel;
             random = new Random();
+            _isRandomActive = true;
+
         }
 
         public void RandomOff()
         {
             random = new RandomProvider();
+            _isRandomActive = false;
         }
 
         public void RandomOn()
         {
             random = new Random();
+            _isRandomActive = true;
         }
 
 
@@ -56,7 +62,7 @@ namespace BusinessLogic
                         double u = (column + randomU) / ppm.Width;
                         double v = (row + randomV) / ppm.Heigth;
 
-                        pixel = shootRay(_camera.GetRay(u, v));
+                        pixel = shootRay(_camera.GetRay(u, v), _camera.MaxDepth);
 
                         AddToPixelBuffer(pixel);
                     }
@@ -73,7 +79,7 @@ namespace BusinessLogic
 
 
 
-        public Color shootRay(Ray ray)
+        public Color shootRay(Ray ray, int depthLeft)
         {
             HitRecord closestObjectHitRecord = new HitRecord()
             {
@@ -93,7 +99,14 @@ namespace BusinessLogic
 
             if (closestObjectHitRecord.IsHit)
             {
-                return GetNormalColor(closestObjectHitRecord);
+                if (depthLeft > 0)
+                {
+                    return GetColor(closestObjectHitRecord, depthLeft);
+                }
+                else
+                {
+                    return new Color(0, 0, 0);
+                }
             }
             else
             {
@@ -103,28 +116,28 @@ namespace BusinessLogic
 
         public Color GetAveragePixelAndReset()
         {
-            Color pixel = new Color(_redBuffer / _samplesPerPixel, _greenBuffer / _samplesPerPixel, _blueBuffer / _samplesPerPixel);
+            Color pixel = new Color((_redBuffer/255) / _samplesPerPixel, (_greenBuffer / 255) / _samplesPerPixel, (_blueBuffer / 255) / _samplesPerPixel);
             _redBuffer = 0;
             _greenBuffer = 0;
             _blueBuffer = 0;
             return pixel;
         }
 
-
         public void AddToPixelBuffer(Color pixel)
         {
-            _redBuffer += pixel.Red / 255;
-            _greenBuffer += pixel.Green / 255;
-            _blueBuffer += pixel.Blue / 255;
+            _redBuffer += pixel.Red;
+            _greenBuffer += pixel.Green;
+            _blueBuffer += pixel.Blue;
         }
 
-        public Color GetNormalColor(HitRecord hitRecord)
+        public Color GetColor(HitRecord hitRecord, int depthLeft)
         {
-            Color vectorColor = new Color(
-                    (hitRecord.Normal.FirstValue + 1) / 2,
-                    (hitRecord.Normal.SecondValue + 1) / 2,
-                    (hitRecord.Normal.ThirdValue + 1) / 2);
-            return vectorColor;
+            Vector newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(GetRandomInUnitSphere());
+            Vector newVector = newVectorPoint.Subtract(hitRecord.Intersection);
+            Ray newRay = new Ray(hitRecord.Intersection, newVector);
+            Color color = shootRay(newRay, depthLeft-1);
+            Color attenuation = hitRecord.Attenuation;
+            return new Color((color.Red * attenuation.Red)/ 65025, (color.Green * attenuation.Green)/65025, (color.Blue * attenuation.Blue)/ 65025);
         }
 
         public Color GetSkyBoxColor(Ray ray)
@@ -145,5 +158,18 @@ namespace BusinessLogic
         {
             return positionedModel.IsModelHit(ray, 0, tMax);
         }
+
+        public Vector GetRandomInUnitSphere()
+        {
+            Vector vector;
+            do
+            {
+                Vector vectorTemp = new Vector(random.NextDouble(), random.NextDouble(), random.NextDouble());
+                vector = vectorTemp.Multiply(2).Subtract(new Vector(1, 1, 1));
+            } while (vector.SquaredLength() >= 1);
+
+            return vector;
+        }
+
     }
 }
