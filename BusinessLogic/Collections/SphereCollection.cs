@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using BusinessLogic.Objects;
 
 namespace BusinessLogic
 {
@@ -11,18 +12,30 @@ namespace BusinessLogic
 
             public static List<Sphere> SphereList { get { return _sphereList; } }
 
+            public static List<Sphere> GetSpheresFromUser(User owner)
+            {
+                List<Sphere> ret = new List<Sphere>();
+                foreach (Sphere s in _sphereList)
+                {
+                    if (s.Owner == owner)
+                    {
+                        ret.Add(s);
+                    }
+                }
+                return ret;
+            }
             public static void DropCollection()
             {
                 _sphereList.Clear();
             }
-            public static bool ContainsSphere(string name)
+            public static bool ContainsSphere(string name, User owner)
             {
-                Sphere sphere = _sphereList.Find(s => s.Name == name);
+                Sphere sphere = _sphereList.Find(s => (s.Name == name && s.Owner == owner));
                 return sphere != null;
             }
             public static void AddSphere(Sphere newElement)
             {
-                if(_sphereList.Find(s => s.Name == newElement.Name) == null)
+                if(!ContainsSphere(newElement.Name, newElement.Owner))
                 {
                     _sphereList.Add(newElement);
                 }
@@ -33,20 +46,20 @@ namespace BusinessLogic
                
             }
 
-            public static Sphere GetSphere(string name)
+            public static Sphere GetSphere(string name, User owner)
             {
-                Sphere ret = _sphereList.Find(s => s.Name == name);
+                Sphere ret = _sphereList.Find(s => s.Name == name && s.Owner == owner);
                 bool exists =  ret != null;
-                if(!exists) throw new BusinessLogicException("Sphere does not exist in the collection");
+                if(!exists) throw new BusinessLogicException("Owner does not have a sphere with that name");
                 return ret;
             }
 
-            public static void RemoveSphere(string name)
+            public static void RemoveSphere(string name, User owner)
             {
-                Sphere sphere = _sphereList.Find(s => s.Name == name);
-                if(sphere == null)
+                Sphere sphere = _sphereList.Find(s => s.Name == name && s.Owner == owner);
+                if(!ContainsSphere(name,owner))
                 {
-                    throw new BusinessLogicException("Sphere does not exist in the collection");
+                    throw new BusinessLogicException("Owner does not have a sphere with that name");
                 }//cant remove sphere used in a existing model
                 else if(ModelCollection.ExistsModelUsingTheSphere(sphere))
                 {

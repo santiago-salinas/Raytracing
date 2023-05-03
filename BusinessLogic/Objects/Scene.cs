@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Utilities;
+﻿using BusinessLogic.Objects;
+using BusinessLogic.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +16,9 @@ namespace BusinessLogic
         private DateTime _creationDate;
         private DateTime _lastModificationDate;
         private DateTime _lastRenderDate;
+
+        private User _owner;
+
 
         public Scene()
         {
@@ -50,6 +54,11 @@ namespace BusinessLogic
             set { _lastRenderDate = value; }
         }
 
+        public User Owner
+        {
+            get { return _owner; }
+            set { _owner = value; }
+        }
 
         private void CheckIfStringNull(string value)
         {
@@ -66,9 +75,10 @@ namespace BusinessLogic
 
         public void AddPositionedModel(PositionedModel newElement)
         {
-            if (_positionedModellList.Find(
+            /*if (_positionedModellList.Find(
                 s => (s.PositionedModelModel == newElement.PositionedModelModel)
-                    && (s.PositionedModelPosition == newElement.PositionedModelPosition)) == null)
+                    && (s.PositionedModelPosition == newElement.PositionedModelPosition)) == null)*/
+            if (!ContainsPositionedModel(newElement))
             {
                 _positionedModellList.Add(newElement);
                 LastModificationDate = DateTime.Now;
@@ -81,29 +91,34 @@ namespace BusinessLogic
 
         public void RemovePositionedModel(PositionedModel oldElement)
         {
-            PositionedModel positionedModel = _positionedModellList.Find(s => (s.PositionedModelModel == oldElement.PositionedModelModel) && (s.PositionedModelPosition == oldElement.PositionedModelPosition));
-            if (positionedModel == null)
+           /* PositionedModel positionedModel = _positionedModellList.Find(s => (s.PositionedModelModel == oldElement.PositionedModelModel) 
+                                                                        && (s.PositionedModelPosition == oldElement.PositionedModelPosition));*/
+
+
+            if (!ContainsPositionedModel(oldElement))
             {
                 throw new BusinessLogicException("PositionedModel is not in scene");
             }
             else
             {
-                _positionedModellList.Remove(positionedModel);
+                _positionedModellList.Remove(oldElement);
                 LastModificationDate = DateTime.Now;
             }
+            
         }
 
         public bool ContainsPositionedModel(PositionedModel element)
         {
-            PositionedModel positionedModel = _positionedModellList.Find(s => (s.PositionedModelModel == element.PositionedModelModel) && (s.PositionedModelPosition == element.PositionedModelPosition));
-            return positionedModel != null;
+           /* PositionedModel positionedModel = _positionedModellList.Find(s => (s.PositionedModelModel == element.PositionedModelModel) 
+                                                                        && (s.PositionedModelPosition == element.PositionedModelPosition));*/
+            return _positionedModellList.Contains(element);
         }
 
-        public bool ContainsModel(string name)
+        public bool ContainsModel(Model model)
         {
-            foreach (PositionedModel model in _positionedModellList)
+            foreach (PositionedModel elem in _positionedModellList)
             {
-                if (model.PositionedModelModel.Name == name) { return true; }
+                if (elem.PositionedModelModel == model) { return true; }
             }
             return false;
         }

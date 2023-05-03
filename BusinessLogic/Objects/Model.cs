@@ -12,6 +12,7 @@ namespace BusinessLogic
         private string _name;
         private Sphere _shape;
         private Lambertian _color;
+        private User _owner;
         public Model() { }
         public string Name
         {
@@ -22,6 +23,12 @@ namespace BusinessLogic
                 CheckIfStringNull(value);
                 _name = value;
             }
+        }
+
+        public User Owner
+        {
+            get { return _owner; }
+            set { _owner = value; }
         }
 
         private void CheckIfStringNull(string value)

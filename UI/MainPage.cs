@@ -20,8 +20,7 @@ namespace UI
         ShapesTab shapesTab;
         ScenesTab scenesTab;
         ModelsTab modelsTab;
-
-        User loggedUser = null;
+        User loggedUser;
         public MainPage(User providedUser)
         {
             InitializeComponent();
@@ -96,7 +95,7 @@ namespace UI
         {
             if (shapesTab == null)
             {
-                shapesTab = new ShapesTab();
+                shapesTab = new ShapesTab(loggedUser);
                 shapesTab.FormClosed += shapesTabClosed;
                 shapesTab.MdiParent = this;
                 shapesTab.Dock = DockStyle.Fill;

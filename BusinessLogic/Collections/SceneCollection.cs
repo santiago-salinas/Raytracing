@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using BusinessLogic.Objects;
 
 namespace BusinessLogic
 {
@@ -13,38 +14,38 @@ namespace BusinessLogic
         {
             _sceneList.Clear();
         }
-        public static bool ContainsScene(string name)
+        public static bool ContainsScene(string name, User owner)
         {
-            Scene scene = _sceneList.Find(s => s.Name == name);
+            Scene scene = _sceneList.Find(s => s.Name == name && s.Owner == owner);
             return scene != null;
         }
         public static void AddScene(Scene newElement)
         {
-            if (_sceneList.Find(s => s.Name == newElement.Name) == null)
+            if (!ContainsScene(newElement.Name, newElement.Owner))
             {
                 _sceneList.Add(newElement);
             }
             else
             {
-                throw new BusinessLogicException("Scene with the same name already exists in the collection");
+                throw new BusinessLogicException("Owner already has scene with that name");
             }
 
         }
 
-        public static Scene GetScene(string name)
+        public static Scene GetScene(string name, User owner)
         {
-            Scene ret = _sceneList.Find(s => s.Name == name);
+            Scene ret = _sceneList.Find(s => s.Name == name && s.Owner == owner);
             bool exists = ret != null;
-            if (!exists) throw new BusinessLogicException("Scene does not exist in the collection");
+            if (!exists) throw new BusinessLogicException("Owner does not have a scene with that name");
             return ret;
         }
 
-        public static void RemoveScene(string name)
+        public static void RemoveScene(string name, User owner)
         {
-            Scene scene = _sceneList.Find(s => s.Name == name);
+            Scene scene = _sceneList.Find(s => s.Name == name && s.Owner == owner);
             if (scene == null)
             {
-                throw new BusinessLogicException("Scene does not exist in the collection");
+                throw new BusinessLogicException("Owner does not have a scene with that name");
             }
             else
             {
@@ -54,7 +55,7 @@ namespace BusinessLogic
 
         public static bool ExistsSceneUsingModel(Model model)
         {
-            Scene ret = _sceneList.Find(m => m.ContainsModel(model.Name));
+            Scene ret = _sceneList.Find(s => s.ContainsModel(model));
             return ret != null;
         }
     }

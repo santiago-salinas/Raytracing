@@ -52,11 +52,11 @@
     <Compile Include="Cards\SphereCard.Designer.cs">
       <DependentUpon>SphereCard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\AddSphere.cs">
+    <Compile Include="Dialogs\AddSphereDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\AddSphere.Designer.cs">
-      <DependentUpon>AddSphere.cs</DependentUpon>
+    <Compile Include="Dialogs\AddSphereDialog.Designer.cs">
+      <DependentUpon>AddSphereDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="LogInPage.cs">
       <SubType>Form</SubType>
@@ -105,8 +105,8 @@
     <EmbeddedResource Include="Cards\SphereCard.resx">
       <DependentUpon>SphereCard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\AddSphere.resx">
-      <DependentUpon>AddSphere.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\AddSphereDialog.resx">
+      <DependentUpon>AddSphereDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogInPage.resx">
       <DependentUpon>LogInPage.cs</DependentUpon>

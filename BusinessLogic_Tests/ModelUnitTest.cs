@@ -1,6 +1,7 @@
 ﻿using BusinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using BusinessLogic.Objects;
 
 namespace BusinessLogic_Tests
 {
@@ -30,7 +31,11 @@ namespace BusinessLogic_Tests
             lambertianName = "Oak color";
             color = new Color((float)133 / 255, (float)94 / 255, (float)66 / 255);
 
-            testSphere = new Sphere(sphereName,radius);
+            testSphere = new Sphere()
+            {
+                Name = sphereName,
+                Radius = radius,
+            };
             testLambertian = new Lambertian(lambertianName,color);
 
 
@@ -160,11 +165,15 @@ namespace BusinessLogic_Tests
         [ExpectedException(typeof(BusinessLogicException), "Cant delete sphere used by active model")]
         public void CantDeleteSphereFromCollectionUsedByModel()
         {
+
             //arrange
+            User testUser = new User();
+            testSphere.Owner = testUser;
+            
             SphereCollection.AddSphere(testSphere);
             ModelCollection.AddModel(testModel);
             //act
-            SphereCollection.RemoveSphere(sphereName);
+            SphereCollection.RemoveSphere(sphereName, testUser);
         }
 
         [TestMethod]
@@ -182,16 +191,18 @@ namespace BusinessLogic_Tests
         public void DeleteSphereAndLambertianAfterDeletingModel()
         {
             //arrange
+            User testUser = new User();
+            testSphere.Owner = testUser;
             SphereCollection.AddSphere(testSphere);
             LambertianCollection.AddLambertian(testLambertian);
             ModelCollection.AddModel(testModel);
             ModelCollection.RemoveModel(modelName);
 
             //act
-            SphereCollection.RemoveSphere(sphereName);
+            SphereCollection.RemoveSphere(sphereName, testUser);
             LambertianCollection.RemoveLambertian(lambertianName);
             //assert
-            bool sphereDeleted = !SphereCollection.ContainsSphere(sphereName);
+            bool sphereDeleted = !SphereCollection.ContainsSphere(sphereName, testUser);
             bool lambertianDeleted = !LambertianCollection.ContainsLambertian(lambertianName);
             Assert.IsTrue(sphereDeleted && lambertianDeleted);
         }

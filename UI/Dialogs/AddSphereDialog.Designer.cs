@@ -1,6 +1,6 @@
 ﻿namespace UI.Dialogs
 {
-    partial class AddSphere
+    partial class AddSphereDialog
     {
         /// <summary>
         /// Required designer variable.

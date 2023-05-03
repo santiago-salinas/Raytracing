@@ -11,6 +11,7 @@ namespace BusinessLogic
     {
         private String _name;
         private Color _color;
+        private User _owner;
         //static double RGBLowerBound = 0;
         //static double RGBUpperBound = 255;
 
@@ -52,6 +53,12 @@ namespace BusinessLogic
                 */
                 _color = value; 
             }
+        }
+
+        public User Owner
+        {
+            get { return _owner; }
+            set { _owner = value; }
         }
 
         /*private void ValueInRange (double value, double lowerBound, double upperBound)

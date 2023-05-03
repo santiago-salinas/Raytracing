@@ -81,7 +81,10 @@ namespace BusinessLogic.Objects
         }
 
 
-
+        public override bool Equals(object other)
+        {
+            return this.UserName == ((User)other).UserName;
+        }
         public DateTime RegisterDate
         {
             get { return _registerDate; }

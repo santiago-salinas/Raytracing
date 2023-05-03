@@ -15,6 +15,8 @@ namespace UI.Cards
 {
     public partial class SphereCard : UserControl
     {
+
+        private Sphere sphere;
         public SphereCard()
         {
             InitializeComponent();
@@ -24,7 +26,7 @@ namespace UI.Cards
         {
             try
             {
-                SphereCollection.RemoveSphere(sphere.Name);
+                SphereCollection.RemoveSphere(sphere.Name, sphere.Owner);
                 this.Parent.Controls.Remove(this);
             }catch (BusinessLogicException ex)
             {
@@ -32,8 +34,7 @@ namespace UI.Cards
             }      
         }
         
-        private Sphere sphere;
-
+        
         public SphereCard(Sphere sphere)
         {
             InitializeComponent();

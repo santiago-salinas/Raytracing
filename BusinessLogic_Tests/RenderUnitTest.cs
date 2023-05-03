@@ -53,7 +53,7 @@ namespace BusinessLogic_Tests
 
             sphereName = "Ball";
             radius = 0.5;
-            testSphere = new Sphere(sphereName, radius);
+            testSphere = new Sphere() { Name = sphereName, Radius = radius };
 
             color = new Color(1, 0, 0);
             lambertianName = "Bright Red";
@@ -77,7 +77,7 @@ namespace BusinessLogic_Tests
 
             sphereName = "Floor";
             radius = 100;
-            testSphereFloor = new Sphere(sphereName, radius);
+            testSphereFloor = new Sphere() {Name = sphereName, Radius = radius };
 
             modelName = "Green Floor";
             testModelFloor = new Model()

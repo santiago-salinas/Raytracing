@@ -1,6 +1,7 @@
 ﻿using BusinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using BusinessLogic.Objects;
 
 
 namespace BusinessLogic_Tests
@@ -14,6 +15,7 @@ namespace BusinessLogic_Tests
         private float differentTestRadius;
         private string testName;
         private string testNullName;
+        public User testUser;
         
 
         [TestInitialize]
@@ -29,6 +31,12 @@ namespace BusinessLogic_Tests
             {
                 Radius = testRadius,
                 Name = testName
+            };
+            testUser = new User()
+            {
+                UserName = "Username",
+                Password = "Password1",
+                RegisterDate = DateTime.Now,
             };
         }
 
@@ -101,9 +109,11 @@ namespace BusinessLogic_Tests
         [TestMethod]
         public void AddSphereToCollection()
         {
+            //arrange
+            testSphere.Owner = testUser;
             //act
             SphereCollection.AddSphere(testSphere);
-            bool added = SphereCollection.ContainsSphere(testSphere.Name);
+            bool added = SphereCollection.ContainsSphere(testSphere.Name,testUser);
             //assert
             Assert.IsTrue(added);
         }
@@ -111,9 +121,13 @@ namespace BusinessLogic_Tests
         [TestMethod]
         public void GetSphereFromCollection()
         {
+            //arrange
+            User testUser = new User();
+            testUser.UserName = "Username";
+            testSphere.Owner = testUser;
             //act
             SphereCollection.AddSphere(testSphere);
-            Sphere getSphere = SphereCollection.GetSphere(testName);
+            Sphere getSphere = SphereCollection.GetSphere(testName, testUser);
             //assert
             Assert.ReferenceEquals(testSphere, getSphere);
         }
@@ -123,10 +137,14 @@ namespace BusinessLogic_Tests
         public void RemoveSphereFromCollection()
         {
             //arrange
+            User testUser = new User();
+            testUser.UserName = "Username";
+            testSphere.Owner = testUser;
+            //arrange
             SphereCollection.AddSphere(testSphere);
             //act
-            SphereCollection.RemoveSphere(testName);
-            SphereCollection.GetSphere(testName);
+            SphereCollection.RemoveSphere(testName, testUser);
+            SphereCollection.GetSphere(testName, testUser);
         }
 
         [TestMethod]
@@ -134,8 +152,11 @@ namespace BusinessLogic_Tests
         public void CantRemoveSphereNotInCollection()
         {
             //arrange
+            User testUser = new User();
+            testUser.UserName = "Username";
+            testSphere.Owner = testUser;
             //act   
-            SphereCollection.RemoveSphere(testName);
+            SphereCollection.RemoveSphere(testName, testUser);
         }
 
         [TestMethod]
@@ -143,11 +164,21 @@ namespace BusinessLogic_Tests
         public void CantAddSphereWithNameAlreadyInCollection()
         {
             //arrange
-            SphereCollection.AddSphere(testSphere);
-            Sphere newSphere = new Sphere();
-            newSphere.Name = testName;
-            newSphere.Radius = differentTestRadius;
-
+            testUser = new User()
+            {
+                UserName = "TestUsername"
+            };
+            testSphere = new Sphere()
+            {
+                Name = testName,
+                Owner = testUser
+            };
+            SphereCollection.AddSphere(testSphere);      
+            Sphere newSphere = new Sphere()
+            {
+                Name = testName,
+                Owner = testUser,
+            };          
             //act
             SphereCollection.AddSphere(newSphere);    
         }

@@ -13,14 +13,16 @@ using BusinessLogic;
 
 namespace UI.Dialogs
 {
-    public partial class AddSphere : Form
+    public partial class AddSphereDialog : Form
     {
         public string SphereName { get { return nameTextBox.Text; } }
         public float SphereRadius { get { return (float)radiusInput.Value; } }
         public Sphere NewSphere = new Sphere();
-        public AddSphere()
+        private User loggedUser {  get; set; }
+        public AddSphereDialog(User loggedUser)
         {
             InitializeComponent();
+            this.loggedUser = loggedUser;
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -47,7 +49,7 @@ namespace UI.Dialogs
                 nameIsCorrect = false;
             }
 
-            if (SphereCollection.ContainsSphere(sphereName)) {
+            if (SphereCollection.ContainsSphere(sphereName,loggedUser)) {
                 nameIsCorrect = false;
                 nameStatusLabel.Text = "* Sphere with that name already exists";
             }
