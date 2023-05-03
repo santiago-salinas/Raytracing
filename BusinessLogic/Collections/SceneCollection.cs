@@ -14,6 +14,19 @@ namespace BusinessLogic
         {
             _sceneList.Clear();
         }
+
+        public static List<Scene> GetScenesFromUser(User owner)
+        {
+            List<Scene> ret = new List<Scene>();
+            foreach (Scene s in _sceneList)
+            {
+                if (s.Owner == owner)
+                {
+                    ret.Add(s);
+                }
+            }
+            return ret;
+        }
         public static bool ContainsScene(string name, User owner)
         {
             Scene scene = _sceneList.Find(s => s.Name == name && s.Owner == owner);

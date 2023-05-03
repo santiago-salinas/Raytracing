@@ -28,7 +28,7 @@ namespace BusinessLogic_Tests
         private Vector testPosition;
         private Vector testPositionAlternative;
 
-           
+        private User testUser;
 
 
         [TestInitialize]
@@ -42,6 +42,13 @@ namespace BusinessLogic_Tests
                 Name = testName
             };
 
+            testUser = new User()
+            {
+                UserName = "Username1"
+            };
+
+      
+
             modelName = "Wooden ball";
             sphereName = "Small sized sphere";
             radius = 5;
@@ -53,6 +60,7 @@ namespace BusinessLogic_Tests
                 Name= sphereName,
                 Radius = radius,
             };
+            
             testLambertian = new Lambertian(lambertianName, color);
 
 
@@ -72,6 +80,8 @@ namespace BusinessLogic_Tests
                 PositionedModelModel = testModel,
                 PositionedModelPosition = testPosition
             };
+
+           
 
             DateTimeProvider.Reset();
 
@@ -362,12 +372,14 @@ namespace BusinessLogic_Tests
         [ExpectedException(typeof(BusinessLogicException), "Cant delete model used by active scene")]
         public void CantDeleteModelFromCollectionUsedByScene()
         {
+            //arrange
+            
             ModelCollection.AddModel(testModel);
             testScene.AddPositionedModel(testPositionedModel);
             SceneCollection.AddScene(testScene);
 
             //act
-            ModelCollection.RemoveModel(testModel.Name);
+            ModelCollection.RemoveModel(testModel.Name,testModel.Owner);
         }
 
         [TestMethod]
@@ -383,7 +395,7 @@ namespace BusinessLogic_Tests
 
             //act
             SceneCollection.RemoveScene(testScene.Name, testUser);
-            ModelCollection.RemoveModel(testModel.Name);
+            ModelCollection.RemoveModel(testModel.Name,testModel.Owner);
         }
 
         [TestMethod]

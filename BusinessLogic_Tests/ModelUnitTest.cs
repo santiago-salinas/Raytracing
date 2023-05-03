@@ -20,6 +20,8 @@ namespace BusinessLogic_Tests
         private string lambertianName;
         private Color color;
 
+        private User testUser;
+
         [TestInitialize]
         public void Initialize()
         {
@@ -38,12 +40,18 @@ namespace BusinessLogic_Tests
             };
             testLambertian = new Lambertian(lambertianName,color);
 
+            testUser= new User()
+            {
+                UserName = "Username1",
+            
+            };
 
             testModel = new Model()
             {
                 Name = modelName,
                 ModelShape = testSphere,
-                ModelColor = testLambertian
+                ModelColor = testLambertian,
+                Owner = testUser
             };
         }
 
@@ -111,7 +119,7 @@ namespace BusinessLogic_Tests
         {
             //act
             ModelCollection.AddModel(testModel);
-            bool added = ModelCollection.ContainsModel(testModel.Name);
+            bool added = ModelCollection.ContainsModel(testModel.Name,testUser);
             //assert
             Assert.IsTrue(added);
         }
@@ -121,7 +129,7 @@ namespace BusinessLogic_Tests
         {
             //act
             ModelCollection.AddModel(testModel);
-            Model getModel = ModelCollection.GetModel(modelName);
+            Model getModel = ModelCollection.GetModel(modelName,testUser);
             //assert
             Assert.ReferenceEquals(testModel, getModel);
         }
@@ -132,8 +140,8 @@ namespace BusinessLogic_Tests
         {
             ModelCollection.AddModel(testModel);
             //act
-            ModelCollection.RemoveModel(modelName);
-            ModelCollection.GetModel(modelName);
+            ModelCollection.RemoveModel(modelName, testUser);
+            ModelCollection.GetModel(modelName, testUser);
         }
 
         [TestMethod]
@@ -141,7 +149,7 @@ namespace BusinessLogic_Tests
         public void CantRemoveModelNotInCollection()
         {
             //act
-            ModelCollection.RemoveModel(modelName);
+            ModelCollection.RemoveModel(modelName, testUser);
         }
 
         [TestMethod]
@@ -154,7 +162,8 @@ namespace BusinessLogic_Tests
             {
                 Name = modelName,
                 ModelShape = testSphere,
-                ModelColor = testLambertian
+                ModelColor = testLambertian,
+                Owner = testUser
             };
 
             //act
@@ -182,28 +191,29 @@ namespace BusinessLogic_Tests
         {
             //arrange
             LambertianCollection.AddLambertian(testLambertian);
+            testLambertian.Owner = testUser;
             ModelCollection.AddModel(testModel);
             //act
-            LambertianCollection.RemoveLambertian(lambertianName);
+            LambertianCollection.RemoveLambertian(lambertianName,testUser);
         }
 
         [TestMethod]
         public void DeleteSphereAndLambertianAfterDeletingModel()
         {
-            //arrange
-            User testUser = new User();
+            //arrange                                    
             testSphere.Owner = testUser;
+            testLambertian.Owner = testUser;
             SphereCollection.AddSphere(testSphere);
             LambertianCollection.AddLambertian(testLambertian);
             ModelCollection.AddModel(testModel);
-            ModelCollection.RemoveModel(modelName);
+            ModelCollection.RemoveModel(modelName, testUser);
 
             //act
             SphereCollection.RemoveSphere(sphereName, testUser);
-            LambertianCollection.RemoveLambertian(lambertianName);
+            LambertianCollection.RemoveLambertian(lambertianName, testUser);
             //assert
             bool sphereDeleted = !SphereCollection.ContainsSphere(sphereName, testUser);
-            bool lambertianDeleted = !LambertianCollection.ContainsLambertian(lambertianName);
+            bool lambertianDeleted = !LambertianCollection.ContainsLambertian(lambertianName, testUser);
             Assert.IsTrue(sphereDeleted && lambertianDeleted);
         }
 
