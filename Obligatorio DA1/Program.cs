@@ -204,14 +204,10 @@ namespace Obligatorio_DA1
             int samplesPerPixel = 100;
             int depth = 50;
 
-            camera = new Camera(origin, lookAt, vectorUp, 40, 500, 500, samplesPerPixel, depth);
-
-            defaultLookFromVector = new Vector(-10, -10, -10);
-            defaultLookAtVector = new Vector(-40, -1, -1);
-            defaultFOV = 30;
+            camera = new Camera(origin, lookAt, vectorUp, 40, 50, 50, samplesPerPixel, depth);
 
             Motor motor = new Motor(testScene, camera);
-            //motor.RandomOff();
+            motor.RandomOff();
             PPM ppm = motor.render();
 
             File.WriteAllText("image.ppm", ppm.GetImageAscii());

@@ -29,19 +29,19 @@ namespace BusinessLogic
         
         public Camera(Vector vectorLookFrom, Vector vectorLookAt, Vector vectorUp,int fieldOfView,int resolutionX, int resolutionY, int samplesPerPixel, int maxDepth)
         {
-            _theta = fieldOfView * Math.PI / 180;
+            _theta = (fieldOfView * Math.PI) / 180.0;
             _heightHalf = Math.Tan(_theta / 2);
             ResolutionX = resolutionX;
             ResolutionY = resolutionY;
-            _aspectRatio = resolutionX / resolutionY;
+            _aspectRatio = (double) resolutionX / (double) resolutionY;
             _widthHalf = _aspectRatio * _heightHalf;
             Origin = vectorLookFrom;
             _vectorW = vectorLookFrom.Subtract(vectorLookAt).GetUnit();
             _vectorU = vectorUp.Cross(_vectorW).GetUnit();
             _vectorV = _vectorW.Cross(_vectorU);
             LowerLeftCorner = Origin.Subtract(_vectorU.Multiply(_widthHalf)).Subtract(_vectorV.Multiply(_heightHalf)).Subtract(_vectorW);
-            Horizontal = _vectorU.Multiply(2 * _widthHalf);
-            Vertical = _vectorV.Multiply(2 * _heightHalf);
+            Horizontal = _vectorU.Multiply(2.0 * _widthHalf);
+            Vertical = _vectorV.Multiply(2.0 * _heightHalf);
 
             SamplesPerPixel = samplesPerPixel;
             MaxDepth = maxDepth;
@@ -96,16 +96,12 @@ namespace BusinessLogic
 
         public Ray GetRay(double u, double v)
         {
-            Vector canvasHorizontal = new Vector(4, 0, 0);
-            Vector canvasVertical = new Vector(0, 2, 0);
-
-            Vector horizontalPosition = canvasHorizontal.Multiply(u);
-            Vector verticalPosition = canvasVertical.Multiply(v);
+            Vector horizontalPosition = Horizontal.Multiply(u);
+            Vector verticalPosition = Vertical.Multiply(v);
 
             Vector pointPosition = LowerLeftCorner.Add(horizontalPosition.Add(verticalPosition)).Subtract(Origin);
 
             return new Ray(Origin, pointPosition);
-
         }
     }
 }
