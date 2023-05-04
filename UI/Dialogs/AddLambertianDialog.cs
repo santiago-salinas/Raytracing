@@ -1,23 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using BusinessLogic.Objects;
-using BusinessLogic.Collections;
 using BusinessLogic;
-using System.Runtime.InteropServices;
 
 namespace UI.Dialogs
 {
     public partial class AddLambertianDialog : Form
     {
    
-        private BusinessLogic.Color color;
+        private Color color;
 
         public Lambertian NewLambertian = new Lambertian();
         private User loggedUser {  get; set; }

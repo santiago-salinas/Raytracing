@@ -1,16 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BusinessLogic.Objects;
 
 namespace BusinessLogic
 {
     public static class LambertianCollection
     {
         static List<Lambertian> _lambertianList = new List<Lambertian>();
-        
+
         public static void DropCollection()
         {
             _lambertianList.Clear();
@@ -32,13 +31,13 @@ namespace BusinessLogic
         public static bool ContainsLambertian(string name, User user)
         {
             Lambertian lambertian = _lambertianList.Find(l => l.Name == name && l.Owner == user);
-            return lambertian != null;           
+            return lambertian != null;
         }
         public static void AddLambertian(Lambertian newElement)
         {
-            if (!ContainsLambertian(newElement.Name,newElement.Owner))
+            if (!ContainsLambertian(newElement.Name, newElement.Owner))
             {
-                _lambertianList.Add(newElement);               
+                _lambertianList.Add(newElement);
             }
             else
             {
@@ -58,19 +57,19 @@ namespace BusinessLogic
         {
             //Lambertian lambertian = _lambertianList.Find(l => l.Name == name && l.Owner == owner);
             Lambertian lambertian = GetLambertian(name, owner);
-           /* if (lambertian == null)
-            {
-                throw new BusinessLogicException("User does not own lambertian with that name");
-            }else */
-            
-            if(ModelCollection.ExistsModelUsingTheLambertian(lambertian))
+            /* if (lambertian == null)
+             {
+                 throw new BusinessLogicException("User does not own lambertian with that name");
+             }else */
+
+            if (ModelCollection.ExistsModelUsingTheLambertian(lambertian))
             {
                 throw new BusinessLogicException("Cant delete lambertian used by existing model");
             }
             else
             {
                 _lambertianList.Remove(lambertian);
-            }           
+            }
         }
     }
 }

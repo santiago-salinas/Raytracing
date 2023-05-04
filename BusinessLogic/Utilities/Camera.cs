@@ -1,78 +1,53 @@
-﻿using BusinessLogic.Objects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace BusinessLogic
 {
     public class Camera
-    {
-        private Vector _lowerLeftCorner;
-        private Vector _horizontal;
-        private Vector _vertical;
-        private Vector _origin;
-
-        private int _resolutionX;
-        private int _resolutionY;
-
-        private int _samplesPerPixel;
-
-        public Vector LowerLeftCorner
+    {        
+        public Camera(CameraDTO dto)
         {
-            get { return _lowerLeftCorner; }
-            set { _lowerLeftCorner = value; }
+            Theta = (dto.FieldOfView * Math.PI) / 180.0;
+            HeightHalf = Math.Tan(Theta / 2);
+            ResolutionX = dto.ResolutionX;
+            ResolutionY = dto.ResolutionY;
+            AspectRatio = (double)ResolutionX / (double)ResolutionY;
+            WidthHalf = AspectRatio * HeightHalf;
+            Origin = dto.LookFrom;
+            VectorW = dto.LookFrom.Subtract(dto.LookAt).GetUnit();
+            VectorU = dto.Up.Cross(VectorW).GetUnit();
+            VectorV = VectorW.Cross(VectorU);
+            LowerLeftCorner = Origin.Subtract(VectorU.Multiply(WidthHalf)).Subtract(VectorV.Multiply(HeightHalf)).Subtract(VectorW);
+            Horizontal = VectorU.Multiply(2.0 * WidthHalf);
+            Vertical = VectorV.Multiply(2.0 * HeightHalf);
+            SamplesPerPixel = dto.SamplesPerPixel;
+            MaxDepth = dto.MaxDepth;
         }
 
-        public Vector Horizontal
-        {
-            get { return _horizontal; }
-            set { _horizontal = value; }
-        }
+        public double Theta { get; set; }
+        public double HeightHalf { get; set; }
+        public int ResolutionX { get; set; }
+        public int ResolutionY { get; set; }
+        public double AspectRatio { get; set; }
+        public double WidthHalf { get; set; }
+        public Vector Origin { get; set; }
+        public Vector VectorW { get; set; }
+        public Vector VectorU { get; set; }
+        public Vector VectorV { get; set; }
+        public Vector LowerLeftCorner { get; set; }
+        public Vector Horizontal { get; set; }
+        public Vector Vertical { get; set; }
 
-        public Vector Vertical
-        {
-            get { return _vertical; }
-            set { _vertical = value; }
-        }
-
-        public Vector Origin
-        {
-            get { return _origin; }
-            set { _origin = value; }
-        }
-
-        public int ResolutionX
-        {
-            get { return _resolutionX; }
-            set { _resolutionX = value; }
-        }
-
-        public int ResolutionY
-        {
-            get { return _resolutionY; }
-            set { _resolutionY = value; }
-        }
-
-        public int SamplesPerPixel
-        {
-            get { return _samplesPerPixel; }
-            set { _samplesPerPixel = value; }
-        }
+        public int SamplesPerPixel { get; set; }
+        public int MaxDepth { get; set; }
 
         public Ray GetRay(double u, double v)
         {
-            Vector canvasHorizontal = new Vector(4, 0, 0);
-            Vector canvasVertical = new Vector(0, 2, 0);
+            Vector horizontalPosition = Horizontal.Multiply(u);
+            Vector verticalPosition = Vertical.Multiply(v);
 
-            Vector horizontalPosition = canvasHorizontal.Multiply(u);
-            Vector verticalPosition = canvasVertical.Multiply(v);
+            Vector pointPosition = LowerLeftCorner.Add(horizontalPosition.Add(verticalPosition)).Subtract(Origin);
 
-            Vector pointPosition = LowerLeftCorner.Add(horizontalPosition.Add(verticalPosition));
-
-            Ray ray = new Ray(Origin, pointPosition);
-            return ray;
+            return new Ray(Origin, pointPosition);
         }
     }
 }

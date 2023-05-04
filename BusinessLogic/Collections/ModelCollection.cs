@@ -1,9 +1,5 @@
-﻿using BusinessLogic.Objects;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BusinessLogic
 {
@@ -66,19 +62,13 @@ namespace BusinessLogic
 
         public static void RemoveModel(string name, User owner)
         {
-            /*Model model = _modelList.Find(s => s.Name == name);
-            if (model == null)
-            {
-                throw new BusinessLogicException("Model does not exist in the collection");
-            }
-            else*/
             Model model = GetModel(name,owner);
             
             if (SceneCollection.ExistsSceneUsingModel(model))
             {
                 throw new BusinessLogicException("Cant delete sphere used by existing model");
             }
-            _modelList.Remove(model);           
+            _modelList.Remove(model);
         }
     }
 }

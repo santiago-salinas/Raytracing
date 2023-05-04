@@ -1,17 +1,6 @@
 ﻿using BusinessLogic;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using BusinessLogic.Objects;
-using BusinessLogic.Collections;
-using BusinessLogic.Utilities;
-using System.Drawing.Configuration;
 
 namespace UI.Cards
 {

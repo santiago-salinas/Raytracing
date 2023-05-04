@@ -8,9 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BusinessLogic.Collections;
-using BusinessLogic.Objects;
-using BusinessLogic.Utilities;
 using UI.Dialogs;
 using UI.Cards;
 

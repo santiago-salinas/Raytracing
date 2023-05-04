@@ -1,6 +1,4 @@
-﻿using BusinessLogic.Objects;
-using System;
-using System.Diagnostics;
+﻿using System;
 
 namespace BusinessLogic
 {
@@ -39,6 +37,7 @@ namespace BusinessLogic
                         TDistanceFromOrigin = t,
                         Intersection = intersectionPoint,
                         Normal = normal,
+                        Attenuation = PositionedModelModel.ModelColor.Color,
                     };
                 }
                 else

@@ -1,10 +1,5 @@
-﻿using BusinessLogic.Objects;
-using BusinessLogic.Utilities;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Xml.Linq;
 
 namespace BusinessLogic
 {
@@ -13,17 +8,13 @@ namespace BusinessLogic
         private List<PositionedModel> _positionedModellList;
         private string _name;
 
-        private DateTime _creationDate;
-        private DateTime _lastModificationDate;
-        private DateTime _lastRenderDate;
-
         private User _owner;
         private PPM _preview;
 
         public Scene()
         {
             _positionedModellList = new List<PositionedModel>();
-            
+
         }
 
 
@@ -38,21 +29,9 @@ namespace BusinessLogic
             }
         }
 
-        public DateTime CreationDate
-        {
-            get { return _creationDate; }
-            set { _creationDate = value; }
-        }
-        public DateTime LastModificationDate
-        {
-            get { return _lastModificationDate; }
-            set { _lastModificationDate = value; }
-        }
-        public DateTime LastRenderDate
-        {
-            get { return _lastRenderDate; }
-            set { _lastRenderDate = value; }
-        }
+        public DateTime CreationDate { get; set; }
+        public DateTime LastModificationDate { get; set; }
+        public DateTime LastRenderDate { get; set; }
 
         public User Owner
         {
@@ -86,9 +65,6 @@ namespace BusinessLogic
 
         public void AddPositionedModel(PositionedModel newElement)
         {
-            /*if (_positionedModellList.Find(
-                s => (s.PositionedModelModel == newElement.PositionedModelModel)
-                    && (s.PositionedModelPosition == newElement.PositionedModelPosition)) == null)*/
             if (!ContainsPositionedModel(newElement))
             {
                 _positionedModellList.Add(newElement);
@@ -102,10 +78,6 @@ namespace BusinessLogic
 
         public void RemovePositionedModel(PositionedModel oldElement)
         {
-           /* PositionedModel positionedModel = _positionedModellList.Find(s => (s.PositionedModelModel == oldElement.PositionedModelModel) 
-                                                                        && (s.PositionedModelPosition == oldElement.PositionedModelPosition));*/
-
-
             if (!ContainsPositionedModel(oldElement))
             {
                 throw new BusinessLogicException("PositionedModel is not in scene");
@@ -115,14 +87,12 @@ namespace BusinessLogic
                 _positionedModellList.Remove(oldElement);
                 LastModificationDate = DateTime.Now;
             }
-            
+
         }
 
         public bool ContainsPositionedModel(PositionedModel element)
         {
-           /* PositionedModel positionedModel = _positionedModellList.Find(s => (s.PositionedModelModel == element.PositionedModelModel) 
-                                                                        && (s.PositionedModelPosition == element.PositionedModelPosition));*/
-            return _positionedModellList.Contains(element);
+           return _positionedModellList.Contains(element);
         }
 
         public bool ContainsModel(Model model)

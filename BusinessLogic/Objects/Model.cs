@@ -1,10 +1,4 @@
-﻿using BusinessLogic.Objects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessLogic.Utilities;
+﻿using System;
 
 namespace BusinessLogic
 {
@@ -50,28 +44,19 @@ namespace BusinessLogic
             }
         }
 
-        public Sphere ModelShape
-        {
-            get { return _shape; }
-            set { _shape = value; }
-        }
+        public Sphere ModelShape { get; set; }
 
-        public Lambertian ModelColor
-        {
-            get { return _color; }
-            set { _color = value; }
-        }
+        public Lambertian ModelColor { get; set; }
 
-        public PPM Preview
-        {
-            get { return _preview; }
-            set { _preview = value; }
-        }
+        public PPM Preview { get; set; }
 
-        
         public override bool Equals(object other)
         {
-            return this.Name == ((Model)other).Name;
+            bool nameEqual = this.Name == ((Model)other).Name;
+            bool shapeEqual = this.ModelShape == ((Model)other).ModelShape;
+            bool colorEqual = this.ModelColor == ((Model)other).ModelColor;
+
+            return nameEqual && shapeEqual && colorEqual;
         }
     }
 }
