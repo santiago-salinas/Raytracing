@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic.Objects
 {
@@ -15,12 +12,14 @@ namespace BusinessLogic.Objects
 
         public User() { }
 
-        public String UserName { 
-            get { return _userName;  } 
-            set {
+        public String UserName
+        {
+            get { return _userName; }
+            set
+            {
                 value = value.Trim();
                 CheckIfUserNameIsValid(value);
-                _userName = value; 
+                _userName = value;
             }
         }
 
@@ -34,13 +33,10 @@ namespace BusinessLogic.Objects
             }
         }
 
+        public DateTime RegisterDate { get; set; }
+
         private bool CheckIfUserNameIsValid(string value)
         {
-            /*if (String.IsNullOrEmpty(value))
-            {
-                throw new BusinessLogicException("User name cannot be null");
-            }*/
-
             if (value.Length < 3 || value.Length > 20)
             {
                 throw new ArgumentException("User name must be between 3 and 20 characters long");
@@ -51,42 +47,36 @@ namespace BusinessLogic.Objects
 
         private void IsValidPassword(string value)
         {
-            if(!PasswordLengthIsBetweenBounds(value))
+            ValidatePasswordLengthIsBetweenBounds(value);
+            ValidatePasswordContainsUpperCase(value);
+            ValidatePasswordContainsDigit(value);
+        }
+
+        private void ValidatePasswordLengthIsBetweenBounds(string value)
+        {
+            if (!(value.Length >= 5 && value.Length <= 25))
             {
                 throw new ArgumentException("Password must be between 5 and 25 characters long");
             }
-            if (!PasswordContainsUpperCase(value))
+        }
+
+        private void ValidatePasswordContainsUpperCase(string value)
+        {
+            if (!value.Any(char.IsUpper))
             {
                 throw new ArgumentException("Password must contain at least one upper case character");
             }
-            if (!PasswordContainsDigit(value))
+        }
+
+        private void ValidatePasswordContainsDigit(string value)
+        {
+            if (!value.Any(char.IsDigit))
             {
                 throw new ArgumentException("Password must contain at least one numerical digit");
             }
         }
-
-        private bool PasswordLengthIsBetweenBounds(string value)
-        {
-            return value.Length >= 5 && value.Length <= 25;
-        }
-
-        private bool PasswordContainsUpperCase(string value)
-        {
-            return value.Any(char.IsUpper);
-        }
-        
-        private bool PasswordContainsDigit(string value)
-        {
-            return value.Any(char.IsDigit);
-        }
-
         
 
-        public DateTime RegisterDate
-        {
-            get { return _registerDate;  }
-            set { _registerDate = value; }
-        }
-         
+
     }
 }
