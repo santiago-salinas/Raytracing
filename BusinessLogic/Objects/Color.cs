@@ -8,6 +8,10 @@ namespace BusinessLogic
         private double _greenValue;
         private double _blueValue;
 
+        private const int lowerBoundForPercentages = 0;
+        private const int upperBoundForPercentages = 0;
+
+
         public Color(double red, double green, double blue)
         {
             Red = red;
@@ -23,7 +27,7 @@ namespace BusinessLogic
             }
             set
             {
-                if (ValueIsBetweenStrictBounds(value, 0, 1))
+                if (ValueIsBetweenStrictBounds(value, lowerBoundForPercentages, upperBoundForPercentages))
                 {
                     _redValue = value;
                 }
@@ -42,7 +46,7 @@ namespace BusinessLogic
             }
             set
             {
-                if (ValueIsBetweenStrictBounds(value, 0, 1))
+                if (ValueIsBetweenStrictBounds(value, lowerBoundForPercentages, upperBoundForPercentages))
                 {
                     _greenValue = value;
                 }
@@ -60,7 +64,7 @@ namespace BusinessLogic
             }
             set
             {
-                if (ValueIsBetweenStrictBounds(value, 0, 1))
+                if (ValueIsBetweenStrictBounds(value, lowerBoundForPercentages, upperBoundForPercentages))
                 {
                     _blueValue = value;
                 }
