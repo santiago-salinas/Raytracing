@@ -34,7 +34,7 @@ namespace BusinessLogic
 
         public DateTime RegisterDate { get; set; }
 
-        private bool CheckIfUserNameIsValid(string value)
+        public void CheckIfUserNameIsValid(string value)
         {
             if (value.Length < 3 || value.Length > 20)
             {
@@ -81,12 +81,6 @@ namespace BusinessLogic
         private bool PasswordContainsDigit(string value)
         {
             return value.Any(char.IsDigit);
-        }
-
-        public DateTime RegisterDate
-        {
-            get { return _registerDate; }
-            set { _registerDate = value; }
         }
 
     }

@@ -6,7 +6,9 @@ namespace BusinessLogic
     {
         private static List<Sphere> _sphereList = new List<Sphere>();
 
-			  public static void DropCollection()
+        public static List<Sphere> SphereList { get { return _sphereList; } }
+
+        public static void DropCollection()
         {
             _sphereList.Clear();
         }
