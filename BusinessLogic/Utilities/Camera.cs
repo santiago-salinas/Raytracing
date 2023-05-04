@@ -27,24 +27,25 @@ namespace BusinessLogic
         private int _samplesPerPixel;
         private int _maxDepth;
         
-        public Camera(Vector vectorLookFrom, Vector vectorLookAt, Vector vectorUp,int fieldOfView,int resolutionX, int resolutionY, int samplesPerPixel, int maxDepth)
+        
+        public Camera(CameraDTO dto)
         {
-            _theta = (fieldOfView * Math.PI) / 180.0;
+            _theta = (dto.FieldOfView * Math.PI) / 180.0;
             _heightHalf = Math.Tan(_theta / 2);
-            ResolutionX = resolutionX;
-            ResolutionY = resolutionY;
-            _aspectRatio = (double) resolutionX / (double) resolutionY;
+            ResolutionX = dto.ResolutionX;
+            ResolutionY = dto.ResolutionY;
+            _aspectRatio = (double)dto.ResolutionX / (double)dto.ResolutionY;
             _widthHalf = _aspectRatio * _heightHalf;
-            Origin = vectorLookFrom;
-            _vectorW = vectorLookFrom.Subtract(vectorLookAt).GetUnit();
-            _vectorU = vectorUp.Cross(_vectorW).GetUnit();
+            Origin = dto.LookFrom;
+            _vectorW = dto.LookFrom.Subtract(dto.LookAt).GetUnit();
+            _vectorU = dto.Up.Cross(_vectorW).GetUnit();
             _vectorV = _vectorW.Cross(_vectorU);
             LowerLeftCorner = Origin.Subtract(_vectorU.Multiply(_widthHalf)).Subtract(_vectorV.Multiply(_heightHalf)).Subtract(_vectorW);
             Horizontal = _vectorU.Multiply(2.0 * _widthHalf);
             Vertical = _vectorV.Multiply(2.0 * _heightHalf);
 
-            SamplesPerPixel = samplesPerPixel;
-            MaxDepth = maxDepth;
+            SamplesPerPixel = dto.SamplesPerPixel;
+            MaxDepth = dto.MaxDepth;
         }
 
         public Vector LowerLeftCorner
