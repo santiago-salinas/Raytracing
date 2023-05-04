@@ -204,7 +204,20 @@ namespace Obligatorio_DA1
             int samplesPerPixel = 100;
             int depth = 50;
 
-            camera = new Camera(origin, lookAt, vectorUp, 40, 50, 50, samplesPerPixel, depth);
+            CameraDTO dto = new CameraDTO()
+            {
+                LookFrom = origin,
+                LookAt = lookAt,
+                Up = vectorUp,
+                FieldOfView = 40,
+                ResolutionX = 50,
+                ResolutionY = 50,
+                SamplesPerPixel = samplesPerPixel,
+                MaxDepth = depth,
+            };
+            camera = new Camera(dto);
+
+            //camera = new Camera(origin, lookAt, vectorUp, 40, 50, 50, samplesPerPixel, depth);
 
             Motor motor = new Motor(testScene, camera);
             motor.RandomOff();

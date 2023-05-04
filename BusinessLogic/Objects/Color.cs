@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
@@ -12,40 +8,45 @@ namespace BusinessLogic
         private double _greenValue;
         private double _blueValue;
 
-        public Color(double r, double g, double b)
+        private const int lowerBoundForPercentages = 0;
+        private const int upperBoundForPercentages = 1;
+
+
+        public Color(double red, double green, double blue)
         {
-            Red = r;
-            Green = g;
-            Blue = b;
+            Red = red;
+            Green = green;
+            Blue = blue;
         }
 
         public double Red
         {
             get
             {
-                return Math.Abs((int)Math.Round(_redValue * 255));
+                return PercentageTo255(_redValue);
             }
-            set {
-                bool isBetweenBounds = value >= 0 && value <= 1;
-                if(isBetweenBounds)
+            set
+            {
+                if (ValueIsBetweenStrictBounds(value, lowerBoundForPercentages, upperBoundForPercentages))
                 {
                     _redValue = value;
                 }
                 else
                 {
                     throw new ArgumentException("Color value must be between 0 and 1");
-                }                
+                }
             }
         }
+
         public double Green
         {
             get
             {
-                return Math.Abs((int)Math.Round(_greenValue * 255));
+                return PercentageTo255(_greenValue);
             }
-            set {
-                bool isBetweenBounds = value >= 0 && value <= 1;
-                if (isBetweenBounds)
+            set
+            {
+                if (ValueIsBetweenStrictBounds(value, lowerBoundForPercentages, upperBoundForPercentages))
                 {
                     _greenValue = value;
                 }
@@ -59,11 +60,11 @@ namespace BusinessLogic
         {
             get
             {
-                return Math.Abs((int)Math.Round(_blueValue * 255));
+                return PercentageTo255(_blueValue);
             }
-            set {
-                bool isBetweenBounds = value >= 0 && value <= 1;
-                if (isBetweenBounds)
+            set
+            {
+                if (ValueIsBetweenStrictBounds(value, lowerBoundForPercentages, upperBoundForPercentages))
                 {
                     _blueValue = value;
                 }
@@ -74,25 +75,43 @@ namespace BusinessLogic
             }
         }
 
-        public Color Multiply(double value)
+        public double PercentageTo255(double value)
         {
-            return new Color(_redValue * value, _greenValue * value, _blueValue * value);
+            return Math.Abs((int)Math.Round(value * 255));
+        }
+
+        public bool ValueIsBetweenStrictBounds(double value, double min, double max)
+        {
+            return value >= min && value <= max;
+        }
+
+        public Color MultiplyBy(double value)
+        {
+            double firstProduct = _redValue * value;
+            double secondProduct = _greenValue * value;
+            double thirdProduct = _blueValue * value;
+
+            return new Color(firstProduct, secondProduct, thirdProduct);
         }
 
         public Color Add(Color other)
         {
-            return new Color(_redValue + other._redValue, _greenValue + other._greenValue, _blueValue + other._blueValue);
+            double firstSum = _redValue + other._redValue;
+            double secondSum = _greenValue + other._greenValue;
+            double thirdSum = _blueValue + other._blueValue;
+
+            return new Color(firstSum, secondSum, thirdSum);
         }
         public override bool Equals(object other)
         {
             Color otherVector = (Color)other;
             const double tolerance = 0.0001;
 
-            bool evalFst = Math.Abs(Red - otherVector.Red) < tolerance;
-            bool evalSnd = Math.Abs(Green - otherVector.Green) < tolerance;
-            bool evalThrd = Math.Abs(Blue - otherVector.Blue) < tolerance;
+            bool firstEval = Math.Abs(Red - otherVector.Red) < tolerance;
+            bool secondEval = Math.Abs(Green - otherVector.Green) < tolerance;
+            bool thirdEval = Math.Abs(Blue - otherVector.Blue) < tolerance;
 
-            return evalFst && evalSnd && evalThrd;
+            return firstEval && secondEval && thirdEval;
         }
     }
 }

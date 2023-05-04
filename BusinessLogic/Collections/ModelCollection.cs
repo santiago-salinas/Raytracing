@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BusinessLogic
 {
@@ -61,7 +57,7 @@ namespace BusinessLogic
             {
                 throw new BusinessLogicException("Cant delete sphere used by existing model");
             }
-            _modelList.Remove(model);           
+            _modelList.Remove(model);
         }
     }
 }

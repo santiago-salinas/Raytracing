@@ -1,7 +1,5 @@
 ﻿using BusinessLogic;
-using BusinessLogic.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Diagnostics;
 
 namespace BusinessLogic_Tests
@@ -197,7 +195,6 @@ namespace BusinessLogic_Tests
 
             testScene.AddPositionedModel(positionedModel4);
 
-
             Vector origin = new Vector(4, 2, 8);
 
             Vector lookAt = new Vector(0, 0.5, -2);
@@ -206,8 +203,20 @@ namespace BusinessLogic_Tests
             int samplesPerPixel = 100;
             int depth = 50;
 
-            camera = new Camera(origin, lookAt, vectorUp, 40, 50, 50, samplesPerPixel, depth);
-                  
+            CameraDTO dto = new CameraDTO()
+            {
+                LookFrom = origin,
+                LookAt = lookAt,
+                Up = vectorUp,
+                FieldOfView = 40,
+                ResolutionX = 50,
+                ResolutionY = 50,
+                SamplesPerPixel = samplesPerPixel,
+                MaxDepth = depth,
+            };
+
+            camera = new Camera(dto);
+
 
         }
 

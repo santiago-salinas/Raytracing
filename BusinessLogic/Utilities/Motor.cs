@@ -1,60 +1,61 @@
-﻿using BusinessLogic.Objects;
-using System;
-using System.Linq.Expressions;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
+﻿using System;
 
 namespace BusinessLogic
 {
     public class Motor
     {
-        private Scene _scene;
-        private Camera _camera;
-
         private double _redBuffer = 0;
         private double _greenBuffer = 0;
         private double _blueBuffer = 0;
 
-        private int _samplesPerPixel;
+        private double RenderInfinity = 3.4 * Math.Pow(10, 38);
 
         Random random = new Random();
-        private bool _isRandomActive;
 
 
         public Motor(Scene scene, Camera camera)
         {
-            _scene = scene;
-            _camera = camera;
-            _samplesPerPixel = camera.SamplesPerPixel;
-            random = new Random();
-            _isRandomActive = true;
+            SceneToRender = scene;
+            CameraUsedToRender = camera;
+            SamplesPerPixel = camera.SamplesPerPixel;
+            ResolutionX = camera.ResolutionX;
+            ResolutionY = camera.ResolutionY;
+            MaxDepth = camera.MaxDepth;
 
+            random = new Random();
         }
+        private Scene SceneToRender { get; set; }
+        private Camera CameraUsedToRender { get; set; }
+
+
+        private int SamplesPerPixel { get; }
+        private int ResolutionX { get; }
+        private int ResolutionY { get; }
+        private int MaxDepth { get; }
+
 
         public void RandomOff()
         {
             random = new RandomProvider();
-            _isRandomActive = false;
         }
 
         public void RandomOn()
         {
             random = new Random();
-            _isRandomActive = true;
         }
 
 
         public PPM render()
         {
-            PPM ppm = new PPM(_camera.ResolutionX, _camera.ResolutionY);
+            PPM ppm = new PPM(ResolutionX, ResolutionY);
 
-            for (double row = ppm.Heigth - 1; row >= 0; row--)
+            for (int row = 0; row < ppm.Heigth; row++)
             {
-                for (double column = 0; column < ppm.Width; column++)
+                for (int column = 0; column < ppm.Width; column++)
                 {
                     Color pixel;
 
-                    for (int sample = 0; sample < _samplesPerPixel; sample++)
+                    for (int sample = 0; sample < SamplesPerPixel; sample++)
                     {
                         double randomU = random.NextDouble();
                         double randomV = random.NextDouble();
@@ -62,14 +63,14 @@ namespace BusinessLogic
                         double u = (column + randomU) / ppm.Width;
                         double v = (row + randomV) / ppm.Heigth;
 
-                        pixel = shootRay(_camera.GetRay(u, v), _camera.MaxDepth);
+                        pixel = shootRay(CameraUsedToRender.GetRay(u, v), MaxDepth);
 
                         AddToPixelBuffer(pixel);
                     }
 
                     pixel = GetAveragePixelAndReset();
 
-                    ppm.SavePixel((int)row, (int)column, pixel);
+                    ppm.SavePixel(row, column, pixel);
 
                 }
             }
@@ -85,9 +86,9 @@ namespace BusinessLogic
             {
                 IsHit = false,
             };
-            double tMax = 3.4 * Math.Pow(10, 38);
+            double tMax = RenderInfinity;
 
-            foreach (PositionedModel positionedModel in _scene.GetModels())
+            foreach (PositionedModel positionedModel in SceneToRender.GetModels())
             {
                 HitRecord hit = IsPositionedModelHitByRay(positionedModel, ray, tMax);
                 if (hit.IsHit)
@@ -116,7 +117,7 @@ namespace BusinessLogic
 
         public Color GetAveragePixelAndReset()
         {
-            Color pixel = new Color((_redBuffer/255) / _samplesPerPixel, (_greenBuffer / 255) / _samplesPerPixel, (_blueBuffer / 255) / _samplesPerPixel);
+            Color pixel = new Color((_redBuffer/255) / SamplesPerPixel, (_greenBuffer / 255) / SamplesPerPixel, (_blueBuffer / 255) / SamplesPerPixel);
             _redBuffer = 0;
             _greenBuffer = 0;
             _blueBuffer = 0;
@@ -151,7 +152,7 @@ namespace BusinessLogic
 
         public Color MixColorsWithWeight(Color firstColor, Color secondColor, double factor)
         {
-            return firstColor.Multiply(1 - factor).Add(secondColor.Multiply(factor));
+            return firstColor.MultiplyBy(1 - factor).Add(secondColor.MultiplyBy(factor));
         }
 
         public HitRecord IsPositionedModelHitByRay(PositionedModel positionedModel, Ray ray, double tMax)

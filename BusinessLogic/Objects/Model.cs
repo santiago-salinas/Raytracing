@@ -1,18 +1,13 @@
-﻿using BusinessLogic.Objects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace BusinessLogic
 {
     public class Model
     {
         private string _name;
-        private Sphere _shape;
-        private Lambertian _color;
+
         public Model() { }
+
         public string Name
         {
             get { return _name; }
@@ -32,22 +27,17 @@ namespace BusinessLogic
             }
         }
 
-        public Sphere ModelShape
-        {
-            get { return _shape; }
-            set { _shape = value; }
-        }
+        public Sphere ModelShape { get; set; }
 
-        public Lambertian ModelColor
-        {
-            get { return _color; }
-            set { _color = value; }
-        }
+        public Lambertian ModelColor { get; set; }
 
-        
         public override bool Equals(object other)
         {
-            return this.Name == ((Model)other).Name;
+            bool nameEqual = this.Name == ((Model)other).Name;
+            bool shapeEqual = this.ModelShape == ((Model)other).ModelShape;
+            bool colorEqual = this.ModelColor == ((Model)other).ModelColor;
+
+            return nameEqual && shapeEqual && colorEqual;
         }
     }
 }
