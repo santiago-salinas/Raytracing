@@ -66,9 +66,8 @@ namespace BusinessLogic
 
         public void AddPositionedModel(PositionedModel newElement)
         {
-            if (_positionedModellList.Find(
-                s => (s.PositionedModelModel == newElement.PositionedModelModel)
-                    && (s.PositionedModelPosition == newElement.PositionedModelPosition)) == null)
+            PositionedModel oldElement = GetPositionedModelLike(newElement);
+            if (oldElement is null)
             {
                 _positionedModellList.Add(newElement);
                 LastModificationDate = DateTime.Now;
@@ -79,18 +78,22 @@ namespace BusinessLogic
             }
         }
 
-        public void RemovePositionedModel(PositionedModel oldElement)
+        public void RemovePositionedModel(PositionedModel element)
         {
-            PositionedModel positionedModel = _positionedModellList.Find(s => (s.PositionedModelModel == oldElement.PositionedModelModel) && (s.PositionedModelPosition == oldElement.PositionedModelPosition));
-            if (positionedModel == null)
+            PositionedModel elementToRemove = GetPositionedModelLike(element);
+            if (elementToRemove is null)
             {
                 throw new BusinessLogicException("PositionedModel is not in scene");
             }
             else
             {
-                _positionedModellList.Remove(positionedModel);
+                _positionedModellList.Remove(elementToRemove);
                 LastModificationDate = DateTime.Now;
             }
+        }
+        private PositionedModel GetPositionedModelLike(PositionedModel element)
+        {
+            return _positionedModellList.Find(s => (s.PositionedModelModel == element.PositionedModelModel) && (s.PositionedModelPosition == element.PositionedModelPosition));
         }
 
         public bool ContainsPositionedModel(PositionedModel element)

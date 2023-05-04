@@ -12,6 +12,8 @@ namespace BusinessLogic
         private string _name;
         private Color _color;
 
+        public Lambertian() { }
+        
         public Lambertian(string name, Color color)
         {
             Name = name;

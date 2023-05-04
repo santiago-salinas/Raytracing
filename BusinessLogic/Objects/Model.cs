@@ -13,6 +13,8 @@ namespace BusinessLogic
         private Sphere _shape;
         private Lambertian _color;
 
+        public Model() { }
+
         public string Name
         {
             get { return _name; }
