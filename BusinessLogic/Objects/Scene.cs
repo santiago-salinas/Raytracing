@@ -8,14 +8,10 @@ namespace BusinessLogic
         private List<PositionedModel> _positionedModellList;
         private string _name;
 
-        private DateTime _creationDate;
-        private DateTime _lastModificationDate;
-        private DateTime _lastRenderDate;
-
         public Scene()
         {
             _positionedModellList = new List<PositionedModel>();
-            
+
         }
 
 
@@ -30,21 +26,9 @@ namespace BusinessLogic
             }
         }
 
-        public DateTime CreationDate
-        {
-            get { return _creationDate; }
-            set { _creationDate = value; }
-        }
-        public DateTime LastModificationDate
-        {
-            get { return _lastModificationDate; }
-            set { _lastModificationDate = value; }
-        }
-        public DateTime LastRenderDate
-        {
-            get { return _lastRenderDate; }
-            set { _lastRenderDate = value; }
-        }
+        public DateTime CreationDate { get; set; }
+        public DateTime LastModificationDate { get; set; }
+        public DateTime LastRenderDate { get; set; }
 
 
         private void CheckIfStringNull(string value)

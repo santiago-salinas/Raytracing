@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Linq;
 
-namespace BusinessLogic.Objects
+namespace BusinessLogic
 {
     public class User
     {
         private String _userName;
         private String _password;
-        private DateTime _registerDate;
 
 
         public User() { }

@@ -5,8 +5,6 @@ namespace BusinessLogic
     public class Model
     {
         private string _name;
-        private Sphere _shape;
-        private Lambertian _color;
 
         public Model() { }
 
@@ -29,18 +27,10 @@ namespace BusinessLogic
             }
         }
 
-        public Sphere ModelShape
-        {
-            get { return _shape; }
-            set { _shape = value; }
-        }
+        public Sphere ModelShape { get; set; }
 
-        public Lambertian ModelColor
-        {
-            get { return _color; }
-            set { _color = value; }
-        }
-     
+        public Lambertian ModelColor { get; set; }
+
         public override bool Equals(object other)
         {
             bool nameEqual = this.Name == ((Model)other).Name;
