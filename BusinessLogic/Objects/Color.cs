@@ -9,7 +9,7 @@ namespace BusinessLogic
         private double _blueValue;
 
         private const int lowerBoundForPercentages = 0;
-        private const int upperBoundForPercentages = 0;
+        private const int upperBoundForPercentages = 1;
 
 
         public Color(double red, double green, double blue)

@@ -12,7 +12,7 @@ namespace BusinessLogic
         private string _name;
         private Sphere _shape;
         private Lambertian _color;
-        public Model() { }
+
         public string Name
         {
             get { return _name; }
@@ -43,11 +43,14 @@ namespace BusinessLogic
             get { return _color; }
             set { _color = value; }
         }
-
-        
+     
         public override bool Equals(object other)
         {
-            return this.Name == ((Model)other).Name;
+            bool nameEqual = this.Name == ((Model)other).Name;
+            bool shapeEqual = this.ModelShape == ((Model)other).ModelShape;
+            bool colorEqual = this.ModelColor == ((Model)other).ModelColor;
+
+            return nameEqual && shapeEqual && colorEqual;
         }
     }
 }
