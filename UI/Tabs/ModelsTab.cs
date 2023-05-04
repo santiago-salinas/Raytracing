@@ -27,8 +27,8 @@ namespace UI.Tabs
 
         private void loadModels()
         {
-            List<Model> lambertianList = ModelCollection.GetModelsFromUser(loggedUser);
-            foreach (Model elem in lambertianList)
+            List<Model> modelList = ModelCollection.GetModelsFromUser(loggedUser);
+            foreach (Model elem in modelList)
             {
                 ModelCard modelCard = new ModelCard(elem);
                 flowLayoutPanel.Controls.Add(modelCard);

@@ -18,11 +18,14 @@ namespace UI.Tabs
     public partial class ScenesTab : Form
     {
         private User loggedUser;
+        public Button newSceneButton;
         public ScenesTab(User loggedUser)
         {
             InitializeComponent();
             this.loggedUser = loggedUser;
             loadScenes();
+            newSceneButton = addSceneButton;
+           
         }
 
         private void loadScenes()
@@ -37,6 +40,22 @@ namespace UI.Tabs
 
         private void addSceneButton_Click(object sender, EventArgs e)
         {
+            Scene newScene = new Scene()
+            {
+                Name = "Blank scene",
+                CreationDate = DateTime.Now,
+                LastModificationDate = DateTime.Now,    
+            };
+            
+            SceneEditDialog newSceneDialog = new SceneEditDialog(newScene,loggedUser);            
+            DialogResult result = newSceneDialog.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                SceneCard newSceneCard = new SceneCard(newScene);
+                SceneCollection.AddScene(newScene);
+                flowLayoutPanel.Controls.Add(newSceneCard);
+            }
 
         }
 

@@ -18,7 +18,7 @@ namespace BusinessLogic
         private DateTime _lastRenderDate;
 
         private User _owner;
-
+        private PPM _preview;
 
         public Scene()
         {
@@ -58,6 +58,17 @@ namespace BusinessLogic
         {
             get { return _owner; }
             set { _owner = value; }
+        }
+
+        public PPM Preview
+        {
+            get { return _preview; }
+            set { _preview = value; }
+        }
+
+        public List<PositionedModel> PositionedModels
+        {
+            get { return _positionedModellList; }
         }
 
         private void CheckIfStringNull(string value)

@@ -10,21 +10,47 @@ using System.Windows.Forms;
 using BusinessLogic;
 using BusinessLogic.Objects;
 using BusinessLogic.Collections;
+using UI.Tabs;
 
 namespace UI.Cards
 {
     public partial class SceneCard : UserControl
     {
-        private Scene scene;
+        private Scene thisScene;
         public SceneCard(Scene scene)
         {
             InitializeComponent();
-            this.scene = scene;
+            thisScene = scene;
+            loadData();
         }
 
-        private void SceneCard_Load(object sender, EventArgs e)
-        {
+        private void deleteButton_Click(object sender, EventArgs e)
+        {          
+            SceneCollection.RemoveScene(thisScene.Name, thisScene.Owner);
+            this.Parent.Controls.Remove(this);
+        }
 
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            
+            SceneEditDialog newSceneDialog = new SceneEditDialog(thisScene,thisScene.Owner);            
+            DialogResult result = newSceneDialog.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                loadData();
+            }
+        }
+
+        private void loadData()
+        {
+            nameLabel.Text = thisScene.Name;
+            //lastModificationLabel += thisScene.LastModificationDate.ToString();
+            if(thisScene.Preview == null)
+            {
+                previewBox.Image = Properties.Resources.no_img_placeholder;
+                previewBox.SizeMode = PictureBoxSizeMode.Zoom;
+            }            
         }
     }
 }

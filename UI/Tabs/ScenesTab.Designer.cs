@@ -37,9 +37,9 @@
             // flowLayoutPanel
             // 
             this.flowLayoutPanel.AutoScroll = true;
-            this.flowLayoutPanel.Location = new System.Drawing.Point(250, 132);
+            this.flowLayoutPanel.Location = new System.Drawing.Point(141, 132);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(701, 387);
+            this.flowLayoutPanel.Size = new System.Drawing.Size(954, 482);
             this.flowLayoutPanel.TabIndex = 4;
             // 
             // pictureBox1

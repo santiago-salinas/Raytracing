@@ -8,50 +8,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BusinessLogic.Objects;
-using BusinessLogic.Collections;
 
 namespace UI.Cards
 {
-    public partial class ModelCard : UserControl
+    public partial class PositionedModelCard : UserControl
     {
+        private PositionedModel positionedModel;
         private Model model;
-        public ModelCard(Model model)
+        private Scene scene;
+        public PositionedModelCard(PositionedModel providedModel, Scene providedScene)
         {
             InitializeComponent();
-            this.model = model;
+            positionedModel = providedModel;
+            scene = providedScene;
+            model = positionedModel.PositionedModelModel;
             modelNameLabel.Text = model.Name;
-            
-            string shapeName = model.ModelShape.Name;
-            shapeNameLabel.Text += shapeName;
-
-            string materialName = model.ModelColor.Name;
-            materialNameLabel.Text += materialName;
+            positionLabel.Text = positionedModel.PositionedModelPosition.ToString();
 
             loadPreview();
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ModelCollection.RemoveModel(model.Name, model.Owner);
-                this.Parent.Controls.Remove(this);
-            }
-            catch (BusinessLogicException ex)
-            {
-                deleteLabel.Visible = true;
-            }
+            scene.RemovePositionedModel(positionedModel);
+            this.Parent.Controls.Remove(this);
         }
 
         private void loadPreview()
         {
             PPM preview = model.Preview;
 
-            if(preview == null) {
+            if (preview == null)
+            {
                 Image defaultImage = Properties.Resources.sphereImage;
                 previewBox.Image = defaultImage;
-                
+
                 Panel coloredBox = new Panel();
 
                 BusinessLogic.Color materialColor = model.ModelColor.Color;
@@ -66,28 +57,8 @@ namespace UI.Cards
                 coloredBox.Location = new Point(previewBox.Width - coloredBox.Width, previewBox.Height - coloredBox.Height);
 
                 previewBox.Controls.Add(coloredBox);
-            
+
             }
-        }
-
-        private void deleteLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void materialNameLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void shapeNameLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void modelNameLabel_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

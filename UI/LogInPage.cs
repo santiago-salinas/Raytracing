@@ -64,6 +64,20 @@ namespace UI
 
             Model model1 = new Model("Model 1",sphere1,lambertian1,user1);
             ModelCollection.AddModel(model1);
+
+            Scene scene1 = new Scene()
+            {
+                Name = "Scene 1",
+                LastModificationDate = DateTime.Now,
+                LastRenderDate = DateTime.Now,
+                Owner = user1                
+            };
+            SceneCollection.AddScene(scene1);
+            scene1.AddPositionedModel(new PositionedModel()
+            {
+                PositionedModelModel = model1,
+                PositionedModelPosition = new Vector(1, 1, 1)
+            });
         }
 
 
