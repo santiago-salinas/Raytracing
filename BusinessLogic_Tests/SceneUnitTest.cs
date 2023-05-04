@@ -1,5 +1,4 @@
 ﻿using BusinessLogic;
-using BusinessLogic.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
@@ -27,7 +26,7 @@ namespace BusinessLogic_Tests
         private Vector testPosition;
         private Vector testPositionAlternative;
 
-           
+        private User testUser;
 
 
         [TestInitialize]
@@ -41,14 +40,29 @@ namespace BusinessLogic_Tests
                 Name = testName
             };
 
+            testUser = new User()
+            {
+                UserName = "Username1"
+            };
+
+      
+
             modelName = "Wooden ball";
             sphereName = "Small sized sphere";
             radius = 5;
             lambertianName = "Oak color";
             color = new Color((float)133/255, (float)94 / 255, (float)66 / 255);
 
-            testSphere = new Sphere(sphereName, radius);
-            testLambertian = new Lambertian(lambertianName, color);
+            testSphere = new Sphere()
+            {
+                Name= sphereName,
+                Radius = radius,
+            };
+            
+            testLambertian = new Lambertian() {
+                Name = lambertianName, 
+                Color = color 
+            };
 
 
             testModel = new Model()
@@ -67,6 +81,8 @@ namespace BusinessLogic_Tests
                 PositionedModelModel = testModel,
                 PositionedModelPosition = testPosition
             };
+
+           
 
             DateTimeProvider.Reset();
 
@@ -276,9 +292,13 @@ namespace BusinessLogic_Tests
         }
         public void AddSceneToCollection()
         {
+            //arrange
+            User testUser = new User();
+            testUser.UserName = "Username";
+            testScene.Owner = testUser;
             //act
             SceneCollection.AddScene(testScene);
-            bool added = SceneCollection.ContainsScene(testScene.Name);
+            bool added = SceneCollection.ContainsScene(testScene.Name, testUser);
             //assert
             Assert.IsTrue(added);
         }
@@ -286,9 +306,13 @@ namespace BusinessLogic_Tests
         [TestMethod]
         public void GetSceneFromCollection()
         {
+            //arrange
+            User testUser = new User();
+            testUser.UserName = "Username";
+            testScene.Owner = testUser;
             //act
             SceneCollection.AddScene(testScene);
-            Scene getScene = SceneCollection.GetScene(testName);
+            Scene getScene = SceneCollection.GetScene(testName,testUser);
             //assert
             Assert.ReferenceEquals(testScene, getScene);
         }
@@ -297,18 +321,26 @@ namespace BusinessLogic_Tests
         [ExpectedException(typeof(BusinessLogicException), "Scene does not exist in the collection")]
         public void RemoveSceneFromCollection()
         {
+            //arrange
+            User testUser = new User();
+            testUser.UserName = "Username";
+            testScene.Owner = testUser;
             SceneCollection.AddScene(testScene);
             //act
-            SceneCollection.RemoveScene(testName);
-            SceneCollection.GetScene(testName);
+            SceneCollection.RemoveScene(testName, testUser);
+            SceneCollection.GetScene(testName, testUser);
         }
 
         [TestMethod]
         [ExpectedException(typeof(BusinessLogicException), "Scene does not exist in the collection")]
         public void CantRemoveSceneNotInCollection()
         {
+            //arrange
+            User testUser = new User();
+            testUser.UserName = "Username";
+            testScene.Owner = testUser;
             //act
-            SceneCollection.RemoveScene(testName);
+            SceneCollection.RemoveScene(testName, testUser);
         }
 
         [TestMethod]
@@ -316,13 +348,24 @@ namespace BusinessLogic_Tests
         public void CantAddSceneWithNameAlreadyInCollection()
         {
             //arrange
-            SceneCollection.AddScene(testScene);
-            Scene newScene = new Scene()
+            User testUser = new User()
             {
-                Name = testName
+                UserName = "Username1"
             };
+            
+            testScene = new Scene()
+            {
+                Name = testName,
+                Owner = testUser
+            };                                            
+            SceneCollection.AddScene(testScene);
 
             //act
+            Scene newScene = new Scene()
+            {
+                Name = testName,
+                Owner = testUser
+            };
             SceneCollection.AddScene(newScene);
         }
 
@@ -330,37 +373,48 @@ namespace BusinessLogic_Tests
         [ExpectedException(typeof(BusinessLogicException), "Cant delete model used by active scene")]
         public void CantDeleteModelFromCollectionUsedByScene()
         {
+            //arrange
+            
             ModelCollection.AddModel(testModel);
             testScene.AddPositionedModel(testPositionedModel);
             SceneCollection.AddScene(testScene);
 
             //act
-            ModelCollection.RemoveModel(testModel.Name);
+            ModelCollection.RemoveModel(testModel.Name,testModel.Owner);
         }
 
         [TestMethod]
         public void DeleteModelAfterDeletingScene()
         {
+            //arrange
+            User testUser = new User();
+            testUser.UserName = "Username";
+            testScene.Owner = testUser;
             ModelCollection.AddModel(testModel);
             testScene.AddPositionedModel(testPositionedModel);
             SceneCollection.AddScene(testScene);
 
             //act
-            SceneCollection.RemoveScene(testScene.Name);
-            ModelCollection.RemoveModel(testModel.Name);
+            SceneCollection.RemoveScene(testScene.Name, testUser);
+            ModelCollection.RemoveModel(testModel.Name,testModel.Owner);
         }
 
         [TestMethod]
         public void ModelIsUsedByScene()
         {
-            Assert.IsFalse(testScene.ContainsModel(testModel.Name));
+
+            //arrange
+            User testUser = new User();
+            testUser.UserName = "Username";
+            testScene.Owner = testUser;
+            Assert.IsFalse(testScene.ContainsModel(testModel));
             ModelCollection.AddModel(testModel);
             //act
             testScene.AddPositionedModel(testPositionedModel);
             //assert
-            Assert.IsTrue(testScene.ContainsModel(testModel.Name));
+            Assert.IsTrue(testScene.ContainsModel(testModel));
             testScene.RemovePositionedModel(testPositionedModel);
-            Assert.IsFalse(testScene.ContainsModel(testModel.Name));
+            Assert.IsFalse(testScene.ContainsModel(testModel));
 
 
         }

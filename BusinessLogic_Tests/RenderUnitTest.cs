@@ -81,6 +81,7 @@ namespace BusinessLogic_Tests
         [TestInitialize]
         public void Initialize()
         {
+            
             // Sphere 1
             testSceneName = "Render Cliche";
 
@@ -91,11 +92,11 @@ namespace BusinessLogic_Tests
 
             sphere1Name = "Spehere1";
             sphere1Radius = 0.5;
-            sphere1 = new Sphere(sphere1Name, sphere1Radius);
+            sphere1 = new Sphere() { Name = sphere1Name, Radius= sphere1Radius };
 
             color1 = new Color(0.1, 0.2, 0.5);
             lambertian1Name = "Color1";
-            lambertian1 = new Lambertian(lambertian1Name, color1);
+            lambertian1 = new Lambertian() { Name = lambertian1Name, Color = color1 };
 
             model1Name = "Model1";
             model1 = new Model()
@@ -118,11 +119,12 @@ namespace BusinessLogic_Tests
 
             sphere2Name = "Spehere2";
             sphere2Radius = 0.5;
-            sphere2 = new Sphere(sphere2Name, sphere2Radius);
+            sphere2 = new Sphere() { Name = sphere2Name, Radius = sphere2Radius };
+
 
             color2 = new Color(0.8, 0.2, 0.5);
             lambertian2Name = "Color2";
-            lambertian2 = new Lambertian(lambertian2Name, color2);
+            lambertian2 = new Lambertian() { Name = lambertian2Name, Color = color2 };
 
             model2Name = "Model2";
             model2 = new Model()
@@ -145,11 +147,11 @@ namespace BusinessLogic_Tests
 
             sphere3Name = "Spehere3";
             sphere3Radius = 2;
-            sphere3 = new Sphere(sphere3Name, sphere3Radius);
+            sphere3 = new Sphere() { Name = sphere3Name, Radius = sphere3Radius };
 
             color3 = new Color(0.8, 0.25, 0.05);
             lambertian3Name = "Color3";
-            lambertian3 = new Lambertian(lambertian3Name, color3);
+            lambertian3 = new Lambertian() { Name = lambertian3Name, Color = color3 };
 
             model3Name = "Model3";
             model3 = new Model()
@@ -172,11 +174,11 @@ namespace BusinessLogic_Tests
 
             sphere4Name = "Spehere4";
             sphere4Radius = 2000;
-            sphere4 = new Sphere(sphere4Name, sphere4Radius);
+            sphere4 = new Sphere() { Name = sphere4Name, Radius = sphere4Radius };
 
             color4 = new Color(0.7, 0.7, 0.1);
             lambertian4Name = "Color4";
-            lambertian4 = new Lambertian(lambertian4Name, color4);
+            lambertian4 = new Lambertian() { Name = lambertian4Name, Color = color4 };
 
             model4Name = "Model4";
             model4 = new Model()

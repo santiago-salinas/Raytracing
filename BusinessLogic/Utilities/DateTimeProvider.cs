@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BusinessLogic.Utilities
+namespace BusinessLogic
 {
     public class DateTimeProvider
     {

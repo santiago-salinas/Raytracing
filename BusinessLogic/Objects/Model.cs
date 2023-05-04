@@ -5,8 +5,19 @@ namespace BusinessLogic
     public class Model
     {
         private string _name;
-
+        private Sphere _shape;
+        private Lambertian _color;
+        private User _owner;
+        private PPM _preview;
         public Model() { }
+
+        public Model(string name, Sphere shape, Lambertian color, User owner)
+        {
+            Name = name;
+            ModelShape = shape;
+            ModelColor = color;
+            Owner = owner;
+        }
 
         public string Name
         {
@@ -17,6 +28,12 @@ namespace BusinessLogic
                 CheckIfStringNull(value);
                 _name = value;
             }
+        }
+
+        public User Owner
+        {
+            get { return _owner; }
+            set { _owner = value; }
         }
 
         private void CheckIfStringNull(string value)
@@ -30,6 +47,8 @@ namespace BusinessLogic
         public Sphere ModelShape { get; set; }
 
         public Lambertian ModelColor { get; set; }
+
+        public PPM Preview { get; set; }
 
         public override bool Equals(object other)
         {

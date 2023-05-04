@@ -5,13 +5,16 @@ namespace BusinessLogic
     public class Lambertian
     {
         private string _name;
+        private Color _color;
+        private User _owner;
 
         public Lambertian() { }
-        
-        public Lambertian(string name, Color color)
+
+        public Lambertian(string name, Color color, User user)
         {
             Name = name;
             Color = color;
+            Owner = user;
         }
 
         public string Name
@@ -25,7 +28,13 @@ namespace BusinessLogic
             }
         }
 
+        public User Owner
+        {
+            get { return _owner; }
+            set { _owner = value; }
+        }
         public Color Color {get; set; }
+
         private void CheckIfStringNull(string value)
         {
             if (string.IsNullOrEmpty(value))

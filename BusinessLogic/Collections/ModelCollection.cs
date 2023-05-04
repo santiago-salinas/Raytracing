@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+
 
 namespace BusinessLogic
 {
@@ -11,14 +12,27 @@ namespace BusinessLogic
             _modelList.Clear();
         }
 
-        public static bool ContainsModel(string name)
+        public static List<Model> GetModelsFromUser(User owner)
         {
-            Model ret = _modelList.Find(m => m.Name == name);
+            List<Model> ret = new List<Model>();
+            foreach (Model s in _modelList)
+            {
+                if (s.Owner == owner)
+                {
+                    ret.Add(s);
+                }
+            }
+            return ret;
+        }
+
+        public static bool ContainsModel(string name, User user)
+        {
+            Model ret = _modelList.Find(m => m.Name == name && m.Owner == user);
             return ret != null;
         }
 
         public static bool ExistsModelUsingTheLambertian(Lambertian lambertian)
-        {
+        {            
             Model ret = _modelList.Find(m => m.ModelColor == lambertian);
             return ret != null;
         }
@@ -29,31 +43,28 @@ namespace BusinessLogic
         }
         public static void AddModel(Model newElement)
         {
-            if (!ContainsModel(newElement.Name))
+            if (!ContainsModel(newElement.Name, newElement.Owner))
             {
                 _modelList.Add(newElement);
             }
             else
             {
-                throw new BusinessLogicException("Model with the same name already exists in the collection");
+                throw new BusinessLogicException("User already has model with the same name");
             }
         }
 
-        public static Model GetModel(string name)
+        public static Model GetModel(string name, User owner)
         {
-            Model ret = _modelList.Find(m => m.Name == name);
-            if (ret == null) throw new BusinessLogicException("Model does not exist in the collection");
+            Model ret = _modelList.Find(m => m.Name == name && m.Owner == owner);
+            if (ret == null) throw new BusinessLogicException("User does not own model with that name");
             return ret;
         }
 
-        public static void RemoveModel(string name)
+        public static void RemoveModel(string name, User owner)
         {
-            Model model = _modelList.Find(s => s.Name == name);
-            if (model == null)
-            {
-                throw new BusinessLogicException("Model does not exist in the collection");
-            }
-            else if (SceneCollection.ExistsSceneUsingModel(model))
+            Model model = GetModel(name,owner);
+            
+            if (SceneCollection.ExistsSceneUsingModel(model))
             {
                 throw new BusinessLogicException("Cant delete sphere used by existing model");
             }

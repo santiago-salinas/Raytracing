@@ -19,6 +19,8 @@ namespace BusinessLogic_Tests
         private string lambertianName;
         private Color color;
 
+        private User testUser;
+
         [TestInitialize]
         public void Initialize()
         {
@@ -30,15 +32,29 @@ namespace BusinessLogic_Tests
             lambertianName = "Oak color";
             color = new Color((float)133 / 255, (float)94 / 255, (float)66 / 255);
 
-            testSphere = new Sphere(sphereName,radius);
-            testLambertian = new Lambertian(lambertianName,color);
+            testSphere = new Sphere()
+            {
+                Name = sphereName,
+                Radius = radius,
+            };
+            testLambertian = new Lambertian()
+            {
+                Name = lambertianName,
+                Color = color,
+            };
 
+            testUser= new User()
+            {
+                UserName = "Username1",
+            
+            };
 
             testModel = new Model()
             {
                 Name = modelName,
                 ModelShape = testSphere,
-                ModelColor = testLambertian
+                ModelColor = testLambertian,
+                Owner = testUser
             };
         }
 
@@ -106,7 +122,7 @@ namespace BusinessLogic_Tests
         {
             //act
             ModelCollection.AddModel(testModel);
-            bool added = ModelCollection.ContainsModel(testModel.Name);
+            bool added = ModelCollection.ContainsModel(testModel.Name,testUser);
             //assert
             Assert.IsTrue(added);
         }
@@ -116,7 +132,7 @@ namespace BusinessLogic_Tests
         {
             //act
             ModelCollection.AddModel(testModel);
-            Model getModel = ModelCollection.GetModel(modelName);
+            Model getModel = ModelCollection.GetModel(modelName,testUser);
             //assert
             Assert.ReferenceEquals(testModel, getModel);
         }
@@ -127,8 +143,8 @@ namespace BusinessLogic_Tests
         {
             ModelCollection.AddModel(testModel);
             //act
-            ModelCollection.RemoveModel(modelName);
-            ModelCollection.GetModel(modelName);
+            ModelCollection.RemoveModel(modelName, testUser);
+            ModelCollection.GetModel(modelName, testUser);
         }
 
         [TestMethod]
@@ -136,7 +152,7 @@ namespace BusinessLogic_Tests
         public void CantRemoveModelNotInCollection()
         {
             //act
-            ModelCollection.RemoveModel(modelName);
+            ModelCollection.RemoveModel(modelName, testUser);
         }
 
         [TestMethod]
@@ -149,7 +165,8 @@ namespace BusinessLogic_Tests
             {
                 Name = modelName,
                 ModelShape = testSphere,
-                ModelColor = testLambertian
+                ModelColor = testLambertian,
+                Owner = testUser
             };
 
             //act
@@ -160,11 +177,15 @@ namespace BusinessLogic_Tests
         [ExpectedException(typeof(BusinessLogicException), "Cant delete sphere used by active model")]
         public void CantDeleteSphereFromCollectionUsedByModel()
         {
+
             //arrange
+            User testUser = new User();
+            testSphere.Owner = testUser;
+            
             SphereCollection.AddSphere(testSphere);
             ModelCollection.AddModel(testModel);
             //act
-            SphereCollection.RemoveSphere(sphereName);
+            SphereCollection.RemoveSphere(sphereName, testUser);
         }
 
         [TestMethod]
@@ -173,26 +194,29 @@ namespace BusinessLogic_Tests
         {
             //arrange
             LambertianCollection.AddLambertian(testLambertian);
+            testLambertian.Owner = testUser;
             ModelCollection.AddModel(testModel);
             //act
-            LambertianCollection.RemoveLambertian(lambertianName);
+            LambertianCollection.RemoveLambertian(lambertianName,testUser);
         }
 
         [TestMethod]
         public void DeleteSphereAndLambertianAfterDeletingModel()
         {
-            //arrange
+            //arrange                                    
+            testSphere.Owner = testUser;
+            testLambertian.Owner = testUser;
             SphereCollection.AddSphere(testSphere);
             LambertianCollection.AddLambertian(testLambertian);
             ModelCollection.AddModel(testModel);
-            ModelCollection.RemoveModel(modelName);
+            ModelCollection.RemoveModel(modelName, testUser);
 
             //act
-            SphereCollection.RemoveSphere(sphereName);
-            LambertianCollection.RemoveLambertian(lambertianName);
+            SphereCollection.RemoveSphere(sphereName, testUser);
+            LambertianCollection.RemoveLambertian(lambertianName, testUser);
             //assert
-            bool sphereDeleted = !SphereCollection.ContainsSphere(sphereName);
-            bool lambertianDeleted = !LambertianCollection.ContainsLambertian(lambertianName);
+            bool sphereDeleted = !SphereCollection.ContainsSphere(sphereName, testUser);
+            bool lambertianDeleted = !LambertianCollection.ContainsLambertian(lambertianName, testUser);
             Assert.IsTrue(sphereDeleted && lambertianDeleted);
         }
 

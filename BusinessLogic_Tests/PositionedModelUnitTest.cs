@@ -29,8 +29,16 @@ namespace BusinessLogic_Tests
             lambertianName = "Oak color";
             color = new Color((float)133 / 255, (float)94 / 255, (float)66 / 255);
 
-            testSphere = new Sphere(sphereName, radius);
-            testLambertian = new Lambertian(lambertianName, color);
+            testSphere = new Sphere()
+            {
+                Name = sphereName,
+                Radius = radius,
+            };
+            testLambertian = new Lambertian()
+            {
+                Color = color,
+                Name = lambertianName,
+            };
 
             testModel = new Model()
             {

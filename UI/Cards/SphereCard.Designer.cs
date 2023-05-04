@@ -100,7 +100,7 @@
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.deleteButton);
             this.Name = "SphereCard";
-            this.Size = new System.Drawing.Size(579, 141);
+            this.Size = new System.Drawing.Size(600, 140);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

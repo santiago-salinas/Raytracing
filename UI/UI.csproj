@@ -46,17 +46,59 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cards\LambertianCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Cards\LambertianCard.Designer.cs">
+      <DependentUpon>LambertianCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cards\ModelCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Cards\ModelCard.Designer.cs">
+      <DependentUpon>ModelCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cards\PositionedModelCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Cards\PositionedModelCard.Designer.cs">
+      <DependentUpon>PositionedModelCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cards\SphereCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Cards\SphereCard.Designer.cs">
       <DependentUpon>SphereCard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\AddSphere.cs">
+    <Compile Include="Cards\SceneCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Cards\SceneCard.Designer.cs">
+      <DependentUpon>SceneCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\AddLambertianDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\AddSphere.Designer.cs">
-      <DependentUpon>AddSphere.cs</DependentUpon>
+    <Compile Include="Dialogs\AddLambertianDialog.Designer.cs">
+      <DependentUpon>AddLambertianDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\AddModelDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AddModelDialog.Designer.cs">
+      <DependentUpon>AddModelDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\AddSphereDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AddSphereDialog.Designer.cs">
+      <DependentUpon>AddSphereDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\EditVector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\EditVector.Designer.cs">
+      <DependentUpon>EditVector.cs</DependentUpon>
     </Compile>
     <Compile Include="LogInPage.cs">
       <SubType>Form</SubType>
@@ -90,6 +132,12 @@
     <Compile Include="Tabs\ModelsTab.Designer.cs">
       <DependentUpon>ModelsTab.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\SceneEditDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\SceneEditDialog.Designer.cs">
+      <DependentUpon>SceneEditDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tabs\ScenesTab.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,11 +150,32 @@
     <Compile Include="Tabs\ShapesTab.Designer.cs">
       <DependentUpon>ShapesTab.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Cards\LambertianCard.resx">
+      <DependentUpon>LambertianCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cards\ModelCard.resx">
+      <DependentUpon>ModelCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cards\PositionedModelCard.resx">
+      <DependentUpon>PositionedModelCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cards\SceneCard.resx">
+      <DependentUpon>SceneCard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Cards\SphereCard.resx">
       <DependentUpon>SphereCard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\AddSphere.resx">
-      <DependentUpon>AddSphere.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\AddLambertianDialog.resx">
+      <DependentUpon>AddLambertianDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AddModelDialog.resx">
+      <DependentUpon>AddModelDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AddSphereDialog.resx">
+      <DependentUpon>AddSphereDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\EditVector.resx">
+      <DependentUpon>EditVector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogInPage.resx">
       <DependentUpon>LogInPage.cs</DependentUpon>
@@ -132,6 +201,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Tabs\ModelsTab.resx">
       <DependentUpon>ModelsTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\SceneEditDialog.resx">
+      <DependentUpon>SceneEditDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tabs\ScenesTab.resx">
       <DependentUpon>ScenesTab.cs</DependentUpon>
@@ -175,6 +247,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\deleteIcon1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\no-img-placeholder.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

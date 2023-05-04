@@ -83,5 +83,9 @@ namespace BusinessLogic
             return value.Any(char.IsDigit);
         }
 
+        public override bool Equals(object other)
+        {
+            return this.UserName == ((User)other).UserName;
+        }
     }
 }

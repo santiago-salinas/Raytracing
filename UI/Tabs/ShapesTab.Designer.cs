@@ -65,6 +65,7 @@
             this.flowLayoutPanel.Name = "flowLayoutPanel";
             this.flowLayoutPanel.Size = new System.Drawing.Size(701, 387);
             this.flowLayoutPanel.TabIndex = 3;
+            
             // 
             // pictureBox1
             // 
@@ -81,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1157, 655);
+            this.ClientSize = new System.Drawing.Size(1200, 650);
             this.Controls.Add(this.flowLayoutPanel);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.addShapeButton);

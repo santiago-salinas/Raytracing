@@ -9,15 +9,19 @@ namespace UI.Tabs
 {
     public partial class ShapesTab : Form
     {
-        public ShapesTab()
+
+        private User loggedUser;
+        public ShapesTab(User loggedUser)
         {
             InitializeComponent();
+            this.loggedUser = loggedUser;
             loadSpheres();
+            
         }
 
         private void addShapeButton_Click(object sender, EventArgs e)
         {
-            AddSphere addSphere = new AddSphere();
+            AddSphereDialog addSphere = new AddSphereDialog(loggedUser);
             DialogResult result = addSphere.ShowDialog();
 
             if (result == DialogResult.OK) {
@@ -29,12 +33,13 @@ namespace UI.Tabs
 
         private void loadSpheres()
         {
-            List<Sphere> sphereList = SphereCollection.SphereList;
+            List<Sphere> sphereList = SphereCollection.GetSpheresFromUser(loggedUser);
             foreach (Sphere elem in sphereList)
             {
                 SphereCard sphereCard = new SphereCard(elem);
                 flowLayoutPanel.Controls.Add(sphereCard);
             }
         }
+
     }
 }
