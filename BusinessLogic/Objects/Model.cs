@@ -14,6 +14,15 @@ namespace BusinessLogic
         private Lambertian _color;
         private User _owner;
         public Model() { }
+
+        public Model(string name, Sphere shape, Lambertian color, User owner)
+        {
+            Name = name;
+            ModelShape = shape;
+            ModelColor = color;
+            Owner = owner;
+        }
+
         public string Name
         {
             get { return _name; }

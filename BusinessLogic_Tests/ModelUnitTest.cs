@@ -38,7 +38,11 @@ namespace BusinessLogic_Tests
                 Name = sphereName,
                 Radius = radius,
             };
-            testLambertian = new Lambertian(lambertianName,color);
+            testLambertian = new Lambertian()
+            {
+                Name = lambertianName,
+                Color = color,
+            };
 
             testUser= new User()
             {

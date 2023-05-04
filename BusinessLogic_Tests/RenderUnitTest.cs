@@ -57,7 +57,11 @@ namespace BusinessLogic_Tests
 
             color = new Color(1, 0, 0);
             lambertianName = "Bright Red";
-            testLambertian = new Lambertian(lambertianName, color);
+            testLambertian = new Lambertian()
+            {
+                Name = lambertianName,
+                Color = color,
+            };
 
             modelName = "Red Ball";
             testModel = new Model()

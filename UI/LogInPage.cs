@@ -51,6 +51,19 @@ namespace UI
             SphereCollection.AddSphere(sphere1);
             SphereCollection.AddSphere(sphere2);
             SphereCollection.AddSphere(sphere3);
+
+            BusinessLogic.Color color1 = new BusinessLogic.Color(0.5,1,0.3);
+            BusinessLogic.Color color2 = new BusinessLogic.Color(1,0.5,1);
+            BusinessLogic.Color color3 = new BusinessLogic.Color(0.2, 0.63, 0.16);
+            Lambertian lambertian1 = new Lambertian("Lambertian 1", color1,user1);
+            Lambertian lambertian2 = new Lambertian("Lambertian 2", color2,user2);
+            Lambertian lambertian3 = new Lambertian("Lambertian 3", color3,user1);
+            LambertianCollection.AddLambertian(lambertian1);
+            LambertianCollection.AddLambertian(lambertian3);
+            LambertianCollection.AddLambertian(lambertian2);
+
+            Model model1 = new Model("Model 1",sphere1,lambertian1,user1);
+            ModelCollection.AddModel(model1);
         }
 
 

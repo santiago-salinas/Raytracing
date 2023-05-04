@@ -17,10 +17,11 @@ namespace BusinessLogic
 
         public Lambertian() { }
 
-        public Lambertian(string name, Color color)
+        public Lambertian(string name, Color color, User user)
         {
             Name = name;
             Color = color;
+            Owner = user;
         }
 
         public string Name

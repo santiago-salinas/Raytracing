@@ -10,16 +10,18 @@ using System.Windows.Forms;
 using BusinessLogic.Objects;
 using BusinessLogic.Collections;
 using BusinessLogic;
+using System.Runtime.InteropServices;
 
 namespace UI.Dialogs
 {
-    public partial class AddSphereDialog : Form
+    public partial class AddLambertianDialog : Form
     {
-        //public string SphereName { get { return nameTextBox.Text; } }
-        //public float SphereRadius { get { return (float)radiusInput.Value; } }
-        public Sphere NewSphere = new Sphere();
+   
+        private BusinessLogic.Color color;
+
+        public Lambertian NewLambertian = new Lambertian();
         private User loggedUser {  get; set; }
-        public AddSphereDialog(User loggedUser)
+        public AddLambertianDialog(User loggedUser)
         {
             InitializeComponent();
             this.loggedUser = loggedUser;
@@ -32,38 +34,42 @@ namespace UI.Dialogs
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            string sphereName = nameTextBox.Text;
-            float radius = (float)radiusInput.Value;
+            string lambertianName = nameTextBox.Text;
+            
             nameStatusLabel.Text = "";
-            radiusStatusLabel.Visible = false;
-
+            colorStatusLabel.Visible = false;
+            
             bool nameIsCorrect = true;
-            bool radiusIsCorrect = true;
+            bool colorValuesAreCorrect = true;
             
             try
             {
-                NewSphere.Name = sphereName;
+                NewLambertian.Name = lambertianName;
             }catch (ArgumentNullException ex)
             {
                 nameStatusLabel.Text = "* Name cannot be empty";
                 nameIsCorrect = false;
             }
 
-            if (SphereCollection.ContainsSphere(sphereName,loggedUser)) {
+            if (LambertianCollection.ContainsLambertian(lambertianName,loggedUser)) {
                 nameIsCorrect = false;
-                nameStatusLabel.Text = "* Sphere with that name already exists";
+                nameStatusLabel.Text = "* Material with that name already exists";
             }
 
+            double redValue = (double)redValueInput.Value / 255;
+            double greenValue = (double)greenValueInput.Value / 255;
+            double blueValue = (double)blueValueInput.Value / 255;           
             try
             {
-                NewSphere.Radius = radius;
-            }catch(BusinessLogicException ex)
+                color = new BusinessLogic.Color(redValue,greenValue,blueValue);
+                NewLambertian.Color = color;
+            }catch(ArgumentException ex)
             {
-                radiusStatusLabel.Visible = true;
-                radiusIsCorrect = false;
+                colorStatusLabel.Visible = true;
+                colorValuesAreCorrect = false;
             }
 
-            if(nameIsCorrect && radiusIsCorrect) {
+            if(nameIsCorrect && colorValuesAreCorrect) {
 
                 DialogResult = DialogResult.OK;
             }

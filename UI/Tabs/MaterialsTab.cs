@@ -11,6 +11,7 @@ using BusinessLogic;
 using BusinessLogic.Collections;
 using BusinessLogic.Objects;
 using UI.Cards;
+using UI.Dialogs;
 
 namespace UI.Tabs
 {
@@ -34,14 +35,17 @@ namespace UI.Tabs
             }
         }
 
-        private void shapeLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void addMaterialButton_Click(object sender, EventArgs e)
         {
+            AddLambertianDialog addMaterial = new AddLambertianDialog(loggedUser);
+            DialogResult result = addMaterial.ShowDialog();
 
+            if (result == DialogResult.OK)
+            {
+                LambertianCard materialCard = new LambertianCard(addMaterial.NewLambertian);
+                LambertianCollection.AddLambertian(addMaterial.NewLambertian);
+                flowLayoutPanel.Controls.Add(materialCard);
+            }
         }
     }
 }

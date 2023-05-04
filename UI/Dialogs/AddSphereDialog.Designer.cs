@@ -118,6 +118,11 @@
             // radiusInput
             // 
             this.radiusInput.Location = new System.Drawing.Point(229, 283);
+            this.radiusInput.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
             this.radiusInput.Name = "radiusInput";
             this.radiusInput.Size = new System.Drawing.Size(146, 20);
             this.radiusInput.TabIndex = 26;
@@ -142,11 +147,12 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
-            // AddSphere
+            // AddSphereDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ControlBox = false;
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.radiusInput);
@@ -158,8 +164,8 @@
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.newSphereLabel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "AddSphere";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Name = "AddSphereDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddSphere";
             ((System.ComponentModel.ISupportInitialize)(this.radiusInput)).EndInit();

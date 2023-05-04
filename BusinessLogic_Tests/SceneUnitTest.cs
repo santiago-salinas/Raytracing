@@ -61,7 +61,10 @@ namespace BusinessLogic_Tests
                 Radius = radius,
             };
             
-            testLambertian = new Lambertian(lambertianName, color);
+            testLambertian = new Lambertian() {
+                Name = lambertianName, 
+                Color = color 
+            };
 
 
             testModel = new Model()

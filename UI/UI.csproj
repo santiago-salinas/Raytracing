@@ -70,6 +70,12 @@
     <Compile Include="Cards\SceneCard.Designer.cs">
       <DependentUpon>SceneCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\AddLambertianDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AddLambertianDialog.Designer.cs">
+      <DependentUpon>AddLambertianDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\AddSphereDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,11 +126,17 @@
     <Compile Include="Tabs\ShapesTab.Designer.cs">
       <DependentUpon>ShapesTab.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Cards\LambertianCard.resx">
+      <DependentUpon>LambertianCard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Cards\SceneCard.resx">
       <DependentUpon>SceneCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Cards\SphereCard.resx">
       <DependentUpon>SphereCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\AddLambertianDialog.resx">
+      <DependentUpon>AddLambertianDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AddSphereDialog.resx">
       <DependentUpon>AddSphereDialog.cs</DependentUpon>
