@@ -65,6 +65,7 @@
             this.flowLayoutPanel.Name = "flowLayoutPanel";
             this.flowLayoutPanel.Size = new System.Drawing.Size(701, 387);
             this.flowLayoutPanel.TabIndex = 3;
+            
             // 
             // pictureBox1
             // 

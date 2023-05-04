@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.newSphereLabel = new System.Windows.Forms.Label();
+            this.newMaterialLabel = new System.Windows.Forms.Label();
             this.nameStatusLabel = new System.Windows.Forms.Label();
-            this.sphereNameLabel = new System.Windows.Forms.Label();
+            this.materialNameLabel = new System.Windows.Forms.Label();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.saveButton = new System.Windows.Forms.Button();
@@ -48,15 +48,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.blueValueInput)).BeginInit();
             this.SuspendLayout();
             // 
-            // newSphereLabel
+            // newMaterialLabel
             // 
-            this.newSphereLabel.AutoSize = true;
-            this.newSphereLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newSphereLabel.Location = new System.Drawing.Point(258, 9);
-            this.newSphereLabel.Name = "newSphereLabel";
-            this.newSphereLabel.Size = new System.Drawing.Size(252, 46);
-            this.newSphereLabel.TabIndex = 0;
-            this.newSphereLabel.Text = "New Material";
+            this.newMaterialLabel.AutoSize = true;
+            this.newMaterialLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newMaterialLabel.Location = new System.Drawing.Point(258, 9);
+            this.newMaterialLabel.Name = "newMaterialLabel";
+            this.newMaterialLabel.Size = new System.Drawing.Size(252, 46);
+            this.newMaterialLabel.TabIndex = 0;
+            this.newMaterialLabel.Text = "New Material";
             // 
             // nameStatusLabel
             // 
@@ -67,14 +67,14 @@
             this.nameStatusLabel.Size = new System.Drawing.Size(0, 13);
             this.nameStatusLabel.TabIndex = 21;
             // 
-            // sphereNameLabel
+            // materialNameLabel
             // 
-            this.sphereNameLabel.AutoSize = true;
-            this.sphereNameLabel.Location = new System.Drawing.Point(229, 79);
-            this.sphereNameLabel.Name = "sphereNameLabel";
-            this.sphereNameLabel.Size = new System.Drawing.Size(75, 13);
-            this.sphereNameLabel.TabIndex = 20;
-            this.sphereNameLabel.Text = "Material Name";
+            this.materialNameLabel.AutoSize = true;
+            this.materialNameLabel.Location = new System.Drawing.Point(229, 79);
+            this.materialNameLabel.Name = "materialNameLabel";
+            this.materialNameLabel.Size = new System.Drawing.Size(75, 13);
+            this.materialNameLabel.TabIndex = 20;
+            this.materialNameLabel.Text = "Material Name";
             // 
             // nameTextBox
             // 
@@ -210,11 +210,12 @@
             this.colorStatusLabel.Text = "* All color values must be between 0 and 255";
             this.colorStatusLabel.Visible = false;
             // 
-            // AddMaterialDialog
+            // AddLambertianDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ControlBox = false;
             this.Controls.Add(this.colorStatusLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.blueValueInput);
@@ -226,12 +227,12 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.nameStatusLabel);
-            this.Controls.Add(this.sphereNameLabel);
+            this.Controls.Add(this.materialNameLabel);
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.newSphereLabel);
+            this.Controls.Add(this.newMaterialLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "AddMaterialDialog";
+            this.Name = "AddLambertianDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddSphere";
             ((System.ComponentModel.ISupportInitialize)(this.redValueInput)).EndInit();
@@ -244,9 +245,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Label newSphereLabel;
+        private System.Windows.Forms.Label newMaterialLabel;
         private System.Windows.Forms.Label nameStatusLabel;
-        private System.Windows.Forms.Label sphereNameLabel;
+        private System.Windows.Forms.Label materialNameLabel;
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button saveButton;

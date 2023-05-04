@@ -11,6 +11,7 @@ using BusinessLogic;
 using BusinessLogic.Collections;
 using BusinessLogic.Objects;
 using UI.Cards;
+using UI.Dialogs;
 
 namespace UI.Tabs
 {
@@ -34,14 +35,17 @@ namespace UI.Tabs
             }
         }
 
-        private void flowLayoutPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void addModelButton_Click(object sender, EventArgs e)
         {
+            AddModelDialog addModel = new AddModelDialog(loggedUser);
+            DialogResult result = addModel.ShowDialog();
 
+            if (result == DialogResult.OK)
+            {
+                ModelCard modelCard = new ModelCard(addModel.NewModel);
+                ModelCollection.AddModel(addModel.NewModel);
+                flowLayoutPanel.Controls.Add(modelCard);
+            }
         }
     }
 }

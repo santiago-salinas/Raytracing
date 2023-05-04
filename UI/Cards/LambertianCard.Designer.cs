@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.colorPanel = new System.Windows.Forms.Panel();
             this.nameLabel = new System.Windows.Forms.Label();
             this.redValueLabel = new System.Windows.Forms.Label();
             this.greenValueLabel = new System.Windows.Forms.Label();
@@ -37,13 +37,13 @@
             this.deleteLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // panel1
+            // colorPanel
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel1.Location = new System.Drawing.Point(29, 24);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(93, 86);
-            this.panel1.TabIndex = 0;
+            this.colorPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.colorPanel.Location = new System.Drawing.Point(29, 24);
+            this.colorPanel.Name = "colorPanel";
+            this.colorPanel.Size = new System.Drawing.Size(93, 86);
+            this.colorPanel.TabIndex = 0;
             // 
             // nameLabel
             // 
@@ -102,9 +102,9 @@
             this.deleteLabel.ForeColor = System.Drawing.Color.Firebrick;
             this.deleteLabel.Location = new System.Drawing.Point(288, 110);
             this.deleteLabel.Name = "deleteLabel";
-            this.deleteLabel.Size = new System.Drawing.Size(276, 13);
+            this.deleteLabel.Size = new System.Drawing.Size(289, 13);
             this.deleteLabel.TabIndex = 7;
-            this.deleteLabel.Text = "* You cannot delete a color that is being used by a model";
+            this.deleteLabel.Text = "* You cannot delete a material that is being used by a model";
             this.deleteLabel.Visible = false;
             // 
             // LambertianCard
@@ -117,7 +117,7 @@
             this.Controls.Add(this.greenValueLabel);
             this.Controls.Add(this.redValueLabel);
             this.Controls.Add(this.nameLabel);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.colorPanel);
             this.Name = "LambertianCard";
             this.Size = new System.Drawing.Size(600, 140);
             this.ResumeLayout(false);
@@ -127,7 +127,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel colorPanel;
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.Label redValueLabel;
         private System.Windows.Forms.Label greenValueLabel;

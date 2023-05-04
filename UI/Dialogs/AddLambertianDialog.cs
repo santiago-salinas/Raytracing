@@ -70,7 +70,7 @@ namespace UI.Dialogs
             }
 
             if(nameIsCorrect && colorValuesAreCorrect) {
-
+                NewLambertian.Owner = loggedUser;
                 DialogResult = DialogResult.OK;
             }
     

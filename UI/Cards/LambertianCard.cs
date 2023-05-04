@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using BusinessLogic.Objects;
 using BusinessLogic.Collections;
 using BusinessLogic.Utilities;
+using System.Drawing.Configuration;
 
 namespace UI.Cards
 {
@@ -26,10 +27,17 @@ namespace UI.Cards
             
             BusinessLogic.Color color = lambertian.Color;
 
+            int redValue = (int)color.Red;
+            int greenValue = (int)color.Green;
+            int blueValue = (int)color. Blue;
 
-            redValueLabel.Text += color.Red.ToString();
-            blueValueLabel.Text += color.Blue.ToString();
-            greenValueLabel.Text += color.Green.ToString();
+
+            redValueLabel.Text += redValue.ToString();
+            greenValueLabel.Text += greenValue.ToString();
+            blueValueLabel.Text += blueValue.ToString();
+
+            System.Drawing.Color shownColor = System.Drawing.Color.FromArgb(redValue,greenValue,blueValue);
+            colorPanel.BackColor = shownColor;
 
         }
 
@@ -45,5 +53,6 @@ namespace UI.Cards
                 deleteLabel.Visible = true;
             }
         }
+
     }
 }

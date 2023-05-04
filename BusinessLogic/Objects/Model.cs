@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLogic.Utilities;
 
 namespace BusinessLogic
 {
@@ -13,6 +14,7 @@ namespace BusinessLogic
         private Sphere _shape;
         private Lambertian _color;
         private User _owner;
+        private PPM _preview;
         public Model() { }
 
         public Model(string name, Sphere shape, Lambertian color, User owner)
@@ -58,6 +60,12 @@ namespace BusinessLogic
         {
             get { return _color; }
             set { _color = value; }
+        }
+
+        public PPM Preview
+        {
+            get { return _preview; }
+            set { _preview = value; }
         }
 
         

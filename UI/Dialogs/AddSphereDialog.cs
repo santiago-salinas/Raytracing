@@ -15,8 +15,7 @@ namespace UI.Dialogs
 {
     public partial class AddSphereDialog : Form
     {
-        //public string SphereName { get { return nameTextBox.Text; } }
-        //public float SphereRadius { get { return (float)radiusInput.Value; } }
+
         public Sphere NewSphere = new Sphere();
         private User loggedUser {  get; set; }
         public AddSphereDialog(User loggedUser)
@@ -64,12 +63,10 @@ namespace UI.Dialogs
             }
 
             if(nameIsCorrect && radiusIsCorrect) {
-
+                NewSphere.Owner = loggedUser;
                 DialogResult = DialogResult.OK;
             }
-    
-            
-            
+                         
         }
     }
 }
