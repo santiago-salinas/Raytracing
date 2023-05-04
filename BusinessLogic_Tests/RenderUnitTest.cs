@@ -197,7 +197,6 @@ namespace BusinessLogic_Tests
 
             testScene.AddPositionedModel(positionedModel4);
 
-
             Vector origin = new Vector(4, 2, 8);
 
             Vector lookAt = new Vector(0, 0.5, -2);
@@ -207,7 +206,7 @@ namespace BusinessLogic_Tests
             int depth = 50;
 
             camera = new Camera(origin, lookAt, vectorUp, 40, 50, 50, samplesPerPixel, depth);
-                  
+
 
         }
 

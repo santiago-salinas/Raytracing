@@ -151,7 +151,7 @@ namespace BusinessLogic
 
         public Color MixColorsWithWeight(Color firstColor, Color secondColor, double factor)
         {
-            return firstColor.Multiply(1 - factor).Add(secondColor.Multiply(factor));
+            return firstColor.MultiplyBy(1 - factor).Add(secondColor.MultiplyBy(factor));
         }
 
         public HitRecord IsPositionedModelHitByRay(PositionedModel positionedModel, Ray ray, double tMax)
