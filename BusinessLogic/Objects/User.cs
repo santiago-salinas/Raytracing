@@ -41,10 +41,13 @@ namespace BusinessLogic
                 throw new ArgumentException("User name must be between 3 and 20 characters long");
             }
 
-            return true;
+            if (value.Contains(" "))
+            {
+                throw new ArgumentException("User name cannot contain spaces");
+            }
         }
 
-        private void IsValidPassword(string value)
+        public void IsValidPassword(string value)
         {
             ValidatePasswordLengthIsBetweenBounds(value);
             ValidatePasswordContainsUpperCase(value);
@@ -74,8 +77,17 @@ namespace BusinessLogic
                 throw new ArgumentException("Password must contain at least one numerical digit");
             }
         }
-        
 
+        private bool PasswordContainsDigit(string value)
+        {
+            return value.Any(char.IsDigit);
+        }
+
+        public DateTime RegisterDate
+        {
+            get { return _registerDate; }
+            set { _registerDate = value; }
+        }
 
     }
 }

@@ -6,26 +6,28 @@ namespace BusinessLogic
     {
         private static List<Sphere> _sphereList = new List<Sphere>();
 
-        public static void DropCollection()
+			  public static void DropCollection()
         {
             _sphereList.Clear();
         }
+
+        
         public static bool ContainsSphere(string name)
         {
             Sphere sphere = _sphereList.Find(s => s.Name == name);
             return sphere != null;
-        }
+				}
+
         public static void AddSphere(Sphere newElement)
         {
-            if (_sphereList.Find(s => s.Name == newElement.Name) == null)
+            if(_sphereList.Find(s => s.Name == newElement.Name) == null)
             {
-                _sphereList.Add(newElement);
+            _sphereList.Add(newElement);
             }
             else
             {
-                throw new BusinessLogicException("Sphere with the same name already exists in the collection");
-            }
-
+            throw new BusinessLogicException("Sphere with the same name already exists in the collection");
+            }       
         }
 
         public static Sphere GetSphere(string name)
