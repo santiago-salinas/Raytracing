@@ -45,10 +45,16 @@ namespace UI
 
             try
             {
-                createdUser.CheckIfUserNameIsValid(username);
+                createdUser.CheckIfUserNameIsValid(username);                
             }catch(ArgumentException ex)
             {
                 usernameStatusLabel.Text = ex.Message;
+                usernameFieldIsCorrect = false;
+            }
+
+            if (UserCollection.ContainsUser(username))
+            {
+                usernameStatusLabel.Text = "User with that name already exists";
                 usernameFieldIsCorrect = false;
             }
 

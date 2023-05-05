@@ -16,18 +16,21 @@ namespace UI.Tabs
     public partial class ScenesTab : Form
     {
         private User loggedUser;
-        public Button newSceneButton;
-        public ScenesTab(User loggedUser)
+        //public Button newSceneButton;
+        public SceneEditDialog sceneEditDialog;
+        private MainPage mainPage;
+        public ScenesTab(User loggedUser,MainPage mainPage)
         {
             InitializeComponent();
             this.loggedUser = loggedUser;
             loadScenes();
-            newSceneButton = addSceneButton;
-           
+            //newSceneButton = addSceneButton;
+            this.mainPage = mainPage;
         }
 
-        private void loadScenes()
+        public void loadScenes()
         {
+            flowLayoutPanel.Controls.Clear();
             List<Scene> sceneList = SceneCollection.GetScenesFromUser(loggedUser);
             foreach (Scene elem in sceneList)
             {
@@ -42,21 +45,45 @@ namespace UI.Tabs
             {
                 Name = "Blank scene",
                 CreationDate = DateTime.Now,
-                LastModificationDate = DateTime.Now,    
+                LastModificationDate = DateTime.Now,
+                Owner = loggedUser
             };
-            
-            SceneEditDialog newSceneDialog = new SceneEditDialog(newScene,loggedUser);            
-            DialogResult result = newSceneDialog.ShowDialog();
 
-            if (result == DialogResult.OK)
-            {
-                SceneCard newSceneCard = new SceneCard(newScene);
-                SceneCollection.AddScene(newScene);
-                flowLayoutPanel.Controls.Add(newSceneCard);
-            }
+            //SceneEditDialog newSceneDialog = new SceneEditDialog(newScene,loggedUser);            
+            // DialogResult result = newSceneDialog.ShowDialog();
 
+            /* if (result == DialogResult.OK)
+             {
+                 SceneCard newSceneCard = new SceneCard(newScene);
+                 SceneCollection.AddScene(newScene);
+                 flowLayoutPanel.Controls.Add(newSceneCard);
+             }*/
+
+            loadSceneEditTab(null);
         }
 
+        public void loadSceneEditTab(Scene scene)
+        {
+            if (sceneEditDialog == null)
+            {
+                SceneEditDialog sceneEditDialog = new SceneEditDialog(scene, loggedUser);
+                sceneEditDialog.scenesTab = this;
+                sceneEditDialog.FormClosed += editSceneClosed;
+                sceneEditDialog.MdiParent = mainPage;
+                sceneEditDialog.Dock = DockStyle.Fill;
+                sceneEditDialog.Show();
+            }
+            else
+            {
+                sceneEditDialog.loadDataFromScene(scene);
+                sceneEditDialog.Activate();
+            }
+        }
+
+        public void editSceneClosed(object sender, EventArgs e)
+        {
+            sceneEditDialog = null;
+        }
 
     }
 }

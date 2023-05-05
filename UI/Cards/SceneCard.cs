@@ -8,11 +8,13 @@ namespace UI.Cards
     public partial class SceneCard : UserControl
     {
         private Scene thisScene;
+        
         public SceneCard(Scene scene)
         {
             InitializeComponent();
             thisScene = scene;
             loadData();
+            
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -23,14 +25,17 @@ namespace UI.Cards
 
         private void editButton_Click(object sender, EventArgs e)
         {
-            
-            SceneEditDialog newSceneDialog = new SceneEditDialog(thisScene,thisScene.Owner);            
-            DialogResult result = newSceneDialog.ShowDialog();
 
-            if (result == DialogResult.OK)
-            {
-                loadData();
-            }
+            /* SceneEditDialog newSceneDialog = new SceneEditDialog(thisScene,thisScene.Owner);            
+             DialogResult result = newSceneDialog.ShowDialog();
+
+             if (result == DialogResult.OK)
+             {
+                 loadData();
+             }*/
+
+            ScenesTab scenesTab = this.Parent.Parent as ScenesTab;
+            scenesTab.loadSceneEditTab(thisScene);
         }
 
         private void loadData()
