@@ -1,6 +1,6 @@
 ﻿namespace UI.Tabs
 {
-    partial class SceneEditDialog
+    partial class EditSceneTab
     {
         /// <summary>
         /// Required designer variable.
@@ -29,13 +29,10 @@
         private void InitializeComponent()
         {
             this.saveButton = new System.Windows.Forms.Button();
-            this.nameLabel = new System.Windows.Forms.Label();
             this.lastModificationLabel = new System.Windows.Forms.Label();
             this.lookFromLabel = new System.Windows.Forms.Label();
             this.lookAtLabel = new System.Windows.Forms.Label();
             this.fovLabel = new System.Windows.Forms.Label();
-            this.lookFromEditButton = new System.Windows.Forms.Button();
-            this.lookAtEditButton = new System.Windows.Forms.Button();
             this.fovInput = new System.Windows.Forms.NumericUpDown();
             this.availableModelsPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.positionedModelsPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -48,6 +45,8 @@
             this.nameTextbox = new System.Windows.Forms.TextBox();
             this.nameStatusLabel = new System.Windows.Forms.Label();
             this.renderPanel = new System.Windows.Forms.Panel();
+            this.lookFromButton = new System.Windows.Forms.Button();
+            this.lookAtButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.fovInput)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,16 +60,6 @@
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
-            // 
-            // nameLabel
-            // 
-            this.nameLabel.AutoSize = true;
-            this.nameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameLabel.Location = new System.Drawing.Point(1040, 52);
-            this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(147, 54);
-            this.nameLabel.TabIndex = 1;
-            this.nameLabel.Text = "label1";
             // 
             // lastModificationLabel
             // 
@@ -96,7 +85,7 @@
             // 
             this.lookAtLabel.AutoSize = true;
             this.lookAtLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lookAtLabel.Location = new System.Drawing.Point(189, 135);
+            this.lookAtLabel.Location = new System.Drawing.Point(214, 135);
             this.lookAtLabel.Name = "lookAtLabel";
             this.lookAtLabel.Size = new System.Drawing.Size(51, 16);
             this.lookAtLabel.TabIndex = 5;
@@ -106,35 +95,16 @@
             // 
             this.fovLabel.AutoSize = true;
             this.fovLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fovLabel.Location = new System.Drawing.Point(323, 135);
+            this.fovLabel.Location = new System.Drawing.Point(394, 135);
             this.fovLabel.Name = "fovLabel";
             this.fovLabel.Size = new System.Drawing.Size(34, 16);
             this.fovLabel.TabIndex = 6;
             this.fovLabel.Text = "FOV";
             // 
-            // lookFromEditButton
-            // 
-            this.lookFromEditButton.Location = new System.Drawing.Point(44, 170);
-            this.lookFromEditButton.Name = "lookFromEditButton";
-            this.lookFromEditButton.Size = new System.Drawing.Size(75, 23);
-            this.lookFromEditButton.TabIndex = 7;
-            this.lookFromEditButton.Text = "button1";
-            this.lookFromEditButton.UseVisualStyleBackColor = true;
-            this.lookFromEditButton.Click += new System.EventHandler(this.lookFromEditButton_Click);
-            // 
-            // lookAtEditButton
-            // 
-            this.lookAtEditButton.Location = new System.Drawing.Point(180, 170);
-            this.lookAtEditButton.Name = "lookAtEditButton";
-            this.lookAtEditButton.Size = new System.Drawing.Size(75, 23);
-            this.lookAtEditButton.TabIndex = 8;
-            this.lookAtEditButton.Text = "button2";
-            this.lookAtEditButton.UseVisualStyleBackColor = true;
-            this.lookAtEditButton.Click += new System.EventHandler(this.lookAtEditButton_Click);
-            // 
             // fovInput
             // 
-            this.fovInput.Location = new System.Drawing.Point(304, 173);
+            this.fovInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fovInput.Location = new System.Drawing.Point(379, 167);
             this.fovInput.Maximum = new decimal(new int[] {
             160,
             0,
@@ -146,7 +116,7 @@
             0,
             0});
             this.fovInput.Name = "fovInput";
-            this.fovInput.Size = new System.Drawing.Size(120, 20);
+            this.fovInput.Size = new System.Drawing.Size(120, 26);
             this.fovInput.TabIndex = 9;
             this.fovInput.Value = new decimal(new int[] {
             30,
@@ -257,12 +227,36 @@
             this.renderPanel.Size = new System.Drawing.Size(617, 385);
             this.renderPanel.TabIndex = 21;
             // 
-            // SceneEditDialog
+            // lookFromButton
+            // 
+            this.lookFromButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lookFromButton.Location = new System.Drawing.Point(37, 161);
+            this.lookFromButton.Name = "lookFromButton";
+            this.lookFromButton.Size = new System.Drawing.Size(101, 38);
+            this.lookFromButton.TabIndex = 22;
+            this.lookFromButton.Text = "(0,0,0)";
+            this.lookFromButton.UseVisualStyleBackColor = true;
+            this.lookFromButton.Click += new System.EventHandler(this.lookFromEditButton_Click);
+            // 
+            // lookAtButton
+            // 
+            this.lookAtButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lookAtButton.Location = new System.Drawing.Point(191, 160);
+            this.lookAtButton.Name = "lookAtButton";
+            this.lookAtButton.Size = new System.Drawing.Size(101, 38);
+            this.lookAtButton.TabIndex = 23;
+            this.lookAtButton.Text = "(0,0,0)";
+            this.lookAtButton.UseVisualStyleBackColor = true;
+            this.lookAtButton.Click += new System.EventHandler(this.lookAtButton_Click);
+            // 
+            // EditSceneTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 761);
             this.ControlBox = false;
+            this.Controls.Add(this.lookAtButton);
+            this.Controls.Add(this.lookFromButton);
             this.Controls.Add(this.renderPanel);
             this.Controls.Add(this.nameStatusLabel);
             this.Controls.Add(this.nameTextbox);
@@ -275,16 +269,13 @@
             this.Controls.Add(this.positionedModelsPanel);
             this.Controls.Add(this.availableModelsPanel);
             this.Controls.Add(this.fovInput);
-            this.Controls.Add(this.lookAtEditButton);
-            this.Controls.Add(this.lookFromEditButton);
             this.Controls.Add(this.fovLabel);
             this.Controls.Add(this.lookAtLabel);
             this.Controls.Add(this.lookFromLabel);
             this.Controls.Add(this.lastModificationLabel);
-            this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.saveButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "SceneEditDialog";
+            this.Name = "EditSceneTab";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "sceneEditTab";
             ((System.ComponentModel.ISupportInitialize)(this.fovInput)).EndInit();
@@ -296,13 +287,10 @@
         #endregion
 
         private System.Windows.Forms.Button saveButton;
-        private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.Label lastModificationLabel;
         private System.Windows.Forms.Label lookFromLabel;
         private System.Windows.Forms.Label lookAtLabel;
         private System.Windows.Forms.Label fovLabel;
-        private System.Windows.Forms.Button lookFromEditButton;
-        private System.Windows.Forms.Button lookAtEditButton;
         private System.Windows.Forms.NumericUpDown fovInput;
         private System.Windows.Forms.FlowLayoutPanel availableModelsPanel;
         private System.Windows.Forms.FlowLayoutPanel positionedModelsPanel;
@@ -315,5 +303,7 @@
         private System.Windows.Forms.TextBox nameTextbox;
         private System.Windows.Forms.Label nameStatusLabel;
         private System.Windows.Forms.Panel renderPanel;
+        private System.Windows.Forms.Button lookFromButton;
+        private System.Windows.Forms.Button lookAtButton;
     }
 }

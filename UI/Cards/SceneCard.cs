@@ -13,8 +13,7 @@ namespace UI.Cards
         {
             InitializeComponent();
             thisScene = scene;
-            loadData();
-            
+            loadData();            
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -25,15 +24,6 @@ namespace UI.Cards
 
         private void editButton_Click(object sender, EventArgs e)
         {
-
-            /* SceneEditDialog newSceneDialog = new SceneEditDialog(thisScene,thisScene.Owner);            
-             DialogResult result = newSceneDialog.ShowDialog();
-
-             if (result == DialogResult.OK)
-             {
-                 loadData();
-             }*/
-
             ScenesTab scenesTab = this.Parent.Parent as ScenesTab;
             scenesTab.loadSceneEditTab(thisScene);
         }
@@ -41,7 +31,7 @@ namespace UI.Cards
         private void loadData()
         {
             nameLabel.Text = thisScene.Name;
-            //lastModificationLabel += thisScene.LastModificationDate.ToString();
+            lastModificationLabel.Text += thisScene.LastModificationDate.ToString("f");
             if(thisScene.Preview == null)
             {
                 previewBox.Image = Properties.Resources.no_img_placeholder;

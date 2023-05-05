@@ -13,13 +13,15 @@ using UI.Cards;
 
 namespace UI.Tabs
 {
-    public partial class SceneEditDialog : Form
+    public partial class EditSceneTab : Form
     {
         public Scene scene;
         private User loggedUser;
         public ScenesTab scenesTab;
         private bool isNewScene;
-        public SceneEditDialog(Scene providedScene, User providedUser)
+
+        private CameraDTO sceneCamera;
+        public EditSceneTab(Scene providedScene, User providedUser)
         {
             InitializeComponent();
             loggedUser = providedUser;
@@ -31,40 +33,76 @@ namespace UI.Tabs
 
         private Scene createNewScene()
         {
+            CameraDTO defaultCameraValues = new CameraDTO()
+            {
+                LookFrom = new Vector(0,2,0),
+                LookAt = new Vector(0,2,5),
+                Up = new Vector(0, 1, 0),
+                FieldOfView = 30,                
+                MaxDepth = 50,
+                ResolutionX = 700,
+                ResolutionY = 400,
+                SamplesPerPixel = 50
+            };
+
             Scene newScene = new Scene()
             {
                 Owner = loggedUser,
                 CreationDate = DateTime.Now,
                 LastModificationDate = DateTime.Now,
-            };            
+                CameraDTO = defaultCameraValues,
+            };
+            
             return newScene;
         }
         public void loadDataFromScene(Scene providedScene)
         {
  
-                scene = providedScene;
-                nameLabel.Text = providedScene.Name;
-                nameTextbox.Text = providedScene.Name;
-                //lastModificationLabel += scene.LastModificationDate.ToString();
-                loadPositionedModels();
-            
+            scene = providedScene;               
+            nameTextbox.Text = providedScene.Name;
+            sceneCamera = providedScene.CameraDTO;
+            Vector lookFrom = sceneCamera.LookFrom;
+            Vector lookAt = sceneCamera.LookAt;
+            int fieldOfView = sceneCamera.FieldOfView;
+            editLookFromButtonText(lookFrom);
+            editLookAtButtonText(lookAt);  
+            lastModificationLabel.Text += scene.LastModificationDate.ToString("f");
+            loadPositionedModels();            
         }
         private void lookFromEditButton_Click(object sender, EventArgs e)
         {
-            /*Vector providedVector = new Vector();
-            EditVector editVectorDialog = new EditVector(providedVector);
             
-            if (editVectorDialog.ShowDialog() == DialogResult.OK)
+            EditVectorDialog editVectorDialog = new EditVectorDialog(sceneCamera.LookFrom);
+            editVectorDialog.ShowDialog();  
+            DialogResult result = editVectorDialog.DialogResult;
+
+            if(result == DialogResult.OK)
             {
-                lookFromEditButton.Text = "";
-            }*/
+                editLookFromButtonText(sceneCamera.LookFrom);
+            } 
         }
 
-        private void lookAtEditButton_Click(object sender, EventArgs e)
+        private void editLookFromButtonText(Vector lookFromValues)
         {
-
+            lookFromButton.Text = "(" + lookFromValues.FirstValue + "," + lookFromValues.SecondValue + "," + lookFromValues.ThirdValue + ")";
         }
 
+        private void lookAtButton_Click(object sender, EventArgs e)
+        {
+            EditVectorDialog editVectorDialog = new EditVectorDialog(sceneCamera.LookAt);
+            editVectorDialog.ShowDialog();
+            DialogResult result = editVectorDialog.DialogResult;
+
+            if (result == DialogResult.OK)
+            {
+                editLookAtButtonText(sceneCamera.LookAt);
+            }
+        }
+
+        private void editLookAtButtonText(Vector lookAtValues)
+        {
+            lookAtButton.Text = "(" + lookAtValues.FirstValue + "," + lookAtValues.SecondValue + "," + lookAtValues.ThirdValue + ")";
+        }
         private void saveButton_Click(object sender, EventArgs e)
         {
             nameStatusLabel.Text = string.Empty;
@@ -140,13 +178,15 @@ namespace UI.Tabs
 
         private void renderButton_Click(object sender, EventArgs e)
         {
-            Vector origin = new Vector(4, 2, 8);
-            Vector lookAt = new Vector(0, 0.5, -2);
-            Vector vectorUp = new Vector(0, 1, 0);
-            int samplesPerPixel = 10;
-            int depth = 50;
+            //Vector origin = new Vector(4, 2, 8);
+            //Vector lookAt = new Vector(0, 0.5, -2);
+            //Vector vectorUp = new Vector(0, 1, 0);
+            //int samplesPerPixel = 10;
+            //int depth = 50;
 
-            CameraDTO dto = new CameraDTO()
+
+
+            /*CameraDTO dto = new CameraDTO()
             {
                 LookFrom = origin,
                 LookAt = lookAt,
@@ -156,13 +196,15 @@ namespace UI.Tabs
                 ResolutionY = 400,
                 SamplesPerPixel = samplesPerPixel,
                 MaxDepth = depth,
-            };
+            };*/
+            renderPanel.Controls.Clear();
 
-            Camera camera = new Camera(dto);
+            Camera camera = new Camera(scene.CameraDTO);
             Motor motomoto = new Motor(scene, camera);
             PPM ppm = motomoto.render();
 
             renderPanel.Controls.Add(new PPMViewer(ppm));
         }
+
     }
 }

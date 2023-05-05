@@ -17,7 +17,7 @@ namespace UI.Tabs
     {
         private User loggedUser;
         //public Button newSceneButton;
-        public SceneEditDialog sceneEditDialog;
+        public EditSceneTab sceneEditDialog;
         private MainPage mainPage;
         public ScenesTab(User loggedUser,MainPage mainPage)
         {
@@ -66,7 +66,7 @@ namespace UI.Tabs
         {
             if (sceneEditDialog == null)
             {
-                SceneEditDialog sceneEditDialog = new SceneEditDialog(scene, loggedUser);
+                EditSceneTab sceneEditDialog = new EditSceneTab(scene, loggedUser);
                 sceneEditDialog.scenesTab = this;
                 sceneEditDialog.FormClosed += editSceneClosed;
                 sceneEditDialog.MdiParent = mainPage;

@@ -8,13 +8,13 @@ namespace BusinessLogic
         private List<PositionedModel> _positionedModellList;
         private string _name;
 
-        private User _owner;
-        private PPM _preview;
+        //private User _owner;
+        //private PPM _preview;
+        // CameraDTO _cameraDTO;
 
         public Scene()
         {
             _positionedModellList = new List<PositionedModel>();
-
         }
 
 
@@ -35,19 +35,23 @@ namespace BusinessLogic
 
         public User Owner
         {
-            get { return _owner; }
-            set { _owner = value; }
+            get;
+            set;
         }
 
         public PPM Preview
         {
-            get { return _preview; }
-            set { _preview = value; }
+            get;
+            set;
         }
-
         public List<PositionedModel> PositionedModels
         {
             get { return _positionedModellList; }
+        }
+
+        public CameraDTO CameraDTO
+        {
+            set; get;
         }
 
         private void CheckIfStringNull(string value)
