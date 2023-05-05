@@ -37,7 +37,7 @@ namespace UI
 
             Sphere sphere1 = new Sphere("Sphere 1", 2.5f,user1);
             Sphere sphere2 = new Sphere("Sphere 2", 3.0f,user2);
-            Sphere sphere3 = new Sphere("Sphere 3", 1.8f,user3);
+            Sphere sphere3 = new Sphere("Sphere 3", 1000f,user3);
 
             SphereCollection.AddSphere(sphere1);
             SphereCollection.AddSphere(sphere2);
@@ -45,7 +45,7 @@ namespace UI
 
             Color color1 = new Color(0.5,1,0.3);
             Color color2 = new Color(1,0.5,1);
-            Color color3 = new Color(0.2, 0.63, 0.16);
+            Color color3 = new Color(1,1,1);
             Lambertian lambertian1 = new Lambertian("Lambertian 1", color1,user1);
             Lambertian lambertian2 = new Lambertian("Lambertian 2", color2,user2);
             Lambertian lambertian3 = new Lambertian("Lambertian 3", color3,user1);
@@ -54,6 +54,8 @@ namespace UI
             LambertianCollection.AddLambertian(lambertian2);
 
             Model model1 = new Model("Model 1",sphere1,lambertian1,user1);
+            Model model2 = new Model("Model 2", sphere2, lambertian2, user1);
+            Model floor = new Model("Floor", sphere3, lambertian3,user1);
             ModelCollection.AddModel(model1);
 
             CameraDTO defaultCameraValues = new CameraDTO()
@@ -61,16 +63,16 @@ namespace UI
                 LookFrom = new Vector(0, 2, 0),
                 LookAt = new Vector(0, 2, 5),
                 Up = new Vector(0, 1, 0),
-                FieldOfView = 30,
+                FieldOfView = 120,
                 MaxDepth = 50,
                 ResolutionX = 650,
                 ResolutionY = 375,
-                SamplesPerPixel = 50
+                SamplesPerPixel = 25
             };
 
             Scene scene1 = new Scene()
             {
-                Name = "Scene 1",
+                Name = "Cantu balls",
                 LastModificationDate = DateTime.Now,
                 LastRenderDate = DateTime.Now,
                 Owner = user1,
@@ -82,6 +84,18 @@ namespace UI
                 PositionedModelModel = model1,
                 PositionedModelPosition = new Vector(1, 1, 1)
             });
+            scene1.AddPositionedModel(new PositionedModel()
+            {
+                PositionedModelModel = model2,
+                PositionedModelPosition = new Vector(1,3,1)
+            });
+            scene1.AddPositionedModel(new PositionedModel()
+            {
+                PositionedModelModel = floor,
+                PositionedModelPosition = new Vector(1,-1003,1)
+            });
+                
+            
         }
 
 

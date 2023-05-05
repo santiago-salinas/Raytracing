@@ -1,20 +1,30 @@
-﻿using BusinessLogic;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using BusinessLogic;
+using UI.Dialogs;
 using UI.Tabs;
 
 namespace UI.Cards
 {
-    public partial class ModelCard : UserControl
+    public partial class EditSceneModelCard : UserControl
     {
+        private Scene scene;
         private Model model;
-        public ModelCard(Model model)
+        public EditSceneModelCard(Scene providedScene, Model providedModel)
         {
             InitializeComponent();
-            this.model = model;
-            modelNameLabel.Text = model.Name;
+            model = providedModel;
+            scene = providedScene;
             
+            modelNameLabel.Text = model.Name;
+
             string shapeName = model.ModelShape.Name;
             shapeNameLabel.Text += shapeName;
 
@@ -24,16 +34,28 @@ namespace UI.Cards
             loadPreview();
         }
 
-        private void deleteButton_Click(object sender, EventArgs e)
+        private void addButton_Click(object sender, EventArgs e)
         {
-            try
+            Vector position = new Vector()
             {
-                ModelCollection.RemoveModel(model.Name, model.Owner);
-                this.Parent.Controls.Remove(this);
-            }
-            catch (BusinessLogicException ex)
+                FirstValue = 0,
+                SecondValue = 0,
+                ThirdValue = 0,
+            };
+            EditVectorDialog editVectorDialog = new EditVectorDialog(position, "Position");
+            editVectorDialog.ShowDialog();
+            DialogResult result = editVectorDialog.DialogResult;
+
+            if (result == DialogResult.OK)
             {
-                deleteLabel.Visible = true;
+                PositionedModel positionedModel = new PositionedModel()
+                {
+                    PositionedModelModel = model,
+                    PositionedModelPosition = position
+                };
+                scene.AddPositionedModel(positionedModel);
+                EditSceneTab editSceneTab = (EditSceneTab)Parent.Parent;
+                editSceneTab.loadPositionedModels();
             }
         }
 
@@ -41,10 +63,11 @@ namespace UI.Cards
         {
             PPM preview = model.Preview;
 
-            if(preview == null) {
+            if (preview == null)
+            {
                 Image defaultImage = Properties.Resources.sphereImage;
                 previewBox.Image = defaultImage;
-                
+
                 Panel coloredBox = new Panel();
 
                 BusinessLogic.Color materialColor = model.ModelColor.Color;

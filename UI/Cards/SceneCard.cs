@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Forms;
 using BusinessLogic;
 using UI.Tabs;
@@ -31,7 +32,7 @@ namespace UI.Cards
         private void loadData()
         {
             nameLabel.Text = thisScene.Name;
-            lastModificationLabel.Text += thisScene.LastModificationDate.ToString("f");
+            lastModificationLabel.Text += thisScene.LastModificationDate.ToString("f", new CultureInfo("en-US"));
             if(thisScene.Preview == null)
             {
                 PictureBox pictureBox = new PictureBox();
