@@ -34,9 +34,10 @@
             // 
             // pictureBox
             // 
-            this.pictureBox.Location = new System.Drawing.Point(52, 18);
+            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox.Location = new System.Drawing.Point(0, 0);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(400, 393);
+            this.pictureBox.Size = new System.Drawing.Size(508, 468);
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
             // 

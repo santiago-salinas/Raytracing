@@ -32,8 +32,7 @@
             this.lastModificationLabel = new System.Windows.Forms.Label();
             this.deleteButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
-            this.previewBox = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.previewBox)).BeginInit();
+            this.previewPanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // nameLabel
@@ -80,38 +79,34 @@
             this.editButton.UseVisualStyleBackColor = true;
             this.editButton.Click += new System.EventHandler(this.editButton_Click);
             // 
-            // previewBox
+            // previewPanel
             // 
-            this.previewBox.InitialImage = global::UI.Properties.Resources.no_img_placeholder;
-            this.previewBox.Location = new System.Drawing.Point(29, 28);
-            this.previewBox.Name = "previewBox";
-            this.previewBox.Size = new System.Drawing.Size(283, 183);
-            this.previewBox.TabIndex = 0;
-            this.previewBox.TabStop = false;
+            this.previewPanel.Location = new System.Drawing.Point(27, 28);
+            this.previewPanel.Name = "previewPanel";
+            this.previewPanel.Size = new System.Drawing.Size(295, 170);
+            this.previewPanel.TabIndex = 10;
             // 
             // SceneCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.previewPanel);
             this.Controls.Add(this.editButton);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.lastModificationLabel);
             this.Controls.Add(this.nameLabel);
-            this.Controls.Add(this.previewBox);
             this.Name = "SceneCard";
             this.Size = new System.Drawing.Size(965, 240);
-            ((System.ComponentModel.ISupportInitialize)(this.previewBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox previewBox;
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.Label lastModificationLabel;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button editButton;
+        private System.Windows.Forms.Panel previewPanel;
     }
 }

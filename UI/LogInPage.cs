@@ -63,8 +63,8 @@ namespace UI
                 Up = new Vector(0, 1, 0),
                 FieldOfView = 30,
                 MaxDepth = 50,
-                ResolutionX = 700,
-                ResolutionY = 400,
+                ResolutionX = 650,
+                ResolutionY = 375,
                 SamplesPerPixel = 50
             };
 

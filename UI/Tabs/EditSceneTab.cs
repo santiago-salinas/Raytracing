@@ -40,8 +40,8 @@ namespace UI.Tabs
                 Up = new Vector(0, 1, 0),
                 FieldOfView = 30,                
                 MaxDepth = 50,
-                ResolutionX = 700,
-                ResolutionY = 400,
+                ResolutionX = 650,
+                ResolutionY = 375,
                 SamplesPerPixel = 50
             };
 
@@ -67,6 +67,7 @@ namespace UI.Tabs
             editLookFromButtonText(lookFrom);
             editLookAtButtonText(lookAt);  
             lastModificationLabel.Text += scene.LastModificationDate.ToString("f");
+            //renderPanel.Controls.Add(new PPMViewer(scene.Preview));
             loadPositionedModels();            
         }
         private void lookFromEditButton_Click(object sender, EventArgs e)
@@ -79,6 +80,7 @@ namespace UI.Tabs
             if(result == DialogResult.OK)
             {
                 editLookFromButtonText(sceneCamera.LookFrom);
+                notifyThatSeneWasModified();
             } 
         }
 
@@ -96,6 +98,7 @@ namespace UI.Tabs
             if (result == DialogResult.OK)
             {
                 editLookAtButtonText(sceneCamera.LookAt);
+                notifyThatSeneWasModified();
             }
         }
 
@@ -178,33 +181,27 @@ namespace UI.Tabs
 
         private void renderButton_Click(object sender, EventArgs e)
         {
-            //Vector origin = new Vector(4, 2, 8);
-            //Vector lookAt = new Vector(0, 0.5, -2);
-            //Vector vectorUp = new Vector(0, 1, 0);
-            //int samplesPerPixel = 10;
-            //int depth = 50;
-
-
-
-            /*CameraDTO dto = new CameraDTO()
-            {
-                LookFrom = origin,
-                LookAt = lookAt,
-                Up = vectorUp,
-                FieldOfView = 40,
-                ResolutionX = 700,
-                ResolutionY = 400,
-                SamplesPerPixel = samplesPerPixel,
-                MaxDepth = depth,
-            };*/
+            DateTime newRenderDate = DateTime.Now;
+            scene.LastRenderDate = newRenderDate;
+            lastRenderLabel.Text = "Last rendered: " + newRenderDate.ToString("f");
             renderPanel.Controls.Clear();
+            outdatedStatusLabel.Visible = false;
+            
 
             Camera camera = new Camera(scene.CameraDTO);
             Motor motomoto = new Motor(scene, camera);
             PPM ppm = motomoto.render();
+            scene.Preview = ppm;
 
             renderPanel.Controls.Add(new PPMViewer(ppm));
         }
 
+        private void notifyThatSeneWasModified()
+        {
+            DateTime newModificationDate = DateTime.Now;
+            scene.LastModificationDate = newModificationDate;
+            lastModificationLabel.Text = "Last modification date: " + newModificationDate.ToString("f");
+            outdatedStatusLabel.Visible = true;
+        }
     }
 }

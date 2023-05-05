@@ -222,9 +222,11 @@
             // 
             // renderPanel
             // 
-            this.renderPanel.Location = new System.Drawing.Point(397, 269);
+            this.renderPanel.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.renderPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.renderPanel.Location = new System.Drawing.Point(390, 266);
             this.renderPanel.Name = "renderPanel";
-            this.renderPanel.Size = new System.Drawing.Size(617, 385);
+            this.renderPanel.Size = new System.Drawing.Size(650, 375);
             this.renderPanel.TabIndex = 21;
             // 
             // lookFromButton

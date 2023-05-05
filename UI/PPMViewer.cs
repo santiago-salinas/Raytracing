@@ -19,6 +19,7 @@ namespace UI
         {
             InitializeComponent();
             ppm = providedPPM;
+            this.Dock = DockStyle.Fill;
             render();
         }
 

@@ -34,8 +34,16 @@ namespace UI.Cards
             lastModificationLabel.Text += thisScene.LastModificationDate.ToString("f");
             if(thisScene.Preview == null)
             {
-                previewBox.Image = Properties.Resources.no_img_placeholder;
-                previewBox.SizeMode = PictureBoxSizeMode.Zoom;
+                PictureBox pictureBox = new PictureBox();
+                pictureBox.Image = Properties.Resources.no_img_placeholder;
+                pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+                previewPanel.Controls.Add(pictureBox);
+                pictureBox.Dock = DockStyle.Fill;
+            }
+            else
+            {
+                previewPanel.Controls.Clear();
+                previewPanel.Controls.Add(new PPMViewer(thisScene.Preview));
             }            
         }
     }
