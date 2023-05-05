@@ -14,9 +14,10 @@ namespace UI.Dialogs
     public partial class EditVectorDialog : Form
     {
         public Vector vector;
-        public EditVectorDialog(Vector providedVector)
+        public EditVectorDialog(Vector providedVector, string title)
         {
             InitializeComponent();
+            titleLabel.Text = title;
             vector = providedVector;
             xValueInput.Value = (decimal)vector.FirstValue;
             yValueInput.Value = (decimal)vector.SecondValue;

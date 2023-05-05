@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cards\EditSceneModelCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Cards\EditSceneModelCard.Designer.cs">
+      <DependentUpon>EditSceneModelCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cards\LambertianCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -159,6 +165,9 @@
     <Compile Include="Tabs\ShapesTab.Designer.cs">
       <DependentUpon>ShapesTab.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Cards\EditSceneModelCard.resx">
+      <DependentUpon>EditSceneModelCard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Cards\LambertianCard.resx">
       <DependentUpon>LambertianCard.cs</DependentUpon>
     </EmbeddedResource>

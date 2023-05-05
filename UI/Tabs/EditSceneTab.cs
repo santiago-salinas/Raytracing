@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UI.Dialogs;
 using UI.Cards;
+using System.Globalization;
 
 namespace UI.Tabs
 {
@@ -64,47 +65,37 @@ namespace UI.Tabs
             Vector lookFrom = sceneCamera.LookFrom;
             Vector lookAt = sceneCamera.LookAt;
             int fieldOfView = sceneCamera.FieldOfView;
-            editLookFromButtonText(lookFrom);
-            editLookAtButtonText(lookAt);  
-            lastModificationLabel.Text += scene.LastModificationDate.ToString("f");
+            lookFromButton.Text = lookFrom.ToString();
+            lookAtButton.Text = lookAt.ToString();
+            lastModificationLabel.Text += scene.LastModificationDate.ToString("f", new CultureInfo("en-US"));
+            fovInput.Value = fieldOfView;
             //renderPanel.Controls.Add(new PPMViewer(scene.Preview));
             loadPositionedModels();            
         }
         private void lookFromEditButton_Click(object sender, EventArgs e)
         {
             
-            EditVectorDialog editVectorDialog = new EditVectorDialog(sceneCamera.LookFrom);
+            EditVectorDialog editVectorDialog = new EditVectorDialog(sceneCamera.LookFrom, "Look from");
             editVectorDialog.ShowDialog();  
             DialogResult result = editVectorDialog.DialogResult;
 
             if(result == DialogResult.OK)
             {
-                editLookFromButtonText(sceneCamera.LookFrom);
+                lookFromButton.Text = sceneCamera.LookFrom.ToString();                
                 notifyThatSeneWasModified();
             } 
         }
-
-        private void editLookFromButtonText(Vector lookFromValues)
-        {
-            lookFromButton.Text = "(" + lookFromValues.FirstValue + "," + lookFromValues.SecondValue + "," + lookFromValues.ThirdValue + ")";
-        }
-
         private void lookAtButton_Click(object sender, EventArgs e)
         {
-            EditVectorDialog editVectorDialog = new EditVectorDialog(sceneCamera.LookAt);
+            EditVectorDialog editVectorDialog = new EditVectorDialog(sceneCamera.LookAt,"Look at");
             editVectorDialog.ShowDialog();
             DialogResult result = editVectorDialog.DialogResult;
 
             if (result == DialogResult.OK)
             {
-                editLookAtButtonText(sceneCamera.LookAt);
+                lookAtButton.Text = sceneCamera.LookAt.ToString();
                 notifyThatSeneWasModified();
             }
-        }
-
-        private void editLookAtButtonText(Vector lookAtValues)
-        {
-            lookAtButton.Text = "(" + lookAtValues.FirstValue + "," + lookAtValues.SecondValue + "," + lookAtValues.ThirdValue + ")";
         }
         private void saveButton_Click(object sender, EventArgs e)
         {
@@ -158,19 +149,24 @@ namespace UI.Tabs
             return scene.Name != nameTextbox.Text;
         }
 
+        private void fovWasChanged(object sender, EventArgs e)
+        {
+            scene.CameraDTO.FieldOfView = (int)fovInput.Value;
+        }
         private void loadAvailableModels()
         {
+            availableModelsPanel.Controls.Clear();
             List<Model> list = ModelCollection.GetModelsFromUser(loggedUser);
             foreach (Model elem in list)
             {
-                ModelCard modelCard = new ModelCard(elem);
+                EditSceneModelCard modelCard = new EditSceneModelCard(scene,elem);
                 availableModelsPanel.Controls.Add(modelCard);
             }
         }
 
-        private void loadPositionedModels()
+        public void loadPositionedModels()
         {
-           
+            positionedModelsPanel.Controls.Clear();  
             List<PositionedModel> list = scene.PositionedModels;
             foreach (PositionedModel elem in list)
             {
@@ -183,7 +179,7 @@ namespace UI.Tabs
         {
             DateTime newRenderDate = DateTime.Now;
             scene.LastRenderDate = newRenderDate;
-            lastRenderLabel.Text = "Last rendered: " + newRenderDate.ToString("f");
+            lastRenderLabel.Text = "Last rendered: " + newRenderDate.ToString("f", new CultureInfo("en-US"));
             renderPanel.Controls.Clear();
             outdatedStatusLabel.Visible = false;
             
@@ -200,8 +196,9 @@ namespace UI.Tabs
         {
             DateTime newModificationDate = DateTime.Now;
             scene.LastModificationDate = newModificationDate;
-            lastModificationLabel.Text = "Last modification date: " + newModificationDate.ToString("f");
+            lastModificationLabel.Text = "Last modification date: " + newModificationDate.ToString("f",new CultureInfo("en-US"));
             outdatedStatusLabel.Visible = true;
         }
+
     }
 }

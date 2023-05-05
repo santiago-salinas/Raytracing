@@ -46,7 +46,7 @@
             this.modelNameLabel.Size = new System.Drawing.Size(86, 31);
             this.modelNameLabel.TabIndex = 1;
             this.modelNameLabel.Text = "label1";
-            this.modelNameLabel.Click += new System.EventHandler(this.modelNameLabel_Click);
+            
             // 
             // shapeNameLabel
             // 
@@ -56,7 +56,7 @@
             this.shapeNameLabel.Size = new System.Drawing.Size(44, 13);
             this.shapeNameLabel.TabIndex = 2;
             this.shapeNameLabel.Text = "Shape: ";
-            this.shapeNameLabel.Click += new System.EventHandler(this.shapeNameLabel_Click);
+            
             // 
             // materialNameLabel
             // 
@@ -66,7 +66,7 @@
             this.materialNameLabel.Size = new System.Drawing.Size(50, 13);
             this.materialNameLabel.TabIndex = 3;
             this.materialNameLabel.Text = "Material: ";
-            this.materialNameLabel.Click += new System.EventHandler(this.materialNameLabel_Click);
+            
             // 
             // deleteButton
             // 
@@ -92,7 +92,7 @@
             this.deleteLabel.TabIndex = 8;
             this.deleteLabel.Text = "* You cannot delete a model that is being used by a scene";
             this.deleteLabel.Visible = false;
-            this.deleteLabel.Click += new System.EventHandler(this.deleteLabel_Click);
+            
             // 
             // previewBox
             // 

@@ -9,7 +9,6 @@ namespace UI
         public LogInPage()
         {
             InitializeComponent();
-            
         }
 
 
