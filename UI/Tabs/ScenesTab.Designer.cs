@@ -46,7 +46,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.LightGray;
             this.pictureBox1.Image = global::UI.Properties.Resources.add;
-            this.pictureBox1.Location = new System.Drawing.Point(424, 52);
+            this.pictureBox1.Location = new System.Drawing.Point(449, 54);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(57, 50);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -59,7 +59,7 @@
             this.addSceneButton.BackColor = System.Drawing.Color.LightGray;
             this.addSceneButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addSceneButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.addSceneButton.Location = new System.Drawing.Point(411, 31);
+            this.addSceneButton.Location = new System.Drawing.Point(425, 31);
             this.addSceneButton.Name = "addSceneButton";
             this.addSceneButton.Size = new System.Drawing.Size(371, 95);
             this.addSceneButton.TabIndex = 5;

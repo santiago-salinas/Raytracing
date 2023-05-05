@@ -26,7 +26,7 @@ namespace UI
         {
             if(scenesTab == null)
             {
-                scenesTab = new ScenesTab(loggedUser);
+                scenesTab = new ScenesTab(loggedUser,this);
                 scenesTab.FormClosed += scenesTabClosed;
                 scenesTab.MdiParent = this;
                 scenesTab.Dock = DockStyle.Fill;

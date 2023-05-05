@@ -46,6 +46,8 @@
             this.sceneLabel = new System.Windows.Forms.Label();
             this.lastRenderLabel = new System.Windows.Forms.Label();
             this.outdatedStatusLabel = new System.Windows.Forms.Label();
+            this.nameTextbox = new System.Windows.Forms.TextBox();
+            this.nameStatusLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fovInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.renderBox)).BeginInit();
             this.SuspendLayout();
@@ -65,7 +67,7 @@
             // 
             this.nameLabel.AutoSize = true;
             this.nameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameLabel.Location = new System.Drawing.Point(144, 43);
+            this.nameLabel.Location = new System.Drawing.Point(1040, 52);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(147, 54);
             this.nameLabel.TabIndex = 1;
@@ -75,7 +77,7 @@
             // 
             this.lastModificationLabel.AutoSize = true;
             this.lastModificationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lastModificationLabel.Location = new System.Drawing.Point(330, 63);
+            this.lastModificationLabel.Location = new System.Drawing.Point(589, 58);
             this.lastModificationLabel.Name = "lastModificationLabel";
             this.lastModificationLabel.Size = new System.Drawing.Size(138, 25);
             this.lastModificationLabel.TabIndex = 2;
@@ -239,12 +241,31 @@
             this.outdatedStatusLabel.Text = "* WARNING: The shown render is OUTDATED";
             this.outdatedStatusLabel.Visible = false;
             // 
+            // nameTextbox
+            // 
+            this.nameTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameTextbox.Location = new System.Drawing.Point(155, 43);
+            this.nameTextbox.Name = "nameTextbox";
+            this.nameTextbox.Size = new System.Drawing.Size(404, 49);
+            this.nameTextbox.TabIndex = 19;
+            // 
+            // nameStatusLabel
+            // 
+            this.nameStatusLabel.AutoSize = true;
+            this.nameStatusLabel.ForeColor = System.Drawing.Color.Red;
+            this.nameStatusLabel.Location = new System.Drawing.Point(155, 99);
+            this.nameStatusLabel.Name = "nameStatusLabel";
+            this.nameStatusLabel.Size = new System.Drawing.Size(0, 13);
+            this.nameStatusLabel.TabIndex = 20;
+            // 
             // SceneEditDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 761);
             this.ControlBox = false;
+            this.Controls.Add(this.nameStatusLabel);
+            this.Controls.Add(this.nameTextbox);
             this.Controls.Add(this.outdatedStatusLabel);
             this.Controls.Add(this.lastRenderLabel);
             this.Controls.Add(this.sceneLabel);
@@ -263,7 +284,7 @@
             this.Controls.Add(this.lastModificationLabel);
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.saveButton);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SceneEditDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "sceneEditTab";
@@ -294,5 +315,7 @@
         private System.Windows.Forms.Label sceneLabel;
         private System.Windows.Forms.Label lastRenderLabel;
         private System.Windows.Forms.Label outdatedStatusLabel;
+        private System.Windows.Forms.TextBox nameTextbox;
+        private System.Windows.Forms.Label nameStatusLabel;
     }
 }

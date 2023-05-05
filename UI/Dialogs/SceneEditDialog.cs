@@ -15,19 +15,40 @@ namespace UI.Tabs
 {
     public partial class SceneEditDialog : Form
     {
-        private Scene scene;
+        public Scene scene;
         private User loggedUser;
+        public ScenesTab scenesTab;
+        private bool isNewScene;
         public SceneEditDialog(Scene providedScene, User providedUser)
         {
-            InitializeComponent();            
-            scene = providedScene;
+            InitializeComponent();
             loggedUser = providedUser;
-            nameLabel.Text = scene.Name;
+            isNewScene = providedScene == null;
+            scene = isNewScene ? createNewScene() : providedScene;
             loadAvailableModels();
-            loadPositionedModels();
-            //lastModificationLabel += scene.LastModificationDate.ToString();
+            loadDataFromScene(scene);           
         }
 
+        private Scene createNewScene()
+        {
+            Scene newScene = new Scene()
+            {
+                Owner = loggedUser,
+                CreationDate = DateTime.Now,
+                LastModificationDate = DateTime.Now,
+            };            
+            return newScene;
+        }
+        public void loadDataFromScene(Scene providedScene)
+        {
+ 
+                scene = providedScene;
+                nameLabel.Text = providedScene.Name;
+                nameTextbox.Text = providedScene.Name;
+                //lastModificationLabel += scene.LastModificationDate.ToString();
+                loadPositionedModels();
+            
+        }
         private void lookFromEditButton_Click(object sender, EventArgs e)
         {
             /*Vector providedVector = new Vector();
@@ -46,12 +67,54 @@ namespace UI.Tabs
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            if (!SceneCollection.ContainsScene(nameLabel.Text, loggedUser))
+            nameStatusLabel.Text = string.Empty;
+            string newName = nameTextbox.Text.Trim();
+            bool endedCorrectly = false;
+            if(newName == "")
             {
-                this.DialogResult = DialogResult.OK;
+                nameStatusLabel.Text = "* Scene's name cannot be blank";
+            }
+            else
+            {
+
+                if (isNewScene)
+                {
+                    if (SceneCollection.ContainsScene(newName, loggedUser))
+                    {
+                        nameStatusLabel.Text = "* User already owns a scene with that name";
+                    }
+                    else
+                    {
+                        scene.Name = newName;
+                        SceneCollection.AddScene(scene);
+                        endedCorrectly = true;
+                    }
+                }
+                else
+                { 
+                    if(nameWasChanged() && SceneCollection.ContainsScene(newName, loggedUser))
+                    {
+                        nameStatusLabel.Text = "* User already owns a scene with that name";
+                    }
+                    else
+                    {
+                        scene.Name = newName;
+                        endedCorrectly= true;
+                    }                
+                }
+                                             
             }
 
-            
+            if (endedCorrectly)
+            {
+                scenesTab.loadScenes();
+                scenesTab.Activate();
+            } 
+        }
+
+        private bool nameWasChanged()
+        {
+            return scene.Name != nameTextbox.Text;
         }
 
         private void loadAvailableModels()
@@ -66,15 +129,14 @@ namespace UI.Tabs
 
         private void loadPositionedModels()
         {
-            if(scene != null)
-            {
+           
                 List<PositionedModel> list = scene.PositionedModels;
                 foreach (PositionedModel elem in list)
                 {
                     PositionedModelCard modelCard = new PositionedModelCard(elem, scene);
                     positionedModelsPanel.Controls.Add(modelCard);
                 }
-            }            
+                       
             
         }
     }
