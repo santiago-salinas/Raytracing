@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Common;
 
 namespace BusinessLogic
 {
@@ -44,6 +45,27 @@ namespace BusinessLogic
             random = new Random();
         }
 
+        private void generatePixel(PPM ppm, int row, int column)
+        {
+            Color pixel;
+
+            for (int sample = 0; sample < SamplesPerPixel; sample++)
+            {
+                double randomU = random.NextDouble();
+                double randomV = random.NextDouble();
+
+                double u = (column + randomU) / ppm.Width;
+                double v = (row + randomV) / ppm.Heigth;
+
+                pixel = shootRay(CameraUsedToRender.GetRay(u, v), MaxDepth);
+
+                AddToPixelBuffer(pixel);
+            }
+
+            pixel = GetAveragePixelAndReset();
+
+            ppm.SavePixel(row, column, pixel);
+        }
 
         public PPM render()
         {
@@ -53,25 +75,7 @@ namespace BusinessLogic
             {
                 for (int column = 0; column < ppm.Width; column++)
                 {
-                    Color pixel;
-
-                    for (int sample = 0; sample < SamplesPerPixel; sample++)
-                    {
-                        double randomU = random.NextDouble();
-                        double randomV = random.NextDouble();
-
-                        double u = (column + randomU) / ppm.Width;
-                        double v = (row + randomV) / ppm.Heigth;
-
-                        pixel = shootRay(CameraUsedToRender.GetRay(u, v), MaxDepth);
-
-                        AddToPixelBuffer(pixel);
-                    }
-
-                    pixel = GetAveragePixelAndReset();
-
-                    ppm.SavePixel(row, column, pixel);
-
+                    generatePixel(ppm, row, column);
                 }
             }
 

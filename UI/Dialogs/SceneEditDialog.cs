@@ -130,14 +130,39 @@ namespace UI.Tabs
         private void loadPositionedModels()
         {
            
-                List<PositionedModel> list = scene.PositionedModels;
-                foreach (PositionedModel elem in list)
-                {
-                    PositionedModelCard modelCard = new PositionedModelCard(elem, scene);
-                    positionedModelsPanel.Controls.Add(modelCard);
-                }
-                       
-            
+            List<PositionedModel> list = scene.PositionedModels;
+            foreach (PositionedModel elem in list)
+            {
+               PositionedModelCard modelCard = new PositionedModelCard(elem, scene);
+               positionedModelsPanel.Controls.Add(modelCard);
+            }                                   
+        }
+
+        private void renderButton_Click(object sender, EventArgs e)
+        {
+            Vector origin = new Vector(4, 2, 8);
+            Vector lookAt = new Vector(0, 0.5, -2);
+            Vector vectorUp = new Vector(0, 1, 0);
+            int samplesPerPixel = 10;
+            int depth = 50;
+
+            CameraDTO dto = new CameraDTO()
+            {
+                LookFrom = origin,
+                LookAt = lookAt,
+                Up = vectorUp,
+                FieldOfView = 40,
+                ResolutionX = 700,
+                ResolutionY = 400,
+                SamplesPerPixel = samplesPerPixel,
+                MaxDepth = depth,
+            };
+
+            Camera camera = new Camera(dto);
+            Motor motomoto = new Motor(scene, camera);
+            PPM ppm = motomoto.render();
+
+            renderPanel.Controls.Add(new PPMViewer(ppm));
         }
     }
 }

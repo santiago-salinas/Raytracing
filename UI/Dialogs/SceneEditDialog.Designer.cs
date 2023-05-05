@@ -41,15 +41,14 @@
             this.positionedModelsPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.availableModelsLabel = new System.Windows.Forms.Label();
             this.positionedModelsLabel = new System.Windows.Forms.Label();
-            this.renderBox = new System.Windows.Forms.PictureBox();
             this.renderButton = new System.Windows.Forms.Button();
             this.sceneLabel = new System.Windows.Forms.Label();
             this.lastRenderLabel = new System.Windows.Forms.Label();
             this.outdatedStatusLabel = new System.Windows.Forms.Label();
             this.nameTextbox = new System.Windows.Forms.TextBox();
             this.nameStatusLabel = new System.Windows.Forms.Label();
+            this.renderPanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.fovInput)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.renderBox)).BeginInit();
             this.SuspendLayout();
             // 
             // saveButton
@@ -189,14 +188,6 @@
             this.positionedModelsLabel.TabIndex = 13;
             this.positionedModelsLabel.Text = "Positioned models";
             // 
-            // renderBox
-            // 
-            this.renderBox.Location = new System.Drawing.Point(414, 266);
-            this.renderBox.Name = "renderBox";
-            this.renderBox.Size = new System.Drawing.Size(600, 371);
-            this.renderBox.TabIndex = 14;
-            this.renderBox.TabStop = false;
-            // 
             // renderButton
             // 
             this.renderButton.BackColor = System.Drawing.Color.DeepSkyBlue;
@@ -208,6 +199,7 @@
             this.renderButton.TabIndex = 15;
             this.renderButton.Text = "Render";
             this.renderButton.UseVisualStyleBackColor = false;
+            this.renderButton.Click += new System.EventHandler(this.renderButton_Click);
             // 
             // sceneLabel
             // 
@@ -258,19 +250,26 @@
             this.nameStatusLabel.Size = new System.Drawing.Size(0, 13);
             this.nameStatusLabel.TabIndex = 20;
             // 
+            // renderPanel
+            // 
+            this.renderPanel.Location = new System.Drawing.Point(397, 269);
+            this.renderPanel.Name = "renderPanel";
+            this.renderPanel.Size = new System.Drawing.Size(617, 385);
+            this.renderPanel.TabIndex = 21;
+            // 
             // SceneEditDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 761);
             this.ControlBox = false;
+            this.Controls.Add(this.renderPanel);
             this.Controls.Add(this.nameStatusLabel);
             this.Controls.Add(this.nameTextbox);
             this.Controls.Add(this.outdatedStatusLabel);
             this.Controls.Add(this.lastRenderLabel);
             this.Controls.Add(this.sceneLabel);
             this.Controls.Add(this.renderButton);
-            this.Controls.Add(this.renderBox);
             this.Controls.Add(this.positionedModelsLabel);
             this.Controls.Add(this.availableModelsLabel);
             this.Controls.Add(this.positionedModelsPanel);
@@ -289,7 +288,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "sceneEditTab";
             ((System.ComponentModel.ISupportInitialize)(this.fovInput)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.renderBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -310,12 +308,12 @@
         private System.Windows.Forms.FlowLayoutPanel positionedModelsPanel;
         private System.Windows.Forms.Label availableModelsLabel;
         private System.Windows.Forms.Label positionedModelsLabel;
-        private System.Windows.Forms.PictureBox renderBox;
         private System.Windows.Forms.Button renderButton;
         private System.Windows.Forms.Label sceneLabel;
         private System.Windows.Forms.Label lastRenderLabel;
         private System.Windows.Forms.Label outdatedStatusLabel;
         private System.Windows.Forms.TextBox nameTextbox;
         private System.Windows.Forms.Label nameStatusLabel;
+        private System.Windows.Forms.Panel renderPanel;
     }
 }
