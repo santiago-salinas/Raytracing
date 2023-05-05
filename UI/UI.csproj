@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>UI.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cards\EditSceneModelCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Cards\EditSceneModelCard.Designer.cs">
+      <DependentUpon>EditSceneModelCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cards\LambertianCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -94,11 +103,11 @@
     <Compile Include="Dialogs\AddSphereDialog.Designer.cs">
       <DependentUpon>AddSphereDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\EditVector.cs">
+    <Compile Include="Dialogs\EditVectorDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\EditVector.Designer.cs">
-      <DependentUpon>EditVector.cs</DependentUpon>
+    <Compile Include="Dialogs\EditVectorDialog.Designer.cs">
+      <DependentUpon>EditVectorDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="LogInPage.cs">
       <SubType>Form</SubType>
@@ -111,6 +120,12 @@
     </Compile>
     <Compile Include="MainPage.Designer.cs">
       <DependentUpon>MainPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PPMViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PPMViewer.Designer.cs">
+      <DependentUpon>PPMViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -132,11 +147,11 @@
     <Compile Include="Tabs\ModelsTab.Designer.cs">
       <DependentUpon>ModelsTab.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\SceneEditDialog.cs">
+    <Compile Include="Tabs\EditSceneTab.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\SceneEditDialog.Designer.cs">
-      <DependentUpon>SceneEditDialog.cs</DependentUpon>
+    <Compile Include="Tabs\EditSceneTab.Designer.cs">
+      <DependentUpon>EditSceneTab.cs</DependentUpon>
     </Compile>
     <Compile Include="Tabs\ScenesTab.cs">
       <SubType>Form</SubType>
@@ -150,6 +165,9 @@
     <Compile Include="Tabs\ShapesTab.Designer.cs">
       <DependentUpon>ShapesTab.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Cards\EditSceneModelCard.resx">
+      <DependentUpon>EditSceneModelCard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Cards\LambertianCard.resx">
       <DependentUpon>LambertianCard.cs</DependentUpon>
     </EmbeddedResource>
@@ -174,14 +192,17 @@
     <EmbeddedResource Include="Dialogs\AddSphereDialog.resx">
       <DependentUpon>AddSphereDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\EditVector.resx">
-      <DependentUpon>EditVector.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\EditVectorDialog.resx">
+      <DependentUpon>EditVectorDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogInPage.resx">
       <DependentUpon>LogInPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainPage.resx">
       <DependentUpon>MainPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PPMViewer.resx">
+      <DependentUpon>PPMViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -202,8 +223,8 @@
     <EmbeddedResource Include="Tabs\ModelsTab.resx">
       <DependentUpon>ModelsTab.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\SceneEditDialog.resx">
-      <DependentUpon>SceneEditDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Tabs\EditSceneTab.resx">
+      <DependentUpon>EditSceneTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tabs\ScenesTab.resx">
       <DependentUpon>ScenesTab.cs</DependentUpon>
@@ -252,4 +273,8 @@
     <None Include="Resources\no-img-placeholder.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
 </Project>

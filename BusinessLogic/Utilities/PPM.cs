@@ -14,6 +14,12 @@
 
         public int Heigth { get; set; }
 
+        public Color[,] PixelsValues { 
+            get
+            {
+                return _pixels;
+            }
+        }
         public void SavePixel(int row, int column, Color pixelRGB)
         {
             int posX = column;
@@ -38,6 +44,8 @@
             }
             return ppmAsString;
         }
+
+
 
         public override bool Equals(object other)
         {

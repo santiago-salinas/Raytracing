@@ -40,6 +40,10 @@ namespace BusinessLogic
             set { _thirdValue = value; }
         }
 
+        public override string ToString()
+        {
+            return $"({FirstValue} ; {SecondValue} ; {ThirdValue})";
+        }
         public override bool Equals(object other)
         {
             Vector otherVector = (Vector)other;
