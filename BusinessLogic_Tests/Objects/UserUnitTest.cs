@@ -99,6 +99,19 @@ namespace BusinessLogic_Tests
         }
 
         [TestMethod]
+        public void CheckIfUserNameIsValid_UserNameContainsSpace_ArgumentExceptionThrown()
+        {
+            // Arrange
+            string invalidUserName = "user name with space";
+
+            // Act
+            Action act = () => testUser.UserName = invalidUserName;
+            // Assert
+            var exception = Assert.ThrowsException<ArgumentException>(act);
+            Assert.AreEqual("User name cannot contain spaces", exception.Message);
+        }
+
+        [TestMethod]
         public void UserNameTooShortThrowsException()
         {
             // Arrange
@@ -213,7 +226,22 @@ namespace BusinessLogic_Tests
 
             // Assert
             var exception = Assert.ThrowsException<ArgumentException>(act);
+            Assert.AreEqual("Password must contain at least one upper case character", exception.Message);
+        }
 
+        [TestMethod]
+        public void PasswordNoDigitThrowsException()
+        {
+            // Arrange
+            string invalidPassword = "Password";
+
+            // Act
+            Action act = () => testUser.Password = invalidPassword;
+
+            // Assert
+            
+            var exception = Assert.ThrowsException<ArgumentException>(act);
+            Assert.AreEqual("Password must contain at least one numerical digit", exception.Message);
         }
 
         [TestMethod]
@@ -228,6 +256,50 @@ namespace BusinessLogic_Tests
 
             // Assert
             Assert.IsTrue(actual);
+        }
+
+        [TestMethod]
+        public void Equals_UserWithSameUserName_ReturnsTrue()
+        {
+            // Arrange
+            User user1 = new User()
+            {
+                UserName = "username",
+                Password= "Password1"
+            };
+            User user2 = new User()
+            {
+                UserName = "username",
+                Password = "Password2"
+            };
+
+            // Act
+            bool result = user1.Equals(user2);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Equals_UserWithDifferentUserName_ReturnsFalse()
+        {
+            // Arrange
+            User user1 = new User()
+            {
+                UserName = "username1",
+                Password = "Password1"
+            };
+            User user2 = new User()
+            {
+                UserName = "username2",
+                Password = "Password2"
+            };
+
+            // Act
+            bool result = user1.Equals(user2);
+
+            // Assert
+            Assert.IsFalse(result);
         }
 
         [TestMethod]
