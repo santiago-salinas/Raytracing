@@ -44,6 +44,20 @@ namespace BusinessLogic
         {
             random = new Random();
         }
+        public PPM render()
+        {
+            PPM ppm = new PPM(ResolutionX, ResolutionY);
+
+            for (int row = 0; row < ppm.Heigth; row++)
+            {
+                for (int column = 0; column < ppm.Width; column++)
+                {
+                    generatePixel(ppm, row, column);
+                }
+            }
+
+            return ppm;
+        }
 
         private void generatePixel(PPM ppm, int row, int column)
         {
@@ -66,23 +80,6 @@ namespace BusinessLogic
 
             ppm.SavePixel(row, column, pixel);
         }
-
-        public PPM render()
-        {
-            PPM ppm = new PPM(ResolutionX, ResolutionY);
-
-            for (int row = 0; row < ppm.Heigth; row++)
-            {
-                for (int column = 0; column < ppm.Width; column++)
-                {
-                    generatePixel(ppm, row, column);
-                }
-            }
-
-            return ppm;
-        }
-
-
 
         public Color shootRay(Ray ray, int depthLeft)
         {

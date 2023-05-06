@@ -19,6 +19,13 @@ namespace BusinessLogic
             Owner = owner;
         }
 
+        public HitRecord IsHitByRay(Ray ray, double tMin, double tMax, Vector position)
+        {
+            HitRecord hit = ModelShape.IsHitByRay(ray, tMin, tMax, position);
+            hit.Attenuation = ModelColor.Color;
+            return hit;
+        }
+
         public string Name
         {
             get { return _name; }
