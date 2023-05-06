@@ -82,5 +82,12 @@ namespace UI
         {
 
         }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            Application.Exit();
+
+            base.OnFormClosing(e);
+        }
     }
 }

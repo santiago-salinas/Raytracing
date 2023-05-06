@@ -46,10 +46,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(44, 85);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(33, 69);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(27, 25);
+            this.label1.Size = new System.Drawing.Size(21, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "X";
             // 
@@ -57,10 +56,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(44, 133);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(33, 108);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(26, 25);
+            this.label2.Size = new System.Drawing.Size(21, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Y";
             // 
@@ -68,18 +66,16 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(44, 180);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(33, 146);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(25, 25);
+            this.label3.Size = new System.Drawing.Size(20, 20);
             this.label3.TabIndex = 2;
             this.label3.Text = "Z";
             // 
             // xValueInput
             // 
             this.xValueInput.DecimalPlaces = 2;
-            this.xValueInput.Location = new System.Drawing.Point(105, 85);
-            this.xValueInput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.xValueInput.Location = new System.Drawing.Point(79, 69);
             this.xValueInput.Maximum = new decimal(new int[] {
             999,
             0,
@@ -91,14 +87,13 @@
             0,
             -2147483648});
             this.xValueInput.Name = "xValueInput";
-            this.xValueInput.Size = new System.Drawing.Size(114, 22);
+            this.xValueInput.Size = new System.Drawing.Size(86, 20);
             this.xValueInput.TabIndex = 3;
             // 
             // yValueInput
             // 
             this.yValueInput.DecimalPlaces = 2;
-            this.yValueInput.Location = new System.Drawing.Point(105, 130);
-            this.yValueInput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.yValueInput.Location = new System.Drawing.Point(79, 106);
             this.yValueInput.Maximum = new decimal(new int[] {
             999,
             0,
@@ -110,14 +105,13 @@
             0,
             -2147483648});
             this.yValueInput.Name = "yValueInput";
-            this.yValueInput.Size = new System.Drawing.Size(114, 22);
+            this.yValueInput.Size = new System.Drawing.Size(86, 20);
             this.yValueInput.TabIndex = 4;
             // 
             // zValueInput
             // 
             this.zValueInput.DecimalPlaces = 2;
-            this.zValueInput.Location = new System.Drawing.Point(105, 180);
-            this.zValueInput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.zValueInput.Location = new System.Drawing.Point(79, 146);
             this.zValueInput.Maximum = new decimal(new int[] {
             999,
             0,
@@ -129,16 +123,15 @@
             0,
             -2147483648});
             this.zValueInput.Name = "zValueInput";
-            this.zValueInput.Size = new System.Drawing.Size(114, 22);
+            this.zValueInput.Size = new System.Drawing.Size(86, 20);
             this.zValueInput.TabIndex = 5;
             // 
             // cancelButton
             // 
             this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelButton.Location = new System.Drawing.Point(152, 233);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cancelButton.Location = new System.Drawing.Point(114, 189);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(116, 42);
+            this.cancelButton.Size = new System.Drawing.Size(87, 34);
             this.cancelButton.TabIndex = 6;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -147,10 +140,9 @@
             // saveButton
             // 
             this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(13, 233);
-            this.saveButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.saveButton.Location = new System.Drawing.Point(10, 189);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(113, 42);
+            this.saveButton.Size = new System.Drawing.Size(85, 34);
             this.saveButton.TabIndex = 7;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -160,17 +152,18 @@
             // 
             this.titleLabel.AutoSize = true;
             this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLabel.Location = new System.Drawing.Point(102, 24);
+            this.titleLabel.Location = new System.Drawing.Point(76, 20);
+            this.titleLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(79, 29);
+            this.titleLabel.Size = new System.Drawing.Size(60, 24);
             this.titleLabel.TabIndex = 8;
             this.titleLabel.Text = "label4";
             // 
             // EditVectorDialog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(281, 300);
+            this.ClientSize = new System.Drawing.Size(211, 244);
             this.ControlBox = false;
             this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.saveButton);
@@ -182,7 +175,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "EditVectorDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "EditVectorDialog";

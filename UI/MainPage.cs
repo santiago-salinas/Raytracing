@@ -106,11 +106,28 @@ namespace UI
             shapesTab = null;
         }
 
+        private bool IsSignignOut = false;
 
         private void signOutButton_Click(object sender, EventArgs e)
         {
-            new LogInPage().Show();
+            IsSignignOut = true;
             this.Close();            
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (IsSignignOut)
+            {
+                IsSignignOut = false;
+                new LogInPage().Show();
+                base.OnFormClosing(e);
+            }
+            else
+            {
+                Application.Exit();
+                base.OnFormClosing(e);
+            }
+
         }
     }
 }

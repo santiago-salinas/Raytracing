@@ -115,7 +115,15 @@ namespace BusinessLogic
         }
         public Vector GetUnit()
         {
-            return Divide(Length());
+            double length = Length();
+            if (length == 0)
+            {
+                return new Vector(FirstValue, SecondValue, ThirdValue);
+            }
+            else
+            {
+                return Divide(length);
+            }            
         }
 
         public double Dot(Vector other)

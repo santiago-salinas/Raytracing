@@ -93,6 +93,7 @@ namespace UI
             });
 
             Application.Run(new LogInPage());
+
             Application.Exit();
         }
     }
