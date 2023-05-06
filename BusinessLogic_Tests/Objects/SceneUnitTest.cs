@@ -1,6 +1,7 @@
 ﻿using BusinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 
 namespace BusinessLogic_Tests
 {
@@ -415,8 +416,63 @@ namespace BusinessLogic_Tests
             Assert.IsTrue(testScene.ContainsModel(testModel));
             testScene.RemovePositionedModel(testPositionedModel);
             Assert.IsFalse(testScene.ContainsModel(testModel));
+        }
 
+        [TestMethod]
+        public void GetScenesFromUser_ShouldReturnScenesOwnedByUser()
+        {
+            User user1 = new User()
+            {
+                UserName = "User1",
+                Password = "Password1"
+            };
+            User user2 = new User()
+            {
+                UserName = "User2",
+                Password = "Password1"
+            };
 
+            Scene scene1 = new Scene()
+            {
+                Name = "scene1",
+                Owner = user1,
+            };
+            Scene scene2 = new Scene()
+            {
+                Name = "scene2",
+                Owner = user1,
+            };
+            Scene scene3 = new Scene()
+            {
+                Name = "scene3",
+                Owner = user2,
+            };
+
+            SceneCollection.AddScene(scene1);
+            SceneCollection.AddScene(scene2);
+            SceneCollection.AddScene(scene3);
+
+            List<Scene> scenes = SceneCollection.GetScenesFromUser(user1);
+
+            Assert.AreEqual(2, scenes.Count);
+            Assert.IsTrue(scenes.Contains(scene1));
+            Assert.IsTrue(scenes.Contains(scene2));
+        }
+
+        [TestMethod]
+        public void GetScenesFromUser_ShouldReturnEmptyListIfNoScenesOwnedByUser()
+        {
+
+            //Arrange
+            User emptyUser = new User()
+            {
+                UserName = "TestUser",
+                Password = "Password1"
+            };
+
+            List<Scene> scenes = SceneCollection.GetScenesFromUser(emptyUser);
+
+            Assert.AreEqual(0, scenes.Count);
         }
 
         [TestCleanup]

@@ -1,7 +1,7 @@
 ﻿using BusinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-
+using System.Collections.Generic;
 
 namespace BusinessLogic_Tests
 {
@@ -10,8 +10,7 @@ namespace BusinessLogic_Tests
     {
         private Sphere testSphere;
         private float testRadius;
-        private float testNegativeRadius;
-        private float differentTestRadius;
+        private float testNegativeRadius;        
         private string testName;
         private string testNullName;
         public User testUser;
@@ -21,8 +20,7 @@ namespace BusinessLogic_Tests
         public void Initialize()
         {
             testName = "Ball";
-            testRadius = 5;
-            differentTestRadius = 10;
+            testRadius = 5;            
             testNullName = string.Empty;
             testNegativeRadius = -5;
 
@@ -45,14 +43,43 @@ namespace BusinessLogic_Tests
             //arrange
             testRadius = 5;
             testName = "Ball";
+            testUser = new User()
+            {
+                UserName= "User1",
+                Password = "Password1"
+            };
             //act
             testSphere = new Sphere()
             {
                 Radius = testRadius,
-                Name = testName
+                Name = testName,
+                Owner = testUser,
             };
-            //Assert
-            Assert.IsNotNull(testSphere);
+            // Assert
+            Assert.AreEqual(testName, testSphere.Name);
+            Assert.AreEqual(testRadius, testSphere.Radius);
+            Assert.AreEqual(testUser, testSphere.Owner);
+        }
+
+        [TestMethod]
+        public void Constructor_ShouldSetPropertiesCorrectly()
+        {
+            // Arrange
+            testRadius = 5;
+            testName = "Ball";
+            testUser = new User()
+            {
+                UserName = "User1",
+                Password = "Password1"
+            };
+
+            // Act
+            Sphere sphere = new Sphere(testName, testRadius, testUser);
+
+            // Assert
+            Assert.AreEqual(testName, sphere.Name);
+            Assert.AreEqual(testRadius, sphere.Radius);
+            Assert.AreEqual(testUser, sphere.Owner);
         }
 
         [TestMethod]
@@ -180,6 +207,51 @@ namespace BusinessLogic_Tests
             };          
             //act
             SphereCollection.AddSphere(newSphere);    
+        }
+
+        [TestMethod]
+        public void GetSpheresFromUser_ShouldReturnSpheresOwnedByUser()
+        {
+            User user1 = new User()
+            {
+                UserName = "User1",
+                Password= "Password1"
+            };
+            User user2 = new User()
+            {
+                UserName = "User2",
+                Password = "Password1"
+            };
+
+            Sphere _sphere1 = new Sphere("sphere1",1, user1);
+            Sphere _sphere2 = new Sphere("sphere2", 5, user1);
+            Sphere _sphere3 = new Sphere("sphere3", 9, user2);
+
+            SphereCollection.AddSphere(_sphere1);
+            SphereCollection.AddSphere(_sphere2);
+            SphereCollection.AddSphere(_sphere3);
+
+            List<Sphere> spheres = SphereCollection.GetSpheresFromUser(user1);
+
+            Assert.AreEqual(2, spheres.Count);
+            Assert.IsTrue(spheres.Contains(_sphere1));
+            Assert.IsTrue(spheres.Contains(_sphere2));
+        }
+
+        [TestMethod]
+        public void GetSpheresFromUser_ShouldReturnEmptyListIfNoSpheresOwnedByUser()
+        {
+
+            //Arrange
+            User emptyUser = new User()
+            {
+                UserName = "TestUser",
+                Password = "Password1"
+            };
+
+            List<Sphere> spheres = SphereCollection.GetSpheresFromUser(emptyUser);
+
+            Assert.AreEqual(0, spheres.Count);
         }
 
         [TestCleanup]
