@@ -49,16 +49,16 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SphereUnitTest.cs" />
+    <Compile Include="Objects\SphereUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="LambertianUnitTest.cs" />
-    <Compile Include="ModelUnitTest.cs" />
-    <Compile Include="PositionedModelUnitTest.cs" />
-    <Compile Include="SceneUnitTest.cs" />
-    <Compile Include="RayUnitTest.cs" />
-    <Compile Include="RenderUnitTest.cs" />
-    <Compile Include="VectorUnitTest.cs" />
-    <Compile Include="UserUnitTest.cs" />
+    <Compile Include="Objects\LambertianUnitTest.cs" />
+    <Compile Include="Objects\ModelUnitTest.cs" />
+    <Compile Include="Objects\PositionedModelUnitTest.cs" />
+    <Compile Include="Objects\SceneUnitTest.cs" />
+    <Compile Include="Utilities\RayUnitTest.cs" />
+    <Compile Include="Utilities\RenderUnitTest.cs" />
+    <Compile Include="Utilities\VectorUnitTest.cs" />
+    <Compile Include="Objects\UserUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

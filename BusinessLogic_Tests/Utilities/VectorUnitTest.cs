@@ -168,6 +168,19 @@ namespace BusinessLogic_Tests
         }
 
         [TestMethod]
+        public void GetUnit_ReturnsOriginalVector_WhenVectorHasLengthEqualToZero()
+        {
+            // Arrange
+            var vector = new Vector(0, 0, 0);
+
+            // Act
+            var actual = vector.GetUnit();
+
+            // Assert
+            Assert.IsTrue(Equals(vector, actual));
+        }
+
+        [TestMethod]
         public void Dot_ReturnsDotProduct()
         {
             // Arrange
@@ -194,6 +207,20 @@ namespace BusinessLogic_Tests
 
             // Assert
             Assert.IsTrue(Equals(crossProduct, expected));
+        }
+
+        [TestMethod]
+        public void ToString_ReturnsFormattedStringRepresentationOfVector()
+        {
+            // Arrange
+            var vector = new Vector(1, 2, 3);
+            var expected = "(1 ; 2 ; 3)";
+
+            // Act
+            var actual = vector.ToString();
+
+            // Assert
+            Assert.AreEqual(expected, actual);
         }
     }
 }

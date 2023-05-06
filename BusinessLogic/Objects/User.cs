@@ -78,10 +78,6 @@ namespace BusinessLogic
             }
         }
 
-        private bool PasswordContainsDigit(string value)
-        {
-            return value.Any(char.IsDigit);
-        }
 
         public override bool Equals(object other)
         {
