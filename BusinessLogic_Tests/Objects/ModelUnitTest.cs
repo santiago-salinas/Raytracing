@@ -1,6 +1,7 @@
 ﻿using BusinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 
 namespace BusinessLogic_Tests
 {
@@ -218,6 +219,63 @@ namespace BusinessLogic_Tests
             bool sphereDeleted = !SphereCollection.ContainsSphere(sphereName, testUser);
             bool lambertianDeleted = !LambertianCollection.ContainsLambertian(lambertianName, testUser);
             Assert.IsTrue(sphereDeleted && lambertianDeleted);
+        }
+
+        [TestMethod]
+        public void GetModelsFromUser_ShouldReturnModelsOwnedByUser()
+        {
+            User user1 = new User()
+            {
+                UserName = "User1",
+                Password = "Password1"
+            };
+            User user2 = new User()
+            {
+                UserName = "User2",
+                Password = "Password1"
+            };
+
+            Model model1 = new Model()
+            {
+                Name = "scene1",
+                Owner = user1,
+            };
+            Model model2 = new Model()
+            {
+                Name = "scene2",
+                Owner = user1,
+            };
+            Model model3 = new Model()
+            {
+                Name = "scene3",
+                Owner = user2,
+            };
+
+            ModelCollection.AddModel(model1);
+            ModelCollection.AddModel(model2);
+            ModelCollection.AddModel(model3);
+
+            List<Model> models = ModelCollection.GetModelsFromUser(user1);
+
+            Assert.AreEqual(2, models.Count);
+            Assert.IsTrue(models.Contains(model1));
+            Assert.IsTrue(models.Contains(model2));
+        }
+
+        [TestMethod]
+        public void GetLambertiansFromUser_ShouldReturnEmptyListIfNoLambertiansOwnedByUser()
+        {
+
+            //Arrange
+            User emptyUser = new User()
+            {
+                UserName = "TestUser",
+                Password = "Password1"
+            };
+
+            List<Model> models = ModelCollection.GetModelsFromUser(emptyUser);
+
+            Assert.AreEqual(0, models.Count);
         }
 
         [TestCleanup]
