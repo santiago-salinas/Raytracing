@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using BusinessLogic;
+using System.Collections.Generic;
 
 namespace BusinessLogic_Tests
 {
@@ -58,7 +59,7 @@ namespace BusinessLogic_Tests
         public void ValuesForVectorMustBeBetweenBounds()
         {
           outOfBoundsColor = new Color((float)-1 / 255, 0, (float)230 / 255);
-            testLambertian.Color = outOfBoundsColor;
+          testLambertian.Color = outOfBoundsColor;
         }
 
         [TestMethod]
@@ -168,6 +169,63 @@ namespace BusinessLogic_Tests
 
             //act
             LambertianCollection.AddLambertian(newLambertian);
+        }
+
+        [TestMethod]
+        public void GetLambertiansFromUser_ShouldReturnLambertiansOwnedByUser()
+        {
+            User user1 = new User()
+            {
+                UserName = "User1",
+                Password = "Password1"
+            };
+            User user2 = new User()
+            {
+                UserName = "User2",
+                Password = "Password1"
+            };
+
+            Lambertian lambertian1 = new Lambertian()
+            {
+                Name = "scene1",
+                Owner = user1,
+            };
+            Lambertian lambertian2 = new Lambertian()
+            {
+                Name = "scene2",
+                Owner = user1,
+            };
+            Lambertian lambertian3 = new Lambertian()
+            {
+                Name = "scene3",
+                Owner = user2,
+            };
+
+            LambertianCollection.AddLambertian(lambertian1);
+            LambertianCollection.AddLambertian(lambertian2);
+            LambertianCollection.AddLambertian(lambertian3);
+
+            List<Lambertian> lambertians = LambertianCollection.GetLambertiansFromUser(user1);
+
+            Assert.AreEqual(2, lambertians.Count);
+            Assert.IsTrue(lambertians.Contains(lambertian1));
+            Assert.IsTrue(lambertians.Contains(lambertian2));
+        }
+
+        [TestMethod]
+        public void GetLambertiansFromUser_ShouldReturnEmptyListIfNoLambertiansOwnedByUser()
+        {
+
+            //Arrange
+            User emptyUser = new User()
+            {
+                UserName = "TestUser",
+                Password = "Password1"
+            };
+
+            List<Lambertian> lambertians = LambertianCollection.GetLambertiansFromUser(emptyUser);
+
+            Assert.AreEqual(0, lambertians.Count);
         }
 
         [TestCleanup]

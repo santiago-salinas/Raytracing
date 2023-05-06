@@ -27,7 +27,6 @@ namespace UI
                 createdUser.Password = password;
                 createdUser.RegisterDate = DateTime.Now;
                 UserCollection.AddUser(createdUser);
-                new LogInPage().Show();
                 this.Close();
             }
             else
@@ -118,8 +117,14 @@ namespace UI
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            new LogInPage().Show();
             this.Close();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            new LogInPage().Show();
+
+            base.OnFormClosing(e);
         }
     }
 }

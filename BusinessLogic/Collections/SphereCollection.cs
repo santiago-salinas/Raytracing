@@ -6,8 +6,6 @@ namespace BusinessLogic
     {
         private static List<Sphere> _sphereList = new List<Sphere>();
 
-        public static List<Sphere> SphereList { get { return _sphereList; } }
-
         public static List<Sphere> GetSpheresFromUser(User owner)
         {
             List<Sphere> ret = new List<Sphere>();

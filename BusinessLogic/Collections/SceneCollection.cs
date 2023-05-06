@@ -51,15 +51,8 @@ namespace BusinessLogic
 
         public static void RemoveScene(string name, User owner)
         {
-            Scene scene = _sceneList.Find(s => s.Name == name && s.Owner == owner);
-            if (scene == null)
-            {
-                throw new BusinessLogicException("Owner does not have a scene with that name");
-            }
-            else
-            {
-                _sceneList.Remove(scene);
-            }
+            Scene scene = GetScene(name,owner);            
+            _sceneList.Remove(scene);            
         }
 
         public static bool ExistsSceneUsingModel(Model model)

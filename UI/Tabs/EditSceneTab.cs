@@ -43,7 +43,7 @@ namespace UI.Tabs
                 MaxDepth = 50,
                 ResolutionX = 650,
                 ResolutionY = 375,
-                SamplesPerPixel = 50
+                SamplesPerPixel = 10
             };
 
             Scene newScene = new Scene()
