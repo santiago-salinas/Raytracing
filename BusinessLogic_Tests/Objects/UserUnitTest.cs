@@ -16,8 +16,18 @@ namespace BusinessLogic_Tests
 
             testUserName = "TestUsername";
             testPassword = "Abc123";
-            testUser = new User();
+            testUser = new User()
+            {
+                UserName= testUserName,
+                Password= testPassword
+            };
             DateTimeProvider.Reset();
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            UserCollection.DropCollection();
         }
 
         [TestMethod]
@@ -204,6 +214,117 @@ namespace BusinessLogic_Tests
             // Assert
             var exception = Assert.ThrowsException<ArgumentException>(act);
 
+        }
+
+        [TestMethod]
+        public void ContainsUser_ReturnsTrue_WhenUserExists()
+        {
+            // Arrange
+            UserCollection.AddUser(testUser);
+            string name = testUser.UserName;
+
+            // Act
+            var actual = UserCollection.ContainsUser(name);
+
+            // Assert
+            Assert.IsTrue(actual);
+        }
+
+        [TestMethod]
+        public void ContainsUser_ReturnsFalse_WhenUserDoesNotExist()
+        {
+            // Arrange
+            UserCollection.AddUser(testUser);
+
+            // Act
+            var actual = UserCollection.ContainsUser("another name");
+
+            // Assert
+            Assert.IsFalse(actual);
+        }
+
+        [TestMethod]
+        public void AddUser_AddsNewUser_WhenUserDoesNotExist()
+        {
+            // Arrange
+            User newUser = new User()
+            {
+                UserName = testUserName,
+                Password = testPassword
+            };
+
+            // Act
+            UserCollection.AddUser(newUser);
+
+            // Assert
+            Assert.IsTrue(UserCollection.ContainsUser(testUserName));
+        }
+
+        [TestMethod]
+        public void AddUser_ThrowsBusinessLogicException_WhenUserAlreadyExists()
+        {
+            // Arrange
+
+            UserCollection.AddUser(testUser);
+            var newUser = new User()
+            {
+                UserName = testUserName,
+                Password = testPassword
+            }; 
+
+            // Act & Assert
+            Assert.ThrowsException<BusinessLogicException>(() => UserCollection.AddUser(newUser));
+        }
+
+        [TestMethod]
+        public void GetUser_ReturnsUser_WhenUserExists()
+        {
+            // Arrange
+            var newUser = new User()
+            {
+                UserName = testUserName,
+                Password = testPassword
+            };
+            UserCollection.AddUser(newUser);
+
+            // Act
+            var actual = UserCollection.GetUser(testUserName);
+
+            // Assert
+            Assert.AreEqual(newUser, actual);
+        }
+
+        [TestMethod]
+        public void GetUser_ThrowsBusinessLogicException_WhenUserDoesNotExist()
+        {
+            // Arrange & Act & Assert
+            Assert.ThrowsException<BusinessLogicException>(() => UserCollection.GetUser(testUserName));
+        }
+
+        [TestMethod]
+        public void CheckUsernameAndPasswordCombination_ReturnsTrue_WhenCombinationExists()
+        {
+            // Arrange
+            UserCollection.AddUser(testUser);
+
+            // Act
+            bool actual = UserCollection.CheckUsernameAndPasswordCombination(testUser.UserName, testUser.Password);
+
+            // Assert
+            Assert.IsTrue(actual);
+        }
+
+        [TestMethod]
+        public void CheckUsernameAndPasswordCombination_ReturnsFalse_WhenCombinationDoesNotExist()
+        {
+            // Arrange
+            UserCollection.AddUser(testUser);
+
+            // Act
+            var actual = UserCollection.CheckUsernameAndPasswordCombination(testUser.UserName, "password2");
+
+            // Assert
+            Assert.IsFalse(actual);
         }
 
     }
