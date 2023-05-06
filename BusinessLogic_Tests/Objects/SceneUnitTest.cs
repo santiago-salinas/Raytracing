@@ -332,16 +332,40 @@ namespace BusinessLogic_Tests
             SceneCollection.GetScene(testName, testUser);
         }
 
+
         [TestMethod]
-        [ExpectedException(typeof(BusinessLogicException), "Scene does not exist in the collection")]
-        public void CantRemoveSceneNotInCollection()
+        public void RemoveScene_ThrowsBusinessLogicException_WhenOwnerDoesNotHaveSceneWithGivenName()
         {
-            //arrange
-            User testUser = new User();
-            testUser.UserName = "Username";
-            testScene.Owner = testUser;
-            //act
-            SceneCollection.RemoveScene(testName, testUser);
+            // Arrange
+            User user1 = new User()
+            {
+                UserName = "User1",
+                Password = "Password1"
+            };
+            User user2 = new User()
+            {
+                UserName = "User2",
+                Password = "Password1"
+            };
+            Scene scene1 = new Scene()
+            {
+                Name = "scene1",
+                Owner = user1,
+            };
+            Scene scene2 = new Scene()
+            {
+                Name = "scene2",
+                Owner = user2,
+            };
+            SceneCollection.AddScene(scene1);
+            SceneCollection.AddScene(scene2);
+
+            // Act
+            Action act = () => SceneCollection.RemoveScene("scene1", user2);
+
+            // Assert
+            var exception = Assert.ThrowsException<BusinessLogicException>(act);
+            Assert.AreEqual("Owner does not have a scene with that name", exception.Message);
         }
 
         [TestMethod]

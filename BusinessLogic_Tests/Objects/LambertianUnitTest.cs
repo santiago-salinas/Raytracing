@@ -59,7 +59,7 @@ namespace BusinessLogic_Tests
         public void ValuesForVectorMustBeBetweenBounds()
         {
           outOfBoundsColor = new Color((float)-1 / 255, 0, (float)230 / 255);
-            testLambertian.Color = outOfBoundsColor;
+          testLambertian.Color = outOfBoundsColor;
         }
 
         [TestMethod]
