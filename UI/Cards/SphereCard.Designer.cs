@@ -39,26 +39,27 @@
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
-            this.nameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameLabel.Location = new System.Drawing.Point(174, 21);
+            this.nameLabel.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameLabel.Location = new System.Drawing.Point(118, 19);
             this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(64, 25);
+            this.nameLabel.Size = new System.Drawing.Size(82, 24);
             this.nameLabel.TabIndex = 1;
             this.nameLabel.Text = "label1";
             // 
             // radiusLabel
             // 
             this.radiusLabel.AutoSize = true;
-            this.radiusLabel.Location = new System.Drawing.Point(179, 77);
+            this.radiusLabel.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radiusLabel.Location = new System.Drawing.Point(118, 60);
             this.radiusLabel.Name = "radiusLabel";
-            this.radiusLabel.Size = new System.Drawing.Size(35, 13);
+            this.radiusLabel.Size = new System.Drawing.Size(70, 22);
             this.radiusLabel.TabIndex = 2;
             this.radiusLabel.Text = "label1";
             // 
             // pictureBox
             // 
             this.pictureBox.Image = global::UI.Properties.Resources.sphereImage;
-            this.pictureBox.Location = new System.Drawing.Point(28, 21);
+            this.pictureBox.Location = new System.Drawing.Point(3, 3);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(100, 92);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -71,7 +72,7 @@
             this.deleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteButton.Font = new System.Drawing.Font("Impact", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.deleteButton.Location = new System.Drawing.Point(458, 42);
+            this.deleteButton.Location = new System.Drawing.Point(398, 34);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(56, 48);
             this.deleteButton.TabIndex = 4;
@@ -82,12 +83,13 @@
             // deleteLabel
             // 
             this.deleteLabel.AutoSize = true;
+            this.deleteLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteLabel.ForeColor = System.Drawing.Color.Firebrick;
-            this.deleteLabel.Location = new System.Drawing.Point(275, 100);
+            this.deleteLabel.Location = new System.Drawing.Point(124, 89);
             this.deleteLabel.Name = "deleteLabel";
-            this.deleteLabel.Size = new System.Drawing.Size(285, 13);
+            this.deleteLabel.Size = new System.Drawing.Size(270, 38);
             this.deleteLabel.TabIndex = 5;
-            this.deleteLabel.Text = "* You cannot delete a sphere that is being used by a model";
+            this.deleteLabel.Text = "* You cannot delete a sphere \r\nthat is being used by a model";
             this.deleteLabel.Visible = false;
             // 
             // SphereCard
@@ -100,7 +102,7 @@
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.deleteButton);
             this.Name = "SphereCard";
-            this.Size = new System.Drawing.Size(600, 140);
+            this.Size = new System.Drawing.Size(469, 140);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

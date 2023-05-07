@@ -46,14 +46,16 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Red;
             this.label1.Location = new System.Drawing.Point(236, 165);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 13);
+            this.label1.Size = new System.Drawing.Size(0, 18);
             this.label1.TabIndex = 53;
             // 
             // cancelButton
             // 
+            this.cancelButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.Location = new System.Drawing.Point(490, 381);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(150, 51);
@@ -64,6 +66,7 @@
             // 
             // saveButton
             // 
+            this.saveButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveButton.Location = new System.Drawing.Point(161, 381);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(150, 51);
@@ -75,26 +78,29 @@
             // nameStatusLabel
             // 
             this.nameStatusLabel.AutoSize = true;
+            this.nameStatusLabel.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nameStatusLabel.ForeColor = System.Drawing.Color.Red;
             this.nameStatusLabel.Location = new System.Drawing.Point(236, 165);
             this.nameStatusLabel.Name = "nameStatusLabel";
-            this.nameStatusLabel.Size = new System.Drawing.Size(0, 13);
+            this.nameStatusLabel.Size = new System.Drawing.Size(0, 18);
             this.nameStatusLabel.TabIndex = 44;
             // 
             // modelNameLabel
             // 
             this.modelNameLabel.AutoSize = true;
+            this.modelNameLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.modelNameLabel.Location = new System.Drawing.Point(228, 88);
             this.modelNameLabel.Name = "modelNameLabel";
-            this.modelNameLabel.Size = new System.Drawing.Size(67, 13);
+            this.modelNameLabel.Size = new System.Drawing.Size(99, 19);
             this.modelNameLabel.TabIndex = 43;
             this.modelNameLabel.Text = "Model Name";
             // 
             // nameTextBox
             // 
-            this.nameTextBox.Location = new System.Drawing.Point(228, 126);
+            this.nameTextBox.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameTextBox.Location = new System.Drawing.Point(228, 120);
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(322, 20);
+            this.nameTextBox.Size = new System.Drawing.Size(322, 26);
             this.nameTextBox.TabIndex = 42;
             // 
             // panel1
@@ -109,55 +115,60 @@
             // newModelLabel
             // 
             this.newModelLabel.AutoSize = true;
-            this.newModelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newModelLabel.Location = new System.Drawing.Point(257, 18);
+            this.newModelLabel.Font = new System.Drawing.Font("Consolas", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newModelLabel.Location = new System.Drawing.Point(291, 9);
             this.newModelLabel.Name = "newModelLabel";
-            this.newModelLabel.Size = new System.Drawing.Size(220, 46);
+            this.newModelLabel.Size = new System.Drawing.Size(218, 47);
             this.newModelLabel.TabIndex = 40;
             this.newModelLabel.Text = "New Model";
             // 
             // shapeComboBox
             // 
+            this.shapeComboBox.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.shapeComboBox.FormattingEnabled = true;
             this.shapeComboBox.Location = new System.Drawing.Point(228, 211);
             this.shapeComboBox.Name = "shapeComboBox";
-            this.shapeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.shapeComboBox.Size = new System.Drawing.Size(121, 27);
             this.shapeComboBox.TabIndex = 54;
             this.shapeComboBox.SelectedIndexChanged += new System.EventHandler(this.shapeComboBox_SelectedIndexChanged);
             // 
             // materialComboBox
             // 
+            this.materialComboBox.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.materialComboBox.FormattingEnabled = true;
             this.materialComboBox.Location = new System.Drawing.Point(228, 275);
             this.materialComboBox.Name = "materialComboBox";
-            this.materialComboBox.Size = new System.Drawing.Size(121, 21);
+            this.materialComboBox.Size = new System.Drawing.Size(121, 27);
             this.materialComboBox.TabIndex = 55;
             this.materialComboBox.SelectedIndexChanged += new System.EventHandler(this.materialComboBox_SelectedIndexChanged);
             // 
             // shapeLabel
             // 
             this.shapeLabel.AutoSize = true;
+            this.shapeLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.shapeLabel.Location = new System.Drawing.Point(228, 192);
             this.shapeLabel.Name = "shapeLabel";
-            this.shapeLabel.Size = new System.Drawing.Size(38, 13);
+            this.shapeLabel.Size = new System.Drawing.Size(54, 19);
             this.shapeLabel.TabIndex = 56;
             this.shapeLabel.Text = "Shape";
             // 
             // materialLabel
             // 
             this.materialLabel.AutoSize = true;
+            this.materialLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.materialLabel.Location = new System.Drawing.Point(228, 256);
             this.materialLabel.Name = "materialLabel";
-            this.materialLabel.Size = new System.Drawing.Size(44, 13);
+            this.materialLabel.Size = new System.Drawing.Size(81, 19);
             this.materialLabel.TabIndex = 57;
             this.materialLabel.Text = "Material";
             // 
             // previewCheckbox
             // 
             this.previewCheckbox.AutoSize = true;
+            this.previewCheckbox.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.previewCheckbox.Location = new System.Drawing.Point(228, 322);
             this.previewCheckbox.Name = "previewCheckbox";
-            this.previewCheckbox.Size = new System.Drawing.Size(110, 17);
+            this.previewCheckbox.Size = new System.Drawing.Size(172, 23);
             this.previewCheckbox.TabIndex = 58;
             this.previewCheckbox.Text = "Generate preview";
             this.previewCheckbox.UseVisualStyleBackColor = true;

@@ -37,7 +37,7 @@
             // 
             // previewBox
             // 
-            this.previewBox.Location = new System.Drawing.Point(12, 13);
+            this.previewBox.Location = new System.Drawing.Point(0, 13);
             this.previewBox.Name = "previewBox";
             this.previewBox.Size = new System.Drawing.Size(60, 65);
             this.previewBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -50,7 +50,7 @@
             this.deleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteButton.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.deleteButton.Location = new System.Drawing.Point(195, 33);
+            this.deleteButton.Location = new System.Drawing.Point(207, 33);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(45, 45);
             this.deleteButton.TabIndex = 14;
@@ -62,7 +62,7 @@
             // 
             this.modelNameLabel.AutoSize = true;
             this.modelNameLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.modelNameLabel.Location = new System.Drawing.Point(84, 8);
+            this.modelNameLabel.Location = new System.Drawing.Point(65, 13);
             this.modelNameLabel.MaximumSize = new System.Drawing.Size(112, 0);
             this.modelNameLabel.Name = "modelNameLabel";
             this.modelNameLabel.Size = new System.Drawing.Size(63, 19);
@@ -73,7 +73,7 @@
             // 
             this.positionLabel.AutoSize = true;
             this.positionLabel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.positionLabel.Location = new System.Drawing.Point(85, 50);
+            this.positionLabel.Location = new System.Drawing.Point(66, 50);
             this.positionLabel.Name = "positionLabel";
             this.positionLabel.Size = new System.Drawing.Size(49, 15);
             this.positionLabel.TabIndex = 15;

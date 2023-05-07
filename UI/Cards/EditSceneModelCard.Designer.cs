@@ -61,7 +61,7 @@
             // 
             this.modelNameLabel.AutoSize = true;
             this.modelNameLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.modelNameLabel.Location = new System.Drawing.Point(74, 5);
+            this.modelNameLabel.Location = new System.Drawing.Point(73, 9);
             this.modelNameLabel.MaximumSize = new System.Drawing.Size(112, 0);
             this.modelNameLabel.Name = "modelNameLabel";
             this.modelNameLabel.Size = new System.Drawing.Size(63, 19);
@@ -71,7 +71,7 @@
             // addButton
             // 
             this.addButton.Font = new System.Drawing.Font("MS PGothic", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addButton.Location = new System.Drawing.Point(190, 29);
+            this.addButton.Location = new System.Drawing.Point(212, 22);
             this.addButton.Margin = new System.Windows.Forms.Padding(2);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(41, 45);

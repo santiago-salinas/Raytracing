@@ -20,7 +20,7 @@ namespace UI
         {
             string username = userNameTextBox.Text;
             string password = passwordTextBox.Text;
-            string confirmPassword = confirmPasswordTextbox.Text;
+            //string confirmPassword = confirmPasswordTextbox.Text;
             if(usernameFieldIsCorrect && passwordFieldIsCorrect && confirmPasswordFieldIsCorrect)
             {
                 createdUser.UserName = username;
@@ -93,27 +93,6 @@ namespace UI
                 confirmPasswordFieldIsCorrect = true;
             }
         }
-
-        private void UserLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void UserLabel_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void SignUpPage_Load(object sender, EventArgs e)
-        {
-
-        }
-
 
         private void button1_Click_1(object sender, EventArgs e)
         {

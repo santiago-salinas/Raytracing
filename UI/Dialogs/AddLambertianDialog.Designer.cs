@@ -51,10 +51,10 @@
             // newMaterialLabel
             // 
             this.newMaterialLabel.AutoSize = true;
-            this.newMaterialLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newMaterialLabel.Font = new System.Drawing.Font("Consolas", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newMaterialLabel.Location = new System.Drawing.Point(258, 9);
             this.newMaterialLabel.Name = "newMaterialLabel";
-            this.newMaterialLabel.Size = new System.Drawing.Size(252, 46);
+            this.newMaterialLabel.Size = new System.Drawing.Size(284, 47);
             this.newMaterialLabel.TabIndex = 0;
             this.newMaterialLabel.Text = "New Material";
             // 
@@ -62,7 +62,7 @@
             // 
             this.nameStatusLabel.AutoSize = true;
             this.nameStatusLabel.ForeColor = System.Drawing.Color.Red;
-            this.nameStatusLabel.Location = new System.Drawing.Point(237, 156);
+            this.nameStatusLabel.Location = new System.Drawing.Point(233, 159);
             this.nameStatusLabel.Name = "nameStatusLabel";
             this.nameStatusLabel.Size = new System.Drawing.Size(0, 13);
             this.nameStatusLabel.TabIndex = 21;
@@ -70,30 +70,33 @@
             // materialNameLabel
             // 
             this.materialNameLabel.AutoSize = true;
+            this.materialNameLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.materialNameLabel.Location = new System.Drawing.Point(229, 79);
             this.materialNameLabel.Name = "materialNameLabel";
-            this.materialNameLabel.Size = new System.Drawing.Size(75, 13);
+            this.materialNameLabel.Size = new System.Drawing.Size(126, 19);
             this.materialNameLabel.TabIndex = 20;
             this.materialNameLabel.Text = "Material Name";
             // 
             // nameTextBox
             // 
+            this.nameTextBox.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nameTextBox.Location = new System.Drawing.Point(229, 117);
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(322, 20);
+            this.nameTextBox.Size = new System.Drawing.Size(322, 26);
             this.nameTextBox.TabIndex = 19;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Black;
             this.panel1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.panel1.Location = new System.Drawing.Point(201, 143);
+            this.panel1.Location = new System.Drawing.Point(201, 152);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(350, 1);
             this.panel1.TabIndex = 18;
             // 
             // saveButton
             // 
+            this.saveButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveButton.Location = new System.Drawing.Point(162, 372);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(150, 51);
@@ -104,6 +107,7 @@
             // 
             // cancelButton
             // 
+            this.cancelButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.Location = new System.Drawing.Point(491, 372);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(150, 51);
@@ -115,32 +119,36 @@
             // redLabel
             // 
             this.redLabel.AutoSize = true;
+            this.redLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.redLabel.Location = new System.Drawing.Point(227, 195);
             this.redLabel.Name = "redLabel";
-            this.redLabel.Size = new System.Drawing.Size(62, 13);
+            this.redLabel.Size = new System.Drawing.Size(108, 19);
             this.redLabel.TabIndex = 32;
             this.redLabel.Text = "Red value: ";
             // 
             // greenLabel
             // 
             this.greenLabel.AutoSize = true;
+            this.greenLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.greenLabel.Location = new System.Drawing.Point(226, 246);
             this.greenLabel.Name = "greenLabel";
-            this.greenLabel.Size = new System.Drawing.Size(71, 13);
+            this.greenLabel.Size = new System.Drawing.Size(126, 19);
             this.greenLabel.TabIndex = 33;
             this.greenLabel.Text = "Green value: ";
             // 
             // blueLabel
             // 
             this.blueLabel.AutoSize = true;
+            this.blueLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.blueLabel.Location = new System.Drawing.Point(227, 300);
             this.blueLabel.Name = "blueLabel";
-            this.blueLabel.Size = new System.Drawing.Size(63, 13);
+            this.blueLabel.Size = new System.Drawing.Size(117, 19);
             this.blueLabel.TabIndex = 34;
             this.blueLabel.Text = "Blue value: ";
             // 
             // redValueInput
             // 
+            this.redValueInput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.redValueInput.Location = new System.Drawing.Point(337, 193);
             this.redValueInput.Maximum = new decimal(new int[] {
             255,
@@ -153,11 +161,12 @@
             0,
             -2147483648});
             this.redValueInput.Name = "redValueInput";
-            this.redValueInput.Size = new System.Drawing.Size(120, 20);
+            this.redValueInput.Size = new System.Drawing.Size(120, 26);
             this.redValueInput.TabIndex = 35;
             // 
             // greenValueInput
             // 
+            this.greenValueInput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.greenValueInput.Location = new System.Drawing.Point(337, 244);
             this.greenValueInput.Maximum = new decimal(new int[] {
             255,
@@ -170,11 +179,12 @@
             0,
             -2147483648});
             this.greenValueInput.Name = "greenValueInput";
-            this.greenValueInput.Size = new System.Drawing.Size(120, 20);
+            this.greenValueInput.Size = new System.Drawing.Size(120, 26);
             this.greenValueInput.TabIndex = 36;
             // 
             // blueValueInput
             // 
+            this.blueValueInput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.blueValueInput.Location = new System.Drawing.Point(337, 298);
             this.blueValueInput.Maximum = new decimal(new int[] {
             255,
@@ -187,14 +197,14 @@
             0,
             -2147483648});
             this.blueValueInput.Name = "blueValueInput";
-            this.blueValueInput.Size = new System.Drawing.Size(120, 20);
+            this.blueValueInput.Size = new System.Drawing.Size(120, 26);
             this.blueValueInput.TabIndex = 37;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(237, 156);
+            this.label1.Location = new System.Drawing.Point(233, 159);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 38;
@@ -202,10 +212,11 @@
             // colorStatusLabel
             // 
             this.colorStatusLabel.AutoSize = true;
+            this.colorStatusLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.colorStatusLabel.ForeColor = System.Drawing.Color.Red;
             this.colorStatusLabel.Location = new System.Drawing.Point(229, 338);
             this.colorStatusLabel.Name = "colorStatusLabel";
-            this.colorStatusLabel.Size = new System.Drawing.Size(220, 13);
+            this.colorStatusLabel.Size = new System.Drawing.Size(405, 19);
             this.colorStatusLabel.TabIndex = 39;
             this.colorStatusLabel.Text = "* All color values must be between 0 and 255";
             this.colorStatusLabel.Visible = false;

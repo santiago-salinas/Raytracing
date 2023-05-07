@@ -75,6 +75,7 @@
             // xValueInput
             // 
             this.xValueInput.DecimalPlaces = 2;
+            this.xValueInput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xValueInput.Location = new System.Drawing.Point(79, 69);
             this.xValueInput.Maximum = new decimal(new int[] {
             999,
@@ -87,12 +88,13 @@
             0,
             -2147483648});
             this.xValueInput.Name = "xValueInput";
-            this.xValueInput.Size = new System.Drawing.Size(86, 20);
+            this.xValueInput.Size = new System.Drawing.Size(86, 26);
             this.xValueInput.TabIndex = 3;
             // 
             // yValueInput
             // 
             this.yValueInput.DecimalPlaces = 2;
+            this.yValueInput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.yValueInput.Location = new System.Drawing.Point(79, 106);
             this.yValueInput.Maximum = new decimal(new int[] {
             999,
@@ -105,12 +107,13 @@
             0,
             -2147483648});
             this.yValueInput.Name = "yValueInput";
-            this.yValueInput.Size = new System.Drawing.Size(86, 20);
+            this.yValueInput.Size = new System.Drawing.Size(86, 26);
             this.yValueInput.TabIndex = 4;
             // 
             // zValueInput
             // 
             this.zValueInput.DecimalPlaces = 2;
+            this.zValueInput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.zValueInput.Location = new System.Drawing.Point(79, 146);
             this.zValueInput.Maximum = new decimal(new int[] {
             999,
@@ -123,12 +126,12 @@
             0,
             -2147483648});
             this.zValueInput.Name = "zValueInput";
-            this.zValueInput.Size = new System.Drawing.Size(86, 20);
+            this.zValueInput.Size = new System.Drawing.Size(86, 26);
             this.zValueInput.TabIndex = 5;
             // 
             // cancelButton
             // 
-            this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.Location = new System.Drawing.Point(114, 189);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(87, 34);
@@ -139,7 +142,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveButton.Location = new System.Drawing.Point(10, 189);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(85, 34);
@@ -151,11 +154,11 @@
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
-            this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLabel.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleLabel.Location = new System.Drawing.Point(76, 20);
             this.titleLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(60, 24);
+            this.titleLabel.Size = new System.Drawing.Size(70, 22);
             this.titleLabel.TabIndex = 8;
             this.titleLabel.Text = "label4";
             // 
