@@ -51,30 +51,30 @@ namespace UI
             // 
             // userNameTextBox
             // 
-            this.userNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userNameTextBox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userNameTextBox.Location = new System.Drawing.Point(65, 257);
             this.userNameTextBox.Name = "userNameTextBox";
-            this.userNameTextBox.Size = new System.Drawing.Size(347, 22);
+            this.userNameTextBox.Size = new System.Drawing.Size(347, 23);
             this.userNameTextBox.TabIndex = 0;
             this.userNameTextBox.TextChanged += new System.EventHandler(this.usernameTextBoxChanged);
             // 
             // passwordTextBox
             // 
-            this.passwordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordTextBox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordTextBox.Location = new System.Drawing.Point(65, 348);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
-            this.passwordTextBox.Size = new System.Drawing.Size(347, 22);
+            this.passwordTextBox.Size = new System.Drawing.Size(347, 23);
             this.passwordTextBox.TabIndex = 1;
             this.passwordTextBox.TextChanged += new System.EventHandler(this.passwordTextBoxChanged);
             // 
             // confirmPasswordTextbox
             // 
-            this.confirmPasswordTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.confirmPasswordTextbox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.confirmPasswordTextbox.Location = new System.Drawing.Point(65, 439);
             this.confirmPasswordTextbox.Name = "confirmPasswordTextbox";
             this.confirmPasswordTextbox.PasswordChar = '*';
-            this.confirmPasswordTextbox.Size = new System.Drawing.Size(347, 22);
+            this.confirmPasswordTextbox.Size = new System.Drawing.Size(347, 23);
             this.confirmPasswordTextbox.TabIndex = 2;
             this.confirmPasswordTextbox.TextChanged += new System.EventHandler(this.passwordConfirmTextBoxChanged);
             // 
@@ -93,22 +93,22 @@ namespace UI
             // passwordStatusLabel
             // 
             this.passwordStatusLabel.AutoSize = true;
-            this.passwordStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordStatusLabel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordStatusLabel.ForeColor = System.Drawing.Color.Red;
             this.passwordStatusLabel.Location = new System.Drawing.Point(62, 380);
             this.passwordStatusLabel.Name = "passwordStatusLabel";
-            this.passwordStatusLabel.Size = new System.Drawing.Size(145, 16);
+            this.passwordStatusLabel.Size = new System.Drawing.Size(329, 15);
             this.passwordStatusLabel.TabIndex = 14;
             this.passwordStatusLabel.Text = resources.GetString("passwordStatusLabel.Text");
             // 
             // usernameStatusLabel
             // 
             this.usernameStatusLabel.AutoSize = true;
-            this.usernameStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameStatusLabel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.usernameStatusLabel.ForeColor = System.Drawing.Color.Red;
             this.usernameStatusLabel.Location = new System.Drawing.Point(62, 289);
             this.usernameStatusLabel.Name = "usernameStatusLabel";
-            this.usernameStatusLabel.Size = new System.Drawing.Size(145, 16);
+            this.usernameStatusLabel.Size = new System.Drawing.Size(329, 15);
             this.usernameStatusLabel.TabIndex = 17;
             this.usernameStatusLabel.Text = resources.GetString("usernameStatusLabel.Text");
             // 
@@ -167,7 +167,8 @@ namespace UI
             this.UserLabel.Name = "UserLabel";
             this.UserLabel.Size = new System.Drawing.Size(58, 24);
             this.UserLabel.TabIndex = 12;
-            this.UserLabel.Text = "User";            // 
+            this.UserLabel.Text = "User";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -177,7 +178,6 @@ namespace UI
             this.label1.Size = new System.Drawing.Size(106, 24);
             this.label1.TabIndex = 21;
             this.label1.Text = "Password";
-
             // 
             // label2
             // 
@@ -241,7 +241,6 @@ namespace UI
             this.Name = "SignUpPage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SignUpPage";
-
             this.Banner.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
             this.ResumeLayout(false);
