@@ -55,6 +55,39 @@ namespace BusinessLogic
             }
         }
 
+        public HitRecord IsHitByRay(Ray ray, double tMin, double tMax, Vector position)
+        {
+            Vector vectorOriginCenter = ray.Origin.Subtract(position);
+            double a = ray.Direction.Dot(ray.Direction);
+            double b = vectorOriginCenter.Dot(ray.Direction) * 2;
+            double c = vectorOriginCenter.Dot(vectorOriginCenter) - Radius * Radius;
+            double discriminant = b * b - 4 * a * c;
+            if (discriminant < 0)
+            {
+                return new HitRecord() { IsHit = false };
+            }
+            else
+            {
+                double t = (-1 * b - Math.Sqrt(discriminant)) / (2 * a);
+                Vector intersectionPoint = ray.PointAt(t);
+                Vector normal = intersectionPoint.Subtract(position).Divide(Radius);
+                if (t < tMax && t > tMin)
+                {
+                    return new HitRecord()
+                    {
+                        IsHit = true,
+                        TDistanceFromOrigin = t,
+                        Intersection = intersectionPoint,
+                        Normal = normal,
+                    };
+                }
+                else
+                {
+                    return new HitRecord() { IsHit = false };
+                }
+            }
+        }
+
         public override bool Equals(object other)
         {
             return this.Name == ((Sphere)other).Name && this.Radius == ((Sphere)other).Radius;
