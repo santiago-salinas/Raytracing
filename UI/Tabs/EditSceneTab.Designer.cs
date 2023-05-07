@@ -52,11 +52,10 @@
             // 
             // saveButton
             // 
-            this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(45, 36);
-            this.saveButton.Margin = new System.Windows.Forms.Padding(4);
+            this.saveButton.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveButton.Location = new System.Drawing.Point(34, 29);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(113, 95);
+            this.saveButton.Size = new System.Drawing.Size(85, 77);
             this.saveButton.TabIndex = 0;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -65,52 +64,47 @@
             // lastModificationLabel
             // 
             this.lastModificationLabel.AutoSize = true;
-            this.lastModificationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lastModificationLabel.Location = new System.Drawing.Point(785, 71);
-            this.lastModificationLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lastModificationLabel.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lastModificationLabel.Location = new System.Drawing.Point(589, 58);
             this.lastModificationLabel.Name = "lastModificationLabel";
-            this.lastModificationLabel.Size = new System.Drawing.Size(179, 29);
+            this.lastModificationLabel.Size = new System.Drawing.Size(175, 23);
             this.lastModificationLabel.TabIndex = 2;
             this.lastModificationLabel.Text = "Last modified: ";
             // 
             // lookFromLabel
             // 
             this.lookFromLabel.AutoSize = true;
-            this.lookFromLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lookFromLabel.Location = new System.Drawing.Point(71, 166);
-            this.lookFromLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lookFromLabel.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lookFromLabel.Location = new System.Drawing.Point(63, 135);
             this.lookFromLabel.Name = "lookFromLabel";
-            this.lookFromLabel.Size = new System.Drawing.Size(84, 20);
+            this.lookFromLabel.Size = new System.Drawing.Size(80, 18);
             this.lookFromLabel.TabIndex = 4;
             this.lookFromLabel.Text = "Look from";
             // 
             // lookAtLabel
             // 
             this.lookAtLabel.AutoSize = true;
-            this.lookAtLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lookAtLabel.Location = new System.Drawing.Point(285, 166);
-            this.lookAtLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lookAtLabel.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lookAtLabel.Location = new System.Drawing.Point(270, 135);
             this.lookAtLabel.Name = "lookAtLabel";
-            this.lookAtLabel.Size = new System.Drawing.Size(64, 20);
+            this.lookAtLabel.Size = new System.Drawing.Size(64, 18);
             this.lookAtLabel.TabIndex = 5;
             this.lookAtLabel.Text = "Look at";
             // 
             // fovLabel
             // 
             this.fovLabel.AutoSize = true;
-            this.fovLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fovLabel.Location = new System.Drawing.Point(525, 166);
-            this.fovLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.fovLabel.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fovLabel.Location = new System.Drawing.Point(459, 135);
             this.fovLabel.Name = "fovLabel";
-            this.fovLabel.Size = new System.Drawing.Size(43, 20);
+            this.fovLabel.Size = new System.Drawing.Size(32, 18);
             this.fovLabel.TabIndex = 6;
             this.fovLabel.Text = "FOV";
             // 
             // fovInput
             // 
-            this.fovInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fovInput.Location = new System.Drawing.Point(505, 206);
-            this.fovInput.Margin = new System.Windows.Forms.Padding(4);
+            this.fovInput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fovInput.Location = new System.Drawing.Point(427, 168);
             this.fovInput.Maximum = new decimal(new int[] {
             160,
             0,
@@ -122,7 +116,7 @@
             0,
             0});
             this.fovInput.Name = "fovInput";
-            this.fovInput.Size = new System.Drawing.Size(160, 30);
+            this.fovInput.Size = new System.Drawing.Size(120, 26);
             this.fovInput.TabIndex = 9;
             this.fovInput.Value = new decimal(new int[] {
             30,
@@ -135,52 +129,47 @@
             // 
             this.availableModelsPanel.AutoScroll = true;
             this.availableModelsPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.availableModelsPanel.Location = new System.Drawing.Point(59, 326);
-            this.availableModelsPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.availableModelsPanel.Location = new System.Drawing.Point(12, 265);
             this.availableModelsPanel.Name = "availableModelsPanel";
-            this.availableModelsPanel.Size = new System.Drawing.Size(276, 576);
+            this.availableModelsPanel.Size = new System.Drawing.Size(272, 468);
             this.availableModelsPanel.TabIndex = 10;
             // 
             // positionedModelsPanel
             // 
             this.positionedModelsPanel.AutoScroll = true;
-            this.positionedModelsPanel.Location = new System.Drawing.Point(1299, 328);
-            this.positionedModelsPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.positionedModelsPanel.Location = new System.Drawing.Point(946, 266);
             this.positionedModelsPanel.Name = "positionedModelsPanel";
-            this.positionedModelsPanel.Size = new System.Drawing.Size(296, 575);
+            this.positionedModelsPanel.Size = new System.Drawing.Size(317, 467);
             this.positionedModelsPanel.TabIndex = 11;
             // 
             // availableModelsLabel
             // 
             this.availableModelsLabel.AutoSize = true;
-            this.availableModelsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.availableModelsLabel.Location = new System.Drawing.Point(59, 281);
-            this.availableModelsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.availableModelsLabel.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.availableModelsLabel.Location = new System.Drawing.Point(44, 228);
             this.availableModelsLabel.Name = "availableModelsLabel";
-            this.availableModelsLabel.Size = new System.Drawing.Size(218, 31);
+            this.availableModelsLabel.Size = new System.Drawing.Size(202, 24);
             this.availableModelsLabel.TabIndex = 12;
             this.availableModelsLabel.Text = "Available models";
             // 
             // positionedModelsLabel
             // 
             this.positionedModelsLabel.AutoSize = true;
-            this.positionedModelsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.positionedModelsLabel.Location = new System.Drawing.Point(1293, 281);
-            this.positionedModelsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.positionedModelsLabel.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.positionedModelsLabel.Location = new System.Drawing.Point(970, 228);
             this.positionedModelsLabel.Name = "positionedModelsLabel";
-            this.positionedModelsLabel.Size = new System.Drawing.Size(235, 31);
+            this.positionedModelsLabel.Size = new System.Drawing.Size(214, 24);
             this.positionedModelsLabel.TabIndex = 13;
             this.positionedModelsLabel.Text = "Positioned models";
             // 
             // renderButton
             // 
             this.renderButton.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.renderButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.renderButton.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.renderButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.renderButton.Location = new System.Drawing.Point(1021, 266);
-            this.renderButton.Margin = new System.Windows.Forms.Padding(4);
+            this.renderButton.Location = new System.Drawing.Point(766, 216);
             this.renderButton.Name = "renderButton";
-            this.renderButton.Size = new System.Drawing.Size(193, 54);
+            this.renderButton.Size = new System.Drawing.Size(145, 44);
             this.renderButton.TabIndex = 15;
             this.renderButton.Text = "Render";
             this.renderButton.UseVisualStyleBackColor = false;
@@ -189,74 +178,67 @@
             // sceneLabel
             // 
             this.sceneLabel.AutoSize = true;
-            this.sceneLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sceneLabel.Location = new System.Drawing.Point(403, 281);
-            this.sceneLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.sceneLabel.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sceneLabel.Location = new System.Drawing.Point(302, 228);
             this.sceneLabel.Name = "sceneLabel";
-            this.sceneLabel.Size = new System.Drawing.Size(91, 31);
+            this.sceneLabel.Size = new System.Drawing.Size(70, 24);
             this.sceneLabel.TabIndex = 16;
             this.sceneLabel.Text = "Scene";
             // 
             // lastRenderLabel
             // 
             this.lastRenderLabel.AutoSize = true;
-            this.lastRenderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lastRenderLabel.Location = new System.Drawing.Point(552, 818);
-            this.lastRenderLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lastRenderLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lastRenderLabel.Location = new System.Drawing.Point(325, 665);
             this.lastRenderLabel.Name = "lastRenderLabel";
-            this.lastRenderLabel.Size = new System.Drawing.Size(143, 25);
+            this.lastRenderLabel.Size = new System.Drawing.Size(144, 19);
             this.lastRenderLabel.TabIndex = 17;
             this.lastRenderLabel.Text = "Last rendered: ";
             // 
             // outdatedStatusLabel
             // 
             this.outdatedStatusLabel.AutoSize = true;
-            this.outdatedStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.outdatedStatusLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.outdatedStatusLabel.ForeColor = System.Drawing.Color.DarkOrange;
-            this.outdatedStatusLabel.Location = new System.Drawing.Point(552, 866);
-            this.outdatedStatusLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.outdatedStatusLabel.Location = new System.Drawing.Point(325, 702);
             this.outdatedStatusLabel.Name = "outdatedStatusLabel";
-            this.outdatedStatusLabel.Size = new System.Drawing.Size(463, 25);
+            this.outdatedStatusLabel.Size = new System.Drawing.Size(360, 19);
             this.outdatedStatusLabel.TabIndex = 18;
             this.outdatedStatusLabel.Text = "* WARNING: The shown render is OUTDATED";
             this.outdatedStatusLabel.Visible = false;
             // 
             // nameTextbox
             // 
-            this.nameTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameTextbox.Location = new System.Drawing.Point(207, 53);
-            this.nameTextbox.Margin = new System.Windows.Forms.Padding(4);
+            this.nameTextbox.Font = new System.Drawing.Font("Consolas", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameTextbox.Location = new System.Drawing.Point(155, 43);
             this.nameTextbox.Name = "nameTextbox";
-            this.nameTextbox.Size = new System.Drawing.Size(537, 60);
+            this.nameTextbox.Size = new System.Drawing.Size(404, 51);
             this.nameTextbox.TabIndex = 19;
             // 
             // nameStatusLabel
             // 
             this.nameStatusLabel.AutoSize = true;
             this.nameStatusLabel.ForeColor = System.Drawing.Color.Red;
-            this.nameStatusLabel.Location = new System.Drawing.Point(207, 122);
-            this.nameStatusLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.nameStatusLabel.Location = new System.Drawing.Point(155, 99);
             this.nameStatusLabel.Name = "nameStatusLabel";
-            this.nameStatusLabel.Size = new System.Drawing.Size(0, 16);
+            this.nameStatusLabel.Size = new System.Drawing.Size(0, 13);
             this.nameStatusLabel.TabIndex = 20;
             // 
             // renderPanel
             // 
             this.renderPanel.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.renderPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.renderPanel.Location = new System.Drawing.Point(386, 328);
-            this.renderPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.renderPanel.Location = new System.Drawing.Point(290, 266);
             this.renderPanel.Name = "renderPanel";
-            this.renderPanel.Size = new System.Drawing.Size(865, 461);
+            this.renderPanel.Size = new System.Drawing.Size(650, 375);
             this.renderPanel.TabIndex = 21;
             // 
             // lookFromButton
             // 
-            this.lookFromButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lookFromButton.Location = new System.Drawing.Point(49, 198);
-            this.lookFromButton.Margin = new System.Windows.Forms.Padding(4);
+            this.lookFromButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lookFromButton.Location = new System.Drawing.Point(22, 160);
             this.lookFromButton.Name = "lookFromButton";
-            this.lookFromButton.Size = new System.Drawing.Size(135, 47);
+            this.lookFromButton.Size = new System.Drawing.Size(165, 38);
             this.lookFromButton.TabIndex = 22;
             this.lookFromButton.Text = "(0,0,0)";
             this.lookFromButton.UseVisualStyleBackColor = true;
@@ -264,11 +246,10 @@
             // 
             // lookAtButton
             // 
-            this.lookAtButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lookAtButton.Location = new System.Drawing.Point(255, 197);
-            this.lookAtButton.Margin = new System.Windows.Forms.Padding(4);
+            this.lookAtButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lookAtButton.Location = new System.Drawing.Point(221, 160);
             this.lookAtButton.Name = "lookAtButton";
-            this.lookAtButton.Size = new System.Drawing.Size(135, 47);
+            this.lookAtButton.Size = new System.Drawing.Size(165, 38);
             this.lookAtButton.TabIndex = 23;
             this.lookAtButton.Text = "(0,0,0)";
             this.lookAtButton.UseVisualStyleBackColor = true;
@@ -276,9 +257,9 @@
             // 
             // EditSceneTab
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1700, 937);
+            this.ClientSize = new System.Drawing.Size(1275, 761);
             this.ControlBox = false;
             this.Controls.Add(this.lookAtButton);
             this.Controls.Add(this.lookFromButton);
@@ -300,7 +281,6 @@
             this.Controls.Add(this.lastModificationLabel);
             this.Controls.Add(this.saveButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "EditSceneTab";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "sceneEditTab";

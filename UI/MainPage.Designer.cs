@@ -43,6 +43,7 @@
             // shapesSideBarButton
             // 
             this.shapesSideBarButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.shapesSideBarButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.shapesSideBarButton.Location = new System.Drawing.Point(0, 89);
             this.shapesSideBarButton.Name = "shapesSideBarButton";
             this.shapesSideBarButton.Size = new System.Drawing.Size(200, 93);
@@ -54,6 +55,7 @@
             // materialsSideBarButton
             // 
             this.materialsSideBarButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.materialsSideBarButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.materialsSideBarButton.Location = new System.Drawing.Point(0, 0);
             this.materialsSideBarButton.Name = "materialsSideBarButton";
             this.materialsSideBarButton.Size = new System.Drawing.Size(200, 89);
@@ -65,6 +67,7 @@
             // modelsSideBarButton
             // 
             this.modelsSideBarButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.modelsSideBarButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.modelsSideBarButton.Location = new System.Drawing.Point(0, 182);
             this.modelsSideBarButton.Name = "modelsSideBarButton";
             this.modelsSideBarButton.Size = new System.Drawing.Size(200, 89);
@@ -76,6 +79,7 @@
             // scenesSideBarButton
             // 
             this.scenesSideBarButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.scenesSideBarButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.scenesSideBarButton.Location = new System.Drawing.Point(0, 271);
             this.scenesSideBarButton.Name = "scenesSideBarButton";
             this.scenesSideBarButton.Size = new System.Drawing.Size(200, 89);
@@ -95,13 +99,14 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 782);
+            this.panel1.Size = new System.Drawing.Size(200, 781);
             this.panel1.TabIndex = 0;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.loggedUsernameLabel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel2.Location = new System.Drawing.Point(0, 360);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(200, 76);
@@ -110,16 +115,18 @@
             // loggedUsernameLabel
             // 
             this.loggedUsernameLabel.AutoSize = true;
-            this.loggedUsernameLabel.Location = new System.Drawing.Point(82, 32);
+            this.loggedUsernameLabel.Location = new System.Drawing.Point(67, 31);
             this.loggedUsernameLabel.Name = "loggedUsernameLabel";
-            this.loggedUsernameLabel.Size = new System.Drawing.Size(35, 13);
+            this.loggedUsernameLabel.Size = new System.Drawing.Size(63, 19);
             this.loggedUsernameLabel.TabIndex = 0;
             this.loggedUsernameLabel.Text = "label1";
+            this.loggedUsernameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // signOutButton
             // 
             this.signOutButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.signOutButton.Location = new System.Drawing.Point(0, 731);
+            this.signOutButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.signOutButton.Location = new System.Drawing.Point(0, 730);
             this.signOutButton.Name = "signOutButton";
             this.signOutButton.Size = new System.Drawing.Size(200, 51);
             this.signOutButton.TabIndex = 4;
@@ -131,7 +138,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1353, 782);
+            this.ClientSize = new System.Drawing.Size(1434, 781);
             this.Controls.Add(this.panel1);
             this.IsMdiContainer = true;
             this.Name = "MainPage";
