@@ -48,37 +48,40 @@
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
-            this.nameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameLabel.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nameLabel.Location = new System.Drawing.Point(169, 24);
             this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(64, 25);
+            this.nameLabel.Size = new System.Drawing.Size(76, 23);
             this.nameLabel.TabIndex = 2;
             this.nameLabel.Text = "label1";
             // 
             // redValueLabel
             // 
             this.redValueLabel.AutoSize = true;
-            this.redValueLabel.Location = new System.Drawing.Point(171, 88);
+            this.redValueLabel.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.redValueLabel.Location = new System.Drawing.Point(170, 73);
             this.redValueLabel.Name = "redValueLabel";
-            this.redValueLabel.Size = new System.Drawing.Size(21, 13);
+            this.redValueLabel.Size = new System.Drawing.Size(32, 18);
             this.redValueLabel.TabIndex = 3;
             this.redValueLabel.Text = "R: ";
             // 
             // greenValueLabel
             // 
             this.greenValueLabel.AutoSize = true;
-            this.greenValueLabel.Location = new System.Drawing.Point(242, 88);
+            this.greenValueLabel.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.greenValueLabel.Location = new System.Drawing.Point(250, 73);
             this.greenValueLabel.Name = "greenValueLabel";
-            this.greenValueLabel.Size = new System.Drawing.Size(21, 13);
+            this.greenValueLabel.Size = new System.Drawing.Size(32, 18);
             this.greenValueLabel.TabIndex = 4;
             this.greenValueLabel.Text = "G: ";
             // 
             // blueValueLabel
             // 
             this.blueValueLabel.AutoSize = true;
-            this.blueValueLabel.Location = new System.Drawing.Point(322, 88);
+            this.blueValueLabel.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.blueValueLabel.Location = new System.Drawing.Point(334, 73);
             this.blueValueLabel.Name = "blueValueLabel";
-            this.blueValueLabel.Size = new System.Drawing.Size(20, 13);
+            this.blueValueLabel.Size = new System.Drawing.Size(32, 18);
             this.blueValueLabel.TabIndex = 5;
             this.blueValueLabel.Text = "B: ";
             // 
@@ -88,7 +91,7 @@
             this.deleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteButton.Font = new System.Drawing.Font("Impact", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.deleteButton.Location = new System.Drawing.Point(476, 43);
+            this.deleteButton.Location = new System.Drawing.Point(487, 43);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(56, 48);
             this.deleteButton.TabIndex = 6;
@@ -99,10 +102,11 @@
             // deleteLabel
             // 
             this.deleteLabel.AutoSize = true;
+            this.deleteLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteLabel.ForeColor = System.Drawing.Color.Firebrick;
-            this.deleteLabel.Location = new System.Drawing.Point(288, 110);
+            this.deleteLabel.Location = new System.Drawing.Point(32, 113);
             this.deleteLabel.Name = "deleteLabel";
-            this.deleteLabel.Size = new System.Drawing.Size(289, 13);
+            this.deleteLabel.Size = new System.Drawing.Size(549, 19);
             this.deleteLabel.TabIndex = 7;
             this.deleteLabel.Text = "* You cannot delete a material that is being used by a model";
             this.deleteLabel.Visible = false;

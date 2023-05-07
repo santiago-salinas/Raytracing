@@ -37,16 +37,16 @@
             // flowLayoutPanel
             // 
             this.flowLayoutPanel.AutoScroll = true;
-            this.flowLayoutPanel.Location = new System.Drawing.Point(141, 132);
+            this.flowLayoutPanel.Location = new System.Drawing.Point(12, 132);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(954, 482);
+            this.flowLayoutPanel.Size = new System.Drawing.Size(1251, 676);
             this.flowLayoutPanel.TabIndex = 4;
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.LightGray;
             this.pictureBox1.Image = global::UI.Properties.Resources.add;
-            this.pictureBox1.Location = new System.Drawing.Point(449, 54);
+            this.pictureBox1.Location = new System.Drawing.Point(472, 55);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(57, 50);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -57,11 +57,11 @@
             // 
             this.addSceneButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.addSceneButton.BackColor = System.Drawing.Color.LightGray;
-            this.addSceneButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addSceneButton.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addSceneButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.addSceneButton.Location = new System.Drawing.Point(425, 31);
+            this.addSceneButton.Location = new System.Drawing.Point(453, 31);
             this.addSceneButton.Name = "addSceneButton";
-            this.addSceneButton.Size = new System.Drawing.Size(371, 95);
+            this.addSceneButton.Size = new System.Drawing.Size(370, 95);
             this.addSceneButton.TabIndex = 5;
             this.addSceneButton.Text = "     Add new scene";
             this.addSceneButton.UseVisualStyleBackColor = false;
@@ -71,7 +71,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 650);
+            this.ClientSize = new System.Drawing.Size(1276, 820);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.addSceneButton);
             this.Controls.Add(this.flowLayoutPanel);

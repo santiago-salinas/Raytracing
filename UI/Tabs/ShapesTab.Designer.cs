@@ -48,9 +48,9 @@
             // 
             this.addShapeButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.addShapeButton.BackColor = System.Drawing.Color.LightGray;
-            this.addShapeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addShapeButton.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addShapeButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.addShapeButton.Location = new System.Drawing.Point(368, 75);
+            this.addShapeButton.Location = new System.Drawing.Point(453, 31);
             this.addShapeButton.Name = "addShapeButton";
             this.addShapeButton.Size = new System.Drawing.Size(371, 95);
             this.addShapeButton.TabIndex = 1;
@@ -61,17 +61,16 @@
             // flowLayoutPanel
             // 
             this.flowLayoutPanel.AutoScroll = true;
-            this.flowLayoutPanel.Location = new System.Drawing.Point(210, 215);
+            this.flowLayoutPanel.Location = new System.Drawing.Point(12, 132);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(701, 387);
+            this.flowLayoutPanel.Size = new System.Drawing.Size(1252, 676);
             this.flowLayoutPanel.TabIndex = 3;
-            
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.LightGray;
             this.pictureBox1.Image = global::UI.Properties.Resources.add;
-            this.pictureBox1.Location = new System.Drawing.Point(381, 96);
+            this.pictureBox1.Location = new System.Drawing.Point(472, 55);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(57, 50);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -82,7 +81,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 650);
+            this.ClientSize = new System.Drawing.Size(1276, 820);
             this.Controls.Add(this.flowLayoutPanel);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.addShapeButton);

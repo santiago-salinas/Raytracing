@@ -38,20 +38,20 @@
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
-            this.nameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameLabel.Font = new System.Drawing.Font("Consolas", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nameLabel.Location = new System.Drawing.Point(352, 28);
             this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(126, 46);
+            this.nameLabel.Size = new System.Drawing.Size(152, 47);
             this.nameLabel.TabIndex = 1;
             this.nameLabel.Text = "label1";
             // 
             // lastModificationLabel
             // 
             this.lastModificationLabel.AutoSize = true;
-            this.lastModificationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lastModificationLabel.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lastModificationLabel.Location = new System.Drawing.Point(355, 136);
             this.lastModificationLabel.Name = "lastModificationLabel";
-            this.lastModificationLabel.Size = new System.Drawing.Size(138, 25);
+            this.lastModificationLabel.Size = new System.Drawing.Size(175, 23);
             this.lastModificationLabel.TabIndex = 2;
             this.lastModificationLabel.Text = "Last modified: ";
             // 
@@ -59,9 +59,9 @@
             // 
             this.deleteButton.BackColor = System.Drawing.Color.DimGray;
             this.deleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.deleteButton.Font = new System.Drawing.Font("Impact", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteButton.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.deleteButton.Location = new System.Drawing.Point(848, 67);
+            this.deleteButton.Location = new System.Drawing.Point(1079, 71);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(84, 72);
             this.deleteButton.TabIndex = 8;
@@ -71,9 +71,10 @@
             // 
             // editButton
             // 
-            this.editButton.Location = new System.Drawing.Point(732, 86);
+            this.editButton.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editButton.Location = new System.Drawing.Point(933, 82);
             this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(75, 35);
+            this.editButton.Size = new System.Drawing.Size(113, 57);
             this.editButton.TabIndex = 9;
             this.editButton.Text = "Edit";
             this.editButton.UseVisualStyleBackColor = true;
@@ -96,7 +97,7 @@
             this.Controls.Add(this.lastModificationLabel);
             this.Controls.Add(this.nameLabel);
             this.Name = "SceneCard";
-            this.Size = new System.Drawing.Size(965, 240);
+            this.Size = new System.Drawing.Size(1200, 240);
             this.ResumeLayout(false);
             this.PerformLayout();
 

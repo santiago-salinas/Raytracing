@@ -41,8 +41,8 @@
             this.PasswordLabel = new System.Windows.Forms.Label();
             this.SignUpLabel = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             this.Banner.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -60,24 +60,22 @@
             this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.Logo.TabIndex = 0;
             this.Logo.TabStop = false;
-            this.Logo.Click += new System.EventHandler(this.Logo_Click);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Gray;
             this.panel1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.panel1.Location = new System.Drawing.Point(59, 82);
+            this.panel1.Location = new System.Drawing.Point(59, 90);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(350, 1);
             this.panel1.TabIndex = 3;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // logInButton
             // 
-            this.logInButton.Font = new System.Drawing.Font("Consolas", 9.75F);
-            this.logInButton.Location = new System.Drawing.Point(190, 189);
+            this.logInButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.logInButton.Location = new System.Drawing.Point(171, 230);
             this.logInButton.Name = "logInButton";
-            this.logInButton.Size = new System.Drawing.Size(112, 25);
+            this.logInButton.Size = new System.Drawing.Size(125, 41);
             this.logInButton.TabIndex = 2;
             this.logInButton.Text = "Log In";
             this.logInButton.UseVisualStyleBackColor = true;
@@ -85,8 +83,8 @@
             // 
             // signUpButton
             // 
-            this.signUpButton.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.signUpButton.Location = new System.Drawing.Point(202, 43);
+            this.signUpButton.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.signUpButton.Location = new System.Drawing.Point(197, 43);
             this.signUpButton.Name = "signUpButton";
             this.signUpButton.Size = new System.Drawing.Size(80, 23);
             this.signUpButton.TabIndex = 3;
@@ -96,31 +94,32 @@
             // 
             // userNameTextBox
             // 
+            this.userNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userNameTextBox.Location = new System.Drawing.Point(59, 56);
             this.userNameTextBox.Name = "userNameTextBox";
-            this.userNameTextBox.Size = new System.Drawing.Size(350, 20);
+            this.userNameTextBox.Size = new System.Drawing.Size(350, 26);
             this.userNameTextBox.TabIndex = 0;
             // 
             // passwordTextBox
             // 
-            this.passwordTextBox.Location = new System.Drawing.Point(61, 145);
+            this.passwordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordTextBox.Location = new System.Drawing.Point(61, 141);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
-            this.passwordTextBox.Size = new System.Drawing.Size(348, 20);
+            this.passwordTextBox.Size = new System.Drawing.Size(348, 26);
             this.passwordTextBox.TabIndex = 1;
             // 
             // logInLabel
             // 
             this.logInLabel.AutoSize = true;
-            this.logInLabel.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.logInLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logInLabel.ForeColor = System.Drawing.Color.Red;
-            this.logInLabel.Location = new System.Drawing.Point(111, 230);
+            this.logInLabel.Location = new System.Drawing.Point(32, 198);
             this.logInLabel.Name = "logInLabel";
-            this.logInLabel.Size = new System.Drawing.Size(283, 13);
+            this.logInLabel.Size = new System.Drawing.Size(423, 19);
             this.logInLabel.TabIndex = 9;
             this.logInLabel.Text = resources.GetString("logInLabel.Text");
             this.logInLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.logInLabel.Click += new System.EventHandler(this.logInLabel_Click);
             // 
             // Banner
             // 
@@ -142,7 +141,6 @@
             this.UserLabel.Size = new System.Drawing.Size(58, 24);
             this.UserLabel.TabIndex = 11;
             this.UserLabel.Text = "User";
-            this.UserLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // PasswordLabel
             // 
@@ -159,15 +157,14 @@
             this.SignUpLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SignUpLabel.AutoSize = true;
-            this.SignUpLabel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SignUpLabel.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SignUpLabel.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.SignUpLabel.Location = new System.Drawing.Point(148, 16);
+            this.SignUpLabel.Location = new System.Drawing.Point(138, 22);
             this.SignUpLabel.Name = "SignUpLabel";
-            this.SignUpLabel.Size = new System.Drawing.Size(189, 15);
+            this.SignUpLabel.Size = new System.Drawing.Size(216, 18);
             this.SignUpLabel.TabIndex = 13;
             this.SignUpLabel.Text = "Don\'t have an account yet?";
             this.SignUpLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.SignUpLabel.Click += new System.EventHandler(this.label3_Click);
             // 
             // panel3
             // 
@@ -185,7 +182,15 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(484, 376);
             this.panel3.TabIndex = 14;
-            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Gray;
+            this.panel2.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.panel2.Location = new System.Drawing.Point(59, 176);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(350, 1);
+            this.panel2.TabIndex = 4;
             // 
             // panel4
             // 
@@ -197,15 +202,6 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(484, 100);
             this.panel4.TabIndex = 15;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.Gray;
-            this.panel2.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.panel2.Location = new System.Drawing.Point(59, 171);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(350, 1);
-            this.panel2.TabIndex = 4;
             // 
             // LogInPage
             // 
@@ -221,7 +217,6 @@
             this.Name = "LogInPage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.LogInPage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
             this.Banner.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
