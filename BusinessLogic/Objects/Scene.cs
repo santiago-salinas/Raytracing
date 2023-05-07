@@ -8,10 +8,6 @@ namespace BusinessLogic
         private List<PositionedModel> _positionedModellList;
         private string _name;
 
-        //private User _owner;
-        //private PPM _preview;
-        // CameraDTO _cameraDTO;
-
         public Scene()
         {
             _positionedModellList = new List<PositionedModel>();
@@ -103,7 +99,7 @@ namespace BusinessLogic
         {
             foreach (PositionedModel elem in _positionedModellList)
             {
-                if (elem.PositionedModelModel == model) { return true; }
+                if (elem.Model == model) { return true; }
             }
             return false;
         }

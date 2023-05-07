@@ -15,10 +15,10 @@ namespace UI.Cards
             this.model = model;
             modelNameLabel.Text = model.Name;
             
-            string shapeName = model.ModelShape.Name;
+            string shapeName = model.Shape.Name;
             shapeNameLabel.Text += shapeName;
 
-            string materialName = model.ModelColor.Name;
+            string materialName = model.Material.Name;
             materialNameLabel.Text += materialName;
 
             loadPreview();
@@ -47,7 +47,7 @@ namespace UI.Cards
                 
                 Panel coloredBox = new Panel();
 
-                BusinessLogic.Color materialColor = model.ModelColor.Color;
+                BusinessLogic.Color materialColor = model.Material.Color;
 
                 int redValue = (int)materialColor.Red;
                 int greenValue = (int)materialColor.Green;

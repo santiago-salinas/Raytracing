@@ -49,18 +49,17 @@ namespace UI.Dialogs
                 nameStatusLabel.Text = "* Model with that name already exists";
             }
 
-            if (previewCheckbox.Checked)
-            {
-                //generate a ppm and grant it to model
-                NewModel.Preview = new PPM(5, 5);
-            }
-
             if (nameIsCorrect)
             {
                 NewModel.Owner = loggedUser;
-                NewModel.ModelShape = selectedShape;
-                NewModel.ModelColor = selectedMaterial;
+                NewModel.Shape = selectedShape;
+                NewModel.Material = selectedMaterial;
                 DialogResult = DialogResult.OK;
+            }
+
+            if (previewCheckbox.Checked)
+            {
+                NewModel.renderPreview();
             }
         }
 

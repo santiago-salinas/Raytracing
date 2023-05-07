@@ -91,26 +91,26 @@ namespace UI
 
             scene1.AddPositionedModel(new PositionedModel()
             {
-                PositionedModelModel = model1,
-                PositionedModelPosition = new Vector(0, 0.5, -2)
+                Model = model1,
+                Position = new Vector(0, 0.5, -2)
         });
 
             scene1.AddPositionedModel(new PositionedModel()
             {
-                PositionedModelModel = model2,
-                PositionedModelPosition = new Vector(-1, 0.5, -2)
+                Model = model2,
+                Position = new Vector(-1, 0.5, -2)
         });
 
             scene1.AddPositionedModel(new PositionedModel()
             {
-                PositionedModelModel = model3,
-                PositionedModelPosition = new Vector(-1, 2, -10)
+                Model = model3,
+                Position = new Vector(-1, 2, -10)
         });
 
             scene1.AddPositionedModel(new PositionedModel()
             {
-                PositionedModelModel = model4,
-                PositionedModelPosition = new Vector(0, -2000, -1)
+                Model = model4,
+                Position = new Vector(0, -2000, -1)
         });
 
             Application.Run(new LogInPage());

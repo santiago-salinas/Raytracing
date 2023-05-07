@@ -33,12 +33,12 @@ namespace BusinessLogic
 
         public static bool ExistsModelUsingTheLambertian(Lambertian lambertian)
         {            
-            Model ret = _modelList.Find(m => m.ModelColor == lambertian);
+            Model ret = _modelList.Find(m => m.Material == lambertian);
             return ret != null;
         }
         public static bool ExistsModelUsingTheSphere(Sphere sphere)
         {
-            Model ret = _modelList.Find(m => m.ModelShape == sphere);
+            Model ret = _modelList.Find(m => m.Shape == sphere);
             return ret != null;
         }
         public static void AddModel(Model newElement)

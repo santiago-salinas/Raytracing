@@ -25,10 +25,10 @@ namespace UI.Cards
             
             modelNameLabel.Text = model.Name;
 
-            string shapeName = model.ModelShape.Name;
+            string shapeName = model.Shape.Name;
             shapeNameLabel.Text += shapeName;
 
-            string materialName = model.ModelColor.Name;
+            string materialName = model.Material.Name;
             materialNameLabel.Text += materialName;
 
             loadPreview();
@@ -50,8 +50,8 @@ namespace UI.Cards
             {
                 PositionedModel positionedModel = new PositionedModel()
                 {
-                    PositionedModelModel = model,
-                    PositionedModelPosition = position
+                    Model = model,
+                    Position = position
                 };
                 scene.AddPositionedModel(positionedModel);
                 EditSceneTab editSceneTab = (EditSceneTab)Parent.Parent;
@@ -70,7 +70,7 @@ namespace UI.Cards
 
                 Panel coloredBox = new Panel();
 
-                BusinessLogic.Color materialColor = model.ModelColor.Color;
+                BusinessLogic.Color materialColor = model.Material.Color;
 
                 int redValue = (int)materialColor.Red;
                 int greenValue = (int)materialColor.Green;
