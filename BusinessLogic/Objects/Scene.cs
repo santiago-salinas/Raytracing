@@ -99,7 +99,7 @@ namespace BusinessLogic
         {
             foreach (PositionedModel elem in _positionedModellList)
             {
-                if (elem.PositionedModelModel == model) { return true; }
+                if (elem.Model == model) { return true; }
             }
             return false;
         }

@@ -97,15 +97,15 @@ namespace BusinessLogic_Tests
             model1 = new Model()
             {
                 Name = model1Name,
-                ModelShape = sphere1,
-                ModelColor = lambertian1
+                Shape = sphere1,
+                Material = lambertian1
             };
 
             position1 = new Vector(0, 0.5, -2);
             positionedModel1 = new PositionedModel()
             {
-                PositionedModelModel = model1,
-                PositionedModelPosition = position1
+                Model = model1,
+                Position = position1
             };
 
             testScene.AddPositionedModel(positionedModel1);
@@ -125,15 +125,15 @@ namespace BusinessLogic_Tests
             model2 = new Model()
             {
                 Name = model2Name,
-                ModelShape = sphere2,
-                ModelColor = lambertian2
+                Shape = sphere2,
+                Material = lambertian2
             };
 
             position2 = new Vector(-1, 0.5, -2);
             positionedModel2 = new PositionedModel()
             {
-                PositionedModelModel = model2,
-                PositionedModelPosition = position2
+                Model = model2,
+                Position = position2
             };
 
             testScene.AddPositionedModel(positionedModel2);
@@ -152,15 +152,15 @@ namespace BusinessLogic_Tests
             model3 = new Model()
             {
                 Name = model3Name,
-                ModelShape = sphere3,
-                ModelColor = lambertian3
+                Shape = sphere3,
+                Material = lambertian3
             };
 
             position3 = new Vector(-1, 2, -10);
             positionedModel3 = new PositionedModel()
             {
-                PositionedModelModel = model3,
-                PositionedModelPosition = position3
+                Model = model3,
+                Position = position3
             };
 
             testScene.AddPositionedModel(positionedModel3);
@@ -179,15 +179,15 @@ namespace BusinessLogic_Tests
             model4 = new Model()
             {
                 Name = model4Name,
-                ModelShape = sphere4,
-                ModelColor = lambertian4
+                Shape = sphere4,
+                Material = lambertian4
             };
 
             position4 = new Vector(0, -2000, -1);
             positionedModel4 = new PositionedModel()
             {
-                PositionedModelModel = model4,
-                PositionedModelPosition = position4
+                Model = model4,
+                Position = position4
             };
 
             testScene.AddPositionedModel(positionedModel4);

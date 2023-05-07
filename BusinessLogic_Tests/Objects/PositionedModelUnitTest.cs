@@ -43,16 +43,16 @@ namespace BusinessLogic_Tests
             testModel = new Model()
             {
                 Name = modelName,
-                ModelShape = testSphere,
-                ModelColor = testLambertian
+                Shape = testSphere,
+                Material = testLambertian
             };
 
             testPosition = new Vector(0, 0, 0);
 
             testPositionedModel = new PositionedModel()
             {
-                PositionedModelModel = testModel,
-                PositionedModelPosition = testPosition
+                Model = testModel,
+                Position = testPosition
             };
         }
 
@@ -65,8 +65,8 @@ namespace BusinessLogic_Tests
             //act
             testPositionedModel = new PositionedModel()
             {
-                PositionedModelModel = testModel,
-                PositionedModelPosition = testPosition
+                Model = testModel,
+                Position = testPosition
             };
             //assert
             Assert.IsNotNull(testModel);

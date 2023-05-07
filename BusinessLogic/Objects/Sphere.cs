@@ -13,7 +13,6 @@ namespace BusinessLogic
             Owner = owner;
         }
 
-
         private User _owner;
         private double _radius;
         private string _name;

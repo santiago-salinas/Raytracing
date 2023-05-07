@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 
 namespace BusinessLogic
 {
@@ -14,21 +16,58 @@ namespace BusinessLogic
         public Model(string name, Sphere shape, Lambertian color, User owner)
         {
             Name = name;
-            ModelShape = shape;
-            ModelColor = color;
+            Shape = shape;
+            Material = color;
             Owner = owner;
         }
 
         public HitRecord IsHitByRay(Ray ray, double tMin, double tMax, Vector position)
         {
-            HitRecord hit = ModelShape.IsHitByRay(ray, tMin, tMax, position);
-            hit.Attenuation = ModelColor.Color;
+            HitRecord hit = Shape.IsHitByRay(ray, tMin, tMax, position);
+            hit.Attenuation = Material.Color;
             return hit;
+        }
+
+        public void renderPreview()
+        {
+            Scene testScene = new Scene();
+
+            Model model = new Model()
+            {
+                Material = this.Material,
+                Shape = new Sphere() { Radius = 1 },
+            };
+
+            Vector position = new Vector(1, 1, 1);
+            PositionedModel positionedModel = new PositionedModel()
+            {
+                Model = model,
+                Position = position
+            };
+
+            testScene.AddPositionedModel(positionedModel);
+
+
+            testScene.CameraDTO = new CameraDTO()
+            {
+                LookFrom = new Vector(0,5,0),
+                LookAt = new Vector(1, 1, 1),
+                Up = new Vector(0, 1, 0),
+                FieldOfView = 40,
+                ResolutionX = 50,
+                ResolutionY = 50,
+                SamplesPerPixel = 50,
+                MaxDepth = 10,
+            };
+
+
+            Engine renderEngine = new Engine(testScene);
+            Preview = renderEngine.render();
         }
 
         public Ray GetBouncedRay(HitRecord hitRecord)
         {
-            return ModelColor.GetBouncedRay(hitRecord);
+            return Material.GetBouncedRay(hitRecord);
         }
 
         public string Name
@@ -57,19 +96,20 @@ namespace BusinessLogic
         }
 
         
-        public Sphere ModelShape { get; set; }
+        public Sphere Shape { get; set; }
 
-        public Lambertian ModelColor { get; set; }
+        public Lambertian Material { get; set; }
 
         public PPM Preview { get; set; }
 
         public override bool Equals(object other)
         {
             bool nameEqual = this.Name == ((Model)other).Name;
-            bool shapeEqual = this.ModelShape == ((Model)other).ModelShape;
-            bool colorEqual = this.ModelColor == ((Model)other).ModelColor;
+            bool shapeEqual = this.Shape == ((Model)other).Shape;
+            bool colorEqual = this.Material == ((Model)other).Material;
 
             return nameEqual && shapeEqual && colorEqual;
         }
+
     }
 }

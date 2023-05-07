@@ -21,9 +21,9 @@ namespace UI.Cards
             InitializeComponent();
             positionedModel = providedModel;
             scene = providedScene;
-            model = positionedModel.PositionedModelModel;
+            model = positionedModel.Model;
             modelNameLabel.Text = model.Name;
-            positionLabel.Text = positionedModel.PositionedModelPosition.ToString();
+            positionLabel.Text = positionedModel.Position.ToString();
 
             loadPreview();
         }
@@ -45,7 +45,7 @@ namespace UI.Cards
 
                 Panel coloredBox = new Panel();
 
-                BusinessLogic.Color materialColor = model.ModelColor.Color;
+                BusinessLogic.Color materialColor = model.Material.Color;
 
                 int redValue = (int)materialColor.Red;
                 int greenValue = (int)materialColor.Green;

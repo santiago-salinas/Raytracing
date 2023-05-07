@@ -8,23 +8,23 @@ namespace BusinessLogic
         {
         }
 
-        public Model PositionedModelModel { get; set; }
-        public Vector PositionedModelPosition { get; set; }
+        public Model Model { get; set; }
+        public Vector Position { get; set; }
 
         public HitRecord IsModelHit(Ray ray, double tMin, double tMax)
         {
-            return PositionedModelModel.IsHitByRay(ray, tMin, tMax, PositionedModelPosition);
+            return Model.IsHitByRay(ray, tMin, tMax, Position);
         }
 
         public Ray GetBouncedRay(HitRecord hitRecord)
         {
-            return PositionedModelModel.GetBouncedRay(hitRecord);
+            return Model.GetBouncedRay(hitRecord);
         }
 
         public override bool Equals(object other)
         {
-            bool evalModel = this.PositionedModelModel == ((PositionedModel)other).PositionedModelModel;
-            bool evalPosition = this.PositionedModelPosition == ((PositionedModel)other).PositionedModelPosition;
+            bool evalModel = this.Model == ((PositionedModel)other).Model;
+            bool evalPosition = this.Position == ((PositionedModel)other).Position;
 
             return evalModel && evalPosition;
         }

@@ -53,8 +53,8 @@ namespace BusinessLogic_Tests
             testModel = new Model()
             {
                 Name = modelName,
-                ModelShape = testSphere,
-                ModelColor = testLambertian,
+                Shape = testSphere,
+                Material = testLambertian,
                 Owner = testUser
             };
         }
@@ -68,8 +68,8 @@ namespace BusinessLogic_Tests
             testModel = new Model()
             {
                 Name = modelName,
-                ModelShape = testSphere,
-                ModelColor = testLambertian
+                Shape = testSphere,
+                Material = testLambertian
             };
             //Assert
             Assert.IsNotNull(testModel);
@@ -165,8 +165,8 @@ namespace BusinessLogic_Tests
             Model newModel = new Model()
             {
                 Name = modelName,
-                ModelShape = testSphere,
-                ModelColor = testLambertian,
+                Shape = testSphere,
+                Material = testLambertian,
                 Owner = testUser
             };
 
