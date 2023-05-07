@@ -45,36 +45,39 @@
             // newSphereLabel
             // 
             this.newSphereLabel.AutoSize = true;
-            this.newSphereLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newSphereLabel.Font = new System.Drawing.Font("Consolas", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newSphereLabel.Location = new System.Drawing.Point(266, 47);
             this.newSphereLabel.Name = "newSphereLabel";
-            this.newSphereLabel.Size = new System.Drawing.Size(239, 46);
+            this.newSphereLabel.Size = new System.Drawing.Size(240, 47);
             this.newSphereLabel.TabIndex = 0;
             this.newSphereLabel.Text = "New Sphere";
             // 
             // nameStatusLabel
             // 
             this.nameStatusLabel.AutoSize = true;
+            this.nameStatusLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nameStatusLabel.ForeColor = System.Drawing.Color.Red;
             this.nameStatusLabel.Location = new System.Drawing.Point(243, 202);
             this.nameStatusLabel.Name = "nameStatusLabel";
-            this.nameStatusLabel.Size = new System.Drawing.Size(0, 13);
+            this.nameStatusLabel.Size = new System.Drawing.Size(0, 19);
             this.nameStatusLabel.TabIndex = 21;
             // 
             // sphereNameLabel
             // 
             this.sphereNameLabel.AutoSize = true;
+            this.sphereNameLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sphereNameLabel.Location = new System.Drawing.Point(226, 123);
             this.sphereNameLabel.Name = "sphereNameLabel";
-            this.sphereNameLabel.Size = new System.Drawing.Size(72, 13);
+            this.sphereNameLabel.Size = new System.Drawing.Size(108, 19);
             this.sphereNameLabel.TabIndex = 20;
             this.sphereNameLabel.Text = "Sphere Name";
             // 
             // nameTextBox
             // 
+            this.nameTextBox.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nameTextBox.Location = new System.Drawing.Point(226, 161);
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(322, 20);
+            this.nameTextBox.Size = new System.Drawing.Size(322, 26);
             this.nameTextBox.TabIndex = 19;
             // 
             // panel1
@@ -89,10 +92,11 @@
             // radiusStatusLabel
             // 
             this.radiusStatusLabel.AutoSize = true;
+            this.radiusStatusLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radiusStatusLabel.ForeColor = System.Drawing.Color.Red;
             this.radiusStatusLabel.Location = new System.Drawing.Point(243, 324);
             this.radiusStatusLabel.Name = "radiusStatusLabel";
-            this.radiusStatusLabel.Size = new System.Drawing.Size(134, 13);
+            this.radiusStatusLabel.Size = new System.Drawing.Size(243, 19);
             this.radiusStatusLabel.TabIndex = 25;
             this.radiusStatusLabel.Text = "* Radius must be over zero";
             this.radiusStatusLabel.Visible = false;
@@ -100,9 +104,10 @@
             // radiusLabel
             // 
             this.radiusLabel.AutoSize = true;
+            this.radiusLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radiusLabel.Location = new System.Drawing.Point(226, 245);
             this.radiusLabel.Name = "radiusLabel";
-            this.radiusLabel.Size = new System.Drawing.Size(40, 13);
+            this.radiusLabel.Size = new System.Drawing.Size(63, 19);
             this.radiusLabel.TabIndex = 24;
             this.radiusLabel.Text = "Radius";
             // 
@@ -117,6 +122,7 @@
             // 
             // radiusInput
             // 
+            this.radiusInput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radiusInput.Location = new System.Drawing.Point(229, 283);
             this.radiusInput.Maximum = new decimal(new int[] {
             999999,
@@ -124,11 +130,12 @@
             0,
             0});
             this.radiusInput.Name = "radiusInput";
-            this.radiusInput.Size = new System.Drawing.Size(146, 20);
+            this.radiusInput.Size = new System.Drawing.Size(146, 26);
             this.radiusInput.TabIndex = 26;
             // 
             // saveButton
             // 
+            this.saveButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveButton.Location = new System.Drawing.Point(162, 372);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(150, 51);
@@ -139,6 +146,7 @@
             // 
             // cancelButton
             // 
+            this.cancelButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.Location = new System.Drawing.Point(491, 372);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(150, 51);

@@ -115,11 +115,11 @@ namespace UI
             // confirmPasswordStatusLabel
             // 
             this.confirmPasswordStatusLabel.AutoSize = true;
-            this.confirmPasswordStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.confirmPasswordStatusLabel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.confirmPasswordStatusLabel.ForeColor = System.Drawing.Color.Red;
             this.confirmPasswordStatusLabel.Location = new System.Drawing.Point(62, 473);
             this.confirmPasswordStatusLabel.Name = "confirmPasswordStatusLabel";
-            this.confirmPasswordStatusLabel.Size = new System.Drawing.Size(320, 16);
+            this.confirmPasswordStatusLabel.Size = new System.Drawing.Size(343, 15);
             this.confirmPasswordStatusLabel.TabIndex = 18;
             this.confirmPasswordStatusLabel.Text = "Confirmed password and password are not the same";
             this.confirmPasswordStatusLabel.Visible = false;
@@ -127,11 +127,11 @@ namespace UI
             // signUpLabel
             // 
             this.signUpLabel.AutoSize = true;
-            this.signUpLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.signUpLabel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.signUpLabel.ForeColor = System.Drawing.Color.Red;
-            this.signUpLabel.Location = new System.Drawing.Point(90, 540);
+            this.signUpLabel.Location = new System.Drawing.Point(62, 540);
             this.signUpLabel.Name = "signUpLabel";
-            this.signUpLabel.Size = new System.Drawing.Size(300, 16);
+            this.signUpLabel.Size = new System.Drawing.Size(357, 15);
             this.signUpLabel.TabIndex = 19;
             this.signUpLabel.Text = "Please check text fields for necessary corrections";
             this.signUpLabel.Visible = false;
