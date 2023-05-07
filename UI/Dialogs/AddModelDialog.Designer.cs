@@ -195,7 +195,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "AddModelDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AddModelDialog";
+            this.Text = "New model";
             this.ResumeLayout(false);
             this.PerformLayout();
 

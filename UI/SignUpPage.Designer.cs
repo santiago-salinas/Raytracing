@@ -44,37 +44,37 @@ namespace UI
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.goBackButton = new System.Windows.Forms.Button();
             this.Banner.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             this.SuspendLayout();
             // 
             // userNameTextBox
             // 
-            this.userNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userNameTextBox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userNameTextBox.Location = new System.Drawing.Point(65, 257);
             this.userNameTextBox.Name = "userNameTextBox";
-            this.userNameTextBox.Size = new System.Drawing.Size(347, 22);
+            this.userNameTextBox.Size = new System.Drawing.Size(347, 23);
             this.userNameTextBox.TabIndex = 0;
             this.userNameTextBox.TextChanged += new System.EventHandler(this.usernameTextBoxChanged);
             // 
             // passwordTextBox
             // 
-            this.passwordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordTextBox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordTextBox.Location = new System.Drawing.Point(65, 348);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
-            this.passwordTextBox.Size = new System.Drawing.Size(347, 22);
+            this.passwordTextBox.Size = new System.Drawing.Size(347, 23);
             this.passwordTextBox.TabIndex = 1;
             this.passwordTextBox.TextChanged += new System.EventHandler(this.passwordTextBoxChanged);
             // 
             // confirmPasswordTextbox
             // 
-            this.confirmPasswordTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.confirmPasswordTextbox.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.confirmPasswordTextbox.Location = new System.Drawing.Point(65, 439);
             this.confirmPasswordTextbox.Name = "confirmPasswordTextbox";
             this.confirmPasswordTextbox.PasswordChar = '*';
-            this.confirmPasswordTextbox.Size = new System.Drawing.Size(347, 22);
+            this.confirmPasswordTextbox.Size = new System.Drawing.Size(347, 23);
             this.confirmPasswordTextbox.TabIndex = 2;
             this.confirmPasswordTextbox.TextChanged += new System.EventHandler(this.passwordConfirmTextBoxChanged);
             // 
@@ -93,33 +93,33 @@ namespace UI
             // passwordStatusLabel
             // 
             this.passwordStatusLabel.AutoSize = true;
-            this.passwordStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordStatusLabel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordStatusLabel.ForeColor = System.Drawing.Color.Red;
             this.passwordStatusLabel.Location = new System.Drawing.Point(62, 380);
             this.passwordStatusLabel.Name = "passwordStatusLabel";
-            this.passwordStatusLabel.Size = new System.Drawing.Size(145, 16);
+            this.passwordStatusLabel.Size = new System.Drawing.Size(329, 15);
             this.passwordStatusLabel.TabIndex = 14;
             this.passwordStatusLabel.Text = resources.GetString("passwordStatusLabel.Text");
             // 
             // usernameStatusLabel
             // 
             this.usernameStatusLabel.AutoSize = true;
-            this.usernameStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameStatusLabel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.usernameStatusLabel.ForeColor = System.Drawing.Color.Red;
             this.usernameStatusLabel.Location = new System.Drawing.Point(62, 289);
             this.usernameStatusLabel.Name = "usernameStatusLabel";
-            this.usernameStatusLabel.Size = new System.Drawing.Size(145, 16);
+            this.usernameStatusLabel.Size = new System.Drawing.Size(329, 15);
             this.usernameStatusLabel.TabIndex = 17;
             this.usernameStatusLabel.Text = resources.GetString("usernameStatusLabel.Text");
             // 
             // confirmPasswordStatusLabel
             // 
             this.confirmPasswordStatusLabel.AutoSize = true;
-            this.confirmPasswordStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.confirmPasswordStatusLabel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.confirmPasswordStatusLabel.ForeColor = System.Drawing.Color.Red;
             this.confirmPasswordStatusLabel.Location = new System.Drawing.Point(62, 473);
             this.confirmPasswordStatusLabel.Name = "confirmPasswordStatusLabel";
-            this.confirmPasswordStatusLabel.Size = new System.Drawing.Size(320, 16);
+            this.confirmPasswordStatusLabel.Size = new System.Drawing.Size(343, 15);
             this.confirmPasswordStatusLabel.TabIndex = 18;
             this.confirmPasswordStatusLabel.Text = "Confirmed password and password are not the same";
             this.confirmPasswordStatusLabel.Visible = false;
@@ -127,11 +127,11 @@ namespace UI
             // signUpLabel
             // 
             this.signUpLabel.AutoSize = true;
-            this.signUpLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.signUpLabel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.signUpLabel.ForeColor = System.Drawing.Color.Red;
-            this.signUpLabel.Location = new System.Drawing.Point(90, 540);
+            this.signUpLabel.Location = new System.Drawing.Point(62, 540);
             this.signUpLabel.Name = "signUpLabel";
-            this.signUpLabel.Size = new System.Drawing.Size(300, 16);
+            this.signUpLabel.Size = new System.Drawing.Size(357, 15);
             this.signUpLabel.TabIndex = 19;
             this.signUpLabel.Text = "Please check text fields for necessary corrections";
             this.signUpLabel.Visible = false;
@@ -167,7 +167,8 @@ namespace UI
             this.UserLabel.Name = "UserLabel";
             this.UserLabel.Size = new System.Drawing.Size(58, 24);
             this.UserLabel.TabIndex = 12;
-            this.UserLabel.Text = "User";            // 
+            this.UserLabel.Text = "User";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -177,7 +178,6 @@ namespace UI
             this.label1.Size = new System.Drawing.Size(106, 24);
             this.label1.TabIndex = 21;
             this.label1.Text = "Password";
-
             // 
             // label2
             // 
@@ -207,23 +207,23 @@ namespace UI
             this.panel2.Size = new System.Drawing.Size(350, 1);
             this.panel2.TabIndex = 24;
             // 
-            // button1
+            // goBackButton
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(10, 193);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(92, 34);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "<< Go Back";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.goBackButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.goBackButton.Location = new System.Drawing.Point(10, 193);
+            this.goBackButton.Name = "goBackButton";
+            this.goBackButton.Size = new System.Drawing.Size(92, 34);
+            this.goBackButton.TabIndex = 25;
+            this.goBackButton.Text = "<< Go Back";
+            this.goBackButton.UseVisualStyleBackColor = true;
+            this.goBackButton.Click += new System.EventHandler(this.goBackButton_onClick);
             // 
             // SignUpPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 582);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.goBackButton);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label2);
@@ -240,8 +240,7 @@ namespace UI
             this.Controls.Add(this.userNameTextBox);
             this.Name = "SignUpPage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SignUpPage";
-
+            this.Text = "Sign up";
             this.Banner.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
             this.ResumeLayout(false);
@@ -266,6 +265,6 @@ namespace UI
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button goBackButton;
     }
 }

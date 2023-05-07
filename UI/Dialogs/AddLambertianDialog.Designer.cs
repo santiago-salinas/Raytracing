@@ -245,7 +245,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "AddLambertianDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AddSphere";
+            this.Text = "New material";
             ((System.ComponentModel.ISupportInitialize)(this.redValueInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.greenValueInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.blueValueInput)).EndInit();

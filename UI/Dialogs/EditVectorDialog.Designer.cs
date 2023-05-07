@@ -180,7 +180,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "EditVectorDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "EditVectorDialog";
+            this.Text = "Edit vector";
             ((System.ComponentModel.ISupportInitialize)(this.xValueInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.yValueInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zValueInput)).EndInit();
