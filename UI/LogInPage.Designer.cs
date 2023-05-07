@@ -216,7 +216,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "LogInPage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Log in";
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
             this.Banner.ResumeLayout(false);
             this.panel3.ResumeLayout(false);

@@ -20,8 +20,15 @@ namespace UI
         {
             string username = userNameTextBox.Text;
             string password = passwordTextBox.Text;
-            //string confirmPassword = confirmPasswordTextbox.Text;
-            if(usernameFieldIsCorrect && passwordFieldIsCorrect && confirmPasswordFieldIsCorrect)
+            usernameStatusLabel.Text = "";
+
+            if (UserCollection.ContainsUser(username))
+            {
+                usernameStatusLabel.Text = "User with that name already exists";
+                usernameFieldIsCorrect = false;
+            }
+
+            if (usernameFieldIsCorrect && passwordFieldIsCorrect && confirmPasswordFieldIsCorrect)
             {
                 createdUser.UserName = username;
                 createdUser.Password = password;
@@ -50,13 +57,6 @@ namespace UI
                 usernameStatusLabel.Text = ex.Message;
                 usernameFieldIsCorrect = false;
             }
-
-            if (UserCollection.ContainsUser(username))
-            {
-                usernameStatusLabel.Text = "User with that name already exists";
-                usernameFieldIsCorrect = false;
-            }
-
         }
 
         private void passwordTextBoxChanged(object sender, EventArgs e)
@@ -94,7 +94,7 @@ namespace UI
             }
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void goBackButton_onClick(object sender, EventArgs e)
         {
             this.Close();
         }

@@ -175,7 +175,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "AddSphereDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AddSphere";
+            this.Text = "New sphere";
             ((System.ComponentModel.ISupportInitialize)(this.radiusInput)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
