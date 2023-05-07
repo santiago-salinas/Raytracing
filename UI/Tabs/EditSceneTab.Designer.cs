@@ -128,7 +128,6 @@
             // availableModelsPanel
             // 
             this.availableModelsPanel.AutoScroll = true;
-            this.availableModelsPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.availableModelsPanel.Location = new System.Drawing.Point(12, 265);
             this.availableModelsPanel.Name = "availableModelsPanel";
             this.availableModelsPanel.Size = new System.Drawing.Size(272, 468);

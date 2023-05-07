@@ -56,6 +56,7 @@ namespace UI.Cards
                 scene.AddPositionedModel(positionedModel);
                 EditSceneTab editSceneTab = (EditSceneTab)Parent.Parent;
                 editSceneTab.loadPositionedModels();
+                editSceneTab.notifyThatSeneWasModified();
             }
         }
 

@@ -8,17 +8,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UI.Tabs;
 
 namespace UI.Dialogs
 {
     public partial class EditVectorDialog : Form
     {
+        public bool wasModified;
         public Vector vector;
         public EditVectorDialog(Vector providedVector, string title)
         {
             InitializeComponent();
             titleLabel.Text = title;
             vector = providedVector;
+            wasModified = false;
+
             xValueInput.Value = (decimal)vector.FirstValue;
             yValueInput.Value = (decimal)vector.SecondValue;
             zValueInput.Value = (decimal)vector.ThirdValue;
@@ -26,9 +30,20 @@ namespace UI.Dialogs
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            vector.FirstValue = (double)xValueInput.Value;
-            vector.SecondValue = (double)yValueInput.Value;
-            vector.ThirdValue = (double)zValueInput.Value;
+            double newXValue = (double)xValueInput.Value;
+            double newYValue = (double)yValueInput.Value;
+            double newZValue = (double)zValueInput.Value;
+
+            if (vector.FirstValue != newXValue ||
+                vector.SecondValue != newYValue ||
+                vector.ThirdValue != newZValue) {
+
+                wasModified = true;
+            }
+
+            vector.FirstValue = newXValue;
+            vector.SecondValue = newYValue;
+            vector.ThirdValue = newZValue;
 
             DialogResult = DialogResult.OK;
         }
