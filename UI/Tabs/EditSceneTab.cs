@@ -68,7 +68,10 @@ namespace UI.Tabs
             lookAtButton.Text = lookAt.ToString();
             lastModificationLabel.Text += scene.LastModificationDate.ToString("f", new CultureInfo("en-US"));
             fovInput.Value = fieldOfView;
-            //renderPanel.Controls.Add(new PPMViewer(scene.Preview));
+            if (scene.Preview != null)
+            {
+                renderPanel.Controls.Add(new PPMViewer(scene.Preview));
+            }
             loadPositionedModels();            
         }
         private void lookFromEditButton_Click(object sender, EventArgs e)
