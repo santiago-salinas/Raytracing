@@ -72,11 +72,6 @@ namespace BusinessLogic_Tests
         private Scene testScene;
         private string testSceneName;
 
-        private Vector defaultLookFromVector;
-        private Vector defaultLookAtVector;
-        private int defaultFOV;
-
-        private Camera camera;
 
         [TestInitialize]
         public void Initialize()
@@ -217,15 +212,14 @@ namespace BusinessLogic_Tests
                 MaxDepth = depth,
             };
 
-            camera = new Camera(dto);
-
+            testScene.CameraDTO = dto;
 
         }
 
         [TestMethod]
         public void RenderTestScene()
         {
-            Motor motor = new Motor(testScene, camera);
+            Engine motor = new Engine(testScene);
             motor.RandomOff();
             PPM ppm = motor.render();
 

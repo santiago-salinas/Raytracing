@@ -26,55 +26,56 @@ namespace UI
 
             };
 
-            User user2 = new User()
-            {
-                UserName = "Test2",
-                Password = "Test1",
-                RegisterDate = DateTime.Now,
-            };
-
-            User user3 = new User()
-            {
-                UserName = "Test3",
-                Password = "Test1",
-                RegisterDate = DateTime.Now,
-            };
             UserCollection.AddUser(user1);
-            UserCollection.AddUser(user2);
-            UserCollection.AddUser(user3);
 
+            Sphere sphere1 = new Sphere("Sphere 1", 0.5f, user1);
+            Sphere sphere2 = new Sphere("Sphere 2", 0.5f, user1);
+            Sphere sphere3 = new Sphere("Sphere 3", 2f, user1);
+            Sphere sphere4 = new Sphere("Floor", 2000f, user1);
 
-            Sphere sphere1 = new Sphere("Sphere 1", 2.5f, user1);
-            Sphere sphere2 = new Sphere("Sphere 2", 3.0f, user2);
-            Sphere sphere3 = new Sphere("Sphere 3", 1.8f, user3);
 
             SphereCollection.AddSphere(sphere1);
             SphereCollection.AddSphere(sphere2);
             SphereCollection.AddSphere(sphere3);
+            SphereCollection.AddSphere(sphere4);
 
-            Color color1 = new Color(0.5, 1, 0.3);
-            Color color2 = new Color(1, 0.5, 1);
-            Color color3 = new Color(0.2, 0.63, 0.16);
+
+            Color color1 = new Color(0.1, 0.2, 0.5);
+            Color color2 = new Color(0.8, 0.2, 0.5);
+            Color color3 = new Color(0.8, 0.25, 0.05);
+            Color color4 = new Color(0.7, 0.7, 0.1);
             Lambertian lambertian1 = new Lambertian("Lambertian 1", color1, user1);
-            Lambertian lambertian2 = new Lambertian("Lambertian 2", color2, user2);
+            Lambertian lambertian2 = new Lambertian("Lambertian 2", color2, user1);
             Lambertian lambertian3 = new Lambertian("Lambertian 3", color3, user1);
+            Lambertian lambertian4 = new Lambertian("Lambertian 4", color4, user1);
+
             LambertianCollection.AddLambertian(lambertian1);
-            LambertianCollection.AddLambertian(lambertian3);
             LambertianCollection.AddLambertian(lambertian2);
+            LambertianCollection.AddLambertian(lambertian3);
+            LambertianCollection.AddLambertian(lambertian4);
+
 
             Model model1 = new Model("Model 1", sphere1, lambertian1, user1);
+            Model model2 = new Model("Model 2", sphere2, lambertian2, user1);
+            Model model3 = new Model("Model 3", sphere3, lambertian3, user1);
+            Model model4 = new Model("Model 4", sphere4, lambertian4, user1);
+
             ModelCollection.AddModel(model1);
+            ModelCollection.AddModel(model2);
+            ModelCollection.AddModel(model3);
+            ModelCollection.AddModel(model4);
+
 
             CameraDTO defaultCameraValues = new CameraDTO()
             {
-                LookFrom = new Vector(0, 2, 0),
-                LookAt = new Vector(0, 2, 5),
+                LookFrom = new Vector(4, 2, 8),
+                LookAt = new Vector(0, 0.5, -2),
                 Up = new Vector(0, 1, 0),
-                FieldOfView = 30,
+                FieldOfView = 40,
                 MaxDepth = 50,
-                ResolutionX = 650,
-                ResolutionY = 375,
-                SamplesPerPixel = 50
+                ResolutionX = 300,
+                ResolutionY = 200,
+                SamplesPerPixel = 100
             };
 
             Scene scene1 = new Scene()
@@ -85,12 +86,32 @@ namespace UI
                 Owner = user1,
                 CameraDTO = defaultCameraValues,
             };
+
             SceneCollection.AddScene(scene1);
+
             scene1.AddPositionedModel(new PositionedModel()
             {
                 PositionedModelModel = model1,
-                PositionedModelPosition = new Vector(1, 1, 1)
-            });
+                PositionedModelPosition = new Vector(0, 0.5, -2)
+        });
+
+            scene1.AddPositionedModel(new PositionedModel()
+            {
+                PositionedModelModel = model2,
+                PositionedModelPosition = new Vector(-1, 0.5, -2)
+        });
+
+            scene1.AddPositionedModel(new PositionedModel()
+            {
+                PositionedModelModel = model3,
+                PositionedModelPosition = new Vector(-1, 2, -10)
+        });
+
+            scene1.AddPositionedModel(new PositionedModel()
+            {
+                PositionedModelModel = model4,
+                PositionedModelPosition = new Vector(0, -2000, -1)
+        });
 
             Application.Run(new LogInPage());
 
