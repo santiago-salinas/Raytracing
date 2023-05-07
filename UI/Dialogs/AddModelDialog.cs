@@ -22,9 +22,7 @@ namespace UI.Dialogs
             this.availableLambertians = LambertianCollection.GetLambertiansFromUser(loggedUser);
 
             loadShapeComboBox();
-            shapeComboBox.SelectedIndex = 0;
             loadMaterialComboBox();
-            materialComboBox.SelectedIndex = 0;
         }
 
         private void saveButton_Click(object sender, EventArgs e)
