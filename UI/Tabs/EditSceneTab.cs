@@ -183,9 +183,7 @@ namespace UI.Tabs
             renderPanel.Controls.Clear();
             outdatedStatusLabel.Visible = false;
             
-
-            Camera camera = new Camera(scene.CameraDTO);
-            Motor motomoto = new Motor(scene, camera);
+            Engine motomoto = new Engine(scene);
             PPM ppm = motomoto.render();
             scene.Preview = ppm;
 

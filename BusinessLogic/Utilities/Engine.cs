@@ -3,7 +3,7 @@ using System.Data.Common;
 
 namespace BusinessLogic
 {
-    public class Motor
+    public class Engine
     {
         private double _redBuffer = 0;
         private double _greenBuffer = 0;
@@ -13,13 +13,15 @@ namespace BusinessLogic
 
         public static Random random;
 
-        static Motor()
+        static Engine()
         {
             random = new Random();
         }
 
-        public Motor(Scene scene, Camera camera)
+        public Engine(Scene scene)
         {
+            Camera camera = new Camera(scene.CameraDTO);
+
             SceneToRender = scene;
             CameraUsedToRender = camera;
             SamplesPerPixel = camera.SamplesPerPixel;

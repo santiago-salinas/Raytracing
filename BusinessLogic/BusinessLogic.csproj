@@ -60,7 +60,7 @@
     <Compile Include="Utilities\CameraDTO.cs" />
     <Compile Include="Utilities\RandomProvider.cs" />
     <Compile Include="Utilities\HitRecord.cs" />
-    <Compile Include="Utilities\Motor.cs" />
+    <Compile Include="Utilities\Engine.cs" />
     <Compile Include="Utilities\PPM.cs" />
     <Compile Include="Utilities\DateTimeProvider.cs" />
     <Compile Include="Utilities\Vector.cs" />

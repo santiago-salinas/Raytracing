@@ -144,7 +144,7 @@ namespace BusinessLogic
             Vector vector;
             do
             {
-                Vector vectorTemp = new Vector(Motor.random.NextDouble(), Motor.random.NextDouble(), Motor.random.NextDouble());
+                Vector vectorTemp = new Vector(Engine.random.NextDouble(), Engine.random.NextDouble(), Engine.random.NextDouble());
                 vector = vectorTemp.Multiply(2).Subtract(new Vector(1, 1, 1));
             } while (vector.SquaredLength() >= 1);
 
