@@ -68,7 +68,10 @@ namespace UI.Tabs
             lookAtButton.Text = lookAt.ToString();
             lastModificationLabel.Text += scene.LastModificationDate.ToString("f", new CultureInfo("en-US"));
             fovInput.Value = fieldOfView;
-            //renderPanel.Controls.Add(new PPMViewer(scene.Preview));
+            if (scene.Preview != null)
+            {
+                renderPanel.Controls.Add(new PPMViewer(scene.Preview));
+            }
             loadPositionedModels();            
         }
         private void lookFromEditButton_Click(object sender, EventArgs e)
@@ -80,8 +83,8 @@ namespace UI.Tabs
 
             if(result == DialogResult.OK)
             {
-                lookFromButton.Text = sceneCamera.LookFrom.ToString();                
-                notifyThatSeneWasModified();
+                if (editVectorDialog.wasModified) notifyThatSeneWasModified();
+                lookFromButton.Text = sceneCamera.LookFrom.ToString();
             } 
         }
         private void lookAtButton_Click(object sender, EventArgs e)
@@ -90,10 +93,9 @@ namespace UI.Tabs
             editVectorDialog.ShowDialog();
             DialogResult result = editVectorDialog.DialogResult;
 
-            if (result == DialogResult.OK)
-            {
-                lookAtButton.Text = sceneCamera.LookAt.ToString();
-                notifyThatSeneWasModified();
+            if (result == DialogResult.OK) { 
+                if(editVectorDialog.wasModified) notifyThatSeneWasModified();
+                lookAtButton.Text = sceneCamera.LookAt.ToString();                
             }
         }
         private void saveButton_Click(object sender, EventArgs e)
@@ -150,7 +152,8 @@ namespace UI.Tabs
 
         private void fovWasChanged(object sender, EventArgs e)
         {
-            scene.CameraDTO.FieldOfView = (int)fovInput.Value;
+            sceneCamera.FieldOfView = (int)fovInput.Value;
+            notifyThatSeneWasModified();
         }
         private void loadAvailableModels()
         {
@@ -189,7 +192,7 @@ namespace UI.Tabs
             renderPanel.Controls.Add(new PPMViewer(ppm));
         }
 
-        private void notifyThatSeneWasModified()
+        public void notifyThatSeneWasModified()
         {
             DateTime newModificationDate = DateTime.Now;
             scene.LastModificationDate = newModificationDate;
