@@ -138,5 +138,17 @@ namespace BusinessLogic
             double z = _firstValue * other.SecondValue - _secondValue * other.FirstValue;
             return new Vector(x, y, z);
         }
+
+        public static Vector GetRandomInUnitSphere()
+        {
+            Vector vector;
+            do
+            {
+                Vector vectorTemp = new Vector(Motor.random.NextDouble(), Motor.random.NextDouble(), Motor.random.NextDouble());
+                vector = vectorTemp.Multiply(2).Subtract(new Vector(1, 1, 1));
+            } while (vector.SquaredLength() >= 1);
+
+            return vector;
+        }
     }
 }

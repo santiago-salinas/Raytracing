@@ -26,6 +26,11 @@ namespace BusinessLogic
             return hit;
         }
 
+        public Ray GetBouncedRay(HitRecord hitRecord)
+        {
+            return ModelColor.GetBouncedRay(hitRecord);
+        }
+
         public string Name
         {
             get { return _name; }
@@ -51,6 +56,7 @@ namespace BusinessLogic
             }
         }
 
+        
         public Sphere ModelShape { get; set; }
 
         public Lambertian ModelColor { get; set; }

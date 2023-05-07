@@ -43,6 +43,15 @@ namespace BusinessLogic
             }
         }
 
+        public Ray GetBouncedRay(HitRecord hitRecord)
+        {
+            Vector newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(Vector.GetRandomInUnitSphere());
+            Vector newVector = newVectorPoint.Subtract(hitRecord.Intersection);
+            Ray newRay = new Ray(hitRecord.Intersection, newVector);
+
+            return newRay;
+        }
+
         public override bool Equals(object other)
         {
             bool namesEqual = this.Name == ((Lambertian)other).Name;

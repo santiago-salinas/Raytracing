@@ -16,6 +16,11 @@ namespace BusinessLogic
             return PositionedModelModel.IsHitByRay(ray, tMin, tMax, PositionedModelPosition);
         }
 
+        public Ray GetBouncedRay(HitRecord hitRecord)
+        {
+            return PositionedModelModel.GetBouncedRay(hitRecord);
+        }
+
         public override bool Equals(object other)
         {
             bool evalModel = this.PositionedModelModel == ((PositionedModel)other).PositionedModelModel;

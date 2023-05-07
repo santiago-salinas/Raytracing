@@ -11,8 +11,12 @@ namespace BusinessLogic
 
         private double RenderInfinity = 3.4 * Math.Pow(10, 38);
 
-        Random random = new Random();
+        public static Random random;
 
+        static Motor()
+        {
+            random = new Random();
+        }
 
         public Motor(Scene scene, Camera camera)
         {
@@ -71,7 +75,9 @@ namespace BusinessLogic
                 double u = (column + randomU) / ppm.Width;
                 double v = (row + randomV) / ppm.Heigth;
 
-                pixel = shootRay(CameraUsedToRender.GetRay(u, v), MaxDepth);
+                Ray fromCameraToPixel = CameraUsedToRender.GetRay(u, v);
+
+                pixel = shootRay(fromCameraToPixel, MaxDepth);
 
                 AddToPixelBuffer(pixel);
             }
@@ -88,7 +94,7 @@ namespace BusinessLogic
                 IsHit = false,
             };
             double tMax = RenderInfinity;
-
+            PositionedModel closestObject = new PositionedModel();
             foreach (PositionedModel positionedModel in SceneToRender.GetModels())
             {
                 HitRecord hit = IsPositionedModelHitByRay(positionedModel, ray, tMax);
@@ -96,19 +102,13 @@ namespace BusinessLogic
                 {
                     closestObjectHitRecord = hit;
                     tMax = closestObjectHitRecord.TDistanceFromOrigin;
+                    closestObject = positionedModel;
                 }
             }
 
             if (closestObjectHitRecord.IsHit)
             {
-                if (depthLeft > 0)
-                {
-                    return GetColor(closestObjectHitRecord, depthLeft);
-                }
-                else
-                {
-                    return new Color(0, 0, 0);
-                }
+                return GetColor(closestObject, closestObjectHitRecord, depthLeft);
             }
             else
             {
@@ -132,14 +132,19 @@ namespace BusinessLogic
             _blueBuffer += pixel.Blue;
         }
 
-        public Color GetColor(HitRecord hitRecord, int depthLeft)
+        public Color GetColor(PositionedModel positionedModel, HitRecord hitRecord, int depthLeft)
         {
-            Vector newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(GetRandomInUnitSphere());
-            Vector newVector = newVectorPoint.Subtract(hitRecord.Intersection);
-            Ray newRay = new Ray(hitRecord.Intersection, newVector);
-            Color color = shootRay(newRay, depthLeft-1);
-            Color attenuation = hitRecord.Attenuation;
-            return new Color((color.Red * attenuation.Red)/ 65025, (color.Green * attenuation.Green)/65025, (color.Blue * attenuation.Blue)/ 65025);
+            if(depthLeft > 0)
+            {
+                Ray bouncedRay = positionedModel.GetBouncedRay(hitRecord);
+                Color color = shootRay(bouncedRay, depthLeft - 1);
+                Color attenuation = hitRecord.Attenuation;
+                return new Color((color.Red * attenuation.Red) / 65025, (color.Green * attenuation.Green) / 65025, (color.Blue * attenuation.Blue) / 65025);
+            }
+            else
+            {
+                return new Color(0, 0, 0);
+            }
         }
 
         public Color GetSkyBoxColor(Ray ray)
@@ -159,18 +164,6 @@ namespace BusinessLogic
         public HitRecord IsPositionedModelHitByRay(PositionedModel positionedModel, Ray ray, double tMax)
         {
             return positionedModel.IsModelHit(ray, 0, tMax);
-        }
-
-        public Vector GetRandomInUnitSphere()
-        {
-            Vector vector;
-            do
-            {
-                Vector vectorTemp = new Vector(random.NextDouble(), random.NextDouble(), random.NextDouble());
-                vector = vectorTemp.Multiply(2).Subtract(new Vector(1, 1, 1));
-            } while (vector.SquaredLength() >= 1);
-
-            return vector;
         }
 
     }
