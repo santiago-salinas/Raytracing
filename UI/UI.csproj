@@ -32,9 +32,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>UI.Program</StartupObject>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,7 +49,7 @@
     <Compile Include="Cards\EditSceneModelCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Cards\EditSceneModelCard.Designer.cs">
+    <Compile Include="Cards\EditSceneModelCard.designer.cs">
       <DependentUpon>EditSceneModelCard.cs</DependentUpon>
     </Compile>
     <Compile Include="Cards\LambertianCard.cs">
@@ -106,7 +103,7 @@
     <Compile Include="Dialogs\EditVectorDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\EditVectorDialog.Designer.cs">
+    <Compile Include="Dialogs\EditVectorDialog.designer.cs">
       <DependentUpon>EditVectorDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="LogInPage.cs">
@@ -124,21 +121,22 @@
     <Compile Include="PPMViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PPMViewer.Designer.cs">
+    <Compile Include="PPMViewer.designer.cs">
       <DependentUpon>PPMViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="SignUpPage.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SignUpPage.Designer.cs">
       <DependentUpon>SignUpPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tabs\EditSceneTab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tabs\EditSceneTab.designer.cs">
+      <DependentUpon>EditSceneTab.cs</DependentUpon>
     </Compile>
     <Compile Include="Tabs\MaterialsTab.cs">
       <SubType>Form</SubType>
@@ -151,12 +149,6 @@
     </Compile>
     <Compile Include="Tabs\ModelsTab.Designer.cs">
       <DependentUpon>ModelsTab.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Tabs\EditSceneTab.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Tabs\EditSceneTab.Designer.cs">
-      <DependentUpon>EditSceneTab.cs</DependentUpon>
     </Compile>
     <Compile Include="Tabs\ScenesTab.cs">
       <SubType>Form</SubType>
@@ -197,9 +189,7 @@
     <EmbeddedResource Include="Dialogs\AddSphereDialog.resx">
       <DependentUpon>AddSphereDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\EditVectorDialog.resx">
-      <DependentUpon>EditVectorDialog.cs</DependentUpon>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\EditVectorDialog.resx" />
     <EmbeddedResource Include="LogInPage.resx">
       <DependentUpon>LogInPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -211,20 +201,25 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <EmbeddedResource Include="SignUpPage.resx">
       <DependentUpon>SignUpPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tabs\EditSceneTab.resx">
+      <DependentUpon>EditSceneTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tabs\MaterialsTab.resx">
       <DependentUpon>MaterialsTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tabs\ModelsTab.resx">
       <DependentUpon>ModelsTab.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Tabs\EditSceneTab.resx">
-      <DependentUpon>EditSceneTab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tabs\ScenesTab.resx">
       <DependentUpon>ScenesTab.cs</DependentUpon>
@@ -252,17 +247,25 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\992651.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Captura de pantalla 2023-04-29 161957.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\add.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\sphereImage.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\deleteIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\deleteIcon1.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\no-img-placeholder.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
-  </PropertyGroup>
 </Project>

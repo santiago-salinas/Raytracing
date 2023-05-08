@@ -241,7 +241,7 @@
             this.lookFromButton.TabIndex = 22;
             this.lookFromButton.Text = "(0,0,0)";
             this.lookFromButton.UseVisualStyleBackColor = true;
-            this.lookFromButton.Click += new System.EventHandler(this.lookFromEditButton_Click);
+            this.lookFromButton.Click += new System.EventHandler(this.lookFromButton_Click);
             // 
             // lookAtButton
             // 
