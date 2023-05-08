@@ -51,7 +51,7 @@ namespace BusinessLogic
         {
             random = new Random();
         }
-        public PPM render()
+        public PPM Render()
         {
             PPM ppm = new PPM(ResolutionX, ResolutionY);
 

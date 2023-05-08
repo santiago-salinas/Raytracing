@@ -35,8 +35,8 @@ namespace UI.Tabs
                 Up = new Vector(0, 1, 0),
                 FieldOfView = 30,
                 MaxDepth = 50,
-                ResolutionX = 650,
-                ResolutionY = 375,
+                ResolutionX = 300,
+                ResolutionY = 200,
                 SamplesPerPixel = 10
             };
 
@@ -66,10 +66,11 @@ namespace UI.Tabs
             if (scene.Preview != null)
             {
                 renderPanel.Controls.Add(new PPMViewer(scene.Preview));
+                lastRenderLabel.Text += scene.LastRenderDate.ToString("f", new CultureInfo("en-US"));
             }
             loadPositionedModels();            
         }
-        private void lookFromEditButton_Click(object sender, EventArgs e)
+        private void lookFromButton_Click(object sender, EventArgs e)
         {
 
             EditVectorDialog editVectorDialog = new EditVectorDialog(sceneCamera.LookFrom, "Look from");
@@ -89,7 +90,7 @@ namespace UI.Tabs
             DialogResult result = editVectorDialog.DialogResult;
 
             if (result == DialogResult.OK) { 
-                if(editVectorDialog.wasModified) notifyThatSeneWasModified();
+                if (editVectorDialog.wasModified) notifyThatSeneWasModified();
                 lookAtButton.Text = sceneCamera.LookAt.ToString();                
             }
         }
@@ -147,8 +148,11 @@ namespace UI.Tabs
 
         private void fovWasChanged(object sender, EventArgs e)
         {
-            sceneCamera.FieldOfView = (int)fovInput.Value;
-            notifyThatSeneWasModified();
+            int newFov = (int)fovInput.Value;
+            if (sceneCamera.FieldOfView != newFov) {
+                notifyThatSeneWasModified();
+                sceneCamera.FieldOfView = newFov;
+            }
         }
         private void loadAvailableModels()
         {
@@ -179,9 +183,9 @@ namespace UI.Tabs
             lastRenderLabel.Text = "Last rendered: " + newRenderDate.ToString("f", new CultureInfo("en-US"));
             renderPanel.Controls.Clear();
             outdatedStatusLabel.Visible = false;
-
-            Engine motomoto = new Engine(scene);
-            PPM ppm = motomoto.render();
+            
+            Engine engine = new Engine(scene);
+            PPM ppm = engine.Render();
             scene.Preview = ppm;
 
             renderPanel.Controls.Add(new PPMViewer(ppm));

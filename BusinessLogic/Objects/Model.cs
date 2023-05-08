@@ -60,7 +60,7 @@ namespace BusinessLogic
 
 
             Engine renderEngine = new Engine(testScene);
-            Preview = renderEngine.render();
+            Preview = renderEngine.Render();
         }
 
         public Ray GetBouncedRay(HitRecord hitRecord)

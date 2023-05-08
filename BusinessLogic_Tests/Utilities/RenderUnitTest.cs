@@ -221,7 +221,7 @@ namespace BusinessLogic_Tests
         {
             Engine motor = new Engine(testScene);
             motor.RandomOff();
-            PPM ppm = motor.render();
+            PPM ppm = motor.Render();
 
             Trace.WriteLine((ppm.GetImageAscii()));
 
