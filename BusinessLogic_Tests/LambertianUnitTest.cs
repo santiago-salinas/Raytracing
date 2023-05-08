@@ -1,6 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using BusinessLogic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using BusinessLogic;
 
 namespace BusinessLogic_Tests
 {
@@ -20,14 +20,15 @@ namespace BusinessLogic_Tests
         public void Initialize()
         {
             testName = "Wood";
-            testColor = new Color(1,1,1);
-            
-            differentTestColor = new Color((float)125/255,0, (float)230/255);
-                        
+            testColor = new Color(1, 1, 1);
+
+            differentTestColor = new Color((float)125 / 255, 0, (float)230 / 255);
+
             testNullName = string.Empty;
 
-            testUser = new User() { 
-                UserName= "Username"                
+            testUser = new User()
+            {
+                UserName = "Username"
             };
 
             testLambertian = new Lambertian()
@@ -54,10 +55,10 @@ namespace BusinessLogic_Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException),"Values must be between 0 and 255")]
+        [ExpectedException(typeof(ArgumentException), "Values must be between 0 and 255")]
         public void ValuesForVectorMustBeBetweenBounds()
         {
-          outOfBoundsColor = new Color((float)-1 / 255, 0, (float)230 / 255);
+            outOfBoundsColor = new Color((float)-1 / 255, 0, (float)230 / 255);
             testLambertian.Color = outOfBoundsColor;
         }
 
@@ -66,7 +67,7 @@ namespace BusinessLogic_Tests
         public void ValuesForColorAreNaturalNumbers()
         {
             //arrange
-            testColor = new Color(2.22,1.55,51.5);
+            testColor = new Color(2.22, 1.55, 51.5);
             //assert
             testLambertian.Color = testColor;
         }
@@ -116,10 +117,10 @@ namespace BusinessLogic_Tests
         public void AddLambertianToCollection()
         {
             //arrange
-            
+
             //act
             LambertianCollection.AddLambertian(testLambertian);
-            bool added = LambertianCollection.ContainsLambertian(testLambertian.Name,testLambertian.Owner);
+            bool added = LambertianCollection.ContainsLambertian(testLambertian.Name, testLambertian.Owner);
             //assert
             Assert.IsTrue(added);
 
@@ -131,7 +132,7 @@ namespace BusinessLogic_Tests
             //arrange
             //act
             LambertianCollection.AddLambertian(testLambertian);
-            Lambertian getLambertian = LambertianCollection.GetLambertian(testName,testUser);
+            Lambertian getLambertian = LambertianCollection.GetLambertian(testName, testUser);
             //assert
             Assert.ReferenceEquals(testLambertian, getLambertian);
         }
@@ -143,7 +144,7 @@ namespace BusinessLogic_Tests
             //arrange
             LambertianCollection.AddLambertian(testLambertian);
             //act
-            LambertianCollection.RemoveLambertian(testName,testUser);
+            LambertianCollection.RemoveLambertian(testName, testUser);
             LambertianCollection.GetLambertian(testName, testUser);
         }
 

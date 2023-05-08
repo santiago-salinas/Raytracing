@@ -19,18 +19,19 @@ namespace UI.Cards
             {
                 SphereCollection.RemoveSphere(sphere.Name, sphere.Owner);
                 this.Parent.Controls.Remove(this);
-            }catch (BusinessLogicException ex)
+            }
+            catch (BusinessLogicException ex)
             {
                 deleteLabel.Visible = true;
-            }      
+            }
         }
-        
-        
+
+
         public SphereCard(Sphere sphere)
         {
             InitializeComponent();
             this.sphere = sphere;
-            nameLabel.Text = sphere.Name;           
+            nameLabel.Text = sphere.Name;
             radiusLabel.Text = "Radius: " + sphere.Radius.ToString();
 
         }

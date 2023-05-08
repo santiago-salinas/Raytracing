@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.Common;
 
 namespace BusinessLogic
 {
@@ -8,6 +7,8 @@ namespace BusinessLogic
         private double _redBuffer = 0;
         private double _greenBuffer = 0;
         private double _blueBuffer = 0;
+
+        private int rgbUpperBound = 255;
 
         private double RenderInfinity = 3.4 * Math.Pow(10, 38);
 
@@ -84,7 +85,8 @@ namespace BusinessLogic
                 AddToPixelBuffer(pixel);
             }
 
-            pixel = GetAveragePixelAndReset();
+            pixel = GetAveragePixel();
+            ResetBuffer();
 
             ppm.SavePixel(row, column, pixel);
         }
@@ -118,14 +120,22 @@ namespace BusinessLogic
             }
         }
 
-        public Color GetAveragePixelAndReset()
+        public Color GetAveragePixel()
         {
-            Color pixel = new Color((_redBuffer/255) / SamplesPerPixel, (_greenBuffer / 255) / SamplesPerPixel, (_blueBuffer / 255) / SamplesPerPixel);
+            Color pixel = new Color((_redBuffer / rgbUpperBound) / SamplesPerPixel,
+                                    (_greenBuffer / rgbUpperBound) / SamplesPerPixel,
+                                    (_blueBuffer / rgbUpperBound) / SamplesPerPixel);
+            return pixel;
+        }
+
+        private void ResetBuffer()
+        {
             _redBuffer = 0;
             _greenBuffer = 0;
             _blueBuffer = 0;
-            return pixel;
         }
+
+
 
         public void AddToPixelBuffer(Color pixel)
         {
@@ -136,7 +146,7 @@ namespace BusinessLogic
 
         public Color GetColor(PositionedModel positionedModel, HitRecord hitRecord, int depthLeft)
         {
-            if(depthLeft > 0)
+            if (depthLeft > 0)
             {
                 Ray bouncedRay = positionedModel.GetBouncedRay(hitRecord);
                 Color color = shootRay(bouncedRay, depthLeft - 1);

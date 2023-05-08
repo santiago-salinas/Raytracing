@@ -1,8 +1,5 @@
 ﻿using BusinessLogic;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace UI
@@ -93,25 +90,25 @@ namespace UI
             {
                 Model = model1,
                 Position = new Vector(0, 0.5, -2)
-        });
+            });
 
             scene1.AddPositionedModel(new PositionedModel()
             {
                 Model = model2,
                 Position = new Vector(-1, 0.5, -2)
-        });
+            });
 
             scene1.AddPositionedModel(new PositionedModel()
             {
                 Model = model3,
                 Position = new Vector(-1, 2, -10)
-        });
+            });
 
             scene1.AddPositionedModel(new PositionedModel()
             {
                 Model = model4,
                 Position = new Vector(0, -2000, -1)
-        });
+            });
 
             Application.Run(new LogInPage());
 

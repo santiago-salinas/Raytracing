@@ -1,15 +1,8 @@
-﻿using System;
+﻿using BusinessLogic;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using BusinessLogic;
 using UI.Cards;
-using UI.Dialogs;
 
 namespace UI.Tabs
 {
@@ -19,7 +12,7 @@ namespace UI.Tabs
         //public Button newSceneButton;
         public EditSceneTab sceneEditDialog;
         private MainPage mainPage;
-        public ScenesTab(User loggedUser,MainPage mainPage)
+        public ScenesTab(User loggedUser, MainPage mainPage)
         {
             InitializeComponent();
             this.loggedUser = loggedUser;

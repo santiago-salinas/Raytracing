@@ -14,7 +14,7 @@ namespace BusinessLogic_Tests
         private Sphere testSphere;
         private string sphereName;
         private float radius;
-        
+
         private Lambertian testLambertian;
         private string lambertianName;
         private Color color;
@@ -24,7 +24,7 @@ namespace BusinessLogic_Tests
         [TestInitialize]
         public void Initialize()
         {
-            modelName = "Wooden ball";          
+            modelName = "Wooden ball";
             testNullName = string.Empty;
 
             sphereName = "Small sized sphere";
@@ -43,10 +43,10 @@ namespace BusinessLogic_Tests
                 Color = color,
             };
 
-            testUser= new User()
+            testUser = new User()
             {
                 UserName = "Username1",
-            
+
             };
 
             testModel = new Model()
@@ -122,7 +122,7 @@ namespace BusinessLogic_Tests
         {
             //act
             ModelCollection.AddModel(testModel);
-            bool added = ModelCollection.ContainsModel(testModel.Name,testUser);
+            bool added = ModelCollection.ContainsModel(testModel.Name, testUser);
             //assert
             Assert.IsTrue(added);
         }
@@ -132,7 +132,7 @@ namespace BusinessLogic_Tests
         {
             //act
             ModelCollection.AddModel(testModel);
-            Model getModel = ModelCollection.GetModel(modelName,testUser);
+            Model getModel = ModelCollection.GetModel(modelName, testUser);
             //assert
             Assert.ReferenceEquals(testModel, getModel);
         }
@@ -181,7 +181,7 @@ namespace BusinessLogic_Tests
             //arrange
             User testUser = new User();
             testSphere.Owner = testUser;
-            
+
             SphereCollection.AddSphere(testSphere);
             ModelCollection.AddModel(testModel);
             //act
@@ -197,7 +197,7 @@ namespace BusinessLogic_Tests
             testLambertian.Owner = testUser;
             ModelCollection.AddModel(testModel);
             //act
-            LambertianCollection.RemoveLambertian(lambertianName,testUser);
+            LambertianCollection.RemoveLambertian(lambertianName, testUser);
         }
 
         [TestMethod]

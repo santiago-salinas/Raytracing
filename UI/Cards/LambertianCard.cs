@@ -13,19 +13,19 @@ namespace UI.Cards
             InitializeComponent();
             this.lambertian = lambertian;
             nameLabel.Text = lambertian.Name;
-            
+
             BusinessLogic.Color color = lambertian.Color;
 
             int redValue = (int)color.Red;
             int greenValue = (int)color.Green;
-            int blueValue = (int)color. Blue;
+            int blueValue = (int)color.Blue;
 
 
             redValueLabel.Text += redValue.ToString();
             greenValueLabel.Text += greenValue.ToString();
             blueValueLabel.Text += blueValue.ToString();
 
-            System.Drawing.Color shownColor = System.Drawing.Color.FromArgb(redValue,greenValue,blueValue);
+            System.Drawing.Color shownColor = System.Drawing.Color.FromArgb(redValue, greenValue, blueValue);
             colorPanel.BackColor = shownColor;
 
         }

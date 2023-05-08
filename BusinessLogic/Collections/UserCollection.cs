@@ -13,7 +13,7 @@ namespace BusinessLogic
 
         public static bool ContainsUser(string name)
         {
-            return  _userList.Exists(u => u.UserName == name); ;
+            return _userList.Exists(u => u.UserName == name); ;
         }
 
         public static void AddUser(User newElement)

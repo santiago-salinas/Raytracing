@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Reflection;
 
 namespace BusinessLogic
 {
@@ -50,7 +48,7 @@ namespace BusinessLogic
 
             testScene.CameraDTO = new CameraDTO()
             {
-                LookFrom = new Vector(0,5,0),
+                LookFrom = new Vector(0, 5, 0),
                 LookAt = new Vector(1, 1, 1),
                 Up = new Vector(0, 1, 0),
                 FieldOfView = 40,
@@ -95,7 +93,7 @@ namespace BusinessLogic
             }
         }
 
-        
+
         public Sphere Shape { get; set; }
 
         public Lambertian Material { get; set; }

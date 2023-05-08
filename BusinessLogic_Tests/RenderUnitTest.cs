@@ -76,7 +76,7 @@ namespace BusinessLogic_Tests
         [TestInitialize]
         public void Initialize()
         {
-            
+
             // Sphere 1
             testSceneName = "Render Cliche";
 
@@ -87,7 +87,7 @@ namespace BusinessLogic_Tests
 
             sphere1Name = "Spehere1";
             sphere1Radius = 0.5;
-            sphere1 = new Sphere() { Name = sphere1Name, Radius= sphere1Radius };
+            sphere1 = new Sphere() { Name = sphere1Name, Radius = sphere1Radius };
 
             color1 = new Color(0.1, 0.2, 0.5);
             lambertian1Name = "Color1";

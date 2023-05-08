@@ -1,7 +1,7 @@
-﻿using System;
+﻿using BusinessLogic;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using BusinessLogic;
 using UI.Cards;
 using UI.Dialogs;
 
@@ -16,7 +16,7 @@ namespace UI.Tabs
             InitializeComponent();
             this.loggedUser = loggedUser;
             loadSpheres();
-            
+
         }
 
         private void addShapeButton_Click(object sender, EventArgs e)
@@ -24,7 +24,8 @@ namespace UI.Tabs
             AddSphereDialog addSphere = new AddSphereDialog(loggedUser);
             DialogResult result = addSphere.ShowDialog();
 
-            if (result == DialogResult.OK) {
+            if (result == DialogResult.OK)
+            {
                 SphereCard sphereCard = new SphereCard(addSphere.NewSphere);
                 SphereCollection.AddSphere(addSphere.NewSphere);
                 flowLayoutPanel.Controls.Add(sphereCard);

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using BusinessLogic;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using BusinessLogic;
 using UI.Dialogs;
 using UI.Tabs;
 
@@ -22,7 +16,7 @@ namespace UI.Cards
             InitializeComponent();
             model = providedModel;
             scene = providedScene;
-            
+
             modelNameLabel.Text = model.Name;
 
             string shapeName = model.Shape.Name;

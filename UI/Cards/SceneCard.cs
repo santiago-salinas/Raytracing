@@ -1,7 +1,7 @@
-﻿using System;
+﻿using BusinessLogic;
+using System;
 using System.Globalization;
 using System.Windows.Forms;
-using BusinessLogic;
 using UI.Tabs;
 
 namespace UI.Cards
@@ -9,16 +9,16 @@ namespace UI.Cards
     public partial class SceneCard : UserControl
     {
         private Scene thisScene;
-        
+
         public SceneCard(Scene scene)
         {
             InitializeComponent();
             thisScene = scene;
-            loadData();            
+            loadData();
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
-        {          
+        {
             SceneCollection.RemoveScene(thisScene.Name, thisScene.Owner);
             this.Parent.Controls.Remove(this);
         }
@@ -33,7 +33,7 @@ namespace UI.Cards
         {
             nameLabel.Text = thisScene.Name;
             lastModificationLabel.Text += thisScene.LastModificationDate.ToString("f", new CultureInfo("en-US"));
-            if(thisScene.Preview == null)
+            if (thisScene.Preview == null)
             {
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.Image = Properties.Resources.no_img_placeholder;
@@ -45,7 +45,7 @@ namespace UI.Cards
             {
                 previewPanel.Controls.Clear();
                 previewPanel.Controls.Add(new PPMViewer(thisScene.Preview));
-            }            
+            }
         }
     }
 }

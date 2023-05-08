@@ -1,13 +1,13 @@
-﻿using System;
+﻿using BusinessLogic;
+using System;
 using System.Windows.Forms;
-using BusinessLogic;
 using UI.Tabs;
 
 namespace UI
 {
     public partial class MainPage : Form
     {
-        
+
         MaterialsTab materialsTab;
         ShapesTab shapesTab;
         ScenesTab scenesTab;
@@ -24,9 +24,9 @@ namespace UI
 
         private void scenesSideBarButton_Click(object sender, EventArgs e)
         {
-            if(scenesTab == null)
+            if (scenesTab == null)
             {
-                scenesTab = new ScenesTab(loggedUser,this);
+                scenesTab = new ScenesTab(loggedUser, this);
                 scenesTab.FormClosed += scenesTabClosed;
                 scenesTab.MdiParent = this;
                 scenesTab.Dock = DockStyle.Fill;
@@ -111,7 +111,7 @@ namespace UI
         private void signOutButton_Click(object sender, EventArgs e)
         {
             IsSignignOut = true;
-            this.Close();            
+            this.Close();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)

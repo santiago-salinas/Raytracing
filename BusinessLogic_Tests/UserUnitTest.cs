@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BusinessLogic;
+﻿using BusinessLogic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
 namespace BusinessLogic_Tests
@@ -11,8 +11,9 @@ namespace BusinessLogic_Tests
         private String testUserName;
         private String testPassword;
 
-        [TestInitialize] 
-        public void Initialize() {
+        [TestInitialize]
+        public void Initialize()
+        {
 
             testUserName = "TestUsername";
             testPassword = "Abc123";
@@ -37,7 +38,7 @@ namespace BusinessLogic_Tests
 
             // Assert
             Assert.IsNotNull(testUserName);
-            
+
         }
 
         [TestMethod]
@@ -92,7 +93,7 @@ namespace BusinessLogic_Tests
         public void UserNameTooShortThrowsException()
         {
             // Arrange
-            String invalidUserName = "aA";            
+            String invalidUserName = "aA";
 
             // Act
             Action act = () => testUser.UserName = invalidUserName;
@@ -100,7 +101,7 @@ namespace BusinessLogic_Tests
             // Assert
             var exception = Assert.ThrowsException<ArgumentException>(act);
             Assert.AreEqual("User name must be between 3 and 20 characters long", exception.Message);
-   
+
         }
 
         [TestMethod]
@@ -121,7 +122,7 @@ namespace BusinessLogic_Tests
         public void UserNameNullOrEmptyThrowsException()
         {
             // Arrange
-        
+
             String invalidUserName = String.Empty;
 
             // Act
@@ -143,7 +144,7 @@ namespace BusinessLogic_Tests
 
             // Assert
             Assert.AreEqual(validPassword, testUser.Password);
-            
+
         }
 
         [TestMethod]
@@ -152,7 +153,7 @@ namespace BusinessLogic_Tests
         {
             //arrange
             testPassword = string.Empty;
-            
+
             //act
             Action act = () => testUser.Password = testPassword;
 
@@ -165,7 +166,7 @@ namespace BusinessLogic_Tests
         public void PasswordTooShortThrowsException()
         {
             // Arrange
-            
+
             String invalidPassword = "Abc1";
 
             // Act
@@ -174,7 +175,7 @@ namespace BusinessLogic_Tests
             // Assert
             var exception = Assert.ThrowsException<ArgumentException>(act);
             Assert.AreEqual("Password must be between 5 and 25 characters long", exception.Message);
-            
+
         }
 
         [TestMethod]

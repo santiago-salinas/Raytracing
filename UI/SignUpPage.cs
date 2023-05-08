@@ -1,6 +1,6 @@
-﻿using System;
+﻿using BusinessLogic;
+using System;
 using System.Windows.Forms;
-using BusinessLogic;
 
 namespace UI
 {
@@ -21,7 +21,7 @@ namespace UI
             string username = userNameTextBox.Text;
             string password = passwordTextBox.Text;
             string confirmPassword = confirmPasswordTextbox.Text;
-            if(usernameFieldIsCorrect && passwordFieldIsCorrect && confirmPasswordFieldIsCorrect)
+            if (usernameFieldIsCorrect && passwordFieldIsCorrect && confirmPasswordFieldIsCorrect)
             {
                 createdUser.UserName = username;
                 createdUser.Password = password;
@@ -31,7 +31,7 @@ namespace UI
             }
             else
             {
-                signUpLabel.Visible = true;                
+                signUpLabel.Visible = true;
             }
 
         }
@@ -44,8 +44,9 @@ namespace UI
 
             try
             {
-                createdUser.CheckIfUserNameIsValid(username);                
-            }catch(ArgumentException ex)
+                createdUser.CheckIfUserNameIsValid(username);
+            }
+            catch (ArgumentException ex)
             {
                 usernameStatusLabel.Text = ex.Message;
                 usernameFieldIsCorrect = false;

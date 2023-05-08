@@ -40,10 +40,11 @@ namespace BusinessLogic
             }
         }
 
-        public User Owner { 
+        public User Owner
+        {
             get { return _owner; }
             set { _owner = value; }
-        
+
         }
 
         private void CheckIfStringNull(string value)

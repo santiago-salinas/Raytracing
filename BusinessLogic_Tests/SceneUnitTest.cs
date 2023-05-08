@@ -45,23 +45,24 @@ namespace BusinessLogic_Tests
                 UserName = "Username1"
             };
 
-      
+
 
             modelName = "Wooden ball";
             sphereName = "Small sized sphere";
             radius = 5;
             lambertianName = "Oak color";
-            color = new Color((float)133/255, (float)94 / 255, (float)66 / 255);
+            color = new Color((float)133 / 255, (float)94 / 255, (float)66 / 255);
 
             testSphere = new Sphere()
             {
-                Name= sphereName,
+                Name = sphereName,
                 Radius = radius,
             };
-            
-            testLambertian = new Lambertian() {
-                Name = lambertianName, 
-                Color = color 
+
+            testLambertian = new Lambertian()
+            {
+                Name = lambertianName,
+                Color = color
             };
 
 
@@ -82,7 +83,7 @@ namespace BusinessLogic_Tests
                 Position = testPosition
             };
 
-           
+
 
             DateTimeProvider.Reset();
 
@@ -256,7 +257,7 @@ namespace BusinessLogic_Tests
             testScene = new Scene()
             {
                 CreationDate = DateTimeProvider.Now,
-                
+
 
             };
             testScene.AddPositionedModel(testPositionedModel);
@@ -265,7 +266,7 @@ namespace BusinessLogic_Tests
             DateTime previousDate = testScene.LastModificationDate;
             testScene.RemovePositionedModel(testPositionedModel);
             bool lastModificationIsLater = testScene.LastModificationDate > previousDate;
-            
+
             //assert
             Assert.IsTrue(lastModificationIsLater);
         }
@@ -286,7 +287,7 @@ namespace BusinessLogic_Tests
             DateTime previousDate = testScene.LastRenderDate;
             testScene.RenderScene();
             bool lastRenderIsLater = testScene.LastRenderDate > previousDate;
-            
+
             //assert
             Assert.IsTrue(lastRenderIsLater);
         }
@@ -312,7 +313,7 @@ namespace BusinessLogic_Tests
             testScene.Owner = testUser;
             //act
             SceneCollection.AddScene(testScene);
-            Scene getScene = SceneCollection.GetScene(testName,testUser);
+            Scene getScene = SceneCollection.GetScene(testName, testUser);
             //assert
             Assert.ReferenceEquals(testScene, getScene);
         }
@@ -352,12 +353,12 @@ namespace BusinessLogic_Tests
             {
                 UserName = "Username1"
             };
-            
+
             testScene = new Scene()
             {
                 Name = testName,
                 Owner = testUser
-            };                                            
+            };
             SceneCollection.AddScene(testScene);
 
             //act
@@ -374,13 +375,13 @@ namespace BusinessLogic_Tests
         public void CantDeleteModelFromCollectionUsedByScene()
         {
             //arrange
-            
+
             ModelCollection.AddModel(testModel);
             testScene.AddPositionedModel(testPositionedModel);
             SceneCollection.AddScene(testScene);
 
             //act
-            ModelCollection.RemoveModel(testModel.Name,testModel.Owner);
+            ModelCollection.RemoveModel(testModel.Name, testModel.Owner);
         }
 
         [TestMethod]
@@ -396,7 +397,7 @@ namespace BusinessLogic_Tests
 
             //act
             SceneCollection.RemoveScene(testScene.Name, testUser);
-            ModelCollection.RemoveModel(testModel.Name,testModel.Owner);
+            ModelCollection.RemoveModel(testModel.Name, testModel.Owner);
         }
 
         [TestMethod]

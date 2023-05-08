@@ -29,10 +29,10 @@ namespace UI.Dialogs
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            string modelName = nameTextBox.Text;            
-            nameStatusLabel.Text = "";            
+            string modelName = nameTextBox.Text;
+            nameStatusLabel.Text = "";
             bool nameIsCorrect = true;
-            
+
             try
             {
                 NewModel.Name = modelName;

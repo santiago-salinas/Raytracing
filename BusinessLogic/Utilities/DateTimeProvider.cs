@@ -6,7 +6,8 @@ namespace BusinessLogic
     {
         private static DateTime? now;
 
-        public static DateTime Now {
+        public static DateTime Now
+        {
             get
             {
                 if (now == null)
@@ -20,7 +21,7 @@ namespace BusinessLogic
             set
             {
                 now = value;
-            } 
+            }
         }
 
         public static void Reset() => now = null;
