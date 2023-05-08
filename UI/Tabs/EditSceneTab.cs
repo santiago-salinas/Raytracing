@@ -183,8 +183,8 @@ namespace UI.Tabs
             renderPanel.Controls.Clear();
             outdatedStatusLabel.Visible = false;
             
-            Engine motomoto = new Engine(scene);
-            PPM ppm = motomoto.render();
+            Engine engine = new Engine(scene);
+            PPM ppm = engine.Render();
             scene.Preview = ppm;
 
             renderPanel.Controls.Add(new PPMViewer(ppm));

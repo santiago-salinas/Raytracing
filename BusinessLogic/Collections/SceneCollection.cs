@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLogic
 {
@@ -14,13 +15,14 @@ namespace BusinessLogic
         public static List<Scene> GetScenesFromUser(User owner)
         {
             List<Scene> ret = new List<Scene>();
-            foreach (Scene s in _sceneList)
+            foreach (Scene scene in _sceneList)
             {
-                if (s.Owner == owner)
+                if (scene.Owner == owner)
                 {
-                    ret.Add(s);
+                    ret.Add(scene);
                 }
             }
+            ret.OrderBy(scene => scene.LastModificationDate);
             return ret;
         }
         public static bool ContainsScene(string name, User owner)
