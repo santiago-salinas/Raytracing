@@ -1,16 +1,10 @@
 ﻿using BusinessLogic;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using UI.Dialogs;
-using UI.Cards;
 using System.Globalization;
+using System.Windows.Forms;
+using UI.Cards;
+using UI.Dialogs;
 
 namespace UI.Tabs
 {
@@ -36,10 +30,10 @@ namespace UI.Tabs
         {
             CameraDTO defaultCameraValues = new CameraDTO()
             {
-                LookFrom = new Vector(0,2,0),
-                LookAt = new Vector(0,2,5),
+                LookFrom = new Vector(0, 2, 0),
+                LookAt = new Vector(0, 2, 5),
                 Up = new Vector(0, 1, 0),
-                FieldOfView = 30,                
+                FieldOfView = 30,
                 MaxDepth = 50,
                 ResolutionX = 650,
                 ResolutionY = 375,
@@ -58,7 +52,8 @@ namespace UI.Tabs
         }
         public void loadDataFromScene(Scene providedScene)
         {
-            scene = providedScene;               
+
+            scene = providedScene;
             nameTextbox.Text = providedScene.Name;
             sceneCamera = providedScene.CameraDTO;
             Vector lookFrom = sceneCamera.LookFrom;
@@ -76,9 +71,9 @@ namespace UI.Tabs
         }
         private void lookFromEditButton_Click(object sender, EventArgs e)
         {
-            
+
             EditVectorDialog editVectorDialog = new EditVectorDialog(sceneCamera.LookFrom, "Look from");
-            editVectorDialog.ShowDialog();  
+            editVectorDialog.ShowDialog();
             DialogResult result = editVectorDialog.DialogResult;
 
             if(result == DialogResult.OK)
@@ -103,7 +98,7 @@ namespace UI.Tabs
             nameStatusLabel.Text = string.Empty;
             string newName = nameTextbox.Text.Trim();
             bool endedCorrectly = false;
-            if(newName == "")
+            if (newName == "")
             {
                 nameStatusLabel.Text = "* Scene's name cannot be blank";
             }
@@ -124,25 +119,25 @@ namespace UI.Tabs
                     }
                 }
                 else
-                { 
-                    if(nameWasChanged() && SceneCollection.ContainsScene(newName, loggedUser))
+                {
+                    if (nameWasChanged() && SceneCollection.ContainsScene(newName, loggedUser))
                     {
                         nameStatusLabel.Text = "* User already owns a scene with that name";
                     }
                     else
                     {
                         scene.Name = newName;
-                        endedCorrectly= true;
-                    }                
+                        endedCorrectly = true;
+                    }
                 }
-                                             
+
             }
 
             if (endedCorrectly)
             {
                 scenesTab.loadScenes();
                 scenesTab.Activate();
-            } 
+            }
         }
 
         private bool nameWasChanged()
@@ -161,20 +156,20 @@ namespace UI.Tabs
             List<Model> list = ModelCollection.GetModelsFromUser(loggedUser);
             foreach (Model elem in list)
             {
-                EditSceneModelCard modelCard = new EditSceneModelCard(scene,elem);
+                EditSceneModelCard modelCard = new EditSceneModelCard(scene, elem);
                 availableModelsPanel.Controls.Add(modelCard);
             }
         }
 
         public void loadPositionedModels()
         {
-            positionedModelsPanel.Controls.Clear();  
+            positionedModelsPanel.Controls.Clear();
             List<PositionedModel> list = scene.PositionedModels;
             foreach (PositionedModel elem in list)
             {
-               PositionedModelCard modelCard = new PositionedModelCard(elem, scene);
-               positionedModelsPanel.Controls.Add(modelCard);
-            }                                   
+                PositionedModelCard modelCard = new PositionedModelCard(elem, scene);
+                positionedModelsPanel.Controls.Add(modelCard);
+            }
         }
 
         private void renderButton_Click(object sender, EventArgs e)
@@ -184,7 +179,7 @@ namespace UI.Tabs
             lastRenderLabel.Text = "Last rendered: " + newRenderDate.ToString("f", new CultureInfo("en-US"));
             renderPanel.Controls.Clear();
             outdatedStatusLabel.Visible = false;
-            
+
             Engine motomoto = new Engine(scene);
             PPM ppm = motomoto.render();
             scene.Preview = ppm;
@@ -196,7 +191,7 @@ namespace UI.Tabs
         {
             DateTime newModificationDate = DateTime.Now;
             scene.LastModificationDate = newModificationDate;
-            lastModificationLabel.Text = "Last modification date: " + newModificationDate.ToString("f",new CultureInfo("en-US"));
+            lastModificationLabel.Text = "Last modification date: " + newModificationDate.ToString("f", new CultureInfo("en-US"));
             outdatedStatusLabel.Visible = true;
         }
 

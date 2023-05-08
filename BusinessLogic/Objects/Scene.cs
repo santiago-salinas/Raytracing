@@ -56,7 +56,7 @@ namespace BusinessLogic
             {
                 throw new ArgumentNullException("Name cannot be blank");
             }
-        }        
+        }
 
         public List<PositionedModel> GetModels()
         {
@@ -92,7 +92,7 @@ namespace BusinessLogic
 
         public bool ContainsPositionedModel(PositionedModel element)
         {
-           return _positionedModellList.Contains(element);
+            return _positionedModellList.Contains(element);
         }
 
         public bool ContainsModel(Model model)

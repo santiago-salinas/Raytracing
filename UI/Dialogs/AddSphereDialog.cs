@@ -1,6 +1,6 @@
-﻿using System;
+﻿using BusinessLogic;
+using System;
 using System.Windows.Forms;
-using BusinessLogic;
 
 namespace UI.Dialogs
 {
@@ -8,7 +8,7 @@ namespace UI.Dialogs
     {
 
         public Sphere NewSphere = new Sphere();
-        private User loggedUser {  get; set; }
+        private User loggedUser { get; set; }
         public AddSphereDialog(User loggedUser)
         {
             InitializeComponent();
@@ -29,17 +29,19 @@ namespace UI.Dialogs
 
             bool nameIsCorrect = true;
             bool radiusIsCorrect = true;
-            
+
             try
             {
                 NewSphere.Name = sphereName;
-            }catch (ArgumentNullException ex)
+            }
+            catch (ArgumentNullException ex)
             {
                 nameStatusLabel.Text = "* Name cannot be empty";
                 nameIsCorrect = false;
             }
 
-            if (SphereCollection.ContainsSphere(sphereName,loggedUser)) {
+            if (SphereCollection.ContainsSphere(sphereName, loggedUser))
+            {
                 nameIsCorrect = false;
                 nameStatusLabel.Text = "* Sphere with that name already exists";
             }
@@ -47,17 +49,19 @@ namespace UI.Dialogs
             try
             {
                 NewSphere.Radius = radius;
-            }catch(BusinessLogicException ex)
+            }
+            catch (BusinessLogicException ex)
             {
                 radiusStatusLabel.Visible = true;
                 radiusIsCorrect = false;
             }
 
-            if(nameIsCorrect && radiusIsCorrect) {
+            if (nameIsCorrect && radiusIsCorrect)
+            {
                 NewSphere.Owner = loggedUser;
                 DialogResult = DialogResult.OK;
             }
-                         
+
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using BusinessLogic;
+using System;
 using System.Windows.Forms;
-using BusinessLogic;
 
 namespace UI
 {
@@ -18,8 +18,9 @@ namespace UI
             string passwordText = passwordTextBox.Text;
 
             bool credentialsAreCorrect = UserCollection.CheckUsernameAndPasswordCombination(userNameText, passwordText);
-            
-            if (credentialsAreCorrect) {
+
+            if (credentialsAreCorrect)
+            {
                 User user = UserCollection.GetUser(userNameText);
                 new MainPage(user).Show();
                 this.Hide();

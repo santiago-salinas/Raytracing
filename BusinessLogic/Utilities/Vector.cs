@@ -123,7 +123,7 @@ namespace BusinessLogic
             else
             {
                 return Divide(length);
-            }            
+            }
         }
 
         public double Dot(Vector other)

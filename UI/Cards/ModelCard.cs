@@ -2,7 +2,6 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using UI.Tabs;
 
 namespace UI.Cards
 {
@@ -14,7 +13,7 @@ namespace UI.Cards
             InitializeComponent();
             this.model = model;
             modelNameLabel.Text = model.Name;
-            
+
             string shapeName = model.Shape.Name;
             shapeNameLabel.Text += shapeName;
 
@@ -41,10 +40,11 @@ namespace UI.Cards
         {
             PPM preview = model.Preview;
 
-            if(preview == null) {
+            if (preview == null)
+            {
                 Image defaultImage = Properties.Resources.sphereImage;
                 previewBox.Image = defaultImage;
-                
+
                 Panel coloredBox = new Panel();
 
                 BusinessLogic.Color materialColor = model.Material.Color;

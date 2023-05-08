@@ -14,7 +14,7 @@ namespace BusinessLogic_Tests
         private string testName;
         private string testNullName;
         public User testUser;
-        
+
 
         [TestInitialize]
         public void Initialize()
@@ -139,7 +139,7 @@ namespace BusinessLogic_Tests
             testSphere.Owner = testUser;
             //act
             SphereCollection.AddSphere(testSphere);
-            bool added = SphereCollection.ContainsSphere(testSphere.Name,testUser);
+            bool added = SphereCollection.ContainsSphere(testSphere.Name, testUser);
             //assert
             Assert.IsTrue(added);
         }
@@ -199,14 +199,14 @@ namespace BusinessLogic_Tests
                 Name = testName,
                 Owner = testUser
             };
-            SphereCollection.AddSphere(testSphere);      
+            SphereCollection.AddSphere(testSphere);
             Sphere newSphere = new Sphere()
             {
                 Name = testName,
                 Owner = testUser,
-            };          
+            };
             //act
-            SphereCollection.AddSphere(newSphere);    
+            SphereCollection.AddSphere(newSphere);
         }
 
         [TestMethod]

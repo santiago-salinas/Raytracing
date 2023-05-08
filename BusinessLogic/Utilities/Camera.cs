@@ -3,7 +3,7 @@
 namespace BusinessLogic
 {
     public class Camera
-    {        
+    {
         public Camera(CameraDTO dto)
         {
             Theta = (dto.FieldOfView * Math.PI) / 180.0;

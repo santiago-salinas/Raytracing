@@ -33,7 +33,7 @@ namespace BusinessLogic
             get { return _owner; }
             set { _owner = value; }
         }
-        public Color Color {get; set; }
+        public Color Color { get; set; }
 
         private void CheckIfStringNull(string value)
         {
@@ -56,7 +56,7 @@ namespace BusinessLogic
         {
             bool namesEqual = this.Name == ((Lambertian)other).Name;
             bool colorEqual = this.Color == ((Lambertian)other).Color;
-            return namesEqual && colorEqual; 
+            return namesEqual && colorEqual;
         }
     }
 }

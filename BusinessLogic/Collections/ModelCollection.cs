@@ -32,7 +32,7 @@ namespace BusinessLogic
         }
 
         public static bool ExistsModelUsingTheLambertian(Lambertian lambertian)
-        {            
+        {
             Model ret = _modelList.Find(m => m.Material == lambertian);
             return ret != null;
         }
@@ -62,8 +62,8 @@ namespace BusinessLogic
 
         public static void RemoveModel(string name, User owner)
         {
-            Model model = GetModel(name,owner);
-            
+            Model model = GetModel(name, owner);
+
             if (SceneCollection.ExistsSceneUsingModel(model))
             {
                 throw new BusinessLogicException("Cant delete sphere used by existing model");
