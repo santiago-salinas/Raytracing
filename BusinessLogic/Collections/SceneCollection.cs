@@ -22,7 +22,7 @@ namespace BusinessLogic
                     ret.Add(scene);
                 }
             }
-            ret.OrderBy(scene => scene.LastModificationDate);
+            ret = ret.OrderByDescending(scene => scene.LastModificationDate).ToList();
             return ret;
         }
         public static bool ContainsScene(string name, User owner)

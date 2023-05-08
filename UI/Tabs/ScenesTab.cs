@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using BusinessLogic;
 using UI.Cards;
@@ -23,6 +24,7 @@ namespace UI.Tabs
         {
             flowLayoutPanel.Controls.Clear();
             List<Scene> sceneList = SceneCollection.GetScenesFromUser(loggedUser);
+            //var orderedList = sceneList.OrderByDescending(scene => scene.LastModificationDate).ToList();
             foreach (Scene elem in sceneList)
             {
                 SceneCard sceneCard = new SceneCard(elem);
