@@ -4,9 +4,11 @@ namespace BusinessLogic
 {
     public class RandomProvider : Random
     {
+        private const double selectedValue = 0.5;
+
         public override double NextDouble()
         {
-            return 0.5;
+            return selectedValue;
         }
     }
 }

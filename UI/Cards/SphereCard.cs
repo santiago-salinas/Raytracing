@@ -17,10 +17,10 @@ namespace UI.Cards
         {
             try
             {
-                SphereCollection.RemoveSphere(sphere.Name, sphere.Owner);
+                Spheres.RemoveSphere(sphere.Name, sphere.Owner);
                 this.Parent.Controls.Remove(this);
             }
-            catch (BusinessLogicException ex)
+            catch (BusinessLogicException)
             {
                 deleteLabel.Visible = true;
             }

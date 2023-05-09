@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace BusinessLogic
 {
-    public static class SceneCollection
+    public static class Scenes
     {
         private static List<Scene> _sceneList = new List<Scene>();
 
-        public static void DropCollection()
+        public static void Drop()
         {
             _sceneList.Clear();
         }

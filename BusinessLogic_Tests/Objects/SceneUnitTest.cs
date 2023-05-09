@@ -299,8 +299,8 @@ namespace BusinessLogic_Tests
             testUser.UserName = "Username";
             testScene.Owner = testUser;
             //act
-            SceneCollection.AddScene(testScene);
-            bool added = SceneCollection.ContainsScene(testScene.Name, testUser);
+            Scenes.AddScene(testScene);
+            bool added = Scenes.ContainsScene(testScene.Name, testUser);
             //assert
             Assert.IsTrue(added);
         }
@@ -313,8 +313,8 @@ namespace BusinessLogic_Tests
             testUser.UserName = "Username";
             testScene.Owner = testUser;
             //act
-            SceneCollection.AddScene(testScene);
-            Scene getScene = SceneCollection.GetScene(testName, testUser);
+            Scenes.AddScene(testScene);
+            Scene getScene = Scenes.GetScene(testName, testUser);
             //assert
             Assert.ReferenceEquals(testScene, getScene);
         }
@@ -327,10 +327,10 @@ namespace BusinessLogic_Tests
             User testUser = new User();
             testUser.UserName = "Username";
             testScene.Owner = testUser;
-            SceneCollection.AddScene(testScene);
+            Scenes.AddScene(testScene);
             //act
-            SceneCollection.RemoveScene(testName, testUser);
-            SceneCollection.GetScene(testName, testUser);
+            Scenes.RemoveScene(testName, testUser);
+            Scenes.GetScene(testName, testUser);
         }
 
 
@@ -358,11 +358,11 @@ namespace BusinessLogic_Tests
                 Name = "scene2",
                 Owner = user2,
             };
-            SceneCollection.AddScene(scene1);
-            SceneCollection.AddScene(scene2);
+            Scenes.AddScene(scene1);
+            Scenes.AddScene(scene2);
 
             // Act
-            Action act = () => SceneCollection.RemoveScene("scene1", user2);
+            Action act = () => Scenes.RemoveScene("scene1", user2);
 
             // Assert
             var exception = Assert.ThrowsException<BusinessLogicException>(act);
@@ -384,7 +384,7 @@ namespace BusinessLogic_Tests
                 Name = testName,
                 Owner = testUser
             };
-            SceneCollection.AddScene(testScene);
+            Scenes.AddScene(testScene);
 
             //act
             Scene newScene = new Scene()
@@ -392,7 +392,7 @@ namespace BusinessLogic_Tests
                 Name = testName,
                 Owner = testUser
             };
-            SceneCollection.AddScene(newScene);
+            Scenes.AddScene(newScene);
         }
 
         [TestMethod]
@@ -401,12 +401,12 @@ namespace BusinessLogic_Tests
         {
             //arrange
 
-            ModelCollection.AddModel(testModel);
+            Models.AddModel(testModel);
             testScene.AddPositionedModel(testPositionedModel);
-            SceneCollection.AddScene(testScene);
+            Scenes.AddScene(testScene);
 
             //act
-            ModelCollection.RemoveModel(testModel.Name, testModel.Owner);
+            Models.RemoveModel(testModel.Name, testModel.Owner);
         }
 
         [TestMethod]
@@ -416,13 +416,13 @@ namespace BusinessLogic_Tests
             User testUser = new User();
             testUser.UserName = "Username";
             testScene.Owner = testUser;
-            ModelCollection.AddModel(testModel);
+            Models.AddModel(testModel);
             testScene.AddPositionedModel(testPositionedModel);
-            SceneCollection.AddScene(testScene);
+            Scenes.AddScene(testScene);
 
             //act
-            SceneCollection.RemoveScene(testScene.Name, testUser);
-            ModelCollection.RemoveModel(testModel.Name, testModel.Owner);
+            Scenes.RemoveScene(testScene.Name, testUser);
+            Models.RemoveModel(testModel.Name, testModel.Owner);
         }
 
         [TestMethod]
@@ -434,7 +434,7 @@ namespace BusinessLogic_Tests
             testUser.UserName = "Username";
             testScene.Owner = testUser;
             Assert.IsFalse(testScene.ContainsModel(testModel));
-            ModelCollection.AddModel(testModel);
+            Models.AddModel(testModel);
             //act
             testScene.AddPositionedModel(testPositionedModel);
             //assert
@@ -473,11 +473,11 @@ namespace BusinessLogic_Tests
                 Owner = user2,
             };
 
-            SceneCollection.AddScene(scene1);
-            SceneCollection.AddScene(scene2);
-            SceneCollection.AddScene(scene3);
+            Scenes.AddScene(scene1);
+            Scenes.AddScene(scene2);
+            Scenes.AddScene(scene3);
 
-            List<Scene> scenes = SceneCollection.GetScenesFromUser(user1);
+            List<Scene> scenes = Scenes.GetScenesFromUser(user1);
 
             Assert.AreEqual(2, scenes.Count);
             Assert.IsTrue(scenes.Contains(scene1));
@@ -495,7 +495,7 @@ namespace BusinessLogic_Tests
                 Password = "Password1"
             };
 
-            List<Scene> scenes = SceneCollection.GetScenesFromUser(emptyUser);
+            List<Scene> scenes = Scenes.GetScenesFromUser(emptyUser);
 
             Assert.AreEqual(0, scenes.Count);
         }
@@ -503,10 +503,10 @@ namespace BusinessLogic_Tests
         [TestCleanup]
         public void TearDown()
         {
-            SphereCollection.DropCollection();
-            LambertianCollection.DropCollection();
-            ModelCollection.DropCollection();
-            SceneCollection.DropCollection();
+            Spheres.Drop();
+            Lambertians.Drop();
+            Models.Drop();
+            Scenes.Drop();
             testScene.DropPositionedModels();
         }
     }

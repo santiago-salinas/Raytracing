@@ -34,10 +34,10 @@ namespace UI.Cards
         {
             try
             {
-                LambertianCollection.RemoveLambertian(lambertian.Name, lambertian.Owner);
+                Lambertians.RemoveLambertian(lambertian.Name, lambertian.Owner);
                 this.Parent.Controls.Remove(this);
             }
-            catch (BusinessLogicException ex)
+            catch (BusinessLogicException)
             {
                 deleteLabel.Visible = true;
             }

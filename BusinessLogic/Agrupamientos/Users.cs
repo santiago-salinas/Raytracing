@@ -2,11 +2,11 @@
 
 namespace BusinessLogic
 {
-    public static class UserCollection
+    public static class Users
     {
         private static List<User> _userList = new List<User>();
 
-        public static void DropCollection()
+        public static void Drop()
         {
             _userList.Clear();
         }

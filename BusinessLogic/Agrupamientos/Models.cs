@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace BusinessLogic
 {
-    public static class ModelCollection
+    public static class Models
     {
         private static List<Model> _modelList = new List<Model>();
 
-        public static void DropCollection()
+        public static void Drop()
         {
             _modelList.Clear();
         }
@@ -64,7 +64,7 @@ namespace BusinessLogic
         {
             Model model = GetModel(name, owner);
 
-            if (SceneCollection.ExistsSceneUsingModel(model))
+            if (Scenes.ExistsSceneUsingModel(model))
             {
                 throw new BusinessLogicException("Cant delete sphere used by existing model");
             }

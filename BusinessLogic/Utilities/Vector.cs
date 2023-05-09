@@ -4,10 +4,7 @@ namespace BusinessLogic
 {
     public class Vector
     {
-        private double _firstValue;
-        private double _secondValue;
-        private double _thirdValue;
-
+        private const double tolerance = 0.0001;
         public Vector()
         { }
 
@@ -24,21 +21,9 @@ namespace BusinessLogic
             ThirdValue = z;
         }
 
-        public double FirstValue
-        {
-            get { return _firstValue; }
-            set { _firstValue = value; }
-        }
-        public double SecondValue
-        {
-            get { return _secondValue; }
-            set { _secondValue = value; }
-        }
-        public double ThirdValue
-        {
-            get { return _thirdValue; }
-            set { _thirdValue = value; }
-        }
+        public double FirstValue { get; set; }
+        public double SecondValue { get; set; }
+        public double ThirdValue { get; set; }
 
         public override string ToString()
         {
@@ -47,7 +32,6 @@ namespace BusinessLogic
         public override bool Equals(object other)
         {
             Vector otherVector = (Vector)other;
-            const double tolerance = 0.0001;
 
             bool evalFst = Math.Abs(FirstValue - otherVector.FirstValue) < tolerance;
             bool evalSnd = Math.Abs(SecondValue - otherVector.SecondValue) < tolerance;
@@ -58,55 +42,55 @@ namespace BusinessLogic
 
         public Vector Add(Vector other)
         {
-            return new Vector(_firstValue + other.FirstValue, _secondValue + other.SecondValue, _thirdValue + other.ThirdValue);
+            return new Vector(FirstValue + other.FirstValue, SecondValue + other.SecondValue, ThirdValue + other.ThirdValue);
         }
 
         public Vector Subtract(Vector other)
         {
-            return new Vector(_firstValue - other.FirstValue, _secondValue - other.SecondValue, _thirdValue - other.ThirdValue);
+            return new Vector(FirstValue - other.FirstValue, SecondValue - other.SecondValue, ThirdValue - other.ThirdValue);
         }
 
         public Vector Multiply(double value)
         {
-            return new Vector(_firstValue * value, _secondValue * value, _thirdValue * value);
+            return new Vector(FirstValue * value, SecondValue * value, ThirdValue * value);
         }
 
         public Vector Divide(double value)
         {
-            return new Vector(_firstValue / value, _secondValue / value, _thirdValue / value);
+            return new Vector(FirstValue / value, SecondValue / value, ThirdValue / value);
         }
 
         public void AddTo(Vector other)
         {
-            _firstValue += other.FirstValue;
-            _secondValue += other.SecondValue;
-            _thirdValue += other.ThirdValue;
+            FirstValue += other.FirstValue;
+            SecondValue += other.SecondValue;
+            ThirdValue += other.ThirdValue;
         }
 
         public void SubtractFrom(Vector other)
         {
-            _firstValue -= other.FirstValue;
-            _secondValue -= other.SecondValue;
-            _thirdValue -= other.ThirdValue;
+            FirstValue -= other.FirstValue;
+            SecondValue -= other.SecondValue;
+            ThirdValue -= other.ThirdValue;
         }
 
         public void ScaleUpBy(int iCount)
         {
-            _firstValue *= iCount;
-            _secondValue *= iCount;
-            _thirdValue *= iCount;
+            FirstValue *= iCount;
+            SecondValue *= iCount;
+            ThirdValue *= iCount;
         }
 
         public void ScaleDownBy(int iCount)
         {
-            _firstValue /= iCount;
-            _secondValue /= iCount;
-            _thirdValue /= iCount;
+            FirstValue /= iCount;
+            SecondValue /= iCount;
+            ThirdValue /= iCount;
         }
 
         public double SquaredLength()
         {
-            return _firstValue * _firstValue + _secondValue * _secondValue + _thirdValue * _thirdValue;
+            return FirstValue * FirstValue + SecondValue * SecondValue + ThirdValue * ThirdValue;
         }
 
         public double Length()
@@ -128,14 +112,14 @@ namespace BusinessLogic
 
         public double Dot(Vector other)
         {
-            return _firstValue * other.FirstValue + _secondValue * other.SecondValue + _thirdValue * other.ThirdValue;
+            return FirstValue * other.FirstValue + SecondValue * other.SecondValue + ThirdValue * other.ThirdValue;
         }
 
         public Vector Cross(Vector other)
         {
-            double x = _secondValue * other.ThirdValue - _thirdValue * other.SecondValue;
-            double y = _thirdValue * other.FirstValue - _firstValue * other.ThirdValue;
-            double z = _firstValue * other.SecondValue - _secondValue * other.FirstValue;
+            double x = SecondValue * other.ThirdValue - ThirdValue * other.SecondValue;
+            double y = ThirdValue * other.FirstValue - FirstValue * other.ThirdValue;
+            double z = FirstValue * other.SecondValue - SecondValue * other.FirstValue;
             return new Vector(x, y, z);
         }
 
@@ -145,7 +129,8 @@ namespace BusinessLogic
             do
             {
                 Vector vectorTemp = new Vector(Engine.random.NextDouble(), Engine.random.NextDouble(), Engine.random.NextDouble());
-                vector = vectorTemp.Multiply(2).Subtract(new Vector(1, 1, 1));
+                Vector unitVector = new Vector(1, 1, 1);
+                vector = vectorTemp.Multiply(2).Subtract(unitVector);
             } while (vector.SquaredLength() >= 1);
 
             return vector;

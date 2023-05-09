@@ -34,13 +34,13 @@ namespace UI.Dialogs
             {
                 NewSphere.Name = sphereName;
             }
-            catch (ArgumentNullException ex)
+            catch (ArgumentNullException)
             {
                 nameStatusLabel.Text = "* Name cannot be empty";
                 nameIsCorrect = false;
             }
 
-            if (SphereCollection.ContainsSphere(sphereName, loggedUser))
+            if (Spheres.ContainsSphere(sphereName, loggedUser))
             {
                 nameIsCorrect = false;
                 nameStatusLabel.Text = "* Sphere with that name already exists";
@@ -50,7 +50,7 @@ namespace UI.Dialogs
             {
                 NewSphere.Radius = radius;
             }
-            catch (BusinessLogicException ex)
+            catch (BusinessLogicException)
             {
                 radiusStatusLabel.Visible = true;
                 radiusIsCorrect = false;

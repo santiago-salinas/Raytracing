@@ -29,26 +29,14 @@ namespace BusinessLogic
         public DateTime LastModificationDate { get; set; }
         public DateTime LastRenderDate { get; set; }
 
-        public User Owner
-        {
-            get;
-            set;
-        }
-
-        public PPM Preview
-        {
-            get;
-            set;
-        }
+        public User Owner { get; set; }
+        public PPM Preview { get; set; }
         public List<PositionedModel> PositionedModels
         {
             get { return _positionedModellList; }
         }
 
-        public CameraDTO CameraDTO
-        {
-            set; get;
-        }
+        public CameraDTO CameraDTO { get; set; }
 
         private void CheckIfStringNull(string value)
         {

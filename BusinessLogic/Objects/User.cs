@@ -5,9 +5,12 @@ namespace BusinessLogic
 {
     public class User
     {
+        private const int minimumUsernameLength = 3;
+        private const int maximumUsernameLength = 20;
+        private const int minimumPasswordLength = 5;
+        private const int maximumPasswordLength = 25;
         private String _userName;
         private String _password;
-
 
         public User() { }
 
@@ -36,7 +39,7 @@ namespace BusinessLogic
 
         public void CheckIfUserNameIsValid(string value)
         {
-            if (value.Length < 3 || value.Length > 20)
+            if (value.Length < minimumUsernameLength || value.Length > maximumUsernameLength)
             {
                 throw new ArgumentException("User name must be between 3 and 20 characters long");
             }
@@ -56,7 +59,7 @@ namespace BusinessLogic
 
         private void ValidatePasswordLengthIsBetweenBounds(string value)
         {
-            if (!(value.Length >= 5 && value.Length <= 25))
+            if (!(value.Length >= minimumPasswordLength && value.Length <= maximumPasswordLength))
             {
                 throw new ArgumentException("Password must be between 5 and 25 characters long");
             }
@@ -77,7 +80,6 @@ namespace BusinessLogic
                 throw new ArgumentException("Password must contain at least one numerical digit");
             }
         }
-
 
         public override bool Equals(object other)
         {

@@ -5,10 +5,6 @@ namespace BusinessLogic
     public class Model
     {
         private string _name;
-        private Sphere _shape;
-        private Lambertian _color;
-        private User _owner;
-        private PPM _preview;
         public Model() { }
 
         public Model(string name, Sphere shape, Lambertian color, User owner)
@@ -79,11 +75,7 @@ namespace BusinessLogic
             }
         }
 
-        public User Owner
-        {
-            get { return _owner; }
-            set { _owner = value; }
-        }
+        public User Owner { get; set; }
 
         private void CheckIfStringNull(string value)
         {
