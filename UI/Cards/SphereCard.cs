@@ -20,7 +20,7 @@ namespace UI.Cards
                 Spheres.RemoveSphere(sphere.Name, sphere.Owner);
                 this.Parent.Controls.Remove(this);
             }
-            catch (BusinessLogicException ex)
+            catch (BusinessLogicException)
             {
                 deleteLabel.Visible = true;
             }

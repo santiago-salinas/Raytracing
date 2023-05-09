@@ -36,7 +36,7 @@ namespace UI.Dialogs
             {
                 NewLambertian.Name = lambertianName;
             }
-            catch (ArgumentNullException ex)
+            catch (ArgumentNullException)
             {
                 nameStatusLabel.Text = "* Name cannot be empty";
                 nameIsCorrect = false;
@@ -56,7 +56,7 @@ namespace UI.Dialogs
                 color = new BusinessLogic.Color(redValue, greenValue, blueValue);
                 NewLambertian.Color = color;
             }
-            catch (ArgumentException ex)
+            catch (ArgumentException)
             {
                 colorStatusLabel.Visible = true;
                 colorValuesAreCorrect = false;

@@ -5,7 +5,6 @@ namespace BusinessLogic
     public class Model
     {
         private string _name;
-        private User _owner;
         public Model() { }
 
         public Model(string name, Sphere shape, Lambertian color, User owner)

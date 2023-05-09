@@ -14,7 +14,6 @@ namespace UI
         ModelsTab modelsTab;
         User loggedUser;
 
-        Button newSceneTabButton;
         public MainPage(User providedUser)
         {
             InitializeComponent();

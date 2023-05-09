@@ -34,7 +34,7 @@ namespace UI.Dialogs
             {
                 NewSphere.Name = sphereName;
             }
-            catch (ArgumentNullException ex)
+            catch (ArgumentNullException)
             {
                 nameStatusLabel.Text = "* Name cannot be empty";
                 nameIsCorrect = false;
@@ -50,7 +50,7 @@ namespace UI.Dialogs
             {
                 NewSphere.Radius = radius;
             }
-            catch (BusinessLogicException ex)
+            catch (BusinessLogicException)
             {
                 radiusStatusLabel.Visible = true;
                 radiusIsCorrect = false;

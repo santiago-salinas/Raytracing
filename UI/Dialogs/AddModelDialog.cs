@@ -35,7 +35,7 @@ namespace UI.Dialogs
             {
                 NewModel.Name = modelName;
             }
-            catch (ArgumentNullException ex)
+            catch (ArgumentNullException)
             {
                 nameStatusLabel.Text = "* Name cannot be empty";
                 nameIsCorrect = false;
