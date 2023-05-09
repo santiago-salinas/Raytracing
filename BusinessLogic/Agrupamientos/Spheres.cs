@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace BusinessLogic
 {
-    public static class SphereCollection
+    public static class Spheres
     {
         private static List<Sphere> _sphereList = new List<Sphere>();
 
@@ -18,7 +18,7 @@ namespace BusinessLogic
             }
             return ret;
         }
-        public static void DropCollection()
+        public static void Drop()
         {
             _sphereList.Clear();
         }
@@ -54,8 +54,8 @@ namespace BusinessLogic
             if (!ContainsSphere(name, owner))
             {
                 throw new BusinessLogicException("Owner does not have a sphere with that name");
-            }//cant remove sphere used in a existing model
-            else if (ModelCollection.ExistsModelUsingTheSphere(sphere))
+            }
+            else if (Models.ExistsModelUsingTheSphere(sphere))
             {
                 throw new BusinessLogicException("Cant delete sphere used by existing model");
             }

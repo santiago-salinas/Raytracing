@@ -22,7 +22,7 @@ namespace UI.Tabs
         public void loadScenes()
         {
             flowLayoutPanel.Controls.Clear();
-            List<Scene> sceneList = SceneCollection.GetScenesFromUser(loggedUser);
+            List<Scene> sceneList = Scenes.GetScenesFromUser(loggedUser);
             foreach (Scene elem in sceneList)
             {
                 SceneCard sceneCard = new SceneCard(elem);

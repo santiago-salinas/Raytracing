@@ -40,7 +40,7 @@ namespace UI.Dialogs
                 nameIsCorrect = false;
             }
 
-            if (SphereCollection.ContainsSphere(sphereName, loggedUser))
+            if (Spheres.ContainsSphere(sphereName, loggedUser))
             {
                 nameIsCorrect = false;
                 nameStatusLabel.Text = "* Sphere with that name already exists";

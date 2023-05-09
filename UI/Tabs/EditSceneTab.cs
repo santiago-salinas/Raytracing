@@ -108,20 +108,20 @@ namespace UI.Tabs
 
                 if (isNewScene)
                 {
-                    if (SceneCollection.ContainsScene(newName, loggedUser))
+                    if (Scenes.ContainsScene(newName, loggedUser))
                     {
                         nameStatusLabel.Text = "* User already owns a scene with that name";
                     }
                     else
                     {
                         scene.Name = newName;
-                        SceneCollection.AddScene(scene);
+                        Scenes.AddScene(scene);
                         endedCorrectly = true;
                     }
                 }
                 else
                 {
-                    if (nameWasChanged() && SceneCollection.ContainsScene(newName, loggedUser))
+                    if (nameWasChanged() && Scenes.ContainsScene(newName, loggedUser))
                     {
                         nameStatusLabel.Text = "* User already owns a scene with that name";
                     }
@@ -157,7 +157,7 @@ namespace UI.Tabs
         private void loadAvailableModels()
         {
             availableModelsPanel.Controls.Clear();
-            List<Model> list = ModelCollection.GetModelsFromUser(loggedUser);
+            List<Model> list = Models.GetModelsFromUser(loggedUser);
             foreach (Model elem in list)
             {
                 EditSceneModelCard modelCard = new EditSceneModelCard(scene, elem);

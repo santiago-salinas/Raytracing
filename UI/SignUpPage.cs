@@ -22,7 +22,7 @@ namespace UI
             string password = passwordTextBox.Text;
             usernameStatusLabel.Text = "";
 
-            if (UserCollection.ContainsUser(username))
+            if (Users.ContainsUser(username))
             {
                 usernameStatusLabel.Text = "User with that name already exists";
                 usernameFieldIsCorrect = false;
@@ -33,7 +33,7 @@ namespace UI
                 createdUser.UserName = username;
                 createdUser.Password = password;
                 createdUser.RegisterDate = DateTime.Now;
-                UserCollection.AddUser(createdUser);
+                Users.AddUser(createdUser);
                 this.Close();
             }
             else

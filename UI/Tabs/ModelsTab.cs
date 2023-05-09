@@ -19,7 +19,7 @@ namespace UI.Tabs
 
         private void loadModels()
         {
-            List<Model> modelList = ModelCollection.GetModelsFromUser(loggedUser);
+            List<Model> modelList = Models.GetModelsFromUser(loggedUser);
             foreach (Model elem in modelList)
             {
                 ModelCard modelCard = new ModelCard(elem);
@@ -35,7 +35,7 @@ namespace UI.Tabs
             if (result == DialogResult.OK)
             {
                 ModelCard modelCard = new ModelCard(addModel.NewModel);
-                ModelCollection.AddModel(addModel.NewModel);
+                Models.AddModel(addModel.NewModel);
                 flowLayoutPanel.Controls.Add(modelCard);
             }
         }

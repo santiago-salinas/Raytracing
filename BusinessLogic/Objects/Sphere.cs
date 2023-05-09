@@ -13,7 +13,7 @@ namespace BusinessLogic
             Owner = owner;
         }
 
-        private User _owner;
+        private const int _minimumRadius = 0;
         private double _radius;
         private string _name;
         public double Radius
@@ -21,7 +21,7 @@ namespace BusinessLogic
             get { return _radius; }
             set
             {
-                if (value <= 0)
+                if (value <= _minimumRadius)
                 {
                     throw new BusinessLogicException("Radius must be a value over zero >0");
                 }
@@ -40,12 +40,7 @@ namespace BusinessLogic
             }
         }
 
-        public User Owner
-        {
-            get { return _owner; }
-            set { _owner = value; }
-
-        }
+        public User Owner { get; set; }
 
         private void CheckIfStringNull(string value)
         {

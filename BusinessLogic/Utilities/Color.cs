@@ -10,7 +10,8 @@ namespace BusinessLogic
 
         private const int lowerBoundForPercentages = 0;
         private const int upperBoundForPercentages = 1;
-
+        private const int maximumRGBValue = 255;
+        private const double tolerance = 0.0001;
 
         public Color(double red, double green, double blue)
         {
@@ -77,7 +78,7 @@ namespace BusinessLogic
 
         public double PercentageTo255(double value)
         {
-            return Math.Abs((int)Math.Round(value * 255));
+            return Math.Abs((int)Math.Round(value * maximumRGBValue));
         }
 
         public bool ValueIsBetweenStrictBounds(double value, double min, double max)
@@ -105,7 +106,6 @@ namespace BusinessLogic
         public override bool Equals(object other)
         {
             Color otherVector = (Color)other;
-            const double tolerance = 0.0001;
 
             bool firstEval = Math.Abs(Red - otherVector.Red) < tolerance;
             bool secondEval = Math.Abs(Green - otherVector.Green) < tolerance;

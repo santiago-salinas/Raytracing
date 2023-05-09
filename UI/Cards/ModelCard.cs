@@ -27,7 +27,7 @@ namespace UI.Cards
         {
             try
             {
-                ModelCollection.RemoveModel(model.Name, model.Owner);
+                Models.RemoveModel(model.Name, model.Owner);
                 this.Parent.Controls.Remove(this);
             }
             catch (BusinessLogicException ex)

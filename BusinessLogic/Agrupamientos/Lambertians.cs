@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace BusinessLogic
 {
-    public static class LambertianCollection
+    public static class Lambertians
     {
         static List<Lambertian> _lambertianList = new List<Lambertian>();
 
-        public static void DropCollection()
+        public static void Drop()
         {
             _lambertianList.Clear();
         }
@@ -51,14 +51,9 @@ namespace BusinessLogic
 
         public static void RemoveLambertian(string name, User owner)
         {
-            //Lambertian lambertian = _lambertianList.Find(l => l.Name == name && l.Owner == owner);
             Lambertian lambertian = GetLambertian(name, owner);
-            /* if (lambertian == null)
-             {
-                 throw new BusinessLogicException("User does not own lambertian with that name");
-             }else */
 
-            if (ModelCollection.ExistsModelUsingTheLambertian(lambertian))
+            if (Models.ExistsModelUsingTheLambertian(lambertian))
             {
                 throw new BusinessLogicException("Cant delete lambertian used by existing model");
             }

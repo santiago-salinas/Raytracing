@@ -42,7 +42,7 @@ namespace UI.Dialogs
                 nameIsCorrect = false;
             }
 
-            if (LambertianCollection.ContainsLambertian(lambertianName, loggedUser))
+            if (Lambertians.ContainsLambertian(lambertianName, loggedUser))
             {
                 nameIsCorrect = false;
                 nameStatusLabel.Text = "* Material with that name already exists";
