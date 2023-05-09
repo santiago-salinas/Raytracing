@@ -6,7 +6,7 @@ namespace UI.Dialogs
 {
     public partial class AddLambertianDialog : Form
     {
-
+        private const int maximumRGBValue = 255;
         private Color color;
 
         public Lambertian NewLambertian = new Lambertian();
@@ -48,9 +48,9 @@ namespace UI.Dialogs
                 nameStatusLabel.Text = "* Material with that name already exists";
             }
 
-            double redValue = (double)redValueInput.Value / 255;
-            double greenValue = (double)greenValueInput.Value / 255;
-            double blueValue = (double)blueValueInput.Value / 255;
+            double redValue = (double)redValueInput.Value / maximumRGBValue;
+            double greenValue = (double)greenValueInput.Value / maximumRGBValue;
+            double blueValue = (double)blueValueInput.Value / maximumRGBValue;
             try
             {
                 color = new BusinessLogic.Color(redValue, greenValue, blueValue);

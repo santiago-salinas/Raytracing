@@ -108,15 +108,14 @@ namespace UI.Tabs
 
                 if (isNewScene)
                 {
-                    if (Scenes.ContainsScene(newName, loggedUser))
-                    {
-                        nameStatusLabel.Text = "* User already owns a scene with that name";
-                    }
-                    else
+                    try
                     {
                         scene.Name = newName;
                         Scenes.AddScene(scene);
                         endedCorrectly = true;
+                    }catch(Exception ex)
+                    {
+                        nameStatusLabel.Text = "* " + ex.Message;
                     }
                 }
                 else
@@ -195,7 +194,7 @@ namespace UI.Tabs
         {
             DateTime newModificationDate = DateTime.Now;
             scene.LastModificationDate = newModificationDate;
-            lastModificationLabel.Text = "Last modification date: " + newModificationDate.ToString("f", new CultureInfo("en-US"));
+            lastModificationLabel.Text = "Last modification date: " + newModificationDate.ToString("f",new CultureInfo("en-US"));
             outdatedStatusLabel.Visible = true;
         }
 

@@ -247,22 +247,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\992651.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Captura de pantalla 2023-04-29 161957.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\add.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\sphereImage.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\deleteIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\deleteIcon1.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\no-img-placeholder.png" />
