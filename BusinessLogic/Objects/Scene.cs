@@ -56,7 +56,7 @@ namespace BusinessLogic
             if (!ContainsPositionedModel(newElement))
             {
                 _positionedModellList.Add(newElement);
-                LastModificationDate = DateTime.Now;
+                UpdateLastModificationDate();
             }
             else
             {
@@ -73,7 +73,7 @@ namespace BusinessLogic
             else
             {
                 _positionedModellList.Remove(oldElement);
-                LastModificationDate = DateTime.Now;
+                UpdateLastModificationDate();
             }
 
         }
@@ -95,6 +95,11 @@ namespace BusinessLogic
         public void UpdateLastRenderDate()
         {
             LastRenderDate = DateTime.Now;
+        }
+
+        public void UpdateLastModificationDate()
+        {
+            LastModificationDate = DateTime.Now;
         }
 
         public void DropPositionedModels()
