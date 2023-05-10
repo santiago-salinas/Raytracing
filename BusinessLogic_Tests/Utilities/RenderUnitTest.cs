@@ -9,19 +9,19 @@ namespace BusinessLogic_Tests
 
     {
         // Sphere 1
-        private Model model1;
-        private string model1Name;
+        private Model _model1;
+        private string _model1Name;
 
-        private Sphere sphere1;
-        private string sphere1Name;
-        private double sphere1Radius;
+        private Sphere _sphere1;
+        private string _sphere1Name;
+        private double _sphere1Radius;
 
-        private Lambertian lambertian1;
-        private string lambertian1Name;
-        private Color color1;
+        private Lambertian _lambertian1;
+        private string _lambertian1Name;
+        private Color _color1;
 
-        private Vector position1;
-        private PositionedModel positionedModel1;
+        private Vector _position1;
+        private PositionedModel _positionedModel1;
 
         // Sphere 2
         private Model model2;
@@ -85,30 +85,30 @@ namespace BusinessLogic_Tests
                 Name = testSceneName
             };
 
-            sphere1Name = "Spehere1";
-            sphere1Radius = 0.5;
-            sphere1 = new Sphere() { Name = sphere1Name, Radius = sphere1Radius };
+            _sphere1Name = "Spehere1";
+            _sphere1Radius = 0.5;
+            _sphere1 = new Sphere() { Name = _sphere1Name, Radius = _sphere1Radius };
 
-            color1 = new Color(0.1, 0.2, 0.5);
-            lambertian1Name = "Color1";
-            lambertian1 = new Lambertian() { Name = lambertian1Name, Color = color1 };
+            _color1 = new Color(0.1, 0.2, 0.5);
+            _lambertian1Name = "Color1";
+            _lambertian1 = new Lambertian() { Name = _lambertian1Name, Color = _color1 };
 
-            model1Name = "Model1";
-            model1 = new Model()
+            _model1Name = "Model1";
+            _model1 = new Model()
             {
-                Name = model1Name,
-                Shape = sphere1,
-                Material = lambertian1
+                Name = _model1Name,
+                Shape = _sphere1,
+                Material = _lambertian1
             };
 
-            position1 = new Vector(0, 0.5, -2);
-            positionedModel1 = new PositionedModel()
+            _position1 = new Vector(0, 0.5, -2);
+            _positionedModel1 = new PositionedModel()
             {
-                Model = model1,
-                Position = position1
+                Model = _model1,
+                Position = _position1
             };
 
-            testScene.AddPositionedModel(positionedModel1);
+            testScene.AddPositionedModel(_positionedModel1);
 
             // Sphere 2
 

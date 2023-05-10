@@ -4,17 +4,17 @@ namespace BusinessLogic
 {
     public static class Lambertians
     {
-        static List<Lambertian> _lambertianList = new List<Lambertian>();
+        private static List<Lambertian> s_lambertianList = new List<Lambertian>();
 
         public static void Drop()
         {
-            _lambertianList.Clear();
+            s_lambertianList.Clear();
         }
 
         public static List<Lambertian> GetLambertiansFromUser(User owner)
         {
             List<Lambertian> ret = new List<Lambertian>();
-            foreach (Lambertian s in _lambertianList)
+            foreach (Lambertian s in s_lambertianList)
             {
                 if (s.Owner == owner)
                 {
@@ -26,14 +26,14 @@ namespace BusinessLogic
 
         public static bool ContainsLambertian(string name, User user)
         {
-            Lambertian lambertian = _lambertianList.Find(l => l.Name == name && l.Owner == user);
+            Lambertian lambertian = s_lambertianList.Find(l => l.Name == name && l.Owner == user);
             return lambertian != null;
         }
         public static void AddLambertian(Lambertian newElement)
         {
             if (!ContainsLambertian(newElement.Name, newElement.Owner))
             {
-                _lambertianList.Add(newElement);
+                s_lambertianList.Add(newElement);
             }
             else
             {
@@ -44,7 +44,7 @@ namespace BusinessLogic
 
         public static Lambertian GetLambertian(string name, User user)
         {
-            Lambertian ret = _lambertianList.Find(l => l.Name == name && l.Owner == user);
+            Lambertian ret = s_lambertianList.Find(l => l.Name == name && l.Owner == user);
             if (ret == null) throw new BusinessLogicException("User does not own lambertian with that name");
             return ret;
         }
@@ -59,7 +59,7 @@ namespace BusinessLogic
             }
             else
             {
-                _lambertianList.Remove(lambertian);
+                s_lambertianList.Remove(lambertian);
             }
         }
     }

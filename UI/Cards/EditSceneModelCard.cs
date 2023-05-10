@@ -9,26 +9,26 @@ namespace UI.Cards
 {
     public partial class EditSceneModelCard : UserControl
     {
-        private Scene scene;
-        private Model model;
+        private Scene _scene;
+        private Model _model;
         public EditSceneModelCard(Scene providedScene, Model providedModel)
         {
             InitializeComponent();
-            model = providedModel;
-            scene = providedScene;
+            _model = providedModel;
+            _scene = providedScene;
 
-            modelNameLabel.Text = model.Name;
+            modelNameLabel.Text = _model.Name;
 
-            string shapeName = model.Shape.Name;
+            string shapeName = _model.Shape.Name;
             shapeNameLabel.Text += shapeName;
 
-            string materialName = model.Material.Name;
+            string materialName = _model.Material.Name;
             materialNameLabel.Text += materialName;
 
-            loadPreview();
+            LoadPreview();
         }
 
-        private void addButton_Click(object sender, EventArgs e)
+        private void AddButton_Click(object sender, EventArgs e)
         {
             Vector position = new Vector()
             {
@@ -44,19 +44,19 @@ namespace UI.Cards
             {
                 PositionedModel positionedModel = new PositionedModel()
                 {
-                    Model = model,
+                    Model = _model,
                     Position = position
                 };
-                scene.AddPositionedModel(positionedModel);
+                _scene.AddPositionedModel(positionedModel);
                 EditSceneTab editSceneTab = (EditSceneTab)Parent.Parent;
-                editSceneTab.loadPositionedModels();
-                editSceneTab.notifyThatSeneWasModified();
+                editSceneTab.LoadPositionedModels();
+                editSceneTab.NotifyThatSeneWasModified();
             }
         }
 
-        private void loadPreview()
+        private void LoadPreview()
         {
-            PPM preview = model.Preview;
+            PPM preview = _model.Preview;
 
             if (preview == null)
             {
@@ -65,7 +65,7 @@ namespace UI.Cards
 
                 Panel coloredBox = new Panel();
 
-                BusinessLogic.Color materialColor = model.Material.Color;
+                BusinessLogic.Color materialColor = _model.Material.Color;
 
                 int redValue = (int)materialColor.Red;
                 int greenValue = (int)materialColor.Green;
@@ -81,7 +81,7 @@ namespace UI.Cards
             }
             else
             {
-                previewBox.Controls.Add(new PPMViewer(model.Preview));
+                previewBox.Controls.Add(new PPMViewer(_model.Preview));
             }
         }
     }

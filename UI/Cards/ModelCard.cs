@@ -7,11 +7,11 @@ namespace UI.Cards
 {
     public partial class ModelCard : UserControl
     {
-        private Model model;
+        private Model _model;
         public ModelCard(Model model)
         {
             InitializeComponent();
-            this.model = model;
+            this._model = model;
             modelNameLabel.Text = model.Name;
 
             string shapeName = model.Shape.Name;
@@ -20,14 +20,14 @@ namespace UI.Cards
             string materialName = model.Material.Name;
             materialNameLabel.Text += materialName;
 
-            loadPreview();
+            LoadPreview();
         }
 
-        private void deleteButton_Click(object sender, EventArgs e)
+        private void DeleteButton_Click(object sender, EventArgs e)
         {
             try
             {
-                Models.RemoveModel(model.Name, model.Owner);
+                Models.RemoveModel(_model.Name, _model.Owner);
                 this.Parent.Controls.Remove(this);
             }
             catch (BusinessLogicException)
@@ -36,9 +36,9 @@ namespace UI.Cards
             }
         }
 
-        private void loadPreview()
+        private void LoadPreview()
         {
-            PPM preview = model.Preview;
+            PPM preview = _model.Preview;
 
             if (preview == null)
             {
@@ -47,7 +47,7 @@ namespace UI.Cards
 
                 Panel coloredBox = new Panel();
 
-                BusinessLogic.Color materialColor = model.Material.Color;
+                BusinessLogic.Color materialColor = _model.Material.Color;
 
                 int redValue = (int)materialColor.Red;
                 int greenValue = (int)materialColor.Green;
@@ -63,7 +63,7 @@ namespace UI.Cards
             }
             else
             {
-                previewBox.Controls.Add(new PPMViewer(model.Preview));
+                previewBox.Controls.Add(new PPMViewer(_model.Preview));
             }
         }
     }

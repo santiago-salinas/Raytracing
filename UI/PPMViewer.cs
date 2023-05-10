@@ -7,21 +7,21 @@ namespace UI
     public partial class PPMViewer : UserControl
     {
 
-        private PPM ppm;
+        private PPM _ppm;
         public PPMViewer(PPM providedPPM)
         {
             InitializeComponent();
-            ppm = providedPPM;
+            _ppm = providedPPM;
             this.Dock = DockStyle.Fill;
-            render();
+            Render();
         }
 
-        private void render()
+        private void Render()
         {
-            var width = ppm.Width;
-            var height = ppm.Heigth;
+            var width = _ppm.Width;
+            var height = _ppm.Heigth;
             var bitmap = new Bitmap(width, height);
-            var pixels = ppm.PixelsValues;
+            var pixels = _ppm.PixelsValues;
 
             for (int row = 0; row < height; row++)
             {

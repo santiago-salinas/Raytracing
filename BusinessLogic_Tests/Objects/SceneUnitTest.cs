@@ -8,80 +8,80 @@ namespace BusinessLogic_Tests
     [TestClass]
     public class SceneUnitTest
     {
-        private Scene testScene;
-        private string testName;
-        private string testNullName;
+        private Scene _testScene;
+        private string _testName;
+        private string _testNullName;
 
-        private Model testModel;
-        private string modelName;
+        private Model _testModel;
+        private string _modelName;
 
-        private Sphere testSphere;
-        private string sphereName;
-        private float radius;
+        private Sphere _testSphere;
+        private string _sphereName;
+        private float _radius;
 
-        private Lambertian testLambertian;
-        private string lambertianName;
-        private Color color;
+        private Lambertian _testLambertian;
+        private string _lambertianName;
+        private Color _color;
 
-        private PositionedModel testPositionedModel;
-        private Vector testPosition;
-        private Vector testPositionAlternative;
+        private PositionedModel _testPositionedModel;
+        private Vector _testPosition;
+        private Vector _testPositionAlternative;
 
-        private User testUser;
+        private User _testUser;
 
 
         [TestInitialize]
         public void Initialize()
         {
-            testName = "Rolling Balls";
-            testNullName = string.Empty;
+            _testName = "Rolling Balls";
+            _testNullName = string.Empty;
 
-            testScene = new Scene()
+            _testScene = new Scene()
             {
-                Name = testName
+                Name = _testName
             };
 
-            testUser = new User()
+            _testUser = new User()
             {
                 UserName = "Username1"
             };
 
 
 
-            modelName = "Wooden ball";
-            sphereName = "Small sized sphere";
-            radius = 5;
-            lambertianName = "Oak color";
-            color = new Color((float)133 / 255, (float)94 / 255, (float)66 / 255);
+            _modelName = "Wooden ball";
+            _sphereName = "Small sized sphere";
+            _radius = 5;
+            _lambertianName = "Oak color";
+            _color = new Color((float)133 / 255, (float)94 / 255, (float)66 / 255);
 
-            testSphere = new Sphere()
+            _testSphere = new Sphere()
             {
-                Name = sphereName,
-                Radius = radius,
+                Name = _sphereName,
+                Radius = _radius,
             };
 
-            testLambertian = new Lambertian()
+            _testLambertian = new Lambertian()
             {
-                Name = lambertianName,
-                Color = color
+                Name = _lambertianName,
+                Color = _color
             };
 
 
-            testModel = new Model()
+            _testModel = new Model()
             {
-                Name = modelName,
-                Shape = testSphere,
-                Material = testLambertian
+                Name = _modelName,
+                Shape = _testSphere,
+                Material = _testLambertian
             };
 
-            testPosition = new Vector(0, 0, 0);
-            testPositionAlternative = new Vector(1, 1, 1);
+            _testPosition = new Vector(0, 0, 0);
+            _testPositionAlternative = new Vector(1, 1, 1);
 
 
-            testPositionedModel = new PositionedModel()
+            _testPositionedModel = new PositionedModel()
             {
-                Model = testModel,
-                Position = testPosition
+                Model = _testModel,
+                Position = _testPosition
             };
 
 
@@ -93,12 +93,12 @@ namespace BusinessLogic_Tests
         [TestMethod]
         public void SceneCreatedSuccesfullyTest()
         {
-            testScene = new Scene()
+            _testScene = new Scene()
             {
-                Name = testName
+                Name = _testName
             };
             //assert
-            Assert.IsNotNull(testScene);
+            Assert.IsNotNull(_testScene);
         }
 
         [TestMethod]
@@ -106,56 +106,56 @@ namespace BusinessLogic_Tests
         public void NameCantBeNullTest()
         {
             //arrange
-            testNullName = string.Empty;
+            _testNullName = string.Empty;
             //act
-            testScene.Name = testNullName;
+            _testScene.Name = _testNullName;
         }
 
         [TestMethod]
         public void NameWithLeftPaddingFail()
         {
             //arrange
-            string nameWithLeftPadding = " " + testName;
+            string nameWithLeftPadding = " " + _testName;
             //act
-            testScene.Name = nameWithLeftPadding;
+            _testScene.Name = nameWithLeftPadding;
             //assert
-            Assert.AreEqual(testScene.Name, testName);
+            Assert.AreEqual(_testScene.Name, _testName);
         }
 
         [TestMethod]
         public void NameWithRightPaddingFail()
         {
             //arrange
-            string nameWithRightPadding = testName + " ";
+            string nameWithRightPadding = _testName + " ";
             //act
-            testScene.Name = nameWithRightPadding;
+            _testScene.Name = nameWithRightPadding;
             //assert
-            Assert.AreEqual(testScene.Name, testName);
+            Assert.AreEqual(_testScene.Name, _testName);
         }
 
         [TestMethod]
         public void NameWithPaddingsFail()
         {
             //arrange
-            string nameWithPaddings = " " + testName + " ";
+            string nameWithPaddings = " " + _testName + " ";
             //act
-            testScene.Name = nameWithPaddings;
+            _testScene.Name = nameWithPaddings;
             //assert
-            Assert.AreEqual(testScene.Name, testName);
+            Assert.AreEqual(_testScene.Name, _testName);
         }
 
         [TestMethod]
         public void AddPositionedModelToScene()
         {
             //arrange
-            bool isContainedByScene = testScene.ContainsPositionedModel(testPositionedModel);
+            bool isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel);
             Assert.IsFalse(isContainedByScene);
 
             //act
-            testScene.AddPositionedModel(testPositionedModel);
+            _testScene.AddPositionedModel(_testPositionedModel);
 
             //assert
-            isContainedByScene = testScene.ContainsPositionedModel(testPositionedModel);
+            isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel);
             Assert.IsTrue(isContainedByScene);
         }
 
@@ -164,28 +164,28 @@ namespace BusinessLogic_Tests
         public void CantHaveDuplicatedPositionedModelInScene()
         {
             //arrange
-            bool isContainedByScene = testScene.ContainsPositionedModel(testPositionedModel);
+            bool isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel);
             Assert.IsFalse(isContainedByScene);
-            testScene.AddPositionedModel(testPositionedModel);
-            isContainedByScene = testScene.ContainsPositionedModel(testPositionedModel);
+            _testScene.AddPositionedModel(_testPositionedModel);
+            isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel);
             Assert.IsTrue(isContainedByScene);
             //act
-            testScene.AddPositionedModel(testPositionedModel);
+            _testScene.AddPositionedModel(_testPositionedModel);
         }
 
         [TestMethod]
         public void RemovePositionedModelFromScene()
         {
             //arrange
-            bool isContainedByScene = testScene.ContainsPositionedModel(testPositionedModel);
+            bool isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel);
             Assert.IsFalse(isContainedByScene);
-            testScene.AddPositionedModel(testPositionedModel);
-            isContainedByScene = testScene.ContainsPositionedModel(testPositionedModel);
+            _testScene.AddPositionedModel(_testPositionedModel);
+            isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel);
             Assert.IsTrue(isContainedByScene);
             //act
-            testScene.RemovePositionedModel(testPositionedModel);
+            _testScene.RemovePositionedModel(_testPositionedModel);
             //assert
-            isContainedByScene = testScene.ContainsPositionedModel(testPositionedModel);
+            isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel);
             Assert.IsFalse(isContainedByScene);
         }
 
@@ -195,21 +195,21 @@ namespace BusinessLogic_Tests
             //arrange
             PositionedModel testPositionedModelAlternative = new PositionedModel()
             {
-                Model = testModel,
-                Position = testPositionAlternative
+                Model = _testModel,
+                Position = _testPositionAlternative
             };
 
-            testScene.AddPositionedModel(testPositionedModel);
-            testScene.AddPositionedModel(testPositionedModelAlternative);
+            _testScene.AddPositionedModel(_testPositionedModel);
+            _testScene.AddPositionedModel(testPositionedModelAlternative);
 
-            bool isContainedByScene = testScene.ContainsPositionedModel(testPositionedModel);
+            bool isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel);
             Assert.IsTrue(isContainedByScene);
 
             //act
-            testScene.RemovePositionedModel(testPositionedModel);
+            _testScene.RemovePositionedModel(_testPositionedModel);
 
             //assert
-            isContainedByScene = testScene.ContainsPositionedModel(testPositionedModel);
+            isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel);
             Assert.IsFalse(isContainedByScene);
         }
 
@@ -220,13 +220,13 @@ namespace BusinessLogic_Tests
             DateTimeProvider.Now = DateTime.Now;
 
             //act
-            testScene = new Scene()
+            _testScene = new Scene()
             {
                 CreationDate = DateTimeProvider.Now,
             };
 
             //assert
-            Assert.AreEqual(testScene.CreationDate, DateTimeProvider.Now);
+            Assert.AreEqual(_testScene.CreationDate, DateTimeProvider.Now);
         }
 
         [TestMethod]
@@ -235,16 +235,16 @@ namespace BusinessLogic_Tests
             //arrange
 
             DateTimeProvider.Now = DateTime.Now.AddDays(-1);
-            testScene = new Scene()
+            _testScene = new Scene()
             {
                 CreationDate = DateTimeProvider.Now,
                 LastModificationDate = DateTimeProvider.Now,
             };
 
             //act
-            DateTime previousDate = testScene.LastModificationDate;
-            testScene.AddPositionedModel(testPositionedModel);
-            bool lastModificationIsLater = testScene.LastModificationDate > previousDate;
+            DateTime previousDate = _testScene.LastModificationDate;
+            _testScene.AddPositionedModel(_testPositionedModel);
+            bool lastModificationIsLater = _testScene.LastModificationDate > previousDate;
 
             //assert
             Assert.IsTrue(lastModificationIsLater);
@@ -255,18 +255,18 @@ namespace BusinessLogic_Tests
         {
             //arrange
             DateTimeProvider.Now = DateTime.Now.AddDays(-1);
-            testScene = new Scene()
+            _testScene = new Scene()
             {
                 CreationDate = DateTimeProvider.Now,
 
 
             };
-            testScene.AddPositionedModel(testPositionedModel);
-            testScene.LastModificationDate = DateTimeProvider.Now;
+            _testScene.AddPositionedModel(_testPositionedModel);
+            _testScene.LastModificationDate = DateTimeProvider.Now;
             //act
-            DateTime previousDate = testScene.LastModificationDate;
-            testScene.RemovePositionedModel(testPositionedModel);
-            bool lastModificationIsLater = testScene.LastModificationDate > previousDate;
+            DateTime previousDate = _testScene.LastModificationDate;
+            _testScene.RemovePositionedModel(_testPositionedModel);
+            bool lastModificationIsLater = _testScene.LastModificationDate > previousDate;
 
             //assert
             Assert.IsTrue(lastModificationIsLater);
@@ -277,7 +277,7 @@ namespace BusinessLogic_Tests
         {
             //arrange
             DateTimeProvider.Now = DateTime.Now.AddDays(-1);
-            testScene = new Scene()
+            _testScene = new Scene()
             {
                 CreationDate = DateTimeProvider.Now,
                 LastRenderDate = DateTimeProvider.Now,
@@ -285,9 +285,9 @@ namespace BusinessLogic_Tests
 
             //act
 
-            DateTime previousDate = testScene.LastRenderDate;
-            testScene.UpdateLastRenderDate();
-            bool lastRenderIsLater = testScene.LastRenderDate > previousDate;
+            DateTime previousDate = _testScene.LastRenderDate;
+            _testScene.UpdateLastRenderDate();
+            bool lastRenderIsLater = _testScene.LastRenderDate > previousDate;
 
             //assert
             Assert.IsTrue(lastRenderIsLater);
@@ -297,10 +297,10 @@ namespace BusinessLogic_Tests
             //arrange
             User testUser = new User();
             testUser.UserName = "Username";
-            testScene.Owner = testUser;
+            _testScene.Owner = testUser;
             //act
-            Scenes.AddScene(testScene);
-            bool added = Scenes.ContainsScene(testScene.Name, testUser);
+            Scenes.AddScene(_testScene);
+            bool added = Scenes.ContainsScene(_testScene.Name, testUser);
             //assert
             Assert.IsTrue(added);
         }
@@ -311,12 +311,12 @@ namespace BusinessLogic_Tests
             //arrange
             User testUser = new User();
             testUser.UserName = "Username";
-            testScene.Owner = testUser;
+            _testScene.Owner = testUser;
             //act
-            Scenes.AddScene(testScene);
-            Scene getScene = Scenes.GetScene(testName, testUser);
+            Scenes.AddScene(_testScene);
+            Scene getScene = Scenes.GetScene(_testName, testUser);
             //assert
-            Assert.ReferenceEquals(testScene, getScene);
+            Assert.ReferenceEquals(_testScene, getScene);
         }
 
         [TestMethod]
@@ -326,11 +326,11 @@ namespace BusinessLogic_Tests
             //arrange
             User testUser = new User();
             testUser.UserName = "Username";
-            testScene.Owner = testUser;
-            Scenes.AddScene(testScene);
+            _testScene.Owner = testUser;
+            Scenes.AddScene(_testScene);
             //act
-            Scenes.RemoveScene(testName, testUser);
-            Scenes.GetScene(testName, testUser);
+            Scenes.RemoveScene(_testName, testUser);
+            Scenes.GetScene(_testName, testUser);
         }
 
 
@@ -379,17 +379,17 @@ namespace BusinessLogic_Tests
                 UserName = "Username1"
             };
 
-            testScene = new Scene()
+            _testScene = new Scene()
             {
-                Name = testName,
+                Name = _testName,
                 Owner = testUser
             };
-            Scenes.AddScene(testScene);
+            Scenes.AddScene(_testScene);
 
             //act
             Scene newScene = new Scene()
             {
-                Name = testName,
+                Name = _testName,
                 Owner = testUser
             };
             Scenes.AddScene(newScene);
@@ -401,12 +401,12 @@ namespace BusinessLogic_Tests
         {
             //arrange
 
-            Models.AddModel(testModel);
-            testScene.AddPositionedModel(testPositionedModel);
-            Scenes.AddScene(testScene);
+            Models.AddModel(_testModel);
+            _testScene.AddPositionedModel(_testPositionedModel);
+            Scenes.AddScene(_testScene);
 
             //act
-            Models.RemoveModel(testModel.Name, testModel.Owner);
+            Models.RemoveModel(_testModel.Name, _testModel.Owner);
         }
 
         [TestMethod]
@@ -415,14 +415,14 @@ namespace BusinessLogic_Tests
             //arrange
             User testUser = new User();
             testUser.UserName = "Username";
-            testScene.Owner = testUser;
-            Models.AddModel(testModel);
-            testScene.AddPositionedModel(testPositionedModel);
-            Scenes.AddScene(testScene);
+            _testScene.Owner = testUser;
+            Models.AddModel(_testModel);
+            _testScene.AddPositionedModel(_testPositionedModel);
+            Scenes.AddScene(_testScene);
 
             //act
-            Scenes.RemoveScene(testScene.Name, testUser);
-            Models.RemoveModel(testModel.Name, testModel.Owner);
+            Scenes.RemoveScene(_testScene.Name, testUser);
+            Models.RemoveModel(_testModel.Name, _testModel.Owner);
         }
 
         [TestMethod]
@@ -432,15 +432,15 @@ namespace BusinessLogic_Tests
             //arrange
             User testUser = new User();
             testUser.UserName = "Username";
-            testScene.Owner = testUser;
-            Assert.IsFalse(testScene.ContainsModel(testModel));
-            Models.AddModel(testModel);
+            _testScene.Owner = testUser;
+            Assert.IsFalse(_testScene.ContainsModel(_testModel));
+            Models.AddModel(_testModel);
             //act
-            testScene.AddPositionedModel(testPositionedModel);
+            _testScene.AddPositionedModel(_testPositionedModel);
             //assert
-            Assert.IsTrue(testScene.ContainsModel(testModel));
-            testScene.RemovePositionedModel(testPositionedModel);
-            Assert.IsFalse(testScene.ContainsModel(testModel));
+            Assert.IsTrue(_testScene.ContainsModel(_testModel));
+            _testScene.RemovePositionedModel(_testPositionedModel);
+            Assert.IsFalse(_testScene.ContainsModel(_testModel));
         }
 
         [TestMethod]
@@ -507,7 +507,7 @@ namespace BusinessLogic_Tests
             Lambertians.Drop();
             Models.Drop();
             Scenes.Drop();
-            testScene.DropPositionedModels();
+            _testScene.DropPositionedModels();
         }
     }
 }

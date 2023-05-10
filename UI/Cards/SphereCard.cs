@@ -7,17 +7,17 @@ namespace UI.Cards
     public partial class SphereCard : UserControl
     {
 
-        private Sphere sphere;
+        private Sphere _sphere;
         public SphereCard()
         {
             InitializeComponent();
         }
 
-        private void deleteButton_Click(object sender, EventArgs e)
+        private void DeleteButton_Click(object sender, EventArgs e)
         {
             try
             {
-                Spheres.RemoveSphere(sphere.Name, sphere.Owner);
+                Spheres.RemoveSphere(_sphere.Name, _sphere.Owner);
                 this.Parent.Controls.Remove(this);
             }
             catch (BusinessLogicException)
@@ -30,7 +30,7 @@ namespace UI.Cards
         public SphereCard(Sphere sphere)
         {
             InitializeComponent();
-            this.sphere = sphere;
+            this._sphere = sphere;
             nameLabel.Text = sphere.Name;
             radiusLabel.Text = "Radius: " + sphere.Radius.ToString();
 

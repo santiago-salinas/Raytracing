@@ -7,20 +7,20 @@ namespace BusinessLogic_Tests
     [TestClass]
     public class UserTests
     {
-        private User testUser;
-        private String testUserName;
-        private String testPassword;
+        private User _testUser;
+        private String _testUserName;
+        private String _testPassword;
 
         [TestInitialize]
         public void Initialize()
         {
 
-            testUserName = "TestUsername";
-            testPassword = "Abc123";
-            testUser = new User()
+            _testUserName = "TestUsername";
+            _testPassword = "Abc123";
+            _testUser = new User()
             {
-                UserName = testUserName,
-                Password = testPassword
+                UserName = _testUserName,
+                Password = _testPassword
             };
             DateTimeProvider.Reset();
         }
@@ -35,33 +35,33 @@ namespace BusinessLogic_Tests
         public void CreatedValidUser()
         {
             // Arrange
-            testUserName = "TestUsername";
-            testPassword = "Abc123";
+            _testUserName = "TestUsername";
+            _testPassword = "Abc123";
 
             // Act
-            testUser = new User()
+            _testUser = new User()
             {
-                UserName = testUserName,
-                Password = testPassword,
+                UserName = _testUserName,
+                Password = _testPassword,
                 RegisterDate = DateTimeProvider.Now
             };
 
             // Assert
-            Assert.IsNotNull(testUserName);
+            Assert.IsNotNull(_testUserName);
 
         }
 
         [TestMethod]
         public void RegistrationDateIsCorrect()
         {
-            testUser = new User()
+            _testUser = new User()
             {
-                UserName = testUserName,
-                Password = testPassword,
+                UserName = _testUserName,
+                Password = _testPassword,
                 RegisterDate = DateTimeProvider.Now
             };
 
-            Assert.AreEqual(DateTimeProvider.Now, testUser.RegisterDate);
+            Assert.AreEqual(DateTimeProvider.Now, _testUser.RegisterDate);
 
         }
 
@@ -70,33 +70,33 @@ namespace BusinessLogic_Tests
         public void NameWithLeftPaddingFail()
         {
             //arrange
-            string nameWithLeftPadding = " " + testUserName;
+            string nameWithLeftPadding = " " + _testUserName;
             //act
-            testUser.UserName = nameWithLeftPadding;
+            _testUser.UserName = nameWithLeftPadding;
             //assert
-            Assert.AreEqual(testUser.UserName, testUserName);
+            Assert.AreEqual(_testUser.UserName, _testUserName);
         }
 
         [TestMethod]
         public void NameWithRightPaddingFail()
         {
             //arrange
-            string nameWithRightPadding = testUserName + " ";
+            string nameWithRightPadding = _testUserName + " ";
             //act
-            testUser.UserName = nameWithRightPadding;
+            _testUser.UserName = nameWithRightPadding;
             //assert
-            Assert.AreEqual(testUser.UserName, testUserName);
+            Assert.AreEqual(_testUser.UserName, _testUserName);
         }
 
         [TestMethod]
         public void NameWithPaddingsFail()
         {
             //arrange
-            string nameWithPaddings = " " + testUserName + " ";
+            string nameWithPaddings = " " + _testUserName + " ";
             //act
-            testUser.UserName = nameWithPaddings;
+            _testUser.UserName = nameWithPaddings;
             //assert
-            Assert.AreEqual(testUser.UserName, testUserName);
+            Assert.AreEqual(_testUser.UserName, _testUserName);
         }
 
         [TestMethod]
@@ -106,7 +106,7 @@ namespace BusinessLogic_Tests
             string invalidUserName = "user name with space";
 
             // Act
-            Action act = () => testUser.UserName = invalidUserName;
+            Action act = () => _testUser.UserName = invalidUserName;
             // Assert
             var exception = Assert.ThrowsException<ArgumentException>(act);
             Assert.AreEqual("User name cannot contain spaces", exception.Message);
@@ -119,7 +119,7 @@ namespace BusinessLogic_Tests
             String invalidUserName = "aA";
 
             // Act
-            Action act = () => testUser.UserName = invalidUserName;
+            Action act = () => _testUser.UserName = invalidUserName;
 
             // Assert
             var exception = Assert.ThrowsException<ArgumentException>(act);
@@ -134,7 +134,7 @@ namespace BusinessLogic_Tests
             String invalidUserName = "abcdefghijklmnopqrstuvwxyz";
 
             // Act
-            Action act = () => testUser.UserName = invalidUserName;
+            Action act = () => _testUser.UserName = invalidUserName;
 
             // Assert
             var exception = Assert.ThrowsException<ArgumentException>(act);
@@ -149,7 +149,7 @@ namespace BusinessLogic_Tests
             String invalidUserName = String.Empty;
 
             // Act
-            Action act = () => testUser.UserName = invalidUserName;
+            Action act = () => _testUser.UserName = invalidUserName;
 
             // Assert
             var exception = Assert.ThrowsException<ArgumentException>(act);
@@ -163,10 +163,10 @@ namespace BusinessLogic_Tests
             String validPassword = "Abc123";
 
             // Act
-            testUser.Password = validPassword;
+            _testUser.Password = validPassword;
 
             // Assert
-            Assert.AreEqual(validPassword, testUser.Password);
+            Assert.AreEqual(validPassword, _testUser.Password);
 
         }
 
@@ -175,10 +175,10 @@ namespace BusinessLogic_Tests
         public void NullPasswordThrowsException()
         {
             //arrange
-            testPassword = string.Empty;
+            _testPassword = string.Empty;
 
             //act
-            Action act = () => testUser.Password = testPassword;
+            Action act = () => _testUser.Password = _testPassword;
 
             // Assert
             var exception = Assert.ThrowsException<ArgumentException>(act);
@@ -193,7 +193,7 @@ namespace BusinessLogic_Tests
             String invalidPassword = "Abc1";
 
             // Act
-            Action act = () => testUser.Password = invalidPassword;
+            Action act = () => _testUser.Password = invalidPassword;
 
             // Assert
             var exception = Assert.ThrowsException<ArgumentException>(act);
@@ -208,7 +208,7 @@ namespace BusinessLogic_Tests
             String invalidPassword = "Abcdefghijklmnopqrstuvwxyz";
 
             // Act
-            Action act = () => testUser.Password = invalidPassword;
+            Action act = () => _testUser.Password = invalidPassword;
 
             // Assert
             var exception = Assert.ThrowsException<ArgumentException>(act);
@@ -237,7 +237,7 @@ namespace BusinessLogic_Tests
             string invalidPassword = "Password";
 
             // Act
-            Action act = () => testUser.Password = invalidPassword;
+            Action act = () => _testUser.Password = invalidPassword;
 
             // Assert
 
@@ -249,8 +249,8 @@ namespace BusinessLogic_Tests
         public void ContainsUser_ReturnsTrue_WhenUserExists()
         {
             // Arrange
-            Users.AddUser(testUser);
-            string name = testUser.UserName;
+            Users.AddUser(_testUser);
+            string name = _testUser.UserName;
 
             // Act
             var actual = Users.ContainsUser(name);
@@ -307,7 +307,7 @@ namespace BusinessLogic_Tests
         public void ContainsUser_ReturnsFalse_WhenUserDoesNotExist()
         {
             // Arrange
-            Users.AddUser(testUser);
+            Users.AddUser(_testUser);
 
             // Act
             var actual = Users.ContainsUser("another name");
@@ -322,15 +322,15 @@ namespace BusinessLogic_Tests
             // Arrange
             User newUser = new User()
             {
-                UserName = testUserName,
-                Password = testPassword
+                UserName = _testUserName,
+                Password = _testPassword
             };
 
             // Act
             Users.AddUser(newUser);
 
             // Assert
-            Assert.IsTrue(Users.ContainsUser(testUserName));
+            Assert.IsTrue(Users.ContainsUser(_testUserName));
         }
 
         [TestMethod]
@@ -338,11 +338,11 @@ namespace BusinessLogic_Tests
         {
             // Arrange
 
-            Users.AddUser(testUser);
+            Users.AddUser(_testUser);
             var newUser = new User()
             {
-                UserName = testUserName,
-                Password = testPassword
+                UserName = _testUserName,
+                Password = _testPassword
             };
 
             // Act & Assert
@@ -355,13 +355,13 @@ namespace BusinessLogic_Tests
             // Arrange
             var newUser = new User()
             {
-                UserName = testUserName,
-                Password = testPassword
+                UserName = _testUserName,
+                Password = _testPassword
             };
             Users.AddUser(newUser);
 
             // Act
-            var actual = Users.GetUser(testUserName);
+            var actual = Users.GetUser(_testUserName);
 
             // Assert
             Assert.AreEqual(newUser, actual);
@@ -371,17 +371,17 @@ namespace BusinessLogic_Tests
         public void GetUser_ThrowsBusinessLogicException_WhenUserDoesNotExist()
         {
             // Arrange & Act & Assert
-            Assert.ThrowsException<BusinessLogicException>(() => Users.GetUser(testUserName));
+            Assert.ThrowsException<BusinessLogicException>(() => Users.GetUser(_testUserName));
         }
 
         [TestMethod]
         public void CheckUsernameAndPasswordCombination_ReturnsTrue_WhenCombinationExists()
         {
             // Arrange
-            Users.AddUser(testUser);
+            Users.AddUser(_testUser);
 
             // Act
-            bool actual = Users.CheckUsernameAndPasswordCombination(testUser.UserName, testUser.Password);
+            bool actual = Users.CheckUsernameAndPasswordCombination(_testUser.UserName, _testUser.Password);
 
             // Assert
             Assert.IsTrue(actual);
@@ -391,10 +391,10 @@ namespace BusinessLogic_Tests
         public void CheckUsernameAndPasswordCombination_ReturnsFalse_WhenCombinationDoesNotExist()
         {
             // Arrange
-            Users.AddUser(testUser);
+            Users.AddUser(_testUser);
 
             // Act
-            var actual = Users.CheckUsernameAndPasswordCombination(testUser.UserName, "password2");
+            var actual = Users.CheckUsernameAndPasswordCombination(_testUser.UserName, "password2");
 
             // Assert
             Assert.IsFalse(actual);

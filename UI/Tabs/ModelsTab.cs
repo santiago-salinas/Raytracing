@@ -9,17 +9,17 @@ namespace UI.Tabs
 {
     public partial class ModelsTab : Form
     {
-        private User loggedUser;
+        private User _loggedUser;
         public ModelsTab(User loggedUser)
         {
             InitializeComponent();
-            this.loggedUser = loggedUser;
-            loadModels();
+            this._loggedUser = loggedUser;
+            LoadModels();
         }
 
-        private void loadModels()
+        private void LoadModels()
         {
-            List<Model> modelList = Models.GetModelsFromUser(loggedUser);
+            List<Model> modelList = Models.GetModelsFromUser(_loggedUser);
             foreach (Model elem in modelList)
             {
                 ModelCard modelCard = new ModelCard(elem);
@@ -27,9 +27,9 @@ namespace UI.Tabs
             }
         }
 
-        private void addModelButton_Click(object sender, EventArgs e)
+        private void AddModelButton_Click(object sender, EventArgs e)
         {
-            AddModelDialog addModel = new AddModelDialog(loggedUser);
+            AddModelDialog addModel = new AddModelDialog(_loggedUser);
             DialogResult result = addModel.ShowDialog();
 
             if (result == DialogResult.OK)

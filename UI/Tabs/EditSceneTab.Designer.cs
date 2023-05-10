@@ -60,7 +60,7 @@
             this.saveButton.TabIndex = 0;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // lastModificationLabel
             // 
@@ -129,7 +129,7 @@
             0,
             0,
             0});
-            this.fovInput.ValueChanged += new System.EventHandler(this.fovWasChanged);
+            this.fovInput.ValueChanged += new System.EventHandler(this.FovWasChanged);
             // 
             // availableModelsPanel
             // 
@@ -183,7 +183,7 @@
             this.renderButton.TabIndex = 15;
             this.renderButton.Text = "Render";
             this.renderButton.UseVisualStyleBackColor = false;
-            this.renderButton.Click += new System.EventHandler(this.renderButton_Click);
+            this.renderButton.Click += new System.EventHandler(this.RenderButton_Click);
             // 
             // sceneLabel
             // 
@@ -259,7 +259,7 @@
             this.lookFromButton.TabIndex = 22;
             this.lookFromButton.Text = "(0,0,0)";
             this.lookFromButton.UseVisualStyleBackColor = true;
-            this.lookFromButton.Click += new System.EventHandler(this.lookFromButton_Click);
+            this.lookFromButton.Click += new System.EventHandler(this.LookFromButton_Click);
             // 
             // lookAtButton
             // 
@@ -271,7 +271,7 @@
             this.lookAtButton.TabIndex = 23;
             this.lookAtButton.Text = "(0,0,0)";
             this.lookAtButton.UseVisualStyleBackColor = true;
-            this.lookAtButton.Click += new System.EventHandler(this.lookAtButton_Click);
+            this.lookAtButton.Click += new System.EventHandler(this.LookAtButton_Click);
             // 
             // EditSceneTab
             // 

@@ -56,7 +56,7 @@
             this.deleteButton.TabIndex = 14;
             this.deleteButton.Text = "X";
             this.deleteButton.UseVisualStyleBackColor = false;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // modelNameLabel
             // 

@@ -8,28 +8,28 @@ namespace BusinessLogic_Tests
     [TestClass]
     public class SphereUnitTest
     {
-        private Sphere testSphere;
-        private float testRadius;
-        private float testNegativeRadius;
-        private string testName;
-        private string testNullName;
-        public User testUser;
+        private Sphere _testSphere;
+        private float _testRadius;
+        private float _testNegativeRadius;
+        private string _testName;
+        private string _testNullName;
+        public User _testUser;
 
 
         [TestInitialize]
         public void Initialize()
         {
-            testName = "Ball";
-            testRadius = 5;
-            testNullName = string.Empty;
-            testNegativeRadius = -5;
+            _testName = "Ball";
+            _testRadius = 5;
+            _testNullName = string.Empty;
+            _testNegativeRadius = -5;
 
-            testSphere = new Sphere()
+            _testSphere = new Sphere()
             {
-                Radius = testRadius,
-                Name = testName
+                Radius = _testRadius,
+                Name = _testName
             };
-            testUser = new User()
+            _testUser = new User()
             {
                 UserName = "Username",
                 Password = "Password1",
@@ -41,52 +41,52 @@ namespace BusinessLogic_Tests
         public void SphereCreatedSuccesfullyTest()
         {
             //arrange
-            testRadius = 5;
-            testName = "Ball";
-            testUser = new User()
+            _testRadius = 5;
+            _testName = "Ball";
+            _testUser = new User()
             {
                 UserName = "User1",
                 Password = "Password1"
             };
             //act
-            testSphere = new Sphere()
+            _testSphere = new Sphere()
             {
-                Radius = testRadius,
-                Name = testName,
-                Owner = testUser,
+                Radius = _testRadius,
+                Name = _testName,
+                Owner = _testUser,
             };
             // Assert
-            Assert.AreEqual(testName, testSphere.Name);
-            Assert.AreEqual(testRadius, testSphere.Radius);
-            Assert.AreEqual(testUser, testSphere.Owner);
+            Assert.AreEqual(_testName, _testSphere.Name);
+            Assert.AreEqual(_testRadius, _testSphere.Radius);
+            Assert.AreEqual(_testUser, _testSphere.Owner);
         }
 
         [TestMethod]
         public void Constructor_ShouldSetPropertiesCorrectly()
         {
             // Arrange
-            testRadius = 5;
-            testName = "Ball";
-            testUser = new User()
+            _testRadius = 5;
+            _testName = "Ball";
+            _testUser = new User()
             {
                 UserName = "User1",
                 Password = "Password1"
             };
 
             // Act
-            Sphere sphere = new Sphere(testName, testRadius, testUser);
+            Sphere sphere = new Sphere(_testName, _testRadius, _testUser);
 
             // Assert
-            Assert.AreEqual(testName, sphere.Name);
-            Assert.AreEqual(testRadius, sphere.Radius);
-            Assert.AreEqual(testUser, sphere.Owner);
+            Assert.AreEqual(_testName, sphere.Name);
+            Assert.AreEqual(_testRadius, sphere.Radius);
+            Assert.AreEqual(_testUser, sphere.Owner);
         }
 
         [TestMethod]
         [ExpectedException(typeof(BusinessLogicException), "Radius must be a value over zero >0")]
         public void RadiusIsOverZeroTest()
         {
-            testSphere.Radius = testNegativeRadius;
+            _testSphere.Radius = _testNegativeRadius;
         }
 
         [TestMethod]
@@ -94,52 +94,52 @@ namespace BusinessLogic_Tests
         public void NameCantBeNullTest()
         {
             //arrange
-            testNullName = string.Empty;
+            _testNullName = string.Empty;
             //act
-            testSphere.Name = testNullName;
+            _testSphere.Name = _testNullName;
         }
 
         [TestMethod]
         public void NameWithLeftPaddingFail()
         {
             //arrange
-            string nameWithLeftPadding = " " + testName;
+            string nameWithLeftPadding = " " + _testName;
             //act
-            testSphere.Name = nameWithLeftPadding;
+            _testSphere.Name = nameWithLeftPadding;
             //assert
-            Assert.AreEqual(testSphere.Name, testName);
+            Assert.AreEqual(_testSphere.Name, _testName);
         }
 
         [TestMethod]
         public void NameWithRightPaddingFail()
         {
             //arrange
-            string nameWithRightPadding = testName + " ";
+            string nameWithRightPadding = _testName + " ";
             //act
-            testSphere.Name = nameWithRightPadding;
+            _testSphere.Name = nameWithRightPadding;
             //assert
-            Assert.AreEqual(testSphere.Name, testName);
+            Assert.AreEqual(_testSphere.Name, _testName);
         }
 
         [TestMethod]
         public void NameWithPaddingsFail()
         {
             //arrange
-            string nameWithPaddings = " " + testName + " ";
+            string nameWithPaddings = " " + _testName + " ";
             //act
-            testSphere.Name = nameWithPaddings;
+            _testSphere.Name = nameWithPaddings;
             //assert
-            Assert.AreEqual(testSphere.Name, testName);
+            Assert.AreEqual(_testSphere.Name, _testName);
         }
 
         [TestMethod]
         public void AddSphereToCollection()
         {
             //arrange
-            testSphere.Owner = testUser;
+            _testSphere.Owner = _testUser;
             //act
-            Spheres.AddSphere(testSphere);
-            bool added = Spheres.ContainsSphere(testSphere.Name, testUser);
+            Spheres.AddSphere(_testSphere);
+            bool added = Spheres.ContainsSphere(_testSphere.Name, _testUser);
             //assert
             Assert.IsTrue(added);
         }
@@ -150,12 +150,12 @@ namespace BusinessLogic_Tests
             //arrange
             User testUser = new User();
             testUser.UserName = "Username";
-            testSphere.Owner = testUser;
+            _testSphere.Owner = testUser;
             //act
-            Spheres.AddSphere(testSphere);
-            Sphere getSphere = Spheres.GetSphere(testName, testUser);
+            Spheres.AddSphere(_testSphere);
+            Sphere getSphere = Spheres.GetSphere(_testName, testUser);
             //assert
-            Assert.ReferenceEquals(testSphere, getSphere);
+            Assert.ReferenceEquals(_testSphere, getSphere);
         }
 
         [TestMethod]
@@ -165,12 +165,12 @@ namespace BusinessLogic_Tests
             //arrange
             User testUser = new User();
             testUser.UserName = "Username";
-            testSphere.Owner = testUser;
+            _testSphere.Owner = testUser;
             //arrange
-            Spheres.AddSphere(testSphere);
+            Spheres.AddSphere(_testSphere);
             //act
-            Spheres.RemoveSphere(testName, testUser);
-            Spheres.GetSphere(testName, testUser);
+            Spheres.RemoveSphere(_testName, testUser);
+            Spheres.GetSphere(_testName, testUser);
         }
 
         [TestMethod]
@@ -180,9 +180,9 @@ namespace BusinessLogic_Tests
             //arrange
             User testUser = new User();
             testUser.UserName = "Username";
-            testSphere.Owner = testUser;
+            _testSphere.Owner = testUser;
             //act   
-            Spheres.RemoveSphere(testName, testUser);
+            Spheres.RemoveSphere(_testName, testUser);
         }
 
         [TestMethod]
@@ -190,20 +190,20 @@ namespace BusinessLogic_Tests
         public void CantAddSphereWithNameAlreadyInCollection()
         {
             //arrange
-            testUser = new User()
+            _testUser = new User()
             {
                 UserName = "TestUsername"
             };
-            testSphere = new Sphere()
+            _testSphere = new Sphere()
             {
-                Name = testName,
-                Owner = testUser
+                Name = _testName,
+                Owner = _testUser
             };
-            Spheres.AddSphere(testSphere);
+            Spheres.AddSphere(_testSphere);
             Sphere newSphere = new Sphere()
             {
-                Name = testName,
-                Owner = testUser,
+                Name = _testName,
+                Owner = _testUser,
             };
             //act
             Spheres.AddSphere(newSphere);

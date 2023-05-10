@@ -52,7 +52,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBox1.Click += new System.EventHandler(this.PlusSymbolImage_Click);
             // 
             // addSceneButton
             // 
@@ -66,7 +66,7 @@
             this.addSceneButton.TabIndex = 5;
             this.addSceneButton.Text = "     Add new scene";
             this.addSceneButton.UseVisualStyleBackColor = false;
-            this.addSceneButton.Click += new System.EventHandler(this.addSceneButton_Click);
+            this.addSceneButton.Click += new System.EventHandler(this.AddSceneButton_Click);
             // 
             // ScenesTab
             // 

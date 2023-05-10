@@ -8,21 +8,21 @@ namespace UI.Tabs
 {
     public partial class ScenesTab : Form
     {
-        private User loggedUser;
-        public EditSceneTab sceneEditDialog;
-        private MainPage mainPage;
+        private User _loggedUser;
+        public EditSceneTab SceneEditDialog;
+        private MainPage _mainPage;
         public ScenesTab(User loggedUser, MainPage mainPage)
         {
             InitializeComponent();
-            this.loggedUser = loggedUser;
-            loadScenes();
-            this.mainPage = mainPage;
+            this._loggedUser = loggedUser;
+            LoadScenes();
+            this._mainPage = mainPage;
         }
 
-        public void loadScenes()
+        public void LoadScenes()
         {
             flowLayoutPanel.Controls.Clear();
-            List<Scene> sceneList = Scenes.GetScenesFromUser(loggedUser);
+            List<Scene> sceneList = Scenes.GetScenesFromUser(_loggedUser);
             foreach (Scene elem in sceneList)
             {
                 SceneCard sceneCard = new SceneCard(elem);
@@ -30,36 +30,36 @@ namespace UI.Tabs
             }
         }
 
-        private void addSceneButton_Click(object sender, EventArgs e)
+        private void AddSceneButton_Click(object sender, EventArgs e)
         {
-            loadSceneEditTab(null);
+            LoadSceneEditTab(null);
         }
 
-        public void loadSceneEditTab(Scene scene)
+        public void LoadSceneEditTab(Scene scene)
         {
-            if (sceneEditDialog == null)
+            if (SceneEditDialog == null)
             {
-                EditSceneTab sceneEditDialog = new EditSceneTab(scene, loggedUser);
-                sceneEditDialog.scenesTab = this;
-                sceneEditDialog.FormClosed += editSceneClosed;
-                sceneEditDialog.MdiParent = mainPage;
+                EditSceneTab sceneEditDialog = new EditSceneTab(scene, _loggedUser);
+                sceneEditDialog.ScenesTab = this;
+                sceneEditDialog.FormClosed += EditSceneClosed;
+                sceneEditDialog.MdiParent = _mainPage;
                 sceneEditDialog.Dock = DockStyle.Fill;
                 sceneEditDialog.Show();
             }
             else
             {
-                sceneEditDialog.Activate();
+                SceneEditDialog.Activate();
             }
         }
 
-        public void editSceneClosed(object sender, EventArgs e)
+        public void EditSceneClosed(object sender, EventArgs e)
         {
-            sceneEditDialog = null;
+            SceneEditDialog = null;
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void PlusSymbolImage_Click(object sender, EventArgs e)
         {
-            loadSceneEditTab(null);
+            LoadSceneEditTab(null);
         }
     }
 }

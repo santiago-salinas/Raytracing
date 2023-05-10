@@ -6,23 +6,23 @@ namespace UI.Dialogs
 {
     public partial class AddLambertianDialog : Form
     {
-        private const int maximumRGBValue = 255;
-        private Color color;
+        private const int _maximumRGBValue = 255;
+        private Color _color;
 
         public Lambertian NewLambertian = new Lambertian();
-        private User loggedUser { get; set; }
+        private User _loggedUser { get; set; }
         public AddLambertianDialog(User loggedUser)
         {
             InitializeComponent();
-            this.loggedUser = loggedUser;
+            this._loggedUser = loggedUser;
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
+        private void SaveButton_Click(object sender, EventArgs e)
         {
             string lambertianName = nameTextBox.Text;
 
@@ -42,19 +42,19 @@ namespace UI.Dialogs
                 nameIsCorrect = false;
             }
 
-            if (Lambertians.ContainsLambertian(lambertianName, loggedUser))
+            if (Lambertians.ContainsLambertian(lambertianName, _loggedUser))
             {
                 nameIsCorrect = false;
                 nameStatusLabel.Text = "* Material with that name already exists";
             }
 
-            double redValue = (double)redValueInput.Value / maximumRGBValue;
-            double greenValue = (double)greenValueInput.Value / maximumRGBValue;
-            double blueValue = (double)blueValueInput.Value / maximumRGBValue;
+            double redValue = (double)redValueInput.Value / _maximumRGBValue;
+            double greenValue = (double)greenValueInput.Value / _maximumRGBValue;
+            double blueValue = (double)blueValueInput.Value / _maximumRGBValue;
             try
             {
-                color = new BusinessLogic.Color(redValue, greenValue, blueValue);
-                NewLambertian.Color = color;
+                _color = new BusinessLogic.Color(redValue, greenValue, blueValue);
+                NewLambertian.Color = _color;
             }
             catch (ArgumentException)
             {
@@ -64,13 +64,9 @@ namespace UI.Dialogs
 
             if (nameIsCorrect && colorValuesAreCorrect)
             {
-                NewLambertian.Owner = loggedUser;
+                NewLambertian.Owner = _loggedUser;
                 DialogResult = DialogResult.OK;
             }
-
-
-
         }
-
     }
 }

@@ -67,7 +67,7 @@
             this.deleteButton.TabIndex = 8;
             this.deleteButton.Text = "X";
             this.deleteButton.UseVisualStyleBackColor = false;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // editButton
             // 
@@ -78,7 +78,7 @@
             this.editButton.TabIndex = 9;
             this.editButton.Text = "Edit";
             this.editButton.UseVisualStyleBackColor = true;
-            this.editButton.Click += new System.EventHandler(this.editButton_Click);
+            this.editButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // previewPanel
             // 

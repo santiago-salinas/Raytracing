@@ -12,7 +12,7 @@ namespace UI
         }
 
 
-        private void logInButton_Click(object sender, EventArgs e)
+        private void LogInButton_Click(object sender, EventArgs e)
         {
             string userNameText = userNameTextBox.Text;
             string passwordText = passwordTextBox.Text;
@@ -33,7 +33,7 @@ namespace UI
             }
         }
 
-        private void signUpButton_Click(object sender, EventArgs e)
+        private void SignUpButton_Click(object sender, EventArgs e)
         {
             new SignUpPage().Show();
             this.Hide();

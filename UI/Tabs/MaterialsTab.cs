@@ -9,17 +9,17 @@ namespace UI.Tabs
 {
     public partial class MaterialsTab : Form
     {
-        private User loggedUser;
+        private User _loggedUser;
         public MaterialsTab(User loggedUser)
         {
             InitializeComponent();
-            this.loggedUser = loggedUser;
-            loadMaterials();
+            this._loggedUser = loggedUser;
+            LoadMaterials();
         }
 
-        private void loadMaterials()
+        private void LoadMaterials()
         {
-            List<Lambertian> lambertianList = Lambertians.GetLambertiansFromUser(loggedUser);
+            List<Lambertian> lambertianList = Lambertians.GetLambertiansFromUser(_loggedUser);
             foreach (Lambertian elem in lambertianList)
             {
                 LambertianCard lambertianCard = new LambertianCard(elem);
@@ -27,9 +27,9 @@ namespace UI.Tabs
             }
         }
 
-        private void addMaterialButton_Click(object sender, EventArgs e)
+        private void AddMaterialButton_Click(object sender, EventArgs e)
         {
-            AddLambertianDialog addMaterial = new AddLambertianDialog(loggedUser);
+            AddLambertianDialog addMaterial = new AddLambertianDialog(_loggedUser);
             DialogResult result = addMaterial.ShowDialog();
 
             if (result == DialogResult.OK)

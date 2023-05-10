@@ -81,7 +81,7 @@
             this.addButton.TabIndex = 14;
             this.addButton.Text = "+";
             this.addButton.UseVisualStyleBackColor = true;
-            this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            this.addButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
             // previewBox
             // 

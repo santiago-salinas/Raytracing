@@ -10,23 +10,23 @@ namespace UI.Tabs
 {
     public partial class EditSceneTab : Form
     {
-        private Scene scene;
-        private User loggedUser;
-        public ScenesTab scenesTab;
-        private bool isNewScene;
+        private Scene _scene;
+        private User _loggedUser;
+        public ScenesTab ScenesTab;
+        private bool _isNewScene;
 
         private CameraDTO sceneCamera;
         public EditSceneTab(Scene providedScene, User providedUser)
         {
             InitializeComponent();
-            loggedUser = providedUser;
-            isNewScene = providedScene == null;
-            scene = isNewScene ? createNewScene() : providedScene;
-            loadAvailableModels();
-            loadDataFromScene(scene);
+            _loggedUser = providedUser;
+            _isNewScene = providedScene == null;
+            _scene = _isNewScene ? CreateNewScene() : providedScene;
+            LoadAvailableModels();
+            LoadDataFromScene(_scene);
         }
 
-        private Scene createNewScene()
+        private Scene CreateNewScene()
         {
             CameraDTO defaultCameraValues = new CameraDTO()
             {
@@ -42,7 +42,7 @@ namespace UI.Tabs
 
             Scene newScene = new Scene()
             {
-                Owner = loggedUser,
+                Owner = _loggedUser,
                 CreationDate = DateTime.Now,
                 LastModificationDate = DateTime.Now,
                 CameraDTO = defaultCameraValues,
@@ -50,9 +50,9 @@ namespace UI.Tabs
 
             return newScene;
         }
-        private void loadDataFromScene(Scene providedScene)
+        private void LoadDataFromScene(Scene providedScene)
         {
-            scene = providedScene;
+            _scene = providedScene;
             nameTextbox.Text = providedScene.Name;
             sceneCamera = providedScene.CameraDTO;
             Vector lookFrom = sceneCamera.LookFrom;
@@ -60,16 +60,16 @@ namespace UI.Tabs
             int fieldOfView = sceneCamera.FieldOfView;
             lookFromButton.Text = lookFrom.ToString();
             lookAtButton.Text = lookAt.ToString();
-            lastModificationLabel.Text += scene.LastModificationDate.ToString("f", new CultureInfo("en-US"));
+            lastModificationLabel.Text += _scene.LastModificationDate.ToString("f", new CultureInfo("en-US"));
             fovInput.Value = fieldOfView;
-            if (scene.Preview != null)
+            if (_scene.Preview != null)
             {
-                renderPanel.Controls.Add(new PPMViewer(scene.Preview));
-                lastRenderLabel.Text += scene.LastRenderDate.ToString("f", new CultureInfo("en-US"));
+                renderPanel.Controls.Add(new PPMViewer(_scene.Preview));
+                lastRenderLabel.Text += _scene.LastRenderDate.ToString("f", new CultureInfo("en-US"));
             }
-            loadPositionedModels();
+            LoadPositionedModels();
         }
-        private void lookFromButton_Click(object sender, EventArgs e)
+        private void LookFromButton_Click(object sender, EventArgs e)
         {
 
             EditVectorDialog editVectorDialog = new EditVectorDialog(sceneCamera.LookFrom, "Look from");
@@ -78,11 +78,11 @@ namespace UI.Tabs
 
             if (result == DialogResult.OK)
             {
-                if (editVectorDialog.wasModified) notifyThatSeneWasModified();
+                if (editVectorDialog.WasModified) NotifyThatSeneWasModified();
                 lookFromButton.Text = sceneCamera.LookFrom.ToString();
             }
         }
-        private void lookAtButton_Click(object sender, EventArgs e)
+        private void LookAtButton_Click(object sender, EventArgs e)
         {
             EditVectorDialog editVectorDialog = new EditVectorDialog(sceneCamera.LookAt, "Look at");
             editVectorDialog.ShowDialog();
@@ -90,11 +90,11 @@ namespace UI.Tabs
 
             if (result == DialogResult.OK)
             {
-                if (editVectorDialog.wasModified) notifyThatSeneWasModified();
+                if (editVectorDialog.WasModified) NotifyThatSeneWasModified();
                 lookAtButton.Text = sceneCamera.LookAt.ToString();
             }
         }
-        private void saveButton_Click(object sender, EventArgs e)
+        private void SaveButton_Click(object sender, EventArgs e)
         {
             nameStatusLabel.Text = string.Empty;
             string newName = nameTextbox.Text.Trim();
@@ -105,12 +105,12 @@ namespace UI.Tabs
             }
             else
             {
-                if (isNewScene)
+                if (_isNewScene)
                 {
                     try
                     {
-                        scene.Name = newName;
-                        Scenes.AddScene(scene);
+                        _scene.Name = newName;
+                        Scenes.AddScene(_scene);
                         endedCorrectly = true;
                     }
                     catch (Exception ex)
@@ -120,13 +120,13 @@ namespace UI.Tabs
                 }
                 else
                 {
-                    if (nameWasChanged() && Scenes.ContainsScene(newName, loggedUser))
+                    if (NameWasChanged() && Scenes.ContainsScene(newName, _loggedUser))
                     {
                         nameStatusLabel.Text = "* User already owns a scene with that name";
                     }
                     else
                     {
-                        scene.Name = newName;
+                        _scene.Name = newName;
                         endedCorrectly = true;
                     }
                 }
@@ -135,65 +135,65 @@ namespace UI.Tabs
 
             if (endedCorrectly)
             {
-                scenesTab.loadScenes();
-                scenesTab.Activate();
+                ScenesTab.LoadScenes();
+                ScenesTab.Activate();
             }
         }
 
-        private bool nameWasChanged()
+        private bool NameWasChanged()
         {
-            return scene.Name != nameTextbox.Text;
+            return _scene.Name != nameTextbox.Text;
         }
 
-        private void fovWasChanged(object sender, EventArgs e)
+        private void FovWasChanged(object sender, EventArgs e)
         {
             int newFov = (int)fovInput.Value;
             if (sceneCamera.FieldOfView != newFov)
             {
-                notifyThatSeneWasModified();
+                NotifyThatSeneWasModified();
                 sceneCamera.FieldOfView = newFov;
             }
         }
-        private void loadAvailableModels()
+        private void LoadAvailableModels()
         {
             availableModelsPanel.Controls.Clear();
-            List<Model> list = Models.GetModelsFromUser(loggedUser);
+            List<Model> list = Models.GetModelsFromUser(_loggedUser);
             foreach (Model elem in list)
             {
-                EditSceneModelCard modelCard = new EditSceneModelCard(scene, elem);
+                EditSceneModelCard modelCard = new EditSceneModelCard(_scene, elem);
                 availableModelsPanel.Controls.Add(modelCard);
             }
         }
 
-        public void loadPositionedModels()
+        public void LoadPositionedModels()
         {
             positionedModelsPanel.Controls.Clear();
-            List<PositionedModel> list = scene.PositionedModels;
+            List<PositionedModel> list = _scene.PositionedModels;
             foreach (PositionedModel elem in list)
             {
-                PositionedModelCard modelCard = new PositionedModelCard(elem, scene);
+                PositionedModelCard modelCard = new PositionedModelCard(elem, _scene);
                 positionedModelsPanel.Controls.Add(modelCard);
             }
         }
 
-        private void renderButton_Click(object sender, EventArgs e)
+        private void RenderButton_Click(object sender, EventArgs e)
         {
-            scene.UpdateLastRenderDate();
-            lastRenderLabel.Text = "Last rendered: " + scene.LastRenderDate.ToString("f", new CultureInfo("en-US"));
+            _scene.UpdateLastRenderDate();
+            lastRenderLabel.Text = "Last rendered: " + _scene.LastRenderDate.ToString("f", new CultureInfo("en-US"));
             renderPanel.Controls.Clear();
             outdatedStatusLabel.Visible = false;
 
-            Engine engine = new Engine(scene);
+            Engine engine = new Engine(_scene);
             PPM ppm = engine.Render();
-            scene.Preview = ppm;
+            _scene.Preview = ppm;
 
             renderPanel.Controls.Add(new PPMViewer(ppm));
         }
 
-        public void notifyThatSeneWasModified()
+        public void NotifyThatSeneWasModified()
         {
             DateTime newModificationDate = DateTime.Now;
-            scene.LastModificationDate = newModificationDate;
+            _scene.LastModificationDate = newModificationDate;
             lastModificationLabel.Text = "Last modification date: " + newModificationDate.ToString("f", new CultureInfo("en-US"));
             outdatedStatusLabel.Visible = true;
         }

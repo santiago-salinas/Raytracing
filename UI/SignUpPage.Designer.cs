@@ -56,7 +56,7 @@ namespace UI
             this.userNameTextBox.Name = "userNameTextBox";
             this.userNameTextBox.Size = new System.Drawing.Size(347, 23);
             this.userNameTextBox.TabIndex = 0;
-            this.userNameTextBox.TextChanged += new System.EventHandler(this.usernameTextBoxChanged);
+            this.userNameTextBox.TextChanged += new System.EventHandler(this.UsernameTextBoxChanged);
             // 
             // passwordTextBox
             // 
@@ -66,7 +66,7 @@ namespace UI
             this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(347, 23);
             this.passwordTextBox.TabIndex = 1;
-            this.passwordTextBox.TextChanged += new System.EventHandler(this.passwordTextBoxChanged);
+            this.passwordTextBox.TextChanged += new System.EventHandler(this.PasswordTextBoxChanged);
             // 
             // confirmPasswordTextbox
             // 
@@ -76,7 +76,7 @@ namespace UI
             this.confirmPasswordTextbox.PasswordChar = '*';
             this.confirmPasswordTextbox.Size = new System.Drawing.Size(347, 23);
             this.confirmPasswordTextbox.TabIndex = 2;
-            this.confirmPasswordTextbox.TextChanged += new System.EventHandler(this.passwordConfirmTextBoxChanged);
+            this.confirmPasswordTextbox.TextChanged += new System.EventHandler(this.PasswordConfirmTextBoxChanged);
             // 
             // signUpButton
             // 
@@ -87,8 +87,8 @@ namespace UI
             this.signUpButton.TabIndex = 13;
             this.signUpButton.Text = "Sign Up";
             this.signUpButton.UseVisualStyleBackColor = true;
-            this.signUpButton.TextChanged += new System.EventHandler(this.usernameTextBoxChanged);
-            this.signUpButton.Click += new System.EventHandler(this.signUpButton_Click);
+            this.signUpButton.TextChanged += new System.EventHandler(this.UsernameTextBoxChanged);
+            this.signUpButton.Click += new System.EventHandler(this.SignUpButton_Click);
             // 
             // passwordStatusLabel
             // 
@@ -216,7 +216,7 @@ namespace UI
             this.goBackButton.TabIndex = 25;
             this.goBackButton.Text = "<< Go Back";
             this.goBackButton.UseVisualStyleBackColor = true;
-            this.goBackButton.Click += new System.EventHandler(this.goBackButton_onClick);
+            this.goBackButton.Click += new System.EventHandler(this.GoBackButton_onClick);
             // 
             // SignUpPage
             // 

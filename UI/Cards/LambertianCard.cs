@@ -6,12 +6,12 @@ namespace UI.Cards
 {
     public partial class LambertianCard : UserControl
     {
-        private Lambertian lambertian;
+        private Lambertian _lambertian;
 
         public LambertianCard(Lambertian lambertian)
         {
             InitializeComponent();
-            this.lambertian = lambertian;
+            this._lambertian = lambertian;
             nameLabel.Text = lambertian.Name;
 
             BusinessLogic.Color color = lambertian.Color;
@@ -30,11 +30,11 @@ namespace UI.Cards
 
         }
 
-        private void deleteButton_Click(object sender, EventArgs e)
+        private void DeleteButton_Click(object sender, EventArgs e)
         {
             try
             {
-                Lambertians.RemoveLambertian(lambertian.Name, lambertian.Owner);
+                Lambertians.RemoveLambertian(_lambertian.Name, _lambertian.Owner);
                 this.Parent.Controls.Remove(this);
             }
             catch (BusinessLogicException)
