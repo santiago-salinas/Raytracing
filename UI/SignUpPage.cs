@@ -6,17 +6,17 @@ namespace UI
 {
     public partial class SignUpPage : Form
     {
-        User createdUser = null;
-        bool usernameFieldIsCorrect = false;
-        bool passwordFieldIsCorrect = false;
-        bool confirmPasswordFieldIsCorrect = false;
+        private User _createdUser = null;
+        private bool _usernameFieldIsCorrect = false;
+        private bool _passwordFieldIsCorrect = false;
+        private bool _confirmPasswordFieldIsCorrect = false;
         public SignUpPage()
         {
             InitializeComponent();
-            createdUser = new User();
+            _createdUser = new User();
         }
 
-        private void signUpButton_Click(object sender, EventArgs e)
+        private void SignUpButton_Click(object sender, EventArgs e)
         {
             string username = userNameTextBox.Text;
             string password = passwordTextBox.Text;
@@ -25,15 +25,15 @@ namespace UI
             if (Users.ContainsUser(username))
             {
                 usernameStatusLabel.Text = "User with that name already exists";
-                usernameFieldIsCorrect = false;
+                _usernameFieldIsCorrect = false;
             }
 
-            if (usernameFieldIsCorrect && passwordFieldIsCorrect && confirmPasswordFieldIsCorrect)
+            if (_usernameFieldIsCorrect && _passwordFieldIsCorrect && _confirmPasswordFieldIsCorrect)
             {
-                createdUser.UserName = username;
-                createdUser.Password = password;
-                createdUser.RegisterDate = DateTime.Now;
-                Users.AddUser(createdUser);
+                _createdUser.UserName = username;
+                _createdUser.Password = password;
+                _createdUser.RegisterDate = DateTime.Now;
+                Users.AddUser(_createdUser);
                 this.Close();
             }
             else
@@ -43,42 +43,42 @@ namespace UI
 
         }
 
-        private void usernameTextBoxChanged(object sender, EventArgs e)
+        private void UsernameTextBoxChanged(object sender, EventArgs e)
         {
             string username = userNameTextBox.Text;
             usernameStatusLabel.Text = "";
-            usernameFieldIsCorrect = true;
+            _usernameFieldIsCorrect = true;
 
             try
             {
-                createdUser.CheckIfUserNameIsValid(username);
+                _createdUser.CheckIfUserNameIsValid(username);
             }
             catch (ArgumentException ex)
             {
                 usernameStatusLabel.Text = ex.Message;
-                usernameFieldIsCorrect = false;
+                _usernameFieldIsCorrect = false;
             }
         }
 
-        private void passwordTextBoxChanged(object sender, EventArgs e)
+        private void PasswordTextBoxChanged(object sender, EventArgs e)
         {
             string password = passwordTextBox.Text;
             passwordStatusLabel.Text = "";
-            passwordFieldIsCorrect = true;
+            _passwordFieldIsCorrect = true;
             try
             {
-                createdUser.IsValidPassword(password);
+                _createdUser.IsValidPassword(password);
             }
             catch (ArgumentException ex)
             {
                 passwordStatusLabel.Text = ex.Message;
-                passwordFieldIsCorrect = false;
+                _passwordFieldIsCorrect = false;
             }
 
-            passwordConfirmTextBoxChanged(sender, e);
+            PasswordConfirmTextBoxChanged(sender, e);
         }
 
-        private void passwordConfirmTextBoxChanged(object sender, EventArgs e)
+        private void PasswordConfirmTextBoxChanged(object sender, EventArgs e)
         {
             string password = passwordTextBox.Text;
             string confirmPassword = confirmPasswordTextbox.Text;
@@ -87,15 +87,15 @@ namespace UI
             if (password != confirmPassword)
             {
                 confirmPasswordStatusLabel.Visible = true;
-                confirmPasswordFieldIsCorrect = false;
+                _confirmPasswordFieldIsCorrect = false;
             }
             else
             {
-                confirmPasswordFieldIsCorrect = true;
+                _confirmPasswordFieldIsCorrect = true;
             }
         }
 
-        private void goBackButton_onClick(object sender, EventArgs e)
+        private void GoBackButton_onClick(object sender, EventArgs e)
         {
             this.Close();
         }

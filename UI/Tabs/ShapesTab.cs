@@ -10,18 +10,18 @@ namespace UI.Tabs
     public partial class ShapesTab : Form
     {
 
-        private User loggedUser;
+        private User _loggedUser;
         public ShapesTab(User loggedUser)
         {
             InitializeComponent();
-            this.loggedUser = loggedUser;
-            loadSpheres();
+            this._loggedUser = loggedUser;
+            LoadSpheres();
 
         }
 
-        private void addShapeButton_Click(object sender, EventArgs e)
+        private void AddShapeButton_Click(object sender, EventArgs e)
         {
-            AddSphereDialog addSphere = new AddSphereDialog(loggedUser);
+            AddSphereDialog addSphere = new AddSphereDialog(_loggedUser);
             DialogResult result = addSphere.ShowDialog();
 
             if (result == DialogResult.OK)
@@ -32,9 +32,9 @@ namespace UI.Tabs
             }
         }
 
-        private void loadSpheres()
+        private void LoadSpheres()
         {
-            List<Sphere> sphereList = Spheres.GetSpheresFromUser(loggedUser);
+            List<Sphere> sphereList = Spheres.GetSpheresFromUser(_loggedUser);
             foreach (Sphere elem in sphereList)
             {
                 SphereCard sphereCard = new SphereCard(elem);

@@ -7,30 +7,30 @@ namespace UI.Cards
 {
     public partial class PositionedModelCard : UserControl
     {
-        private PositionedModel positionedModel;
-        private Model model;
-        private Scene scene;
+        private PositionedModel _positionedModel;
+        private Model _model;
+        private Scene _scene;
         public PositionedModelCard(PositionedModel providedModel, Scene providedScene)
         {
             InitializeComponent();
-            positionedModel = providedModel;
-            scene = providedScene;
-            model = positionedModel.Model;
-            modelNameLabel.Text = model.Name;
-            positionLabel.Text = positionedModel.Position.ToString();
+            _positionedModel = providedModel;
+            _scene = providedScene;
+            _model = _positionedModel.Model;
+            modelNameLabel.Text = _model.Name;
+            positionLabel.Text = _positionedModel.Position.ToString();
 
-            loadPreview();
+            LoadPreview();
         }
 
-        private void deleteButton_Click(object sender, EventArgs e)
+        private void DeleteButton_Click(object sender, EventArgs e)
         {
-            scene.RemovePositionedModel(positionedModel);
+            _scene.RemovePositionedModel(_positionedModel);
             this.Parent.Controls.Remove(this);
         }
 
-        private void loadPreview()
+        private void LoadPreview()
         {
-            PPM preview = model.Preview;
+            PPM preview = _model.Preview;
 
             if (preview == null)
             {
@@ -39,7 +39,7 @@ namespace UI.Cards
 
                 Panel coloredBox = new Panel();
 
-                BusinessLogic.Color materialColor = model.Material.Color;
+                BusinessLogic.Color materialColor = _model.Material.Color;
 
                 int redValue = (int)materialColor.Red;
                 int greenValue = (int)materialColor.Green;

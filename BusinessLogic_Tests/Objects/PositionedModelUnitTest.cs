@@ -5,54 +5,54 @@ namespace BusinessLogic_Tests
     [TestClass]
     public class PositionedModelUnitTest
     {
-        private PositionedModel testPositionedModel;
-        private Vector testPosition;
+        private PositionedModel _testPositionedModel;
+        private Vector _testPosition;
 
-        private Model testModel;
-        private string modelName;
+        private Model _testModel;
+        private string _modelName;
 
-        private Sphere testSphere;
-        private string sphereName;
-        private float radius;
+        private Sphere _testSphere;
+        private string _sphereName;
+        private float _radius;
 
-        private Lambertian testLambertian;
-        private string lambertianName;
-        private Color color;
+        private Lambertian _testLambertian;
+        private string _lambertianName;
+        private Color _color;
 
         [TestInitialize]
         public void Initialize()
         {
-            modelName = "Wooden ball";
+            _modelName = "Wooden ball";
 
-            sphereName = "Small sized sphere";
-            radius = 5;
-            lambertianName = "Oak color";
-            color = new Color((float)133 / 255, (float)94 / 255, (float)66 / 255);
+            _sphereName = "Small sized sphere";
+            _radius = 5;
+            _lambertianName = "Oak color";
+            _color = new Color((float)133 / 255, (float)94 / 255, (float)66 / 255);
 
-            testSphere = new Sphere()
+            _testSphere = new Sphere()
             {
-                Name = sphereName,
-                Radius = radius,
+                Name = _sphereName,
+                Radius = _radius,
             };
-            testLambertian = new Lambertian()
+            _testLambertian = new Lambertian()
             {
-                Color = color,
-                Name = lambertianName,
-            };
-
-            testModel = new Model()
-            {
-                Name = modelName,
-                Shape = testSphere,
-                Material = testLambertian
+                Color = _color,
+                Name = _lambertianName,
             };
 
-            testPosition = new Vector(0, 0, 0);
-
-            testPositionedModel = new PositionedModel()
+            _testModel = new Model()
             {
-                Model = testModel,
-                Position = testPosition
+                Name = _modelName,
+                Shape = _testSphere,
+                Material = _testLambertian
+            };
+
+            _testPosition = new Vector(0, 0, 0);
+
+            _testPositionedModel = new PositionedModel()
+            {
+                Model = _testModel,
+                Position = _testPosition
             };
         }
 
@@ -60,16 +60,16 @@ namespace BusinessLogic_Tests
         public void PositionedModelCreatedSuccesfullyTest()
         {
             //arrange
-            testPosition = new Vector(0, 0, 0);
+            _testPosition = new Vector(0, 0, 0);
 
             //act
-            testPositionedModel = new PositionedModel()
+            _testPositionedModel = new PositionedModel()
             {
-                Model = testModel,
-                Position = testPosition
+                Model = _testModel,
+                Position = _testPosition
             };
             //assert
-            Assert.IsNotNull(testModel);
+            Assert.IsNotNull(_testModel);
         }
     }
 }

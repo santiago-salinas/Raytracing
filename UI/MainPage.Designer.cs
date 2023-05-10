@@ -51,7 +51,7 @@
             this.shapesSideBarButton.TabIndex = 1;
             this.shapesSideBarButton.Text = "Shapes";
             this.shapesSideBarButton.UseVisualStyleBackColor = true;
-            this.shapesSideBarButton.Click += new System.EventHandler(this.shapesSideBarButton_Click);
+            this.shapesSideBarButton.Click += new System.EventHandler(this.ShapesSideBarButton_Click);
             // 
             // materialsSideBarButton
             // 
@@ -64,7 +64,7 @@
             this.materialsSideBarButton.TabIndex = 0;
             this.materialsSideBarButton.Text = "Materials";
             this.materialsSideBarButton.UseVisualStyleBackColor = true;
-            this.materialsSideBarButton.Click += new System.EventHandler(this.materialsSideBarButton_Click);
+            this.materialsSideBarButton.Click += new System.EventHandler(this.MaterialsSideBarButton_Click);
             // 
             // modelsSideBarButton
             // 
@@ -77,7 +77,7 @@
             this.modelsSideBarButton.TabIndex = 2;
             this.modelsSideBarButton.Text = "Models";
             this.modelsSideBarButton.UseVisualStyleBackColor = true;
-            this.modelsSideBarButton.Click += new System.EventHandler(this.modelsSideBarButton_Click);
+            this.modelsSideBarButton.Click += new System.EventHandler(this.ModelsSideBarButton_Click);
             // 
             // scenesSideBarButton
             // 
@@ -90,7 +90,7 @@
             this.scenesSideBarButton.TabIndex = 3;
             this.scenesSideBarButton.Text = "Scenes";
             this.scenesSideBarButton.UseVisualStyleBackColor = true;
-            this.scenesSideBarButton.Click += new System.EventHandler(this.scenesSideBarButton_Click);
+            this.scenesSideBarButton.Click += new System.EventHandler(this.ScenesSideBarButton_Click);
             // 
             // panel1
             // 
@@ -140,7 +140,7 @@
             this.signOutButton.TabIndex = 4;
             this.signOutButton.Text = "Sign Out";
             this.signOutButton.UseVisualStyleBackColor = true;
-            this.signOutButton.Click += new System.EventHandler(this.signOutButton_Click);
+            this.signOutButton.Click += new System.EventHandler(this.SignOutButton_Click);
             // 
             // MainPage
             // 

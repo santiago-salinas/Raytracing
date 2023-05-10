@@ -8,54 +8,54 @@ namespace BusinessLogic_Tests
     [TestClass]
     public class ModelUnitTest
     {
-        private Model testModel;
-        private string modelName;
-        private string testNullName;
+        private Model _testModel;
+        private string _modelName;
+        private string _testNullName;
 
-        private Sphere testSphere;
-        private string sphereName;
-        private float radius;
+        private Sphere _testSphere;
+        private string _sphereName;
+        private float _radius;
 
-        private Lambertian testLambertian;
-        private string lambertianName;
-        private Color color;
+        private Lambertian _testLambertian;
+        private string _lambertianName;
+        private Color _color;
 
-        private User testUser;
+        private User _testUser;
 
         [TestInitialize]
         public void Initialize()
         {
-            modelName = "Wooden ball";
-            testNullName = string.Empty;
+            _modelName = "Wooden ball";
+            _testNullName = string.Empty;
 
-            sphereName = "Small sized sphere";
-            radius = 5;
-            lambertianName = "Oak color";
-            color = new Color((float)133 / 255, (float)94 / 255, (float)66 / 255);
+            _sphereName = "Small sized sphere";
+            _radius = 5;
+            _lambertianName = "Oak color";
+            _color = new Color((float)133 / 255, (float)94 / 255, (float)66 / 255);
 
-            testSphere = new Sphere()
+            _testSphere = new Sphere()
             {
-                Name = sphereName,
-                Radius = radius,
+                Name = _sphereName,
+                Radius = _radius,
             };
-            testLambertian = new Lambertian()
+            _testLambertian = new Lambertian()
             {
-                Name = lambertianName,
-                Color = color,
+                Name = _lambertianName,
+                Color = _color,
             };
 
-            testUser = new User()
+            _testUser = new User()
             {
                 UserName = "Username1",
 
             };
 
-            testModel = new Model()
+            _testModel = new Model()
             {
-                Name = modelName,
-                Shape = testSphere,
-                Material = testLambertian,
-                Owner = testUser
+                Name = _modelName,
+                Shape = _testSphere,
+                Material = _testLambertian,
+                Owner = _testUser
             };
         }
 
@@ -63,16 +63,16 @@ namespace BusinessLogic_Tests
         public void ModelCreatedSuccesfullyTest()
         {
             //arrange            
-            modelName = "Wooden ball";
+            _modelName = "Wooden ball";
             //act
-            testModel = new Model()
+            _testModel = new Model()
             {
-                Name = modelName,
-                Shape = testSphere,
-                Material = testLambertian
+                Name = _modelName,
+                Shape = _testSphere,
+                Material = _testLambertian
             };
             //Assert
-            Assert.IsNotNull(testModel);
+            Assert.IsNotNull(_testModel);
         }
 
         [TestMethod]
@@ -80,50 +80,50 @@ namespace BusinessLogic_Tests
         public void NameCantBeNullTest()
         {
             //arrange
-            testNullName = string.Empty;
+            _testNullName = string.Empty;
             //act
-            testModel.Name = testNullName;
+            _testModel.Name = _testNullName;
         }
 
         [TestMethod]
         public void NameWithLeftPaddingFail()
         {
             //arrange
-            string nameWithLeftPadding = " " + modelName;
+            string nameWithLeftPadding = " " + _modelName;
             //act
-            testModel.Name = nameWithLeftPadding;
+            _testModel.Name = nameWithLeftPadding;
             //assert
-            Assert.AreEqual(testModel.Name, modelName);
+            Assert.AreEqual(_testModel.Name, _modelName);
         }
 
         [TestMethod]
         public void NameWithRightPaddingFail()
         {
             //arrange
-            string nameWithRightPadding = modelName + " ";
+            string nameWithRightPadding = _modelName + " ";
             //act
-            testModel.Name = nameWithRightPadding;
+            _testModel.Name = nameWithRightPadding;
             //assert
-            Assert.AreEqual(testModel.Name, modelName);
+            Assert.AreEqual(_testModel.Name, _modelName);
         }
 
         [TestMethod]
         public void NameWithPaddingsFail()
         {
             //arrange
-            string nameWithPaddings = " " + modelName + " ";
+            string nameWithPaddings = " " + _modelName + " ";
             //act
-            testModel.Name = nameWithPaddings;
+            _testModel.Name = nameWithPaddings;
             //assert
-            Assert.AreEqual(testModel.Name, modelName);
+            Assert.AreEqual(_testModel.Name, _modelName);
         }
 
         [TestMethod]
         public void AddModelToCollection()
         {
             //act
-            Models.AddModel(testModel);
-            bool added = Models.ContainsModel(testModel.Name, testUser);
+            Models.AddModel(_testModel);
+            bool added = Models.ContainsModel(_testModel.Name, _testUser);
             //assert
             Assert.IsTrue(added);
         }
@@ -132,20 +132,20 @@ namespace BusinessLogic_Tests
         public void GetModelFromCollection()
         {
             //act
-            Models.AddModel(testModel);
-            Model getModel = Models.GetModel(modelName, testUser);
+            Models.AddModel(_testModel);
+            Model getModel = Models.GetModel(_modelName, _testUser);
             //assert
-            Assert.ReferenceEquals(testModel, getModel);
+            Assert.ReferenceEquals(_testModel, getModel);
         }
 
         [TestMethod]
         [ExpectedException(typeof(BusinessLogicException), "Model does not exist in the collection")]
         public void RemoveModelFromCollection()
         {
-            Models.AddModel(testModel);
+            Models.AddModel(_testModel);
             //act
-            Models.RemoveModel(modelName, testUser);
-            Models.GetModel(modelName, testUser);
+            Models.RemoveModel(_modelName, _testUser);
+            Models.GetModel(_modelName, _testUser);
         }
 
         [TestMethod]
@@ -153,7 +153,7 @@ namespace BusinessLogic_Tests
         public void CantRemoveModelNotInCollection()
         {
             //act
-            Models.RemoveModel(modelName, testUser);
+            Models.RemoveModel(_modelName, _testUser);
         }
 
         [TestMethod]
@@ -161,13 +161,13 @@ namespace BusinessLogic_Tests
         public void CantAddModelWithNameAlreadyInCollection()
         {
             //arrange
-            Models.AddModel(testModel);
+            Models.AddModel(_testModel);
             Model newModel = new Model()
             {
-                Name = modelName,
-                Shape = testSphere,
-                Material = testLambertian,
-                Owner = testUser
+                Name = _modelName,
+                Shape = _testSphere,
+                Material = _testLambertian,
+                Owner = _testUser
             };
 
             //act
@@ -181,12 +181,12 @@ namespace BusinessLogic_Tests
 
             //arrange
             User testUser = new User();
-            testSphere.Owner = testUser;
+            _testSphere.Owner = testUser;
 
-            Spheres.AddSphere(testSphere);
-            Models.AddModel(testModel);
+            Spheres.AddSphere(_testSphere);
+            Models.AddModel(_testModel);
             //act
-            Spheres.RemoveSphere(sphereName, testUser);
+            Spheres.RemoveSphere(_sphereName, testUser);
         }
 
         [TestMethod]
@@ -194,30 +194,30 @@ namespace BusinessLogic_Tests
         public void CantDeleteLambertianFromCollectionUsedByModel()
         {
             //arrange
-            Lambertians.AddLambertian(testLambertian);
-            testLambertian.Owner = testUser;
-            Models.AddModel(testModel);
+            Lambertians.AddLambertian(_testLambertian);
+            _testLambertian.Owner = _testUser;
+            Models.AddModel(_testModel);
             //act
-            Lambertians.RemoveLambertian(lambertianName, testUser);
+            Lambertians.RemoveLambertian(_lambertianName, _testUser);
         }
 
         [TestMethod]
         public void DeleteSphereAndLambertianAfterDeletingModel()
         {
             //arrange                                    
-            testSphere.Owner = testUser;
-            testLambertian.Owner = testUser;
-            Spheres.AddSphere(testSphere);
-            Lambertians.AddLambertian(testLambertian);
-            Models.AddModel(testModel);
-            Models.RemoveModel(modelName, testUser);
+            _testSphere.Owner = _testUser;
+            _testLambertian.Owner = _testUser;
+            Spheres.AddSphere(_testSphere);
+            Lambertians.AddLambertian(_testLambertian);
+            Models.AddModel(_testModel);
+            Models.RemoveModel(_modelName, _testUser);
 
             //act
-            Spheres.RemoveSphere(sphereName, testUser);
-            Lambertians.RemoveLambertian(lambertianName, testUser);
+            Spheres.RemoveSphere(_sphereName, _testUser);
+            Lambertians.RemoveLambertian(_lambertianName, _testUser);
             //assert
-            bool sphereDeleted = !Spheres.ContainsSphere(sphereName, testUser);
-            bool lambertianDeleted = !Lambertians.ContainsLambertian(lambertianName, testUser);
+            bool sphereDeleted = !Spheres.ContainsSphere(_sphereName, _testUser);
+            bool lambertianDeleted = !Lambertians.ContainsLambertian(_lambertianName, _testUser);
             Assert.IsTrue(sphereDeleted && lambertianDeleted);
         }
 

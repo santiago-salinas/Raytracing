@@ -56,7 +56,7 @@
             this.addShapeButton.TabIndex = 1;
             this.addShapeButton.Text = "     Add new shape";
             this.addShapeButton.UseVisualStyleBackColor = false;
-            this.addShapeButton.Click += new System.EventHandler(this.addShapeButton_Click);
+            this.addShapeButton.Click += new System.EventHandler(this.AddShapeButton_Click);
             // 
             // flowLayoutPanel
             // 
@@ -76,7 +76,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.addShapeButton_Click);
+            this.pictureBox1.Click += new System.EventHandler(this.AddShapeButton_Click);
             // 
             // ShapesTab
             // 

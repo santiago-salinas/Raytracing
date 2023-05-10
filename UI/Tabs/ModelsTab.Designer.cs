@@ -52,7 +52,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.addModelButton_Click);
+            this.pictureBox1.Click += new System.EventHandler(this.AddModelButton_Click);
             // 
             // addModelButton
             // 
@@ -66,7 +66,7 @@
             this.addModelButton.TabIndex = 6;
             this.addModelButton.Text = "     Add new model";
             this.addModelButton.UseVisualStyleBackColor = false;
-            this.addModelButton.Click += new System.EventHandler(this.addModelButton_Click);
+            this.addModelButton.Click += new System.EventHandler(this.AddModelButton_Click);
             // 
             // ModelsTab
             // 

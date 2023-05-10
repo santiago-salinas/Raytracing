@@ -8,116 +8,116 @@ namespace UI
     public partial class MainPage : Form
     {
 
-        MaterialsTab materialsTab;
-        ShapesTab shapesTab;
-        ScenesTab scenesTab;
-        ModelsTab modelsTab;
-        User loggedUser;
-
+        private MaterialsTab _materialsTab;
+        private ShapesTab _shapesTab;
+        private ScenesTab _scenesTab;
+        private ModelsTab _modelsTab;
+        private User _loggedUser;
+        private bool _isSignignOut = false;
         public MainPage(User providedUser)
         {
             InitializeComponent();
-            loggedUser = providedUser;
-            loggedUsernameLabel.Text = loggedUser.UserName;
+            _loggedUser = providedUser;
+            loggedUsernameLabel.Text = _loggedUser.UserName;
         }
 
-        private void scenesSideBarButton_Click(object sender, EventArgs e)
+        private void ScenesSideBarButton_Click(object sender, EventArgs e)
         {
-            if (scenesTab == null)
+            if (_scenesTab == null)
             {
-                scenesTab = new ScenesTab(loggedUser, this);
-                scenesTab.FormClosed += scenesTabClosed;
-                scenesTab.MdiParent = this;
-                scenesTab.Dock = DockStyle.Fill;
-                scenesTab.Show();
+                _scenesTab = new ScenesTab(_loggedUser, this);
+                _scenesTab.FormClosed += ScenesTabClosed;
+                _scenesTab.MdiParent = this;
+                _scenesTab.Dock = DockStyle.Fill;
+                _scenesTab.Show();
             }
             else
             {
-                scenesTab.Activate();
+                _scenesTab.Activate();
             }
         }
 
-        private void scenesTabClosed(object sender, FormClosedEventArgs e)
+        private void ScenesTabClosed(object sender, FormClosedEventArgs e)
         {
-            scenesTab = null;
+            _scenesTab = null;
         }
 
-        private void modelsSideBarButton_Click(object sender, EventArgs e)
+        private void ModelsSideBarButton_Click(object sender, EventArgs e)
         {
-            if (modelsTab == null)
+            if (_modelsTab == null)
             {
-                modelsTab = new ModelsTab(loggedUser);
-                modelsTab.FormClosed += modelsTabClosed;
-                modelsTab.MdiParent = this;
-                modelsTab.Dock = DockStyle.Fill;
-                modelsTab.Show();
+                _modelsTab = new ModelsTab(_loggedUser);
+                _modelsTab.FormClosed += ModelsTabClosed;
+                _modelsTab.MdiParent = this;
+                _modelsTab.Dock = DockStyle.Fill;
+                _modelsTab.Show();
             }
             else
             {
-                modelsTab.Activate();
+                _modelsTab.Activate();
             }
         }
 
-        private void modelsTabClosed(object sender, FormClosedEventArgs e)
+        private void ModelsTabClosed(object sender, FormClosedEventArgs e)
         {
-            modelsTab = null;
+            _modelsTab = null;
         }
 
-        private void materialsSideBarButton_Click(object sender, EventArgs e)
+        private void MaterialsSideBarButton_Click(object sender, EventArgs e)
         {
-            if (materialsTab == null)
+            if (_materialsTab == null)
             {
-                materialsTab = new MaterialsTab(loggedUser);
-                materialsTab.FormClosed += materialsTabClosed;
-                materialsTab.MdiParent = this;
-                materialsTab.Dock = DockStyle.Fill;
-                materialsTab.Show();
+                _materialsTab = new MaterialsTab(_loggedUser);
+                _materialsTab.FormClosed += MaterialsTabClosed;
+                _materialsTab.MdiParent = this;
+                _materialsTab.Dock = DockStyle.Fill;
+                _materialsTab.Show();
             }
             else
             {
-                materialsTab.Activate();
+                _materialsTab.Activate();
             }
         }
 
-        private void materialsTabClosed(object sender, FormClosedEventArgs e)
+        private void MaterialsTabClosed(object sender, FormClosedEventArgs e)
         {
-            materialsTab = null;
+            _materialsTab = null;
         }
 
-        private void shapesSideBarButton_Click(object sender, EventArgs e)
+        private void ShapesSideBarButton_Click(object sender, EventArgs e)
         {
-            if (shapesTab == null)
+            if (_shapesTab == null)
             {
-                shapesTab = new ShapesTab(loggedUser);
-                shapesTab.FormClosed += shapesTabClosed;
-                shapesTab.MdiParent = this;
-                shapesTab.Dock = DockStyle.Fill;
-                shapesTab.Show();
+                _shapesTab = new ShapesTab(_loggedUser);
+                _shapesTab.FormClosed += ShapesTabClosed;
+                _shapesTab.MdiParent = this;
+                _shapesTab.Dock = DockStyle.Fill;
+                _shapesTab.Show();
             }
             else
             {
-                shapesTab.Activate();
+                _shapesTab.Activate();
             }
         }
 
-        private void shapesTabClosed(object sender, FormClosedEventArgs e)
+        private void ShapesTabClosed(object sender, FormClosedEventArgs e)
         {
-            shapesTab = null;
+            _shapesTab = null;
         }
 
-        private bool IsSignignOut = false;
+        
 
-        private void signOutButton_Click(object sender, EventArgs e)
+        private void SignOutButton_Click(object sender, EventArgs e)
         {
-            IsSignignOut = true;
+            _isSignignOut = true;
             this.Close();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (IsSignignOut)
+            if (_isSignignOut)
             {
-                IsSignignOut = false;
+                _isSignignOut = false;
                 new LogInPage().Show();
                 base.OnFormClosing(e);
             }

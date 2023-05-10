@@ -4,27 +4,27 @@ namespace BusinessLogic
 {
     public class DateTimeProvider
     {
-        private static DateTime? now;
+        private static DateTime? s_now;
 
         public static DateTime Now
         {
             get
             {
-                if (now == null)
+                if (s_now == null)
                 {
-                    now = DateTime.Now;
+                    s_now = DateTime.Now;
                 }
 
-                return (DateTime)now;
+                return (DateTime)s_now;
 
             }
             set
             {
-                now = value;
+                s_now = value;
             }
         }
 
-        public static void Reset() => now = null;
+        public static void Reset() => s_now = null;
 
 
     }

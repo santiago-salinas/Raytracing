@@ -8,19 +8,19 @@ namespace UI.Dialogs
     {
 
         public Sphere NewSphere = new Sphere();
-        private User loggedUser { get; set; }
+        private User _loggedUser { get; set; }
         public AddSphereDialog(User loggedUser)
         {
             InitializeComponent();
-            this.loggedUser = loggedUser;
+            this._loggedUser = loggedUser;
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
+        private void SaveButton_Click(object sender, EventArgs e)
         {
             string sphereName = nameTextBox.Text;
             float radius = (float)radiusInput.Value;
@@ -40,7 +40,7 @@ namespace UI.Dialogs
                 nameIsCorrect = false;
             }
 
-            if (Spheres.ContainsSphere(sphereName, loggedUser))
+            if (Spheres.ContainsSphere(sphereName, _loggedUser))
             {
                 nameIsCorrect = false;
                 nameStatusLabel.Text = "* Sphere with that name already exists";
@@ -58,7 +58,7 @@ namespace UI.Dialogs
 
             if (nameIsCorrect && radiusIsCorrect)
             {
-                NewSphere.Owner = loggedUser;
+                NewSphere.Owner = _loggedUser;
                 DialogResult = DialogResult.OK;
             }
 

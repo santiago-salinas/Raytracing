@@ -8,10 +8,10 @@ namespace BusinessLogic
         private double _greenValue;
         private double _blueValue;
 
-        private const int lowerBoundForPercentages = 0;
-        private const int upperBoundForPercentages = 1;
-        private const int maximumRGBValue = 255;
-        private const double tolerance = 0.0001;
+        private const int _lowerBoundForPercentages = 0;
+        private const int _upperBoundForPercentages = 1;
+        private const int _maximumRGBValue = 255;
+        private const double _tolerance = 0.0001;
 
 
         public Color(double red, double green, double blue)
@@ -29,7 +29,7 @@ namespace BusinessLogic
             }
             set
             {
-                if (ValueIsBetweenStrictBounds(value, lowerBoundForPercentages, upperBoundForPercentages))
+                if (ValueIsBetweenStrictBounds(value, _lowerBoundForPercentages, _upperBoundForPercentages))
                 {
                     _redValue = value;
                 }
@@ -48,7 +48,7 @@ namespace BusinessLogic
             }
             set
             {
-                if (ValueIsBetweenStrictBounds(value, lowerBoundForPercentages, upperBoundForPercentages))
+                if (ValueIsBetweenStrictBounds(value, _lowerBoundForPercentages, _upperBoundForPercentages))
                 {
                     _greenValue = value;
                 }
@@ -66,7 +66,7 @@ namespace BusinessLogic
             }
             set
             {
-                if (ValueIsBetweenStrictBounds(value, lowerBoundForPercentages, upperBoundForPercentages))
+                if (ValueIsBetweenStrictBounds(value, _lowerBoundForPercentages, _upperBoundForPercentages))
                 {
                     _blueValue = value;
                 }
@@ -79,7 +79,7 @@ namespace BusinessLogic
 
         public double PercentageTo255(double value)
         {
-            return Math.Abs((int)Math.Round(value * maximumRGBValue));
+            return Math.Abs((int)Math.Round(value * _maximumRGBValue));
         }
 
         public bool ValueIsBetweenStrictBounds(double value, double min, double max)
@@ -108,9 +108,9 @@ namespace BusinessLogic
         {
             Color otherVector = (Color)other;
 
-            bool firstEval = Math.Abs(Red - otherVector.Red) < tolerance;
-            bool secondEval = Math.Abs(Green - otherVector.Green) < tolerance;
-            bool thirdEval = Math.Abs(Blue - otherVector.Blue) < tolerance;
+            bool firstEval = Math.Abs(Red - otherVector.Red) < _tolerance;
+            bool secondEval = Math.Abs(Green - otherVector.Green) < _tolerance;
+            bool thirdEval = Math.Abs(Blue - otherVector.Blue) < _tolerance;
 
             return firstEval && secondEval && thirdEval;
         }

@@ -8,32 +8,32 @@ namespace UI.Cards
 {
     public partial class SceneCard : UserControl
     {
-        private Scene thisScene;
+        private Scene _thisScene;
 
         public SceneCard(Scene scene)
         {
             InitializeComponent();
-            thisScene = scene;
-            loadData();
+            _thisScene = scene;
+            LoadData();
         }
 
-        private void deleteButton_Click(object sender, EventArgs e)
+        private void DeleteButton_Click(object sender, EventArgs e)
         {
-            Scenes.RemoveScene(thisScene.Name, thisScene.Owner);
+            Scenes.RemoveScene(_thisScene.Name, _thisScene.Owner);
             this.Parent.Controls.Remove(this);
         }
 
-        private void editButton_Click(object sender, EventArgs e)
+        private void EditButton_Click(object sender, EventArgs e)
         {
             ScenesTab scenesTab = this.Parent.Parent as ScenesTab;
-            scenesTab.loadSceneEditTab(thisScene);
+            scenesTab.LoadSceneEditTab(_thisScene);
         }
 
-        private void loadData()
+        private void LoadData()
         {
-            nameLabel.Text = thisScene.Name;
-            lastModificationLabel.Text += thisScene.LastModificationDate.ToString("f", new CultureInfo("en-US"));
-            if (thisScene.Preview == null)
+            nameLabel.Text = _thisScene.Name;
+            lastModificationLabel.Text += _thisScene.LastModificationDate.ToString("f", new CultureInfo("en-US"));
+            if (_thisScene.Preview == null)
             {
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.Image = Properties.Resources.no_img_placeholder;
@@ -44,7 +44,7 @@ namespace UI.Cards
             else
             {
                 previewPanel.Controls.Clear();
-                previewPanel.Controls.Add(new PPMViewer(thisScene.Preview));
+                previewPanel.Controls.Add(new PPMViewer(_thisScene.Preview));
             }
         }
     }

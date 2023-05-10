@@ -6,42 +6,42 @@ namespace UI.Dialogs
 {
     public partial class EditVectorDialog : Form
     {
-        public bool wasModified;
-        private Vector vector;
+        public bool WasModified;
+        private Vector _vector;
         public EditVectorDialog(Vector providedVector, string title)
         {
             InitializeComponent();
             titleLabel.Text = title;
-            vector = providedVector;
-            wasModified = false;
+            _vector = providedVector;
+            WasModified = false;
 
-            xValueInput.Value = (decimal)vector.FirstValue;
-            yValueInput.Value = (decimal)vector.SecondValue;
-            zValueInput.Value = (decimal)vector.ThirdValue;
+            xValueInput.Value = (decimal)_vector.FirstValue;
+            yValueInput.Value = (decimal)_vector.SecondValue;
+            zValueInput.Value = (decimal)_vector.ThirdValue;
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
+        private void SaveButton_Click(object sender, EventArgs e)
         {
             double newXValue = (double)xValueInput.Value;
             double newYValue = (double)yValueInput.Value;
             double newZValue = (double)zValueInput.Value;
 
-            if (vector.FirstValue != newXValue ||
-                vector.SecondValue != newYValue ||
-                vector.ThirdValue != newZValue)
+            if (_vector.FirstValue != newXValue ||
+                _vector.SecondValue != newYValue ||
+                _vector.ThirdValue != newZValue)
             {
 
-                wasModified = true;
+                WasModified = true;
             }
 
-            vector.FirstValue = newXValue;
-            vector.SecondValue = newYValue;
-            vector.ThirdValue = newZValue;
+            _vector.FirstValue = newXValue;
+            _vector.SecondValue = newYValue;
+            _vector.ThirdValue = newZValue;
 
             DialogResult = DialogResult.OK;
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
         }

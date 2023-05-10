@@ -5,17 +5,17 @@ namespace BusinessLogic
 {
     public static class Models
     {
-        private static List<Model> _modelList = new List<Model>();
+        private static List<Model> s_modelList = new List<Model>();
 
         public static void Drop()
         {
-            _modelList.Clear();
+            s_modelList.Clear();
         }
 
         public static List<Model> GetModelsFromUser(User owner)
         {
             List<Model> ret = new List<Model>();
-            foreach (Model s in _modelList)
+            foreach (Model s in s_modelList)
             {
                 if (s.Owner == owner)
                 {
@@ -27,25 +27,25 @@ namespace BusinessLogic
 
         public static bool ContainsModel(string name, User user)
         {
-            Model ret = _modelList.Find(m => m.Name == name && m.Owner == user);
+            Model ret = s_modelList.Find(m => m.Name == name && m.Owner == user);
             return ret != null;
         }
 
         public static bool ExistsModelUsingTheLambertian(Lambertian lambertian)
         {
-            Model ret = _modelList.Find(m => m.Material == lambertian);
+            Model ret = s_modelList.Find(m => m.Material == lambertian);
             return ret != null;
         }
         public static bool ExistsModelUsingTheSphere(Sphere sphere)
         {
-            Model ret = _modelList.Find(m => m.Shape == sphere);
+            Model ret = s_modelList.Find(m => m.Shape == sphere);
             return ret != null;
         }
         public static void AddModel(Model newElement)
         {
             if (!ContainsModel(newElement.Name, newElement.Owner))
             {
-                _modelList.Add(newElement);
+                s_modelList.Add(newElement);
             }
             else
             {
@@ -55,7 +55,7 @@ namespace BusinessLogic
 
         public static Model GetModel(string name, User owner)
         {
-            Model ret = _modelList.Find(m => m.Name == name && m.Owner == owner);
+            Model ret = s_modelList.Find(m => m.Name == name && m.Owner == owner);
             if (ret == null) throw new BusinessLogicException("User does not own model with that name");
             return ret;
         }
@@ -68,7 +68,7 @@ namespace BusinessLogic
             {
                 throw new BusinessLogicException("Cant delete sphere used by existing model");
             }
-            _modelList.Remove(model);
+            s_modelList.Remove(model);
         }
     }
 }

@@ -4,7 +4,7 @@ namespace BusinessLogic
 {
     public class Vector
     {
-        private const double tolerance = 0.0001;
+        private const double _tolerance = 0.0001;
         public Vector()
         { }
 
@@ -33,9 +33,9 @@ namespace BusinessLogic
         {
             Vector otherVector = (Vector)other;
 
-            bool evalFst = Math.Abs(FirstValue - otherVector.FirstValue) < tolerance;
-            bool evalSnd = Math.Abs(SecondValue - otherVector.SecondValue) < tolerance;
-            bool evalThrd = Math.Abs(ThirdValue - otherVector.ThirdValue) < tolerance;
+            bool evalFst = Math.Abs(FirstValue - otherVector.FirstValue) < _tolerance;
+            bool evalSnd = Math.Abs(SecondValue - otherVector.SecondValue) < _tolerance;
+            bool evalThrd = Math.Abs(ThirdValue - otherVector.ThirdValue) < _tolerance;
 
             return evalFst && evalSnd && evalThrd;
         }
@@ -128,7 +128,7 @@ namespace BusinessLogic
             Vector vector;
             do
             {
-                Vector vectorTemp = new Vector(Engine.random.NextDouble(), Engine.random.NextDouble(), Engine.random.NextDouble());
+                Vector vectorTemp = new Vector(Engine.Random.NextDouble(), Engine.Random.NextDouble(), Engine.Random.NextDouble());
                 Vector unitVector = new Vector(1, 1, 1);
                 vector = vectorTemp.Multiply(2).Subtract(unitVector);
             } while (vector.SquaredLength() >= 1);

@@ -79,7 +79,7 @@
             this.logInButton.TabIndex = 2;
             this.logInButton.Text = "Log In";
             this.logInButton.UseVisualStyleBackColor = true;
-            this.logInButton.Click += new System.EventHandler(this.logInButton_Click);
+            this.logInButton.Click += new System.EventHandler(this.LogInButton_Click);
             // 
             // signUpButton
             // 
@@ -90,7 +90,7 @@
             this.signUpButton.TabIndex = 3;
             this.signUpButton.Text = "Sign Up";
             this.signUpButton.UseVisualStyleBackColor = true;
-            this.signUpButton.Click += new System.EventHandler(this.signUpButton_Click);
+            this.signUpButton.Click += new System.EventHandler(this.SignUpButton_Click);
             // 
             // userNameTextBox
             // 

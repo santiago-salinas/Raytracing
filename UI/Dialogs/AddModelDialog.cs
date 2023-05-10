@@ -8,24 +8,24 @@ namespace UI.Dialogs
     public partial class AddModelDialog : Form
     {
         public Model NewModel = new Model();
-        private List<Sphere> availableShapes;
-        private List<Lambertian> availableLambertians;
-        private User loggedUser;
+        private List<Sphere> _availableShapes;
+        private List<Lambertian> _availableLambertians;
+        private User _loggedUser;
 
-        private Sphere selectedShape;
-        private Lambertian selectedMaterial;
+        private Sphere _selectedShape;
+        private Lambertian _selectedMaterial;
         public AddModelDialog(User loggedUser)
         {
             InitializeComponent();
-            this.loggedUser = loggedUser;
-            this.availableShapes = Spheres.GetSpheresFromUser(loggedUser);
-            this.availableLambertians = Lambertians.GetLambertiansFromUser(loggedUser);
+            this._loggedUser = loggedUser;
+            this._availableShapes = Spheres.GetSpheresFromUser(loggedUser);
+            this._availableLambertians = Lambertians.GetLambertiansFromUser(loggedUser);
 
-            loadShapeComboBox();
-            loadMaterialComboBox();
+            LoadShapeComboBox();
+            LoadMaterialComboBox();
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
+        private void SaveButton_Click(object sender, EventArgs e)
         {
             string modelName = nameTextBox.Text;
             nameStatusLabel.Text = "";
@@ -41,7 +41,7 @@ namespace UI.Dialogs
                 nameIsCorrect = false;
             }
 
-            if (Models.ContainsModel(modelName, loggedUser))
+            if (Models.ContainsModel(modelName, _loggedUser))
             {
                 nameIsCorrect = false;
                 nameStatusLabel.Text = "* Model with that name already exists";
@@ -49,9 +49,9 @@ namespace UI.Dialogs
 
             if (nameIsCorrect)
             {
-                NewModel.Owner = loggedUser;
-                NewModel.Shape = selectedShape;
-                NewModel.Material = selectedMaterial;
+                NewModel.Owner = _loggedUser;
+                NewModel.Shape = _selectedShape;
+                NewModel.Material = _selectedMaterial;
                 DialogResult = DialogResult.OK;
             }
 
@@ -61,32 +61,32 @@ namespace UI.Dialogs
             }
         }
 
-        private void shapeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void ShapeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedShape = availableShapes[shapeComboBox.SelectedIndex];
+            _selectedShape = _availableShapes[shapeComboBox.SelectedIndex];
         }
 
-        private void materialComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void MaterialComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedMaterial = availableLambertians[materialComboBox.SelectedIndex];
+            _selectedMaterial = _availableLambertians[materialComboBox.SelectedIndex];
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
         }
 
-        private void loadShapeComboBox()
+        private void LoadShapeComboBox()
         {
-            foreach (Sphere elem in availableShapes)
+            foreach (Sphere elem in _availableShapes)
             {
                 shapeComboBox.Items.Add(elem.Name);
             }
         }
 
-        private void loadMaterialComboBox()
+        private void LoadMaterialComboBox()
         {
-            foreach (Lambertian elem in availableLambertians)
+            foreach (Lambertian elem in _availableLambertians)
             {
                 materialComboBox.Items.Add(elem.Name);
             }
