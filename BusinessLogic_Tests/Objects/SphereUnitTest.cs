@@ -10,7 +10,7 @@ namespace BusinessLogic_Tests
     {
         private Sphere testSphere;
         private float testRadius;
-        private float testNegativeRadius;        
+        private float testNegativeRadius;
         private string testName;
         private string testNullName;
         public User testUser;
@@ -20,7 +20,7 @@ namespace BusinessLogic_Tests
         public void Initialize()
         {
             testName = "Ball";
-            testRadius = 5;            
+            testRadius = 5;
             testNullName = string.Empty;
             testNegativeRadius = -5;
 
@@ -45,7 +45,7 @@ namespace BusinessLogic_Tests
             testName = "Ball";
             testUser = new User()
             {
-                UserName= "User1",
+                UserName = "User1",
                 Password = "Password1"
             };
             //act
@@ -215,7 +215,7 @@ namespace BusinessLogic_Tests
             User user1 = new User()
             {
                 UserName = "User1",
-                Password= "Password1"
+                Password = "Password1"
             };
             User user2 = new User()
             {
@@ -223,7 +223,7 @@ namespace BusinessLogic_Tests
                 Password = "Password1"
             };
 
-            Sphere _sphere1 = new Sphere("sphere1",1, user1);
+            Sphere _sphere1 = new Sphere("sphere1", 1, user1);
             Sphere _sphere2 = new Sphere("sphere2", 5, user1);
             Sphere _sphere3 = new Sphere("sphere3", 9, user2);
 

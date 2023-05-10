@@ -23,7 +23,7 @@ namespace UI.Tabs
             isNewScene = providedScene == null;
             scene = isNewScene ? createNewScene() : providedScene;
             loadAvailableModels();
-            loadDataFromScene(scene);           
+            loadDataFromScene(scene);
         }
 
         private Scene createNewScene()
@@ -47,7 +47,7 @@ namespace UI.Tabs
                 LastModificationDate = DateTime.Now,
                 CameraDTO = defaultCameraValues,
             };
-            
+
             return newScene;
         }
         private void loadDataFromScene(Scene providedScene)
@@ -67,7 +67,7 @@ namespace UI.Tabs
                 renderPanel.Controls.Add(new PPMViewer(scene.Preview));
                 lastRenderLabel.Text += scene.LastRenderDate.ToString("f", new CultureInfo("en-US"));
             }
-            loadPositionedModels();            
+            loadPositionedModels();
         }
         private void lookFromButton_Click(object sender, EventArgs e)
         {
@@ -76,21 +76,22 @@ namespace UI.Tabs
             editVectorDialog.ShowDialog();
             DialogResult result = editVectorDialog.DialogResult;
 
-            if(result == DialogResult.OK)
+            if (result == DialogResult.OK)
             {
                 if (editVectorDialog.wasModified) notifyThatSeneWasModified();
                 lookFromButton.Text = sceneCamera.LookFrom.ToString();
-            } 
+            }
         }
         private void lookAtButton_Click(object sender, EventArgs e)
         {
-            EditVectorDialog editVectorDialog = new EditVectorDialog(sceneCamera.LookAt,"Look at");
+            EditVectorDialog editVectorDialog = new EditVectorDialog(sceneCamera.LookAt, "Look at");
             editVectorDialog.ShowDialog();
             DialogResult result = editVectorDialog.DialogResult;
 
-            if (result == DialogResult.OK) { 
+            if (result == DialogResult.OK)
+            {
                 if (editVectorDialog.wasModified) notifyThatSeneWasModified();
-                lookAtButton.Text = sceneCamera.LookAt.ToString();                
+                lookAtButton.Text = sceneCamera.LookAt.ToString();
             }
         }
         private void saveButton_Click(object sender, EventArgs e)
@@ -104,7 +105,6 @@ namespace UI.Tabs
             }
             else
             {
-
                 if (isNewScene)
                 {
                     try
@@ -112,7 +112,8 @@ namespace UI.Tabs
                         scene.Name = newName;
                         Scenes.AddScene(scene);
                         endedCorrectly = true;
-                    }catch(Exception ex)
+                    }
+                    catch (Exception ex)
                     {
                         nameStatusLabel.Text = "* " + ex.Message;
                     }
@@ -147,7 +148,8 @@ namespace UI.Tabs
         private void fovWasChanged(object sender, EventArgs e)
         {
             int newFov = (int)fovInput.Value;
-            if (sceneCamera.FieldOfView != newFov) {
+            if (sceneCamera.FieldOfView != newFov)
+            {
                 notifyThatSeneWasModified();
                 sceneCamera.FieldOfView = newFov;
             }
@@ -180,7 +182,7 @@ namespace UI.Tabs
             lastRenderLabel.Text = "Last rendered: " + scene.LastRenderDate.ToString("f", new CultureInfo("en-US"));
             renderPanel.Controls.Clear();
             outdatedStatusLabel.Visible = false;
-            
+
             Engine engine = new Engine(scene);
             PPM ppm = engine.Render();
             scene.Preview = ppm;
@@ -192,7 +194,7 @@ namespace UI.Tabs
         {
             DateTime newModificationDate = DateTime.Now;
             scene.LastModificationDate = newModificationDate;
-            lastModificationLabel.Text = "Last modification date: " + newModificationDate.ToString("f",new CultureInfo("en-US"));
+            lastModificationLabel.Text = "Last modification date: " + newModificationDate.ToString("f", new CultureInfo("en-US"));
             outdatedStatusLabel.Visible = true;
         }
 

@@ -10,7 +10,7 @@ namespace BusinessLogic
             HeightHalf = Math.Tan(Theta / 2);
             ResolutionX = dto.ResolutionX;
             ResolutionY = dto.ResolutionY;
-            AspectRatio = (double)ResolutionX / (double)ResolutionY;
+            AspectRatio = ResolutionX / (double)ResolutionY;
             WidthHalf = AspectRatio * HeightHalf;
             Origin = dto.LookFrom;
             VectorW = dto.LookFrom.Subtract(dto.LookAt).GetUnit();

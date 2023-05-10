@@ -1,7 +1,6 @@
 ﻿using BusinessLogic;
 using System;
 using System.Windows.Forms;
-using UI.Tabs;
 
 namespace UI.Dialogs
 {
@@ -29,7 +28,8 @@ namespace UI.Dialogs
 
             if (vector.FirstValue != newXValue ||
                 vector.SecondValue != newYValue ||
-                vector.ThirdValue != newZValue) {
+                vector.ThirdValue != newZValue)
+            {
 
                 wasModified = true;
             }

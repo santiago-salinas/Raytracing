@@ -53,8 +53,8 @@ namespace BusinessLogic
 
         public static void RemoveScene(string name, User owner)
         {
-            Scene scene = GetScene(name,owner);            
-            _sceneList.Remove(scene);            
+            Scene scene = GetScene(name, owner);
+            _sceneList.Remove(scene);
         }
 
         public static bool ExistsSceneUsingModel(Model model)

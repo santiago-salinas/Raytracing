@@ -59,8 +59,8 @@ namespace BusinessLogic_Tests
         [ExpectedException(typeof(ArgumentException), "Values must be between 0 and 255")]
         public void ValuesForVectorMustBeBetweenBounds()
         {
-          outOfBoundsColor = new Color((float)-1 / 255, 0, (float)230 / 255);
-          testLambertian.Color = outOfBoundsColor;
+            outOfBoundsColor = new Color((float)-1 / 255, 0, (float)230 / 255);
+            testLambertian.Color = outOfBoundsColor;
         }
 
         [TestMethod]

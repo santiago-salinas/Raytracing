@@ -154,7 +154,7 @@ namespace BusinessLogic
                 Ray bouncedRay = positionedModel.GetBouncedRay(hitRecord);
                 Color color = shootRay(bouncedRay, depthLeft - 1);
                 Color attenuation = hitRecord.Attenuation;
-                return new Color((color.Red * attenuation.Red) / attenuationDivisor, 
+                return new Color((color.Red * attenuation.Red) / attenuationDivisor,
                     (color.Green * attenuation.Green) / attenuationDivisor,
                     (color.Blue * attenuation.Blue) / attenuationDivisor);
             }

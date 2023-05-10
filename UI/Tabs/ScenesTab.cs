@@ -1,7 +1,6 @@
 ﻿using BusinessLogic;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using UI.Cards;
 
@@ -48,7 +47,7 @@ namespace UI.Tabs
                 sceneEditDialog.Show();
             }
             else
-            {               
+            {
                 sceneEditDialog.Activate();
             }
         }

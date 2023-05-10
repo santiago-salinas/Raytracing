@@ -19,8 +19,8 @@ namespace BusinessLogic_Tests
             testPassword = "Abc123";
             testUser = new User()
             {
-                UserName= testUserName,
-                Password= testPassword
+                UserName = testUserName,
+                Password = testPassword
             };
             DateTimeProvider.Reset();
         }
@@ -240,7 +240,7 @@ namespace BusinessLogic_Tests
             Action act = () => testUser.Password = invalidPassword;
 
             // Assert
-            
+
             var exception = Assert.ThrowsException<ArgumentException>(act);
             Assert.AreEqual("Password must contain at least one numerical digit", exception.Message);
         }
@@ -266,7 +266,7 @@ namespace BusinessLogic_Tests
             User user1 = new User()
             {
                 UserName = "username",
-                Password= "Password1"
+                Password = "Password1"
             };
             User user2 = new User()
             {
@@ -343,7 +343,7 @@ namespace BusinessLogic_Tests
             {
                 UserName = testUserName,
                 Password = testPassword
-            }; 
+            };
 
             // Act & Assert
             Assert.ThrowsException<BusinessLogicException>(() => Users.AddUser(newUser));
