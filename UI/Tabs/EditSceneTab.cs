@@ -43,8 +43,6 @@ namespace UI.Tabs
             Scene newScene = new Scene()
             {
                 Owner = _loggedUser,
-                CreationDate = DateTime.Now,
-                LastModificationDate = DateTime.Now,
                 CameraDTO = defaultCameraValues,
             };
 
@@ -191,10 +189,10 @@ namespace UI.Tabs
         }
 
         public void NotifyThatSeneWasModified()
-        {
-            DateTime newModificationDate = DateTime.Now;
-            _scene.LastModificationDate = newModificationDate;
-            lastModificationLabel.Text = "Last modification date: " + newModificationDate.ToString("f", new CultureInfo("en-US"));
+        {            
+            _scene.UpdateLastModificationDate();
+            DateTime newModificationDate = _scene.LastModificationDate;
+            lastModificationLabel.Text = "Last modified: " + newModificationDate.ToString("f", new CultureInfo("en-US"));
             outdatedStatusLabel.Visible = true;
         }
 

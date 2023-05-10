@@ -220,10 +220,7 @@ namespace BusinessLogic_Tests
             DateTimeProvider.Now = DateTime.Now;
 
             //act
-            _testScene = new Scene()
-            {
-                CreationDate = DateTimeProvider.Now,
-            };
+            _testScene = new Scene();
 
             //assert
             Assert.AreEqual(_testScene.CreationDate, DateTimeProvider.Now);
@@ -235,14 +232,11 @@ namespace BusinessLogic_Tests
             //arrange
 
             DateTimeProvider.Now = DateTime.Now.AddDays(-1);
-            _testScene = new Scene()
-            {
-                CreationDate = DateTimeProvider.Now,
-                LastModificationDate = DateTimeProvider.Now,
-            };
+            _testScene = new Scene();
 
             //act
-            DateTime previousDate = _testScene.LastModificationDate;
+            DateTime previousDate = DateTimeProvider.Now;
+            DateTimeProvider.Reset();
             _testScene.AddPositionedModel(_testPositionedModel);
             bool lastModificationIsLater = _testScene.LastModificationDate > previousDate;
 
@@ -255,16 +249,11 @@ namespace BusinessLogic_Tests
         {
             //arrange
             DateTimeProvider.Now = DateTime.Now.AddDays(-1);
-            _testScene = new Scene()
-            {
-                CreationDate = DateTimeProvider.Now,
-
-
-            };
+            _testScene = new Scene();
             _testScene.AddPositionedModel(_testPositionedModel);
-            _testScene.LastModificationDate = DateTimeProvider.Now;
             //act
-            DateTime previousDate = _testScene.LastModificationDate;
+            DateTime previousDate = DateTimeProvider.Now;
+            DateTimeProvider.Reset();
             _testScene.RemovePositionedModel(_testPositionedModel);
             bool lastModificationIsLater = _testScene.LastModificationDate > previousDate;
 
@@ -277,15 +266,11 @@ namespace BusinessLogic_Tests
         {
             //arrange
             DateTimeProvider.Now = DateTime.Now.AddDays(-1);
-            _testScene = new Scene()
-            {
-                CreationDate = DateTimeProvider.Now,
-                LastRenderDate = DateTimeProvider.Now,
-            };
-
+            _testScene = new Scene();
+            _testScene.UpdateLastRenderDate();
             //act
-
-            DateTime previousDate = _testScene.LastRenderDate;
+            DateTime previousDate = DateTimeProvider.Now;
+            DateTimeProvider.Reset();
             _testScene.UpdateLastRenderDate();
             bool lastRenderIsLater = _testScene.LastRenderDate > previousDate;
 
@@ -503,6 +488,7 @@ namespace BusinessLogic_Tests
         [TestCleanup]
         public void TearDown()
         {
+            DateTimeProvider.Reset();
             Spheres.Drop();
             Lambertians.Drop();
             Models.Drop();

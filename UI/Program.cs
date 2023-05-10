@@ -77,9 +77,7 @@ namespace UI
 
             Scene scene1 = new Scene()
             {
-                Name = "Scene 1",
-                LastModificationDate = DateTime.Now,
-                LastRenderDate = DateTime.Now,
+                Name = "Scene 1",                
                 Owner = user1,
                 CameraDTO = defaultCameraValues,
             };
