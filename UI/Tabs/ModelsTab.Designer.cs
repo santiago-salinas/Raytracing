@@ -37,18 +37,20 @@
             // flowLayoutPanel
             // 
             this.flowLayoutPanel.AutoScroll = true;
-            this.flowLayoutPanel.Location = new System.Drawing.Point(12, 132);
+            this.flowLayoutPanel.Location = new System.Drawing.Point(259, 162);
+            this.flowLayoutPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(1252, 676);
+            this.flowLayoutPanel.Size = new System.Drawing.Size(1426, 832);
             this.flowLayoutPanel.TabIndex = 4;
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.LightGray;
             this.pictureBox1.Image = global::UI.Properties.Resources.add;
-            this.pictureBox1.Location = new System.Drawing.Point(472, 55);
+            this.pictureBox1.Location = new System.Drawing.Point(629, 68);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(57, 50);
+            this.pictureBox1.Size = new System.Drawing.Size(76, 62);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
@@ -60,9 +62,10 @@
             this.addModelButton.BackColor = System.Drawing.Color.LightGray;
             this.addModelButton.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addModelButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.addModelButton.Location = new System.Drawing.Point(453, 31);
+            this.addModelButton.Location = new System.Drawing.Point(604, 38);
+            this.addModelButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.addModelButton.Name = "addModelButton";
-            this.addModelButton.Size = new System.Drawing.Size(371, 95);
+            this.addModelButton.Size = new System.Drawing.Size(495, 117);
             this.addModelButton.TabIndex = 6;
             this.addModelButton.Text = "     Add new model";
             this.addModelButton.UseVisualStyleBackColor = false;
@@ -70,13 +73,14 @@
             // 
             // ModelsTab
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1276, 820);
+            this.ClientSize = new System.Drawing.Size(1701, 1009);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.addModelButton);
             this.Controls.Add(this.flowLayoutPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ModelsTab";
             this.Text = "ModelsTab";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
