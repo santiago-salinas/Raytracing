@@ -8,7 +8,7 @@ namespace UI.Dialogs
     public partial class EditVectorDialog : Form
     {
         public bool wasModified;
-        public Vector vector;
+        private Vector vector;
         public EditVectorDialog(Vector providedVector, string title)
         {
             InitializeComponent();

@@ -10,7 +10,7 @@ namespace UI.Tabs
 {
     public partial class EditSceneTab : Form
     {
-        public Scene scene;
+        private Scene scene;
         private User loggedUser;
         public ScenesTab scenesTab;
         private bool isNewScene;
@@ -34,10 +34,10 @@ namespace UI.Tabs
                 LookAt = new Vector(0, 2, 5),
                 Up = new Vector(0, 1, 0),
                 FieldOfView = 30,
-                MaxDepth = 50,
+                MaxDepth = 20,
                 ResolutionX = 300,
                 ResolutionY = 200,
-                SamplesPerPixel = 10
+                SamplesPerPixel = 50
             };
 
             Scene newScene = new Scene()
@@ -50,9 +50,8 @@ namespace UI.Tabs
             
             return newScene;
         }
-        public void loadDataFromScene(Scene providedScene)
+        private void loadDataFromScene(Scene providedScene)
         {
-
             scene = providedScene;
             nameTextbox.Text = providedScene.Name;
             sceneCamera = providedScene.CameraDTO;
@@ -177,9 +176,8 @@ namespace UI.Tabs
 
         private void renderButton_Click(object sender, EventArgs e)
         {
-            DateTime newRenderDate = DateTime.Now;
-            scene.LastRenderDate = newRenderDate;
-            lastRenderLabel.Text = "Last rendered: " + newRenderDate.ToString("f", new CultureInfo("en-US"));
+            scene.UpdateLastRenderDate();
+            lastRenderLabel.Text = "Last rendered: " + scene.LastRenderDate.ToString("f", new CultureInfo("en-US"));
             renderPanel.Controls.Clear();
             outdatedStatusLabel.Visible = false;
             

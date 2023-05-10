@@ -92,7 +92,7 @@ namespace BusinessLogic
             return false;
         }
 
-        public void RenderScene()
+        public void UpdateLastRenderDate()
         {
             LastRenderDate = DateTime.Now;
         }
