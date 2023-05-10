@@ -52,7 +52,6 @@ namespace UI.Tabs
         }
         private void loadDataFromScene(Scene providedScene)
         {
-
             scene = providedScene;
             nameTextbox.Text = providedScene.Name;
             sceneCamera = providedScene.CameraDTO;
