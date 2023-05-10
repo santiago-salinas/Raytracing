@@ -47,8 +47,7 @@ namespace UI.Tabs
                 sceneEditDialog.Show();
             }
             else
-            {
-                sceneEditDialog.loadDataFromScene(scene);
+            {               
                 sceneEditDialog.Activate();
             }
         }

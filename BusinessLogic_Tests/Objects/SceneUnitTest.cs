@@ -286,7 +286,7 @@ namespace BusinessLogic_Tests
             //act
 
             DateTime previousDate = testScene.LastRenderDate;
-            testScene.RenderScene();
+            testScene.UpdateLastRenderDate();
             bool lastRenderIsLater = testScene.LastRenderDate > previousDate;
 
             //assert
