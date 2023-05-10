@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DAA78854-CFB9-4847-972C-59C737D01241}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Obligatorio_DA1</RootNamespace>
-    <AssemblyName>Obligatorio DA1</AssemblyName>
+    <ProjectGuid>{5807FDC2-139E-4AD2-97D6-0EE8DFCABB8F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessLogic</RootNamespace>
+    <AssemblyName>BusinessLogic</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,17 +41,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Groups\Scenes.cs" />
+    <Compile Include="Groups\Users.cs" />
+    <Compile Include="Exceptions\GeneralException.cs" />
+    <Compile Include="Objects\Lambertian.cs" />
+    <Compile Include="Groups\Lambertians.cs" />
+    <Compile Include="Objects\Model.cs" />
+    <Compile Include="Groups\Models.cs" />
+    <Compile Include="Objects\PositionedModel.cs" />
+    <Compile Include="Objects\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
-      <Project>{5807fdc2-139e-4ad2-97d6-0ee8dfcabb8f}</Project>
-      <Name>BusinessLogic</Name>
-    </ProjectReference>
+    <Compile Include="Objects\Sphere.cs" />
+    <Compile Include="Groups\Spheres.cs" />
+    <Compile Include="Objects\Scene.cs" />
+    <Compile Include="Utilities\Camera.cs" />
+    <Compile Include="Utilities\CameraDTO.cs" />
+    <Compile Include="Utilities\Color.cs" />
+    <Compile Include="Utilities\RandomProvider.cs" />
+    <Compile Include="Utilities\HitRecord.cs" />
+    <Compile Include="Utilities\Engine.cs" />
+    <Compile Include="Utilities\PPM.cs" />
+    <Compile Include="Utilities\DateTimeProvider.cs" />
+    <Compile Include="Utilities\Ray.cs" />
+    <Compile Include="Utilities\Vector.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
