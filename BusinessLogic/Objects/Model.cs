@@ -22,7 +22,7 @@ namespace BusinessLogic
             return hit;
         }
 
-        public void renderPreview()
+        public void RenderPreview()
         {
             Scene testScene = new Scene();
 
