@@ -2,7 +2,7 @@
 
 namespace BusinessLogic
 {
-    public class DateTimeProvider
+    public static class DateTimeProvider
     {
         private static DateTime? s_now;
 
@@ -12,7 +12,7 @@ namespace BusinessLogic
             {
                 if (s_now == null)
                 {
-                    s_now = DateTime.Now;
+                    return DateTime.Now;
                 }
 
                 return (DateTime)s_now;
