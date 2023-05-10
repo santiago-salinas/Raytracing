@@ -234,13 +234,14 @@ namespace BusinessLogic_Tests
             DateTimeProvider.Now = DateTime.Now.AddDays(-1);
             _testScene = new Scene();
 
-            //act
-            DateTime previousDate = DateTimeProvider.Now;
+            //act            
+            DateTime previousDate = _testScene.LastModificationDate;
             DateTimeProvider.Reset();
-            _testScene.AddPositionedModel(_testPositionedModel);
-            bool lastModificationIsLater = _testScene.LastModificationDate > previousDate;
-
+            _testScene.AddPositionedModel(_testPositionedModel);            
+            DateTime newDate = _testScene.LastModificationDate;
+            bool lastModificationIsLater = newDate > previousDate;
             //assert
+            Assert.AreEqual(newDate,DateTimeProvider.Now);
             Assert.IsTrue(lastModificationIsLater);
         }
 
@@ -255,10 +256,13 @@ namespace BusinessLogic_Tests
             DateTime previousDate = DateTimeProvider.Now;
             DateTimeProvider.Reset();
             _testScene.RemovePositionedModel(_testPositionedModel);
+            DateTime newDate = _testScene.LastModificationDate;
             bool lastModificationIsLater = _testScene.LastModificationDate > previousDate;
 
             //assert
+            Assert.AreEqual(newDate, DateTimeProvider.Now);
             Assert.IsTrue(lastModificationIsLater);
+            
         }
 
         [TestMethod]
@@ -272,9 +276,11 @@ namespace BusinessLogic_Tests
             DateTime previousDate = DateTimeProvider.Now;
             DateTimeProvider.Reset();
             _testScene.UpdateLastRenderDate();
+            DateTime newDate = _testScene.LastRenderDate;
             bool lastRenderIsLater = _testScene.LastRenderDate > previousDate;
 
             //assert
+            Assert.AreEqual(newDate, DateTimeProvider.Now);
             Assert.IsTrue(lastRenderIsLater);
         }
         public void AddSceneToCollection()
