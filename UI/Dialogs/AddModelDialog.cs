@@ -91,5 +91,6 @@ namespace UI.Dialogs
                 materialComboBox.Items.Add(elem.Name);
             }
         }
+
     }
 }
