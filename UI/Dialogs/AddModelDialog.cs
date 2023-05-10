@@ -57,7 +57,7 @@ namespace UI.Dialogs
 
             if (previewCheckbox.Checked)
             {
-                NewModel.renderPreview();
+                NewModel.RenderPreview();
             }
         }
 
