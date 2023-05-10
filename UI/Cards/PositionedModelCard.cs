@@ -53,6 +53,10 @@ namespace UI.Cards
                 previewBox.Controls.Add(coloredBox);
 
             }
+            else
+            {
+                previewBox.Controls.Add(new PPMViewer(_model.Preview));
+            }
         }
     }
 }
