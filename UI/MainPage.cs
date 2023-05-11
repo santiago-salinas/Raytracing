@@ -35,6 +35,7 @@ namespace UI
             {
                 _scenesTab.Activate();
             }
+            _scenesTab.LoadScenes();
         }
 
         private void ScenesTabClosed(object sender, FormClosedEventArgs e)
