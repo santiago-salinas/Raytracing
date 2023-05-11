@@ -78,12 +78,12 @@
             this.xValueInput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xValueInput.Location = new System.Drawing.Point(79, 69);
             this.xValueInput.Maximum = new decimal(new int[] {
-            999,
+            9999,
             0,
             0,
             0});
             this.xValueInput.Minimum = new decimal(new int[] {
-            999,
+            9999,
             0,
             0,
             -2147483648});
@@ -97,12 +97,12 @@
             this.yValueInput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.yValueInput.Location = new System.Drawing.Point(79, 106);
             this.yValueInput.Maximum = new decimal(new int[] {
-            999,
+            9999,
             0,
             0,
             0});
             this.yValueInput.Minimum = new decimal(new int[] {
-            999,
+            9999,
             0,
             0,
             -2147483648});
@@ -116,12 +116,12 @@
             this.zValueInput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.zValueInput.Location = new System.Drawing.Point(79, 146);
             this.zValueInput.Maximum = new decimal(new int[] {
-            999,
+            9999,
             0,
             0,
             0});
             this.zValueInput.Minimum = new decimal(new int[] {
-            999,
+            9999,
             0,
             0,
             -2147483648});
