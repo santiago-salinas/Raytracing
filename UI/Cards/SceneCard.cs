@@ -19,7 +19,7 @@ namespace UI.Cards
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            Scenes.RemoveScene(_thisScene.Name, _thisScene.Owner);
+            SceneRepository.RemoveScene(_thisScene.Name, _thisScene.Owner);
             this.Parent.Controls.Remove(this);
         }
 

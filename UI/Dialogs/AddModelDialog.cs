@@ -18,8 +18,8 @@ namespace UI.Dialogs
         {
             InitializeComponent();
             this._loggedUser = loggedUser;
-            this._availableShapes = Spheres.GetSpheresFromUser(loggedUser);
-            this._availableLambertians = Lambertians.GetLambertiansFromUser(loggedUser);
+            this._availableShapes = SphereRepository.GetSpheresFromUser(loggedUser);
+            this._availableLambertians = LambertianRepository.GetLambertiansFromUser(loggedUser);
 
             LoadShapeComboBox();
             LoadMaterialComboBox();
@@ -41,7 +41,7 @@ namespace UI.Dialogs
                 nameIsCorrect = false;
             }
 
-            if (Models.ContainsModel(modelName, _loggedUser))
+            if (ModelRepository.ContainsModel(modelName, _loggedUser))
             {
                 nameIsCorrect = false;
                 nameStatusLabel.Text = "* Model with that name already exists";

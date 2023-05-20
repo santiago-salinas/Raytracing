@@ -17,7 +17,7 @@ namespace UI.Cards
         {
             try
             {
-                Spheres.RemoveSphere(_sphere.Name, _sphere.Owner);
+                SphereRepository.RemoveSphere(_sphere.Name, _sphere.Owner);
                 this.Parent.Controls.Remove(this);
             }
             catch (BusinessLogicException)

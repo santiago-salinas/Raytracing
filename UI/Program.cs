@@ -23,7 +23,7 @@ namespace UI
 
             };
 
-            Users.AddUser(user1);
+            UserRepository.AddUser(user1);
 
             Sphere sphere1 = new Sphere("Sphere 1", 0.5f, user1);
             Sphere sphere2 = new Sphere("Sphere 2", 0.5f, user1);
@@ -31,10 +31,10 @@ namespace UI
             Sphere sphere4 = new Sphere("Floor", 2000f, user1);
 
 
-            Spheres.AddSphere(sphere1);
-            Spheres.AddSphere(sphere2);
-            Spheres.AddSphere(sphere3);
-            Spheres.AddSphere(sphere4);
+            SphereRepository.AddSphere(sphere1);
+            SphereRepository.AddSphere(sphere2);
+            SphereRepository.AddSphere(sphere3);
+            SphereRepository.AddSphere(sphere4);
 
 
             Color color1 = new Color(0.1, 0.2, 0.5);
@@ -46,10 +46,10 @@ namespace UI
             Lambertian lambertian3 = new Lambertian("Lambertian 3", color3, user1);
             Lambertian lambertian4 = new Lambertian("Lambertian 4", color4, user1);
 
-            Lambertians.AddLambertian(lambertian1);
-            Lambertians.AddLambertian(lambertian2);
-            Lambertians.AddLambertian(lambertian3);
-            Lambertians.AddLambertian(lambertian4);
+            LambertianRepository.AddLambertian(lambertian1);
+            LambertianRepository.AddLambertian(lambertian2);
+            LambertianRepository.AddLambertian(lambertian3);
+            LambertianRepository.AddLambertian(lambertian4);
 
 
             Model model1 = new Model("Model 1", sphere1, lambertian1, user1);
@@ -57,10 +57,10 @@ namespace UI
             Model model3 = new Model("Model 3", sphere3, lambertian3, user1);
             Model model4 = new Model("Model 4", sphere4, lambertian4, user1);
 
-            Models.AddModel(model1);
-            Models.AddModel(model2);
-            Models.AddModel(model3);
-            Models.AddModel(model4);
+            ModelRepository.AddModel(model1);
+            ModelRepository.AddModel(model2);
+            ModelRepository.AddModel(model3);
+            ModelRepository.AddModel(model4);
 
 
             CameraDTO defaultCameraValues = new CameraDTO()
@@ -82,7 +82,7 @@ namespace UI
                 CameraDTO = defaultCameraValues,
             };
 
-            Scenes.AddScene(scene1);
+            SceneRepository.AddScene(scene1);
 
             scene1.AddPositionedModel(new PositionedModel()
             {

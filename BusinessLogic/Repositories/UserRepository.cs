@@ -2,7 +2,7 @@
 
 namespace BusinessLogic
 {
-    public static class Users
+    public static class UserRepository
     {
         private static List<User> s_userList = new List<User>();
 

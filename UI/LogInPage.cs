@@ -17,11 +17,11 @@ namespace UI
             string userNameText = userNameTextBox.Text;
             string passwordText = passwordTextBox.Text;
 
-            bool credentialsAreCorrect = Users.CheckUsernameAndPasswordCombination(userNameText, passwordText);
+            bool credentialsAreCorrect = UserRepository.CheckUsernameAndPasswordCombination(userNameText, passwordText);
 
             if (credentialsAreCorrect)
             {
-                User user = Users.GetUser(userNameText);
+                User user = UserRepository.GetUser(userNameText);
                 new MainPage(user).Show();
                 this.Hide();
             }

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace BusinessLogic
 {
-    public static class Lambertians
+    public static class LambertianRepository
     {
         private static List<Lambertian> s_lambertianList = new List<Lambertian>();
 
@@ -53,7 +53,7 @@ namespace BusinessLogic
         {
             Lambertian lambertian = GetLambertian(name, owner);
 
-            if (Models.ExistsModelUsingTheLambertian(lambertian))
+            if (ModelRepository.ExistsModelUsingTheLambertian(lambertian))
             {
                 throw new BusinessLogicException("Cant delete lambertian used by existing model");
             }

@@ -19,7 +19,7 @@ namespace UI.Tabs
 
         private void LoadMaterials()
         {
-            List<Lambertian> lambertianList = Lambertians.GetLambertiansFromUser(_loggedUser);
+            List<Lambertian> lambertianList = LambertianRepository.GetLambertiansFromUser(_loggedUser);
             foreach (Lambertian elem in lambertianList)
             {
                 LambertianCard lambertianCard = new LambertianCard(elem);
@@ -35,7 +35,7 @@ namespace UI.Tabs
             if (result == DialogResult.OK)
             {
                 LambertianCard materialCard = new LambertianCard(addMaterial.NewLambertian);
-                Lambertians.AddLambertian(addMaterial.NewLambertian);
+                LambertianRepository.AddLambertian(addMaterial.NewLambertian);
                 flowLayoutPanel.Controls.Add(materialCard);
             }
         }

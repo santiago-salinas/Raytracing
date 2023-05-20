@@ -34,7 +34,7 @@ namespace UI.Cards
         {
             try
             {
-                Lambertians.RemoveLambertian(_lambertian.Name, _lambertian.Owner);
+                LambertianRepository.RemoveLambertian(_lambertian.Name, _lambertian.Owner);
                 this.Parent.Controls.Remove(this);
             }
             catch (BusinessLogicException)

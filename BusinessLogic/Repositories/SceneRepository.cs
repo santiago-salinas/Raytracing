@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace BusinessLogic
 {
-    public static class Scenes
+    public static class SceneRepository
     {
         private static List<Scene> s_sceneList = new List<Scene>();
 

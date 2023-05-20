@@ -108,7 +108,7 @@ namespace UI.Tabs
                     try
                     {
                         _scene.Name = newName;
-                        Scenes.AddScene(_scene);
+                        SceneRepository.AddScene(_scene);
                         endedCorrectly = true;
                     }
                     catch (Exception ex)
@@ -118,7 +118,7 @@ namespace UI.Tabs
                 }
                 else
                 {
-                    if (NameWasChanged() && Scenes.ContainsScene(newName, _loggedUser))
+                    if (NameWasChanged() && SceneRepository.ContainsScene(newName, _loggedUser))
                     {
                         nameStatusLabel.Text = "* User already owns a scene with that name";
                     }
@@ -155,7 +155,7 @@ namespace UI.Tabs
         private void LoadAvailableModels()
         {
             availableModelsPanel.Controls.Clear();
-            List<Model> list = Models.GetModelsFromUser(_loggedUser);
+            List<Model> list = ModelRepository.GetModelsFromUser(_loggedUser);
             foreach (Model elem in list)
             {
                 EditSceneModelCard modelCard = new EditSceneModelCard(_scene, elem);

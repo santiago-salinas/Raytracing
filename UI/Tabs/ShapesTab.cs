@@ -27,14 +27,14 @@ namespace UI.Tabs
             if (result == DialogResult.OK)
             {
                 SphereCard sphereCard = new SphereCard(addSphere.NewSphere);
-                Spheres.AddSphere(addSphere.NewSphere);
+                SphereRepository.AddSphere(addSphere.NewSphere);
                 flowLayoutPanel.Controls.Add(sphereCard);
             }
         }
 
         private void LoadSpheres()
         {
-            List<Sphere> sphereList = Spheres.GetSpheresFromUser(_loggedUser);
+            List<Sphere> sphereList = SphereRepository.GetSpheresFromUser(_loggedUser);
             foreach (Sphere elem in sphereList)
             {
                 SphereCard sphereCard = new SphereCard(elem);

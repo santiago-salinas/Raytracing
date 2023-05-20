@@ -122,8 +122,8 @@ namespace BusinessLogic_Tests
         public void AddModelToCollection()
         {
             //act
-            Models.AddModel(_testModel);
-            bool added = Models.ContainsModel(_testModel.Name, _testUser);
+            ModelRepository.AddModel(_testModel);
+            bool added = ModelRepository.ContainsModel(_testModel.Name, _testUser);
             //assert
             Assert.IsTrue(added);
         }
@@ -132,8 +132,8 @@ namespace BusinessLogic_Tests
         public void GetModelFromCollection()
         {
             //act
-            Models.AddModel(_testModel);
-            Model getModel = Models.GetModel(_modelName, _testUser);
+            ModelRepository.AddModel(_testModel);
+            Model getModel = ModelRepository.GetModel(_modelName, _testUser);
             //assert
             Assert.ReferenceEquals(_testModel, getModel);
         }
@@ -142,10 +142,10 @@ namespace BusinessLogic_Tests
         [ExpectedException(typeof(BusinessLogicException), "Model does not exist in the collection")]
         public void RemoveModelFromCollection()
         {
-            Models.AddModel(_testModel);
+            ModelRepository.AddModel(_testModel);
             //act
-            Models.RemoveModel(_modelName, _testUser);
-            Models.GetModel(_modelName, _testUser);
+            ModelRepository.RemoveModel(_modelName, _testUser);
+            ModelRepository.GetModel(_modelName, _testUser);
         }
 
         [TestMethod]
@@ -153,7 +153,7 @@ namespace BusinessLogic_Tests
         public void CantRemoveModelNotInCollection()
         {
             //act
-            Models.RemoveModel(_modelName, _testUser);
+            ModelRepository.RemoveModel(_modelName, _testUser);
         }
 
         [TestMethod]
@@ -161,7 +161,7 @@ namespace BusinessLogic_Tests
         public void CantAddModelWithNameAlreadyInCollection()
         {
             //arrange
-            Models.AddModel(_testModel);
+            ModelRepository.AddModel(_testModel);
             Model newModel = new Model()
             {
                 Name = _modelName,
@@ -171,7 +171,7 @@ namespace BusinessLogic_Tests
             };
 
             //act
-            Models.AddModel(newModel);
+            ModelRepository.AddModel(newModel);
         }
 
         [TestMethod]
@@ -183,10 +183,10 @@ namespace BusinessLogic_Tests
             User testUser = new User();
             _testSphere.Owner = testUser;
 
-            Spheres.AddSphere(_testSphere);
-            Models.AddModel(_testModel);
+            SphereRepository.AddSphere(_testSphere);
+            ModelRepository.AddModel(_testModel);
             //act
-            Spheres.RemoveSphere(_sphereName, testUser);
+            SphereRepository.RemoveSphere(_sphereName, testUser);
         }
 
         [TestMethod]
@@ -194,11 +194,11 @@ namespace BusinessLogic_Tests
         public void CantDeleteLambertianFromCollectionUsedByModel()
         {
             //arrange
-            Lambertians.AddLambertian(_testLambertian);
+            LambertianRepository.AddLambertian(_testLambertian);
             _testLambertian.Owner = _testUser;
-            Models.AddModel(_testModel);
+            ModelRepository.AddModel(_testModel);
             //act
-            Lambertians.RemoveLambertian(_lambertianName, _testUser);
+            LambertianRepository.RemoveLambertian(_lambertianName, _testUser);
         }
 
         [TestMethod]
@@ -207,17 +207,17 @@ namespace BusinessLogic_Tests
             //arrange                                    
             _testSphere.Owner = _testUser;
             _testLambertian.Owner = _testUser;
-            Spheres.AddSphere(_testSphere);
-            Lambertians.AddLambertian(_testLambertian);
-            Models.AddModel(_testModel);
-            Models.RemoveModel(_modelName, _testUser);
+            SphereRepository.AddSphere(_testSphere);
+            LambertianRepository.AddLambertian(_testLambertian);
+            ModelRepository.AddModel(_testModel);
+            ModelRepository.RemoveModel(_modelName, _testUser);
 
             //act
-            Spheres.RemoveSphere(_sphereName, _testUser);
-            Lambertians.RemoveLambertian(_lambertianName, _testUser);
+            SphereRepository.RemoveSphere(_sphereName, _testUser);
+            LambertianRepository.RemoveLambertian(_lambertianName, _testUser);
             //assert
-            bool sphereDeleted = !Spheres.ContainsSphere(_sphereName, _testUser);
-            bool lambertianDeleted = !Lambertians.ContainsLambertian(_lambertianName, _testUser);
+            bool sphereDeleted = !SphereRepository.ContainsSphere(_sphereName, _testUser);
+            bool lambertianDeleted = !LambertianRepository.ContainsLambertian(_lambertianName, _testUser);
             Assert.IsTrue(sphereDeleted && lambertianDeleted);
         }
 
@@ -251,11 +251,11 @@ namespace BusinessLogic_Tests
                 Owner = user2,
             };
 
-            Models.AddModel(model1);
-            Models.AddModel(model2);
-            Models.AddModel(model3);
+            ModelRepository.AddModel(model1);
+            ModelRepository.AddModel(model2);
+            ModelRepository.AddModel(model3);
 
-            List<Model> models = Models.GetModelsFromUser(user1);
+            List<Model> models = ModelRepository.GetModelsFromUser(user1);
 
             Assert.AreEqual(2, models.Count);
             Assert.IsTrue(models.Contains(model1));
@@ -273,7 +273,7 @@ namespace BusinessLogic_Tests
                 Password = "Password1"
             };
 
-            List<Model> models = Models.GetModelsFromUser(emptyUser);
+            List<Model> models = ModelRepository.GetModelsFromUser(emptyUser);
 
             Assert.AreEqual(0, models.Count);
         }
@@ -281,9 +281,9 @@ namespace BusinessLogic_Tests
         [TestCleanup]
         public void TearDown()
         {
-            Spheres.Drop();
-            Lambertians.Drop();
-            Models.Drop();
+            SphereRepository.Drop();
+            LambertianRepository.Drop();
+            ModelRepository.Drop();
 
         }
     }
