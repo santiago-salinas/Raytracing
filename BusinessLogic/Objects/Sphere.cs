@@ -46,7 +46,7 @@ namespace BusinessLogic
         {
             if (String.IsNullOrEmpty(value))
             {
-                throw new ArgumentNullException("Name cannot be empty");
+                throw new BusinessLogicException("Name cannot be empty");
             }
         }
 

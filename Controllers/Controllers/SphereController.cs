@@ -46,20 +46,6 @@ namespace Controllers
             return sphereDTOs;
         }
 
-        public string CheckNameValidity(string sphereName, string ownerName)
-        {
-            if (ContainsSphere(sphereName, ownerName)) return "User already has sphere with that name";
-            if (sphereName == "") return "Sphere name cannot be empty";
-
-            return "OK";
-        }
-
-        public string CheckRadiusValidity(float radius) 
-        {
-            if (radius <= 0) return "Radius must be over zero";
-            return "OK";
-        }
-
         public Sphere ConvertToSphere(SphereDTO sphereDTO)
         {
             // Convert the SphereDTO properties to the corresponding Sphere properties

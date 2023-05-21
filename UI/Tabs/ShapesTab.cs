@@ -29,8 +29,7 @@ namespace UI.Tabs
 
             if (result == DialogResult.OK)
             {
-                SphereCard sphereCard = new SphereCard(addSphere.NewSphereDTO,_sphereController);
-                _sphereController.AddSphere(addSphere.NewSphereDTO);
+                SphereCard sphereCard = new SphereCard(addSphere.NewSphereDTO,_sphereController);              
                 flowLayoutPanel.Controls.Add(sphereCard);
             }
         }

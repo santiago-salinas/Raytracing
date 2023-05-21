@@ -9,7 +9,6 @@ namespace UI.Dialogs
 {
     public partial class AddLambertianDialog : Form
     {
-        private const int _maximumRGBValue = 255;
         private LambertianController _controller;
         private string _loggedUser;
 
@@ -35,15 +34,14 @@ namespace UI.Dialogs
 
             statusLabel.Text = "";
 
-            bool nameIsCorrect = true;
-            bool colorValuesAreCorrect = true;
+            bool inputsAreCorrect = true;
             ColorDTO colorDTO = new ColorDTO()
             {
                 Red = redValue,
                 Green = greenValue,
                 Blue = blueValue,
             };
-            LambertianDTO lambertianDTO = new LambertianDTO()
+            NewLambertian = new LambertianDTO()
             {
                 Name = lambertianName,
                 Color = colorDTO,
@@ -52,16 +50,15 @@ namespace UI.Dialogs
 
             try
             {
-                _controller.AddLambertian(lambertianDTO);
+                _controller.AddLambertian(NewLambertian);
             }catch (Exception ex)
             {
                 statusLabel.Text = ex.Message;
-                nameIsCorrect = false;
+                inputsAreCorrect = false;
             }
 
-            if (nameIsCorrect && colorValuesAreCorrect)
-            {
-                NewLambertian = lambertianDTO;
+            if (inputsAreCorrect)
+            {                
                 DialogResult = DialogResult.OK;
             }
         }

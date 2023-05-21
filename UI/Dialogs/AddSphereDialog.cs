@@ -27,30 +27,22 @@ namespace UI.Dialogs
         private void SaveButton_Click(object sender, EventArgs e)
         {
             string sphereName = nameTextBox.Text;
-            float radius = (float)radiusInput.Value;            
+            float radius = (float)radiusInput.Value;
+            NewSphereDTO = new SphereDTO(sphereName, radius, _currentUser);
+            statusLabel.Text = "";
+            bool inputsAreCorrect = true;            
 
-            statusLabel.Text = "";           
-
-            bool nameIsCorrect = true;
-            bool radiusIsCorrect = true;
-
-            string status = _sphereController.CheckNameValidity(sphereName, _currentUser);
-
-            if(status != "OK")
+            try
             {
-                statusLabel.Text = status;
-                nameIsCorrect = false;
-            }
-            status = _sphereController.CheckRadiusValidity(radius);
-            if(status != "OK")
+                _sphereController.AddSphere(NewSphereDTO);
+            }catch (Exception ex)
             {
-                statusLabel.Text = status;
-                radiusIsCorrect = false;
+                statusLabel.Text = ex.Message;
+                inputsAreCorrect = false;
             }
 
-            if (nameIsCorrect && radiusIsCorrect)
-            {
-                NewSphereDTO = new SphereDTO(sphereName, radius, _currentUser);
+            if (inputsAreCorrect)
+            {                
                 DialogResult = DialogResult.OK;
             }
 
