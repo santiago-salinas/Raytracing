@@ -12,7 +12,7 @@ namespace BusinessLogic
             s_sceneList.Clear();
         }
 
-        public static List<Scene> GetScenesFromUser(User owner)
+        public static List<Scene> GetScenesFromUser(string owner)
         {
             List<Scene> ret = new List<Scene>();
             foreach (Scene scene in s_sceneList)
@@ -25,7 +25,7 @@ namespace BusinessLogic
             ret = ret.OrderByDescending(scene => scene.LastModificationDate).ToList();
             return ret;
         }
-        public static bool ContainsScene(string name, User owner)
+        public static bool ContainsScene(string name, string owner)
         {
             Scene scene = s_sceneList.Find(s => s.Name == name && s.Owner == owner);
             return scene != null;
@@ -43,7 +43,7 @@ namespace BusinessLogic
 
         }
 
-        public static Scene GetScene(string name, User owner)
+        public static Scene GetScene(string name, string owner)
         {
             Scene ret = s_sceneList.Find(s => s.Name == name && s.Owner == owner);
             bool exists = ret != null;
@@ -51,7 +51,7 @@ namespace BusinessLogic
             return ret;
         }
 
-        public static void RemoveScene(string name, User owner)
+        public static void RemoveScene(string name, string owner)
         {
             Scene scene = GetScene(name, owner);
             s_sceneList.Remove(scene);

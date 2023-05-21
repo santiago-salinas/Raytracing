@@ -2,16 +2,16 @@ using System.Collections.Generic;
 
 namespace BusinessLogic
 {
-    public static class LambertianRepository
+    public class LambertianRepository
     {
-        private static List<Lambertian> s_lambertianList = new List<Lambertian>();
+        private List<Lambertian> s_lambertianList = new List<Lambertian>();
 
-        public static void Drop()
+        public void Drop()
         {
             s_lambertianList.Clear();
         }
 
-        public static List<Lambertian> GetLambertiansFromUser(User owner)
+        public List<Lambertian> GetLambertiansFromUser(string owner)
         {
             List<Lambertian> ret = new List<Lambertian>();
             foreach (Lambertian s in s_lambertianList)
@@ -24,12 +24,12 @@ namespace BusinessLogic
             return ret;
         }
 
-        public static bool ContainsLambertian(string name, User user)
+        public bool ContainsLambertian(string name, string user)
         {
             Lambertian lambertian = s_lambertianList.Find(l => l.Name == name && l.Owner == user);
             return lambertian != null;
         }
-        public static void AddLambertian(Lambertian newElement)
+        public void AddLambertian(Lambertian newElement)
         {
             if (!ContainsLambertian(newElement.Name, newElement.Owner))
             {
@@ -42,14 +42,14 @@ namespace BusinessLogic
 
         }
 
-        public static Lambertian GetLambertian(string name, User user)
+        public Lambertian GetLambertian(string name, string user)
         {
             Lambertian ret = s_lambertianList.Find(l => l.Name == name && l.Owner == user);
             if (ret == null) throw new BusinessLogicException("User does not own lambertian with that name");
             return ret;
         }
 
-        public static void RemoveLambertian(string name, User owner)
+        public void RemoveLambertian(string name, string owner)
         {
             Lambertian lambertian = GetLambertian(name, owner);
 

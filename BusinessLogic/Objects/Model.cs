@@ -7,7 +7,7 @@ namespace BusinessLogic
         private string _name;
         public Model() { }
 
-        public Model(string name, Sphere shape, Lambertian color, User owner)
+        public Model(string name, Sphere shape, Lambertian color, string owner)
         {
             Name = name;
             Shape = shape;
@@ -75,7 +75,7 @@ namespace BusinessLogic
             }
         }
 
-        public User Owner { get; set; }
+        public string Owner { get; set; }
 
         private void CheckIfStringNull(string value)
         {

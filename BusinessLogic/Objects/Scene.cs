@@ -35,7 +35,7 @@ namespace BusinessLogic
         public DateTime LastModificationDate { get {return _lastModificationDate; } }
         public DateTime LastRenderDate { get { return _lastRenderDate; }}
 
-        public User Owner { get; set; }
+        public string Owner { get; set; }
         public PPM Preview { get; set; }
         public List<PositionedModel> PositionedModels
         {
