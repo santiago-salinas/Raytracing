@@ -210,6 +210,7 @@ namespace BusinessLogic_Tests
                 ResolutionY = 50,
                 SamplesPerPixel = samplesPerPixel,
                 MaxDepth = depth,
+                Aperture = 0.5,
             };
 
             testScene.CameraDTO = dto;
@@ -232,6 +233,7 @@ namespace BusinessLogic_Tests
         [TestMethod]
         public void RenderTestSceneBlur()
         {
+            testScene.Blur = true;
             Engine motor = new Engine(testScene);
             motor.RandomOff();
             PPM ppm = motor.Render();
