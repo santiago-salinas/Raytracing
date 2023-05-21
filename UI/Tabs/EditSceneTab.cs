@@ -42,7 +42,7 @@ namespace UI.Tabs
 
             Scene newScene = new Scene()
             {
-                Owner = _loggedUser,
+                Owner = _loggedUser.UserName,
                 CameraDTO = defaultCameraValues,
             };
 
@@ -118,7 +118,7 @@ namespace UI.Tabs
                 }
                 else
                 {
-                    if (NameWasChanged() && SceneRepository.ContainsScene(newName, _loggedUser))
+                    if (NameWasChanged() && SceneRepository.ContainsScene(newName, _loggedUser.UserName))
                     {
                         nameStatusLabel.Text = "* User already owns a scene with that name";
                     }

@@ -1,5 +1,6 @@
 ﻿using BusinessLogic;
 using Controllers;
+using Controllers.Controllers;
 using Controllers.DTOs;
 using System;
 using System.Collections.Generic;
@@ -11,20 +12,22 @@ namespace UI.Dialogs
     {
         public Model NewModel = new Model();
         private List<SphereDTO> _availableShapes;
-        private List<Lambertian> _availableLambertians;
-        private User _loggedUser;
+        private List<LambertianDTO> _availableLambertians;
+        private string _loggedUser;
 
         private SphereDTO _selectedShape;
-        private Lambertian _selectedMaterial;
-        private Context _context;
+        private LambertianDTO _selectedMaterial;
         private SphereController _sphereController;
-        public AddModelDialog(User loggedUser, Context context)
+        private LambertianController _lambertianController;
+        public AddModelDialog(Context context)
         {
             InitializeComponent();
             _sphereController = context.SphereController;
-            _loggedUser = loggedUser;
-            _availableShapes = _sphereController.GetSpheresFromUser(loggedUser.UserName);
-            _availableLambertians = LambertianRepository.GetLambertiansFromUser(loggedUser);
+            _lambertianController = context.LambertianController;
+            _loggedUser = context.CurrentUser;
+            
+            _availableShapes = _sphereController.GetSpheresFromUser(_loggedUser);
+            _availableLambertians = _lambertianController.GetLambertiansFromUser(_loggedUser);
 
             LoadShapeComboBox();
             LoadMaterialComboBox();
@@ -46,7 +49,7 @@ namespace UI.Dialogs
                 nameIsCorrect = false;
             }
 
-            if (ModelRepository.ContainsModel(modelName, _loggedUser.UserName))
+            if (ModelRepository.ContainsModel(modelName, _loggedUser))
             {
                 nameIsCorrect = false;
                 nameStatusLabel.Text = "* Model with that name already exists";
@@ -56,7 +59,7 @@ namespace UI.Dialogs
             {
                 NewModel.Owner = _loggedUser;
                 NewModel.Shape = _sphereController.ConvertToSphere(_selectedShape);
-                NewModel.Material = _selectedMaterial;
+                NewModel.Material = _lambertianController.ConvertToLambertian(_selectedMaterial);
                 DialogResult = DialogResult.OK;
             }
 
@@ -91,7 +94,7 @@ namespace UI.Dialogs
 
         private void LoadMaterialComboBox()
         {
-            foreach (Lambertian elem in _availableLambertians)
+            foreach (LambertianDTO elem in _availableLambertians)
             {
                 materialComboBox.Items.Add(elem.Name);
             }

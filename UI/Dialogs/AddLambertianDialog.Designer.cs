@@ -42,7 +42,7 @@
             this.greenValueInput = new System.Windows.Forms.NumericUpDown();
             this.blueValueInput = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.colorStatusLabel = new System.Windows.Forms.Label();
+            this.statusLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.redValueInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.greenValueInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.blueValueInput)).BeginInit();
@@ -209,17 +209,15 @@
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 38;
             // 
-            // colorStatusLabel
+            // statusLabel
             // 
-            this.colorStatusLabel.AutoSize = true;
-            this.colorStatusLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colorStatusLabel.ForeColor = System.Drawing.Color.Red;
-            this.colorStatusLabel.Location = new System.Drawing.Point(229, 338);
-            this.colorStatusLabel.Name = "colorStatusLabel";
-            this.colorStatusLabel.Size = new System.Drawing.Size(405, 19);
-            this.colorStatusLabel.TabIndex = 39;
-            this.colorStatusLabel.Text = "* All color values must be between 0 and 255";
-            this.colorStatusLabel.Visible = false;
+            this.statusLabel.AutoSize = true;
+            this.statusLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusLabel.ForeColor = System.Drawing.Color.Red;
+            this.statusLabel.Location = new System.Drawing.Point(229, 338);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(0, 19);
+            this.statusLabel.TabIndex = 39;
             // 
             // AddLambertianDialog
             // 
@@ -227,7 +225,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
-            this.Controls.Add(this.colorStatusLabel);
+            this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.blueValueInput);
             this.Controls.Add(this.greenValueInput);
@@ -270,6 +268,6 @@
         private System.Windows.Forms.NumericUpDown greenValueInput;
         private System.Windows.Forms.NumericUpDown blueValueInput;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label colorStatusLabel;
+        private System.Windows.Forms.Label statusLabel;
     }
 }

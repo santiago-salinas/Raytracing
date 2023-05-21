@@ -13,6 +13,7 @@ namespace UI
         private ShapesTab _shapesTab;
         private ScenesTab _scenesTab;
         private ModelsTab _modelsTab;
+
         private User _loggedUser;
         private bool _isSignignOut = false;
         private Context _context;
@@ -70,7 +71,7 @@ namespace UI
         {
             if (_materialsTab == null)
             {
-                _materialsTab = new MaterialsTab(_loggedUser);
+                _materialsTab = new MaterialsTab(_context);
                 _materialsTab.FormClosed += MaterialsTabClosed;
                 _materialsTab.MdiParent = this;
                 _materialsTab.Dock = DockStyle.Fill;

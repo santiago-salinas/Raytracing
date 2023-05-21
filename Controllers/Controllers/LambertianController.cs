@@ -40,7 +40,7 @@ namespace Controllers.Controllers
             return lambertianDTOs;
         }
 
-        private Lambertian ConvertToLambertian(LambertianDTO dto)
+        public Lambertian ConvertToLambertian(LambertianDTO dto)
         {
             Lambertian lambertian = new Lambertian()
             {
@@ -66,6 +66,7 @@ namespace Controllers.Controllers
                     Owner = lambertian.Owner,
                     Color = ConvertToColorDTO(lambertian.Color),
                 };
+                lambertianDTOs.Add(lambertianDTO);
             }
 
             return lambertianDTOs;

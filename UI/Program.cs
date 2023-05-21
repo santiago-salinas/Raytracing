@@ -2,6 +2,7 @@
 using System;
 using System.Windows.Forms;
 using Controllers;
+using Controllers.Controllers;
 
 namespace UI
 {
@@ -18,7 +19,13 @@ namespace UI
 
             SphereRepository sphereRepository = new SphereRepository();
             SphereController sphereController = new SphereController(sphereRepository);
-            Context context = new Context(sphereController);
+
+            LambertianRepository lambertianRepository = new LambertianRepository();
+            LambertianController lambertianController = new LambertianController(lambertianRepository);
+
+            Context context = new Context();
+            context.SphereController = sphereController;
+            context.LambertianController = lambertianController;
 
             User user1 = new User()
             {
@@ -46,21 +53,21 @@ namespace UI
             Color color2 = new Color(0.8, 0.2, 0.5);
             Color color3 = new Color(0.8, 0.25, 0.05);
             Color color4 = new Color(0.7, 0.7, 0.1);
-            Lambertian lambertian1 = new Lambertian("Lambertian 1", color1, user1);
-            Lambertian lambertian2 = new Lambertian("Lambertian 2", color2, user1);
-            Lambertian lambertian3 = new Lambertian("Lambertian 3", color3, user1);
-            Lambertian lambertian4 = new Lambertian("Lambertian 4", color4, user1);
+            Lambertian lambertian1 = new Lambertian("Lambertian 1", color1, user1.UserName);
+            Lambertian lambertian2 = new Lambertian("Lambertian 2", color2, user1.UserName);
+            Lambertian lambertian3 = new Lambertian("Lambertian 3", color3, user1.UserName);
+            Lambertian lambertian4 = new Lambertian("Lambertian 4", color4, user1.UserName);
 
-            LambertianRepository.AddLambertian(lambertian1);
-            LambertianRepository.AddLambertian(lambertian2);
-            LambertianRepository.AddLambertian(lambertian3);
-            LambertianRepository.AddLambertian(lambertian4);
+            lambertianRepository.AddLambertian(lambertian1);
+            lambertianRepository.AddLambertian(lambertian2);
+            lambertianRepository.AddLambertian(lambertian3);
+            lambertianRepository.AddLambertian(lambertian4);
 
 
-            Model model1 = new Model("Model 1", sphere1, lambertian1, user1);
-            Model model2 = new Model("Model 2", sphere2, lambertian2, user1);
-            Model model3 = new Model("Model 3", sphere3, lambertian3, user1);
-            Model model4 = new Model("Model 4", sphere4, lambertian4, user1);
+            Model model1 = new Model("Model 1", sphere1, lambertian1, user1.UserName);
+            Model model2 = new Model("Model 2", sphere2, lambertian2, user1.UserName);
+            Model model3 = new Model("Model 3", sphere3, lambertian3, user1.UserName);
+            Model model4 = new Model("Model 4", sphere4, lambertian4, user1.UserName);
 
             ModelRepository.AddModel(model1);
             ModelRepository.AddModel(model2);
@@ -83,7 +90,7 @@ namespace UI
             Scene scene1 = new Scene()
             {
                 Name = "Scene 1",                
-                Owner = user1,
+                Owner = user1.UserName,
                 CameraDTO = defaultCameraValues,
             };
 

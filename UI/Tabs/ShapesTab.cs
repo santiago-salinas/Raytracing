@@ -17,7 +17,7 @@ namespace UI.Tabs
         public ShapesTab(Context context)
         {
             InitializeComponent();
-            _currentUser = context.CurrentUser.UserName;
+            _currentUser = context.CurrentUser;
             _sphereController = context.SphereController;
             LoadSpheres();
         }
@@ -29,8 +29,8 @@ namespace UI.Tabs
 
             if (result == DialogResult.OK)
             {
-                SphereCard sphereCard = new SphereCard(addSphere.newSphereDTO,_sphereController);
-                _sphereController.AddSphere(addSphere.newSphereDTO);
+                SphereCard sphereCard = new SphereCard(addSphere.NewSphereDTO,_sphereController);
+                _sphereController.AddSphere(addSphere.NewSphereDTO);
                 flowLayoutPanel.Controls.Add(sphereCard);
             }
         }

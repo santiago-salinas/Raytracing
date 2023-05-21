@@ -10,7 +10,7 @@ namespace UI.Tabs
 {
     public partial class ModelsTab : Form
     {
-        private User _currentUser;
+        private string _currentUser;
         private Context _context;
         public ModelsTab(Context context)
         {
@@ -22,7 +22,7 @@ namespace UI.Tabs
 
         private void LoadModels()
         {
-            List<Model> modelList = ModelRepository.GetModelsFromUser(_currentUser.UserName);
+            List<Model> modelList = ModelRepository.GetModelsFromUser(_currentUser);
             foreach (Model elem in modelList)
             {
                 ModelCard modelCard = new ModelCard(elem);
@@ -32,7 +32,7 @@ namespace UI.Tabs
 
         private void AddModelButton_Click(object sender, EventArgs e)
         {
-            AddModelDialog addModel = new AddModelDialog(_currentUser, _context);
+            AddModelDialog addModel = new AddModelDialog(_context);
             DialogResult result = addModel.ShowDialog();
 
             if (result == DialogResult.OK)

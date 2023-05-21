@@ -25,7 +25,7 @@ namespace UI
             if (credentialsAreCorrect)
             {
                 User user = UserRepository.GetUser(userNameText);
-                _context.CurrentUser = user;
+                _context.CurrentUser = user.UserName;
                 new MainPage(user, _context).Show();
                 this.Hide();
             }

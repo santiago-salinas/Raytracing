@@ -33,7 +33,7 @@ namespace BusinessLogic
         {
             if (string.IsNullOrEmpty(value))
             {
-                throw new ArgumentNullException("Name cant be null");
+                throw new BusinessLogicException("Name cannot be empty");
             }
         }
 

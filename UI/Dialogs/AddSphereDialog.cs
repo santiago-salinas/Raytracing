@@ -10,7 +10,7 @@ namespace UI.Dialogs
     {
        
         private string _currentUser;
-        public SphereDTO newSphereDTO { get; set; }
+        public SphereDTO NewSphereDTO { get; set; }
         private SphereController _sphereController;
         public AddSphereDialog(string currentUser, SphereController sphereController)
         {
@@ -51,7 +51,7 @@ namespace UI.Dialogs
 
             if (nameIsCorrect && radiusIsCorrect)
             {
-                newSphereDTO = new SphereDTO(sphereName, radius, _currentUser);
+                NewSphereDTO = new SphereDTO(sphereName, radius, _currentUser);
                 DialogResult = DialogResult.OK;
             }
 

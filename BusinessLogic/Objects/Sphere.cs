@@ -23,7 +23,7 @@ namespace BusinessLogic
             {
                 if (value <= _minimumRadius)
                 {
-                    throw new BusinessLogicException("Radius must be a value over zero >0");
+                    throw new BusinessLogicException("Radius must be a value over zero");
                 }
                 _radius = value;
             }
@@ -46,7 +46,7 @@ namespace BusinessLogic
         {
             if (String.IsNullOrEmpty(value))
             {
-                throw new ArgumentNullException("Name cant be empty");
+                throw new ArgumentNullException("Name cannot be empty");
             }
         }
 
