@@ -29,8 +29,7 @@ namespace UI.Dialogs
             string sphereName = nameTextBox.Text;
             float radius = (float)radiusInput.Value;            
 
-            nameStatusLabel.Text = "";
-            radiusStatusLabel.Text = "";
+            statusLabel.Text = "";           
 
             bool nameIsCorrect = true;
             bool radiusIsCorrect = true;
@@ -39,13 +38,13 @@ namespace UI.Dialogs
 
             if(status != "OK")
             {
-                nameStatusLabel.Text = status;
+                statusLabel.Text = status;
                 nameIsCorrect = false;
             }
             status = _sphereController.CheckRadiusValidity(radius);
             if(status != "OK")
             {
-                radiusStatusLabel.Text = status;
+                statusLabel.Text = status;
                 radiusIsCorrect = false;
             }
 

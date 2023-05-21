@@ -23,17 +23,17 @@ namespace UI.Dialogs
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            DialogResult = DialogResult.Cancel;
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
             string lambertianName = nameTextBox.Text;
-            double redValue = (double)redValueInput.Value / _maximumRGBValue;
-            double greenValue = (double)greenValueInput.Value / _maximumRGBValue;
-            double blueValue = (double)blueValueInput.Value / _maximumRGBValue;
+            int redValue = (int)redValueInput.Value;
+            int greenValue = (int)greenValueInput.Value;
+            int blueValue = (int)blueValueInput.Value;
 
-            nameStatusLabel.Text = "";
+            statusLabel.Text = "";
 
             bool nameIsCorrect = true;
             bool colorValuesAreCorrect = true;
@@ -58,34 +58,6 @@ namespace UI.Dialogs
                 statusLabel.Text = ex.Message;
                 nameIsCorrect = false;
             }
-
-            /*try
-            {
-                NewLambertian.Name = lambertianName;
-            }
-            catch (ArgumentNullException)
-            {
-                nameStatusLabel.Text = "* Name cannot be empty";
-                nameIsCorrect = false;
-            }
-
-            if (_controller.ContainsLambertian(lambertianName, _loggedUser))
-            {
-                nameIsCorrect = false;
-                nameStatusLabel.Text = "* Material with that name already exists";
-            }
-
-            
-            try
-            {
-                _color = new BusinessLogic.Color(redValue, greenValue, blueValue);
-                NewLambertian.Color = _color;
-            }
-            catch (ArgumentException)
-            {
-                statusLabel.Visible = true;
-                colorValuesAreCorrect = false;
-            }*/
 
             if (nameIsCorrect && colorValuesAreCorrect)
             {

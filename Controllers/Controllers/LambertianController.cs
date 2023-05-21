@@ -11,6 +11,7 @@ namespace Controllers.Controllers
     public class LambertianController
     {
         private LambertianRepository _repository;
+        
 
         public LambertianController(LambertianRepository repository)
         {
@@ -76,9 +77,9 @@ namespace Controllers.Controllers
         {
             ColorDTO colorDTO = new ColorDTO()
             {
-                Red = color.Red,
-                Green = color.Green,
-                Blue = color.Blue,
+                Red = (int)color.Red,
+                Green = (int)color.Green,
+                Blue = (int)color.Blue,
             };
 
             return colorDTO;
@@ -86,14 +87,30 @@ namespace Controllers.Controllers
 
         private Color ConvertToColor(ColorDTO colorDTO)
         {
-            Color color = new Color()
+            int upperRGBBound = 255;
+            int redValue = colorDTO.Red;
+            int greenValue = colorDTO.Green;
+            int blueValue = colorDTO.Blue;
+            if(!IsBetweenBounds(redValue) || !IsBetweenBounds(greenValue) || !IsBetweenBounds(blueValue))
             {
-                Red = colorDTO.Red,
-                Green = colorDTO.Green,
-                Blue = colorDTO.Blue,
+                throw new BusinessLogicException("Inserted RGB values must be between 0 and 255");
+            }
+
+            Color color = new Color()
+            {   
+                Red = (double)colorDTO.Red/ upperRGBBound,
+                Green = (double)colorDTO.Green/ upperRGBBound,
+                Blue = (double)colorDTO.Blue/ upperRGBBound,
             };
 
             return color;
+        }
+
+        private bool IsBetweenBounds(int value)
+        {
+            int upperBound = 255;
+            int lowerBound = 0;
+            return (value >= lowerBound) && (value <= upperBound);
         }
 
     }
