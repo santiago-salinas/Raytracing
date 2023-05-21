@@ -2,6 +2,7 @@
 using System;
 using System.Windows.Forms;
 using UI.Tabs;
+using Controllers;
 
 namespace UI
 {
@@ -14,11 +15,13 @@ namespace UI
         private ModelsTab _modelsTab;
         private User _loggedUser;
         private bool _isSignignOut = false;
-        public MainPage(User providedUser)
+        private Context _context;
+        public MainPage(User providedUser, Context context)
         {
             InitializeComponent();
             _loggedUser = providedUser;
             loggedUsernameLabel.Text = _loggedUser.UserName;
+            _context = context;
         }
 
         private void ScenesSideBarButton_Click(object sender, EventArgs e)
@@ -46,7 +49,7 @@ namespace UI
         {
             if (_modelsTab == null)
             {
-                _modelsTab = new ModelsTab(_loggedUser);
+                _modelsTab = new ModelsTab(_context);
                 _modelsTab.FormClosed += ModelsTabClosed;
                 _modelsTab.MdiParent = this;
                 _modelsTab.Dock = DockStyle.Fill;
@@ -88,7 +91,7 @@ namespace UI
         {
             if (_shapesTab == null)
             {
-                _shapesTab = new ShapesTab(_loggedUser);
+                _shapesTab = new ShapesTab(_context);
                 _shapesTab.FormClosed += ShapesTabClosed;
                 _shapesTab.MdiParent = this;
                 _shapesTab.Dock = DockStyle.Fill;
@@ -118,7 +121,7 @@ namespace UI
             if (_isSignignOut)
             {
                 _isSignignOut = false;
-                new LogInPage().Show();
+                new LogInPage(_context).Show();
                 base.OnFormClosing(e);
             }
             else

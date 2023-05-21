@@ -1,6 +1,7 @@
 ﻿using BusinessLogic;
 using System;
 using System.Windows.Forms;
+using Controllers;
 
 namespace UI
 {
@@ -15,26 +16,30 @@ namespace UI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            SphereRepository sphereRepository = new SphereRepository();
+            SphereController sphereController = new SphereController(sphereRepository);
+            Context context = new Context(sphereController);
+
             User user1 = new User()
             {
                 UserName = "Test",
                 Password = "Test1",
                 RegisterDate = DateTime.Now,
-
             };
 
             UserRepository.AddUser(user1);
+            string userName = user1.UserName;
 
-            Sphere sphere1 = new Sphere("Sphere 1", 0.5f, user1);
-            Sphere sphere2 = new Sphere("Sphere 2", 0.5f, user1);
-            Sphere sphere3 = new Sphere("Sphere 3", 2f, user1);
-            Sphere sphere4 = new Sphere("Floor", 2000f, user1);
+            Sphere sphere1 = new Sphere("Sphere 1", 0.5f, userName);
+            Sphere sphere2 = new Sphere("Sphere 2", 0.5f, userName);
+            Sphere sphere3 = new Sphere("Sphere 3", 2f, userName);
+            Sphere sphere4 = new Sphere("Floor", 2000f, userName);
 
 
-            SphereRepository.AddSphere(sphere1);
-            SphereRepository.AddSphere(sphere2);
-            SphereRepository.AddSphere(sphere3);
-            SphereRepository.AddSphere(sphere4);
+            sphereRepository.AddSphere(sphere1);
+            sphereRepository.AddSphere(sphere2);
+            sphereRepository.AddSphere(sphere3);
+            sphereRepository.AddSphere(sphere4);
 
 
             Color color1 = new Color(0.1, 0.2, 0.5);
@@ -108,7 +113,7 @@ namespace UI
                 Position = new Vector(0, -2000, -1)
             });
 
-            Application.Run(new LogInPage());
+            Application.Run(new LogInPage(context));
 
             Application.Exit();
         }

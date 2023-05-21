@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Controllers.DTOs
+namespace ApplicationLayer.Utilities
 {
-    public class SceneDTO
+    public interface IRay
     {
     }
 }

@@ -4,22 +4,25 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using UI.Cards;
 using UI.Dialogs;
+using Controllers;
 
 namespace UI.Tabs
 {
     public partial class ModelsTab : Form
     {
-        private User _loggedUser;
-        public ModelsTab(User loggedUser)
+        private User _currentUser;
+        private Context _context;
+        public ModelsTab(Context context)
         {
             InitializeComponent();
-            this._loggedUser = loggedUser;
+            _context = context;
+            _currentUser = context.CurrentUser;
             LoadModels();
         }
 
         private void LoadModels()
         {
-            List<Model> modelList = ModelRepository.GetModelsFromUser(_loggedUser);
+            List<Model> modelList = ModelRepository.GetModelsFromUser(_currentUser.UserName);
             foreach (Model elem in modelList)
             {
                 ModelCard modelCard = new ModelCard(elem);
@@ -29,7 +32,7 @@ namespace UI.Tabs
 
         private void AddModelButton_Click(object sender, EventArgs e)
         {
-            AddModelDialog addModel = new AddModelDialog(_loggedUser);
+            AddModelDialog addModel = new AddModelDialog(_currentUser, _context);
             DialogResult result = addModel.ShowDialog();
 
             if (result == DialogResult.OK)

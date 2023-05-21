@@ -1,64 +1,56 @@
 ﻿using BusinessLogic;
 using System;
 using System.Windows.Forms;
+using Controllers;
+using Controllers.DTOs;
 
 namespace UI.Dialogs
 {
     public partial class AddSphereDialog : Form
     {
-
-        public Sphere NewSphere = new Sphere();
-        private User _loggedUser { get; set; }
-        public AddSphereDialog(User loggedUser)
+       
+        private string _currentUser;
+        public SphereDTO newSphereDTO { get; set; }
+        private SphereController _sphereController;
+        public AddSphereDialog(string currentUser, SphereController sphereController)
         {
             InitializeComponent();
-            this._loggedUser = loggedUser;
+            _currentUser = currentUser;
+            _sphereController = sphereController;
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            DialogResult = DialogResult.Cancel;
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
             string sphereName = nameTextBox.Text;
-            float radius = (float)radiusInput.Value;
+            float radius = (float)radiusInput.Value;            
+
             nameStatusLabel.Text = "";
-            radiusStatusLabel.Visible = false;
+            radiusStatusLabel.Text = "";
 
             bool nameIsCorrect = true;
             bool radiusIsCorrect = true;
 
-            try
+            string status = _sphereController.CheckNameValidity(sphereName, _currentUser);
+            if(status != "OK")
             {
-                NewSphere.Name = sphereName;
-            }
-            catch (ArgumentNullException)
-            {
-                nameStatusLabel.Text = "* Name cannot be empty";
+                nameStatusLabel.Text = status;
                 nameIsCorrect = false;
             }
-
-            if (SphereRepository.ContainsSphere(sphereName, _loggedUser))
+            status = _sphereController.CheckRadiusValidity(radius);
+            if(status != "OK")
             {
-                nameIsCorrect = false;
-                nameStatusLabel.Text = "* Sphere with that name already exists";
-            }
-
-            try
-            {
-                NewSphere.Radius = radius;
-            }
-            catch (BusinessLogicException)
-            {
-                radiusStatusLabel.Visible = true;
+                radiusStatusLabel.Text = status;
                 radiusIsCorrect = false;
             }
 
             if (nameIsCorrect && radiusIsCorrect)
             {
-                NewSphere.Owner = _loggedUser;
+                newSphereDTO = new SphereDTO(sphereName, radius, _currentUser);
                 DialogResult = DialogResult.OK;
             }
 

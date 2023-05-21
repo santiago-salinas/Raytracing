@@ -2,32 +2,32 @@ using System.Collections.Generic;
 
 namespace BusinessLogic
 {
-    public static class SphereRepository
+    public class SphereRepository
     {
-        private static List<Sphere> s_sphereList = new List<Sphere>();
+        private List<Sphere> s_sphereList = new List<Sphere>();
 
-        public static List<Sphere> GetSpheresFromUser(User owner)
+        public List<Sphere> GetSpheresFromUser(string ownerName)
         {
             List<Sphere> ret = new List<Sphere>();
             foreach (Sphere s in s_sphereList)
             {
-                if (s.Owner == owner)
+                if (s.Owner == ownerName)
                 {
                     ret.Add(s);
                 }
             }
             return ret;
         }
-        public static void Drop()
+        public void Drop()
         {
             s_sphereList.Clear();
         }
-        public static bool ContainsSphere(string name, User owner)
+        public bool ContainsSphere(string name, string ownerName)
         {
-            Sphere sphere = s_sphereList.Find(s => (s.Name == name && s.Owner == owner));
+            Sphere sphere = s_sphereList.Find(s => (s.Name == name && s.Owner == ownerName));
             return sphere != null;
         }
-        public static void AddSphere(Sphere newElement)
+        public void AddSphere(Sphere newElement)
         {
             if (!ContainsSphere(newElement.Name, newElement.Owner))
             {
@@ -35,23 +35,23 @@ namespace BusinessLogic
             }
             else
             {
-                throw new BusinessLogicException("Sphere with the same name already exists in the collection");
+                throw new BusinessLogicException("User already has sphere with the same name");
             }
 
         }
 
-        public static Sphere GetSphere(string name, User owner)
+        public Sphere GetSphere(string name, string ownerName)
         {
-            Sphere ret = s_sphereList.Find(s => s.Name == name && s.Owner == owner);
+            Sphere ret = s_sphereList.Find(s => s.Name == name && s.Owner == ownerName);
             bool exists = ret != null;
             if (!exists) throw new BusinessLogicException("Owner does not have a sphere with that name");
             return ret;
         }
 
-        public static void RemoveSphere(string name, User owner)
+        public void RemoveSphere(string name, string ownerName)
         {
-            Sphere sphere = s_sphereList.Find(s => s.Name == name && s.Owner == owner);
-            if (!ContainsSphere(name, owner))
+            Sphere sphere = s_sphereList.Find(s => s.Name == name && s.Owner == ownerName);
+            if (!ContainsSphere(name, ownerName))
             {
                 throw new BusinessLogicException("Owner does not have a sphere with that name");
             }

@@ -28,6 +28,7 @@ namespace BusinessLogic_Tests
         private Vector _testPositionAlternative;
 
         private User _testUser;
+        private SphereRepository _testSphereRepository;
 
 
         [TestInitialize]
@@ -71,7 +72,8 @@ namespace BusinessLogic_Tests
             {
                 Name = _modelName,
                 Shape = _testSphere,
-                Material = _testLambertian
+                Material = _testLambertian,
+                Owner = _testUser
             };
 
             _testPosition = new Vector(0, 0, 0);
@@ -84,7 +86,7 @@ namespace BusinessLogic_Tests
                 Position = _testPosition
             };
 
-
+            _testSphereRepository = new SphereRepository();
 
             DateTimeProvider.Reset();
 
@@ -391,7 +393,6 @@ namespace BusinessLogic_Tests
         public void CantDeleteModelFromCollectionUsedByScene()
         {
             //arrange
-
             ModelRepository.AddModel(_testModel);
             _testScene.AddPositionedModel(_testPositionedModel);
             SceneRepository.AddScene(_testScene);
@@ -421,10 +422,11 @@ namespace BusinessLogic_Tests
         {
 
             //arrange
-            User testUser = new User();
-            testUser.UserName = "Username";
-            _testScene.Owner = testUser;
+            _testUser = new User();
+            _testUser.UserName = "Username";
+            _testScene.Owner = _testUser;
             Assert.IsFalse(_testScene.ContainsModel(_testModel));
+            _testModel.Owner = _testUser;
             ModelRepository.AddModel(_testModel);
             //act
             _testScene.AddPositionedModel(_testPositionedModel);
@@ -495,7 +497,7 @@ namespace BusinessLogic_Tests
         public void TearDown()
         {
             DateTimeProvider.Reset();
-            SphereRepository.Drop();
+            _testSphereRepository.Drop();
             LambertianRepository.Drop();
             ModelRepository.Drop();
             SceneRepository.Drop();

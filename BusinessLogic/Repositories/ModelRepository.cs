@@ -12,12 +12,12 @@ namespace BusinessLogic
             s_modelList.Clear();
         }
 
-        public static List<Model> GetModelsFromUser(User owner)
+        public static List<Model> GetModelsFromUser(string owner)
         {
             List<Model> ret = new List<Model>();
             foreach (Model s in s_modelList)
             {
-                if (s.Owner == owner)
+                if (s.Owner.UserName == owner)
                 {
                     ret.Add(s);
                 }
@@ -25,9 +25,9 @@ namespace BusinessLogic
             return ret;
         }
 
-        public static bool ContainsModel(string name, User user)
+        public static bool ContainsModel(string name, string user)
         {
-            Model ret = s_modelList.Find(m => m.Name == name && m.Owner == user);
+            Model ret = s_modelList.Find(m => m.Name == name && m.Owner.UserName == user);
             return ret != null;
         }
 
@@ -43,7 +43,7 @@ namespace BusinessLogic
         }
         public static void AddModel(Model newElement)
         {
-            if (!ContainsModel(newElement.Name, newElement.Owner))
+            if (!ContainsModel(newElement.Name, newElement.Owner.UserName))
             {
                 s_modelList.Add(newElement);
             }

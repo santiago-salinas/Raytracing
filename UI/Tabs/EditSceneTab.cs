@@ -155,7 +155,7 @@ namespace UI.Tabs
         private void LoadAvailableModels()
         {
             availableModelsPanel.Controls.Clear();
-            List<Model> list = ModelRepository.GetModelsFromUser(_loggedUser);
+            List<Model> list = ModelRepository.GetModelsFromUser(_loggedUser.UserName);
             foreach (Model elem in list)
             {
                 EditSceneModelCard modelCard = new EditSceneModelCard(_scene, elem);

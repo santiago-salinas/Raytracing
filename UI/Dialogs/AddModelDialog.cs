@@ -1,4 +1,6 @@
 ﻿using BusinessLogic;
+using Controllers;
+using Controllers.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -8,18 +10,21 @@ namespace UI.Dialogs
     public partial class AddModelDialog : Form
     {
         public Model NewModel = new Model();
-        private List<Sphere> _availableShapes;
+        private List<SphereDTO> _availableShapes;
         private List<Lambertian> _availableLambertians;
         private User _loggedUser;
 
-        private Sphere _selectedShape;
+        private SphereDTO _selectedShape;
         private Lambertian _selectedMaterial;
-        public AddModelDialog(User loggedUser)
+        private Context _context;
+        private SphereController _sphereController;
+        public AddModelDialog(User loggedUser, Context context)
         {
             InitializeComponent();
-            this._loggedUser = loggedUser;
-            this._availableShapes = SphereRepository.GetSpheresFromUser(loggedUser);
-            this._availableLambertians = LambertianRepository.GetLambertiansFromUser(loggedUser);
+            _sphereController = context.SphereController;
+            _loggedUser = loggedUser;
+            _availableShapes = _sphereController.GetSpheresFromUser(loggedUser.UserName);
+            _availableLambertians = LambertianRepository.GetLambertiansFromUser(loggedUser);
 
             LoadShapeComboBox();
             LoadMaterialComboBox();
@@ -41,7 +46,7 @@ namespace UI.Dialogs
                 nameIsCorrect = false;
             }
 
-            if (ModelRepository.ContainsModel(modelName, _loggedUser))
+            if (ModelRepository.ContainsModel(modelName, _loggedUser.UserName))
             {
                 nameIsCorrect = false;
                 nameStatusLabel.Text = "* Model with that name already exists";
@@ -50,7 +55,7 @@ namespace UI.Dialogs
             if (nameIsCorrect)
             {
                 NewModel.Owner = _loggedUser;
-                NewModel.Shape = _selectedShape;
+                NewModel.Shape = _sphereController.ConvertToSphere(_selectedShape);
                 NewModel.Material = _selectedMaterial;
                 DialogResult = DialogResult.OK;
             }
@@ -78,7 +83,7 @@ namespace UI.Dialogs
 
         private void LoadShapeComboBox()
         {
-            foreach (Sphere elem in _availableShapes)
+            foreach (SphereDTO elem in _availableShapes)
             {
                 shapeComboBox.Items.Add(elem.Name);
             }

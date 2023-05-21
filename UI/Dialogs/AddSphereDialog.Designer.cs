@@ -75,7 +75,7 @@
             // nameTextBox
             // 
             this.nameTextBox.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameTextBox.Location = new System.Drawing.Point(226, 161);
+            this.nameTextBox.Location = new System.Drawing.Point(226, 156);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(322, 26);
             this.nameTextBox.TabIndex = 19;
@@ -96,10 +96,8 @@
             this.radiusStatusLabel.ForeColor = System.Drawing.Color.Red;
             this.radiusStatusLabel.Location = new System.Drawing.Point(243, 324);
             this.radiusStatusLabel.Name = "radiusStatusLabel";
-            this.radiusStatusLabel.Size = new System.Drawing.Size(243, 19);
+            this.radiusStatusLabel.Size = new System.Drawing.Size(0, 19);
             this.radiusStatusLabel.TabIndex = 25;
-            this.radiusStatusLabel.Text = "* Radius must be over zero";
-            this.radiusStatusLabel.Visible = false;
             // 
             // radiusLabel
             // 
@@ -123,7 +121,7 @@
             // radiusInput
             // 
             this.radiusInput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radiusInput.Location = new System.Drawing.Point(229, 283);
+            this.radiusInput.Location = new System.Drawing.Point(229, 278);
             this.radiusInput.Maximum = new decimal(new int[] {
             999999,
             0,

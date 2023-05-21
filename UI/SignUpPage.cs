@@ -1,6 +1,7 @@
 ﻿using BusinessLogic;
 using System;
 using System.Windows.Forms;
+using Controllers;
 
 namespace UI
 {
@@ -10,10 +11,12 @@ namespace UI
         private bool _usernameFieldIsCorrect = false;
         private bool _passwordFieldIsCorrect = false;
         private bool _confirmPasswordFieldIsCorrect = false;
-        public SignUpPage()
+        private Context _context;
+        public SignUpPage(Context context)
         {
             InitializeComponent();
             _createdUser = new User();
+            _context = context;
         }
 
         private void SignUpButton_Click(object sender, EventArgs e)
@@ -102,7 +105,7 @@ namespace UI
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            new LogInPage().Show();
+            new LogInPage(_context).Show();
 
             base.OnFormClosing(e);
         }

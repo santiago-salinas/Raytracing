@@ -6,7 +6,7 @@ namespace BusinessLogic
     {
 
         public Sphere() { }
-        public Sphere(string name, double radius, User owner)
+        public Sphere(string name, double radius, string owner)
         {
             Name = name;
             Radius = radius;
@@ -40,7 +40,7 @@ namespace BusinessLogic
             }
         }
 
-        public User Owner { get; set; }
+        public string Owner { get; set; }
 
         private void CheckIfStringNull(string value)
         {
