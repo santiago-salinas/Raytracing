@@ -15,7 +15,6 @@ namespace UI
             _context = context;
         }
 
-
         private void LogInButton_Click(object sender, EventArgs e)
         {
             string userNameText = userNameTextBox.Text;
@@ -47,7 +46,6 @@ namespace UI
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             Application.Exit();
-
             base.OnFormClosing(e);
         }
     }

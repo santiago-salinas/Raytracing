@@ -36,6 +36,7 @@ namespace UI.Dialogs
             bool radiusIsCorrect = true;
 
             string status = _sphereController.CheckNameValidity(sphereName, _currentUser);
+
             if(status != "OK")
             {
                 nameStatusLabel.Text = status;
