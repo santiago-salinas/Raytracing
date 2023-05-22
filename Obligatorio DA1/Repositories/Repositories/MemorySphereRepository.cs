@@ -64,7 +64,7 @@ namespace BusinessLogic
             {
                 throw new BusinessLogicException("Owner does not have a sphere with that name");
             }
-            else if (MemoryModelRepository.ExistsModelUsingTheSphere(sphere))
+            else if (_modelRepository.ExistsModelUsingTheSphere(sphere))
             {
                 throw new BusinessLogicException("Cant delete sphere used by existing model");
             }
