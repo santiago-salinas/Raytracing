@@ -9,10 +9,12 @@ namespace UI
     public partial class LogInPage : Form
     {
         private Context _context;
+        private MemoryUserRepository _userRepository;
         public LogInPage(Context context)
         {
             InitializeComponent();
             _context = context;
+            _userRepository = context.UserRepository;
         }
 
         private void LogInButton_Click(object sender, EventArgs e)
@@ -20,11 +22,11 @@ namespace UI
             string userNameText = userNameTextBox.Text;
             string passwordText = passwordTextBox.Text;
 
-            bool credentialsAreCorrect = UserRepository.CheckUsernameAndPasswordCombination(userNameText, passwordText);
+            bool credentialsAreCorrect = _userRepository.CheckUsernameAndPasswordCombination(userNameText, passwordText);
 
             if (credentialsAreCorrect)
             {
-                User user = UserRepository.GetUser(userNameText);
+                User user = _userRepository.GetUser(userNameText);
                 _context.CurrentUser = user.UserName;
                 new MainPage(user, _context).Show();
                 this.Hide();

@@ -22,12 +22,12 @@ namespace UI.Tabs
         public void LoadScenes()
         {
             flowLayoutPanel.Controls.Clear();
-            List<Scene> sceneList = SceneRepository.GetScenesFromUser(_loggedUser.UserName);
-            foreach (Scene elem in sceneList)
-            {
-                SceneCard sceneCard = new SceneCard(elem);
-                flowLayoutPanel.Controls.Add(sceneCard);
-            }
+            //List<Scene> sceneList = SceneRepository.GetScenesFromUser(_loggedUser.UserName);
+            //foreach (Scene elem in sceneList)
+            //{
+               // SceneCard sceneCard = new SceneCard(elem);
+               // flowLayoutPanel.Controls.Add(sceneCard);
+            //}
         }
 
         private void AddSceneButton_Click(object sender, EventArgs e)
@@ -37,7 +37,7 @@ namespace UI.Tabs
 
         public void LoadSceneEditTab(Scene scene)
         {
-            if (SceneEditDialog == null)
+            /*if (SceneEditDialog == null)
             {
                 EditSceneTab sceneEditDialog = new EditSceneTab(scene, _loggedUser);
                 sceneEditDialog.ScenesTab = this;
@@ -49,7 +49,7 @@ namespace UI.Tabs
             else
             {
                 SceneEditDialog.Activate();
-            }
+            }*/
         }
 
         public void EditSceneClosed(object sender, EventArgs e)

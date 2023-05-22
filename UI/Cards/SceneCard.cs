@@ -3,23 +3,27 @@ using System;
 using System.Globalization;
 using System.Windows.Forms;
 using UI.Tabs;
+using Controllers;
 
 namespace UI.Cards
 {
     public partial class SceneCard : UserControl
     {
         private Scene _thisScene;
+        private ContextBoundObject _context;
+        private MemorySceneRepository _sceneRepository;
 
-        public SceneCard(Scene scene)
+        public SceneCard(Context context, Scene scene)
         {
             InitializeComponent();
             _thisScene = scene;
+            _sceneRepository = context.MemorySceneRepository;
             LoadData();
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            SceneRepository.RemoveScene(_thisScene.Name, _thisScene.Owner);
+            _sceneRepository.RemoveScene(_thisScene.Name, _thisScene.Owner);
             this.Parent.Controls.Remove(this);
         }
 

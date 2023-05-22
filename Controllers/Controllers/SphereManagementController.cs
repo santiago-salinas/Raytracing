@@ -64,17 +64,23 @@ namespace Controllers
 
             foreach (Sphere sphere in spheres)
             {
-                SphereDTO sphereDTO = new SphereDTO
-                {
-                    Name = sphere.Name,
-                    Radius = sphere.Radius,
-                    OwnerName = sphere.Owner
-                };
-
+                SphereDTO sphereDTO = ConvertToDTO(sphere);
                 sphereDTOs.Add(sphereDTO);
             }
 
             return sphereDTOs;
+        }
+
+        public SphereDTO ConvertToDTO(Sphere sphere)
+        {
+            SphereDTO sphereDTO = new SphereDTO
+            {
+                Name = sphere.Name,
+                Radius = sphere.Radius,
+                OwnerName = sphere.Owner
+            };
+
+            return sphereDTO;
         }
     }
 }

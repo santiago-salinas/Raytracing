@@ -17,9 +17,9 @@ namespace Controllers.Converter
         {
             ColorDTO colorDTO = new ColorDTO()
             {
-                Red = (int)color.Red,
-                Green = (int)color.Green,
-                Blue = (int)color.Blue,
+                Red = color.Red,
+                Green = color.Green,
+                Blue = color.Blue,
             };
 
             return colorDTO;

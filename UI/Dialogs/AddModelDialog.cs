@@ -10,24 +10,22 @@ namespace UI.Dialogs
 {
     public partial class AddModelDialog : Form
     {
-        public Model NewModel = new Model();
+        public ModelDTO NewModel;
         private List<SphereDTO> _availableShapes;
         private List<LambertianDTO> _availableLambertians;
         private string _loggedUser;
 
         private SphereDTO _selectedShape;
         private LambertianDTO _selectedMaterial;
-        private SphereManagementController _sphereController;
-        private MaterialManagementController _lambertianController;
+        private ModelManagementController _controller;
         public AddModelDialog(Context context)
         {
             InitializeComponent();
-            _sphereController = context.SphereController;
-            _lambertianController = context.LambertianController;
             _loggedUser = context.CurrentUser;
+            _controller = context.ModelController;
             
-            _availableShapes = _sphereController.GetSpheresFromUser(_loggedUser);
-            _availableLambertians = _lambertianController.GetLambertiansFromUser(_loggedUser);
+            _availableShapes = _controller.GetAvailableShapes(_loggedUser);
+            _availableLambertians = _controller.GetAvailableMaterials(_loggedUser);
 
             LoadShapeComboBox();
             LoadMaterialComboBox();
@@ -35,11 +33,27 @@ namespace UI.Dialogs
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            string modelName = nameTextBox.Text;
+            string modelName = nameTextBox.Text;            
             nameStatusLabel.Text = "";
             bool nameIsCorrect = true;
 
+            NewModel = new ModelDTO();
+            NewModel.Name = modelName;
+            NewModel.OwnerName = _loggedUser;
+            NewModel.Shape = _selectedShape;
+            NewModel.Material = _selectedMaterial;             
+
             try
+            {
+                _controller.AddModel(NewModel);
+            }
+            catch(Exception ex)
+            {
+                nameStatusLabel.Text = ex.Message;
+            }
+
+
+            /*try
             {
                 NewModel.Name = modelName;
             }
@@ -49,23 +63,20 @@ namespace UI.Dialogs
                 nameIsCorrect = false;
             }
 
-            if (ModelRepository.ContainsModel(modelName, _loggedUser))
+            if (.ContainsModel(modelName, _loggedUser))
             {
                 nameIsCorrect = false;
                 nameStatusLabel.Text = "* Model with that name already exists";
-            }
+            }*/
 
             if (nameIsCorrect)
             {
-                NewModel.Owner = _loggedUser;
-                NewModel.Shape = _sphereController.ConvertToSphere(_selectedShape);
-                NewModel.Material = _lambertianController.ConvertToLambertian(_selectedMaterial);
                 DialogResult = DialogResult.OK;
             }
 
             if (previewCheckbox.Checked)
             {
-                NewModel.RenderPreview();
+                //NewModel.RenderPreview();
             }
         }
 

@@ -5,6 +5,8 @@ using System.Windows.Forms;
 using UI.Cards;
 using UI.Dialogs;
 using Controllers;
+using Controllers.Controllers;
+using Controllers.DTOs;
 
 namespace UI.Tabs
 {
@@ -12,20 +14,22 @@ namespace UI.Tabs
     {
         private string _currentUser;
         private Context _context;
+        private ModelManagementController _controller;
         public ModelsTab(Context context)
         {
             InitializeComponent();
             _context = context;
             _currentUser = context.CurrentUser;
+            _controller = context.ModelController;
             LoadModels();
         }
 
         private void LoadModels()
         {
-            List<Model> modelList = ModelRepository.GetModelsFromUser(_currentUser);
-            foreach (Model elem in modelList)
+            List<ModelDTO> modelList = _controller.GetModelsFromUser(_currentUser);
+            foreach (ModelDTO elem in modelList)
             {
-                ModelCard modelCard = new ModelCard(elem);
+                ModelCard modelCard = new ModelCard(elem,_controller);
                 flowLayoutPanel.Controls.Add(modelCard);
             }
         }
@@ -37,8 +41,8 @@ namespace UI.Tabs
 
             if (result == DialogResult.OK)
             {
-                ModelCard modelCard = new ModelCard(addModel.NewModel);
-                ModelRepository.AddModel(addModel.NewModel);
+                ModelCard modelCard = new ModelCard(addModel.NewModel,_controller);
+                //_controller.AddModel(addModel.NewModel);
                 flowLayoutPanel.Controls.Add(modelCard);
             }
         }

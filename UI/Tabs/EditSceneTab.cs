@@ -5,21 +5,27 @@ using System.Globalization;
 using System.Windows.Forms;
 using UI.Cards;
 using UI.Dialogs;
+using Controllers;
+using Controllers.Controllers;
+using Controllers.DTOs;
 
 namespace UI.Tabs
 {
     public partial class EditSceneTab : Form
     {
         private Scene _scene;
-        private User _loggedUser;
+        private string _loggedUser;
         public ScenesTab ScenesTab;
         private bool _isNewScene;
-
+        private MemorySceneRepository _repository;
+        private ModelManagementController _modelController;
         private CameraDTO sceneCamera;
-        public EditSceneTab(Scene providedScene, User providedUser)
+        public EditSceneTab(Scene providedScene, Context context)
         {
-            InitializeComponent();
-            _loggedUser = providedUser;
+            InitializeComponent();            
+            _loggedUser = context.CurrentUser;
+            _repository = context.MemorySceneRepository;
+            _modelController = context.ModelController;
             _isNewScene = providedScene == null;
             _scene = _isNewScene ? CreateNewScene() : providedScene;
             LoadAvailableModels();
@@ -42,7 +48,7 @@ namespace UI.Tabs
 
             Scene newScene = new Scene()
             {
-                Owner = _loggedUser.UserName,
+                Owner = _loggedUser,
                 CameraDTO = defaultCameraValues,
             };
 
@@ -108,7 +114,7 @@ namespace UI.Tabs
                     try
                     {
                         _scene.Name = newName;
-                        SceneRepository.AddScene(_scene);
+                        _repository.AddScene(_scene);
                         endedCorrectly = true;
                     }
                     catch (Exception ex)
@@ -118,7 +124,7 @@ namespace UI.Tabs
                 }
                 else
                 {
-                    if (NameWasChanged() && SceneRepository.ContainsScene(newName, _loggedUser.UserName))
+                    if (NameWasChanged() && _repository.ContainsScene(newName, _loggedUser))
                     {
                         nameStatusLabel.Text = "* User already owns a scene with that name";
                     }
@@ -155,11 +161,11 @@ namespace UI.Tabs
         private void LoadAvailableModels()
         {
             availableModelsPanel.Controls.Clear();
-            List<Model> list = ModelRepository.GetModelsFromUser(_loggedUser.UserName);
-            foreach (Model elem in list)
+            List<ModelDTO> list = _modelController.GetModelsFromUser(_loggedUser);
+            foreach (ModelDTO elem in list)
             {
-                EditSceneModelCard modelCard = new EditSceneModelCard(_scene, elem);
-                availableModelsPanel.Controls.Add(modelCard);
+                //EditSceneModelCard modelCard = new EditSceneModelCard(_scene, elem);
+               // availableModelsPanel.Controls.Add(modelCard);
             }
         }
 

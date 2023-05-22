@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 
 namespace Controllers.Controllers
 {
@@ -15,14 +16,15 @@ namespace Controllers.Controllers
         private IModelRepository _modelRepository;
         private IMaterialManagement _materialController;
         private ISphereManagement _sphereController;
+        private PPMConverter _ppmConverter;
 
+        public IModelRepository ModelRepository { set { _modelRepository = value; } }
+        public IMaterialManagement MaterialController { set { _materialController = value; } }
+        public ISphereManagement SphereController { set { _sphereController = value; } }
+        public PPMConverter PpmConverter { set { _ppmConverter = value; } }
 
-        public ModelManagementController(IModelRepository modelRepository, ISphereManagement sphereController, IMaterialManagement materialController)
-        {
-            _modelRepository = modelRepository;
-            _sphereController = sphereController;
-            _materialController = materialController;
-        }
+        public ModelManagementController()
+        {    }
 
         public void AddModel(ModelDTO modelDTO)
         {
@@ -46,35 +48,50 @@ namespace Controllers.Controllers
         private Model ConvertToModel(ModelDTO modelDTO)
         {
             string ownerName = modelDTO.OwnerName;
-            string materialName = modelDTO.MaterialName;
-            string shapeName = modelDTO.ShapeName;
+            LambertianDTO material = modelDTO.Material;
+            SphereDTO shape = modelDTO.Shape;
 
             Model model = new Model()
             {
                 Name = modelDTO.Name,
-                Material = _materialController.GetLambertian(materialName,ownerName),
-                Shape = _sphereController.GetSphere(shapeName,ownerName),
+                Shape = _sphereController.GetSphere(shape.Name,ownerName),
+                Material = _materialController.GetLambertian(material.Name,ownerName),
                 Owner = ownerName,
-                Preview = modelDTO.Preview
+                Preview = _ppmConverter.ConvertToPPM(modelDTO.Preview)
             };
 
             return model;
+        }
+
+        private Model GetModel(string name, string owner) 
+        {
+            return _modelRepository.GetModel(name,owner);
+        }
+
+        public List<LambertianDTO> GetAvailableMaterials(string owner)
+        {
+            return _materialController.GetLambertiansFromUser(owner);
+        }
+
+        public List<SphereDTO> GetAvailableShapes(string owner) 
+        {
+            return _sphereController.GetSpheresFromUser(owner);
         }
 
         private ModelDTO ConvertToModelDTO(Model model)
         {
             ModelDTO modelDTO = new ModelDTO()
             {
-                MaterialName = model.Material.Name,
-                ShapeName = model.Shape.Name,
+                Material = _materialController.ConvertToDTO(model.Material),
+                Shape = _sphereController.ConvertToDTO(model.Shape),
                 Name = model.Name,
                 OwnerName = model.Owner,
-                Preview = model.Preview
+                Preview = _ppmConverter.ConvertToPpmDTO(model.Preview)
             };
             return modelDTO;
         }
 
-        private List<ModelDTO> ConvertToModelsDTOs(List<Model> models)
+        private List<ModelDTO> ConvertToModelDTOs(List<Model> models)
         {
             List<ModelDTO> modelDTOs = new List<ModelDTO>();
 

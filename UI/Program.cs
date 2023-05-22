@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Controllers;
 using Controllers.Controllers;
 using Repositories;
+using Controllers.Converter;
 
 namespace UI
 {
@@ -18,6 +19,9 @@ namespace UI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            ColorConverter colorConverter = new ColorConverter();
+            PPMConverter ppmConverter = new PPMConverter(colorConverter);
+
             MemoryUserRepository memoryUserRepository = new MemoryUserRepository();
             MemorySceneRepository memorySceneRepository = new MemorySceneRepository();
             MemoryModelRepository memoryModelRepository = new MemoryModelRepository(memorySceneRepository);
@@ -25,11 +29,21 @@ namespace UI
             MemoryLambertianRepository memoryLambertianRepository = new MemoryLambertianRepository(memoryModelRepository);
 
             SphereManagementController sphereController = new SphereManagementController(memorySphereRepository);
-            MaterialManagementController lambertianController = new MaterialManagementController(memoryLambertianRepository);
+            MaterialManagementController lambertianController = new MaterialManagementController(memoryLambertianRepository, colorConverter);
+            ModelManagementController modelController = new ModelManagementController()
+            {
+                MaterialController = lambertianController,
+                ModelRepository = memoryModelRepository,
+                PpmConverter = ppmConverter,
+                SphereController = sphereController
+            };
 
             Context context = new Context();
             context.SphereController = sphereController;
             context.LambertianController = lambertianController;
+            context.ModelController = modelController;
+            context.UserRepository = memoryUserRepository;
+            
 
             User user1 = new User()
             {

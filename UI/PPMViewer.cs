@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using Controllers.DTOs;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -18,10 +19,10 @@ namespace UI
 
         private void Render()
         {
-            var width = _ppm.Width;
-            var height = _ppm.Heigth;
-            var bitmap = new Bitmap(width, height);
-            var pixels = _ppm.PixelsValues;
+            int width = _ppm.Width;
+            int height = _ppm.Heigth;
+            Bitmap bitmap = new Bitmap(width, height);
+            BusinessLogic.Color[,] pixels = _ppm.PixelsValues;
 
             for (int row = 0; row < height; row++)
             {

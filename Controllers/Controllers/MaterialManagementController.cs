@@ -61,24 +61,29 @@ namespace Controllers.Controllers
             return lambertian;
 
         }
-
-
         private List<LambertianDTO> ConvertToLambertianDTOs(List<Lambertian> lambertians)
         {
             List<LambertianDTO> lambertianDTOs = new List<LambertianDTO>();
 
             foreach (Lambertian lambertian in lambertians)
             {
-                LambertianDTO lambertianDTO = new LambertianDTO()
-                {
-                    Name = lambertian.Name,
-                    Owner = lambertian.Owner,
-                    Color = _colorConverter.ConvertToColorDTO(lambertian.Color),
-                };
+                LambertianDTO lambertianDTO = ConvertToDTO(lambertian);
                 lambertianDTOs.Add(lambertianDTO);
             }
 
             return lambertianDTOs;
+        }
+
+        public LambertianDTO ConvertToDTO(Lambertian lambertian)
+        {
+            LambertianDTO lambertianDTO = new LambertianDTO()
+            {
+                Name = lambertian.Name,
+                Owner = lambertian.Owner,
+                Color = _colorConverter.ConvertToColorDTO(lambertian.Color),
+            };
+
+            return lambertianDTO;
         }
 
     }

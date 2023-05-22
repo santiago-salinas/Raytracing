@@ -44,7 +44,6 @@
     <Compile Include="Context.cs" />
     <Compile Include="Controllers\MaterialManagementController.cs" />
     <Compile Include="Controllers\ModelManagementController.cs" />
-    <Compile Include="Controllers\PPMController.cs" />
     <Compile Include="Converter\ColorConverter.cs" />
     <Compile Include="Converter\PPMConverter.cs" />
     <Compile Include="DTOs\ColorDTO.cs" />

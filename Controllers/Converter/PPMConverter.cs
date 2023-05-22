@@ -47,9 +47,10 @@ namespace Controllers
         }
         public PPM ConvertToPPM(PpmDTO ppmDTO)
         {
-            PPM ppm = new PPM(ppmDTO.Height, ppmDTO.Width)
+            if (ppmDTO == null) return null;
+            PPM ppm = new PPM(ppmDTO.Heigth, ppmDTO.Width)
             {
-                PixelsValues = ConvertPixelsFromDTO(ppmDTO.Pixels,ppmDTO.Height,ppmDTO.Width)
+                PixelsValues = ConvertPixelsFromDTO(ppmDTO.Pixels,ppmDTO.Heigth,ppmDTO.Width)
             };
 
             return ppm;
@@ -57,14 +58,19 @@ namespace Controllers
 
         public PpmDTO ConvertToPpmDTO(PPM ppm)
         {
-            PpmDTO ppmDTO = new PpmDTO()
+            if(ppm != null)
             {
-                Height = ppm.Heigth,
-                Width = ppm.Width,
-                Pixels = ConvertPixelsToDTO(ppm.PixelsValues, ppm.Heigth, ppm.Width)
-            };
+                PpmDTO ppmDTO = new PpmDTO()
+                {
+                    Heigth = ppm.Heigth,
+                    Width = ppm.Width,
+                    Pixels = ConvertPixelsToDTO(ppm.PixelsValues, ppm.Heigth, ppm.Width)
+                };
+                return ppmDTO;
+            }
 
-            return ppmDTO;
+            return null;
+            
         }
     }
 }

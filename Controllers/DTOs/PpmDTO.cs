@@ -9,7 +9,7 @@ namespace Controllers.DTOs
     public class PpmDTO
     {
         public int Width { get; set; }
-        public int Height { get; set; }
+        public int Heigth { get; set; }
         public ColorDTO[,] Pixels { get; set; }
 
         public PpmDTO() { }
@@ -17,7 +17,7 @@ namespace Controllers.DTOs
         public PpmDTO(int width, int height)
         {
             Width = width;
-            Height = height;
+            Heigth = height;
             Pixels = new ColorDTO[height, width];
         }
     }

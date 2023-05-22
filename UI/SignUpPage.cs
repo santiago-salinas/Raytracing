@@ -12,11 +12,13 @@ namespace UI
         private bool _passwordFieldIsCorrect = false;
         private bool _confirmPasswordFieldIsCorrect = false;
         private Context _context;
+        private MemoryUserRepository _repository;
         public SignUpPage(Context context)
         {
             InitializeComponent();
             _createdUser = new User();
             _context = context;
+            _repository = context.UserRepository;
         }
 
         private void SignUpButton_Click(object sender, EventArgs e)
@@ -25,7 +27,7 @@ namespace UI
             string password = passwordTextBox.Text;
             usernameStatusLabel.Text = "";
 
-            if (UserRepository.ContainsUser(username))
+            if (_repository.ContainsUser(username))
             {
                 usernameStatusLabel.Text = "User with that name already exists";
                 _usernameFieldIsCorrect = false;
@@ -36,7 +38,7 @@ namespace UI
                 _createdUser.UserName = username;
                 _createdUser.Password = password;
                 _createdUser.RegisterDate = DateTime.Now;
-                UserRepository.AddUser(_createdUser);
+                _repository.AddUser(_createdUser);
                 this.Close();
             }
             else
