@@ -13,7 +13,7 @@ namespace UI.Tabs
     {
 
         private string _currentUser;
-        private SphereController _sphereController;
+        private SphereManagementController _sphereController;
         public ShapesTab(Context context)
         {
             InitializeComponent();

@@ -17,8 +17,8 @@ namespace UI.Dialogs
 
         private SphereDTO _selectedShape;
         private LambertianDTO _selectedMaterial;
-        private SphereController _sphereController;
-        private LambertianController _lambertianController;
+        private SphereManagementController _sphereController;
+        private MaterialManagementController _lambertianController;
         public AddModelDialog(Context context)
         {
             InitializeComponent();

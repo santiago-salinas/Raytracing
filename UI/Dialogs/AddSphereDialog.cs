@@ -11,8 +11,8 @@ namespace UI.Dialogs
        
         private string _currentUser;
         public SphereDTO NewSphereDTO { get; set; }
-        private SphereController _sphereController;
-        public AddSphereDialog(string currentUser, SphereController sphereController)
+        private SphereManagementController _sphereController;
+        public AddSphereDialog(string currentUser, SphereManagementController sphereController)
         {
             InitializeComponent();
             _currentUser = currentUser;

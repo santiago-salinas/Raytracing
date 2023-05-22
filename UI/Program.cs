@@ -3,6 +3,7 @@ using System;
 using System.Windows.Forms;
 using Controllers;
 using Controllers.Controllers;
+using Repositories;
 
 namespace UI
 {
@@ -17,11 +18,14 @@ namespace UI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            SphereRepository sphereRepository = new SphereRepository();
-            SphereController sphereController = new SphereController(sphereRepository);
+            MemoryUserRepository memoryUserRepository = new MemoryUserRepository();
+            MemorySceneRepository memorySceneRepository = new MemorySceneRepository();
+            MemoryModelRepository memoryModelRepository = new MemoryModelRepository(memorySceneRepository);
+            MemorySphereRepository memorySphereRepository = new MemorySphereRepository(memoryModelRepository);
+            MemoryLambertianRepository memoryLambertianRepository = new MemoryLambertianRepository(memoryModelRepository);
 
-            LambertianRepository lambertianRepository = new LambertianRepository();
-            LambertianController lambertianController = new LambertianController(lambertianRepository);
+            SphereManagementController sphereController = new SphereManagementController(memorySphereRepository);
+            MaterialManagementController lambertianController = new MaterialManagementController(memoryLambertianRepository);
 
             Context context = new Context();
             context.SphereController = sphereController;
@@ -34,7 +38,7 @@ namespace UI
                 RegisterDate = DateTime.Now,
             };
 
-            UserRepository.AddUser(user1);
+            memoryUserRepository.AddUser(user1);
             string userName = user1.UserName;
 
             Sphere sphere1 = new Sphere("Sphere 1", 0.5f, userName);
@@ -43,10 +47,10 @@ namespace UI
             Sphere sphere4 = new Sphere("Floor", 2000f, userName);
 
 
-            sphereRepository.AddSphere(sphere1);
-            sphereRepository.AddSphere(sphere2);
-            sphereRepository.AddSphere(sphere3);
-            sphereRepository.AddSphere(sphere4);
+            memorySphereRepository.AddSphere(sphere1);
+            memorySphereRepository.AddSphere(sphere2);
+            memorySphereRepository.AddSphere(sphere3);
+            memorySphereRepository.AddSphere(sphere4);
 
 
             Color color1 = new Color(0.1, 0.2, 0.5);
@@ -58,10 +62,10 @@ namespace UI
             Lambertian lambertian3 = new Lambertian("Lambertian 3", color3, user1.UserName);
             Lambertian lambertian4 = new Lambertian("Lambertian 4", color4, user1.UserName);
 
-            lambertianRepository.AddLambertian(lambertian1);
-            lambertianRepository.AddLambertian(lambertian2);
-            lambertianRepository.AddLambertian(lambertian3);
-            lambertianRepository.AddLambertian(lambertian4);
+            memoryLambertianRepository.AddLambertian(lambertian1);
+            memoryLambertianRepository.AddLambertian(lambertian2);
+            memoryLambertianRepository.AddLambertian(lambertian3);
+            memoryLambertianRepository.AddLambertian(lambertian4);
 
 
             Model model1 = new Model("Model 1", sphere1, lambertian1, user1.UserName);
@@ -69,10 +73,10 @@ namespace UI
             Model model3 = new Model("Model 3", sphere3, lambertian3, user1.UserName);
             Model model4 = new Model("Model 4", sphere4, lambertian4, user1.UserName);
 
-            ModelRepository.AddModel(model1);
-            ModelRepository.AddModel(model2);
-            ModelRepository.AddModel(model3);
-            ModelRepository.AddModel(model4);
+            memoryModelRepository.AddModel(model1);
+            memoryModelRepository.AddModel(model2);
+            memoryModelRepository.AddModel(model3);
+            memoryModelRepository.AddModel(model4);
 
 
             CameraDTO defaultCameraValues = new CameraDTO()
@@ -94,7 +98,7 @@ namespace UI
                 CameraDTO = defaultCameraValues,
             };
 
-            SceneRepository.AddScene(scene1);
+            memorySceneRepository.AddScene(scene1);
 
             scene1.AddPositionedModel(new PositionedModel()
             {

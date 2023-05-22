@@ -10,9 +10,9 @@ namespace UI.Cards
     {
 
         private SphereDTO _sphereDTO;
-        private SphereController _controller;
+        private SphereManagementController _controller;
 
-        public SphereCard(SphereDTO sphereDTO, SphereController controller)
+        public SphereCard(SphereDTO sphereDTO, SphereManagementController controller)
         {
             InitializeComponent();
             _sphereDTO = sphereDTO;

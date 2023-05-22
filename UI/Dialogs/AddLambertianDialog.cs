@@ -9,7 +9,7 @@ namespace UI.Dialogs
 {
     public partial class AddLambertianDialog : Form
     {
-        private LambertianController _controller;
+        private MaterialManagementController _controller;
         private string _loggedUser;
 
         public LambertianDTO NewLambertian;

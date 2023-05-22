@@ -14,7 +14,7 @@ namespace UI.Tabs
     {
         private string _loggedUser;
         private Context _context;
-        private LambertianController _lambertianController;
+        private MaterialManagementController _lambertianController;
         public MaterialsTab(Context context)
         {
             InitializeComponent();

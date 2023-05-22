@@ -9,9 +9,9 @@ namespace UI.Cards
     public partial class LambertianCard : UserControl
     {
         private LambertianDTO _lambertian;
-        private LambertianController _controller;
+        private MaterialManagementController _controller;
 
-        public LambertianCard(LambertianDTO lambertianDTO, LambertianController controller)
+        public LambertianCard(LambertianDTO lambertianDTO, MaterialManagementController controller)
         {
             InitializeComponent();
             _lambertian = lambertianDTO;

@@ -42,22 +42,32 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context.cs" />
-    <Compile Include="Controllers\LambertianController.cs" />
+    <Compile Include="Controllers\MaterialManagementController.cs" />
+    <Compile Include="Controllers\ModelManagementController.cs" />
+    <Compile Include="Controllers\PPMController.cs" />
+    <Compile Include="Converter\ColorConverter.cs" />
+    <Compile Include="Converter\PPMConverter.cs" />
     <Compile Include="DTOs\ColorDTO.cs" />
     <Compile Include="DTOs\LambertianDTO.cs" />
     <Compile Include="DTOs\ModelDTO.cs" />
     <Compile Include="DTOs\PpmDTO.cs" />
+    <Compile Include="Interfaces\IMaterialManagement.cs" />
+    <Compile Include="Interfaces\ISphereManagement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DTOs\SceneDTO.cs" />
     <Compile Include="DTOs\SphereDTO.cs" />
     <Compile Include="DTOs\UserDTO.cs" />
     <Compile Include="DTOs\VectorDTO.cs" />
-    <Compile Include="Controllers\SphereController.cs" />
+    <Compile Include="Controllers\SphereManagementController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
       <Project>{5807fdc2-139e-4ad2-97d6-0ee8dfcabb8f}</Project>
       <Name>BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Obligatorio DA1\Repositories\Repositories.csproj">
+      <Project>{7a7be452-b92a-4aa7-bb88-3167e526a453}</Project>
+      <Name>Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

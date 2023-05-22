@@ -5,17 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Controllers.Interfaces;
+using Controllers.Converter;
 
 namespace Controllers.Controllers
 {
-    public class LambertianController
+    public class MaterialManagementController : IMaterialManagement
     {
-        private LambertianRepository _repository;
+        private MemoryLambertianRepository _repository;
+        private ColorConverter _colorConverter;
         
-
-        public LambertianController(LambertianRepository repository)
+        public MaterialManagementController(MemoryLambertianRepository repository,ColorConverter converter)
         {
             _repository = repository;
+            _colorConverter = converter;
         }
 
         public void AddLambertian(LambertianDTO lambertianDTO)
@@ -27,6 +30,11 @@ namespace Controllers.Controllers
         public void RemoveLambertian(string name, string ownerName)
         {
             _repository.RemoveLambertian(name, ownerName);
+        }
+
+        public Lambertian GetLambertian(string name, string ownerName)
+        {
+            return _repository.GetLambertian(name, ownerName);
         }
 
         private bool ContainsLambertian(string lambertianName, string ownerName) 
@@ -47,7 +55,7 @@ namespace Controllers.Controllers
             {
                 Name = dto.Name,
                 Owner = dto.Owner,
-                Color = ConvertToColor(dto.Color),
+                Color = _colorConverter.ConvertToColor(dto.Color),
             };
 
             return lambertian;
@@ -65,52 +73,12 @@ namespace Controllers.Controllers
                 {
                     Name = lambertian.Name,
                     Owner = lambertian.Owner,
-                    Color = ConvertToColorDTO(lambertian.Color),
+                    Color = _colorConverter.ConvertToColorDTO(lambertian.Color),
                 };
                 lambertianDTOs.Add(lambertianDTO);
             }
 
             return lambertianDTOs;
-        }
-
-        private ColorDTO ConvertToColorDTO(Color color)
-        {
-            ColorDTO colorDTO = new ColorDTO()
-            {
-                Red = (int)color.Red,
-                Green = (int)color.Green,
-                Blue = (int)color.Blue,
-            };
-
-            return colorDTO;
-        }
-
-        private Color ConvertToColor(ColorDTO colorDTO)
-        {
-            int upperRGBBound = 255;
-            int redValue = colorDTO.Red;
-            int greenValue = colorDTO.Green;
-            int blueValue = colorDTO.Blue;
-            if(!IsBetweenBounds(redValue) || !IsBetweenBounds(greenValue) || !IsBetweenBounds(blueValue))
-            {
-                throw new BusinessLogicException("Inserted RGB values must be between 0 and 255");
-            }
-
-            Color color = new Color()
-            {   
-                Red = (double)colorDTO.Red/ upperRGBBound,
-                Green = (double)colorDTO.Green/ upperRGBBound,
-                Blue = (double)colorDTO.Blue/ upperRGBBound,
-            };
-
-            return color;
-        }
-
-        private bool IsBetweenBounds(int value)
-        {
-            int upperBound = 255;
-            int lowerBound = 0;
-            return (value >= lowerBound) && (value <= upperBound);
         }
 
     }

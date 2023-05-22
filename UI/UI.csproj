@@ -249,6 +249,10 @@
       <Project>{373a8444-9aba-4360-a411-884816f6f2dc}</Project>
       <Name>Controllers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Obligatorio DA1\Repositories\Repositories.csproj">
+      <Project>{7a7be452-b92a-4aa7-bb88-3167e526a453}</Project>
+      <Name>Repositories</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\add.png" />

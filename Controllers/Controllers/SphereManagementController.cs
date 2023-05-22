@@ -5,28 +5,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessLogic;
+using Controllers.Interfaces;
+using Controllers;
 
 namespace Controllers
 {
-    public class SphereController
+    public class SphereManagementController : ISphereManagement
     {
-        private SphereRepository _repository;
-        public SphereController(SphereRepository sphereRepo) {
+        private ISphereRepository _repository;
+        public SphereManagementController(ISphereRepository sphereRepo) {
             _repository = sphereRepo;
         }
 
         public void AddSphere(SphereDTO sphereDTO)
         {
-            // Convert the SphereDTO to a Sphere object
             Sphere sphere = ConvertToSphere(sphereDTO);
-
-            // Add the sphere to the repository
             _repository.AddSphere(sphere);
         }
 
         public void RemoveSphere(string name, string ownerName)
         {
-            // Remove the sphere from the repository
             _repository.RemoveSphere(name, ownerName);
         }
 
@@ -35,20 +33,21 @@ namespace Controllers
             return _repository.ContainsSphere(sphereName, ownerName);
         }
 
-        public List<SphereDTO> GetSpheresFromUser(string owner)
+        public Sphere GetSphere(string name, string owner) 
         {
-            // Get the spheres from the repository
-            List<Sphere> spheres = _repository.GetSpheresFromUser(owner);
+            return _repository.GetSphere(name, owner);
+        }
 
-            // Convert the spheres to SphereDTO objects
+        public List<SphereDTO> GetSpheresFromUser(string owner)
+        {            
+            List<Sphere> spheres = _repository.GetSpheresFromUser(owner);            
             List<SphereDTO> sphereDTOs = ConvertToSphereDTOs(spheres);
 
             return sphereDTOs;
         }
 
         public Sphere ConvertToSphere(SphereDTO sphereDTO)
-        {
-            // Convert the SphereDTO properties to the corresponding Sphere properties
+        {            
             Sphere sphere = new Sphere
             {
                 Name = sphereDTO.Name,
@@ -65,7 +64,6 @@ namespace Controllers
 
             foreach (Sphere sphere in spheres)
             {
-                // Convert each Sphere to a SphereDTO and add it to the list
                 SphereDTO sphereDTO = new SphereDTO
                 {
                     Name = sphere.Name,
