@@ -56,7 +56,9 @@
     <Compile Include="Objects\Scene.cs" />
     <Compile Include="Utilities\Camera.cs" />
     <Compile Include="Utilities\CameraDTO.cs" />
+    <Compile Include="Utilities\CameraBlur.cs" />
     <Compile Include="Utilities\Color.cs" />
+    <Compile Include="Utilities\ICamera.cs" />
     <Compile Include="Utilities\RandomProvider.cs" />
     <Compile Include="Utilities\HitRecord.cs" />
     <Compile Include="Utilities\Engine.cs" />

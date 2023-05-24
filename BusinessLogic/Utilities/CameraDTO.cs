@@ -10,8 +10,9 @@
         public int ResolutionY { get; set; }
         public int SamplesPerPixel { get; set; }
         public int MaxDepth { get; set; }
+        public double Aperture { get; set; }
 
-        public CameraDTO() { }
+    public CameraDTO() { }
     }
 
 

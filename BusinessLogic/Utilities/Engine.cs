@@ -26,24 +26,32 @@ namespace BusinessLogic
 
         public Engine(Scene scene)
         {
-            Camera camera = new Camera(scene.CameraDTO);
+            Random = new Random();
+
+            if (scene.Blur)
+            {
+                CameraUsedToRender = new CameraBlur(scene.CameraDTO);
+            }
+            else
+            {
+                CameraUsedToRender = new Camera(scene.CameraDTO);
+            }
+            
 
             SceneToRender = scene;
-            CameraUsedToRender = camera;
-            SamplesPerPixel = camera.SamplesPerPixel;
-            ResolutionX = camera.ResolutionX;
-            ResolutionY = camera.ResolutionY;
-            MaxDepth = camera.MaxDepth;
+            SamplesPerPixel = CameraUsedToRender.SamplesPerPixel;
+            ResolutionX = CameraUsedToRender.ResolutionX;
+            ResolutionY = CameraUsedToRender.ResolutionY;
+            MaxDepth = CameraUsedToRender.MaxDepth;
 
-            Random = new Random();
+           
         }
         private Scene SceneToRender { get; set; }
-        private Camera CameraUsedToRender { get; set; }
+        private ICamera CameraUsedToRender { get; set; }
         private int SamplesPerPixel { get; }
         private int ResolutionX { get; }
         private int ResolutionY { get; }
         private int MaxDepth { get; }
-
 
         public void RandomOff()
         {

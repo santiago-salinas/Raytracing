@@ -44,6 +44,8 @@ namespace BusinessLogic
 
         public CameraDTO CameraDTO { get; set; }
 
+        public bool Blur { get; set; }
+
         private void CheckIfStringNull(string value)
         {
             if (String.IsNullOrEmpty(value))
