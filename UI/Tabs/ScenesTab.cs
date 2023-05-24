@@ -3,20 +3,21 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using UI.Cards;
+using Controllers;
 
 namespace UI.Tabs
 {
     public partial class ScenesTab : Form
     {
-        private User _loggedUser;
+        private string _currentUser;
         public EditSceneTab SceneEditDialog;
         private MainPage _mainPage;
-        public ScenesTab(User loggedUser, MainPage mainPage)
+        public ScenesTab(Context context, MainPage mainPage)
         {
             InitializeComponent();
-            this._loggedUser = loggedUser;
+            _loggedUser = context.CurrentUser;
             LoadScenes();
-            this._mainPage = mainPage;
+            _mainPage = mainPage;
         }
 
         public void LoadScenes()

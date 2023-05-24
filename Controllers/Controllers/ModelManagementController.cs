@@ -11,7 +11,7 @@ using System.Xml.Schema;
 
 namespace Controllers.Controllers
 {
-    public class ModelManagementController
+    public class ModelManagementController : IModelManagement
     {
         private IModelRepository _modelRepository;
         private IMaterialManagement _materialController;
@@ -45,7 +45,7 @@ namespace Controllers.Controllers
             _modelRepository.RemoveModel(name, owner);
         }
 
-        private Model ConvertToModel(ModelDTO modelDTO)
+        public Model ConvertToModel(ModelDTO modelDTO)
         {
             string ownerName = modelDTO.OwnerName;
             LambertianDTO material = modelDTO.Material;
@@ -57,7 +57,7 @@ namespace Controllers.Controllers
                 Shape = _sphereController.GetSphere(shape.Name,ownerName),
                 Material = _materialController.GetLambertian(material.Name,ownerName),
                 Owner = ownerName,
-                Preview = _ppmConverter.ConvertToPPM(modelDTO.Preview)
+                Preview = ConvertToPPM(modelDTO.Preview)
             };
 
             return model;
@@ -78,7 +78,7 @@ namespace Controllers.Controllers
             return _sphereController.GetSpheresFromUser(owner);
         }
 
-        private ModelDTO ConvertToModelDTO(Model model)
+        public ModelDTO ConvertToModelDTO(Model model)
         {
             ModelDTO modelDTO = new ModelDTO()
             {
@@ -86,7 +86,7 @@ namespace Controllers.Controllers
                 Shape = _sphereController.ConvertToDTO(model.Shape),
                 Name = model.Name,
                 OwnerName = model.Owner,
-                Preview = _ppmConverter.ConvertToPpmDTO(model.Preview)
+                Preview = ConvertPpmToDTO(model.Preview)
             };
             return modelDTO;
         }
@@ -102,6 +102,14 @@ namespace Controllers.Controllers
             }
 
             return modelDTOs;
+        }
+
+        public PpmDTO ConvertPpmToDTO(PPM ppm) {
+            return _ppmConverter.ConvertToPpmDTO(ppm);
+        }
+
+        public PPM ConvertToPPM(PpmDTO dto) {
+            return _ppmConverter.ConvertToPPM(dto);
         }
     }
 }

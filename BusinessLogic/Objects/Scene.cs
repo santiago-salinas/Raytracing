@@ -39,6 +39,7 @@ namespace BusinessLogic
         public PPM Preview { get; set; }
         public List<PositionedModel> PositionedModels
         {
+            set { _positionedModellList = value;}
             get { return _positionedModellList; }
         }
 

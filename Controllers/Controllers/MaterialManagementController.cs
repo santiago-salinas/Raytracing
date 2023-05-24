@@ -7,15 +7,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Controllers.Interfaces;
 using Controllers.Converter;
+using Repositories.Interfaces;
 
 namespace Controllers.Controllers
 {
     public class MaterialManagementController : IMaterialManagement
     {
-        private MemoryLambertianRepository _repository;
+        private IMaterialRepository _repository;
         private ColorConverter _colorConverter;
         
-        public MaterialManagementController(MemoryLambertianRepository repository,ColorConverter converter)
+        public MaterialManagementController(IMaterialRepository repository,ColorConverter converter)
         {
             _repository = repository;
             _colorConverter = converter;
