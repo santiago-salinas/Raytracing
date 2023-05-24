@@ -72,7 +72,9 @@ namespace UI
                 MaxDepth = 50,
                 ResolutionX = 300,
                 ResolutionY = 200,
-                SamplesPerPixel = 100
+                SamplesPerPixel = 100,
+
+                Aperture = 1.0,
             };
 
             Scene scene1 = new Scene()

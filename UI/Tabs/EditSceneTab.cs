@@ -200,7 +200,7 @@ namespace UI.Tabs
 
         private void numericAperture_ValueChanged(object sender, EventArgs e)
         {
-            int newAperture = (int)apertureInput.Value;
+            double newAperture = (double) apertureInput.Value;
             if (sceneCamera.Aperture != newAperture)
             {
                 NotifyThatSeneWasModified();
@@ -209,6 +209,11 @@ namespace UI.Tabs
         }
 
         private void checkBlur_CheckStateChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void checkBlur_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBlur.Checked)
             {
@@ -220,6 +225,7 @@ namespace UI.Tabs
                 apertureInput.Enabled = false;
                 _scene.Blur = false;
             }
+            NotifyThatSeneWasModified();
         }
     }
 }

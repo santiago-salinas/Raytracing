@@ -48,7 +48,7 @@
             this.lookFromButton = new System.Windows.Forms.Button();
             this.lookAtButton = new System.Windows.Forms.Button();
             this.apertureInput = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
+            this.apertureLabel = new System.Windows.Forms.Label();
             this.checkBlur = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.fovInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.apertureInput)).BeginInit();
@@ -284,15 +284,15 @@
             0});
             this.apertureInput.ValueChanged += new System.EventHandler(this.numericAperture_ValueChanged);
             // 
-            // label1
+            // apertureLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(598, 135);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 18);
-            this.label1.TabIndex = 25;
-            this.label1.Text = "Aperture";
+            this.apertureLabel.AutoSize = true;
+            this.apertureLabel.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.apertureLabel.Location = new System.Drawing.Point(598, 135);
+            this.apertureLabel.Name = "apertureLabel";
+            this.apertureLabel.Size = new System.Drawing.Size(72, 18);
+            this.apertureLabel.TabIndex = 25;
+            this.apertureLabel.Text = "Aperture";
             // 
             // checkBlur
             // 
@@ -303,6 +303,7 @@
             this.checkBlur.TabIndex = 26;
             this.checkBlur.Text = "Use";
             this.checkBlur.UseVisualStyleBackColor = true;
+            this.checkBlur.CheckedChanged += new System.EventHandler(this.checkBlur_CheckedChanged);
             this.checkBlur.CheckStateChanged += new System.EventHandler(this.checkBlur_CheckStateChanged);
             // 
             // EditSceneTab
@@ -312,7 +313,7 @@
             this.ClientSize = new System.Drawing.Size(1275, 820);
             this.ControlBox = false;
             this.Controls.Add(this.checkBlur);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.apertureLabel);
             this.Controls.Add(this.apertureInput);
             this.Controls.Add(this.lookAtButton);
             this.Controls.Add(this.lookFromButton);
@@ -366,7 +367,7 @@
         private System.Windows.Forms.Button lookFromButton;
         private System.Windows.Forms.Button lookAtButton;
         private System.Windows.Forms.NumericUpDown apertureInput;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label apertureLabel;
         private System.Windows.Forms.CheckBox checkBlur;
     }
 }
