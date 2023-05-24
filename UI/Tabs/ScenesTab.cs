@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using UI.Cards;
 using Controllers;
+using Controllers.DTOs;
+using Controllers.Controllers;
 
 namespace UI.Tabs
 {
@@ -12,23 +14,25 @@ namespace UI.Tabs
         private string _currentUser;
         public EditSceneTab SceneEditDialog;
         private MainPage _mainPage;
+        private SceneManagementController _controller;
         public ScenesTab(Context context, MainPage mainPage)
         {
             InitializeComponent();
-            _loggedUser = context.CurrentUser;
-            LoadScenes();
             _mainPage = mainPage;
+            _controller = context.SceneController;
+            _currentUser = context.CurrentUser;
+            LoadScenes();            
         }
 
         public void LoadScenes()
         {
             flowLayoutPanel.Controls.Clear();
-            //List<Scene> sceneList = SceneRepository.GetScenesFromUser(_loggedUser.UserName);
-            //foreach (Scene elem in sceneList)
-            //{
-               // SceneCard sceneCard = new SceneCard(elem);
-               // flowLayoutPanel.Controls.Add(sceneCard);
-            //}
+            List<SceneDTO> sceneList = _controller.GetScenesFromUser(_currentUser);
+            foreach (SceneDTO elem in sceneList)
+            {
+               SceneCard sceneCard = new SceneCard(_controller,elem);
+               flowLayoutPanel.Controls.Add(sceneCard);
+            }
         }
 
         private void AddSceneButton_Click(object sender, EventArgs e)

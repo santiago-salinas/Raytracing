@@ -24,7 +24,7 @@ namespace UI.Tabs
         {
             InitializeComponent();            
             _loggedUser = context.CurrentUser;
-            _repository = context.MemorySceneRepository;
+            _repository = context.SceneRepository;
             _modelController = context.ModelController;
             _isNewScene = providedScene == null;
             _scene = _isNewScene ? CreateNewScene() : providedScene;

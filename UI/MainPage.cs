@@ -29,7 +29,7 @@ namespace UI
         {
             if (_scenesTab == null)
             {
-                _scenesTab = new ScenesTab(_loggedUser, this);
+                _scenesTab = new ScenesTab(_context, this);
                 _scenesTab.FormClosed += ScenesTabClosed;
                 _scenesTab.MdiParent = this;
                 _scenesTab.Dock = DockStyle.Fill;

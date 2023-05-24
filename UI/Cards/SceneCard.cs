@@ -1,36 +1,36 @@
-﻿using BusinessLogic;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Windows.Forms;
 using UI.Tabs;
 using Controllers;
+using Controllers.DTOs;
+using Controllers.Controllers;
 
 namespace UI.Cards
 {
     public partial class SceneCard : UserControl
     {
-        private Scene _thisScene;
-        private ContextBoundObject _context;
-        private MemorySceneRepository _sceneRepository;
+        private SceneDTO _thisScene;        
+        private SceneManagementController _controller;
 
-        public SceneCard(Context context, Scene scene)
+        public SceneCard(SceneManagementController controller, SceneDTO scene)
         {
             InitializeComponent();
             _thisScene = scene;
-            _sceneRepository = context.MemorySceneRepository;
+            _controller = controller;
             LoadData();
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            _sceneRepository.RemoveScene(_thisScene.Name, _thisScene.Owner);
+            _controller.RemoveScene(_thisScene.Name, _thisScene.Owner);
             this.Parent.Controls.Remove(this);
         }
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            ScenesTab scenesTab = this.Parent.Parent as ScenesTab;
-            scenesTab.LoadSceneEditTab(_thisScene);
+            //ScenesTab scenesTab = this.Parent.Parent as ScenesTab;
+            //scenesTab.LoadSceneEditTab(_thisScene);
         }
 
         private void LoadData()
@@ -48,7 +48,7 @@ namespace UI.Cards
             else
             {
                 previewPanel.Controls.Clear();
-                previewPanel.Controls.Add(new PPMViewer(_thisScene.Preview));
+               // previewPanel.Controls.Add(new PPMViewer(_thisScene.Preview));
             }
         }
     }

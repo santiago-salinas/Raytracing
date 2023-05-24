@@ -5,6 +5,7 @@ using Controllers;
 using Controllers.Controllers;
 using Repositories;
 using Controllers.Converter;
+using System.Security.Cryptography;
 
 namespace UI
 {
@@ -37,12 +38,14 @@ namespace UI
                 PpmConverter = ppmConverter,
                 SphereController = sphereController
             };
+            SceneManagementController sceneController = new SceneManagementController(memorySceneRepository, modelController);
 
             Context context = new Context();
             context.SphereController = sphereController;
             context.LambertianController = lambertianController;
             context.ModelController = modelController;
             context.UserRepository = memoryUserRepository;
+            context.SceneController = sceneController;
             
 
             User user1 = new User()
