@@ -72,7 +72,7 @@ namespace BusinessLogic
 
             if (_sceneRepository.ExistsSceneUsingModel(model))
             {
-                throw new BusinessLogicException("Cant delete sphere used by existing model");
+                throw new BusinessLogicException("Cannot delete model used by an existing scene");
             }
             _modelList.Remove(model);
         }

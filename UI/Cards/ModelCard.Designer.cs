@@ -88,10 +88,8 @@
             this.deleteLabel.ForeColor = System.Drawing.Color.Firebrick;
             this.deleteLabel.Location = new System.Drawing.Point(210, 115);
             this.deleteLabel.Name = "deleteLabel";
-            this.deleteLabel.Size = new System.Drawing.Size(522, 19);
+            this.deleteLabel.Size = new System.Drawing.Size(0, 19);
             this.deleteLabel.TabIndex = 8;
-            this.deleteLabel.Text = "* You cannot delete a model that is being used by a scene";
-            this.deleteLabel.Visible = false;
             // 
             // previewBox
             // 
