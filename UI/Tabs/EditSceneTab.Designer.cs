@@ -47,7 +47,11 @@
             this.renderPanel = new System.Windows.Forms.Panel();
             this.lookFromButton = new System.Windows.Forms.Button();
             this.lookAtButton = new System.Windows.Forms.Button();
+            this.apertureInput = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.checkBlur = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.fovInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.apertureInput)).BeginInit();
             this.SuspendLayout();
             // 
             // saveButton
@@ -254,12 +258,62 @@
             this.lookAtButton.UseVisualStyleBackColor = true;
             this.lookAtButton.Click += new System.EventHandler(this.LookAtButton_Click);
             // 
+            // apertureInput
+            // 
+            this.apertureInput.DecimalPlaces = 1;
+            this.apertureInput.Enabled = false;
+            this.apertureInput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.apertureInput.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.apertureInput.Location = new System.Drawing.Point(578, 168);
+            this.apertureInput.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.apertureInput.Name = "apertureInput";
+            this.apertureInput.Size = new System.Drawing.Size(120, 26);
+            this.apertureInput.TabIndex = 24;
+            this.apertureInput.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.apertureInput.ValueChanged += new System.EventHandler(this.numericAperture_ValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(598, 135);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 18);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "Aperture";
+            // 
+            // checkBlur
+            // 
+            this.checkBlur.AutoSize = true;
+            this.checkBlur.Location = new System.Drawing.Point(613, 200);
+            this.checkBlur.Name = "checkBlur";
+            this.checkBlur.Size = new System.Drawing.Size(45, 17);
+            this.checkBlur.TabIndex = 26;
+            this.checkBlur.Text = "Use";
+            this.checkBlur.UseVisualStyleBackColor = true;
+            this.checkBlur.CheckStateChanged += new System.EventHandler(this.checkBlur_CheckStateChanged);
+            // 
             // EditSceneTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1275, 820);
             this.ControlBox = false;
+            this.Controls.Add(this.checkBlur);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.apertureInput);
             this.Controls.Add(this.lookAtButton);
             this.Controls.Add(this.lookFromButton);
             this.Controls.Add(this.renderPanel);
@@ -284,6 +338,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "sceneEditTab";
             ((System.ComponentModel.ISupportInitialize)(this.fovInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.apertureInput)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -310,5 +365,8 @@
         private System.Windows.Forms.Panel renderPanel;
         private System.Windows.Forms.Button lookFromButton;
         private System.Windows.Forms.Button lookAtButton;
+        private System.Windows.Forms.NumericUpDown apertureInput;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox checkBlur;
     }
 }

@@ -37,7 +37,9 @@ namespace UI.Tabs
                 MaxDepth = 20,
                 ResolutionX = 300,
                 ResolutionY = 200,
-                SamplesPerPixel = 50
+                SamplesPerPixel = 50,
+
+                Aperture = 1.0
             };
 
             Scene newScene = new Scene()
@@ -196,5 +198,28 @@ namespace UI.Tabs
             outdatedStatusLabel.Visible = true;
         }
 
+        private void numericAperture_ValueChanged(object sender, EventArgs e)
+        {
+            int newAperture = (int)apertureInput.Value;
+            if (sceneCamera.Aperture != newAperture)
+            {
+                NotifyThatSeneWasModified();
+                sceneCamera.Aperture = newAperture;
+            }
+        }
+
+        private void checkBlur_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (checkBlur.Checked)
+            {
+                apertureInput.Enabled = true;
+                _scene.Blur = true;
+            }
+            else
+            {
+                apertureInput.Enabled = false;
+                _scene.Blur = false;
+            }
+        }
     }
 }
