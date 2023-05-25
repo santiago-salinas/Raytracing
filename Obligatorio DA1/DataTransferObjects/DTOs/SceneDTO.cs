@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLogic;
 
 namespace DataTransferObjects
 {
@@ -15,6 +16,6 @@ namespace DataTransferObjects
         public string Owner { get; set; }
         public PpmDTO Preview { get; set; }
         public List<PositionedModelDTO> PositionedModels { get; set; }
-        public CameraDTO CameraDTO { get; set; }
+        public BLCameraDTO CameraDTO { get; set; }
     }
 }
