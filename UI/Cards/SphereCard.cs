@@ -2,7 +2,7 @@
 using Controllers;
 using System;
 using System.Windows.Forms;
-using Controllers.DTOs;
+using DataTransferObjects;
 
 namespace UI.Cards
 {

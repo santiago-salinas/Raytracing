@@ -1,5 +1,5 @@
 ﻿using BusinessLogic;
-using Controllers.DTOs;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ using Repositories.Interfaces;
 
 namespace Controllers.Controllers
 {
-    public class MaterialManagementController : IMaterialManagement
+    public class MaterialManagementController
     {
         private IMaterialRepository _repository;
         private ColorConverter _colorConverter;

@@ -8,7 +8,7 @@ using BusinessLogic;
 using Controllers.DTOs;
 using Controllers.Converter;
 
-namespace Controllers
+namespace Services
 {
     public class PPMConverter
     {

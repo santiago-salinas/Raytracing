@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Controllers;
 using BusinessLogic;
-using Controllers.DTOs;
 
-namespace Controllers.Converter
+namespace Services
 {
     public class ColorConverter
     {
         public ColorConverter() { }
-
+        private int _upperBound = 255;
+        private int _lowerBound = 0;
         public ColorDTO ConvertToColorDTO(Color color)
         {
             ColorDTO colorDTO = new ColorDTO()
@@ -27,20 +27,19 @@ namespace Controllers.Converter
 
         public Color ConvertToColor(ColorDTO colorDTO)
         {
-            int upperRGBBound = 255;
             double redValue = colorDTO.Red;
             double greenValue = colorDTO.Green;
             double blueValue = colorDTO.Blue;
             if (!IsBetweenBounds(redValue) || !IsBetweenBounds(greenValue) || !IsBetweenBounds(blueValue))
             {
-                throw new BusinessLogicException("Inserted RGB values must be between 0 and 255");
+                throw new BusinessLogicException($"Inserted RGB values must be between {_lowerBound} and {_upperBound}");
             }
 
             Color color = new Color()
             {
-                Red = colorDTO.Red / upperRGBBound,
-                Green = colorDTO.Green / upperRGBBound,
-                Blue = colorDTO.Blue / upperRGBBound,
+                Red = colorDTO.Red / _upperBound,
+                Green = colorDTO.Green / _upperBound,
+                Blue = colorDTO.Blue / _upperBound,
             };
 
             return color;
@@ -48,9 +47,8 @@ namespace Controllers.Converter
 
         private bool IsBetweenBounds(double value)
         {
-            int upperBound = 255;
-            int lowerBound = 0;
-            return (value >= lowerBound) && (value <= upperBound);
+            
+            return (value >= _lowerBound) && (value <= _upperBound);
         }
     }
 }
