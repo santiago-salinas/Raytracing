@@ -41,11 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IMaterialRepository.cs" />
-    <Compile Include="Interfaces\IModelRepository.cs" />
-    <Compile Include="Interfaces\ISceneRepository.cs" />
-    <Compile Include="Interfaces\ISphereRepository.cs" />
-    <Compile Include="Interfaces\IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\MemoryLambertianRepository.cs" />
     <Compile Include="Repositories\MemoryModelRepository.cs" />

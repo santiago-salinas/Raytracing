@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controllers", "..\Controlle
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{7A7BE452-B92A-4AA7-BB88-3167E526A453}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "..\Services\Services.csproj", "{036D7A65-09F5-408F-A99D-765125DF08A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataTransferObjects", "DataTransferObjects\DataTransferObjects.csproj", "{AB995188-C650-4026-83C9-87CB778C9D89}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{7A7BE452-B92A-4AA7-BB88-3167E526A453}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A7BE452-B92A-4AA7-BB88-3167E526A453}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A7BE452-B92A-4AA7-BB88-3167E526A453}.Release|Any CPU.Build.0 = Release|Any CPU
+		{036D7A65-09F5-408F-A99D-765125DF08A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{036D7A65-09F5-408F-A99D-765125DF08A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{036D7A65-09F5-408F-A99D-765125DF08A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{036D7A65-09F5-408F-A99D-765125DF08A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB995188-C650-4026-83C9-87CB778C9D89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB995188-C650-4026-83C9-87CB778C9D89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB995188-C650-4026-83C9-87CB778C9D89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB995188-C650-4026-83C9-87CB778C9D89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,90 +1,49 @@
-﻿using BusinessLogic;
-using Services;
-using System;
+﻿using Services;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Controllers.Interfaces;
-using Controllers.Converter;
+using System;
 using Repositories.Interfaces;
+using DataTransferObjects;
+using System.Xml.Linq;
 
 namespace Controllers.Controllers
 {
     public class MaterialManagementController
     {
-        private IMaterialRepository _repository;
-        private ColorConverter _colorConverter;
+        private MaterialManagementService _service;
         
-        public MaterialManagementController(IMaterialRepository repository,ColorConverter converter)
+        public MaterialManagementController(MaterialManagementService service)
         {
-            _repository = repository;
-            _colorConverter = converter;
+            _service = service;
         }
 
         public void AddLambertian(LambertianDTO lambertianDTO)
         {
-            Lambertian lambertian = ConvertToLambertian(lambertianDTO);
-            _repository.AddLambertian(lambertian);
+            try
+            {
+                _service.AddLambertian(lambertianDTO);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            
         }
 
         public void RemoveLambertian(string name, string ownerName)
         {
-            _repository.RemoveLambertian(name, ownerName);
-        }
-
-        public Lambertian GetLambertian(string name, string ownerName)
-        {
-            return _repository.GetLambertian(name, ownerName);
-        }
-
-        private bool ContainsLambertian(string lambertianName, string ownerName) 
-        {
-            return _repository.ContainsLambertian(lambertianName, ownerName);
+            try
+            {
+                _service.RemoveLambertian(name, ownerName);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public List<LambertianDTO> GetLambertiansFromUser(string owner) 
         {
-            List<Lambertian> lambertians = _repository.GetLambertiansFromUser(owner);
-            List<LambertianDTO> lambertianDTOs = ConvertToLambertianDTOs(lambertians);
-            return lambertianDTOs;
-        }
-
-        public Lambertian ConvertToLambertian(LambertianDTO dto)
-        {
-            Lambertian lambertian = new Lambertian()
-            {
-                Name = dto.Name,
-                Owner = dto.Owner,
-                Color = _colorConverter.ConvertToColor(dto.Color),
-            };
-
-            return lambertian;
-
-        }
-        private List<LambertianDTO> ConvertToLambertianDTOs(List<Lambertian> lambertians)
-        {
-            List<LambertianDTO> lambertianDTOs = new List<LambertianDTO>();
-
-            foreach (Lambertian lambertian in lambertians)
-            {
-                LambertianDTO lambertianDTO = ConvertToDTO(lambertian);
-                lambertianDTOs.Add(lambertianDTO);
-            }
-
-            return lambertianDTOs;
-        }
-
-        public LambertianDTO ConvertToDTO(Lambertian lambertian)
-        {
-            LambertianDTO lambertianDTO = new LambertianDTO()
-            {
-                Name = lambertian.Name,
-                Owner = lambertian.Owner,
-                Color = _colorConverter.ConvertToColorDTO(lambertian.Color),
-            };
-
-            return lambertianDTO;
+            return _service.GetLambertiansFromUser(owner);
         }
 
     }

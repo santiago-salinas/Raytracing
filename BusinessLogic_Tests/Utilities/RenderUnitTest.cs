@@ -200,7 +200,7 @@ namespace BusinessLogic_Tests
             int samplesPerPixel = 100;
             int depth = 50;
 
-            CameraDTO dto = new CameraDTO()
+            BLCameraDTO dto = new BLCameraDTO()
             {
                 LookFrom = origin,
                 LookAt = lookAt,

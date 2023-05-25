@@ -19,7 +19,7 @@ namespace UI.Tabs
         private bool _isNewScene;
         private MemorySceneRepository _repository;
         private ModelManagementController _modelController;
-        private CameraDTO sceneCamera;
+        private BLCameraDTO sceneCamera;
         public EditSceneTab(Scene providedScene, Context context)
         {
             InitializeComponent();            
@@ -34,7 +34,7 @@ namespace UI.Tabs
 
         private Scene CreateNewScene()
         {
-            CameraDTO defaultCameraValues = new CameraDTO()
+            BLCameraDTO defaultCameraValues = new BLCameraDTO()
             {
                 LookFrom = new Vector(0, 2, 0),
                 LookAt = new Vector(0, 2, 5),

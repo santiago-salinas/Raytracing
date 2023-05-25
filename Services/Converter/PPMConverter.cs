@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Controllers;
 using BusinessLogic;
-using Controllers.DTOs;
-using Controllers.Converter;
+using DataTransferObjects;
+
 
 namespace Services
 {

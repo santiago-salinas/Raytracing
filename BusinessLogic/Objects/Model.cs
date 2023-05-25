@@ -42,7 +42,7 @@ namespace BusinessLogic
             testScene.AddPositionedModel(positionedModel);
 
 
-            testScene.CameraDTO = new CameraDTO()
+            testScene.CameraDTO = new BLCameraDTO()
             {
                 LookFrom = new Vector(0, 5, 0),
                 LookAt = new Vector(1, 1, 1),

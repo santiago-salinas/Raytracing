@@ -1,15 +1,10 @@
 ﻿using BusinessLogic;
-using Services;
 using Controllers.Interfaces;
 using Repositories.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+using DataTransferObjects;
 
-namespace Controllers.Controllers
+namespace Controllers
 {
     public class SceneManagementController
     {

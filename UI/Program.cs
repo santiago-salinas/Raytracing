@@ -96,7 +96,7 @@ namespace UI
             memoryModelRepository.AddModel(model4);
 
 
-            CameraDTO defaultCameraValues = new CameraDTO()
+            BLCameraDTO defaultCameraValues = new BLCameraDTO()
             {
                 LookFrom = new Vector(4, 2, 8),
                 LookAt = new Vector(0, 0.5, -2),

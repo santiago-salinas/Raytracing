@@ -43,7 +43,7 @@ namespace BusinessLogic
             get { return _positionedModellList; }
         }
 
-        public CameraDTO CameraDTO { get; set; }
+        public BLCameraDTO CameraDTO { get; set; }
 
         private void CheckIfStringNull(string value)
         {

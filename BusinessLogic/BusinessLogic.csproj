@@ -42,6 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\GeneralException.cs" />
+    <Compile Include="Interfaces\IMaterialRepository.cs" />
+    <Compile Include="Interfaces\IModelRepository.cs" />
+    <Compile Include="Interfaces\ISceneRepository.cs" />
+    <Compile Include="Interfaces\ISphereRepository.cs" />
+    <Compile Include="Interfaces\IUserRepository.cs" />
     <Compile Include="Objects\Lambertian.cs" />
     <Compile Include="Objects\Model.cs" />
     <Compile Include="Objects\PositionedModel.cs" />

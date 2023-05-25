@@ -2,16 +2,12 @@
 using Services;
 using Controllers.Interfaces;
 using Repositories.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Schema;
+using DataTransferObjects;
 
 namespace Controllers.Controllers
 {
-    public class ModelManagementController : IModelManagement
+    public class ModelManagementController
     {
         private IModelRepository _modelRepository;
         private IMaterialManagement _materialController;
