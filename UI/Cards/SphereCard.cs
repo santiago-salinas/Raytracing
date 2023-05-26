@@ -28,7 +28,7 @@ namespace UI.Cards
                 _controller.RemoveSphere(_sphereDTO.Name, _sphereDTO.OwnerName);
                 Parent.Controls.Remove(this);
             }
-            catch (BusinessLogicException)
+            catch (Exception)
             {
                 deleteLabel.Visible = true;
             }

@@ -41,7 +41,7 @@ namespace UI.Cards
                 _controller.RemoveLambertian(_lambertian.Name, _lambertian.Owner);
                 this.Parent.Controls.Remove(this);
             }
-            catch (BusinessLogicException)
+            catch (Exception)
             {
                 deleteLabel.Visible = true;
             }
