@@ -5,7 +5,7 @@ using Repositories.Interfaces;
 using DataTransferObjects;
 using System.Xml.Linq;
 
-namespace Controllers.Controllers
+namespace Controllers
 {
     public class MaterialManagementController
     {
@@ -25,8 +25,7 @@ namespace Controllers.Controllers
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            }
-            
+            }            
         }
 
         public void RemoveLambertian(string name, string ownerName)

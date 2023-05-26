@@ -3,8 +3,9 @@ using System;
 using System.Windows.Forms;
 using Controllers;
 using Controllers.Controllers;
+using Services;
 using Repositories;
-using Controllers.Converter;
+
 using System.Security.Cryptography;
 
 namespace UI
@@ -20,8 +21,7 @@ namespace UI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            ColorConverter colorConverter = new ColorConverter();
-            PPMConverter ppmConverter = new PPMConverter(colorConverter);
+           
 
             MemoryUserRepository memoryUserRepository = new MemoryUserRepository();
             MemorySceneRepository memorySceneRepository = new MemorySceneRepository();
@@ -29,21 +29,20 @@ namespace UI
             MemorySphereRepository memorySphereRepository = new MemorySphereRepository(memoryModelRepository);
             MemoryLambertianRepository memoryLambertianRepository = new MemoryLambertianRepository(memoryModelRepository);
 
-            SphereManagementController sphereController = new SphereManagementController(memorySphereRepository);
-            MaterialManagementController lambertianController = new MaterialManagementController(memoryLambertianRepository, colorConverter);
-            ModelManagementController modelController = new ModelManagementController()
-            {
-                MaterialController = lambertianController,
-                ModelRepository = memoryModelRepository,
-                PpmConverter = ppmConverter,
-                SphereController = sphereController
-            };
-            SceneManagementController sceneController = new SceneManagementController(memorySceneRepository, modelController);
+            SphereManagementService sphereManagementService = new SphereManagementService(memorySphereRepository);
+            MaterialManagementService materialManagementService = new MaterialManagementService(memoryLambertianRepository);
+            ModelManagementService modelManagementService = new ModelManagementService(memoryModelRepository);
+            SceneManagementService sceneManagementService = new SceneManagementService(memorySceneRepository);
+
+            SphereManagementController sphereManagementController = new SphereManagementController(sphereManagementService);
+            MaterialManagementController materialManagementController = new MaterialManagementController(materialManagementService);
+            ModelManagementController modelManagementController = new ModelManagementController(modelManagementService,sphereManagementService,materialManagementService);
+            SceneManagementController sceneController = new SceneManagementController(sceneManagementService);
 
             Context context = new Context();
-            context.SphereController = sphereController;
-            context.LambertianController = lambertianController;
-            context.ModelController = modelController;
+            context.SphereController = sphereManagementController;
+            context.LambertianController = materialManagementController;
+            context.ModelController = modelManagementController;
             context.UserRepository = memoryUserRepository;
             context.SceneController = sceneController;
             

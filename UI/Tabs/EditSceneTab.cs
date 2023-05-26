@@ -7,7 +7,7 @@ using UI.Cards;
 using UI.Dialogs;
 using Controllers;
 using Controllers.Controllers;
-using Controllers.DTOs;
+using DataTransferObjects;
 
 namespace UI.Tabs
 {
@@ -68,7 +68,7 @@ namespace UI.Tabs
             fovInput.Value = fieldOfView;
             if (_scene.Preview != null)
             {
-                renderPanel.Controls.Add(new PPMViewer(_scene.Preview));
+                //renderPanel.Controls.Add(new PPMViewer(_scene.Preview));
                 lastRenderLabel.Text += _scene.LastRenderDate.ToString("f", new CultureInfo("en-US"));
             }
             LoadPositionedModels();
@@ -191,7 +191,7 @@ namespace UI.Tabs
             PPM ppm = engine.Render();
             _scene.Preview = ppm;
 
-            renderPanel.Controls.Add(new PPMViewer(ppm));
+            //renderPanel.Controls.Add(new PPMViewer(ppm));
         }
 
         public void NotifyThatSeneWasModified()

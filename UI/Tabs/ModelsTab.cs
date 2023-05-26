@@ -6,7 +6,7 @@ using UI.Cards;
 using UI.Dialogs;
 using Controllers;
 using Controllers.Controllers;
-using Controllers.DTOs;
+using DataTransferObjects;
 
 namespace UI.Tabs
 {

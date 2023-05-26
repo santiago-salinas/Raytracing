@@ -2,8 +2,7 @@
 using System;
 using System.Windows.Forms;
 using Controllers;
-using Controllers.Controllers;
-using Controllers.DTOs;
+using DataTransferObjects;
 
 namespace UI.Dialogs
 {

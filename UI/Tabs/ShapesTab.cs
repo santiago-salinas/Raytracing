@@ -1,4 +1,4 @@
-﻿using BusinessLogic;
+﻿using DataTransferObjects;
 using Controllers;
 using System;
 using System.Collections.Generic;

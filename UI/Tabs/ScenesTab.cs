@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using UI.Cards;
 using Controllers;
-using Controllers.DTOs;
-using Controllers.Controllers;
+using DataTransferObjects;
 
 namespace UI.Tabs
 {

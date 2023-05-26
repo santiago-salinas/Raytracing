@@ -1,5 +1,4 @@
-﻿using BusinessLogic;
-using Controllers.DTOs;
+﻿using DataTransferObjects;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -8,8 +7,8 @@ namespace UI
     public partial class PPMViewer : UserControl
     {
 
-        private PPM _ppm;
-        public PPMViewer(PPM providedPPM)
+        private PpmDTO _ppm;
+        public PPMViewer(PpmDTO providedPPM)
         {
             InitializeComponent();
             _ppm = providedPPM;
@@ -22,7 +21,7 @@ namespace UI
             int width = _ppm.Width;
             int height = _ppm.Heigth;
             Bitmap bitmap = new Bitmap(width, height);
-            BusinessLogic.Color[,] pixels = _ppm.PixelsValues;
+            ColorDTO[,] pixels = _ppm.Pixels;
 
             for (int row = 0; row < height; row++)
             {
@@ -32,7 +31,7 @@ namespace UI
                     int green = (int)pixels[row, column].Green;
                     int blue = (int)pixels[row, column].Blue;
 
-                    bitmap.SetPixel(column, row, System.Drawing.Color.FromArgb(red, green, blue));
+                    bitmap.SetPixel(column, row, Color.FromArgb(red, green, blue));
                 }
             }
 

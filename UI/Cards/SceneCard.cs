@@ -3,8 +3,7 @@ using System.Globalization;
 using System.Windows.Forms;
 using UI.Tabs;
 using Controllers;
-using Controllers.DTOs;
-using Controllers.Controllers;
+using DataTransferObjects;
 
 namespace UI.Cards
 {

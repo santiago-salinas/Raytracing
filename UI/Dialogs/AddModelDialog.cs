@@ -1,7 +1,7 @@
 ﻿using BusinessLogic;
 using Controllers;
 using Controllers.Controllers;
-using Controllers.DTOs;
+using DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;

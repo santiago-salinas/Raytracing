@@ -21,7 +21,7 @@ namespace Services
 
         public void AddSphere(SphereDTO sphereDTO)
         {
-            Sphere sphere = ConvertToSphere(sphereDTO);
+            Sphere sphere = SphereMapper.ConvertToSphere(sphereDTO);
             _repository.AddSphere(sphere);
         }
 
@@ -30,40 +30,10 @@ namespace Services
             _repository.RemoveSphere(name, ownerName);
         }
 
-        public SphereDTO GetSphere(string name, string owner)
-        {
-            Sphere sphere = _repository.GetSphere(name, owner);
-            return ConvertToDTO(sphere);
-        }
-
         public List<SphereDTO> GetSpheresFromUser(string owner)
         {
             List<Sphere> spheres = _repository.GetSpheresFromUser(owner);
             return ConvertToSphereDTOs(spheres);
-        }
-
-        private Sphere ConvertToSphere(SphereDTO sphereDTO)
-        {
-            Sphere sphere = new Sphere
-            {
-                Name = sphereDTO.Name,
-                Radius = sphereDTO.Radius,
-                Owner = sphereDTO.OwnerName,
-            };
-
-            return sphere;
-        }
-
-        private SphereDTO ConvertToDTO(Sphere sphere)
-        {
-            SphereDTO sphereDTO = new SphereDTO
-            {
-                Name = sphere.Name,
-                Radius = sphere.Radius,
-                OwnerName = sphere.Owner
-            };
-
-            return sphereDTO;
         }
 
         private List<SphereDTO> ConvertToSphereDTOs(List<Sphere> spheres)
@@ -72,7 +42,7 @@ namespace Services
 
             foreach (Sphere sphere in spheres)
             {
-                SphereDTO sphereDTO = ConvertToDTO(sphere);
+                SphereDTO sphereDTO = SphereMapper.ConvertToDTO(sphere);
                 sphereDTOs.Add(sphereDTO);
             }
 

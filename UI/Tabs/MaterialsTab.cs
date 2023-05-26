@@ -1,12 +1,11 @@
-﻿using BusinessLogic;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using UI.Cards;
 using UI.Dialogs;
 using Controllers;
 using Controllers.Controllers;
-using Controllers.DTOs;
+using DataTransferObjects;
 
 namespace UI.Tabs
 {
@@ -42,7 +41,6 @@ namespace UI.Tabs
             if (result == DialogResult.OK)
             {
                 LambertianCard materialCard = new LambertianCard(addMaterial.NewLambertian, _lambertianController);
-                //LambertianRepository.AddLambertian(addMaterial.NewLambertian);
                 flowLayoutPanel.Controls.Add(materialCard);
             }
         }

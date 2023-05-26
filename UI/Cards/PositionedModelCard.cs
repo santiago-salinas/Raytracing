@@ -55,7 +55,7 @@ namespace UI.Cards
             }
             else
             {
-                previewBox.Controls.Add(new PPMViewer(_model.Preview));
+                //previewBox.Controls.Add(new PPMViewer(_model.Preview));
             }
         }
     }

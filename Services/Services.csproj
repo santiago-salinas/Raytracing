@@ -41,9 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converter\ColorConverter.cs" />
-    <Compile Include="Converter\PPMConverter.cs" />
+    <Compile Include="MaterialManagementService.cs" />
+    <Compile Include="ModelManagementService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SceneManagementService.cs" />
     <Compile Include="SphereManagementService.cs" />
   </ItemGroup>
   <ItemGroup>

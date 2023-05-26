@@ -51,7 +51,19 @@
     <Compile Include="DTOs\SphereDTO.cs" />
     <Compile Include="DTOs\UserDTO.cs" />
     <Compile Include="DTOs\VectorDTO.cs" />
+    <Compile Include="Mappers\ColorMapper.cs" />
+    <Compile Include="Mappers\MaterialMapper.cs" />
+    <Compile Include="Mappers\ModelMapper.cs" />
+    <Compile Include="Mappers\PPMMapper.cs" />
+    <Compile Include="Mappers\SceneMapper.cs" />
+    <Compile Include="Mappers\SphereMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BusinessLogic\BusinessLogic.csproj">
+      <Project>{5807fdc2-139e-4ad2-97d6-0ee8dfcabb8f}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

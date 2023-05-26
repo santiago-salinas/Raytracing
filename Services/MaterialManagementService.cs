@@ -9,17 +9,16 @@ namespace Services
     public class MaterialManagementService
     {
         private IMaterialRepository _repository;
-        private ColorConverter _colorConverter;
+            
 
-        public MaterialManagementService(IMaterialRepository repository, ColorConverter converter)
+        public MaterialManagementService(IMaterialRepository repository)
         {
-            _repository = repository;
-            _colorConverter = converter;
+            _repository = repository;            
         }
 
         public void AddLambertian(LambertianDTO lambertianDTO)
         {
-            Lambertian lambertian = ConvertToLambertian(lambertianDTO);
+            Lambertian lambertian = MaterialMapper.ConvertToLambertian(lambertianDTO);
             _repository.AddLambertian(lambertian);
         }
 
@@ -28,13 +27,12 @@ namespace Services
             _repository.RemoveLambertian(name, ownerName);
         }
 
-        public LambertianDTO GetLambertian(string name, string ownerName)
-        {
-            Lambertian lambertian = _repository.GetLambertian(name, ownerName);
-            return ConvertToDTO(lambertian);
+        public Lambertian GetLambertian(string name, string ownerName)
+        {            
+            return _repository.GetLambertian(name, ownerName);
         }
 
-        private bool ContainsLambertian(string lambertianName, string ownerName)
+        public bool ContainsLambertian(string lambertianName, string ownerName)
         {
             return _repository.ContainsLambertian(lambertianName, ownerName);
         }
@@ -42,45 +40,21 @@ namespace Services
         public List<LambertianDTO> GetLambertiansFromUser(string owner)
         {
             List<Lambertian> lambertians = _repository.GetLambertiansFromUser(owner);
-            List<LambertianDTO> lambertianDTOs = ConvertToLambertianDTOs(lambertians);
+            List<LambertianDTO> lambertianDTOs = ConvertListToDTOs(lambertians);
             return lambertianDTOs;
         }
-
-        public Lambertian ConvertToLambertian(LambertianDTO dto)
-        {
-            Lambertian lambertian = new Lambertian()
-            {
-                Name = dto.Name,
-                Owner = dto.Owner,
-                Color = _colorConverter.ConvertToColor(dto.Color),
-            };
-
-            return lambertian;
-
-        }
-        private List<LambertianDTO> ConvertToLambertianDTOs(List<Lambertian> lambertians)
+        private List<LambertianDTO> ConvertListToDTOs(List<Lambertian> lambertians)
         {
             List<LambertianDTO> lambertianDTOs = new List<LambertianDTO>();
 
             foreach (Lambertian lambertian in lambertians)
             {
-                LambertianDTO lambertianDTO = ConvertToDTO(lambertian);
+                LambertianDTO lambertianDTO = MaterialMapper.ConvertToDTO(lambertian);
                 lambertianDTOs.Add(lambertianDTO);
             }
 
             return lambertianDTOs;
         }
 
-        public LambertianDTO ConvertToDTO(Lambertian lambertian)
-        {
-            LambertianDTO lambertianDTO = new LambertianDTO()
-            {
-                Name = lambertian.Name,
-                Owner = lambertian.Owner,
-                Color = _colorConverter.ConvertToColorDTO(lambertian.Color),
-            };
-
-            return lambertianDTO;
-        }
     }
 }

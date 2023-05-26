@@ -1,6 +1,6 @@
 ﻿using BusinessLogic;
-using Controllers.Controllers;
-using Controllers.DTOs;
+using Controllers;
+using DataTransferObjects;
 using System;
 using System.Windows.Forms;
 
