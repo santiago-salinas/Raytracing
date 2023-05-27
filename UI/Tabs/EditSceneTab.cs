@@ -244,7 +244,7 @@ namespace UI.Tabs
             // Displays a SaveFileDialog so the user can save the Image
             // assigned to Button2.
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "JPeg Image|*.jpg|Png Image|*.png|Ppm Image (25segundos)|*.ppm";
+            saveFileDialog1.Filter = "JPeg Image|*.jpg|Png Image|*.png|Ppm Image|*.ppm";
             saveFileDialog1.Title = "Save an Image File";
             saveFileDialog1.ShowDialog();
 
