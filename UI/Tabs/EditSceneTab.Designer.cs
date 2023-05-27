@@ -50,6 +50,7 @@
             this.apertureInput = new System.Windows.Forms.NumericUpDown();
             this.apertureLabel = new System.Windows.Forms.Label();
             this.checkBlur = new System.Windows.Forms.CheckBox();
+            this.saveBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.fovInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.apertureInput)).BeginInit();
             this.SuspendLayout();
@@ -306,12 +307,24 @@
             this.checkBlur.CheckedChanged += new System.EventHandler(this.checkBlur_CheckedChanged);
             this.checkBlur.CheckStateChanged += new System.EventHandler(this.checkBlur_CheckStateChanged);
             // 
+            // saveBtn
+            // 
+            this.saveBtn.Enabled = false;
+            this.saveBtn.Location = new System.Drawing.Point(782, 598);
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(75, 23);
+            this.saveBtn.TabIndex = 27;
+            this.saveBtn.Text = "Save Image";
+            this.saveBtn.UseVisualStyleBackColor = true;
+            this.saveBtn.Click += new System.EventHandler(this.button1_Click);
+            // 
             // EditSceneTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1275, 820);
             this.ControlBox = false;
+            this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.checkBlur);
             this.Controls.Add(this.apertureLabel);
             this.Controls.Add(this.apertureInput);
@@ -369,5 +382,6 @@
         private System.Windows.Forms.NumericUpDown apertureInput;
         private System.Windows.Forms.Label apertureLabel;
         private System.Windows.Forms.CheckBox checkBlur;
+        private System.Windows.Forms.Button saveBtn;
     }
 }
