@@ -48,8 +48,6 @@
             return ppmAsString;
         }
 
-
-
         public override bool Equals(object other)
         {
             PPM otherPPM = (PPM)other;
