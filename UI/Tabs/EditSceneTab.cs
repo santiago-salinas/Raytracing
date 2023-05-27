@@ -164,7 +164,7 @@ namespace UI.Tabs
             List<ModelDTO> list = _modelController.GetModelsFromUser(_loggedUser);
             foreach (ModelDTO elem in list)
             {
-                //EditSceneModelCard modelCard = new EditSceneModelCard(_scene, elem);
+               //EditSceneModelCard modelCard = new EditSceneModelCard(_scene, elem);
                // availableModelsPanel.Controls.Add(modelCard);
             }
         }

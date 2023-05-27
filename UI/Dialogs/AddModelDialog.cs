@@ -41,7 +41,15 @@ namespace UI.Dialogs
             NewModel.Name = modelName;
             NewModel.OwnerName = _loggedUser;
             NewModel.Shape = _selectedShape;
-            NewModel.Material = _selectedMaterial;             
+            NewModel.Material = _selectedMaterial;
+            if (previewCheckbox.Checked)
+            {
+                NewModel.Preview = _controller.RenderPreview(NewModel);
+            }
+            else
+            {
+                NewModel.Preview = null;
+            }
 
             try
             {
@@ -74,10 +82,7 @@ namespace UI.Dialogs
                 DialogResult = DialogResult.OK;
             }
 
-            if (previewCheckbox.Checked)
-            {
-                //NewModel.RenderPreview();
-            }
+            
         }
 
         private void ShapeComboBox_SelectedIndexChanged(object sender, EventArgs e)

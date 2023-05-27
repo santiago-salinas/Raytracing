@@ -34,10 +34,12 @@ namespace UI
             ModelManagementService modelManagementService = new ModelManagementService(memoryModelRepository);
             SceneManagementService sceneManagementService = new SceneManagementService(memorySceneRepository);
             UserService userService = new UserService(memoryUserRepository);
+            RenderingService renderingService = new RenderingService();
 
             SphereManagementController sphereManagementController = new SphereManagementController(sphereManagementService);
             MaterialManagementController materialManagementController = new MaterialManagementController(materialManagementService);
             ModelManagementController modelManagementController = new ModelManagementController(modelManagementService,sphereManagementService,materialManagementService);
+            modelManagementController.RenderingService = renderingService;
             SceneManagementController sceneController = new SceneManagementController(sceneManagementService);
             UserController userController = new UserController(userService);
 

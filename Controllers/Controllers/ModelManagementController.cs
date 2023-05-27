@@ -8,22 +8,23 @@ namespace Controllers.Controllers
 {
     public class ModelManagementController
     {
-        private ModelManagementService _modelService;
-        private SphereManagementService _sphereService;
-        private MaterialManagementService _materialService;
+        public ModelManagementService ModelService { get; set; }
+        public SphereManagementService SphereService { get; set; }
+        public MaterialManagementService MaterialService { get; set; }
+        public RenderingService RenderingService { get; set; }
 
         public ModelManagementController(ModelManagementService modelService, SphereManagementService sphereService, MaterialManagementService materialService)
         {
-            _modelService = modelService;
-            _sphereService = sphereService;
-            _materialService = materialService;
+            ModelService = modelService;
+            SphereService = sphereService;
+            MaterialService = materialService;
         }
 
         public void AddModel(ModelDTO modelDTO)
         {
             try
             {
-                _modelService.AddModel(modelDTO);
+                ModelService.AddModel(modelDTO);
 
             }catch(Exception ex)
             {
@@ -33,14 +34,14 @@ namespace Controllers.Controllers
 
         public List<ModelDTO> GetModelsFromUser(string owner)
         {
-            return _modelService.GetModelsFromUser(owner);
+            return ModelService.GetModelsFromUser(owner);
         }
 
         public void RemoveModel(string name, string owner)
         {
             try
             {
-                _modelService.RemoveModel(name, owner);
+                ModelService.RemoveModel(name, owner);
             }
             catch (Exception ex)
             {
@@ -51,13 +52,17 @@ namespace Controllers.Controllers
 
         public List<LambertianDTO> GetAvailableMaterials(string owner)
         {
-            return _materialService.GetLambertiansFromUser(owner);
+            return MaterialService.GetLambertiansFromUser(owner);
         }
 
         public List<SphereDTO> GetAvailableShapes(string owner)
         {
-            return _sphereService.GetSpheresFromUser(owner);
+            return SphereService.GetSpheresFromUser(owner);
         }
 
+        public PpmDTO RenderPreview(ModelDTO modelDTO)
+        {            
+            return RenderingService.RenderModelPreview(modelDTO.Material);
+        }
     }
 }

@@ -44,6 +44,7 @@
     <Compile Include="MaterialManagementService.cs" />
     <Compile Include="ModelManagementService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenderingService.cs" />
     <Compile Include="SceneManagementService.cs" />
     <Compile Include="SphereManagementService.cs" />
     <Compile Include="UserService.cs" />
