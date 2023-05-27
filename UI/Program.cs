@@ -33,19 +33,20 @@ namespace UI
             MaterialManagementService materialManagementService = new MaterialManagementService(memoryLambertianRepository);
             ModelManagementService modelManagementService = new ModelManagementService(memoryModelRepository);
             SceneManagementService sceneManagementService = new SceneManagementService(memorySceneRepository);
+            UserService userService = new UserService(memoryUserRepository);
 
             SphereManagementController sphereManagementController = new SphereManagementController(sphereManagementService);
             MaterialManagementController materialManagementController = new MaterialManagementController(materialManagementService);
             ModelManagementController modelManagementController = new ModelManagementController(modelManagementService,sphereManagementService,materialManagementService);
             SceneManagementController sceneController = new SceneManagementController(sceneManagementService);
+            UserController userController = new UserController(userService);
 
             Context context = new Context();
             context.SphereController = sphereManagementController;
             context.LambertianController = materialManagementController;
             context.ModelController = modelManagementController;
-            context.UserRepository = memoryUserRepository;
             context.SceneController = sceneController;
-            
+            context.UserController = userController;
 
             User user1 = new User()
             {

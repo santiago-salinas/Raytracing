@@ -45,7 +45,7 @@
     <Compile Include="Controllers\MaterialManagementController.cs" />
     <Compile Include="Controllers\ModelManagementController.cs" />
     <Compile Include="Controllers\SceneManagementController.cs" />
-    <Compile Include="Controllers\UserManagementController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\SphereManagementController.cs" />
   </ItemGroup>

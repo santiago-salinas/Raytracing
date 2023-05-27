@@ -14,14 +14,12 @@ namespace UI
         private ScenesTab _scenesTab;
         private ModelsTab _modelsTab;
 
-        private User _loggedUser;
         private bool _isSignignOut = false;
         private Context _context;
-        public MainPage(User providedUser, Context context)
+        public MainPage(Context context)
         {
             InitializeComponent();
-            _loggedUser = providedUser;
-            loggedUsernameLabel.Text = _loggedUser.UserName;
+            loggedUsernameLabel.Text = context.CurrentUser;
             _context = context;
         }
 

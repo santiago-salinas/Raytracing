@@ -12,27 +12,67 @@ namespace Services
     {
          private readonly IUserRepository _userRepository;
 
-            public UserService(IUserRepository userRepository)
-            {
-                _userRepository = userRepository;
-            }
+        public UserService(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
 
-            public void SignUp(string username, string password)
+        public string SignUp(string username, string password)
+        {
+            User newUser = new User
             {
-                User newUser = new User
-                {
-                    UserName = username,
-                    Password = password
-                };
+                UserName = username,
+                Password = password,
+                RegisterDate = DateTimeProvider.Now
+            };
 
+            if (!_userRepository.ContainsUser(username))
+            {
                 _userRepository.AddUser(newUser);
+                return "OK";
             }
-
-            public bool Login(string username, string password)
+            else
             {
-                bool isValidCombination = _userRepository.CheckUsernameAndPasswordCombination(username, password);
-
-                return isValidCombination;
+                return "That username is already in use";
             }
+
+          /*  try
+            {
+                _userRepository.AddUser(newUser);
+            }catch(Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }*/
+        }
+
+        public bool Login(string username, string password)
+        {
+            bool isValidCombination = _userRepository.CheckUsernameAndPasswordCombination(username, password);
+
+            return isValidCombination;
+        }
+
+        public void CheckUsernameValidity(string username) 
+        {
+            try
+            {
+                User.CheckUsernameValidity(username);
+            }catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }            
+        }
+
+        public void CheckPasswordValidity(string password)
+        {            
+            try
+            {
+                User.CheckPasswordValidity(password);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

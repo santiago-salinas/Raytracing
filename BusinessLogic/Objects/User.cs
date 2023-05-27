@@ -9,35 +9,35 @@ namespace BusinessLogic
         private const int _maximumUsernameLength = 20;
         private const int _minimumPasswordLength = 5;
         private const int _maximumPasswordLength = 25;
-        private String _userName;
-        private String _password;
+        private string _userName;
+        private string _password;
 
         public User() { }
 
-        public String UserName
+        public string UserName
         {
             get { return _userName; }
             set
             {
                 value = value.Trim();
-                CheckIfUserNameIsValid(value);
+                CheckUsernameValidity(value);
                 _userName = value;
             }
         }
 
-        public String Password
+        public string Password
         {
             get { return _password; }
             set
             {
-                IsValidPassword(value);
+                CheckPasswordValidity(value);
                 _password = value;
             }
         }
 
         public DateTime RegisterDate { get; set; }
 
-        public void CheckIfUserNameIsValid(string value)
+        public static void CheckUsernameValidity(string value)
         {
             if (value.Length < _minimumUsernameLength || value.Length > _maximumUsernameLength)
             {
@@ -50,14 +50,14 @@ namespace BusinessLogic
             }
         }
 
-        public void IsValidPassword(string value)
+        public static void CheckPasswordValidity(string value)
         {
             ValidatePasswordLengthIsBetweenBounds(value);
             ValidatePasswordContainsUpperCase(value);
             ValidatePasswordContainsDigit(value);
         }
 
-        private void ValidatePasswordLengthIsBetweenBounds(string value)
+        private static void ValidatePasswordLengthIsBetweenBounds(string value)
         {
             if (!(value.Length >= _minimumPasswordLength && value.Length <= _maximumPasswordLength))
             {
@@ -65,7 +65,7 @@ namespace BusinessLogic
             }
         }
 
-        private void ValidatePasswordContainsUpperCase(string value)
+        private static void ValidatePasswordContainsUpperCase(string value)
         {
             if (!value.Any(char.IsUpper))
             {
@@ -73,7 +73,7 @@ namespace BusinessLogic
             }
         }
 
-        private void ValidatePasswordContainsDigit(string value)
+        private static void ValidatePasswordContainsDigit(string value)
         {
             if (!value.Any(char.IsDigit))
             {
