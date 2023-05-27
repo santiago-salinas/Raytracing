@@ -48,9 +48,9 @@ namespace BusinessLogic
 
         public override bool Equals(object other)
         {
-            bool namesEqual = this.Name == ((Lambertian)other).Name;
-            bool colorEqual = this.Color == ((Lambertian)other).Color;
-            return namesEqual && colorEqual;
+            bool namesEqual = this.Name == ((Lambertian)other).Name;            
+            bool ownerEqual = this.Owner == ((Lambertian) other).Owner;
+            return namesEqual && ownerEqual;
         }
     }
 }
