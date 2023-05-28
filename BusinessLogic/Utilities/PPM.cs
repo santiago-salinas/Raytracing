@@ -8,7 +8,7 @@
         {
             Width = width;
             Heigth = height;
-            _pixels = new Color[height, width];
+            PixelsValues = new Color[height, width];
         }
 
         public int Width { get; set; }
@@ -21,6 +21,8 @@
             {
                 return _pixels;
             }
+
+            set { _pixels = value; }
         }
         public void SavePixel(int row, int column, Color pixelRGB)
         {

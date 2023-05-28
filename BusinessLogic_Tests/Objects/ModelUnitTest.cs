@@ -22,6 +22,8 @@ namespace BusinessLogic_Tests
 
         private User _testUser;
 
+        private SphereRepository _testSphereRepository = new SphereRepository();
+
         [TestInitialize]
         public void Initialize()
         {
@@ -47,7 +49,6 @@ namespace BusinessLogic_Tests
             _testUser = new User()
             {
                 UserName = "Username1",
-
             };
 
             _testModel = new Model()
@@ -122,8 +123,8 @@ namespace BusinessLogic_Tests
         public void AddModelToCollection()
         {
             //act
-            Models.AddModel(_testModel);
-            bool added = Models.ContainsModel(_testModel.Name, _testUser);
+            ModelRepository.AddModel(_testModel);
+            bool added = ModelRepository.ContainsModel(_testModel.Name, _testUser.UserName);
             //assert
             Assert.IsTrue(added);
         }
@@ -132,8 +133,8 @@ namespace BusinessLogic_Tests
         public void GetModelFromCollection()
         {
             //act
-            Models.AddModel(_testModel);
-            Model getModel = Models.GetModel(_modelName, _testUser);
+            ModelRepository.AddModel(_testModel);
+            Model getModel = ModelRepository.GetModel(_modelName, _testUser);
             //assert
             Assert.ReferenceEquals(_testModel, getModel);
         }
@@ -142,10 +143,10 @@ namespace BusinessLogic_Tests
         [ExpectedException(typeof(BusinessLogicException), "Model does not exist in the collection")]
         public void RemoveModelFromCollection()
         {
-            Models.AddModel(_testModel);
+            ModelRepository.AddModel(_testModel);
             //act
-            Models.RemoveModel(_modelName, _testUser);
-            Models.GetModel(_modelName, _testUser);
+            ModelRepository.RemoveModel(_modelName, _testUser);
+            ModelRepository.GetModel(_modelName, _testUser);
         }
 
         [TestMethod]
@@ -153,7 +154,7 @@ namespace BusinessLogic_Tests
         public void CantRemoveModelNotInCollection()
         {
             //act
-            Models.RemoveModel(_modelName, _testUser);
+            ModelRepository.RemoveModel(_modelName, _testUser);
         }
 
         [TestMethod]
@@ -161,7 +162,7 @@ namespace BusinessLogic_Tests
         public void CantAddModelWithNameAlreadyInCollection()
         {
             //arrange
-            Models.AddModel(_testModel);
+            ModelRepository.AddModel(_testModel);
             Model newModel = new Model()
             {
                 Name = _modelName,
@@ -171,7 +172,7 @@ namespace BusinessLogic_Tests
             };
 
             //act
-            Models.AddModel(newModel);
+            ModelRepository.AddModel(newModel);
         }
 
         [TestMethod]
@@ -179,14 +180,13 @@ namespace BusinessLogic_Tests
         public void CantDeleteSphereFromCollectionUsedByModel()
         {
 
-            //arrange
-            User testUser = new User();
-            _testSphere.Owner = testUser;
+            //arrange           
+            _testSphere.Owner = _testUser.UserName;
 
-            Spheres.AddSphere(_testSphere);
-            Models.AddModel(_testModel);
+            _testSphereRepository.AddSphere(_testSphere);
+            ModelRepository.AddModel(_testModel);
             //act
-            Spheres.RemoveSphere(_sphereName, testUser);
+            _testSphereRepository.RemoveSphere(_sphereName, _testUser.UserName);
         }
 
         [TestMethod]
@@ -194,30 +194,30 @@ namespace BusinessLogic_Tests
         public void CantDeleteLambertianFromCollectionUsedByModel()
         {
             //arrange
-            Lambertians.AddLambertian(_testLambertian);
+            LambertianRepository.AddLambertian(_testLambertian);
             _testLambertian.Owner = _testUser;
-            Models.AddModel(_testModel);
+            ModelRepository.AddModel(_testModel);
             //act
-            Lambertians.RemoveLambertian(_lambertianName, _testUser);
+            LambertianRepository.RemoveLambertian(_lambertianName, _testUser);
         }
 
         [TestMethod]
         public void DeleteSphereAndLambertianAfterDeletingModel()
         {
             //arrange                                    
-            _testSphere.Owner = _testUser;
+            _testSphere.Owner = _testUser.UserName;
             _testLambertian.Owner = _testUser;
-            Spheres.AddSphere(_testSphere);
-            Lambertians.AddLambertian(_testLambertian);
-            Models.AddModel(_testModel);
-            Models.RemoveModel(_modelName, _testUser);
+            _testSphereRepository.AddSphere(_testSphere);
+            LambertianRepository.AddLambertian(_testLambertian);
+            ModelRepository.AddModel(_testModel);
+            ModelRepository.RemoveModel(_modelName, _testUser);
 
             //act
-            Spheres.RemoveSphere(_sphereName, _testUser);
-            Lambertians.RemoveLambertian(_lambertianName, _testUser);
+            _testSphereRepository.RemoveSphere(_sphereName, _testUser.UserName);
+            LambertianRepository.RemoveLambertian(_lambertianName, _testUser);
             //assert
-            bool sphereDeleted = !Spheres.ContainsSphere(_sphereName, _testUser);
-            bool lambertianDeleted = !Lambertians.ContainsLambertian(_lambertianName, _testUser);
+            bool sphereDeleted = !_testSphereRepository.ContainsSphere(_sphereName, _testUser.UserName);
+            bool lambertianDeleted = !LambertianRepository.ContainsLambertian(_lambertianName, _testUser);
             Assert.IsTrue(sphereDeleted && lambertianDeleted);
         }
 
@@ -251,11 +251,11 @@ namespace BusinessLogic_Tests
                 Owner = user2,
             };
 
-            Models.AddModel(model1);
-            Models.AddModel(model2);
-            Models.AddModel(model3);
+            ModelRepository.AddModel(model1);
+            ModelRepository.AddModel(model2);
+            ModelRepository.AddModel(model3);
 
-            List<Model> models = Models.GetModelsFromUser(user1);
+            List<Model> models = ModelRepository.GetModelsFromUser(user1.UserName);
 
             Assert.AreEqual(2, models.Count);
             Assert.IsTrue(models.Contains(model1));
@@ -273,7 +273,7 @@ namespace BusinessLogic_Tests
                 Password = "Password1"
             };
 
-            List<Model> models = Models.GetModelsFromUser(emptyUser);
+            List<Model> models = ModelRepository.GetModelsFromUser(emptyUser.UserName);
 
             Assert.AreEqual(0, models.Count);
         }
@@ -281,9 +281,9 @@ namespace BusinessLogic_Tests
         [TestCleanup]
         public void TearDown()
         {
-            Spheres.Drop();
-            Lambertians.Drop();
-            Models.Drop();
+            _testSphereRepository.Drop();
+            LambertianRepository.Drop();
+            ModelRepository.Drop();
 
         }
     }

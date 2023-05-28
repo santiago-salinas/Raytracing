@@ -2,6 +2,7 @@
 using System;
 using System.Windows.Forms;
 using UI.Tabs;
+using Controllers;
 
 namespace UI
 {
@@ -12,20 +13,21 @@ namespace UI
         private ShapesTab _shapesTab;
         private ScenesTab _scenesTab;
         private ModelsTab _modelsTab;
-        private User _loggedUser;
+
         private bool _isSignignOut = false;
-        public MainPage(User providedUser)
+        private Context _context;
+        public MainPage(Context context)
         {
             InitializeComponent();
-            _loggedUser = providedUser;
-            loggedUsernameLabel.Text = _loggedUser.UserName;
+            loggedUsernameLabel.Text = context.CurrentUser;
+            _context = context;
         }
 
         private void ScenesSideBarButton_Click(object sender, EventArgs e)
         {
             if (_scenesTab == null)
             {
-                _scenesTab = new ScenesTab(_loggedUser, this);
+                _scenesTab = new ScenesTab(_context, this);
                 _scenesTab.FormClosed += ScenesTabClosed;
                 _scenesTab.MdiParent = this;
                 _scenesTab.Dock = DockStyle.Fill;
@@ -46,7 +48,7 @@ namespace UI
         {
             if (_modelsTab == null)
             {
-                _modelsTab = new ModelsTab(_loggedUser);
+                _modelsTab = new ModelsTab(_context);
                 _modelsTab.FormClosed += ModelsTabClosed;
                 _modelsTab.MdiParent = this;
                 _modelsTab.Dock = DockStyle.Fill;
@@ -67,7 +69,7 @@ namespace UI
         {
             if (_materialsTab == null)
             {
-                _materialsTab = new MaterialsTab(_loggedUser);
+                _materialsTab = new MaterialsTab(_context);
                 _materialsTab.FormClosed += MaterialsTabClosed;
                 _materialsTab.MdiParent = this;
                 _materialsTab.Dock = DockStyle.Fill;
@@ -88,7 +90,7 @@ namespace UI
         {
             if (_shapesTab == null)
             {
-                _shapesTab = new ShapesTab(_loggedUser);
+                _shapesTab = new ShapesTab(_context);
                 _shapesTab.FormClosed += ShapesTabClosed;
                 _shapesTab.MdiParent = this;
                 _shapesTab.Dock = DockStyle.Fill;
@@ -118,7 +120,7 @@ namespace UI
             if (_isSignignOut)
             {
                 _isSignignOut = false;
-                new LogInPage().Show();
+                new LogInPage(_context).Show();
                 base.OnFormClosing(e);
             }
             else

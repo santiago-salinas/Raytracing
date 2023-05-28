@@ -1,70 +1,63 @@
 ﻿using BusinessLogic;
 using System;
 using System.Windows.Forms;
+using Controllers;
+using DataTransferObjects;
 
 namespace UI.Dialogs
 {
     public partial class AddLambertianDialog : Form
     {
-        private const int _maximumRGBValue = 255;
-        private Color _color;
+        private MaterialManagementController _controller;
+        private string _loggedUser;
 
-        public Lambertian NewLambertian = new Lambertian();
-        private User _loggedUser { get; set; }
-        public AddLambertianDialog(User loggedUser)
+        public LambertianDTO NewLambertian;
+        public AddLambertianDialog(Context context)
         {
             InitializeComponent();
-            this._loggedUser = loggedUser;
+            _controller = context.LambertianController;
+            _loggedUser = context.CurrentUser;
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            DialogResult = DialogResult.Cancel;
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
             string lambertianName = nameTextBox.Text;
+            int redValue = (int)redValueInput.Value;
+            int greenValue = (int)greenValueInput.Value;
+            int blueValue = (int)blueValueInput.Value;
 
-            nameStatusLabel.Text = "";
-            colorStatusLabel.Visible = false;
+            statusLabel.Text = "";
 
-            bool nameIsCorrect = true;
-            bool colorValuesAreCorrect = true;
+            bool inputsAreCorrect = true;
+            ColorDTO colorDTO = new ColorDTO()
+            {
+                Red = redValue,
+                Green = greenValue,
+                Blue = blueValue,
+            };
+            NewLambertian = new LambertianDTO()
+            {
+                Name = lambertianName,
+                Color = colorDTO,
+                Owner = _loggedUser,
+            };
 
             try
             {
-                NewLambertian.Name = lambertianName;
-            }
-            catch (ArgumentNullException)
+                _controller.AddLambertian(NewLambertian);
+            }catch (Exception ex)
             {
-                nameStatusLabel.Text = "* Name cannot be empty";
-                nameIsCorrect = false;
-            }
-
-            if (Lambertians.ContainsLambertian(lambertianName, _loggedUser))
-            {
-                nameIsCorrect = false;
-                nameStatusLabel.Text = "* Material with that name already exists";
+                statusLabel.Text = ex.Message;
+                inputsAreCorrect = false;
             }
 
-            double redValue = (double)redValueInput.Value / _maximumRGBValue;
-            double greenValue = (double)greenValueInput.Value / _maximumRGBValue;
-            double blueValue = (double)blueValueInput.Value / _maximumRGBValue;
-            try
-            {
-                _color = new BusinessLogic.Color(redValue, greenValue, blueValue);
-                NewLambertian.Color = _color;
-            }
-            catch (ArgumentException)
-            {
-                colorStatusLabel.Visible = true;
-                colorValuesAreCorrect = false;
-            }
-
-            if (nameIsCorrect && colorValuesAreCorrect)
-            {
-                NewLambertian.Owner = _loggedUser;
+            if (inputsAreCorrect)
+            {                
                 DialogResult = DialogResult.OK;
             }
         }

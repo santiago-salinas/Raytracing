@@ -1,4 +1,4 @@
-﻿using BusinessLogic;
+﻿using DataTransferObjects;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -7,9 +7,9 @@ namespace UI
 {
     public partial class PPMViewer : UserControl
     {
-        private Bitmap bitmap;
-        public PPM ppm;
-        public PPMViewer(PPM providedPPM)
+        private PpmDTO ppm;
+
+        public PPMViewer(PpmDTO providedPPM)
         {
             InitializeComponent();
             ppm = providedPPM;
@@ -19,10 +19,10 @@ namespace UI
 
         private void Render()
         {
-            var width = ppm.Width;
-            var height = ppm.Heigth;
-            bitmap = new Bitmap(width, height);
-            var pixels = ppm.PixelsValues;
+            int width = ppm.Width;
+            int height = ppm.Heigth;
+            Bitmap bitmap = new Bitmap(width, height);
+            ColorDTO[,] pixels = ppm.Pixels;
 
             for (int row = 0; row < height; row++)
             {
@@ -32,7 +32,7 @@ namespace UI
                     int green = (int)pixels[row, column].Green;
                     int blue = (int)pixels[row, column].Blue;
 
-                    bitmap.SetPixel(column, row, System.Drawing.Color.FromArgb(red, green, blue));
+                    bitmap.SetPixel(column, row, Color.FromArgb(red, green, blue));
                 }
             }
 
@@ -45,7 +45,7 @@ namespace UI
         {
             var width = ppm.Width;
             var height = ppm.Heigth;
-            var pixels = ppm.PixelsValues;
+            var pixels = ppm.Pixels;
             using (StreamWriter writetext = new StreamWriter(fs))
             {
                 string format = "P3\r\n";

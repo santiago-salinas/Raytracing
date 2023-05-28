@@ -120,8 +120,8 @@ namespace BusinessLogic_Tests
             //arrange
 
             //act
-            Lambertians.AddLambertian(_testLambertian);
-            bool added = Lambertians.ContainsLambertian(_testLambertian.Name, _testLambertian.Owner);
+            LambertianRepository.AddLambertian(_testLambertian);
+            bool added = LambertianRepository.ContainsLambertian(_testLambertian.Name, _testLambertian.Owner);
             //assert
             Assert.IsTrue(added);
 
@@ -132,8 +132,8 @@ namespace BusinessLogic_Tests
         {
             //arrange
             //act
-            Lambertians.AddLambertian(_testLambertian);
-            Lambertian getLambertian = Lambertians.GetLambertian(_testName, _testUser);
+            LambertianRepository.AddLambertian(_testLambertian);
+            Lambertian getLambertian = LambertianRepository.GetLambertian(_testName, _testUser);
             //assert
             Assert.ReferenceEquals(_testLambertian, getLambertian);
         }
@@ -143,10 +143,10 @@ namespace BusinessLogic_Tests
         public void RemoveLambertianFromCollection()
         {
             //arrange
-            Lambertians.AddLambertian(_testLambertian);
+            LambertianRepository.AddLambertian(_testLambertian);
             //act
-            Lambertians.RemoveLambertian(_testName, _testUser);
-            Lambertians.GetLambertian(_testName, _testUser);
+            LambertianRepository.RemoveLambertian(_testName, _testUser);
+            LambertianRepository.GetLambertian(_testName, _testUser);
         }
 
         [TestMethod]
@@ -154,7 +154,7 @@ namespace BusinessLogic_Tests
         public void CantRemoveLambertianNotInCollection()
         {
             //act
-            Lambertians.RemoveLambertian(_testName, _testUser);
+            LambertianRepository.RemoveLambertian(_testName, _testUser);
         }
 
         [TestMethod]
@@ -162,14 +162,14 @@ namespace BusinessLogic_Tests
         public void CantAddLambertianWithNameAlreadyInCollection()
         {
             //arrange
-            Lambertians.AddLambertian(_testLambertian);
+            LambertianRepository.AddLambertian(_testLambertian);
             Lambertian newLambertian = new Lambertian();
             newLambertian.Name = _testName;
             newLambertian.Color = _differentTestColor;
             newLambertian.Owner = _testUser;
 
             //act
-            Lambertians.AddLambertian(newLambertian);
+            LambertianRepository.AddLambertian(newLambertian);
         }
 
         [TestMethod]
@@ -202,11 +202,11 @@ namespace BusinessLogic_Tests
                 Owner = user2,
             };
 
-            Lambertians.AddLambertian(lambertian1);
-            Lambertians.AddLambertian(lambertian2);
-            Lambertians.AddLambertian(lambertian3);
+            LambertianRepository.AddLambertian(lambertian1);
+            LambertianRepository.AddLambertian(lambertian2);
+            LambertianRepository.AddLambertian(lambertian3);
 
-            List<Lambertian> lambertians = Lambertians.GetLambertiansFromUser(user1);
+            List<Lambertian> lambertians = LambertianRepository.GetLambertiansFromUser(user1);
 
             Assert.AreEqual(2, lambertians.Count);
             Assert.IsTrue(lambertians.Contains(lambertian1));
@@ -224,7 +224,7 @@ namespace BusinessLogic_Tests
                 Password = "Password1"
             };
 
-            List<Lambertian> lambertians = Lambertians.GetLambertiansFromUser(emptyUser);
+            List<Lambertian> lambertians = LambertianRepository.GetLambertiansFromUser(emptyUser);
 
             Assert.AreEqual(0, lambertians.Count);
         }
@@ -232,7 +232,7 @@ namespace BusinessLogic_Tests
         [TestCleanup]
         public void TearDown()
         {
-            Lambertians.Drop();
+            LambertianRepository.Drop();
         }
     }
 }

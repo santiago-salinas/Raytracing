@@ -1,6 +1,6 @@
 ﻿namespace BusinessLogic
 {
-    public class CameraDTO
+    public class BLCameraDTO
     {
         public Vector LookFrom { get; set; }
         public Vector LookAt { get; set; }
@@ -11,9 +11,6 @@
         public int SamplesPerPixel { get; set; }
         public int MaxDepth { get; set; }
         public double Aperture { get; set; }
-
-    public CameraDTO() { }
+        public BLCameraDTO() { }
     }
-
-
 }

@@ -7,7 +7,7 @@ namespace BusinessLogic
         private string _name;
         public Model() { }
 
-        public Model(string name, Sphere shape, Lambertian color, User owner)
+        public Model(string name, Sphere shape, Lambertian color, string owner)
         {
             Name = name;
             Shape = shape;
@@ -42,7 +42,7 @@ namespace BusinessLogic
             testScene.AddPositionedModel(positionedModel);
 
 
-            testScene.CameraDTO = new CameraDTO()
+            testScene.CameraDTO = new BLCameraDTO()
             {
                 LookFrom = new Vector(0, 5, 0),
                 LookAt = new Vector(1, 1, 1),
@@ -75,7 +75,7 @@ namespace BusinessLogic
             }
         }
 
-        public User Owner { get; set; }
+        public string Owner { get; set; }
 
         private void CheckIfStringNull(string value)
         {
@@ -94,7 +94,8 @@ namespace BusinessLogic
 
         public override bool Equals(object other)
         {
-            bool nameEqual = this.Name == ((Model)other).Name;
+            Model otherAsModel = other as Model;
+            bool nameEqual = this.Name == otherAsModel.Name;
             bool shapeEqual = this.Shape == ((Model)other).Shape;
             bool colorEqual = this.Material == ((Model)other).Material;
 

@@ -5,7 +5,7 @@ namespace BusinessLogic
 {
     public class Camera : ICamera
     {
-        public Camera(CameraDTO dto)
+        public Camera(BLCameraDTO dto)
         {
             Theta = (dto.FieldOfView * Math.PI) / 180.0;
             HeightHalf = Math.Tan(Theta / 2);

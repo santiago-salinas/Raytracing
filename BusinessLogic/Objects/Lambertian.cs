@@ -8,7 +8,7 @@ namespace BusinessLogic
 
         public Lambertian() { }
 
-        public Lambertian(string name, Color color, User user)
+        public Lambertian(string name, Color color, string user)
         {
             Name = name;
             Color = color;
@@ -26,14 +26,14 @@ namespace BusinessLogic
             }
         }
 
-        public User Owner { get; set; }
+        public string Owner { get; set; }
         public Color Color { get; set; }
 
         private void CheckIfStringNull(string value)
         {
             if (string.IsNullOrEmpty(value))
             {
-                throw new ArgumentNullException("Name cant be null");
+                throw new BusinessLogicException("Name cannot be empty");
             }
         }
 
@@ -48,9 +48,9 @@ namespace BusinessLogic
 
         public override bool Equals(object other)
         {
-            bool namesEqual = this.Name == ((Lambertian)other).Name;
-            bool colorEqual = this.Color == ((Lambertian)other).Color;
-            return namesEqual && colorEqual;
+            bool namesEqual = this.Name == ((Lambertian)other).Name;            
+            bool ownerEqual = this.Owner == ((Lambertian) other).Owner;
+            return namesEqual && ownerEqual;
         }
     }
 }

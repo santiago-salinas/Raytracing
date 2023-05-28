@@ -1,19 +1,23 @@
-﻿using BusinessLogic;
-using System;
+﻿using System;
 using System.Windows.Forms;
+using Controllers;
+using Services;
+using DataTransferObjects;
 
 namespace UI
 {
     public partial class SignUpPage : Form
     {
-        private User _createdUser = null;
         private bool _usernameFieldIsCorrect = false;
         private bool _passwordFieldIsCorrect = false;
         private bool _confirmPasswordFieldIsCorrect = false;
-        public SignUpPage()
+        private UserController _controller;
+        private Context _context;
+        public SignUpPage(Context context)
         {
-            InitializeComponent();
-            _createdUser = new User();
+            InitializeComponent();            
+            _controller = context.UserController;
+            _context = context;
         }
 
         private void SignUpButton_Click(object sender, EventArgs e)
@@ -22,7 +26,28 @@ namespace UI
             string password = passwordTextBox.Text;
             usernameStatusLabel.Text = "";
 
-            if (Users.ContainsUser(username))
+            if(_usernameFieldIsCorrect && _passwordFieldIsCorrect && _confirmPasswordFieldIsCorrect)
+            {
+                try
+                {
+                    _controller.SignUp(username, password);
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    signUpLabel.Visible = true;
+                    usernameStatusLabel.Text = ex.Message;
+                }
+            }else
+            {
+                signUpLabel.Visible = true;
+            }
+         /*   try
+            {
+                
+            }
+
+            if (_repository.ContainsUser(username))
             {
                 usernameStatusLabel.Text = "User with that name already exists";
                 _usernameFieldIsCorrect = false;
@@ -33,13 +58,9 @@ namespace UI
                 _createdUser.UserName = username;
                 _createdUser.Password = password;
                 _createdUser.RegisterDate = DateTime.Now;
-                Users.AddUser(_createdUser);
+                _repository.AddUser(_createdUser);
                 this.Close();
-            }
-            else
-            {
-                signUpLabel.Visible = true;
-            }
+            }*/
 
         }
 
@@ -51,9 +72,9 @@ namespace UI
 
             try
             {
-                _createdUser.CheckIfUserNameIsValid(username);
+                _controller.CheckUsernameValidity(username);
             }
-            catch (ArgumentException ex)
+            catch (Exception ex)
             {
                 usernameStatusLabel.Text = ex.Message;
                 _usernameFieldIsCorrect = false;
@@ -67,9 +88,9 @@ namespace UI
             _passwordFieldIsCorrect = true;
             try
             {
-                _createdUser.IsValidPassword(password);
+                _controller.CheckPasswordValidity(password);
             }
-            catch (ArgumentException ex)
+            catch (Exception ex)
             {
                 passwordStatusLabel.Text = ex.Message;
                 _passwordFieldIsCorrect = false;
@@ -102,7 +123,7 @@ namespace UI
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            new LogInPage().Show();
+            new LogInPage(_context).Show();
 
             base.OnFormClosing(e);
         }

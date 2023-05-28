@@ -1,25 +1,28 @@
-﻿using BusinessLogic;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Windows.Forms;
 using UI.Tabs;
+using Controllers;
+using DataTransferObjects;
 
 namespace UI.Cards
 {
     public partial class SceneCard : UserControl
     {
-        private Scene _thisScene;
+        private SceneDTO _thisScene;        
+        private SceneManagementController _controller;
 
-        public SceneCard(Scene scene)
+        public SceneCard(SceneManagementController controller, SceneDTO scene)
         {
             InitializeComponent();
             _thisScene = scene;
+            _controller = controller;
             LoadData();
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            Scenes.RemoveScene(_thisScene.Name, _thisScene.Owner);
+            _controller.RemoveScene(_thisScene.Name, _thisScene.Owner);
             this.Parent.Controls.Remove(this);
         }
 

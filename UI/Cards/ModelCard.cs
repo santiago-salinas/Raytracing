@@ -1,16 +1,21 @@
-﻿using BusinessLogic;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Controllers;
+using Controllers.Controllers;
+using DataTransferObjects;
 
 namespace UI.Cards
 {
     public partial class ModelCard : UserControl
     {
-        private Model _model;
-        public ModelCard(Model model)
+        private ModelDTO _model;
+        private ModelManagementController _controller;
+        public ModelCard(ModelDTO model, ModelManagementController controller)
         {
             InitializeComponent();
+            _controller = controller;
+
             this._model = model;
             modelNameLabel.Text = model.Name;
 
@@ -27,18 +32,18 @@ namespace UI.Cards
         {
             try
             {
-                Models.RemoveModel(_model.Name, _model.Owner);
+                _controller.RemoveModel(_model.Name, _model.OwnerName);
                 this.Parent.Controls.Remove(this);
             }
-            catch (BusinessLogicException)
+            catch (Exception ex)
             {
-                deleteLabel.Visible = true;
+                deleteLabel.Text = ex.Message;
             }
         }
 
         private void LoadPreview()
         {
-            PPM preview = _model.Preview;
+            PpmDTO preview = _model.Preview;
 
             if (preview == null)
             {
@@ -47,7 +52,7 @@ namespace UI.Cards
 
                 Panel coloredBox = new Panel();
 
-                BusinessLogic.Color materialColor = _model.Material.Color;
+                ColorDTO materialColor = _model.Material.Color;
 
                 int redValue = (int)materialColor.Red;
                 int greenValue = (int)materialColor.Green;
@@ -59,7 +64,6 @@ namespace UI.Cards
                 coloredBox.Location = new Point(previewBox.Width - coloredBox.Width, previewBox.Height - coloredBox.Height);
 
                 previewBox.Controls.Add(coloredBox);
-
             }
             else
             {

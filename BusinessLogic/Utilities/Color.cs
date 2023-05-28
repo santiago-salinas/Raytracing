@@ -13,7 +13,7 @@ namespace BusinessLogic
         private const int _maximumRGBValue = 255;
         private const double _tolerance = 0.0001;
 
-
+        public Color() { }
         public Color(double red, double green, double blue)
         {
             Red = red;

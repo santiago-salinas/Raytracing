@@ -6,7 +6,7 @@ namespace BusinessLogic
     {
 
         public Sphere() { }
-        public Sphere(string name, double radius, User owner)
+        public Sphere(string name, double radius, string owner)
         {
             Name = name;
             Radius = radius;
@@ -23,7 +23,7 @@ namespace BusinessLogic
             {
                 if (value <= _minimumRadius)
                 {
-                    throw new BusinessLogicException("Radius must be a value over zero >0");
+                    throw new BusinessLogicException("Radius must be a value over zero");
                 }
                 _radius = value;
             }
@@ -40,13 +40,13 @@ namespace BusinessLogic
             }
         }
 
-        public User Owner { get; set; }
+        public string Owner { get; set; }
 
         private void CheckIfStringNull(string value)
         {
             if (String.IsNullOrEmpty(value))
             {
-                throw new ArgumentNullException("Name cant be empty");
+                throw new BusinessLogicException("Name cannot be empty");
             }
         }
 
@@ -85,7 +85,9 @@ namespace BusinessLogic
 
         public override bool Equals(object other)
         {
-            return this.Name == ((Sphere)other).Name && this.Radius == ((Sphere)other).Radius;
+            bool nameEquals = this.Name == ((Sphere)other).Name;
+            bool ownerEquals = this.Owner == ((Sphere)other).Owner;            
+            return nameEquals && ownerEquals;
         }
 
     }

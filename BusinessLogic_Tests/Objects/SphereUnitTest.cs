@@ -13,8 +13,8 @@ namespace BusinessLogic_Tests
         private float _testNegativeRadius;
         private string _testName;
         private string _testNullName;
-        public User _testUser;
-
+        private User _testUser;
+        private SphereRepository _testSphereRepository;
 
         [TestInitialize]
         public void Initialize()
@@ -35,6 +35,8 @@ namespace BusinessLogic_Tests
                 Password = "Password1",
                 RegisterDate = DateTime.Now,
             };
+
+            _testSphereRepository = new SphereRepository();
         }
 
         [TestMethod]
@@ -53,12 +55,12 @@ namespace BusinessLogic_Tests
             {
                 Radius = _testRadius,
                 Name = _testName,
-                Owner = _testUser,
+                Owner = _testUser.UserName,
             };
             // Assert
             Assert.AreEqual(_testName, _testSphere.Name);
             Assert.AreEqual(_testRadius, _testSphere.Radius);
-            Assert.AreEqual(_testUser, _testSphere.Owner);
+            Assert.AreEqual(_testUser.UserName, _testSphere.Owner);
         }
 
         [TestMethod]
@@ -74,12 +76,12 @@ namespace BusinessLogic_Tests
             };
 
             // Act
-            Sphere sphere = new Sphere(_testName, _testRadius, _testUser);
+            Sphere sphere = new Sphere(_testName, _testRadius, _testUser.UserName);
 
             // Assert
             Assert.AreEqual(_testName, sphere.Name);
             Assert.AreEqual(_testRadius, sphere.Radius);
-            Assert.AreEqual(_testUser, sphere.Owner);
+            Assert.AreEqual(_testUser.UserName, sphere.Owner);
         }
 
         [TestMethod]
@@ -136,10 +138,10 @@ namespace BusinessLogic_Tests
         public void AddSphereToCollection()
         {
             //arrange
-            _testSphere.Owner = _testUser;
+            _testSphere.Owner = _testUser.UserName;
             //act
-            Spheres.AddSphere(_testSphere);
-            bool added = Spheres.ContainsSphere(_testSphere.Name, _testUser);
+            _testSphereRepository.AddSphere(_testSphere);
+            bool added = _testSphereRepository.ContainsSphere(_testSphere.Name, _testUser.UserName);
             //assert
             Assert.IsTrue(added);
         }
@@ -150,10 +152,10 @@ namespace BusinessLogic_Tests
             //arrange
             User testUser = new User();
             testUser.UserName = "Username";
-            _testSphere.Owner = testUser;
+            _testSphere.Owner = testUser.UserName;
             //act
-            Spheres.AddSphere(_testSphere);
-            Sphere getSphere = Spheres.GetSphere(_testName, testUser);
+            _testSphereRepository.AddSphere(_testSphere);
+            Sphere getSphere = _testSphereRepository.GetSphere(_testName, testUser.UserName);
             //assert
             Assert.ReferenceEquals(_testSphere, getSphere);
         }
@@ -165,12 +167,12 @@ namespace BusinessLogic_Tests
             //arrange
             User testUser = new User();
             testUser.UserName = "Username";
-            _testSphere.Owner = testUser;
+            _testSphere.Owner = testUser.UserName;
             //arrange
-            Spheres.AddSphere(_testSphere);
+            _testSphereRepository.AddSphere(_testSphere);
             //act
-            Spheres.RemoveSphere(_testName, testUser);
-            Spheres.GetSphere(_testName, testUser);
+            _testSphereRepository.RemoveSphere(_testName, testUser.UserName);
+            _testSphereRepository.GetSphere(_testName, testUser.UserName);
         }
 
         [TestMethod]
@@ -180,9 +182,9 @@ namespace BusinessLogic_Tests
             //arrange
             User testUser = new User();
             testUser.UserName = "Username";
-            _testSphere.Owner = testUser;
+            _testSphere.Owner = testUser.UserName;
             //act   
-            Spheres.RemoveSphere(_testName, testUser);
+            _testSphereRepository.RemoveSphere(_testName, testUser.UserName);
         }
 
         [TestMethod]
@@ -197,16 +199,16 @@ namespace BusinessLogic_Tests
             _testSphere = new Sphere()
             {
                 Name = _testName,
-                Owner = _testUser
+                Owner = _testUser.UserName
             };
-            Spheres.AddSphere(_testSphere);
+            _testSphereRepository.AddSphere(_testSphere);
             Sphere newSphere = new Sphere()
             {
                 Name = _testName,
-                Owner = _testUser,
+                Owner = _testUser.UserName,
             };
             //act
-            Spheres.AddSphere(newSphere);
+            _testSphereRepository.AddSphere(newSphere);
         }
 
         [TestMethod]
@@ -223,15 +225,15 @@ namespace BusinessLogic_Tests
                 Password = "Password1"
             };
 
-            Sphere _sphere1 = new Sphere("sphere1", 1, user1);
-            Sphere _sphere2 = new Sphere("sphere2", 5, user1);
-            Sphere _sphere3 = new Sphere("sphere3", 9, user2);
+            Sphere _sphere1 = new Sphere("sphere1", 1, user1.UserName);
+            Sphere _sphere2 = new Sphere("sphere2", 5, user1.UserName);
+            Sphere _sphere3 = new Sphere("sphere3", 9, user2.UserName);
 
-            Spheres.AddSphere(_sphere1);
-            Spheres.AddSphere(_sphere2);
-            Spheres.AddSphere(_sphere3);
+            _testSphereRepository.AddSphere(_sphere1);
+            _testSphereRepository.AddSphere(_sphere2);
+            _testSphereRepository.AddSphere(_sphere3);
 
-            List<Sphere> spheres = Spheres.GetSpheresFromUser(user1);
+            List<Sphere> spheres = _testSphereRepository.GetSpheresFromUser(user1.UserName);
 
             Assert.AreEqual(2, spheres.Count);
             Assert.IsTrue(spheres.Contains(_sphere1));
@@ -249,7 +251,7 @@ namespace BusinessLogic_Tests
                 Password = "Password1"
             };
 
-            List<Sphere> spheres = Spheres.GetSpheresFromUser(emptyUser);
+            List<Sphere> spheres = _testSphereRepository.GetSpheresFromUser(emptyUser.UserName);
 
             Assert.AreEqual(0, spheres.Count);
         }
@@ -257,7 +259,7 @@ namespace BusinessLogic_Tests
         [TestCleanup]
         public void TearDown()
         {
-            Spheres.Drop();
+            _testSphereRepository.Drop();
         }
 
     }

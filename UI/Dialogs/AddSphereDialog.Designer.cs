@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             this.newSphereLabel = new System.Windows.Forms.Label();
-            this.nameStatusLabel = new System.Windows.Forms.Label();
             this.sphereNameLabel = new System.Windows.Forms.Label();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.radiusStatusLabel = new System.Windows.Forms.Label();
+            this.statusLabel = new System.Windows.Forms.Label();
             this.radiusLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.radiusInput = new System.Windows.Forms.NumericUpDown();
@@ -52,16 +51,6 @@
             this.newSphereLabel.TabIndex = 0;
             this.newSphereLabel.Text = "New Sphere";
             // 
-            // nameStatusLabel
-            // 
-            this.nameStatusLabel.AutoSize = true;
-            this.nameStatusLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameStatusLabel.ForeColor = System.Drawing.Color.Red;
-            this.nameStatusLabel.Location = new System.Drawing.Point(243, 202);
-            this.nameStatusLabel.Name = "nameStatusLabel";
-            this.nameStatusLabel.Size = new System.Drawing.Size(0, 19);
-            this.nameStatusLabel.TabIndex = 21;
-            // 
             // sphereNameLabel
             // 
             this.sphereNameLabel.AutoSize = true;
@@ -75,7 +64,7 @@
             // nameTextBox
             // 
             this.nameTextBox.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameTextBox.Location = new System.Drawing.Point(226, 161);
+            this.nameTextBox.Location = new System.Drawing.Point(226, 156);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(322, 26);
             this.nameTextBox.TabIndex = 19;
@@ -89,23 +78,21 @@
             this.panel1.Size = new System.Drawing.Size(350, 1);
             this.panel1.TabIndex = 18;
             // 
-            // radiusStatusLabel
+            // statusLabel
             // 
-            this.radiusStatusLabel.AutoSize = true;
-            this.radiusStatusLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radiusStatusLabel.ForeColor = System.Drawing.Color.Red;
-            this.radiusStatusLabel.Location = new System.Drawing.Point(243, 324);
-            this.radiusStatusLabel.Name = "radiusStatusLabel";
-            this.radiusStatusLabel.Size = new System.Drawing.Size(243, 19);
-            this.radiusStatusLabel.TabIndex = 25;
-            this.radiusStatusLabel.Text = "* Radius must be over zero";
-            this.radiusStatusLabel.Visible = false;
+            this.statusLabel.AutoSize = true;
+            this.statusLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusLabel.ForeColor = System.Drawing.Color.Red;
+            this.statusLabel.Location = new System.Drawing.Point(226, 313);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(0, 19);
+            this.statusLabel.TabIndex = 25;
             // 
             // radiusLabel
             // 
             this.radiusLabel.AutoSize = true;
             this.radiusLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radiusLabel.Location = new System.Drawing.Point(226, 245);
+            this.radiusLabel.Location = new System.Drawing.Point(223, 221);
             this.radiusLabel.Name = "radiusLabel";
             this.radiusLabel.Size = new System.Drawing.Size(63, 19);
             this.radiusLabel.TabIndex = 24;
@@ -115,7 +102,7 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.Black;
             this.panel2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.panel2.Location = new System.Drawing.Point(198, 309);
+            this.panel2.Location = new System.Drawing.Point(195, 285);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(350, 1);
             this.panel2.TabIndex = 22;
@@ -123,7 +110,7 @@
             // radiusInput
             // 
             this.radiusInput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radiusInput.Location = new System.Drawing.Point(229, 283);
+            this.radiusInput.Location = new System.Drawing.Point(226, 254);
             this.radiusInput.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -164,10 +151,9 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.radiusInput);
-            this.Controls.Add(this.radiusStatusLabel);
+            this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.radiusLabel);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.nameStatusLabel);
             this.Controls.Add(this.sphereNameLabel);
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.panel1);
@@ -185,11 +171,10 @@
         #endregion
 
         private System.Windows.Forms.Label newSphereLabel;
-        private System.Windows.Forms.Label nameStatusLabel;
         private System.Windows.Forms.Label sphereNameLabel;
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label radiusStatusLabel;
+        private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.Label radiusLabel;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.NumericUpDown radiusInput;

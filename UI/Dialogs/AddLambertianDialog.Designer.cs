@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.newMaterialLabel = new System.Windows.Forms.Label();
-            this.nameStatusLabel = new System.Windows.Forms.Label();
             this.materialNameLabel = new System.Windows.Forms.Label();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -41,8 +40,7 @@
             this.redValueInput = new System.Windows.Forms.NumericUpDown();
             this.greenValueInput = new System.Windows.Forms.NumericUpDown();
             this.blueValueInput = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.colorStatusLabel = new System.Windows.Forms.Label();
+            this.statusLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.redValueInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.greenValueInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.blueValueInput)).BeginInit();
@@ -57,15 +55,6 @@
             this.newMaterialLabel.Size = new System.Drawing.Size(284, 47);
             this.newMaterialLabel.TabIndex = 0;
             this.newMaterialLabel.Text = "New Material";
-            // 
-            // nameStatusLabel
-            // 
-            this.nameStatusLabel.AutoSize = true;
-            this.nameStatusLabel.ForeColor = System.Drawing.Color.Red;
-            this.nameStatusLabel.Location = new System.Drawing.Point(233, 159);
-            this.nameStatusLabel.Name = "nameStatusLabel";
-            this.nameStatusLabel.Size = new System.Drawing.Size(0, 13);
-            this.nameStatusLabel.TabIndex = 21;
             // 
             // materialNameLabel
             // 
@@ -120,7 +109,7 @@
             // 
             this.redLabel.AutoSize = true;
             this.redLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.redLabel.Location = new System.Drawing.Point(227, 195);
+            this.redLabel.Location = new System.Drawing.Point(227, 178);
             this.redLabel.Name = "redLabel";
             this.redLabel.Size = new System.Drawing.Size(108, 19);
             this.redLabel.TabIndex = 32;
@@ -130,7 +119,7 @@
             // 
             this.greenLabel.AutoSize = true;
             this.greenLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.greenLabel.Location = new System.Drawing.Point(226, 246);
+            this.greenLabel.Location = new System.Drawing.Point(226, 229);
             this.greenLabel.Name = "greenLabel";
             this.greenLabel.Size = new System.Drawing.Size(126, 19);
             this.greenLabel.TabIndex = 33;
@@ -140,7 +129,7 @@
             // 
             this.blueLabel.AutoSize = true;
             this.blueLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.blueLabel.Location = new System.Drawing.Point(227, 300);
+            this.blueLabel.Location = new System.Drawing.Point(227, 283);
             this.blueLabel.Name = "blueLabel";
             this.blueLabel.Size = new System.Drawing.Size(117, 19);
             this.blueLabel.TabIndex = 34;
@@ -149,7 +138,7 @@
             // redValueInput
             // 
             this.redValueInput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.redValueInput.Location = new System.Drawing.Point(337, 193);
+            this.redValueInput.Location = new System.Drawing.Point(337, 176);
             this.redValueInput.Maximum = new decimal(new int[] {
             255,
             0,
@@ -167,7 +156,7 @@
             // greenValueInput
             // 
             this.greenValueInput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.greenValueInput.Location = new System.Drawing.Point(337, 244);
+            this.greenValueInput.Location = new System.Drawing.Point(337, 227);
             this.greenValueInput.Maximum = new decimal(new int[] {
             255,
             0,
@@ -185,7 +174,7 @@
             // blueValueInput
             // 
             this.blueValueInput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.blueValueInput.Location = new System.Drawing.Point(337, 298);
+            this.blueValueInput.Location = new System.Drawing.Point(337, 281);
             this.blueValueInput.Maximum = new decimal(new int[] {
             255,
             0,
@@ -200,26 +189,15 @@
             this.blueValueInput.Size = new System.Drawing.Size(120, 26);
             this.blueValueInput.TabIndex = 37;
             // 
-            // label1
+            // statusLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(233, 159);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 13);
-            this.label1.TabIndex = 38;
-            // 
-            // colorStatusLabel
-            // 
-            this.colorStatusLabel.AutoSize = true;
-            this.colorStatusLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colorStatusLabel.ForeColor = System.Drawing.Color.Red;
-            this.colorStatusLabel.Location = new System.Drawing.Point(229, 338);
-            this.colorStatusLabel.Name = "colorStatusLabel";
-            this.colorStatusLabel.Size = new System.Drawing.Size(405, 19);
-            this.colorStatusLabel.TabIndex = 39;
-            this.colorStatusLabel.Text = "* All color values must be between 0 and 255";
-            this.colorStatusLabel.Visible = false;
+            this.statusLabel.AutoSize = true;
+            this.statusLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusLabel.ForeColor = System.Drawing.Color.Red;
+            this.statusLabel.Location = new System.Drawing.Point(229, 338);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(0, 19);
+            this.statusLabel.TabIndex = 39;
             // 
             // AddLambertianDialog
             // 
@@ -227,8 +205,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
-            this.Controls.Add(this.colorStatusLabel);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.blueValueInput);
             this.Controls.Add(this.greenValueInput);
             this.Controls.Add(this.redValueInput);
@@ -237,7 +214,6 @@
             this.Controls.Add(this.redLabel);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
-            this.Controls.Add(this.nameStatusLabel);
             this.Controls.Add(this.materialNameLabel);
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.panel1);
@@ -257,7 +233,6 @@
         #endregion
 
         private System.Windows.Forms.Label newMaterialLabel;
-        private System.Windows.Forms.Label nameStatusLabel;
         private System.Windows.Forms.Label materialNameLabel;
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.Panel panel1;
@@ -269,7 +244,6 @@
         private System.Windows.Forms.NumericUpDown redValueInput;
         private System.Windows.Forms.NumericUpDown greenValueInput;
         private System.Windows.Forms.NumericUpDown blueValueInput;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label colorStatusLabel;
+        private System.Windows.Forms.Label statusLabel;
     }
 }

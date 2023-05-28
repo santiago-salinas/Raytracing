@@ -1,6 +1,12 @@
 ﻿using BusinessLogic;
 using System;
 using System.Windows.Forms;
+using Controllers;
+using Controllers.Controllers;
+using Services;
+using Repositories;
+
+using System.Security.Cryptography;
 
 namespace UI
 {
@@ -15,55 +21,94 @@ namespace UI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+           
+
+            MemoryUserRepository memoryUserRepository = new MemoryUserRepository();
+            MemorySceneRepository memorySceneRepository = new MemorySceneRepository();
+            MemoryModelRepository memoryModelRepository = new MemoryModelRepository(memorySceneRepository);
+            MemorySphereRepository memorySphereRepository = new MemorySphereRepository(memoryModelRepository);
+            MemoryLambertianRepository memoryLambertianRepository = new MemoryLambertianRepository(memoryModelRepository);
+
+            SphereManagementService sphereManagementService = new SphereManagementService(memorySphereRepository);
+            MaterialManagementService materialManagementService = new MaterialManagementService(memoryLambertianRepository);
+            ModelManagementService modelManagementService = new ModelManagementService(memoryModelRepository);
+            SceneManagementService sceneManagementService = new SceneManagementService(memorySceneRepository);
+            UserService userService = new UserService(memoryUserRepository);
+            EditSceneService editSceneService = new EditSceneService(memorySceneRepository);
+            RenderingService renderingService = new RenderingService();
+
+            SphereManagementController sphereManagementController = new SphereManagementController(sphereManagementService);
+            MaterialManagementController materialManagementController = new MaterialManagementController(materialManagementService);
+            ModelManagementController modelManagementController = new ModelManagementController();
+            modelManagementController.SphereService = sphereManagementService;
+            modelManagementController.ModelService = modelManagementService;
+            modelManagementController.MaterialService = materialManagementService;
+            modelManagementController.RenderingService = renderingService;
+            SceneManagementController sceneController = new SceneManagementController(sceneManagementService);
+            UserController userController = new UserController(userService);
+            EditSceneController editSceneController = new EditSceneController();
+            editSceneController.ModelManagementService = modelManagementService;
+            editSceneController.EditSceneService = editSceneService;
+            editSceneController.RenderingService = renderingService;
+            editSceneController.SceneManagementService = sceneManagementService;
+
+            Context context = new Context();
+            context.SphereController = sphereManagementController;
+            context.LambertianController = materialManagementController;
+            context.ModelController = modelManagementController;
+            context.SceneController = sceneController;
+            context.UserController = userController;
+            context.EditSceneController = editSceneController;
+
             User user1 = new User()
             {
                 UserName = "Test",
                 Password = "Test1",
                 RegisterDate = DateTime.Now,
-
             };
 
-            Users.AddUser(user1);
+            memoryUserRepository.AddUser(user1);
+            string userName = user1.UserName;
 
-            Sphere sphere1 = new Sphere("Sphere 1", 0.5f, user1);
-            Sphere sphere2 = new Sphere("Sphere 2", 0.5f, user1);
-            Sphere sphere3 = new Sphere("Sphere 3", 2f, user1);
-            Sphere sphere4 = new Sphere("Floor", 2000f, user1);
+            Sphere sphere1 = new Sphere("Sphere 1", 0.5f, userName);
+            Sphere sphere2 = new Sphere("Sphere 2", 0.5f, userName);
+            Sphere sphere3 = new Sphere("Sphere 3", 2f, userName);
+            Sphere sphere4 = new Sphere("Floor", 2000f, userName);
 
 
-            Spheres.AddSphere(sphere1);
-            Spheres.AddSphere(sphere2);
-            Spheres.AddSphere(sphere3);
-            Spheres.AddSphere(sphere4);
+            memorySphereRepository.AddSphere(sphere1);
+            memorySphereRepository.AddSphere(sphere2);
+            memorySphereRepository.AddSphere(sphere3);
+            memorySphereRepository.AddSphere(sphere4);
 
 
             Color color1 = new Color(0.1, 0.2, 0.5);
             Color color2 = new Color(0.8, 0.2, 0.5);
             Color color3 = new Color(0.8, 0.25, 0.05);
             Color color4 = new Color(0.7, 0.7, 0.1);
-            Lambertian lambertian1 = new Lambertian("Lambertian 1", color1, user1);
-            Lambertian lambertian2 = new Lambertian("Lambertian 2", color2, user1);
-            Lambertian lambertian3 = new Lambertian("Lambertian 3", color3, user1);
-            Lambertian lambertian4 = new Lambertian("Lambertian 4", color4, user1);
+            Lambertian lambertian1 = new Lambertian("Lambertian 1", color1, user1.UserName);
+            Lambertian lambertian2 = new Lambertian("Lambertian 2", color2, user1.UserName);
+            Lambertian lambertian3 = new Lambertian("Lambertian 3", color3, user1.UserName);
+            Lambertian lambertian4 = new Lambertian("Lambertian 4", color4, user1.UserName);
 
-            Lambertians.AddLambertian(lambertian1);
-            Lambertians.AddLambertian(lambertian2);
-            Lambertians.AddLambertian(lambertian3);
-            Lambertians.AddLambertian(lambertian4);
-
-
-            Model model1 = new Model("Model 1", sphere1, lambertian1, user1);
-            Model model2 = new Model("Model 2", sphere2, lambertian2, user1);
-            Model model3 = new Model("Model 3", sphere3, lambertian3, user1);
-            Model model4 = new Model("Model 4", sphere4, lambertian4, user1);
-
-            Models.AddModel(model1);
-            Models.AddModel(model2);
-            Models.AddModel(model3);
-            Models.AddModel(model4);
+            memoryLambertianRepository.AddLambertian(lambertian1);
+            memoryLambertianRepository.AddLambertian(lambertian2);
+            memoryLambertianRepository.AddLambertian(lambertian3);
+            memoryLambertianRepository.AddLambertian(lambertian4);
 
 
-            CameraDTO defaultCameraValues = new CameraDTO()
+            Model model1 = new Model("Model 1", sphere1, lambertian1, user1.UserName);
+            Model model2 = new Model("Model 2", sphere2, lambertian2, user1.UserName);
+            Model model3 = new Model("Model 3", sphere3, lambertian3, user1.UserName);
+            Model model4 = new Model("Model 4", sphere4, lambertian4, user1.UserName);
+
+            memoryModelRepository.AddModel(model1);
+            memoryModelRepository.AddModel(model2);
+            memoryModelRepository.AddModel(model3);
+            memoryModelRepository.AddModel(model4);
+
+
+            BLCameraDTO defaultCameraValues = new BLCameraDTO()
             {
                 LookFrom = new Vector(4, 2, 8),
                 LookAt = new Vector(0, 0.5, -2),
@@ -80,11 +125,11 @@ namespace UI
             Scene scene1 = new Scene()
             {
                 Name = "Scene 1",                
-                Owner = user1,
+                Owner = user1.UserName,
                 CameraDTO = defaultCameraValues,
             };
 
-            Scenes.AddScene(scene1);
+            memorySceneRepository.AddScene(scene1);
 
             scene1.AddPositionedModel(new PositionedModel()
             {
@@ -110,7 +155,7 @@ namespace UI
                 Position = new Vector(0, -2000, -1)
             });
 
-            Application.Run(new LogInPage());
+            Application.Run(new LogInPage(context));
 
             Application.Exit();
         }

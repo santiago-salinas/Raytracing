@@ -28,7 +28,7 @@ namespace BusinessLogic_Tests
         [TestCleanup]
         public void Cleanup()
         {
-            Users.Drop();
+            UserRepository.Drop();
         }
 
         [TestMethod]
@@ -249,11 +249,11 @@ namespace BusinessLogic_Tests
         public void ContainsUser_ReturnsTrue_WhenUserExists()
         {
             // Arrange
-            Users.AddUser(_testUser);
+            UserRepository.AddUser(_testUser);
             string name = _testUser.UserName;
 
             // Act
-            var actual = Users.ContainsUser(name);
+            var actual = UserRepository.ContainsUser(name);
 
             // Assert
             Assert.IsTrue(actual);
@@ -307,10 +307,10 @@ namespace BusinessLogic_Tests
         public void ContainsUser_ReturnsFalse_WhenUserDoesNotExist()
         {
             // Arrange
-            Users.AddUser(_testUser);
+            UserRepository.AddUser(_testUser);
 
             // Act
-            var actual = Users.ContainsUser("another name");
+            var actual = UserRepository.ContainsUser("another name");
 
             // Assert
             Assert.IsFalse(actual);
@@ -327,10 +327,10 @@ namespace BusinessLogic_Tests
             };
 
             // Act
-            Users.AddUser(newUser);
+            UserRepository.AddUser(newUser);
 
             // Assert
-            Assert.IsTrue(Users.ContainsUser(_testUserName));
+            Assert.IsTrue(UserRepository.ContainsUser(_testUserName));
         }
 
         [TestMethod]
@@ -338,7 +338,7 @@ namespace BusinessLogic_Tests
         {
             // Arrange
 
-            Users.AddUser(_testUser);
+            UserRepository.AddUser(_testUser);
             var newUser = new User()
             {
                 UserName = _testUserName,
@@ -346,7 +346,7 @@ namespace BusinessLogic_Tests
             };
 
             // Act & Assert
-            Assert.ThrowsException<BusinessLogicException>(() => Users.AddUser(newUser));
+            Assert.ThrowsException<BusinessLogicException>(() => UserRepository.AddUser(newUser));
         }
 
         [TestMethod]
@@ -358,10 +358,10 @@ namespace BusinessLogic_Tests
                 UserName = _testUserName,
                 Password = _testPassword
             };
-            Users.AddUser(newUser);
+            UserRepository.AddUser(newUser);
 
             // Act
-            var actual = Users.GetUser(_testUserName);
+            var actual = UserRepository.GetUser(_testUserName);
 
             // Assert
             Assert.AreEqual(newUser, actual);
@@ -371,17 +371,17 @@ namespace BusinessLogic_Tests
         public void GetUser_ThrowsBusinessLogicException_WhenUserDoesNotExist()
         {
             // Arrange & Act & Assert
-            Assert.ThrowsException<BusinessLogicException>(() => Users.GetUser(_testUserName));
+            Assert.ThrowsException<BusinessLogicException>(() => UserRepository.GetUser(_testUserName));
         }
 
         [TestMethod]
         public void CheckUsernameAndPasswordCombination_ReturnsTrue_WhenCombinationExists()
         {
             // Arrange
-            Users.AddUser(_testUser);
+            UserRepository.AddUser(_testUser);
 
             // Act
-            bool actual = Users.CheckUsernameAndPasswordCombination(_testUser.UserName, _testUser.Password);
+            bool actual = UserRepository.CheckUsernameAndPasswordCombination(_testUser.UserName, _testUser.Password);
 
             // Assert
             Assert.IsTrue(actual);
@@ -391,10 +391,10 @@ namespace BusinessLogic_Tests
         public void CheckUsernameAndPasswordCombination_ReturnsFalse_WhenCombinationDoesNotExist()
         {
             // Arrange
-            Users.AddUser(_testUser);
+            UserRepository.AddUser(_testUser);
 
             // Act
-            var actual = Users.CheckUsernameAndPasswordCombination(_testUser.UserName, "password2");
+            var actual = UserRepository.CheckUsernameAndPasswordCombination(_testUser.UserName, "password2");
 
             // Assert
             Assert.IsFalse(actual);

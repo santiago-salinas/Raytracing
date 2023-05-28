@@ -8,7 +8,7 @@ namespace BusinessLogic
 {
     internal class CameraBlur : ICamera
     {
-        public CameraBlur(CameraDTO dto)
+        public CameraBlur(BLCameraDTO dto)
         {
 
             LensRadius = dto.Aperture / 2;
