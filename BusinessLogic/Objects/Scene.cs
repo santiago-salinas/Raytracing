@@ -12,7 +12,7 @@ namespace BusinessLogic
         public Scene()
         {
             _positionedModellList = new List<PositionedModel>();
-            _creationDate = DateTimeProvider.Now;
+            CreationDate = DateTimeProvider.Now;
             UpdateLastModificationDate();
         }
 
@@ -28,13 +28,9 @@ namespace BusinessLogic
             }
         }
 
-        private DateTime _creationDate;
-        private DateTime _lastModificationDate;
-        private DateTime _lastRenderDate;
-
-        public DateTime CreationDate { get { return _creationDate; }}
-        public DateTime LastModificationDate { get {return _lastModificationDate; } }
-        public DateTime LastRenderDate { get { return _lastRenderDate; }}
+        public DateTime CreationDate { get; set; }
+        public DateTime LastModificationDate { get; set; }
+        public DateTime LastRenderDate { get; set; }
 
         public string Owner { get; set; }
         public PPM Preview { get; set; }
@@ -100,12 +96,12 @@ namespace BusinessLogic
 
         public void UpdateLastRenderDate()
         {
-            _lastRenderDate = DateTimeProvider.Now;
+            LastRenderDate = DateTimeProvider.Now;
         }
 
         public void UpdateLastModificationDate()
         {
-            _lastModificationDate = DateTimeProvider.Now;
+            LastModificationDate = DateTimeProvider.Now;
         }
 
         public void DropPositionedModels()

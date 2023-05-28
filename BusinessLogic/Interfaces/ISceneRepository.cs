@@ -15,6 +15,8 @@ namespace Repositories.Interfaces
         void AddScene(Scene newElement);
         Scene GetScene(string name, string owner);
         void RemoveScene(string name, string owner);
+        void RemoveModelFromScene(Scene scene, PositionedModel model);
+        void AddModelToScene(Scene scene, PositionedModel model);
         bool ExistsSceneUsingModel(Model model);
     }
 

@@ -13,11 +13,9 @@ namespace Controllers.Controllers
         public MaterialManagementService MaterialService { get; set; }
         public RenderingService RenderingService { get; set; }
 
-        public ModelManagementController(ModelManagementService modelService, SphereManagementService sphereService, MaterialManagementService materialService)
+        public ModelManagementController()
         {
-            ModelService = modelService;
-            SphereService = sphereService;
-            MaterialService = materialService;
+
         }
 
         public void AddModel(ModelDTO modelDTO)

@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTOs\CameraDTO.cs" />
+    <Compile Include="DTOs\UICameraDTO.cs" />
     <Compile Include="DTOs\ColorDTO.cs" />
     <Compile Include="DTOs\LambertianDTO.cs" />
     <Compile Include="DTOs\ModelDTO.cs" />
@@ -51,12 +51,15 @@
     <Compile Include="DTOs\SphereDTO.cs" />
     <Compile Include="DTOs\UserDTO.cs" />
     <Compile Include="DTOs\VectorDTO.cs" />
+    <Compile Include="Mappers\CameraMapper.cs" />
     <Compile Include="Mappers\ColorMapper.cs" />
     <Compile Include="Mappers\MaterialMapper.cs" />
     <Compile Include="Mappers\ModelMapper.cs" />
+    <Compile Include="Mappers\PositionedModelMapper.cs" />
     <Compile Include="Mappers\PPMMapper.cs" />
     <Compile Include="Mappers\SceneMapper.cs" />
     <Compile Include="Mappers\SphereMapper.cs" />
+    <Compile Include="Mappers\VectorMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

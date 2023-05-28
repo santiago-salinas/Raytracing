@@ -17,7 +17,8 @@ namespace Controllers
         public ModelManagementController ModelController { get; set; }
         public UserController UserController { get; set; }
         public MemorySceneRepository SceneRepository { get; set; }
-        public SceneManagementController SceneController { get; set; }
+        public SceneManagementController SceneController { get; set; }        
+        public EditSceneController EditSceneController { get; set; }
         public string CurrentUser { get; set; }
     }
 }

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context.cs" />
+    <Compile Include="Controllers\EditSceneController.cs" />
     <Compile Include="Controllers\MaterialManagementController.cs" />
     <Compile Include="Controllers\ModelManagementController.cs" />
     <Compile Include="Controllers\SceneManagementController.cs" />

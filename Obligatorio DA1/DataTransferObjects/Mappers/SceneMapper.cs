@@ -13,7 +13,7 @@ namespace DataTransferObjects
         {
             SceneDTO sceneDTO = new SceneDTO()
             {
-                CameraDTO = scene.CameraDTO,
+                CameraDTO = CameraMapper.ConvertToUICamDTO(scene.CameraDTO),
                 CreationDate = scene.CreationDate,
                 LastModificationDate = scene.LastModificationDate,
                 LastRenderDate = scene.LastRenderDate,
@@ -28,10 +28,11 @@ namespace DataTransferObjects
         {
             Scene scene = new Scene()
             {
-                CameraDTO = sceneDTO.CameraDTO,
+                CameraDTO = CameraMapper.ConvertToDomainCamDTO(sceneDTO.CameraDTO),
                 Name = sceneDTO.Name,
                 Owner = sceneDTO.Owner,
-                PositionedModels = ConvertToPositionedModelList(sceneDTO.PositionedModels)
+                PositionedModels = ConvertToPositionedModelList(sceneDTO.PositionedModels),
+                Preview = PPMMapper.ConvertToPPM(sceneDTO.Preview),                
             };
 
             return scene;
@@ -42,7 +43,7 @@ namespace DataTransferObjects
             List<PositionedModelDTO> positionedModelDTOs = new List<PositionedModelDTO>();
             foreach (PositionedModel model in models)
             {
-                PositionedModelDTO modelDTO = ConvertPositionedModelToDTO(model);
+                PositionedModelDTO modelDTO = PositionedModelMapper.ConvertPositionedModelToDTO(model);
                 positionedModelDTOs.Add(modelDTO);
             }
 
@@ -53,54 +54,11 @@ namespace DataTransferObjects
             List<PositionedModel> positionedModels = new List<PositionedModel>();
             foreach (PositionedModelDTO modelDTO in modelDTOs)
             {
-                PositionedModel positionedModel = ConvertToPositionedModel(modelDTO);
+                PositionedModel positionedModel = PositionedModelMapper.ConvertToPositionedModel(modelDTO);
                 positionedModels.Add(positionedModel);
             }
             return positionedModels;
         }
 
-        private static PositionedModelDTO ConvertPositionedModelToDTO(PositionedModel positionedModel)
-        {
-            PositionedModelDTO positionedModelDTO = new PositionedModelDTO()
-            {
-                ModelDTO = ModelMapper.ConvertToDTO(positionedModel.Model),
-                Position = ConvertVectorToDTO(positionedModel.Position),
-            };
-
-            return positionedModelDTO;
-        }
-        private static PositionedModel ConvertToPositionedModel(PositionedModelDTO positionedModelDTO)
-        {
-            PositionedModel positionedModel = new PositionedModel()
-            {
-                Model = ModelMapper.ConvertToModel(positionedModelDTO.ModelDTO),
-                Position = ConvertToVector(positionedModelDTO.Position),
-            };
-
-            return positionedModel;
-        }
-
-        private static Vector ConvertToVector(VectorDTO vectorDTO)
-        {
-            Vector vector = new Vector()
-            {
-                FirstValue = vectorDTO.FirstValue,
-                SecondValue = vectorDTO.SecondValue,
-                ThirdValue = vectorDTO.ThirdValue,
-            };
-
-            return vector;
-        }
-        private static VectorDTO ConvertVectorToDTO(Vector vector)
-        {
-            VectorDTO vectorDTO = new VectorDTO()
-            {
-                FirstValue = vector.FirstValue,
-                SecondValue = vector.SecondValue,
-                ThirdValue = vector.ThirdValue
-            };
-
-            return vectorDTO;
-        }
     }
 }

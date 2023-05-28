@@ -13,9 +13,7 @@ namespace Services
         public RenderingService() { }
 
         public PpmDTO RenderModelPreview(LambertianDTO material)
-        {
-            PPM preview;
-
+        {            
             Scene previewScene = new Scene();
 
             Model previewModel = new Model()
@@ -46,9 +44,18 @@ namespace Services
             };
 
             Engine renderEngine = new Engine(previewScene);
-            preview = renderEngine.Render();
+            PPM preview = renderEngine.Render();
 
             return PPMMapper.ConvertToDTO(preview);
+        }
+
+        public PpmDTO RenderScene(SceneDTO providedScene)
+        {
+            Scene renderScene = SceneMapper.ConvertToScene(providedScene);
+            Engine renderEngine = new Engine(renderScene); 
+            PPM render = renderEngine.Render();
+
+            return PPMMapper.ConvertToDTO(render);
         }
     }
 }

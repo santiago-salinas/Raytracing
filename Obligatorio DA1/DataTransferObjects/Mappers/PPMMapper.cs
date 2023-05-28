@@ -42,7 +42,7 @@ namespace DataTransferObjects
         public static PPM ConvertToPPM(PpmDTO ppmDTO)
         {
             if (ppmDTO == null) return null;
-            PPM ppm = new PPM(ppmDTO.Heigth, ppmDTO.Width)
+            PPM ppm = new PPM(ppmDTO.Width, ppmDTO.Heigth)
             {
                 PixelsValues = ConvertPixelsFromDTO(ppmDTO.Pixels,ppmDTO.Heigth,ppmDTO.Width)
             };
@@ -62,9 +62,7 @@ namespace DataTransferObjects
                 };
                 return ppmDTO;
             }
-
-            return null;
-            
+            return null;            
         }
     }
 }

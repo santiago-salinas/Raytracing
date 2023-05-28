@@ -28,8 +28,8 @@ namespace UI.Cards
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            //ScenesTab scenesTab = this.Parent.Parent as ScenesTab;
-            //scenesTab.LoadSceneEditTab(_thisScene);
+            ScenesTab scenesTab = this.Parent.Parent as ScenesTab;
+            scenesTab.LoadSceneEditTab(_thisScene);
         }
 
         private void LoadData()
@@ -47,7 +47,7 @@ namespace UI.Cards
             else
             {
                 previewPanel.Controls.Clear();
-               // previewPanel.Controls.Add(new PPMViewer(_thisScene.Preview));
+                previewPanel.Controls.Add(new PPMViewer(_thisScene.Preview));
             }
         }
     }

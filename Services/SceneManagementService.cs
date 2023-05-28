@@ -48,6 +48,12 @@ namespace Services
             return _sceneRepository.GetScene(name, owner);
         }
 
+        public void UpdateScene(SceneDTO scene) 
+        {
+            RemoveScene(scene.Name, scene.Owner);
+            AddScene(scene);
+        }
+
         public void RemoveScene(string name, string owner)
         {
             _sceneRepository.RemoveScene(name, owner);

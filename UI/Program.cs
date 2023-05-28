@@ -34,14 +34,23 @@ namespace UI
             ModelManagementService modelManagementService = new ModelManagementService(memoryModelRepository);
             SceneManagementService sceneManagementService = new SceneManagementService(memorySceneRepository);
             UserService userService = new UserService(memoryUserRepository);
+            EditSceneService editSceneService = new EditSceneService(memorySceneRepository);
             RenderingService renderingService = new RenderingService();
 
             SphereManagementController sphereManagementController = new SphereManagementController(sphereManagementService);
             MaterialManagementController materialManagementController = new MaterialManagementController(materialManagementService);
-            ModelManagementController modelManagementController = new ModelManagementController(modelManagementService,sphereManagementService,materialManagementService);
+            ModelManagementController modelManagementController = new ModelManagementController();
+            modelManagementController.SphereService = sphereManagementService;
+            modelManagementController.ModelService = modelManagementService;
+            modelManagementController.MaterialService = materialManagementService;
             modelManagementController.RenderingService = renderingService;
             SceneManagementController sceneController = new SceneManagementController(sceneManagementService);
             UserController userController = new UserController(userService);
+            EditSceneController editSceneController = new EditSceneController();
+            editSceneController.ModelManagementService = modelManagementService;
+            editSceneController.EditSceneService = editSceneService;
+            editSceneController.RenderingService = renderingService;
+            editSceneController.SceneManagementService = sceneManagementService;
 
             Context context = new Context();
             context.SphereController = sphereManagementController;
@@ -49,6 +58,7 @@ namespace UI
             context.ModelController = modelManagementController;
             context.SceneController = sceneController;
             context.UserController = userController;
+            context.EditSceneController = editSceneController;
 
             User user1 = new User()
             {

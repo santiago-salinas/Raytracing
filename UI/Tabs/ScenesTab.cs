@@ -14,9 +14,11 @@ namespace UI.Tabs
         public EditSceneTab SceneEditDialog;
         private MainPage _mainPage;
         private SceneManagementController _controller;
+        private Context _context;
         public ScenesTab(Context context, MainPage mainPage)
         {
             InitializeComponent();
+            _context = context;
             _mainPage = mainPage;
             _controller = context.SceneController;
             _currentUser = context.CurrentUser;
@@ -39,11 +41,11 @@ namespace UI.Tabs
             LoadSceneEditTab(null);
         }
 
-        public void LoadSceneEditTab(Scene scene)
+        public void LoadSceneEditTab(SceneDTO scene)
         {
-            /*if (SceneEditDialog == null)
+            if (SceneEditDialog == null)
             {
-                EditSceneTab sceneEditDialog = new EditSceneTab(scene, _loggedUser);
+                EditSceneTab sceneEditDialog = new EditSceneTab(scene, _context);
                 sceneEditDialog.ScenesTab = this;
                 sceneEditDialog.FormClosed += EditSceneClosed;
                 sceneEditDialog.MdiParent = _mainPage;
@@ -53,7 +55,7 @@ namespace UI.Tabs
             else
             {
                 SceneEditDialog.Activate();
-            }*/
+            }
         }
 
         public void EditSceneClosed(object sender, EventArgs e)

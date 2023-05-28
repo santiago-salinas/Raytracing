@@ -1,81 +1,60 @@
-﻿using BusinessLogic;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Forms;
 using UI.Cards;
 using UI.Dialogs;
 using Controllers;
-using Controllers.Controllers;
 using DataTransferObjects;
 
 namespace UI.Tabs
 {
     public partial class EditSceneTab : Form
     {
-        private Scene _scene;
+        private SceneDTO _scene;
         private string _loggedUser;
         public ScenesTab ScenesTab;
         private bool _isNewScene;
-        private MemorySceneRepository _repository;
-        private ModelManagementController _modelController;
-        private BLCameraDTO sceneCamera;
-        public EditSceneTab(Scene providedScene, Context context)
+        private EditSceneController _controller;
+        private UICameraDTO sceneCamera;
+        public EditSceneTab(SceneDTO providedScene, Context context)
         {
             InitializeComponent();            
             _loggedUser = context.CurrentUser;
-            _repository = context.SceneRepository;
-            _modelController = context.ModelController;
+            _controller = context.EditSceneController;
             _isNewScene = providedScene == null;
             _scene = _isNewScene ? CreateNewScene() : providedScene;
             LoadAvailableModels();
             LoadDataFromScene(_scene);
         }
 
-        private Scene CreateNewScene()
+        private SceneDTO CreateNewScene()
         {
-            BLCameraDTO defaultCameraValues = new BLCameraDTO()
-            {
-                LookFrom = new Vector(0, 2, 0),
-                LookAt = new Vector(0, 2, 5),
-                Up = new Vector(0, 1, 0),
-                FieldOfView = 30,
-                MaxDepth = 20,
-                ResolutionX = 300,
-                ResolutionY = 200,
-                SamplesPerPixel = 50
-            };
-
-            Scene newScene = new Scene()
-            {
-                Owner = _loggedUser,
-                CameraDTO = defaultCameraValues,
-            };
-
-            return newScene;
+            return _controller.CreateNewScene(_loggedUser);
         }
-        private void LoadDataFromScene(Scene providedScene)
+        private void LoadDataFromScene(SceneDTO providedScene)
         {
             _scene = providedScene;
             nameTextbox.Text = providedScene.Name;
             sceneCamera = providedScene.CameraDTO;
-            Vector lookFrom = sceneCamera.LookFrom;
-            Vector lookAt = sceneCamera.LookAt;
+            VectorDTO lookFrom = sceneCamera.LookFrom;
+            VectorDTO lookAt = sceneCamera.LookAt;
             int fieldOfView = sceneCamera.FieldOfView;
-            lookFromButton.Text = lookFrom.ToString();
-            lookAtButton.Text = lookAt.ToString();
+
+            lookFromButton.Text = VectorToString(lookFrom);
+            lookAtButton.Text = VectorToString(lookAt);
+
             lastModificationLabel.Text += _scene.LastModificationDate.ToString("f", new CultureInfo("en-US"));
             fovInput.Value = fieldOfView;
             if (_scene.Preview != null)
             {
-                //renderPanel.Controls.Add(new PPMViewer(_scene.Preview));
+                renderPanel.Controls.Add(new PPMViewer(_scene.Preview));
                 lastRenderLabel.Text += _scene.LastRenderDate.ToString("f", new CultureInfo("en-US"));
             }
             LoadPositionedModels();
         }
         private void LookFromButton_Click(object sender, EventArgs e)
         {
-
             EditVectorDialog editVectorDialog = new EditVectorDialog(sceneCamera.LookFrom, "Look from");
             editVectorDialog.ShowDialog();
             DialogResult result = editVectorDialog.DialogResult;
@@ -83,7 +62,7 @@ namespace UI.Tabs
             if (result == DialogResult.OK)
             {
                 if (editVectorDialog.WasModified) NotifyThatSeneWasModified();
-                lookFromButton.Text = sceneCamera.LookFrom.ToString();
+                lookFromButton.Text = VectorToString(sceneCamera.LookFrom);
             }
         }
         private void LookAtButton_Click(object sender, EventArgs e)
@@ -95,47 +74,17 @@ namespace UI.Tabs
             if (result == DialogResult.OK)
             {
                 if (editVectorDialog.WasModified) NotifyThatSeneWasModified();
-                lookAtButton.Text = sceneCamera.LookAt.ToString();
+                lookAtButton.Text = VectorToString(sceneCamera.LookAt);
             }
         }
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            nameStatusLabel.Text = string.Empty;
+            nameStatusLabel.Text = "";
             string newName = nameTextbox.Text.Trim();
-            bool endedCorrectly = false;
-            if (newName == "")
-            {
-                nameStatusLabel.Text = "* Scene's name cannot be blank";
-            }
-            else
-            {
-                if (_isNewScene)
-                {
-                    try
-                    {
-                        _scene.Name = newName;
-                        _repository.AddScene(_scene);
-                        endedCorrectly = true;
-                    }
-                    catch (Exception ex)
-                    {
-                        nameStatusLabel.Text = "* " + ex.Message;
-                    }
-                }
-                else
-                {
-                    if (NameWasChanged() && _repository.ContainsScene(newName, _loggedUser))
-                    {
-                        nameStatusLabel.Text = "* User already owns a scene with that name";
-                    }
-                    else
-                    {
-                        _scene.Name = newName;
-                        endedCorrectly = true;
-                    }
-                }
+            bool endedCorrectly = true;
 
-            }
+           // nameStatusLabel.Text = _controller.SaveChangedName(newName);
+            
 
             if (endedCorrectly)
             {
@@ -161,42 +110,42 @@ namespace UI.Tabs
         private void LoadAvailableModels()
         {
             availableModelsPanel.Controls.Clear();
-            List<ModelDTO> list = _modelController.GetModelsFromUser(_loggedUser);
+            List<ModelDTO> list = _controller.GetAvailableModels(_loggedUser);
             foreach (ModelDTO elem in list)
             {
-               //EditSceneModelCard modelCard = new EditSceneModelCard(_scene, elem);
-               // availableModelsPanel.Controls.Add(modelCard);
+               EditSceneModelCard modelCard = new EditSceneModelCard(_controller,_scene, elem);
+               availableModelsPanel.Controls.Add(modelCard);
             }
         }
-
         public void LoadPositionedModels()
         {
             positionedModelsPanel.Controls.Clear();
-            List<PositionedModel> list = _scene.PositionedModels;
-            foreach (PositionedModel elem in list)
+            List<PositionedModelDTO> list = _scene.PositionedModels;
+            foreach (PositionedModelDTO elem in list)
             {
-                PositionedModelCard modelCard = new PositionedModelCard(elem, _scene);
+                PositionedModelCard modelCard = new PositionedModelCard(elem, _scene, _controller);
                 positionedModelsPanel.Controls.Add(modelCard);
             }
         }
 
         private void RenderButton_Click(object sender, EventArgs e)
         {
-            _scene.UpdateLastRenderDate();
-            lastRenderLabel.Text = "Last rendered: " + _scene.LastRenderDate.ToString("f", new CultureInfo("en-US"));
+            
             renderPanel.Controls.Clear();
             outdatedStatusLabel.Visible = false;
+            
+            PpmDTO ppm = _controller.RenderScene(_scene);
 
-            Engine engine = new Engine(_scene);
-            PPM ppm = engine.Render();
-            _scene.Preview = ppm;
-
-            //renderPanel.Controls.Add(new PPMViewer(ppm));
+            renderPanel.Controls.Add(new PPMViewer(ppm));
+            lastRenderLabel.Text = "Last rendered: " + _scene.LastRenderDate.ToString("f", new CultureInfo("en-US"));
         }
-
+        private string VectorToString(VectorDTO vector)
+        {
+            return $"({vector.FirstValue} ; {vector.SecondValue} ; {vector.ThirdValue})";
+        }
         public void NotifyThatSeneWasModified()
         {            
-            _scene.UpdateLastModificationDate();
+            _controller.UpdateLastModificationDate(_scene);
             DateTime newModificationDate = _scene.LastModificationDate;
             lastModificationLabel.Text = "Last modified: " + newModificationDate.ToString("f", new CultureInfo("en-US"));
             outdatedStatusLabel.Visible = true;

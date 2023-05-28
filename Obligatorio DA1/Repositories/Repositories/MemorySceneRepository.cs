@@ -1,6 +1,7 @@
 ﻿using Repositories.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 
 namespace BusinessLogic
 {
@@ -62,6 +63,16 @@ namespace BusinessLogic
         {
             Scene ret = _sceneList.Find(s => s.ContainsModel(model));
             return ret != null;
+        }
+
+        public void AddModelToScene(Scene scene, PositionedModel model)
+        {
+            scene.AddPositionedModel(model);
+        }
+
+        public void RemoveModelFromScene(Scene scene, PositionedModel model) 
+        {
+            scene.RemovePositionedModel(model);
         }
     }
 }

@@ -16,6 +16,6 @@ namespace DataTransferObjects
         public string Owner { get; set; }
         public PpmDTO Preview { get; set; }
         public List<PositionedModelDTO> PositionedModels { get; set; }
-        public BLCameraDTO CameraDTO { get; set; }
+        public UICameraDTO CameraDTO { get; set; }
     }
 }
