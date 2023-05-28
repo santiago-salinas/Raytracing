@@ -19,5 +19,13 @@
             return Model.GetBouncedRay(hitRecord);
         }
 
+        public override bool Equals(object other)
+        {
+            PositionedModel otherModel = other as PositionedModel;
+            bool modelIsEqual = Model.Equals(otherModel.Model);
+            bool positionIsEqual = Position.Equals(otherModel.Position);
+            return modelIsEqual && positionIsEqual;
+        }
+
     }
 }

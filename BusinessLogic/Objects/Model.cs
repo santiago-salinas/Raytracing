@@ -94,7 +94,8 @@ namespace BusinessLogic
 
         public override bool Equals(object other)
         {
-            bool nameEqual = this.Name == ((Model)other).Name;
+            Model otherAsModel = other as Model;
+            bool nameEqual = this.Name == otherAsModel.Name;
             bool shapeEqual = this.Shape == ((Model)other).Shape;
             bool colorEqual = this.Material == ((Model)other).Material;
 
