@@ -16,10 +16,19 @@ namespace BusinessLogic_Tests
         private string _testNullName;
         private User _testUser;
 
+        private MemorySceneRepository memorySceneRepository;
+        private MemoryModelRepository memoryModelRepository;
+        private MemorySphereRepository memorySphereRepository;
+        private MemoryLambertianRepository memoryLambertianRepository;
 
         [TestInitialize]
         public void Initialize()
         {
+            memorySceneRepository = new MemorySceneRepository();
+            memoryModelRepository = new MemoryModelRepository(memorySceneRepository);
+            memorySphereRepository = new MemorySphereRepository(memoryModelRepository);
+            memoryLambertianRepository = new MemoryLambertianRepository(memoryModelRepository);
+
             _testName = "Wood";
             _testColor = new Color(1, 1, 1);
 
@@ -36,7 +45,7 @@ namespace BusinessLogic_Tests
             {
                 Name = _testName,
                 Color = _testColor,
-                Owner = _testUser,
+                Owner = _testUser.UserName,
             };
         }
 
@@ -74,7 +83,7 @@ namespace BusinessLogic_Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException), "Name cant be null")]
+        [ExpectedException(typeof(BusinessLogicException), "Name cant be null")]
         public void NameCantBeNullTest()
         {
             //act
@@ -120,8 +129,8 @@ namespace BusinessLogic_Tests
             //arrange
 
             //act
-            LambertianRepository.AddLambertian(_testLambertian);
-            bool added = LambertianRepository.ContainsLambertian(_testLambertian.Name, _testLambertian.Owner);
+            memoryLambertianRepository.AddLambertian(_testLambertian);
+            bool added = memoryLambertianRepository.ContainsLambertian(_testLambertian.Name, _testLambertian.Owner);
             //assert
             Assert.IsTrue(added);
 
@@ -132,8 +141,8 @@ namespace BusinessLogic_Tests
         {
             //arrange
             //act
-            LambertianRepository.AddLambertian(_testLambertian);
-            Lambertian getLambertian = LambertianRepository.GetLambertian(_testName, _testUser);
+            memoryLambertianRepository.AddLambertian(_testLambertian);
+            Lambertian getLambertian = memoryLambertianRepository.GetLambertian(_testName, _testUser.UserName);
             //assert
             Assert.ReferenceEquals(_testLambertian, getLambertian);
         }
@@ -143,10 +152,10 @@ namespace BusinessLogic_Tests
         public void RemoveLambertianFromCollection()
         {
             //arrange
-            LambertianRepository.AddLambertian(_testLambertian);
+            memoryLambertianRepository.AddLambertian(_testLambertian);
             //act
-            LambertianRepository.RemoveLambertian(_testName, _testUser);
-            LambertianRepository.GetLambertian(_testName, _testUser);
+            memoryLambertianRepository.RemoveLambertian(_testName, _testUser.UserName);
+            memoryLambertianRepository.GetLambertian(_testName, _testUser.UserName);
         }
 
         [TestMethod]
@@ -154,7 +163,7 @@ namespace BusinessLogic_Tests
         public void CantRemoveLambertianNotInCollection()
         {
             //act
-            LambertianRepository.RemoveLambertian(_testName, _testUser);
+            memoryLambertianRepository.RemoveLambertian(_testName, _testUser.UserName);
         }
 
         [TestMethod]
@@ -162,14 +171,14 @@ namespace BusinessLogic_Tests
         public void CantAddLambertianWithNameAlreadyInCollection()
         {
             //arrange
-            LambertianRepository.AddLambertian(_testLambertian);
+            memoryLambertianRepository.AddLambertian(_testLambertian);
             Lambertian newLambertian = new Lambertian();
             newLambertian.Name = _testName;
             newLambertian.Color = _differentTestColor;
-            newLambertian.Owner = _testUser;
+            newLambertian.Owner = _testUser.UserName;
 
             //act
-            LambertianRepository.AddLambertian(newLambertian);
+            memoryLambertianRepository.AddLambertian(newLambertian);
         }
 
         [TestMethod]
@@ -189,24 +198,24 @@ namespace BusinessLogic_Tests
             Lambertian lambertian1 = new Lambertian()
             {
                 Name = "scene1",
-                Owner = user1,
+                Owner = user1.UserName,
             };
             Lambertian lambertian2 = new Lambertian()
             {
                 Name = "scene2",
-                Owner = user1,
+                Owner = user1.UserName,
             };
             Lambertian lambertian3 = new Lambertian()
             {
                 Name = "scene3",
-                Owner = user2,
+                Owner = user2.UserName,
             };
 
-            LambertianRepository.AddLambertian(lambertian1);
-            LambertianRepository.AddLambertian(lambertian2);
-            LambertianRepository.AddLambertian(lambertian3);
+            memoryLambertianRepository.AddLambertian(lambertian1);
+            memoryLambertianRepository.AddLambertian(lambertian2);
+            memoryLambertianRepository.AddLambertian(lambertian3);
 
-            List<Lambertian> lambertians = LambertianRepository.GetLambertiansFromUser(user1);
+            List<Lambertian> lambertians = memoryLambertianRepository.GetLambertiansFromUser(user1.UserName);
 
             Assert.AreEqual(2, lambertians.Count);
             Assert.IsTrue(lambertians.Contains(lambertian1));
@@ -224,7 +233,7 @@ namespace BusinessLogic_Tests
                 Password = "Password1"
             };
 
-            List<Lambertian> lambertians = LambertianRepository.GetLambertiansFromUser(emptyUser);
+            List<Lambertian> lambertians = memoryLambertianRepository.GetLambertiansFromUser(emptyUser.UserName);
 
             Assert.AreEqual(0, lambertians.Count);
         }
@@ -232,7 +241,7 @@ namespace BusinessLogic_Tests
         [TestCleanup]
         public void TearDown()
         {
-            LambertianRepository.Drop();
+            memoryLambertianRepository.Drop();
         }
     }
 }

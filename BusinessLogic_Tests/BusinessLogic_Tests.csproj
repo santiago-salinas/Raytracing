@@ -68,6 +68,10 @@
       <Project>{5807FDC2-139E-4AD2-97D6-0EE8DFCABB8F}</Project>
       <Name>BusinessLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Obligatorio DA1\Repositories\Repositories.csproj">
+      <Project>{7a7be452-b92a-4aa7-bb88-3167e526a453}</Project>
+      <Name>Repositories</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

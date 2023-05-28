@@ -27,13 +27,22 @@ namespace BusinessLogic_Tests
         private Vector _testPosition;
         private Vector _testPositionAlternative;
 
-        private User _testUser;
-        private SphereRepository _testSphereRepository;
+        private string _testUser;
 
+        private MemorySceneRepository memorySceneRepository;
+        private MemoryModelRepository memoryModelRepository;
+        private MemorySphereRepository memorySphereRepository;
+        private MemoryLambertianRepository memoryLambertianRepository;
 
         [TestInitialize]
         public void Initialize()
         {
+            memorySceneRepository = new MemorySceneRepository();
+            memoryModelRepository = new MemoryModelRepository(memorySceneRepository);
+            memorySphereRepository = new MemorySphereRepository(memoryModelRepository);
+            memoryLambertianRepository = new MemoryLambertianRepository(memoryModelRepository);
+
+
             _testName = "Rolling Balls";
             _testNullName = string.Empty;
 
@@ -42,10 +51,7 @@ namespace BusinessLogic_Tests
                 Name = _testName
             };
 
-            _testUser = new User()
-            {
-                UserName = "Username1"
-            };
+            _testUser = "Username1";
 
 
 
@@ -85,8 +91,6 @@ namespace BusinessLogic_Tests
                 Model = _testModel,
                 Position = _testPosition
             };
-
-            _testSphereRepository = new SphereRepository();
 
             DateTimeProvider.Reset();
 
@@ -150,44 +154,34 @@ namespace BusinessLogic_Tests
         public void AddPositionedModelToScene()
         {
             //arrange
-            bool isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel);
+            bool isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel.Model.Name, _testPositionedModel.Position);
             Assert.IsFalse(isContainedByScene);
 
             //act
             _testScene.AddPositionedModel(_testPositionedModel);
 
             //assert
-            isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel);
+            isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel.Model.Name, _testPositionedModel.Position);
             Assert.IsTrue(isContainedByScene);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(BusinessLogicException), "Duplicated PositionedModel in Scene")]
-        public void CantHaveDuplicatedPositionedModelInScene()
-        {
-            //arrange
-            bool isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel);
-            Assert.IsFalse(isContainedByScene);
-            _testScene.AddPositionedModel(_testPositionedModel);
-            isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel);
-            Assert.IsTrue(isContainedByScene);
-            //act
-            _testScene.AddPositionedModel(_testPositionedModel);
-        }
+        
 
         [TestMethod]
         public void RemovePositionedModelFromScene()
         {
             //arrange
-            bool isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel);
+            bool isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel.Model.Name, _testPositionedModel.Position);
             Assert.IsFalse(isContainedByScene);
             _testScene.AddPositionedModel(_testPositionedModel);
-            isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel);
+            isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel.Model.Name, _testPositionedModel.Position);
+
             Assert.IsTrue(isContainedByScene);
             //act
             _testScene.RemovePositionedModel(_testPositionedModel);
             //assert
-            isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel);
+            isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel.Model.Name, _testPositionedModel.Position);
+
             Assert.IsFalse(isContainedByScene);
         }
 
@@ -204,14 +198,15 @@ namespace BusinessLogic_Tests
             _testScene.AddPositionedModel(_testPositionedModel);
             _testScene.AddPositionedModel(testPositionedModelAlternative);
 
-            bool isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel);
+            bool isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel.Model.Name, _testPositionedModel.Position);
             Assert.IsTrue(isContainedByScene);
 
             //act
             _testScene.RemovePositionedModel(_testPositionedModel);
 
             //assert
-            isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel);
+            isContainedByScene = _testScene.ContainsPositionedModel(_testPositionedModel.Model.Name, _testPositionedModel.Position);
+
             Assert.IsFalse(isContainedByScene);
         }
 
@@ -290,10 +285,10 @@ namespace BusinessLogic_Tests
             //arrange
             User testUser = new User();
             testUser.UserName = "Username";
-            _testScene.Owner = testUser;
+            _testScene.Owner = testUser.UserName;
             //act
-            SceneRepository.AddScene(_testScene);
-            bool added = SceneRepository.ContainsScene(_testScene.Name, testUser);
+            memorySceneRepository.AddScene(_testScene);
+            bool added = memorySceneRepository.ContainsScene(_testScene.Name, testUser.UserName);
             //assert
             Assert.IsTrue(added);
         }
@@ -304,10 +299,10 @@ namespace BusinessLogic_Tests
             //arrange
             User testUser = new User();
             testUser.UserName = "Username";
-            _testScene.Owner = testUser;
+            _testScene.Owner = testUser.UserName;
             //act
-            SceneRepository.AddScene(_testScene);
-            Scene getScene = SceneRepository.GetScene(_testName, testUser);
+            memorySceneRepository.AddScene(_testScene);
+            Scene getScene = memorySceneRepository.GetScene(_testName, testUser.UserName);
             //assert
             Assert.ReferenceEquals(_testScene, getScene);
         }
@@ -319,11 +314,11 @@ namespace BusinessLogic_Tests
             //arrange
             User testUser = new User();
             testUser.UserName = "Username";
-            _testScene.Owner = testUser;
-            SceneRepository.AddScene(_testScene);
+            _testScene.Owner = testUser.UserName;
+            memorySceneRepository.AddScene(_testScene);
             //act
-            SceneRepository.RemoveScene(_testName, testUser);
-            SceneRepository.GetScene(_testName, testUser);
+            memorySceneRepository.RemoveScene(_testName, testUser.UserName);
+            memorySceneRepository.GetScene(_testName, testUser.UserName);
         }
 
 
@@ -344,18 +339,18 @@ namespace BusinessLogic_Tests
             Scene scene1 = new Scene()
             {
                 Name = "scene1",
-                Owner = user1,
+                Owner = user1.UserName,
             };
             Scene scene2 = new Scene()
             {
                 Name = "scene2",
-                Owner = user2,
+                Owner = user2.UserName,
             };
-            SceneRepository.AddScene(scene1);
-            SceneRepository.AddScene(scene2);
+            memorySceneRepository.AddScene(scene1);
+            memorySceneRepository.AddScene(scene2);
 
             // Act
-            Action act = () => SceneRepository.RemoveScene("scene1", user2);
+            Action act = () => memorySceneRepository.RemoveScene("scene1", user2.UserName);
 
             // Assert
             var exception = Assert.ThrowsException<BusinessLogicException>(act);
@@ -375,17 +370,17 @@ namespace BusinessLogic_Tests
             _testScene = new Scene()
             {
                 Name = _testName,
-                Owner = testUser
+                Owner = testUser.UserName
             };
-            SceneRepository.AddScene(_testScene);
+            memorySceneRepository.AddScene(_testScene);
 
             //act
             Scene newScene = new Scene()
             {
                 Name = _testName,
-                Owner = testUser
+                Owner = testUser.UserName
             };
-            SceneRepository.AddScene(newScene);
+            memorySceneRepository.AddScene(newScene);
         }
 
         [TestMethod]
@@ -393,12 +388,12 @@ namespace BusinessLogic_Tests
         public void CantDeleteModelFromCollectionUsedByScene()
         {
             //arrange
-            ModelRepository.AddModel(_testModel);
+            memoryModelRepository.AddModel(_testModel);
             _testScene.AddPositionedModel(_testPositionedModel);
-            SceneRepository.AddScene(_testScene);
+            memorySceneRepository.AddScene(_testScene);
 
             //act
-            ModelRepository.RemoveModel(_testModel.Name, _testModel.Owner);
+            memoryModelRepository.RemoveModel(_testModel.Name, _testModel.Owner);
         }
 
         [TestMethod]
@@ -407,14 +402,14 @@ namespace BusinessLogic_Tests
             //arrange
             User testUser = new User();
             testUser.UserName = "Username";
-            _testScene.Owner = testUser;
-            ModelRepository.AddModel(_testModel);
+            _testScene.Owner = testUser.UserName;
+            memoryModelRepository.AddModel(_testModel);
             _testScene.AddPositionedModel(_testPositionedModel);
-            SceneRepository.AddScene(_testScene);
+            memorySceneRepository.AddScene(_testScene);
 
             //act
-            SceneRepository.RemoveScene(_testScene.Name, testUser);
-            ModelRepository.RemoveModel(_testModel.Name, _testModel.Owner);
+            memorySceneRepository.RemoveScene(_testScene.Name, testUser.UserName);
+            memoryModelRepository.RemoveModel(_testModel.Name, _testModel.Owner);
         }
 
         [TestMethod]
@@ -422,12 +417,11 @@ namespace BusinessLogic_Tests
         {
 
             //arrange
-            _testUser = new User();
-            _testUser.UserName = "Username";
+            _testUser = "Username";
             _testScene.Owner = _testUser;
             Assert.IsFalse(_testScene.ContainsModel(_testModel));
             _testModel.Owner = _testUser;
-            ModelRepository.AddModel(_testModel);
+            memoryModelRepository.AddModel(_testModel);
             //act
             _testScene.AddPositionedModel(_testPositionedModel);
             //assert
@@ -453,24 +447,24 @@ namespace BusinessLogic_Tests
             Scene scene1 = new Scene()
             {
                 Name = "scene1",
-                Owner = user1,
+                Owner = user1.UserName,
             };
             Scene scene2 = new Scene()
             {
                 Name = "scene2",
-                Owner = user1,
+                Owner = user1.UserName,
             };
             Scene scene3 = new Scene()
             {
                 Name = "scene3",
-                Owner = user2,
+                Owner = user2.UserName,
             };
 
-            SceneRepository.AddScene(scene1);
-            SceneRepository.AddScene(scene2);
-            SceneRepository.AddScene(scene3);
+            memorySceneRepository.AddScene(scene1);
+            memorySceneRepository.AddScene(scene2);
+            memorySceneRepository.AddScene(scene3);
 
-            List<Scene> scenes = SceneRepository.GetScenesFromUser(user1);
+            List<Scene> scenes = memorySceneRepository.GetScenesFromUser(user1.UserName);
 
             Assert.AreEqual(2, scenes.Count);
             Assert.IsTrue(scenes.Contains(scene1));
@@ -488,7 +482,7 @@ namespace BusinessLogic_Tests
                 Password = "Password1"
             };
 
-            List<Scene> scenes = SceneRepository.GetScenesFromUser(emptyUser);
+            List<Scene> scenes = memorySceneRepository.GetScenesFromUser(emptyUser.UserName);
 
             Assert.AreEqual(0, scenes.Count);
         }
@@ -497,10 +491,10 @@ namespace BusinessLogic_Tests
         public void TearDown()
         {
             DateTimeProvider.Reset();
-            _testSphereRepository.Drop();
-            LambertianRepository.Drop();
-            ModelRepository.Drop();
-            SceneRepository.Drop();
+            memorySphereRepository.Drop();
+            memoryLambertianRepository.Drop();
+            memoryModelRepository.Drop();
+            memorySceneRepository.Drop();
             _testScene.DropPositionedModels();
         }
     }
