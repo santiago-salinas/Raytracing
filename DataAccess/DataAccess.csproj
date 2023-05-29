@@ -52,12 +52,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EFContext.cs" />
-    <Compile Include="SphereEntity.cs" />
+    <Compile Include="Entities\LambertianEntity.cs" />
+    <Compile Include="Migrations\202305292338549_InitialCreate.cs" />
+    <Compile Include="Migrations\202305292338549_InitialCreate.designer.cs">
+      <DependentUpon>202305292338549_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305292343414_v1.cs" />
+    <Compile Include="Migrations\202305292343414_v1.designer.cs">
+      <DependentUpon>202305292343414_v1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Entities\SphereEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202305292338549_InitialCreate.resx">
+      <DependentUpon>202305292338549_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305292343414_v1.resx">
+      <DependentUpon>202305292343414_v1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

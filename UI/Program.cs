@@ -24,7 +24,7 @@ namespace UI
             {
                 var sphere = new SphereEntity()
                 {
-                    NameID = "my first sphere",
+                    NameID = "my first sphere2",
                     Owner = "Fefo",
                     Radius = 10,
                 };
