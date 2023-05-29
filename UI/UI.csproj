@@ -260,6 +260,10 @@
       <Project>{373a8444-9aba-4360-a411-884816f6f2dc}</Project>
       <Name>Controllers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{9950622b-d4c8-4b45-9a69-7fbc73807093}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Obligatorio DA1\DataTransferObjects\DataTransferObjects.csproj">
       <Project>{ab995188-c650-4026-83c9-87cb778c9d89}</Project>
       <Name>DataTransferObjects</Name>

@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositorie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controllers", "..\Controllers\Controllers.csproj", "{373A8444-9ABA-4360-A411-884816F6F2DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "..\DataAccess\DataAccess.csproj", "{9950622B-D4C8-4B45-9A69-7FBC73807093}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{373A8444-9ABA-4360-A411-884816F6F2DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{373A8444-9ABA-4360-A411-884816F6F2DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{373A8444-9ABA-4360-A411-884816F6F2DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9950622B-D4C8-4B45-9A69-7FBC73807093}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9950622B-D4C8-4B45-9A69-7FBC73807093}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9950622B-D4C8-4B45-9A69-7FBC73807093}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9950622B-D4C8-4B45-9A69-7FBC73807093}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

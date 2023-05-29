@@ -5,7 +5,7 @@ using Controllers;
 using Controllers.Controllers;
 using Services;
 using Repositories;
-
+using DataAccess;
 using System.Security.Cryptography;
 
 namespace UI
@@ -20,8 +20,19 @@ namespace UI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            using (var ctx = new EFContext())
+            {
+                var sphere = new SphereEntity()
+                {
+                    NameID = "my first sphere",
+                    Owner = "Fefo",
+                    Radius = 10,
+                };
 
-           
+                ctx.SphereEntities.Add(sphere);
+                ctx.SaveChanges();
+            }
+
 
             MemoryUserRepository memoryUserRepository = new MemoryUserRepository();
             MemorySceneRepository memorySceneRepository = new MemorySceneRepository();
