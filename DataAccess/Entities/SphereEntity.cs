@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using BusinessLogic;
 
 namespace DataAccess
 {
@@ -12,10 +13,32 @@ namespace DataAccess
     {
         [Key]
         [Column(Order = 1)]
-        public string NameID { get; set; }
+        public string Name { get; set; }
         [Key]
         [Column(Order = 2)]
         public string Owner { get; set; }
-        public int Radius { get; set; }
+        public double Radius { get; set; }
+
+        public static SphereEntity FromDomain (Sphere sphere)
+        {
+            SphereEntity ret = new SphereEntity()
+            {
+                Name = sphere.Name,
+                Owner = sphere.Owner,
+                Radius = sphere.Radius,
+            };
+            return ret;
+        }
+
+        public static Sphere FromEntity(SphereEntity entity)
+        {
+            Sphere ret = new Sphere()
+            {
+                Name = entity.Name,
+                Owner = entity.Owner,
+                Radius = entity.Radius,
+            };
+            return ret;
+        }
     }
 }
