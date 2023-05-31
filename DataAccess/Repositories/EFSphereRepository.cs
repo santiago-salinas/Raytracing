@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using BusinessLogic;
 using Controllers.Interfaces;
 
@@ -19,18 +20,18 @@ namespace DataAccess.Repositories
 
             using (EFContext dbContext = new EFContext())
             {
-                List<SphereEntity> entities = dbContext.SphereEntities.ToList();
+                var query = $"SELECT * " +
+                            $"FROM SphereEntities " +
+                            $"WHERE Owner = '{username}'";
+
+                List<SphereEntity> entities = dbContext.SphereEntities.SqlQuery(query).ToList();
 
                 foreach (SphereEntity entity in entities)
-                {
-                    if(entity.Owner == username)
-                    {
-                        Sphere domainSphere = SphereEntity.FromEntity(entity);
-                        spheres.Add(domainSphere);
-                    }                    
+                {                    
+                    Sphere domainSphere = SphereEntity.FromEntity(entity);
+                    spheres.Add(domainSphere);                                       
                 }
             }
-
             return spheres;
         }
 
@@ -60,7 +61,10 @@ namespace DataAccess.Repositories
         {
             using (EFContext dbContext = new EFContext())
             {
-                SphereEntity sphere = dbContext.SphereEntities.FirstOrDefault(s => s.Name == name && s.Owner == owner);
+                var query = $"SELECT * " +
+                            $"FROM SphereEntities " +
+                            $"WHERE Name = '{name}' AND Owner = '{owner}'";
+                SphereEntity sphere = dbContext.SphereEntities.SqlQuery(query).FirstOrDefault();
 
                 if (sphere != null)
                 {
