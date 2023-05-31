@@ -22,9 +22,10 @@ namespace UI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Sphere efSphere = new Sphere("Ef sphere", 0.5f, "Santi");
+            //Sphere efSphere = new Sphere("Ef sphere", 0.5f, "Santi");
             EFSphereRepository eFSphereRepository = new EFSphereRepository();
-            eFSphereRepository.AddSphere(efSphere);
+            //eFSphereRepository.AddSphere(efSphere);
+
 
             MemoryUserRepository memoryUserRepository = new MemoryUserRepository();
             MemorySceneRepository memorySceneRepository = new MemorySceneRepository();
@@ -32,7 +33,8 @@ namespace UI
             MemorySphereRepository memorySphereRepository = new MemorySphereRepository(memoryModelRepository);
             MemoryLambertianRepository memoryLambertianRepository = new MemoryLambertianRepository(memoryModelRepository);
 
-            SphereManagementService sphereManagementService = new SphereManagementService(memorySphereRepository);
+            //SphereManagementService sphereManagementService = new SphereManagementService(memorySphereRepository);
+            SphereManagementService sphereManagementService = new SphereManagementService(eFSphereRepository);
             MaterialManagementService materialManagementService = new MaterialManagementService(memoryLambertianRepository);
             ModelManagementService modelManagementService = new ModelManagementService(memoryModelRepository);
             SceneManagementService sceneManagementService = new SceneManagementService(memorySceneRepository);

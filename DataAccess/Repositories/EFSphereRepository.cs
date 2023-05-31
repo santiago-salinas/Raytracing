@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,12 +15,35 @@ namespace DataAccess.Repositories
 
         public List<Sphere> GetSpheresFromUser(string username)
         {
-            return new List<Sphere>();
+            List<Sphere> spheres = new List<Sphere>();
+
+            using (EFContext dbContext = new EFContext())
+            {
+                List<SphereEntity> entities = dbContext.SphereEntities.ToList();
+
+                foreach (SphereEntity entity in entities)
+                {
+                    if(entity.Owner == username)
+                    {
+                        Sphere domainSphere = SphereEntity.FromEntity(entity);
+                        spheres.Add(domainSphere);
+                    }                    
+                }
+            }
+
+            return spheres;
         }
 
         public bool ContainsSphere(string name, string owner)
         {
-            return false;
+            using (EFContext dbContext = new EFContext())
+            {
+                var query = $"SELECT * " +
+                            $"FROM SphereEntities " +
+                            $"WHERE Name = '{name}' AND Owner = '{owner}'";
+                SphereEntity entitySphere = dbContext.SphereEntities.SqlQuery(query).FirstOrDefault();
+                return entitySphere != null;                
+            }
         }
 
         public void AddSphere(Sphere sphere) 
@@ -32,18 +56,49 @@ namespace DataAccess.Repositories
             }
         }
 
-        public void RemoveSphere(string name, string owner) { }
+        public void RemoveSphere(string name, string owner) 
+        {
+            using (EFContext dbContext = new EFContext())
+            {
+                SphereEntity sphere = dbContext.SphereEntities.FirstOrDefault(s => s.Name == name && s.Owner == owner);
+
+                if (sphere != null)
+                {
+                    dbContext.SphereEntities.Remove(sphere);
+                    dbContext.SaveChanges();
+
+                    Console.WriteLine("Sphere removed successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Sphere not found.");
+                }
+            }
+
+        }
 
         public Sphere GetSphere(string name, string owner) 
         {
-          /*  using(EFContext dbContext = new EFContext())
+            Sphere domainSphere = null;
+
+            using (EFContext dbContext = new EFContext())
             {
-                SphereEntity entity = dbContext.SphereEntities.
-                Sphere sphere;
+                var query = $"SELECT * " +
+                            $"FROM SphereEntities " +
+                            $"WHERE Name = '{name}' AND Owner = '{owner}'";
+                SphereEntity entitySphere = dbContext.SphereEntities.SqlQuery(query).FirstOrDefault();
 
-            }*/
-
-            return null;
+                if (entitySphere != null)
+                {
+                    Console.WriteLine($"Name: {entitySphere.Name}, Owner: {entitySphere.Owner}, Radius: {entitySphere.Radius}");
+                    domainSphere = SphereEntity.FromEntity(entitySphere);
+                }
+                else
+                {
+                    Console.WriteLine("Sphere not found.");
+                }
+            }
+            return domainSphere;
         }
 
 

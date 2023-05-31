@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="EFContext.cs" />
     <Compile Include="Entities\LambertianEntity.cs" />
+    <Compile Include="Entities\ModelEntity.cs" />
     <Compile Include="Migrations\202305292338549_InitialCreate.cs" />
     <Compile Include="Migrations\202305292338549_InitialCreate.designer.cs">
       <DependentUpon>202305292338549_InitialCreate.cs</DependentUpon>
