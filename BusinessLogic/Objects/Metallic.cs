@@ -33,14 +33,13 @@
         {
             Vector newVectorPoint = Reflect(hitRecord.Inray.Direction.GetUnit(), hitRecord.Normal);
             newVectorPoint = newVectorPoint.Add(Vector.GetRandomInUnitSphere().Multiply(hitRecord.Roughness));
-            Vector newVector = newVectorPoint.Subtract(hitRecord.Intersection);
-            Ray newRay = new Ray(hitRecord.Intersection, newVector);
+            Ray newRay = new Ray(hitRecord.Intersection, newVectorPoint);
 
             if(newRay.Direction.Dot(hitRecord.Normal) > 0)
             {
                 return newRay;
             }
-
+            
             newRay.Nulleable = true;
             return newRay;
         }
