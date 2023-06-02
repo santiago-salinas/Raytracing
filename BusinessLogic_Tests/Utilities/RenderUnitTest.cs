@@ -447,7 +447,7 @@ namespace BusinessLogic_Tests
             {
                 Name = _model1Name,
                 Shape = _sphere1,
-                Material = _material1
+                Material = _metallic1
             };
 
             _position1 = new Vector(0, 0.5, -2);
@@ -476,7 +476,7 @@ namespace BusinessLogic_Tests
             {
                 Name = model2Name,
                 Shape = sphere2,
-                Material = material2
+                Material = _metallic2
             };
 
             position2 = new Vector(-1.2, 0.5, -3);
@@ -504,7 +504,7 @@ namespace BusinessLogic_Tests
             {
                 Name = model3Name,
                 Shape = sphere3,
-                Material = lambertian3
+                Material = _metallic3
             };
 
             position3 = new Vector(1.3, 2, -4.7);
@@ -532,7 +532,7 @@ namespace BusinessLogic_Tests
             {
                 Name = model4Name,
                 Shape = sphere4,
-                Material = lambertian4
+                Material = _lambertian4
             };
 
             position4 = new Vector(0.8, 0.5, 2);

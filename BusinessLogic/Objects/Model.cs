@@ -7,11 +7,11 @@ namespace BusinessLogic
         private string _name;
         public Model() { }
 
-        public Model(string name, Sphere shape, Lambertian color, string owner)
+        public Model(string name, Sphere shape, Material model, string owner)
         {
             Name = name;
             Shape = shape;
-            Material = color;
+            Material = model;
             Owner = owner;
         }
 
