@@ -12,13 +12,13 @@ namespace Services
     {
         public RenderingService() { }
 
-        public PpmDTO RenderModelPreview(LambertianDTO material)
+        public PpmDTO RenderModelPreview(MaterialDTO material)
         {            
             Scene previewScene = new Scene();
 
             Model previewModel = new Model()
             {
-                Material = MaterialMapper.ConvertToLambertian(material),
+                Material = MaterialMapper.ConvertToMaterial(material),
                 Shape = new Sphere() { Radius = 1 },
             };
 

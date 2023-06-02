@@ -8,10 +8,10 @@ namespace UI.Cards
 {
     public partial class LambertianCard : UserControl
     {
-        private LambertianDTO _lambertian;
+        private MaterialDTO _lambertian;
         private MaterialManagementController _controller;
 
-        public LambertianCard(LambertianDTO lambertianDTO, MaterialManagementController controller)
+        public LambertianCard(MaterialDTO lambertianDTO, MaterialManagementController controller)
         {
             InitializeComponent();
             _lambertian = lambertianDTO;

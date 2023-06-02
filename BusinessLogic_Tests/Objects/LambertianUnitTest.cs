@@ -142,7 +142,7 @@ namespace BusinessLogic_Tests
             //arrange
             //act
             memoryLambertianRepository.AddLambertian(_testLambertian);
-            Lambertian getLambertian = memoryLambertianRepository.GetLambertian(_testName, _testUser.UserName);
+            Material getLambertian = memoryLambertianRepository.GetLambertian(_testName, _testUser.UserName);
             //assert
             Assert.ReferenceEquals(_testLambertian, getLambertian);
         }
@@ -215,7 +215,7 @@ namespace BusinessLogic_Tests
             memoryLambertianRepository.AddLambertian(lambertian2);
             memoryLambertianRepository.AddLambertian(lambertian3);
 
-            List<Lambertian> lambertians = memoryLambertianRepository.GetLambertiansFromUser(user1.UserName);
+            List<Material> lambertians = memoryLambertianRepository.GetLambertiansFromUser(user1.UserName);
 
             Assert.AreEqual(2, lambertians.Count);
             Assert.IsTrue(lambertians.Contains(lambertian1));
@@ -233,7 +233,7 @@ namespace BusinessLogic_Tests
                 Password = "Password1"
             };
 
-            List<Lambertian> lambertians = memoryLambertianRepository.GetLambertiansFromUser(emptyUser.UserName);
+            List<Material> lambertians = memoryLambertianRepository.GetLambertiansFromUser(emptyUser.UserName);
 
             Assert.AreEqual(0, lambertians.Count);
         }

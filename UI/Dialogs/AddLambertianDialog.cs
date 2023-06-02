@@ -11,7 +11,7 @@ namespace UI.Dialogs
         private MaterialManagementController _controller;
         private string _loggedUser;
 
-        public LambertianDTO NewLambertian;
+        public MaterialDTO NewLambertian;
         public AddLambertianDialog(Context context)
         {
             InitializeComponent();
@@ -40,7 +40,7 @@ namespace UI.Dialogs
                 Green = greenValue,
                 Blue = blueValue,
             };
-            NewLambertian = new LambertianDTO()
+            NewLambertian = new MaterialDTO()
             {
                 Name = lambertianName,
                 Color = colorDTO,

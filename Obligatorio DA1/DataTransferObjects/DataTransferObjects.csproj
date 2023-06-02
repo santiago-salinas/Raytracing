@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="DTOs\UICameraDTO.cs" />
     <Compile Include="DTOs\ColorDTO.cs" />
-    <Compile Include="DTOs\LambertianDTO.cs" />
+    <Compile Include="DTOs\MaterialDTO.cs" />
     <Compile Include="DTOs\ModelDTO.cs" />
     <Compile Include="DTOs\PositionedModelDTO.cs" />
     <Compile Include="DTOs\PpmDTO.cs" />

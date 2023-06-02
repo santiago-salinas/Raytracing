@@ -27,14 +27,14 @@ namespace DataTransferObjects
         public static Model ConvertToModel(ModelDTO modelDTO)
         {
             string ownerName = modelDTO.OwnerName;
-            LambertianDTO material = modelDTO.Material;
+            MaterialDTO material = modelDTO.Material;
             SphereDTO shape = modelDTO.Shape;
 
             Model model = new Model()
             {
                 Name = modelDTO.Name,
                 Shape = SphereMapper.ConvertToSphere(shape),
-                Material = MaterialMapper.ConvertToLambertian(material),
+                Material = MaterialMapper.ConvertToMaterial(material),
                 Owner = ownerName,
                 Preview = PPMMapper.ConvertToPPM(modelDTO.Preview)
             };

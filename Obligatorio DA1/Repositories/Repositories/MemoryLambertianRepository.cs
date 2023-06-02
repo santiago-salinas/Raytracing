@@ -6,7 +6,7 @@ namespace BusinessLogic
 {
     public class MemoryLambertianRepository : IMaterialRepository
     {
-        private List<Lambertian> _lambertianList = new List<Lambertian>();
+        private List<Material> _lambertianList = new List<Material>();
         private IModelRepository _modelRepository;
 
         public MemoryLambertianRepository(IModelRepository modelRepository)
@@ -18,10 +18,10 @@ namespace BusinessLogic
             _lambertianList.Clear();
         }
 
-        public List<Lambertian> GetLambertiansFromUser(string owner)
+        public List<Material> GetLambertiansFromUser(string owner)
         {
-            List<Lambertian> ret = new List<Lambertian>();
-            foreach (Lambertian s in _lambertianList)
+            List<Material> ret = new List<Material>();
+            foreach (Material s in _lambertianList)
             {
                 if (s.Owner == owner)
                 {
@@ -33,10 +33,10 @@ namespace BusinessLogic
 
         public bool ContainsLambertian(string name, string user)
         {
-            Lambertian lambertian = _lambertianList.Find(l => l.Name == name && l.Owner == user);
+            Material lambertian = _lambertianList.Find(l => l.Name == name && l.Owner == user);
             return lambertian != null;
         }
-        public void AddLambertian(Lambertian newElement)
+        public void AddLambertian(Material newElement)
         {
             if (!ContainsLambertian(newElement.Name, newElement.Owner))
             {
@@ -49,16 +49,16 @@ namespace BusinessLogic
 
         }
 
-        public Lambertian GetLambertian(string name, string user)
+        public Material GetLambertian(string name, string user)
         {
-            Lambertian ret = _lambertianList.Find(l => l.Name == name && l.Owner == user);
+            Material ret = _lambertianList.Find(l => l.Name == name && l.Owner == user);
             if (ret == null) throw new BusinessLogicException("User does not own lambertian with that name");
             return ret;
         }
 
         public void RemoveLambertian(string name, string owner)
         {
-            Lambertian lambertian = GetLambertian(name, owner);
+            Material lambertian = GetLambertian(name, owner);
 
             if (_modelRepository.ExistsModelUsingTheLambertian(lambertian))
             {

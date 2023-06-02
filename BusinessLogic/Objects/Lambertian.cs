@@ -1,11 +1,10 @@
 ﻿using System;
+using System.Xml.Linq;
 
 namespace BusinessLogic
 {
-    public class Lambertian
+    public class Lambertian : Material
     {
-        private string _name;
-
         public Lambertian() { }
 
         public Lambertian(string name, Color color, string user)
@@ -15,29 +14,13 @@ namespace BusinessLogic
             Owner = user;
         }
 
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                value = value.Trim();
-                CheckIfStringNull(value);
-                _name = value;
-            }
-        }
-
-        public string Owner { get; set; }
         public Color Color { get; set; }
-
-        private void CheckIfStringNull(string value)
+        public override Color Preview
         {
-            if (string.IsNullOrEmpty(value))
-            {
-                throw new BusinessLogicException("Name cannot be empty");
-            }
+            get { return Color; }
         }
 
-        public Ray GetBouncedRay(HitRecord hitRecord)
+        public override Ray GetBouncedRay(HitRecord hitRecord)
         {
             Vector newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(Vector.GetRandomInUnitSphere());
             Vector newVector = newVectorPoint.Subtract(hitRecord.Intersection);
@@ -46,11 +29,10 @@ namespace BusinessLogic
             return newRay;
         }
 
-        public override bool Equals(object other)
+        public override HitRecord IsHitByRay(HitRecord hit)
         {
-            bool namesEqual = this.Name == ((Lambertian)other).Name;            
-            bool ownerEqual = this.Owner == ((Lambertian) other).Owner;
-            return namesEqual && ownerEqual;
+            hit.Attenuation = Color;
+            return hit;
         }
     }
 }

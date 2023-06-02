@@ -16,7 +16,7 @@ namespace Controllers
             _service = service;
         }
 
-        public void AddLambertian(LambertianDTO lambertianDTO)
+        public void AddLambertian(MaterialDTO lambertianDTO)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace Controllers
             }
         }
 
-        public List<LambertianDTO> GetLambertiansFromUser(string owner) 
+        public List<MaterialDTO> GetLambertiansFromUser(string owner) 
         {
             return _service.GetLambertiansFromUser(owner);
         }

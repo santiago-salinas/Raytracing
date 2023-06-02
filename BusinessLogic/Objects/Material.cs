@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
@@ -21,24 +17,27 @@ namespace BusinessLogic
             }
         }
 
-        public User Owner { get; set; }
+        public abstract Color Preview { get; }
+
+        public string Owner { get; set; }
 
         private void CheckIfStringNull(string value)
         {
             if (string.IsNullOrEmpty(value))
             {
-                throw new ArgumentNullException("Name cant be null");
+                throw new BusinessLogicException("Name cannot be empty");
             }
         }
 
-        public Color Preview { get; set; }
+        public abstract Ray GetBouncedRay(HitRecord hitRecord);
 
-        abstract public Ray GetBouncedRay(Ray rayin, HitRecord hitRecord);
+        public override bool Equals(object other)
+        {
+            bool namesEqual = this.Name == ((Lambertian)other).Name;
+            bool ownerEqual = this.Owner == ((Lambertian)other).Owner;
+            return namesEqual && ownerEqual;
+        }
 
-        abstract public HitRecord AddToHit(HitRecord hitRecord);
-
-        
-
-        abstract public override bool Equals(object other);
+        public abstract HitRecord IsHitByRay(HitRecord hit);
     }
 }

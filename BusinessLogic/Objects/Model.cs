@@ -18,7 +18,7 @@ namespace BusinessLogic
         public HitRecord IsHitByRay(Ray ray, double tMin, double tMax, Vector position)
         {
             HitRecord hit = Shape.IsHitByRay(ray, tMin, tMax, position);
-            hit.Attenuation = Material.Color;
+            hit = Material.IsHitByRay(hit);
             return hit;
         }
 
@@ -88,7 +88,7 @@ namespace BusinessLogic
 
         public Sphere Shape { get; set; }
 
-        public Lambertian Material { get; set; }
+        public Material Material { get; set; }
 
         public PPM Preview { get; set; }
 

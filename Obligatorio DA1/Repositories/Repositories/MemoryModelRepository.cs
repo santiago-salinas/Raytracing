@@ -37,7 +37,7 @@ namespace BusinessLogic
             return ret != null;
         }
 
-        public bool ExistsModelUsingTheLambertian(Lambertian lambertian)
+        public bool ExistsModelUsingTheLambertian(Material lambertian)
         {
             Model ret = _modelList.Find(m => m.Material.Equals(lambertian));
             return ret != null;

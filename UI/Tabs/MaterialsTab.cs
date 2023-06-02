@@ -25,8 +25,8 @@ namespace UI.Tabs
 
         private void LoadMaterials()
         {
-            List<LambertianDTO> lambertianList = _lambertianController.GetLambertiansFromUser(_loggedUser);
-            foreach (LambertianDTO elem in lambertianList)
+            List<MaterialDTO> lambertianList = _lambertianController.GetLambertiansFromUser(_loggedUser);
+            foreach (MaterialDTO elem in lambertianList)
             {
                 LambertianCard lambertianCard = new LambertianCard(elem,_lambertianController);
                 flowLayoutPanel.Controls.Add(lambertianCard);

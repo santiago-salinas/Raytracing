@@ -16,9 +16,9 @@ namespace Services
             _repository = repository;            
         }
 
-        public void AddLambertian(LambertianDTO lambertianDTO)
+        public void AddLambertian(MaterialDTO lambertianDTO)
         {
-            Lambertian lambertian = MaterialMapper.ConvertToLambertian(lambertianDTO);
+            Material lambertian = MaterialMapper.ConvertToMaterial(lambertianDTO);
             _repository.AddLambertian(lambertian);
         }
 
@@ -27,7 +27,7 @@ namespace Services
             _repository.RemoveLambertian(name, ownerName);
         }
 
-        public Lambertian GetLambertian(string name, string ownerName)
+        public Material GetLambertian(string name, string ownerName)
         {            
             return _repository.GetLambertian(name, ownerName);
         }
@@ -37,19 +37,19 @@ namespace Services
             return _repository.ContainsLambertian(lambertianName, ownerName);
         }
 
-        public List<LambertianDTO> GetLambertiansFromUser(string owner)
+        public List<MaterialDTO> GetLambertiansFromUser(string owner)
         {
-            List<Lambertian> lambertians = _repository.GetLambertiansFromUser(owner);
-            List<LambertianDTO> lambertianDTOs = ConvertListToDTOs(lambertians);
+            List<Material> lambertians = _repository.GetLambertiansFromUser(owner);
+            List<MaterialDTO> lambertianDTOs = ConvertListToDTOs(lambertians);
             return lambertianDTOs;
         }
-        private List<LambertianDTO> ConvertListToDTOs(List<Lambertian> lambertians)
+        private List<MaterialDTO> ConvertListToDTOs(List<Material> lambertians)
         {
-            List<LambertianDTO> lambertianDTOs = new List<LambertianDTO>();
+            List<MaterialDTO> lambertianDTOs = new List<MaterialDTO>();
 
-            foreach (Lambertian lambertian in lambertians)
+            foreach (Material lambertian in lambertians)
             {
-                LambertianDTO lambertianDTO = MaterialMapper.ConvertToDTO(lambertian);
+                MaterialDTO lambertianDTO = MaterialMapper.ConvertToDTO(lambertian);
                 lambertianDTOs.Add(lambertianDTO);
             }
 

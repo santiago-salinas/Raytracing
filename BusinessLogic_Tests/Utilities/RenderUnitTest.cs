@@ -16,8 +16,8 @@ namespace BusinessLogic_Tests
         private string _sphere1Name;
         private double _sphere1Radius;
 
-        private Lambertian _lambertian1;
-        private string _lambertian1Name;
+        private Material _material1;
+        private string _material1Name;
         private Color _color1;
 
         private Vector _position1;
@@ -31,8 +31,8 @@ namespace BusinessLogic_Tests
         private string sphere2Name;
         private double sphere2Radius;
 
-        private Lambertian lambertian2;
-        private string lambertian2Name;
+        private Material material2;
+        private string material2Name;
         private Color color2;
 
         private Vector position2;
@@ -46,7 +46,7 @@ namespace BusinessLogic_Tests
         private string sphere3Name;
         private double sphere3Radius;
 
-        private Lambertian lambertian3;
+        private Material lambertian3;
         private string lambertian3Name;
         private Color color3;
 
@@ -61,7 +61,7 @@ namespace BusinessLogic_Tests
         private string sphere4Name;
         private double sphere4Radius;
 
-        private Lambertian lambertian4;
+        private Material lambertian4;
         private string lambertian4Name;
         private Color color4;
 
@@ -76,7 +76,7 @@ namespace BusinessLogic_Tests
         private string sphere5Name;
         private double sphere5Radius;
 
-        private Lambertian lambertian5;
+        private Material lambertian5;
         private string lambertian5Name;
         private Color color5;
 
@@ -109,15 +109,15 @@ namespace BusinessLogic_Tests
             _sphere1 = new Sphere() { Name = _sphere1Name, Radius = _sphere1Radius };
 
             _color1 = new Color(0.1, 0.2, 0.5);
-            _lambertian1Name = "Color1";
-            _lambertian1 = new Lambertian() { Name = _lambertian1Name, Color = _color1 };
+            _material1Name = "Color1";
+            _material1 = new Lambertian() { Name = _material1Name, Color = _color1 };
 
             _model1Name = "Model1";
             _model1 = new Model()
             {
                 Name = _model1Name,
                 Shape = _sphere1,
-                Material = _lambertian1
+                Material = _material1
             };
 
             _position1 = new Vector(0, 0.5, -2);
@@ -137,15 +137,15 @@ namespace BusinessLogic_Tests
 
 
             color2 = new Color(0.8, 0.2, 0.5);
-            lambertian2Name = "Color2";
-            lambertian2 = new Lambertian() { Name = lambertian2Name, Color = color2 };
+            material2Name = "Color2";
+            material2 = new Lambertian() { Name = material2Name, Color = color2 };
 
             model2Name = "Model2";
             model2 = new Model()
             {
                 Name = model2Name,
                 Shape = sphere2,
-                Material = lambertian2
+                Material = material2
             };
 
             position2 = new Vector(-1, 0.5, -2);
@@ -259,15 +259,15 @@ namespace BusinessLogic_Tests
             _sphere1 = new Sphere() { Name = _sphere1Name, Radius = _sphere1Radius };
 
             _color1 = new Color(0.1, 0.2, 0.5);
-            _lambertian1Name = "Color1";
-            _lambertian1 = new Lambertian() { Name = _lambertian1Name, Color = _color1 };
+            _material1Name = "Color1";
+            _material1 = new Lambertian() { Name = _material1Name, Color = _color1 };
 
             _model1Name = "Model1";
             _model1 = new Model()
             {
                 Name = _model1Name,
                 Shape = _sphere1,
-                Material = _lambertian1
+                Material = _material1
             };
 
             _position1 = new Vector(0, 0.5, -2);
@@ -287,15 +287,15 @@ namespace BusinessLogic_Tests
 
 
             color2 = new Color(0.8, 0.2, 0.5);
-            lambertian2Name = "Color2";
-            lambertian2 = new Lambertian() { Name = lambertian2Name, Color = color2 };
+            material2Name = "Color2";
+            material2 = new Lambertian() { Name = material2Name, Color = color2 };
 
             model2Name = "Model2";
             model2 = new Model()
             {
                 Name = model2Name,
                 Shape = sphere2,
-                Material = lambertian2
+                Material = material2
             };
 
             position2 = new Vector(-1, 0.5, -3);
@@ -438,16 +438,16 @@ namespace BusinessLogic_Tests
             _sphere1 = new Sphere() { Name = _sphere1Name, Radius = _sphere1Radius };
 
             _color1 = new Color(0.9, 0.9, 0.7);
-            _lambertian1Name = "Color1";
+            _material1Name = "Color1";
             Metallic _metallic1;
-            _metallic1 = new Metallic() { Name = _lambertian1Name, Color = _color1 };
+            _metallic1 = new Metallic() { Name = _material1Name, Color = _color1 };
 
             _model1Name = "Model1";
             _model1 = new Model()
             {
                 Name = _model1Name,
                 Shape = _sphere1,
-                Material = _lambertian1
+                Material = _material1
             };
 
             _position1 = new Vector(0, 0.5, -2);
@@ -467,16 +467,16 @@ namespace BusinessLogic_Tests
 
 
             color2 = new Color(0.8, 0.3, 0.6);
-            lambertian2Name = "Color2";
+            material2Name = "Color2";
             Metallic _metallic2;
-            _metallic2 = new Metallic() { Name = lambertian2Name, Color = color2 };
+            _metallic2 = new Metallic() { Name = material2Name, Color = color2 };
 
             model2Name = "Model2";
             model2 = new Model()
             {
                 Name = model2Name,
                 Shape = sphere2,
-                Material = lambertian2
+                Material = material2
             };
 
             position2 = new Vector(-1.2, 0.5, -3);

@@ -48,7 +48,7 @@ namespace Controllers.Controllers
             
         }
 
-        public List<LambertianDTO> GetAvailableMaterials(string owner)
+        public List<MaterialDTO> GetAvailableMaterials(string owner)
         {
             return MaterialService.GetLambertiansFromUser(owner);
         }

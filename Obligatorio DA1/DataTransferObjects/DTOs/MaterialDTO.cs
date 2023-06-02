@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 
 namespace DataTransferObjects
 {
-    public class LambertianDTO
+    public class MaterialDTO
     {
+        public string Type { get; set; }
         public string Name { get; set; }
         public string Owner { get; set; }
         public ColorDTO Color { get; set; }
 
-        public LambertianDTO() { }
+        public MaterialDTO() { }
 
-        public LambertianDTO(string name, string owner, ColorDTO color)
+        public MaterialDTO(string name, string owner, ColorDTO color)
         {
             Name = name;
             Owner = owner;

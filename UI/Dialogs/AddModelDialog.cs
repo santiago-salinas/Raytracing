@@ -12,11 +12,11 @@ namespace UI.Dialogs
     {
         public ModelDTO NewModel;
         private List<SphereDTO> _availableShapes;
-        private List<LambertianDTO> _availableLambertians;
+        private List<MaterialDTO> _availableLambertians;
         private string _loggedUser;
 
         private SphereDTO _selectedShape;
-        private LambertianDTO _selectedMaterial;
+        private MaterialDTO _selectedMaterial;
         private ModelManagementController _controller;
         public AddModelDialog(Context context)
         {
@@ -110,7 +110,7 @@ namespace UI.Dialogs
 
         private void LoadMaterialComboBox()
         {
-            foreach (LambertianDTO elem in _availableLambertians)
+            foreach (MaterialDTO elem in _availableLambertians)
             {
                 materialComboBox.Items.Add(elem.Name);
             }
