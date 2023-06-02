@@ -45,6 +45,7 @@ namespace UI.Dialogs
                 Name = lambertianName,
                 Color = colorDTO,
                 Owner = _loggedUser,
+                Type = "lambertian",
             };
 
             try

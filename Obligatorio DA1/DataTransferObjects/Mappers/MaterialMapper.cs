@@ -16,6 +16,7 @@ namespace DataTransferObjects
                 Name = lambertian.Name,
                 Owner = lambertian.Owner,
                 Color = ColorMapper.ConvertToDTO(lambertian.Preview),
+                Type = "lambertian",
             };
 
             return lambertianDTO;
@@ -27,7 +28,7 @@ namespace DataTransferObjects
 
             if(dto.Type == "lambertian")
             {
-                Lambertian lambertian = new Lambertian()
+                ret = new Lambertian()
                 {
                     Name = dto.Name,
                     Owner = dto.Owner,
@@ -35,7 +36,7 @@ namespace DataTransferObjects
                 };
             }else if(dto.Type == "metallic")
             {
-                Lambertian lambertian = new Lambertian()
+                ret = new Metallic()
                 {
                     Name = dto.Name,
                     Owner = dto.Owner,
