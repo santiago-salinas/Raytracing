@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BusinessLogic
+﻿namespace BusinessLogic
 {
     public class Metallic : Material
     {
@@ -37,6 +35,13 @@ namespace BusinessLogic
             newVectorPoint = newVectorPoint.Add(Vector.GetRandomInUnitSphere().Multiply(hitRecord.Roughness));
             Vector newVector = newVectorPoint.Subtract(hitRecord.Intersection);
             Ray newRay = new Ray(hitRecord.Intersection, newVector);
+
+            if(newRay.Direction.Dot(hitRecord.Normal) > 0)
+            {
+                return newRay;
+            }
+
+            newRay.Nulleable = true;
             return newRay;
         }
 
@@ -49,6 +54,7 @@ namespace BusinessLogic
         public override HitRecord IsHitByRay(HitRecord hit)
         {
             hit.Attenuation = Color;
+            hit.Roughness = Roughness;
             return hit;
         }
     }
