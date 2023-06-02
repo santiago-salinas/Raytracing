@@ -435,12 +435,12 @@ namespace BusinessLogic_Tests
 
             _sphere1Name = "Spehere1";
             _sphere1Radius = 0.5;
-            _sphere1 = new Sphere() { Name = _sphere1Name, Radius = _sphere1Radius };
+            _sphere1 = new Sphere() { Name = _sphere1Name, Radius = _sphere1Radius};
 
             _color1 = new Color(0.9, 0.9, 0.7);
             _material1Name = "Color1";
             Metallic _metallic1;
-            _metallic1 = new Metallic() { Name = _material1Name, Color = _color1 };
+            _metallic1 = new Metallic() { Name = _material1Name, Color = _color1, Roughness = 0 };
 
             _model1Name = "Model1";
             _model1 = new Model()
@@ -469,7 +469,7 @@ namespace BusinessLogic_Tests
             color2 = new Color(0.8, 0.3, 0.6);
             material2Name = "Color2";
             Metallic _metallic2;
-            _metallic2 = new Metallic() { Name = material2Name, Color = color2 };
+            _metallic2 = new Metallic() { Name = material2Name, Color = color2, Roughness = 0.2 };
 
             model2Name = "Model2";
             model2 = new Model()
@@ -497,7 +497,7 @@ namespace BusinessLogic_Tests
             color3 = new Color(0.8, 0.25, 0.05);
             lambertian3Name = "Color3";
             Metallic _metallic3;
-            _metallic3 = new Metallic() { Name = lambertian3Name, Color = color3 };
+            _metallic3 = new Metallic() { Name = lambertian3Name, Color = color3, Roughness = 0.1 };
 
             model3Name = "Model3";
             model3 = new Model()
@@ -524,8 +524,8 @@ namespace BusinessLogic_Tests
 
             color4 = new Color(0.6, 0.2, 0.3);
             lambertian4Name = "Color4";
-            Metallic _metallic4;
-            _metallic4 = new Metallic() { Name = lambertian4Name, Color = color4 };
+            Lambertian _lambertian4;
+            _lambertian4 = new Lambertian() { Name = lambertian4Name, Color = color4};
 
             model4Name = "Model4";
             model4 = new Model()

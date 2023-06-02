@@ -123,6 +123,7 @@ namespace BusinessLogic
 
             if (closestObjectHitRecord.IsHit)
             {
+                closestObjectHitRecord.Inray = ray;
                 return GetColor(closestObject, closestObjectHitRecord, depthLeft);
             }
             else

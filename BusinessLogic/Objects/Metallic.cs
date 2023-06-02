@@ -15,6 +15,8 @@ namespace BusinessLogic
         }
 
         public Color Color { get; set; }
+        public double Roughness { get; set; }
+
 
         public override Color Preview
         {
@@ -31,11 +33,17 @@ namespace BusinessLogic
 
         public override Ray GetBouncedRay(HitRecord hitRecord)
         {
-            Vector newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(Vector.GetRandomInUnitSphere());
+            Vector newVectorPoint = Reflect(hitRecord.Inray.Direction.GetUnit(), hitRecord.Normal);
+            newVectorPoint = newVectorPoint.Add(Vector.GetRandomInUnitSphere().Multiply(hitRecord.Roughness));
             Vector newVector = newVectorPoint.Subtract(hitRecord.Intersection);
             Ray newRay = new Ray(hitRecord.Intersection, newVector);
-
             return newRay;
+        }
+
+        public Vector Reflect(Vector vectorV,Vector vectorN)
+        {
+            double dotVN = vectorV.Dot(vectorN);
+            return vectorV.Subtract(vectorN.Multiply(2 * dotVN));
         }
 
         public override HitRecord IsHitByRay(HitRecord hit)
