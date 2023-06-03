@@ -16,11 +16,11 @@ namespace Controllers
             _service = service;
         }
 
-        public void AddLambertian(MaterialDTO lambertianDTO)
+        public void AddMaterial(MaterialDTO materialDTO)
         {
             try
             {
-                _service.AddLambertian(lambertianDTO);
+                _service.AddMaterial(materialDTO);
             }
             catch (Exception ex)
             {
@@ -28,11 +28,11 @@ namespace Controllers
             }            
         }
 
-        public void RemoveLambertian(string name, string ownerName)
+        public void RemoveMaterial(string name, string ownerName)
         {
             try
             {
-                _service.RemoveLambertian(name, ownerName);
+                _service.RemoveMaterial(name, ownerName);
             }
             catch (Exception ex)
             {
@@ -40,9 +40,9 @@ namespace Controllers
             }
         }
 
-        public List<MaterialDTO> GetLambertiansFromUser(string owner) 
+        public List<MaterialDTO> GetMaterialsFromUser(string owner) 
         {
-            return _service.GetLambertiansFromUser(owner);
+            return _service.GetMaterialsFromUser(owner);
         }
 
     }

@@ -6,16 +6,16 @@ using DataTransferObjects;
 
 namespace UI.Dialogs
 {
-    public partial class AddLambertianDialog : Form
+    public partial class AddMaterialDialog : Form
     {
         private MaterialManagementController _controller;
         private string _loggedUser;
 
-        public MaterialDTO NewLambertian;
-        public AddLambertianDialog(Context context)
+        public MaterialDTO NewMaterial;
+        public AddMaterialDialog(Context context)
         {
             InitializeComponent();
-            _controller = context.LambertianController;
+            _controller = context.MaterialController;
             _loggedUser = context.CurrentUser;
         }
 
@@ -26,7 +26,7 @@ namespace UI.Dialogs
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            string lambertianName = nameTextBox.Text;
+            string materialName = nameTextBox.Text;
             int redValue = (int)redValueInput.Value;
             int greenValue = (int)greenValueInput.Value;
             int blueValue = (int)blueValueInput.Value;
@@ -41,9 +41,9 @@ namespace UI.Dialogs
                 Green = greenValue,
                 Blue = blueValue,
             };
-            NewLambertian = new MaterialDTO()
+            NewMaterial = new MaterialDTO()
             {
-                Name = lambertianName,
+                Name = materialName,
                 Color = colorDTO,
                 Owner = _loggedUser,
                 Type = metallicCheck.Enabled ? "metallic" : "lambertian",
@@ -52,7 +52,7 @@ namespace UI.Dialogs
 
             try
             {
-                _controller.AddLambertian(NewLambertian);
+                _controller.AddMaterial(NewMaterial);
             }catch (Exception ex)
             {
                 statusLabel.Text = ex.Message;

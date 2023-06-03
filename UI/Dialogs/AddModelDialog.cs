@@ -12,7 +12,7 @@ namespace UI.Dialogs
     {
         public ModelDTO NewModel;
         private List<SphereDTO> _availableShapes;
-        private List<MaterialDTO> _availableLambertians;
+        private List<MaterialDTO> _availableMaterials;
         private string _loggedUser;
 
         private SphereDTO _selectedShape;
@@ -25,7 +25,7 @@ namespace UI.Dialogs
             _controller = context.ModelController;
             
             _availableShapes = _controller.GetAvailableShapes(_loggedUser);
-            _availableLambertians = _controller.GetAvailableMaterials(_loggedUser);
+            _availableMaterials = _controller.GetAvailableMaterials(_loggedUser);
 
             LoadShapeComboBox();
             LoadMaterialComboBox();
@@ -92,7 +92,7 @@ namespace UI.Dialogs
 
         private void MaterialComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _selectedMaterial = _availableLambertians[materialComboBox.SelectedIndex];
+            _selectedMaterial = _availableMaterials[materialComboBox.SelectedIndex];
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -110,7 +110,7 @@ namespace UI.Dialogs
 
         private void LoadMaterialComboBox()
         {
-            foreach (MaterialDTO elem in _availableLambertians)
+            foreach (MaterialDTO elem in _availableMaterials)
             {
                 materialComboBox.Items.Add(elem.Name);
             }

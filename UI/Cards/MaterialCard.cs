@@ -1,4 +1,6 @@
 ﻿using BusinessLogic;
+using Controllers;
+using DataTransferObjects;
 using System;
 using System.Windows.Forms;
 
@@ -6,15 +8,17 @@ namespace UI.Cards
 {
     public partial class MaterialCard : UserControl
     {
-        private Material _material;
+        private MaterialDTO _lambertian;
+        private MaterialManagementController _controller;
 
-        public MaterialCard(Material material)
+        public MaterialCard(MaterialDTO lambertianDTO, MaterialManagementController controller)
         {
             InitializeComponent();
-            this._material = material;
-            nameLabel.Text = material.Name;
+            _lambertian = lambertianDTO;
+            _controller = controller;
+            nameLabel.Text = lambertianDTO.Name;
 
-            BusinessLogic.Color color = material.Preview;
+            ColorDTO color = lambertianDTO.Color;
 
             int redValue = (int)color.Red;
             int greenValue = (int)color.Green;
@@ -34,10 +38,10 @@ namespace UI.Cards
         {
             try
             {
-                Materials.RemoveMaterial(_material.Name, _material.Owner);
+                _controller.RemoveMaterial(_lambertian.Name, _lambertian.Owner);
                 this.Parent.Controls.Remove(this);
             }
-            catch (BusinessLogicException)
+            catch (Exception)
             {
                 deleteLabel.Visible = true;
             }

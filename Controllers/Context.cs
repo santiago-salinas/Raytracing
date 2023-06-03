@@ -13,7 +13,7 @@ namespace Controllers
     {
         public Context() { }
         public SphereManagementController SphereController { get; set; }
-        public MaterialManagementController LambertianController { get; set; }
+        public MaterialManagementController MaterialController { get; set; }
         public ModelManagementController ModelController { get; set; }
         public UserController UserController { get; set; }
         public MemorySceneRepository SceneRepository { get; set; }

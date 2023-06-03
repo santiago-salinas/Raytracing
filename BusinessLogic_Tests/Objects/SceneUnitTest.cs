@@ -32,7 +32,7 @@ namespace BusinessLogic_Tests
         private MemorySceneRepository memorySceneRepository;
         private MemoryModelRepository memoryModelRepository;
         private MemorySphereRepository memorySphereRepository;
-        private MemoryLambertianRepository memoryLambertianRepository;
+        private MemoryMaterialRepository memoryLambertianRepository;
 
         [TestInitialize]
         public void Initialize()
@@ -40,7 +40,7 @@ namespace BusinessLogic_Tests
             memorySceneRepository = new MemorySceneRepository();
             memoryModelRepository = new MemoryModelRepository(memorySceneRepository);
             memorySphereRepository = new MemorySphereRepository(memoryModelRepository);
-            memoryLambertianRepository = new MemoryLambertianRepository(memoryModelRepository);
+            memoryLambertianRepository = new MemoryMaterialRepository(memoryModelRepository);
 
 
             _testName = "Rolling Balls";

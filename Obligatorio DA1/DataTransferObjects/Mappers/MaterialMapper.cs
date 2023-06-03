@@ -11,7 +11,7 @@ namespace DataTransferObjects
     {
         public static MaterialDTO ConvertToDTO(Material material)
         {
-            MaterialDTO lambertianDTO = new MaterialDTO()
+            MaterialDTO materialDTO = new MaterialDTO()
             {
                 Name = material.Name,
                 Owner = material.Owner,
@@ -19,7 +19,7 @@ namespace DataTransferObjects
                 Type = material.Type,
             };
 
-            return lambertianDTO;
+            return materialDTO;
         }
 
         public static Material ConvertToMaterial(MaterialDTO dto)

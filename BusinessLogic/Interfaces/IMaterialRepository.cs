@@ -10,10 +10,10 @@ namespace Repositories.Interfaces
     public interface IMaterialRepository
     {
         void Drop();
-        List<Material> GetLambertiansFromUser(string owner);
-        bool ContainsLambertian(string name, string user);
-        void AddLambertian(Material newElement);
-        Material GetLambertian(string name, string user);
-        void RemoveLambertian(string name, string owner);
+        List<Material> GetMaterialFromUser(string owner);
+        bool ContainsMaterial(string name, string user);
+        void AddMaterial(Material newElement);
+        Material GetMaterial(string name, string user);
+        void RemoveMaterial(string name, string owner);
     }
 }

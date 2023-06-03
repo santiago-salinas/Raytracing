@@ -16,30 +16,30 @@ namespace Services
             _repository = repository;            
         }
 
-        public void AddLambertian(MaterialDTO lambertianDTO)
+        public void AddMaterial(MaterialDTO lambertianDTO)
         {
             Material lambertian = MaterialMapper.ConvertToMaterial(lambertianDTO);
-            _repository.AddLambertian(lambertian);
+            _repository.AddMaterial(lambertian);
         }
 
-        public void RemoveLambertian(string name, string ownerName)
+        public void RemoveMaterial(string name, string ownerName)
         {
-            _repository.RemoveLambertian(name, ownerName);
+            _repository.RemoveMaterial(name, ownerName);
         }
 
         public Material GetLambertian(string name, string ownerName)
         {            
-            return _repository.GetLambertian(name, ownerName);
+            return _repository.GetMaterial(name, ownerName);
         }
 
         public bool ContainsLambertian(string lambertianName, string ownerName)
         {
-            return _repository.ContainsLambertian(lambertianName, ownerName);
+            return _repository.ContainsMaterial(lambertianName, ownerName);
         }
 
-        public List<MaterialDTO> GetLambertiansFromUser(string owner)
+        public List<MaterialDTO> GetMaterialsFromUser(string owner)
         {
-            List<Material> lambertians = _repository.GetLambertiansFromUser(owner);
+            List<Material> lambertians = _repository.GetMaterialFromUser(owner);
             List<MaterialDTO> lambertianDTOs = ConvertListToDTOs(lambertians);
             return lambertianDTOs;
         }

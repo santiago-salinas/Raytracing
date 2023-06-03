@@ -50,7 +50,7 @@ namespace Controllers.Controllers
 
         public List<MaterialDTO> GetAvailableMaterials(string owner)
         {
-            return MaterialService.GetLambertiansFromUser(owner);
+            return MaterialService.GetMaterialsFromUser(owner);
         }
 
         public List<SphereDTO> GetAvailableShapes(string owner)

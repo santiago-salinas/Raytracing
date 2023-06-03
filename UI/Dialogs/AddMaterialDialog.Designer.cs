@@ -1,6 +1,6 @@
 ﻿namespace UI.Dialogs
 {
-    partial class AddLambertianDialog
+    partial class AddMaterialDialog
     {
         /// <summary>
         /// Required designer variable.
