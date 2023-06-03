@@ -30,6 +30,7 @@ namespace UI.Dialogs
             int redValue = (int)redValueInput.Value;
             int greenValue = (int)greenValueInput.Value;
             int blueValue = (int)blueValueInput.Value;
+            double roughnessValue = (double) roughnessInput.Value;
 
             statusLabel.Text = "";
 
@@ -45,7 +46,8 @@ namespace UI.Dialogs
                 Name = lambertianName,
                 Color = colorDTO,
                 Owner = _loggedUser,
-                Type = "lambertian",
+                Type = metallicCheck.Enabled ? "metallic" : "lambertian",
+                Roughness=roughnessValue,
             };
 
             try

@@ -45,6 +45,11 @@ namespace BusinessLogic
             get { return Color; }
         }
 
+        public override string Type
+        {
+            get { return "metallic"; }
+        }
+
         private void CheckIfStringNull(string value)
         {
             if (string.IsNullOrEmpty(value))

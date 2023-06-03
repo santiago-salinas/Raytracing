@@ -16,7 +16,7 @@ namespace DataTransferObjects
                 Name = material.Name,
                 Owner = material.Owner,
                 Color = ColorMapper.ConvertToDTO(material.Preview),
-                Type = typeof(Material).ToString(),
+                Type = material.Type,
             };
 
             return lambertianDTO;
@@ -41,6 +41,7 @@ namespace DataTransferObjects
                     Name = dto.Name,
                     Owner = dto.Owner,
                     Color = ColorMapper.ConvertToColor(dto.Color),
+                    Roughness = dto.Roughness,
                 };
             }
 

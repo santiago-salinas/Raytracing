@@ -6,6 +6,7 @@ namespace BusinessLogic
     {
         private string _name;
 
+        public abstract string Type { get;}
         public string Name
         {
             get { return _name; }

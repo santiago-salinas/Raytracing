@@ -20,6 +20,11 @@ namespace BusinessLogic
             get { return Color; }
         }
 
+        public override string Type
+        {
+            get { return "lambertian"; }
+        }
+
         public override Ray GetBouncedRay(HitRecord hitRecord)
         {
             Vector newVectorPoint = hitRecord.Intersection.Add(hitRecord.Normal).Add(Vector.GetRandomInUnitSphere());
