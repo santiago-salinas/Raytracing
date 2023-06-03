@@ -18,8 +18,8 @@ namespace DataAccess
             using (EFContext dbContext = new EFContext())
             {
                 var query = $"SELECT * " +
-                            $"FROM SphereEntities " +
-                            $"WHERE Name = '{name}'";
+                            $"FROM UserEntities " +
+                            $"WHERE Username = '{name}'";
                 UserEntity entityUser = dbContext.UserEntities.SqlQuery(query).FirstOrDefault();
                 return entityUser != null;
             }

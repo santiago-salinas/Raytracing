@@ -73,7 +73,7 @@ namespace UI
                 RegisterDate = DateTime.Now,
             };
 
-            eFUserRepository.AddUser(user1);
+            //eFUserRepository.AddUser(user1);
             string userName = user1.UserName;
 
             Sphere sphere1 = new Sphere("Sphere 1", 0.5f, userName);
