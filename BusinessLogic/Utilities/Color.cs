@@ -114,5 +114,10 @@ namespace BusinessLogic
 
             return firstEval && secondEval && thirdEval;
         }
+
+        public override string ToString()
+        {
+            return Red+","+Green+","+Blue;
+        }
     }
 }

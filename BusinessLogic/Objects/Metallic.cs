@@ -50,6 +50,11 @@ namespace BusinessLogic
             get { return "metallic"; }
         }
 
+        public override string ToString()
+        {
+            return Type + ":\nRGB (" + Color.ToString() + ")\nRoughness: "+Roughness;
+        }
+
         private void CheckIfStringNull(string value)
         {
             if (string.IsNullOrEmpty(value))

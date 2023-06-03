@@ -39,5 +39,10 @@ namespace BusinessLogic
             hit.Attenuation = Color;
             return hit;
         }
+
+        public override string ToString()
+        {
+            return Type+":\nRGB (" + Color.ToString() + ")";
+        }
     }
 }

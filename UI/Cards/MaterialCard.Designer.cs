@@ -30,11 +30,9 @@
         {
             this.colorPanel = new System.Windows.Forms.Panel();
             this.nameLabel = new System.Windows.Forms.Label();
-            this.redValueLabel = new System.Windows.Forms.Label();
-            this.greenValueLabel = new System.Windows.Forms.Label();
-            this.blueValueLabel = new System.Windows.Forms.Label();
             this.deleteButton = new System.Windows.Forms.Button();
             this.deleteLabel = new System.Windows.Forms.Label();
+            this.infoLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // colorPanel
@@ -54,36 +52,6 @@
             this.nameLabel.Size = new System.Drawing.Size(76, 23);
             this.nameLabel.TabIndex = 2;
             this.nameLabel.Text = "label1";
-            // 
-            // redValueLabel
-            // 
-            this.redValueLabel.AutoSize = true;
-            this.redValueLabel.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.redValueLabel.Location = new System.Drawing.Point(170, 73);
-            this.redValueLabel.Name = "redValueLabel";
-            this.redValueLabel.Size = new System.Drawing.Size(32, 18);
-            this.redValueLabel.TabIndex = 3;
-            this.redValueLabel.Text = "R: ";
-            // 
-            // greenValueLabel
-            // 
-            this.greenValueLabel.AutoSize = true;
-            this.greenValueLabel.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.greenValueLabel.Location = new System.Drawing.Point(250, 73);
-            this.greenValueLabel.Name = "greenValueLabel";
-            this.greenValueLabel.Size = new System.Drawing.Size(32, 18);
-            this.greenValueLabel.TabIndex = 4;
-            this.greenValueLabel.Text = "G: ";
-            // 
-            // blueValueLabel
-            // 
-            this.blueValueLabel.AutoSize = true;
-            this.blueValueLabel.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.blueValueLabel.Location = new System.Drawing.Point(334, 73);
-            this.blueValueLabel.Name = "blueValueLabel";
-            this.blueValueLabel.Size = new System.Drawing.Size(32, 18);
-            this.blueValueLabel.TabIndex = 5;
-            this.blueValueLabel.Text = "B: ";
             // 
             // deleteButton
             // 
@@ -111,18 +79,26 @@
             this.deleteLabel.Text = "* You cannot delete a material that is being used by a model";
             this.deleteLabel.Visible = false;
             // 
-            // LambertianCard
+            // infoLabel
+            // 
+            this.infoLabel.AutoSize = true;
+            this.infoLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.infoLabel.Location = new System.Drawing.Point(155, 47);
+            this.infoLabel.Name = "infoLabel";
+            this.infoLabel.Size = new System.Drawing.Size(90, 19);
+            this.infoLabel.TabIndex = 8;
+            this.infoLabel.Text = "infoLabel";
+            // 
+            // MaterialCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.infoLabel);
             this.Controls.Add(this.deleteLabel);
             this.Controls.Add(this.deleteButton);
-            this.Controls.Add(this.blueValueLabel);
-            this.Controls.Add(this.greenValueLabel);
-            this.Controls.Add(this.redValueLabel);
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.colorPanel);
-            this.Name = "LambertianCard";
+            this.Name = "MaterialCard";
             this.Size = new System.Drawing.Size(600, 140);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -133,10 +109,8 @@
 
         private System.Windows.Forms.Panel colorPanel;
         private System.Windows.Forms.Label nameLabel;
-        private System.Windows.Forms.Label redValueLabel;
-        private System.Windows.Forms.Label greenValueLabel;
-        private System.Windows.Forms.Label blueValueLabel;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Label deleteLabel;
+        private System.Windows.Forms.Label infoLabel;
     }
 }

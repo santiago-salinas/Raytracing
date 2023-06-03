@@ -15,7 +15,7 @@ namespace DataTransferObjects
         public ColorDTO Color { get; set; }
         public double Roughness { get; set; }
 
-
+        public string Info { get; set; }
         public MaterialDTO() { }
 
     }

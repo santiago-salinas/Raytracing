@@ -8,26 +8,23 @@ namespace UI.Cards
 {
     public partial class MaterialCard : UserControl
     {
-        private MaterialDTO _lambertian;
+        private MaterialDTO _material;
         private MaterialManagementController _controller;
 
-        public MaterialCard(MaterialDTO lambertianDTO, MaterialManagementController controller)
+        public MaterialCard(MaterialDTO materialDTO, MaterialManagementController controller)
         {
             InitializeComponent();
-            _lambertian = lambertianDTO;
+            _material = materialDTO;
             _controller = controller;
-            nameLabel.Text = lambertianDTO.Name;
+            nameLabel.Text = materialDTO.Name;
 
-            ColorDTO color = lambertianDTO.Color;
+            ColorDTO color = materialDTO.Color;
 
             int redValue = (int)color.Red;
             int greenValue = (int)color.Green;
             int blueValue = (int)color.Blue;
 
-
-            redValueLabel.Text += redValue.ToString();
-            greenValueLabel.Text += greenValue.ToString();
-            blueValueLabel.Text += blueValue.ToString();
+            infoLabel.Text = materialDTO.Info;
 
             System.Drawing.Color shownColor = System.Drawing.Color.FromArgb(redValue, greenValue, blueValue);
             colorPanel.BackColor = shownColor;
@@ -38,7 +35,7 @@ namespace UI.Cards
         {
             try
             {
-                _controller.RemoveMaterial(_lambertian.Name, _lambertian.Owner);
+                _controller.RemoveMaterial(_material.Name, _material.Owner);
                 this.Parent.Controls.Remove(this);
             }
             catch (Exception)

@@ -17,6 +17,7 @@ namespace DataTransferObjects
                 Owner = material.Owner,
                 Color = ColorMapper.ConvertToDTO(material.Preview),
                 Type = material.Type,
+                Info = material.ToString(),
             };
 
             return materialDTO;

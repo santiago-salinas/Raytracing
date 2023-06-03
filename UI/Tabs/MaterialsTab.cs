@@ -40,8 +40,8 @@ namespace UI.Tabs
 
             if (result == DialogResult.OK)
             {
-                MaterialCard materialCard = new MaterialCard(addMaterial.NewMaterial, _materialController);
-                flowLayoutPanel.Controls.Add(materialCard);
+                flowLayoutPanel.Controls.Clear();
+                LoadMaterials();
             }
         }
     }
