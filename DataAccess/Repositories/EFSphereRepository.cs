@@ -70,12 +70,6 @@ namespace DataAccess.Repositories
                 {
                     dbContext.SphereEntities.Remove(sphere);
                     dbContext.SaveChanges();
-
-                    Console.WriteLine("Sphere removed successfully.");
-                }
-                else
-                {
-                    Console.WriteLine("Sphere not found.");
                 }
             }
 
@@ -94,12 +88,7 @@ namespace DataAccess.Repositories
 
                 if (entitySphere != null)
                 {
-                    Console.WriteLine($"Name: {entitySphere.Name}, Owner: {entitySphere.Owner}, Radius: {entitySphere.Radius}");
                     domainSphere = SphereEntity.FromEntity(entitySphere);
-                }
-                else
-                {
-                    Console.WriteLine("Sphere not found.");
                 }
             }
             return domainSphere;

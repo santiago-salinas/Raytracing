@@ -42,7 +42,7 @@ namespace UI
             EditSceneService editSceneService = new EditSceneService(memorySceneRepository);
             RenderingService renderingService = new RenderingService();
 
-            SphereManagementController sphereManagementController = new SphereManagementController(sphereManagementService);
+            SphereManagementController sphereManagementController = new SphereManagementController(sphereManagementService,modelManagementService);
             MaterialManagementController materialManagementController = new MaterialManagementController(materialManagementService);
             ModelManagementController modelManagementController = new ModelManagementController();
             modelManagementController.SphereService = sphereManagementService;
