@@ -62,5 +62,17 @@ namespace UI.Dialogs
                 DialogResult = DialogResult.OK;
             }
         }
+
+        private void metallicCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (metallicCheck.Checked)
+            {
+                roughnessInput.Enabled = true;
+            }
+            else
+            {
+                roughnessInput.Enabled = false;
+            }
+        }
     }
 }

@@ -1,7 +1,12 @@
-﻿namespace BusinessLogic
+﻿using System;
+
+namespace BusinessLogic
 {
     public class Metallic : Material
     {
+        private const int _lowerBoundForPercentages = 0;
+        private const int _upperBoundForPercentages = 1;
+        private double _roughness;
 
         public Metallic() { }
 
@@ -13,8 +18,27 @@
         }
 
         public Color Color { get; set; }
-        public double Roughness { get; set; }
+        public double Roughness {
+            get
+            {
+                return _roughness;
+            }
+            set {
+                if (ValueIsBetweenStrictBounds(value, _lowerBoundForPercentages, _upperBoundForPercentages))
+                {
+                    _roughness = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Roughness value must be between 0 and 1");
+                }
+            }
+        }
 
+        public bool ValueIsBetweenStrictBounds(double value, double min, double max)
+        {
+            return value >= min && value <= max;
+        }
 
         public override Color Preview
         {
