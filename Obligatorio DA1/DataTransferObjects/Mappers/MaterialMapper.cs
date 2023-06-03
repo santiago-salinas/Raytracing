@@ -26,7 +26,7 @@ namespace DataTransferObjects
         {
             Material ret = null;
 
-            if(dto.Type == "Lambertian")
+            if(dto.Type == "lambertian")
             {
                 ret = new Lambertian()
                 {
