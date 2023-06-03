@@ -12,7 +12,7 @@ namespace Repositories.Interfaces
         void Drop();
         List<Model> GetModelsFromUser(string owner);
         bool ContainsModel(string name, string user);
-        bool ExistsModelUsingTheLambertian(Lambertian lambertian);
+        bool ExistsModelUsingTheMaterial(Material material);
         bool ExistsModelUsingTheSphere(Sphere sphere);
         void AddModel(Model newElement);
         Model GetModel(string name, string owner);

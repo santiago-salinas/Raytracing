@@ -13,35 +13,35 @@ namespace UI.Tabs
     {
         private string _loggedUser;
         private Context _context;
-        private MaterialManagementController _lambertianController;
+        private MaterialManagementController _materialController;
         public MaterialsTab(Context context)
         {
             InitializeComponent();
             _context = context;
             _loggedUser = context.CurrentUser;
-            _lambertianController = context.LambertianController;
+            _materialController = context.MaterialController;
             LoadMaterials();
         }
 
         private void LoadMaterials()
         {
-            List<LambertianDTO> lambertianList = _lambertianController.GetLambertiansFromUser(_loggedUser);
-            foreach (LambertianDTO elem in lambertianList)
+            List<MaterialDTO> materialList = _materialController.GetMaterialsFromUser(_loggedUser);
+            foreach (MaterialDTO elem in materialList)
             {
-                LambertianCard lambertianCard = new LambertianCard(elem,_lambertianController);
-                flowLayoutPanel.Controls.Add(lambertianCard);
+                MaterialCard materialCard = new MaterialCard(elem,_materialController);
+                flowLayoutPanel.Controls.Add(materialCard);
             }
         }
 
         private void AddMaterialButton_Click(object sender, EventArgs e)
         {
-            AddLambertianDialog addMaterial = new AddLambertianDialog(_context);
+            AddMaterialDialog addMaterial = new AddMaterialDialog(_context);
             DialogResult result = addMaterial.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-                LambertianCard materialCard = new LambertianCard(addMaterial.NewLambertian, _lambertianController);
-                flowLayoutPanel.Controls.Add(materialCard);
+                flowLayoutPanel.Controls.Clear();
+                LoadMaterials();
             }
         }
     }

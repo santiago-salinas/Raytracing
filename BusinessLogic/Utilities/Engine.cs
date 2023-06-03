@@ -123,6 +123,7 @@ namespace BusinessLogic
 
             if (closestObjectHitRecord.IsHit)
             {
+                closestObjectHitRecord.Inray = ray;
                 return GetColor(closestObject, closestObjectHitRecord, depthLeft);
             }
             else
@@ -160,6 +161,12 @@ namespace BusinessLogic
             if (depthLeft > _zero)
             {
                 Ray bouncedRay = positionedModel.GetBouncedRay(hitRecord);
+
+                if (bouncedRay.Nulleable)
+                {
+                    return new Color(_zero, _zero, _zero);
+                }
+
                 Color color = shootRay(bouncedRay, depthLeft - 1);
                 Color attenuation = hitRecord.Attenuation;
                 return new Color((color.Red * attenuation.Red) / _attenuationDivisor,

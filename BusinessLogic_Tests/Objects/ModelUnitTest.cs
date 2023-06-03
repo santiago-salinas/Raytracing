@@ -26,7 +26,7 @@ namespace BusinessLogic_Tests
         private MemorySceneRepository memorySceneRepository;
         private MemoryModelRepository memoryModelRepository;
         private MemorySphereRepository memorySphereRepository;
-        private MemoryLambertianRepository memoryLambertianRepository;
+        private MemoryMaterialRepository memoryLambertianRepository;
 
         [TestInitialize]
         public void Initialize()
@@ -34,7 +34,7 @@ namespace BusinessLogic_Tests
             memorySceneRepository = new MemorySceneRepository();
             memoryModelRepository = new MemoryModelRepository(memorySceneRepository);
             memorySphereRepository = new MemorySphereRepository(memoryModelRepository);
-            memoryLambertianRepository = new MemoryLambertianRepository(memoryModelRepository);
+            memoryLambertianRepository = new MemoryMaterialRepository(memoryModelRepository);
 
 
             _modelName = "Wooden ball";
@@ -201,11 +201,11 @@ namespace BusinessLogic_Tests
         public void CantDeleteLambertianFromCollectionUsedByModel()
         {
             //arrange
-            memoryLambertianRepository.AddLambertian(_testLambertian);
+            memoryLambertianRepository.AddMaterial(_testLambertian);
             _testLambertian.Owner = _testUser;
             memoryModelRepository.AddModel(_testModel);
             //act
-            memoryLambertianRepository.RemoveLambertian(_lambertianName, _testUser);
+            memoryLambertianRepository.RemoveMaterial(_lambertianName, _testUser);
         }
 
         [TestMethod]
@@ -215,16 +215,16 @@ namespace BusinessLogic_Tests
             _testSphere.Owner = _testUser;
             _testLambertian.Owner = _testUser;
             memorySphereRepository.AddSphere(_testSphere);
-            memoryLambertianRepository.AddLambertian(_testLambertian);
+            memoryLambertianRepository.AddMaterial(_testLambertian);
             memoryModelRepository.AddModel(_testModel);
             memoryModelRepository.RemoveModel(_modelName, _testUser);
 
             //act
             memorySphereRepository.RemoveSphere(_sphereName, _testUser);
-            memoryLambertianRepository.RemoveLambertian(_lambertianName, _testUser);
+            memoryLambertianRepository.RemoveMaterial(_lambertianName, _testUser);
             //assert
             bool sphereDeleted = !memorySphereRepository.ContainsSphere(_sphereName, _testUser);
-            bool lambertianDeleted = !memoryLambertianRepository.ContainsLambertian(_lambertianName, _testUser);
+            bool lambertianDeleted = !memoryLambertianRepository.ContainsMaterial(_lambertianName, _testUser);
             Assert.IsTrue(sphereDeleted && lambertianDeleted);
         }
 

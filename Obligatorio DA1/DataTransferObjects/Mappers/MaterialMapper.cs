@@ -9,29 +9,44 @@ namespace DataTransferObjects
 {
     public static class MaterialMapper
     {
-        public static LambertianDTO ConvertToDTO(Lambertian lambertian)
+        public static MaterialDTO ConvertToDTO(Material material)
         {
-            LambertianDTO lambertianDTO = new LambertianDTO()
+            MaterialDTO materialDTO = new MaterialDTO()
             {
-                Name = lambertian.Name,
-                Owner = lambertian.Owner,
-                Color = ColorMapper.ConvertToDTO(lambertian.Color),
+                Name = material.Name,
+                Owner = material.Owner,
+                Color = ColorMapper.ConvertToDTO(material.Preview),
+                Type = material.Type,
+                Info = material.ToString(),
             };
 
-            return lambertianDTO;
+            return materialDTO;
         }
 
-        public static Lambertian ConvertToLambertian(LambertianDTO dto)
+        public static Material ConvertToMaterial(MaterialDTO dto)
         {
-            Lambertian lambertian = new Lambertian()
+            Material ret = null;
+
+            if(dto.Type == "lambertian")
             {
-                Name = dto.Name,
-                Owner = dto.Owner,
-                Color = ColorMapper.ConvertToColor(dto.Color),
-            };
+                ret = new Lambertian()
+                {
+                    Name = dto.Name,
+                    Owner = dto.Owner,
+                    Color = ColorMapper.ConvertToColor(dto.Color),
+                };
+            }else if(dto.Type == "metallic")
+            {
+                ret = new Metallic()
+                {
+                    Name = dto.Name,
+                    Owner = dto.Owner,
+                    Color = ColorMapper.ConvertToColor(dto.Color),
+                    Roughness = dto.Roughness,
+                };
+            }
 
-            return lambertian;
-
+            return ret;
         }
     }
 }

@@ -27,10 +27,10 @@ namespace UI
             MemorySceneRepository memorySceneRepository = new MemorySceneRepository();
             MemoryModelRepository memoryModelRepository = new MemoryModelRepository(memorySceneRepository);
             MemorySphereRepository memorySphereRepository = new MemorySphereRepository(memoryModelRepository);
-            MemoryLambertianRepository memoryLambertianRepository = new MemoryLambertianRepository(memoryModelRepository);
+            MemoryMaterialRepository memoryMaterialRepository = new MemoryMaterialRepository(memoryModelRepository);
 
             SphereManagementService sphereManagementService = new SphereManagementService(memorySphereRepository);
-            MaterialManagementService materialManagementService = new MaterialManagementService(memoryLambertianRepository);
+            MaterialManagementService materialManagementService = new MaterialManagementService(memoryMaterialRepository);
             ModelManagementService modelManagementService = new ModelManagementService(memoryModelRepository);
             SceneManagementService sceneManagementService = new SceneManagementService(memorySceneRepository);
             UserService userService = new UserService(memoryUserRepository);
@@ -54,7 +54,7 @@ namespace UI
 
             Context context = new Context();
             context.SphereController = sphereManagementController;
-            context.LambertianController = materialManagementController;
+            context.MaterialController = materialManagementController;
             context.ModelController = modelManagementController;
             context.SceneController = sceneController;
             context.UserController = userController;
@@ -91,10 +91,10 @@ namespace UI
             Lambertian lambertian3 = new Lambertian("Lambertian 3", color3, user1.UserName);
             Lambertian lambertian4 = new Lambertian("Lambertian 4", color4, user1.UserName);
 
-            memoryLambertianRepository.AddLambertian(lambertian1);
-            memoryLambertianRepository.AddLambertian(lambertian2);
-            memoryLambertianRepository.AddLambertian(lambertian3);
-            memoryLambertianRepository.AddLambertian(lambertian4);
+            memoryMaterialRepository.AddMaterial(lambertian1);
+            memoryMaterialRepository.AddMaterial(lambertian2);
+            memoryMaterialRepository.AddMaterial(lambertian3);
+            memoryMaterialRepository.AddMaterial(lambertian4);
 
 
             Model model1 = new Model("Model 1", sphere1, lambertian1, user1.UserName);

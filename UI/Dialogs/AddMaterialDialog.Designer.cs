@@ -1,6 +1,6 @@
 ﻿namespace UI.Dialogs
 {
-    partial class AddLambertianDialog
+    partial class AddMaterialDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -41,9 +41,13 @@
             this.greenValueInput = new System.Windows.Forms.NumericUpDown();
             this.blueValueInput = new System.Windows.Forms.NumericUpDown();
             this.statusLabel = new System.Windows.Forms.Label();
+            this.metallicCheck = new System.Windows.Forms.CheckBox();
+            this.roughnessInput = new System.Windows.Forms.NumericUpDown();
+            this.roughnessLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.redValueInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.greenValueInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.blueValueInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.roughnessInput)).BeginInit();
             this.SuspendLayout();
             // 
             // newMaterialLabel
@@ -199,12 +203,54 @@
             this.statusLabel.Size = new System.Drawing.Size(0, 19);
             this.statusLabel.TabIndex = 39;
             // 
+            // metallicCheck
+            // 
+            this.metallicCheck.AutoSize = true;
+            this.metallicCheck.Location = new System.Drawing.Point(565, 254);
+            this.metallicCheck.Name = "metallicCheck";
+            this.metallicCheck.Size = new System.Drawing.Size(62, 17);
+            this.metallicCheck.TabIndex = 40;
+            this.metallicCheck.Text = "Metallic";
+            this.metallicCheck.UseVisualStyleBackColor = true;
+            this.metallicCheck.CheckedChanged += new System.EventHandler(this.metallicCheck_CheckedChanged);
+            // 
+            // roughnessInput
+            // 
+            this.roughnessInput.DecimalPlaces = 2;
+            this.roughnessInput.Enabled = false;
+            this.roughnessInput.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.roughnessInput.Location = new System.Drawing.Point(537, 228);
+            this.roughnessInput.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.roughnessInput.Name = "roughnessInput";
+            this.roughnessInput.Size = new System.Drawing.Size(120, 20);
+            this.roughnessInput.TabIndex = 41;
+            // 
+            // roughnessLabel
+            // 
+            this.roughnessLabel.AutoSize = true;
+            this.roughnessLabel.Location = new System.Drawing.Point(534, 212);
+            this.roughnessLabel.Name = "roughnessLabel";
+            this.roughnessLabel.Size = new System.Drawing.Size(72, 13);
+            this.roughnessLabel.TabIndex = 42;
+            this.roughnessLabel.Text = "Roughness %";
+            // 
             // AddLambertianDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.roughnessLabel);
+            this.Controls.Add(this.roughnessInput);
+            this.Controls.Add(this.metallicCheck);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.blueValueInput);
             this.Controls.Add(this.greenValueInput);
@@ -225,6 +271,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.redValueInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.greenValueInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.blueValueInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.roughnessInput)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -245,5 +292,8 @@
         private System.Windows.Forms.NumericUpDown greenValueInput;
         private System.Windows.Forms.NumericUpDown blueValueInput;
         private System.Windows.Forms.Label statusLabel;
+        private System.Windows.Forms.CheckBox metallicCheck;
+        private System.Windows.Forms.NumericUpDown roughnessInput;
+        private System.Windows.Forms.Label roughnessLabel;
     }
 }
