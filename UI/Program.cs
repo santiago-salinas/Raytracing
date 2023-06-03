@@ -25,9 +25,9 @@ namespace UI
             //Sphere efSphere = new Sphere("Ef sphere", 0.5f, "Santi");
             EFSphereRepository eFSphereRepository = new EFSphereRepository();
             //eFSphereRepository.AddSphere(efSphere);
+            EFUserRepository eFUserRepository = new EFUserRepository();
 
-
-            MemoryUserRepository memoryUserRepository = new MemoryUserRepository();
+            //MemoryUserRepository memoryUserRepository = new MemoryUserRepository();
             MemorySceneRepository memorySceneRepository = new MemorySceneRepository();
             MemoryModelRepository memoryModelRepository = new MemoryModelRepository(memorySceneRepository);
             MemorySphereRepository memorySphereRepository = new MemorySphereRepository(memoryModelRepository);
@@ -38,7 +38,8 @@ namespace UI
             MaterialManagementService materialManagementService = new MaterialManagementService(memoryLambertianRepository);
             ModelManagementService modelManagementService = new ModelManagementService(memoryModelRepository);
             SceneManagementService sceneManagementService = new SceneManagementService(memorySceneRepository);
-            UserService userService = new UserService(memoryUserRepository);
+            //UserService userService = new UserService(memoryUserRepository);
+            UserService userService = new UserService(eFUserRepository);
             EditSceneService editSceneService = new EditSceneService(memorySceneRepository);
             RenderingService renderingService = new RenderingService();
 
@@ -72,7 +73,7 @@ namespace UI
                 RegisterDate = DateTime.Now,
             };
 
-            memoryUserRepository.AddUser(user1);
+            eFUserRepository.AddUser(user1);
             string userName = user1.UserName;
 
             Sphere sphere1 = new Sphere("Sphere 1", 0.5f, userName);

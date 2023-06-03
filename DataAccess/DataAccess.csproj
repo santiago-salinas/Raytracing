@@ -54,6 +54,7 @@
     <Compile Include="EFContext.cs" />
     <Compile Include="Entities\LambertianEntity.cs" />
     <Compile Include="Entities\ModelEntity.cs" />
+    <Compile Include="Entities\UserEntity.cs" />
     <Compile Include="Migrations\202305292338549_InitialCreate.cs" />
     <Compile Include="Migrations\202305292338549_InitialCreate.designer.cs">
       <DependentUpon>202305292338549_InitialCreate.cs</DependentUpon>
@@ -66,10 +67,15 @@
     <Compile Include="Migrations\202305300044280_RecreateTable.designer.cs">
       <DependentUpon>202305300044280_RecreateTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306031934129_v2.cs" />
+    <Compile Include="Migrations\202306031934129_v2.designer.cs">
+      <DependentUpon>202306031934129_v2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Entities\SphereEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EFSphereRepository.cs" />
+    <Compile Include="Repositories\EFUserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -84,6 +90,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202305300044280_RecreateTable.resx">
       <DependentUpon>202305300044280_RecreateTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306031934129_v2.resx">
+      <DependentUpon>202306031934129_v2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

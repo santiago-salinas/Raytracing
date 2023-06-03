@@ -14,5 +14,7 @@ namespace DataAccess
 
         public DbSet<SphereEntity> SphereEntities { get; set; }
         public DbSet<LambertianEntity> LambertianEntities { get;set; }
+        public DbSet<ModelEntity> ModelEntities { get; set; }
+        public DbSet<UserEntity> UserEntities { get; set; }
     }
 }
