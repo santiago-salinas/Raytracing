@@ -43,19 +43,13 @@ namespace Controllers
         }
         public void SignUp(string username, string password)
         {
-            string result = _userService.SignUp(username, password);
-            if(result != "OK")
-            {
-                throw new Exception(result);
-            }
-
-            /*try
+            try
             {
                 _userService.SignUp(username, password);
             }catch (Exception ex)   
             {
                 throw new Exception(ex.Message, ex);
-            }*/
+            }
             
         }
 

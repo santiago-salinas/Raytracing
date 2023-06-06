@@ -5,8 +5,9 @@ using Controllers;
 using Controllers.Controllers;
 using Services;
 using Repositories;
-
+using DataAccess;
 using System.Security.Cryptography;
+using DataAccess.Repositories;
 
 namespace UI
 {
@@ -21,23 +22,27 @@ namespace UI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-           
+            //Sphere efSphere = new Sphere("Ef sphere", 0.5f, "Santi");
+            EFSphereRepository eFSphereRepository = new EFSphereRepository();
+            //eFSphereRepository.AddSphere(efSphere);
+            EFUserRepository eFUserRepository = new EFUserRepository();
 
-            MemoryUserRepository memoryUserRepository = new MemoryUserRepository();
+            //MemoryUserRepository memoryUserRepository = new MemoryUserRepository();
             MemorySceneRepository memorySceneRepository = new MemorySceneRepository();
             MemoryModelRepository memoryModelRepository = new MemoryModelRepository(memorySceneRepository);
             MemorySphereRepository memorySphereRepository = new MemorySphereRepository(memoryModelRepository);
             MemoryMaterialRepository memoryMaterialRepository = new MemoryMaterialRepository(memoryModelRepository);
 
-            SphereManagementService sphereManagementService = new SphereManagementService(memorySphereRepository);
+            SphereManagementService sphereManagementService = new SphereManagementService(eFSphereRepository);
             MaterialManagementService materialManagementService = new MaterialManagementService(memoryMaterialRepository);
             ModelManagementService modelManagementService = new ModelManagementService(memoryModelRepository);
             SceneManagementService sceneManagementService = new SceneManagementService(memorySceneRepository);
-            UserService userService = new UserService(memoryUserRepository);
+            //UserService userService = new UserService(memoryUserRepository);
+            UserService userService = new UserService(eFUserRepository);
             EditSceneService editSceneService = new EditSceneService(memorySceneRepository);
             RenderingService renderingService = new RenderingService();
 
-            SphereManagementController sphereManagementController = new SphereManagementController(sphereManagementService);
+            SphereManagementController sphereManagementController = new SphereManagementController(sphereManagementService,modelManagementService);
             MaterialManagementController materialManagementController = new MaterialManagementController(materialManagementService);
             ModelManagementController modelManagementController = new ModelManagementController();
             modelManagementController.SphereService = sphereManagementService;
@@ -67,7 +72,7 @@ namespace UI
                 RegisterDate = DateTime.Now,
             };
 
-            memoryUserRepository.AddUser(user1);
+            //eFUserRepository.AddUser(user1);
             string userName = user1.UserName;
 
             Sphere sphere1 = new Sphere("Sphere 1", 0.5f, userName);

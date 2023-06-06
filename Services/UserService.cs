@@ -17,32 +17,28 @@ namespace Services
             _userRepository = userRepository;
         }
 
-        public string SignUp(string username, string password)
+        public void SignUp(string username, string password)
         {
-            User newUser = new User
-            {
-                UserName = username,
-                Password = password,
-                RegisterDate = DateTimeProvider.Now
-            };
 
-            if (!_userRepository.ContainsUser(username))
-            {
-                _userRepository.AddUser(newUser);
-                return "OK";
-            }
+            if (_userRepository.ContainsUser(username)) throw new Exception("Username already in use");
             else
             {
-                return "That username is already in use";
-            }
+                try
+                {
+                    User newUser = new User
+                    {
+                        UserName = username,
+                        Password = password,
+                        RegisterDate = DateTimeProvider.Now
+                    };
 
-          /*  try
-            {
-                _userRepository.AddUser(newUser);
-            }catch(Exception ex)
-            {
-                throw new Exception(ex.Message, ex);
-            }*/
+                    _userRepository.AddUser(newUser);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
         }
 
         public bool Login(string username, string password)

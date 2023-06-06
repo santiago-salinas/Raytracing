@@ -9,7 +9,6 @@ namespace Repositories.Interfaces
 {
     public interface IUserRepository
     {
-        void Drop();
         bool ContainsUser(string name);
         void AddUser(User newElement);
         User GetUser(string username);

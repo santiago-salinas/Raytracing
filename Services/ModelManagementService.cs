@@ -52,5 +52,16 @@ namespace Services
 
             return modelDTOs;
         }
+
+        public bool ExistsModelUsingSphere(string sphereName, string sphereOwner)
+        {
+            Sphere sphereCopy = new Sphere()
+            {
+                Name = sphereName,
+                Owner = sphereOwner
+            };
+            return _modelRepository.ExistsModelUsingTheSphere(sphereCopy);
+        }
+
     }
 }

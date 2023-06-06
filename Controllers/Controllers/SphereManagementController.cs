@@ -14,10 +14,13 @@ namespace Controllers
     public class SphereManagementController
     {
         private SphereManagementService _service;
+        private ModelManagementService _modelManagementService;
 
-        public SphereManagementController(SphereManagementService service)
+
+        public SphereManagementController(SphereManagementService sphereService, ModelManagementService modelService)
         {
-            _service = service;
+            _service = sphereService;
+            _modelManagementService = modelService;
         }
 
         public void AddSphere(SphereDTO sphereDTO)
@@ -34,13 +37,20 @@ namespace Controllers
 
         public void RemoveSphere(string name, string ownerName)
         {
-            try
+            if (_modelManagementService.ExistsModelUsingSphere(name, ownerName))
             {
-                _service.RemoveSphere(name, ownerName);
+                throw new Exception("Cannot remove a sphere that is being used by a model");
             }
-            catch (Exception exception) 
+            else
             {
-                throw new Exception(exception.Message);
+                try
+                {
+                    _service.RemoveSphere(name, ownerName);
+                }
+                catch (Exception exception)
+                {
+                    throw new Exception(exception.Message);
+                }   
             }
         }
 

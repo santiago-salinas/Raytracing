@@ -66,7 +66,7 @@ namespace BusinessLogic
             }
             else if (_modelRepository.ExistsModelUsingTheSphere(sphere))
             {
-                throw new BusinessLogicException("Cant delete sphere used by existing model");
+                throw new BusinessLogicException("Cannot delete sphere used by existing model");
             }
             else
             {

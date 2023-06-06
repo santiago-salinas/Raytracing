@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Services;
 using DataTransferObjects;
+using Repositories.Interfaces;
 
 namespace Services
 {
@@ -21,13 +22,34 @@ namespace Services
 
         public void AddSphere(SphereDTO sphereDTO)
         {
-            Sphere sphere = SphereMapper.ConvertToSphere(sphereDTO);
-            _repository.AddSphere(sphere);
+            try
+            {
+                Sphere sphere = SphereMapper.ConvertToSphere(sphereDTO);
+                try
+                {
+                    _repository.AddSphere(sphere);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("User already owns sphere with that name");
+                }
+            }
+            catch (BusinessLogicException ex)
+            {
+                throw new Exception(ex.Message);
+            } 
         }
 
         public void RemoveSphere(string name, string ownerName)
         {
-            _repository.RemoveSphere(name, ownerName);
+            try
+            {
+                _repository.RemoveSphere(name, ownerName);
+            }
+            catch
+            {
+                throw new Exception("Cannot remove a sphere that is being used by a model");
+            }            
         }
 
         public List<SphereDTO> GetSpheresFromUser(string owner)
