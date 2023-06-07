@@ -72,6 +72,10 @@
     <Compile Include="Migrations\202306031934129_v2.designer.cs">
       <DependentUpon>202306031934129_v2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306070007569_V3.cs" />
+    <Compile Include="Migrations\202306070007569_V3.designer.cs">
+      <DependentUpon>202306070007569_V3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Entities\SphereEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,6 +98,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202306031934129_v2.resx">
       <DependentUpon>202306031934129_v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306070007569_V3.resx">
+      <DependentUpon>202306070007569_V3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

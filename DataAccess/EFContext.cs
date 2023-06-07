@@ -1,4 +1,5 @@
 ﻿using DataAccess;
+using DataAccess.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -16,5 +17,9 @@ namespace DataAccess
         public DbSet<LambertianEntity> LambertianEntities { get;set; }
         public DbSet<ModelEntity> ModelEntities { get; set; }
         public DbSet<UserEntity> UserEntities { get; set; }
+
+        public DbSet<PPMEntity> PPMEntities { get; set; }
+        public DbSet<PixelEntity> PixelEntities { get; set; }
+
     }
 }

@@ -22,6 +22,13 @@ namespace DataAccess.Entities
 
             Color[,] _pixels = ppm.PixelsValues;
 
+            PPMEntity ret = new PPMEntity()
+            {
+                Id = Guid.NewGuid(),
+                Width = ppm.Width,
+                Height = ppm.Heigth,
+            };
+
             for (int row = 0; row < ppm.Heigth; row++)
             {
                 for (int column = 0; column < ppm.Width; column++)
@@ -33,30 +40,28 @@ namespace DataAccess.Entities
                         Green = _pixels[row, column].Green,
                         Blue = _pixels[row, column].Blue,
                         ColumnPos = column,
-                        RowPos = row
+                        RowPos = row,
+                        PPMEntity = ret,
                     };
                     pixels.Add(pix);
                 }
             }
 
-            PPMEntity ret = new PPMEntity()
-            {
-                Id = Guid.NewGuid(),
-                Width = ppm.Width,
-                Height = ppm.Heigth,
-            };
+            ret.Pixels = pixels;
+
+
             return ret;
         }
 
         public static PPM FromEntity(PPMEntity entity)
         {
             PPM ret = new PPM(entity.Width, entity.Height);
-            foreach (var item in entity.Pixels)
+            foreach (PixelEntity pix in entity.Pixels)
             {
-                Color color = new Color(item.Red,item.Green,item.Blue);
-                ret.SavePixel(item.RowPos,item.ColumnPos,color);
+                Color color = new Color(pix.Red/255, pix.Green/255, pix.Blue/255);
+                int row = -pix.RowPos + entity.Height -1;
+                ret.SavePixel(row, pix.ColumnPos, color);
             }
-            
             return ret;
         }
     }
@@ -68,7 +73,6 @@ namespace DataAccess.Entities
         public double Red { get; set; }
         public double Green { get; set; }
         public double Blue { get; set; }
-        public int PPMEntityId { get; set; }
         public int ColumnPos { get; set; }
         public int RowPos { get; set; }
 
