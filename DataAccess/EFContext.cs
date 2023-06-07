@@ -19,7 +19,6 @@ namespace DataAccess
         public DbSet<UserEntity> UserEntities { get; set; }
 
         public DbSet<PPMEntity> PPMEntities { get; set; }
-        public DbSet<PixelEntity> PixelEntities { get; set; }
 
     }
 }

@@ -72,20 +72,6 @@ namespace EntityFrameworkTests
         private Vector position4;
         private PositionedModel positionedModel4;
 
-        // Sphere 5
-        private Model model5;
-        private string model5Name;
-
-        private Sphere sphere5;
-        private string sphere5Name;
-        private double sphere5Radius;
-
-        private Material lambertian5;
-        private string lambertian5Name;
-        private Color color5;
-
-        private Vector position5;
-        private PositionedModel positionedModel5;
 
         // Scene
         private Scene testScene;
@@ -260,19 +246,6 @@ namespace EntityFrameworkTests
                             $"FROM PPMEntities " +
                             $"WHERE Id = '{id}'";
                 PPMEntity entityPPM = dbContext.PPMEntities.SqlQuery(query).FirstOrDefault();
-
-                var query2 = $"SELECT * " +
-                            $"FROM PixelEntities " +
-                            $"WHERE PPMEntity_Id = '{entityPPM.Id}'";
-
-                List<PixelEntity> entities = dbContext.PixelEntities.SqlQuery(query2).ToList();
-
-                entityPPM.Pixels = new List<PixelEntity>();
-
-                foreach (PixelEntity entity in entities)
-                {
-                    entityPPM.Pixels.Add(entity);
-                }
 
                 if (entityPPM != null)
                 {

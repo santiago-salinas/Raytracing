@@ -1,7 +1,10 @@
 ﻿using BusinessLogic;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,71 +17,75 @@ namespace DataAccess.Entities
         public Guid Id { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-        public ICollection<PixelEntity> Pixels { get; set; }
+        public byte[] RenderBytes { get; set; }
 
         public static PPMEntity FromDomain(PPM ppm)
         {
-            ICollection<PixelEntity> pixels = new List<PixelEntity>();
-
-            Color[,] _pixels = ppm.PixelsValues;
-
+            BusinessLogic.Color[,] _pixels = ppm.PixelsValues;
             PPMEntity ret = new PPMEntity()
             {
                 Id = Guid.NewGuid(),
                 Width = ppm.Width,
                 Height = ppm.Heigth,
+                RenderBytes = ppmToBitmap(ppm)
             };
 
-            for (int row = 0; row < ppm.Heigth; row++)
+            return ret;
+        }
+
+        private static byte[] ppmToBitmap(PPM ppm)
+        {
+            int width = ppm.Width;
+            int height = ppm.Heigth;
+            Bitmap bitmap = new Bitmap(width, height);
+            BusinessLogic.Color[,] pixels = ppm.PixelsValues;
+
+            for (int row = 0; row < height; row++)
             {
-                for (int column = 0; column < ppm.Width; column++)
+                for (int column = 0; column < width; column++)
                 {
-                    PixelEntity pix = new PixelEntity()
-                    {
-                        Id = Guid.NewGuid(),
-                        Red = _pixels[row, column].Red,
-                        Green = _pixels[row, column].Green,
-                        Blue = _pixels[row, column].Blue,
-                        ColumnPos = column,
-                        RowPos = row,
-                        PPMEntity = ret,
-                    };
-                    pixels.Add(pix);
+                    int red = (int)pixels[row, column].Red;
+                    int green = (int)pixels[row, column].Green;
+                    int blue = (int)pixels[row, column].Blue;
+
+                    bitmap.SetPixel(column, row, System.Drawing.Color.FromArgb(red, green, blue));
                 }
             }
 
-            ret.Pixels = pixels;
-
-
-            return ret;
+            using (MemoryStream stream = new MemoryStream())
+            {
+                bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
+                return stream.ToArray();
+            }
         }
 
         public static PPM FromEntity(PPMEntity entity)
         {
             PPM ret = new PPM(entity.Width, entity.Height);
-            foreach (PixelEntity pix in entity.Pixels)
+
+            Bitmap bitmap;
+            using (MemoryStream stream = new MemoryStream(entity.RenderBytes))
             {
-                Color color = new Color(pix.Red/255, pix.Green/255, pix.Blue/255);
-                int row = -pix.RowPos + entity.Height -1;
-                ret.SavePixel(row, pix.ColumnPos, color);
+                bitmap = new Bitmap(stream);
+            }
+
+            for (int row = 0; row < ret.Heigth; row++)
+            {
+                for (int column = 0; column < ret.Width; column++)
+                {
+                    System.Drawing.Color pixel = bitmap.GetPixel(column, row);
+
+                    double red = pixel.R/(double)255;
+                    double green = pixel.G/ (double)255;
+                    double blue = pixel.B/ (double)255;
+
+                    BusinessLogic.Color color = new BusinessLogic.Color(red, green, blue);
+                    int rowinput = -row + ret.Heigth - 1;
+                    ret.SavePixel(rowinput, column, color);
+                }
             }
             return ret;
         }
     }
 
-    public class PixelEntity
-    {
-        [Key]
-        public Guid Id { get; set; }
-        public double Red { get; set; }
-        public double Green { get; set; }
-        public double Blue { get; set; }
-        public int ColumnPos { get; set; }
-        public int RowPos { get; set; }
-
-
-        public PPMEntity PPMEntity { get; set; }
-    }
-
-    
 }

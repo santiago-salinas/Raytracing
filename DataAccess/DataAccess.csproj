@@ -43,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -76,6 +77,10 @@
     <Compile Include="Migrations\202306070007569_V3.designer.cs">
       <DependentUpon>202306070007569_V3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306072000248_V4.cs" />
+    <Compile Include="Migrations\202306072000248_V4.designer.cs">
+      <DependentUpon>202306072000248_V4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Entities\SphereEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -101,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202306070007569_V3.resx">
       <DependentUpon>202306070007569_V3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306072000248_V4.resx">
+      <DependentUpon>202306072000248_V4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
