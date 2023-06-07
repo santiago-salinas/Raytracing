@@ -242,10 +242,7 @@ namespace EntityFrameworkTests
 
             using (EFContext dbContext = new EFContext())
             {
-                var query = $"SELECT * " +
-                            $"FROM PPMEntities " +
-                            $"WHERE Id = '{id}'";
-                PPMEntity entityPPM = dbContext.PPMEntities.SqlQuery(query).FirstOrDefault();
+                PPMEntity entityPPM = dbContext.PPMEntities.FirstOrDefault(entity => entity.Id == id);
 
                 if (entityPPM != null)
                 {
