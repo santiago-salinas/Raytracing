@@ -43,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EFContext.cs" />
+    <Compile Include="Entities\PPMEntity.cs" />
     <Compile Include="Entities\LambertianEntity.cs" />
     <Compile Include="Entities\ModelEntity.cs" />
     <Compile Include="Entities\UserEntity.cs" />
@@ -70,6 +72,14 @@
     <Compile Include="Migrations\202306031934129_v2.cs" />
     <Compile Include="Migrations\202306031934129_v2.designer.cs">
       <DependentUpon>202306031934129_v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306070007569_V3.cs" />
+    <Compile Include="Migrations\202306070007569_V3.designer.cs">
+      <DependentUpon>202306070007569_V3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306072000248_V4.cs" />
+    <Compile Include="Migrations\202306072000248_V4.designer.cs">
+      <DependentUpon>202306072000248_V4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Entities\SphereEntity.cs" />
@@ -93,6 +103,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202306031934129_v2.resx">
       <DependentUpon>202306031934129_v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306070007569_V3.resx">
+      <DependentUpon>202306070007569_V3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306072000248_V4.resx">
+      <DependentUpon>202306072000248_V4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

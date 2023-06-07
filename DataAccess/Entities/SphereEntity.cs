@@ -19,6 +19,7 @@ namespace DataAccess
         public string Owner { get; set; }
         public double Radius { get; set; }
 
+
         public static SphereEntity FromDomain (Sphere sphere)
         {
             SphereEntity ret = new SphereEntity()
