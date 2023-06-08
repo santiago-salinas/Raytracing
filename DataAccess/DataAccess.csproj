@@ -81,6 +81,10 @@
     <Compile Include="Migrations\202306072000248_V4.designer.cs">
       <DependentUpon>202306072000248_V4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306072339541_asd.cs" />
+    <Compile Include="Migrations\202306072339541_asd.designer.cs">
+      <DependentUpon>202306072339541_asd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Entities\SphereEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202306072000248_V4.resx">
       <DependentUpon>202306072000248_V4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306072339541_asd.resx">
+      <DependentUpon>202306072339541_asd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

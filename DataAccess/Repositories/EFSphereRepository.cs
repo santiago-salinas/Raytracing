@@ -22,7 +22,7 @@ namespace DataAccess.Repositories
             {
                 var query = $"SELECT * " +
                             $"FROM SphereEntities " +
-                            $"WHERE Owner = '{username}'";
+                            $"WHERE OwnerId = '{username}'";
 
                 List<SphereEntity> entities = dbContext.SphereEntities.SqlQuery(query).ToList();
 
@@ -51,7 +51,7 @@ namespace DataAccess.Repositories
         {
             using (EFContext dbContext = new EFContext())
             {
-                SphereEntity entity = SphereEntity.FromDomain(sphere);
+                SphereEntity entity = SphereEntity.FromDomain(sphere, dbContext);
                 dbContext.SphereEntities.Add(entity);
                 dbContext.SaveChanges();
             }
