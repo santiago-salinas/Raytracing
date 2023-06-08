@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using DataAccess.Entities;
+using BusinessLogic;
 
 namespace DataAccess
 {
@@ -26,5 +27,49 @@ namespace DataAccess
         public int RedValue { get; set; }
         public int GreenValue { get; set; }
         public int BlueValue { get; set; }
+
+        public static LambertianEntity FromDomain(Lambertian lambertian, EFContext efContext)
+        {
+           
+            string owner = lambertian.Owner;
+            Color color = lambertian.Color;
+            UserEntity userEntity = efContext.UserEntities.FirstOrDefault(u => u.Username == owner); ;
+            
+            LambertianEntity ret = new LambertianEntity()
+            {
+                RedValue = (int)color.Red,
+                GreenValue = (int)color.Green,
+                BlueValue = (int)color.Blue,
+            };
+
+            MaterialEntity materialEntity = new MaterialEntity()
+            {
+                Name = lambertian.Name,
+                Owner = userEntity,
+                Lambertian = ret,
+            };
+
+            ret.Material = materialEntity;
+
+            return ret;
+        }
+
+        public static Lambertian FromEntity(LambertianEntity entity)
+        {
+            Color color = new Color()
+            {
+                Red = entity.RedValue,
+                Green = entity.GreenValue,
+                Blue = entity.BlueValue
+            };
+            Lambertian ret = new Lambertian()
+            {
+                Name = entity.MaterialName,
+                Owner = entity.MaterialOwnerId,
+                Color = color,
+            };
+
+            return ret;
+        }
     }
 }
