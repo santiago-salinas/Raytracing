@@ -91,6 +91,10 @@
     <Compile Include="Migrations\202306080024339_add-material-table.designer.cs">
       <DependentUpon>202306080024339_add-material-table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306080044336_add-material-table-v2.cs" />
+    <Compile Include="Migrations\202306080044336_add-material-table-v2.designer.cs">
+      <DependentUpon>202306080044336_add-material-table-v2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Entities\SphereEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -125,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202306080024339_add-material-table.resx">
       <DependentUpon>202306080024339_add-material-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306080044336_add-material-table-v2.resx">
+      <DependentUpon>202306080044336_add-material-table-v2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

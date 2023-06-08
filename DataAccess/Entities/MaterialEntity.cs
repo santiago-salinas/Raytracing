@@ -18,5 +18,7 @@ namespace DataAccess.Entities
         [Column(Order = 2)]
         public string OwnerId { get; set; }
         public UserEntity Owner { get; set; }
+        public LambertianEntity Lambertian { get; set; }
+        public MetallicEntity Metallic { get; set; }
     }
 }
