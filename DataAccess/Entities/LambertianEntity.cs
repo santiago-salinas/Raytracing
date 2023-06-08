@@ -34,7 +34,6 @@ namespace DataAccess
             string owner = lambertian.Owner;
             Color color = lambertian.Color;
             UserEntity userEntity = efContext.UserEntities.FirstOrDefault(u => u.Username == owner); ;
-            
             LambertianEntity ret = new LambertianEntity()
             {
                 RedValue = (int)color.Red,
@@ -58,9 +57,9 @@ namespace DataAccess
         {
             Color color = new Color()
             {
-                Red = entity.RedValue,
-                Green = entity.GreenValue,
-                Blue = entity.BlueValue
+                Red = (double)entity.RedValue/255,
+                Green = (double)entity.GreenValue/255,
+                Blue = (double)entity.BlueValue/255
             };
             Lambertian ret = new Lambertian()
             {

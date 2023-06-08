@@ -18,7 +18,7 @@ namespace BusinessLogic
             _lambertianList.Clear();
         }
 
-        public List<Material> GetMaterialFromUser(string owner)
+        public List<Material> GetMaterialsFromUser(string owner)
         {
             List<Material> ret = new List<Material>();
             foreach (Material s in _lambertianList)

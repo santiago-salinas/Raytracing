@@ -39,7 +39,7 @@ namespace Services
 
         public List<MaterialDTO> GetMaterialsFromUser(string owner)
         {
-            List<Material> lambertians = _repository.GetMaterialFromUser(owner);
+            List<Material> lambertians = _repository.GetMaterialsFromUser(owner);
             List<MaterialDTO> lambertianDTOs = ConvertListToDTOs(lambertians);
             return lambertianDTOs;
         }
