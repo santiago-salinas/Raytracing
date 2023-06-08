@@ -9,7 +9,6 @@ namespace Repositories.Interfaces
 {
     public interface IModelRepository
     {
-        void Drop();
         List<Model> GetModelsFromUser(string owner);
         bool ContainsModel(string name, string user);
         bool ExistsModelUsingTheMaterial(Material material);
