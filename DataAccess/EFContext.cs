@@ -19,7 +19,6 @@ namespace DataAccess
         public DbSet<MetallicEntity> MetallicEntities { get; set; }
         public DbSet<ModelEntity> ModelEntities { get; set; }
         public DbSet<UserEntity> UserEntities { get; set; }
-
         public DbSet<PPMEntity> PPMEntities { get; set; }
 
     }

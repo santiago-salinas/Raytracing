@@ -5,7 +5,6 @@ namespace BusinessLogic
     public abstract class Material
     {
         private string _name;
-
         public abstract string Type { get;}
         public string Name
         {

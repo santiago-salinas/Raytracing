@@ -24,13 +24,28 @@ namespace DataAccess.Entities
 
         public static Material FromEntity(MaterialEntity entity) 
         {
-            return LambertianEntity.FromEntity(entity.Lambertian);
+            if(entity.Lambertian != null)
+            {
+                return LambertianEntity.FromEntity(entity.Lambertian);
+            }
+            else
+            {
+                return MetallicEntity.FromEntity(entity.Metallic);
+            }
         }
 
         public static MaterialEntity FromDomain(Material material, EFContext context)
         {
-            LambertianEntity lamEntity = LambertianEntity.FromDomain(material as Lambertian, context);
-            return lamEntity.Material;
+            if(material.Type == "lambertian" ) 
+            {
+                LambertianEntity lamEntity = LambertianEntity.FromDomain(material as Lambertian, context);
+                return lamEntity.Material;
+            }
+            else
+            {
+                MetallicEntity metEntity = MetallicEntity.FromDomain(material as Metallic, context);
+                return metEntity.Material;
+            }
         }
     }
 }
