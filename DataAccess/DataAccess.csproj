@@ -53,6 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EFContext.cs" />
+    <Compile Include="Entities\MaterialEntity.cs" />
+    <Compile Include="Entities\MetallicEntity.cs" />
     <Compile Include="Entities\PPMEntity.cs" />
     <Compile Include="Entities\LambertianEntity.cs" />
     <Compile Include="Entities\ModelEntity.cs" />
@@ -85,6 +87,10 @@
     <Compile Include="Migrations\202306072339541_asd.designer.cs">
       <DependentUpon>202306072339541_asd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306080024339_add-material-table.cs" />
+    <Compile Include="Migrations\202306080024339_add-material-table.designer.cs">
+      <DependentUpon>202306080024339_add-material-table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Entities\SphereEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -116,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202306072339541_asd.resx">
       <DependentUpon>202306072339541_asd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306080024339_add-material-table.resx">
+      <DependentUpon>202306080024339_add-material-table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using DataAccess.Entities;
 
-namespace DataAccess
+namespace DataAccess.Entities
 {
-    public class LambertianEntity
+    public class MetallicEntity
     {
         [Key]
         [ForeignKey(nameof(Material))]
@@ -26,5 +24,6 @@ namespace DataAccess
         public int RedValue { get; set; }
         public int GreenValue { get; set; }
         public int BlueValue { get; set; }
+        public int Roughness { get; set; }
     }
 }
