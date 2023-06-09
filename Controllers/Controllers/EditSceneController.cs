@@ -16,9 +16,9 @@ namespace Controllers
         public ModelManagementService ModelManagementService { get; set; }
         public SceneManagementService SceneManagementService { get; set; }
         public EditSceneController() { }
-        public SceneDTO CreateNewScene(string owner)
+        public SceneDTO CreateNewScene(string owner, string name)
         {            
-            SceneDTO newScene = EditSceneService.CreateNewScene(owner);
+            SceneDTO newScene = EditSceneService.CreateNewScene(owner, name);
             AddNewScene(newScene);
             return newScene;
         }

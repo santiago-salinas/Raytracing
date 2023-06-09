@@ -25,18 +25,21 @@ namespace UI.Tabs
 
         public EditSceneTab(SceneDTO providedScene, Context context)
         {
-            InitializeComponent();            
+            InitializeComponent();
             _loggedUser = context.CurrentUser;
             _controller = context.EditSceneController;
             _isNewScene = providedScene == null;
-            _scene = _isNewScene ? CreateNewScene() : providedScene;
-            LoadAvailableModels();
-            LoadDataFromScene(_scene);
+            _scene = providedScene;
+
+            if (!_isNewScene)
+            {
+                EnableEditControls();
+            }
         }
 
-        private SceneDTO CreateNewScene()
+        private SceneDTO CreateNewScene(string name)
         {
-            return _controller.CreateNewScene(_loggedUser);
+            return _controller.CreateNewScene(_loggedUser,name);
         }
         private void LoadDataFromScene(SceneDTO providedScene)
         {
@@ -89,16 +92,26 @@ namespace UI.Tabs
         {
             nameStatusLabel.Text = "";
             string newName = nameTextbox.Text.Trim();
-            bool endedCorrectly = true;
 
-           // nameStatusLabel.Text = _controller.SaveChangedName(newName);
+            _scene = CreateNewScene(newName);
+
+            EnableEditControls();
             
+        }
 
-            if (endedCorrectly)
-            {
-                ScenesTab.LoadScenes();
-                ScenesTab.Activate();
-            }
+        private void EnableEditControls()
+        {
+            lookFromButton.Enabled = true;
+            lookAtButton.Enabled = true;
+            fovInput.Enabled = true;
+            checkBlur.Enabled = true;
+            renderButton.Enabled = true;
+
+            saveButton.Visible = false;
+            nameTextbox.ReadOnly = true;
+
+            LoadAvailableModels();
+            LoadDataFromScene(_scene);
         }
 
         private bool NameWasChanged()

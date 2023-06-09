@@ -62,7 +62,7 @@
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(106, 51);
             this.saveButton.TabIndex = 0;
-            this.saveButton.Text = "Change name";
+            this.saveButton.Text = "Confirm Name";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
@@ -108,6 +108,7 @@
             // 
             // fovInput
             // 
+            this.fovInput.Enabled = false;
             this.fovInput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fovInput.Location = new System.Drawing.Point(427, 168);
             this.fovInput.Maximum = new decimal(new int[] {
@@ -169,6 +170,7 @@
             // renderButton
             // 
             this.renderButton.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.renderButton.Enabled = false;
             this.renderButton.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.renderButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.renderButton.Location = new System.Drawing.Point(712, 216);
@@ -239,6 +241,7 @@
             // 
             // lookFromButton
             // 
+            this.lookFromButton.Enabled = false;
             this.lookFromButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lookFromButton.Location = new System.Drawing.Point(22, 160);
             this.lookFromButton.Name = "lookFromButton";
@@ -250,6 +253,7 @@
             // 
             // lookAtButton
             // 
+            this.lookAtButton.Enabled = false;
             this.lookAtButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lookAtButton.Location = new System.Drawing.Point(221, 160);
             this.lookAtButton.Name = "lookAtButton";
@@ -298,6 +302,7 @@
             // checkBlur
             // 
             this.checkBlur.AutoSize = true;
+            this.checkBlur.Enabled = false;
             this.checkBlur.Location = new System.Drawing.Point(613, 200);
             this.checkBlur.Name = "checkBlur";
             this.checkBlur.Size = new System.Drawing.Size(45, 17);
