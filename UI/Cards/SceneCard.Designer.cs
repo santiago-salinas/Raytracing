@@ -82,9 +82,10 @@
             // 
             // previewPanel
             // 
-            this.previewPanel.Location = new System.Drawing.Point(27, 28);
+            this.previewPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.previewPanel.Location = new System.Drawing.Point(27, 13);
             this.previewPanel.Name = "previewPanel";
-            this.previewPanel.Size = new System.Drawing.Size(295, 170);
+            this.previewPanel.Size = new System.Drawing.Size(300, 200);
             this.previewPanel.TabIndex = 10;
             // 
             // SceneCard

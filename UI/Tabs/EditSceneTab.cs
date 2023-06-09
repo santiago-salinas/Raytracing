@@ -8,6 +8,7 @@ using UI.Cards;
 using UI.Dialogs;
 using Controllers;
 using DataTransferObjects;
+using System.Xml.Linq;
 
 namespace UI.Tabs
 {
@@ -90,12 +91,19 @@ namespace UI.Tabs
         }
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            sceneNameStatusLabel.Visible = true;
             nameStatusLabel.Text = "";
             string newName = nameTextbox.Text.Trim();
 
-            _scene = CreateNewScene(newName);
-
-            EnableEditControls();
+            try
+            {
+                _scene = CreateNewScene(newName);
+                EnableEditControls();
+            }
+            catch (Exception ex)
+            {
+                sceneNameStatusLabel.Text = ex.Message;
+            }
             
         }
 
@@ -241,6 +249,18 @@ namespace UI.Tabs
                 }
 
                 fs.Close();
+            }
+        }
+
+        private void nameTextbox_TextChanged(object sender, EventArgs e)
+        {
+            string name = nameTextbox.Text;
+            sceneNameStatusLabel.Visible = true;
+            sceneNameStatusLabel.Text = "";
+
+            if(_controller.NameIsAlreadyInUse(name, _loggedUser))
+            {
+                sceneNameStatusLabel.Text = "Name already in use";
             }
         }
     }

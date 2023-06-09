@@ -35,6 +35,7 @@ namespace UI
             }
             else
             {
+                _scenesTab.LoadScenes();
                 _scenesTab.Activate();
             }
         }

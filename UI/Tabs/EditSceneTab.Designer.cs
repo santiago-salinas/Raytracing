@@ -51,6 +51,7 @@
             this.apertureLabel = new System.Windows.Forms.Label();
             this.checkBlur = new System.Windows.Forms.CheckBox();
             this.saveBtn = new System.Windows.Forms.Button();
+            this.sceneNameStatusLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fovInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.apertureInput)).BeginInit();
             this.SuspendLayout();
@@ -220,6 +221,7 @@
             this.nameTextbox.Name = "nameTextbox";
             this.nameTextbox.Size = new System.Drawing.Size(404, 51);
             this.nameTextbox.TabIndex = 19;
+            this.nameTextbox.TextChanged += new System.EventHandler(this.nameTextbox_TextChanged);
             // 
             // nameStatusLabel
             // 
@@ -323,12 +325,25 @@
             this.saveBtn.UseVisualStyleBackColor = true;
             this.saveBtn.Click += new System.EventHandler(this.button1_Click);
             // 
+            // sceneNameStatusLabel
+            // 
+            this.sceneNameStatusLabel.AutoSize = true;
+            this.sceneNameStatusLabel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sceneNameStatusLabel.ForeColor = System.Drawing.Color.Red;
+            this.sceneNameStatusLabel.Location = new System.Drawing.Point(45, 99);
+            this.sceneNameStatusLabel.Name = "sceneNameStatusLabel";
+            this.sceneNameStatusLabel.Size = new System.Drawing.Size(42, 15);
+            this.sceneNameStatusLabel.TabIndex = 28;
+            this.sceneNameStatusLabel.Text = "TEXTO";
+            this.sceneNameStatusLabel.Visible = false;
+            // 
             // EditSceneTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1275, 820);
             this.ControlBox = false;
+            this.Controls.Add(this.sceneNameStatusLabel);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.checkBlur);
             this.Controls.Add(this.apertureLabel);
@@ -388,5 +403,6 @@
         private System.Windows.Forms.Label apertureLabel;
         private System.Windows.Forms.CheckBox checkBlur;
         private System.Windows.Forms.Button saveBtn;
+        private System.Windows.Forms.Label sceneNameStatusLabel;
     }
 }

@@ -23,47 +23,6 @@ namespace Controllers
             return newScene;
         }
 
-        /*public string SaveChangedName(String newName, bool isNewScene, SceneDTO sceneDTO)
-        {
-
-
-
-
-            if (newName == "")
-            {
-                return "* Scene's name cannot be blank";
-            }
-            else
-            {
-                if (isNewScene)
-                {
-                    try
-                    {
-                        _scene.Name = newName;
-                        _controller.AddNewScene(_scene);
-                        endedCorrectly = true;
-                    }
-                    catch (Exception ex)
-                    {
-                        nameStatusLabel.Text = "* " + ex.Message;
-                    }
-                }
-                else
-                {
-                    if (NameWasChanged() && _controller.NameIsAlreadyInUse(newName, _loggedUser))
-                    {
-                        nameStatusLabel.Text = "* User already owns a scene with that name";
-                    }
-                    else
-                    {
-                        _scene.Name = newName;
-                        endedCorrectly = true;
-                    }
-                }
-
-            }
-        }
-        */
         public List<ModelDTO> GetAvailableModels(string owner)
         {
             return ModelManagementService.GetModelsFromUser(owner);
