@@ -50,12 +50,17 @@ namespace UI.Tabs
             VectorDTO lookFrom = sceneCamera.LookFrom;
             VectorDTO lookAt = sceneCamera.LookAt;
             int fieldOfView = sceneCamera.FieldOfView;
+            double aperture = sceneCamera.Aperture;
+            bool blurEnabled = _scene.Blur;
 
             lookFromButton.Text = VectorToString(lookFrom);
             lookAtButton.Text = VectorToString(lookAt);
 
             lastModificationLabel.Text += _scene.LastModificationDate.ToString("f", new CultureInfo("en-US"));
             fovInput.Value = fieldOfView;
+            apertureInput.Value = (decimal) aperture;
+            checkBlur.Checked = blurEnabled;
+
             if (_scene.Preview != null)
             {
                 _imagePPM = new PPMViewer(_scene.Preview);
@@ -134,6 +139,7 @@ namespace UI.Tabs
             {
                 NotifyThatSeneWasModified();
                 sceneCamera.FieldOfView = newFov;
+                _controller.UpdateScene(_scene);
             }
         }
         private void LoadAvailableModels()
@@ -191,6 +197,7 @@ namespace UI.Tabs
             {
                 NotifyThatSeneWasModified();
                 sceneCamera.Aperture = newAperture;
+                _controller.UpdateScene(_scene);
             }
         }
 
@@ -212,6 +219,7 @@ namespace UI.Tabs
                 _scene.Blur = false;
             }
             NotifyThatSeneWasModified();
+            _controller.UpdateScene(_scene);
         }
 
         // https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-save-files-using-the-savefiledialog-component?view=netframeworkdesktop-4.8
@@ -254,6 +262,7 @@ namespace UI.Tabs
 
         private void nameTextbox_TextChanged(object sender, EventArgs e)
         {
+            /*
             string name = nameTextbox.Text;
             sceneNameStatusLabel.Visible = true;
             sceneNameStatusLabel.Text = "";
@@ -262,6 +271,7 @@ namespace UI.Tabs
             {
                 sceneNameStatusLabel.Text = "Name already in use";
             }
+            */
         }
     }
 }

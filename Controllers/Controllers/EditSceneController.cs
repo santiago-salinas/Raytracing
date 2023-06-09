@@ -60,7 +60,7 @@ namespace Controllers
             return render;
         }
  
-        private void UpdateScene(SceneDTO sceneDTO)
+        public void UpdateScene(SceneDTO sceneDTO)
         {
             SceneManagementService.UpdateScene(sceneDTO);
         }

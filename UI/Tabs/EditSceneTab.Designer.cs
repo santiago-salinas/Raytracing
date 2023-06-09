@@ -332,9 +332,8 @@
             this.sceneNameStatusLabel.ForeColor = System.Drawing.Color.Red;
             this.sceneNameStatusLabel.Location = new System.Drawing.Point(45, 99);
             this.sceneNameStatusLabel.Name = "sceneNameStatusLabel";
-            this.sceneNameStatusLabel.Size = new System.Drawing.Size(42, 15);
+            this.sceneNameStatusLabel.Size = new System.Drawing.Size(0, 15);
             this.sceneNameStatusLabel.TabIndex = 28;
-            this.sceneNameStatusLabel.Text = "TEXTO";
             this.sceneNameStatusLabel.Visible = false;
             // 
             // EditSceneTab
