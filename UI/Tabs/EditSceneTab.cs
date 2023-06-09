@@ -57,6 +57,11 @@ namespace UI.Tabs
             lookAtButton.Text = VectorToString(lookAt);
 
             lastModificationLabel.Text += _scene.LastModificationDate.ToString("f", new CultureInfo("en-US"));
+
+            if(_scene.LastModificationDate.Minute != _scene.LastRenderDate.Minute)
+            {
+                NotifyThatSeneWasModified();
+            }
             fovInput.Value = fieldOfView;
             apertureInput.Value = (decimal) aperture;
             checkBlur.Checked = blurEnabled;
@@ -176,7 +181,7 @@ namespace UI.Tabs
             renderPanel.Controls.Add(_imagePPM);
             saveBtn.Enabled = true;
 
-            lastRenderLabel.Text = "Last rendered: " + _scene.LastRenderDate.ToString("f", new CultureInfo("en-US"));
+            lastRenderLabel.Text = "Last rendered: " + _scene.LastRenderDate.ToString("f", new CultureInfo("en-US")) + ":" + _scene.LastRenderDate.ToString("ss"); ;
         }
         private string VectorToString(VectorDTO vector)
         {
@@ -186,7 +191,7 @@ namespace UI.Tabs
         {            
             _controller.UpdateLastModificationDate(_scene);
             DateTime newModificationDate = _scene.LastModificationDate;
-            lastModificationLabel.Text = "Last modified: " + newModificationDate.ToString("f", new CultureInfo("en-US"));
+            lastModificationLabel.Text = "Last modified: " + newModificationDate.ToString("f", new CultureInfo("en-US")) + ":" + newModificationDate.ToString("ss"); ;
             outdatedStatusLabel.Visible = true;
         }
 

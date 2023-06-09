@@ -48,7 +48,9 @@ namespace Services
 
         public void UpdateLastRenderDate(SceneDTO sceneDTO)
         {
-            sceneDTO.LastRenderDate = DateTimeProvider.Now;
+            System.DateTime date = DateTimeProvider.Now;
+            sceneDTO.LastRenderDate = date;
+            sceneDTO.LastModificationDate = date;
         }
 
         public void UpdateLastModificationDate(SceneDTO sceneDTO)
