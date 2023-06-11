@@ -17,10 +17,17 @@ namespace Controllers
         public SceneManagementService SceneManagementService { get; set; }
         public EditSceneController() { }
         public SceneDTO CreateNewScene(string owner, string name)
-        {            
-            SceneDTO newScene = EditSceneService.CreateNewScene(owner, name);
-            AddNewScene(newScene);
-            return newScene;
+        {
+            try
+            {
+                SceneDTO newScene = EditSceneService.CreateNewScene(owner, name);
+                AddNewScene(newScene);
+                return newScene;
+            }catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            
         }
 
         public List<ModelDTO> GetAvailableModels(string owner)
