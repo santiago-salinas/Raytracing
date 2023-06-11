@@ -24,11 +24,18 @@ namespace DataAccess
         public UserEntity Owner { get; set; }
         public MaterialEntity Material { get; set; }
         public SphereEntity Shape { get; set; }
+        public PPMEntity PPMEntity { get; set; }
 
         public static Model FromEntity(ModelEntity entity)
         {
             Material material = MaterialEntity.FromEntity(entity.Material);
             Sphere shape = SphereEntity.FromEntity(entity.Shape);
+
+            PPM ppm = null;
+            if (entity.PPMEntity != null)
+            {
+                ppm = PPMEntity.FromEntity(entity.PPMEntity);
+            }
 
             Model ret = new Model()
             {
@@ -36,6 +43,7 @@ namespace DataAccess
                 Owner = entity.OwnerId,
                 Material = material,
                 Shape = shape,
+                Preview = ppm,
             };
 
             return ret;
@@ -53,12 +61,20 @@ namespace DataAccess
                 .FirstOrDefault(m => m.OwnerId == userEntity.Username && m.Name == materialName);
             SphereEntity sphereEntity = efContext.SphereEntities.FirstOrDefault(s => s.OwnerId == userEntity.Username && s.Name == shapeName);
 
+
+            PPMEntity ppm = null;
+            if (model.Preview != null)
+            {
+                ppm = PPMEntity.FromDomain(model.Preview);
+            }
+
             ModelEntity ret = new ModelEntity()
             {
                 Name = model.Name,
                 Owner = userEntity,
                 Material = materialEntity,
                 Shape = sphereEntity,
+                PPMEntity = ppm,
             };
 
             return ret;

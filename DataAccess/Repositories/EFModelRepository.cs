@@ -26,6 +26,7 @@ namespace DataAccess.Repositories
                     .Include(m => m.Material.Lambertian)
                     .Include(m => m.Material.Metallic)
                     .Include(m => m.Shape)
+                    .Include(m => m.PPMEntity)
                     .Where(m => m.OwnerId == owner)
                     .ToList();
 
@@ -92,10 +93,16 @@ namespace DataAccess.Repositories
             using (EFContext context = new EFContext())
             {
                 ModelEntity modelEntity = context.ModelEntities
+                    .Include(m => m.PPMEntity)
                     .FirstOrDefault(m => m.Name == name && m.OwnerId == owner);
 
                 if (modelEntity != null)
                 {
+                    if(modelEntity.PPMEntity  != null)
+                    {
+                        context.PPMEntities.Remove(modelEntity.PPMEntity);
+                    }
+
                     context.ModelEntities.Remove(modelEntity);
                     context.SaveChanges();
                 }
