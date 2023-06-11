@@ -8,6 +8,8 @@ using Repositories;
 using DataAccess;
 using System.Security.Cryptography;
 using DataAccess.Repositories;
+using System.Threading;
+using System.Data.SqlClient;
 
 namespace UI
 {
@@ -21,6 +23,7 @@ namespace UI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Application.ThreadException += new ThreadExceptionEventHandler(ThreadException);
 
             //Sphere efSphere = new Sphere("Ef sphere", 0.5f, "Santi");
             EFSphereRepository eFSphereRepository = new EFSphereRepository();
@@ -164,6 +167,15 @@ namespace UI
             Application.Run(new LogInPage(context));
 
             Application.Exit();
+        }
+
+        static void ThreadException(object sender, ThreadExceptionEventArgs e)
+        {
+            if(e.Exception is SqlException)
+            {
+                MessageBox.Show("An error ocurred when trying to connect with the database. The application will now close.","Connection Error");
+                Application.Exit();
+            }
         }
     }
 }
