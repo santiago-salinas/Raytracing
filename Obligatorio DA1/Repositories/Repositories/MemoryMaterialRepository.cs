@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Repositories;
 using Repositories.Interfaces;
+using BusinessLogic.Exceptions;
+
 
 namespace BusinessLogic
 {

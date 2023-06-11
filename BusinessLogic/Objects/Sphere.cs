@@ -1,4 +1,6 @@
 ﻿using System;
+using BusinessLogic.Exceptions;
+
 
 namespace BusinessLogic
 {

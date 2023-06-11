@@ -9,6 +9,8 @@ using BusinessLogic;
 using Controllers.Interfaces;
 using Repositories.Interfaces;
 using DataAccess.Entities;
+using System.Data.Entity.Infrastructure;
+using BusinessLogic.Exceptions;
 
 namespace DataAccess.Repositories
 {
@@ -41,14 +43,22 @@ namespace DataAccess.Repositories
 
         public void AddMaterial(Material newElement)
         {
-            using (EFContext context = new EFContext())
+            try
             {
-                UserEntity owner = context.UserEntities.FirstOrDefault(u => u.Username == newElement.Owner);
+                using (EFContext context = new EFContext())
+                {
+                    UserEntity owner = context.UserEntities.FirstOrDefault(u => u.Username == newElement.Owner);
 
-                var materialEntity = MaterialEntity.FromDomain(newElement,context);
-                context.MaterialEntities.Add(materialEntity);
-                context.SaveChanges();
+                    var materialEntity = MaterialEntity.FromDomain(newElement, context);
+                    context.MaterialEntities.Add(materialEntity);
+                    context.SaveChanges();
+                }
             }
+            catch (DbUpdateException ex)
+            {
+                throw new RepositoryException("User already owns material with that name");
+            }
+            
         }
 
         public Material GetMaterial(string name, string user)
