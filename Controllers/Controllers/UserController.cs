@@ -1,9 +1,6 @@
 ﻿using Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Controllers.Exceptions;
+using Services.Exceptions;
 
 namespace Controllers
 {
@@ -18,16 +15,13 @@ namespace Controllers
 
         public void CheckUsernameValidity(string username)
         {
-            int _minimumUsernameLength = 3;
-            int _maximumUsernameLength = 20;
-            if (username.Length < _minimumUsernameLength || username.Length > _maximumUsernameLength)
+            try
             {
-                throw new ArgumentException("User name must be between 3 and 20 characters long");
+                _userService.CheckUsernameValidity(username);
             }
-
-            if (username.Contains(" "))
+            catch (Service_ArgumentException ex)
             {
-                throw new ArgumentException("User name cannot contain spaces");
+                throw new Controller_ArgumentException(ex.Message);
             }
         }
 
@@ -36,9 +30,9 @@ namespace Controllers
             try
             {
                 _userService.CheckPasswordValidity(password);
-            }catch  (Exception ex)
+            }catch  (Service_ArgumentException ex)
             {
-                throw new Exception(ex.Message, ex);
+                throw new Controller_ArgumentException(ex.Message);
             }
         }
         public void SignUp(string username, string password)
@@ -46,9 +40,9 @@ namespace Controllers
             try
             {
                 _userService.SignUp(username, password);
-            }catch (Exception ex)   
+            }catch (Service_ObjectAlreadyExistsException ex)   
             {
-                throw new Exception(ex.Message, ex);
+                throw new Controller_ObjectAlreadyExistsException(ex.Message);
             }
             
         }

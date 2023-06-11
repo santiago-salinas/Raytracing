@@ -149,6 +149,10 @@
       <Project>{5807fdc2-139e-4ad2-97d6-0ee8dfcabb8f}</Project>
       <Name>BusinessLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RepoInterfaces\RepoInterfaces.csproj">
+      <Project>{8bcecb32-1033-4d47-b60b-16fed3c4091a}</Project>
+      <Name>RepoInterfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

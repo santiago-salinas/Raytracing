@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Controllers;
+using Controllers.Exceptions;
 using Services;
 using DataTransferObjects;
 
@@ -25,6 +26,7 @@ namespace UI
             string username = userNameTextBox.Text;
             string password = passwordTextBox.Text;
             usernameStatusLabel.Text = "";
+            UsernameTextBoxChanged(sender,e);
 
             if(_usernameFieldIsCorrect && _passwordFieldIsCorrect && _confirmPasswordFieldIsCorrect)
             {
@@ -33,7 +35,7 @@ namespace UI
                     _controller.SignUp(username, password);
                     this.Close();
                 }
-                catch (Exception ex)
+                catch (Controller_ObjectAlreadyExistsException ex)
                 {
                     signUpLabel.Visible = true;
                     usernameStatusLabel.Text = ex.Message;
@@ -42,26 +44,6 @@ namespace UI
             {
                 signUpLabel.Visible = true;
             }
-         /*   try
-            {
-                
-            }
-
-            if (_repository.ContainsUser(username))
-            {
-                usernameStatusLabel.Text = "User with that name already exists";
-                _usernameFieldIsCorrect = false;
-            }
-
-            if (_usernameFieldIsCorrect && _passwordFieldIsCorrect && _confirmPasswordFieldIsCorrect)
-            {
-                _createdUser.UserName = username;
-                _createdUser.Password = password;
-                _createdUser.RegisterDate = DateTime.Now;
-                _repository.AddUser(_createdUser);
-                this.Close();
-            }*/
-
         }
 
         private void UsernameTextBoxChanged(object sender, EventArgs e)
@@ -74,7 +56,7 @@ namespace UI
             {
                 _controller.CheckUsernameValidity(username);
             }
-            catch (Exception ex)
+            catch (Controller_ArgumentException ex)
             {
                 usernameStatusLabel.Text = ex.Message;
                 _usernameFieldIsCorrect = false;
@@ -90,7 +72,7 @@ namespace UI
             {
                 _controller.CheckPasswordValidity(password);
             }
-            catch (Exception ex)
+            catch (Controller_ArgumentException ex)
             {
                 passwordStatusLabel.Text = ex.Message;
                 _passwordFieldIsCorrect = false;

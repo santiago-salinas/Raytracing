@@ -1,14 +1,11 @@
 ﻿using BusinessLogic;
-using Controllers.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Services;
-using DataTransferObjects;
-using Repositories.Interfaces;
 using BusinessLogic.Exceptions;
+using RepoInterfaces;
+using System.Collections.Generic;
+using Services.Exceptions;
+using DataTransferObjects;
+
+
 
 
 namespace Services
@@ -27,31 +24,21 @@ namespace Services
             try
             {
                 Sphere sphere = SphereMapper.ConvertToSphere(sphereDTO);
-                try
+                if(_repository.ContainsSphere(sphere.Name,sphere.Owner)) 
+                    throw new Service_ObjectHandlingException("User already owns sphere with that name");
+                else
                 {
                     _repository.AddSphere(sphere);
                 }
-                catch (Exception ex)
-                {
-                    throw new Exception("User already owns sphere with that name");
-                }
-            }
-            catch (BusinessLogicException ex)
+            }catch(BusinessLogicException ex) 
             {
-                throw new Exception(ex.Message);
-            } 
+                throw new Service_ObjectHandlingException(ex.Message);
+            }
         }
 
         public void RemoveSphere(string name, string ownerName)
         {
-            try
-            {
-                _repository.RemoveSphere(name, ownerName);
-            }
-            catch
-            {
-                throw new Exception("Cannot remove a sphere that is being used by a model");
-            }            
+            _repository.RemoveSphere(name, ownerName);        
         }
 
         public List<SphereDTO> GetSpheresFromUser(string owner)

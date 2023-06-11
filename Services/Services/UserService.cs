@@ -1,5 +1,7 @@
 ﻿using BusinessLogic;
-using Repositories.Interfaces;
+using BusinessLogic.Exceptions;
+using RepoInterfaces;
+using Services.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,24 +22,17 @@ namespace Services
         public void SignUp(string username, string password)
         {
 
-            if (_userRepository.ContainsUser(username)) throw new Exception("Username already in use");
+            if (_userRepository.ContainsUser(username)) throw new Service_ObjectAlreadyExistsException("Username already in use");
             else
             {
-                try
+                User newUser = new User
                 {
-                    User newUser = new User
-                    {
-                        UserName = username,
-                        Password = password,
-                        RegisterDate = DateTimeProvider.Now
-                    };
+                    UserName = username,
+                    Password = password,
+                    RegisterDate = DateTimeProvider.Now
+                };
 
-                    _userRepository.AddUser(newUser);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
+                _userRepository.AddUser(newUser);
             }
         }
 
@@ -53,9 +48,9 @@ namespace Services
             try
             {
                 User.CheckUsernameValidity(username);
-            }catch (Exception ex)
+            }catch (BusinessLogicException ex)
             {
-                throw new Exception(ex.Message);
+                throw new Service_ArgumentException(ex.Message);
             }            
         }
 
@@ -65,9 +60,9 @@ namespace Services
             {
                 User.CheckPasswordValidity(password);
             }
-            catch (Exception ex)
+            catch (BusinessLogicException ex)
             {
-                throw new Exception(ex.Message);
+                throw new Service_ArgumentException(ex.Message);
             }
         }
     }

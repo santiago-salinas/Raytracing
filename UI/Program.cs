@@ -4,12 +4,13 @@ using System.Windows.Forms;
 using Controllers;
 using Controllers.Controllers;
 using Services;
-using Repositories;
+using RepoInterfaces;
 using DataAccess;
 using System.Security.Cryptography;
 using DataAccess.Repositories;
 using System.Threading;
 using System.Data.SqlClient;
+using Repositories;
 
 namespace UI
 {
@@ -41,7 +42,7 @@ namespace UI
             SphereManagementService sphereManagementService = new SphereManagementService(eFSphereRepository);
             MaterialManagementService materialManagementService = new MaterialManagementService(eFMaterialRepository);
             //ModelManagementService modelManagementService = new ModelManagementService(memoryModelRepository);
-            ModelManagementService modelManagementService = new ModelManagementService(eFModelRepository);
+            ModelManagementService modelManagementService = new ModelManagementService(eFModelRepository,memorySceneRepository);
             SceneManagementService sceneManagementService = new SceneManagementService(memorySceneRepository);
             //UserService userService = new UserService(memoryUserRepository);
             UserService userService = new UserService(eFUserRepository);
@@ -49,7 +50,7 @@ namespace UI
             RenderingService renderingService = new RenderingService();
 
             SphereManagementController sphereManagementController = new SphereManagementController(sphereManagementService,modelManagementService);
-            MaterialManagementController materialManagementController = new MaterialManagementController(materialManagementService);
+            MaterialManagementController materialManagementController = new MaterialManagementController(materialManagementService, modelManagementService);
             ModelManagementController modelManagementController = new ModelManagementController();
             modelManagementController.SphereService = sphereManagementService;
             modelManagementController.ModelService = modelManagementService;

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using BusinessLogic;
-using Controllers.Interfaces;
+using RepoInterfaces;
 
 namespace DataAccess.Repositories
 {
@@ -41,7 +41,7 @@ namespace DataAccess.Repositories
             {
                 var query = $"SELECT * " +
                             $"FROM SphereEntities " +
-                            $"WHERE Name = '{name}' AND Owner = '{owner}'";
+                            $"WHERE Name = '{name}' AND OwnerId = '{owner}'";
                 SphereEntity entitySphere = dbContext.SphereEntities.SqlQuery(query).FirstOrDefault();
                 return entitySphere != null;                
             }
@@ -63,7 +63,7 @@ namespace DataAccess.Repositories
             {
                 var query = $"SELECT * " +
                             $"FROM SphereEntities " +
-                            $"WHERE Name = '{name}' AND Owner = '{owner}'";
+                            $"WHERE Name = '{name}' AND OwnerId = '{owner}'";
                 SphereEntity sphere = dbContext.SphereEntities.SqlQuery(query).FirstOrDefault();
 
                 if (sphere != null)
@@ -82,7 +82,7 @@ namespace DataAccess.Repositories
             {
                 var query = $"SELECT * " +
                             $"FROM SphereEntities " +
-                            $"WHERE Name = '{name}' AND Owner = '{owner}'";
+                            $"WHERE Name = '{name}' AND OwnerId = '{owner}'";
                 SphereEntity entitySphere = dbContext.SphereEntities.SqlQuery(query).FirstOrDefault();
 
                 if (entitySphere != null)

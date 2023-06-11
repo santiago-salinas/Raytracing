@@ -1,13 +1,11 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Controllers.Interfaces;
-using Controllers;
+
 using Services;
 using DataTransferObjects;
+using Controllers.Exceptions;
+using Services.Exceptions;
 
 namespace Controllers
 {
@@ -15,7 +13,6 @@ namespace Controllers
     {
         private SphereManagementService _service;
         private ModelManagementService _modelManagementService;
-
 
         public SphereManagementController(SphereManagementService sphereService, ModelManagementService modelService)
         {
@@ -29,9 +26,9 @@ namespace Controllers
             {
                 _service.AddSphere(sphereDTO);
             }
-            catch (Exception exception)
+            catch (Service_ObjectHandlingException exception)
             {
-                throw new Exception(exception.Message);
+                throw new Controller_ObjectHandlingException(exception.Message);
             }
         }
 
@@ -39,18 +36,11 @@ namespace Controllers
         {
             if (_modelManagementService.ExistsModelUsingSphere(name, ownerName))
             {
-                throw new Exception("Cannot remove a sphere that is being used by a model");
+                throw new Controller_ObjectHandlingException("Cannot remove a sphere that is being used by a model");
             }
             else
             {
-                try
-                {
-                    _service.RemoveSphere(name, ownerName);
-                }
-                catch (Exception exception)
-                {
-                    throw new Exception(exception.Message);
-                }   
+                _service.RemoveSphere(name, ownerName);
             }
         }
 
