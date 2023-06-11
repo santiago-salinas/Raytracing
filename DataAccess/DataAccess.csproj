@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EFContext.cs" />
+    <Compile Include="Entities\CameraEntity.cs" />
     <Compile Include="Entities\PositionedModelEntity.cs" />
     <Compile Include="Entities\SceneEntity.cs" />
     <Compile Include="Entities\MaterialEntity.cs" />
@@ -109,6 +110,10 @@
     <Compile Include="Migrations\202306112003519_V42.designer.cs">
       <DependentUpon>202306112003519_V42.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306112029231_V5.cs" />
+    <Compile Include="Migrations\202306112029231_V5.designer.cs">
+      <DependentUpon>202306112029231_V5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Entities\SphereEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -158,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202306112003519_V42.resx">
       <DependentUpon>202306112003519_V42.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306112029231_V5.resx">
+      <DependentUpon>202306112029231_V5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

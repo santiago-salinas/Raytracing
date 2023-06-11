@@ -25,7 +25,7 @@ namespace DataAccess.Entities
         public DateTime LastRenderDate { get; set; }
         // public PPM Preview { get; set; }
         public ICollection<PositionedModelEntity> PositionedModels { get; set; }
-        public BLCameraDTO CameraDTO { get; set; }
+        public CameraEntity CameraDTO { get; set; }
         public bool Blur { get; set; }
 
         public static Scene FromEntity(SceneEntity entity)
@@ -50,7 +50,7 @@ namespace DataAccess.Entities
                 CreationDate = entity.CreationDate,
                 LastModificationDate = entity.LastModificationDate,
                 LastRenderDate = entity.LastRenderDate,
-                CameraDTO = entity.CameraDTO,
+                CameraDTO = CameraEntity.FromEntity(entity.CameraDTO),
                 Blur = entity.Blur,
                 PositionedModels = posModels
             };
@@ -83,7 +83,7 @@ namespace DataAccess.Entities
                 CreationDate = scene.CreationDate,
                 LastModificationDate = scene.LastModificationDate,
                 LastRenderDate = scene.LastRenderDate,
-                CameraDTO = scene.CameraDTO,
+                CameraDTO = CameraEntity.FromDomain(scene.CameraDTO),
                 Blur = scene.Blur,
                 PositionedModels = posModelsEntities
             };
