@@ -11,8 +11,8 @@ namespace RepoInterfaces
     {
         List<Model> GetModelsFromUser(string owner);
         bool ContainsModel(string name, string user);
-        bool ExistsModelUsingTheMaterial(Material material);
-        bool ExistsModelUsingTheSphere(Sphere sphere);
+        bool ExistsModelUsingTheMaterial(string materialName, string materialOwner);
+        bool ExistsModelUsingTheSphere(string sphereName, string sphereOwner);
         void AddModel(Model newElement);
         Model GetModel(string name, string owner);
         void RemoveModel(string name, string owner);

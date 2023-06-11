@@ -3,6 +3,7 @@ using System;
 using System.Windows.Forms;
 using Controllers;
 using DataTransferObjects;
+using Controllers.Exceptions;
 
 namespace UI.Dialogs
 {
@@ -53,7 +54,7 @@ namespace UI.Dialogs
             try
             {
                 _controller.AddMaterial(NewMaterial);
-            }catch (Exception ex)
+            }catch (Controller_ArgumentException ex)
             {
                 statusLabel.Text = ex.Message;
                 inputsAreCorrect = false;

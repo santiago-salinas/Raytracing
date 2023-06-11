@@ -54,12 +54,12 @@ namespace Services
 
         public bool ExistsModelUsingSphere(string sphereName, string sphereOwner)
         {
-            Sphere sphereCopy = new Sphere()
-            {
-                Name = sphereName,
-                Owner = sphereOwner
-            };
-            return _modelRepository.ExistsModelUsingTheSphere(sphereCopy);
+            return _modelRepository.ExistsModelUsingTheSphere(sphereName, sphereOwner);
+        }
+
+        public bool ExistsModelUsingMaterial(string materialName, string materialOwner) 
+        {
+            return _modelRepository.ExistsModelUsingTheMaterial(materialName, materialOwner);
         }
 
     }

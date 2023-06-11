@@ -39,14 +39,14 @@ namespace Repositories
             return ret != null;
         }
 
-        public bool ExistsModelUsingTheMaterial(Material lambertian)
+        public bool ExistsModelUsingTheMaterial(string materialName, string owner)
         {
-            Model ret = _modelList.Find(m => m.Material.Equals(lambertian));
+            Model ret = _modelList.Find(m => m.Material.Name == materialName && m.Owner == owner);
             return ret != null;
         }
-        public bool ExistsModelUsingTheSphere(Sphere sphere)
+        public bool ExistsModelUsingTheSphere(string sphereName, string owner)
         {
-            Model ret = _modelList.Find(m => m.Shape.Equals(sphere));
+            Model ret = _modelList.Find(m => m.Shape.Name == sphereName && m.Owner == owner);
             return ret != null;
         }
         public void AddModel(Model newElement)

@@ -77,10 +77,21 @@ namespace DataAccess.Repositories
             using (EFContext context = new EFContext())
             {
                 MaterialEntity materialEntity = context.MaterialEntities
+                    .Include (m => m.Lambertian) .Include(m => m.Metallic)
                     .FirstOrDefault(m => m.Name == name && m.Owner.Username == owner);
 
                 if (materialEntity != null)
                 {
+                    LambertianEntity lambertianEntity = materialEntity.Lambertian;
+                    MetallicEntity metallicEntity = materialEntity.Metallic;
+                    if (lambertianEntity != null)
+                    {
+                        context.LambertianEntities.Remove(lambertianEntity);
+                    }
+                    else
+                    {
+                        context.MetallicEntities.Remove(metallicEntity);
+                    }
                     context.MaterialEntities.Remove(materialEntity);
                     context.SaveChanges();
                 }

@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System;
 using DataTransferObjects;
 using System.Xml.Linq;
+using Services.Exceptions;
+using Controllers.Exceptions;
 
 namespace Controllers
 {
     public class MaterialManagementController
     {
         private MaterialManagementService _service;
-        
-        public MaterialManagementController(MaterialManagementService service)
+        private ModelManagementService _modelManagementService;
+        public MaterialManagementController(MaterialManagementService service, ModelManagementService modelManagementService)
         {
             _service = service;
+            _modelManagementService = modelManagementService;
         }
 
         public void AddMaterial(MaterialDTO materialDTO)
@@ -21,22 +24,22 @@ namespace Controllers
             {
                 _service.AddMaterial(materialDTO);
             }
-            catch (Exception ex)
+            catch (Service_ArgumentException ex)
             {
-                throw new Exception(ex.Message);
+                throw new Controller_ArgumentException(ex.Message);
             }            
         }
 
         public void RemoveMaterial(string name, string ownerName)
         {
-            try
+            if (_modelManagementService.ExistsModelUsingMaterial(name, ownerName))
+            {
+                throw new Controller_ObjectHandlingException("Cannot remove a material that is being used by a model");
+            }
+            else
             {
                 _service.RemoveMaterial(name, ownerName);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            }            
         }
 
         public List<MaterialDTO> GetMaterialsFromUser(string owner) 

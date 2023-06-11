@@ -2,7 +2,8 @@
 using DataTransferObjects;
 using RepoInterfaces;
 using System.Collections.Generic;
-
+using BusinessLogic.Exceptions;
+using Services.Exceptions;
 
 namespace Services
 {
@@ -16,15 +17,27 @@ namespace Services
             _repository = repository;            
         }
 
-        public void AddMaterial(MaterialDTO lambertianDTO)
+        public void AddMaterial(MaterialDTO materialDTO)
         {
-            Material lambertian = MaterialMapper.ConvertToMaterial(lambertianDTO);
-            _repository.AddMaterial(lambertian);
+            try
+            {
+                Material material = MaterialMapper.ConvertToMaterial(materialDTO);
+                if (_repository.ContainsMaterial(material.Name, material.Owner))
+                {
+                    throw new Service_ArgumentException("User already owns a material with that name");
+                }
+                _repository.AddMaterial(material);
+            }
+            catch(BusinessLogicException ex)
+            {
+                throw new Service_ArgumentException(ex.Message);
+            }
+            
         }
 
         public void RemoveMaterial(string name, string ownerName)
         {
-            _repository.RemoveMaterial(name, ownerName);
+            _repository.RemoveMaterial(name, ownerName);      
         }
 
         public Material GetLambertian(string name, string ownerName)

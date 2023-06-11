@@ -62,7 +62,7 @@ namespace Repositories
         {
             Material lambertian = GetMaterial(name, owner);
 
-            if (_modelRepository.ExistsModelUsingTheMaterial(lambertian))
+            if (_modelRepository.ExistsModelUsingTheMaterial(name, owner))
             {
                 throw new BusinessLogicException("Cant delete lambertian used by existing model");
             }

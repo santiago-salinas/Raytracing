@@ -50,7 +50,7 @@ namespace UI
             RenderingService renderingService = new RenderingService();
 
             SphereManagementController sphereManagementController = new SphereManagementController(sphereManagementService,modelManagementService);
-            MaterialManagementController materialManagementController = new MaterialManagementController(materialManagementService);
+            MaterialManagementController materialManagementController = new MaterialManagementController(materialManagementService, modelManagementService);
             ModelManagementController modelManagementController = new ModelManagementController();
             modelManagementController.SphereService = sphereManagementService;
             modelManagementController.ModelService = modelManagementService;
