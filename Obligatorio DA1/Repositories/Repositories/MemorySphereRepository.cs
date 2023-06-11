@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using Controllers.Interfaces;
-using Repositories;
-using Repositories.Interfaces;
+using RepoInterfaces;
+using BusinessLogic;
 using BusinessLogic.Exceptions;
 
-
-namespace BusinessLogic
+namespace Repositories
 {
     public class MemorySphereRepository : ISphereRepository
     {

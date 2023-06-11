@@ -41,8 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\ServiceArgumentException.cs" />
-    <Compile Include="Exceptions\ServiceObjectAlreadyExistsException.cs" />
+    <Compile Include="Exceptions\Service_ArgumentException.cs" />
+    <Compile Include="Exceptions\Service_ObjectAlreadyExistsException.cs" />
+    <Compile Include="Exceptions\Service_ObjectHandlingException.cs" />
     <Compile Include="Services\EditSceneService.cs" />
     <Compile Include="Services\MaterialManagementService.cs" />
     <Compile Include="Services\ModelManagementService.cs" />
@@ -61,9 +62,9 @@
       <Project>{ab995188-c650-4026-83c9-87cb778c9d89}</Project>
       <Name>DataTransferObjects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Obligatorio DA1\Repositories\Repositories.csproj">
-      <Project>{7a7be452-b92a-4aa7-bb88-3167e526a453}</Project>
-      <Name>Repositories</Name>
+    <ProjectReference Include="..\RepoInterfaces\RepoInterfaces.csproj">
+      <Project>{8bcecb32-1033-4d47-b60b-16fed3c4091a}</Project>
+      <Name>RepoInterfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,6 +3,8 @@ using BusinessLogic.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using Repositories;
+
 
 namespace BusinessLogic_Tests
 {

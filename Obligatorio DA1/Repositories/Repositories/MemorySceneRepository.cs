@@ -1,11 +1,11 @@
-﻿using Repositories.Interfaces;
+﻿using RepoInterfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Permissions;
 using BusinessLogic.Exceptions;
+using BusinessLogic;
 
-
-namespace BusinessLogic
+namespace Repositories
 {
     public class MemorySceneRepository : ISceneRepository
     {

@@ -1,11 +1,6 @@
 ﻿using Services;
 using Controllers.Exceptions;
 using Services.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Controllers
 {
@@ -24,7 +19,7 @@ namespace Controllers
             {
                 _userService.CheckUsernameValidity(username);
             }
-            catch (ServiceArgumentException ex)
+            catch (Service_ArgumentException ex)
             {
                 throw new Controller_ArgumentException(ex.Message);
             }
@@ -35,7 +30,7 @@ namespace Controllers
             try
             {
                 _userService.CheckPasswordValidity(password);
-            }catch  (ServiceArgumentException ex)
+            }catch  (Service_ArgumentException ex)
             {
                 throw new Controller_ArgumentException(ex.Message);
             }
@@ -45,7 +40,7 @@ namespace Controllers
             try
             {
                 _userService.SignUp(username, password);
-            }catch (ServiceObjectAlreadyExistsException ex)   
+            }catch (Service_ObjectAlreadyExistsException ex)   
             {
                 throw new Controller_ObjectAlreadyExistsException(ex.Message);
             }

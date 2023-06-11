@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Services.Exceptions
 {
-    public class ServiceArgumentException : Exception
+    public class Service_ObjectHandlingException : Exception
     {
-        public ServiceArgumentException(string message): base(message) { }
+        public Service_ObjectHandlingException(string message) : base(message) { }
     }
 }

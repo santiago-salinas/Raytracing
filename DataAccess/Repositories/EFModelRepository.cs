@@ -1,6 +1,6 @@
 ﻿using BusinessLogic;
 using DataAccess.Entities;
-using Repositories.Interfaces;
+using RepoInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

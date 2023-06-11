@@ -1,6 +1,6 @@
 ﻿using BusinessLogic;
 using BusinessLogic.Exceptions;
-using Repositories.Interfaces;
+using RepoInterfaces;
 using Services.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -22,24 +22,17 @@ namespace Services
         public void SignUp(string username, string password)
         {
 
-            if (_userRepository.ContainsUser(username)) throw new ServiceObjectAlreadyExistsException("Username already in use");
+            if (_userRepository.ContainsUser(username)) throw new Service_ObjectAlreadyExistsException("Username already in use");
             else
             {
-               // try
-              //  {
-                    User newUser = new User
-                    {
-                        UserName = username,
-                        Password = password,
-                        RegisterDate = DateTimeProvider.Now
-                    };
-
-                    _userRepository.AddUser(newUser);
-             //   }
-  /*              catch (BusinessLogicException ex)
+                User newUser = new User
                 {
-                    throw new ServiceArgumentException(ex.Message);
-                }*/
+                    UserName = username,
+                    Password = password,
+                    RegisterDate = DateTimeProvider.Now
+                };
+
+                _userRepository.AddUser(newUser);
             }
         }
 
@@ -57,7 +50,7 @@ namespace Services
                 User.CheckUsernameValidity(username);
             }catch (BusinessLogicException ex)
             {
-                throw new ServiceArgumentException(ex.Message);
+                throw new Service_ArgumentException(ex.Message);
             }            
         }
 
@@ -69,7 +62,7 @@ namespace Services
             }
             catch (BusinessLogicException ex)
             {
-                throw new ServiceArgumentException(ex.Message);
+                throw new Service_ArgumentException(ex.Message);
             }
         }
     }

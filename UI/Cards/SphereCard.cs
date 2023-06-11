@@ -1,5 +1,5 @@
-﻿using BusinessLogic;
-using Controllers;
+﻿using Controllers;
+using Controllers.Exceptions;
 using System;
 using System.Windows.Forms;
 using DataTransferObjects;
@@ -28,7 +28,7 @@ namespace UI.Cards
                 _controller.RemoveSphere(_sphereDTO.Name, _sphereDTO.OwnerName);
                 Parent.Controls.Remove(this);
             }
-            catch (Exception)
+            catch (Controller_ObjectHandlingException)
             {
                 deleteLabel.Visible = true;
             }

@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using Repositories;
-using Repositories.Interfaces;
 using BusinessLogic.Exceptions;
+using BusinessLogic;
+using RepoInterfaces;
 
-
-namespace BusinessLogic
+namespace Repositories
 {
     public class MemoryMaterialRepository : IMaterialRepository
     {

@@ -272,6 +272,10 @@
       <Project>{7a7be452-b92a-4aa7-bb88-3167e526a453}</Project>
       <Name>Repositories</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RepoInterfaces\RepoInterfaces.csproj">
+      <Project>{8bcecb32-1033-4d47-b60b-16fed3c4091a}</Project>
+      <Name>RepoInterfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Services\Services.csproj">
       <Project>{036d7a65-09f5-408f-a99d-765125df08a2}</Project>
       <Name>Services</Name>

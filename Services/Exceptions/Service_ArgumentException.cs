@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Services.Exceptions
 {
-    public class ServiceObjectAlreadyExistsException : Exception
+    public class Service_ArgumentException : Exception
     {
-        public ServiceObjectAlreadyExistsException(string message) : base(message) { }
+        public Service_ArgumentException(string message): base(message) { }
     }
 }

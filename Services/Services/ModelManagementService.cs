@@ -1,7 +1,6 @@
 ﻿using BusinessLogic;
-using Controllers.Interfaces;
 using DataTransferObjects;
-using Repositories.Interfaces;
+using RepoInterfaces;
 using System;
 using System.Collections.Generic;
 
