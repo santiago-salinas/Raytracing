@@ -136,6 +136,8 @@ namespace UI.Tabs
             nameTextbox.ReadOnly = true;
 
             nameSetNoteLabel.Visible = false;
+            sceneNameStatusLabel.Visible = false;
+
 
             LoadAvailableModels();
             LoadDataFromScene(_scene);
