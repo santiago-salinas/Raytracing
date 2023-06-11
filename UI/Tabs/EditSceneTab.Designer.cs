@@ -312,7 +312,6 @@
             this.checkBlur.Text = "Use";
             this.checkBlur.UseVisualStyleBackColor = true;
             this.checkBlur.CheckedChanged += new System.EventHandler(this.checkBlur_CheckedChanged);
-            this.checkBlur.CheckStateChanged += new System.EventHandler(this.checkBlur_CheckStateChanged);
             // 
             // saveBtn
             // 

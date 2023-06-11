@@ -1,7 +1,7 @@
 ﻿using BusinessLogic;
 using DataAccess.Entities;
 using DataAccess.Exceptions;
-using Repositories.Interfaces;
+using RepoInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
@@ -63,7 +63,9 @@ namespace DataAccess.Repositories
             using (EFContext context = new EFContext())
             {
                 SceneEntity sceneEntity = context.SceneEntities
-                    .FirstOrDefault(m => m.Name == name && m.OwnerId == owner);
+                    .Include(m => m.PositionedModels)
+                    .Include(m => m.CameraDTO)
+                    .FirstOrDefault(s => s.Name == name && s.OwnerId == owner);
 
                 if (sceneEntity != null)
                 {
@@ -73,12 +75,7 @@ namespace DataAccess.Repositories
             }
         }
 
-        public void Drop()
-        {
-            throw new NotImplementedException();
-        }
-
-        List<Scene> ISceneRepository.GetScenesFromUser(string owner)
+        public List<Scene> GetScenesFromUser(string owner)
         {
             using (EFContext context = new EFContext())
             {
@@ -102,8 +99,7 @@ namespace DataAccess.Repositories
             using (EFContext context = new EFContext())
             {
                 SceneEntity sceneEntity = context.SceneEntities
-                    .Include(s => s.PositionedModels)
-                    .Include(s => s.CameraDTO)
+                    .Include(s => s.PositionedModels.Select(pm => pm.Model))
                     .FirstOrDefault(s => s.Name == scene.Name && s.OwnerId == scene.Owner);
 
                 PositionedModelEntity positionedModelEntity = sceneEntity.PositionedModels
@@ -112,6 +108,7 @@ namespace DataAccess.Repositories
                 if (positionedModelEntity != null)
                 {
                     sceneEntity.PositionedModels.Remove(positionedModelEntity);
+                    context.PositionedModelEntities.Remove(positionedModelEntity);
                     context.SaveChanges();
                 }
             }
@@ -124,7 +121,6 @@ namespace DataAccess.Repositories
             {
                 SceneEntity sceneEntity = context.SceneEntities
                     .Include(s => s.PositionedModels)
-                    .Include(s => s.CameraDTO)
                     .FirstOrDefault(s => s.Name == scene.Name && s.OwnerId == scene.Owner);
 
                 if (sceneEntity != null)
@@ -137,14 +133,59 @@ namespace DataAccess.Repositories
         }
 
 
-        public bool ExistsSceneUsingModel(Model model)
+        public bool ExistsSceneUsingModel(string modelName, string owner)
         {
             using (EFContext context = new EFContext())
             {
                 bool exists = context.SceneEntities
-                    .Any(s => s.PositionedModels.Any(pm => pm.Model.Name == model.Name));
+                    .Any(s => s.PositionedModels.Any(pm => pm.Model.Name == modelName && pm.Model.Name == owner));
 
                 return exists;
+            }
+        }
+
+        public void UpdateRenderDate(string sceneName, string owner, DateTime date)
+        {
+            using (EFContext context = new EFContext()) 
+            {
+                SceneEntity sceneEntity = context.SceneEntities.Find(sceneName,owner);
+
+                if (sceneEntity != null)
+                {
+                    sceneEntity.LastRenderDate = date;
+                    context.SaveChanges();
+                }
+            }
+            
+        }
+        public void UpdateModificationDate(string sceneName, string owner, DateTime date)
+        {
+            using (EFContext context = new EFContext())
+            {
+                SceneEntity sceneEntity = context.SceneEntities.Find(sceneName, owner);
+
+                if (sceneEntity != null)
+                {
+                    sceneEntity.LastModificationDate = date;
+                    context.SaveChanges();
+                }
+            }
+        }
+        public void UpdateCamera(string sceneName, string owner, BLCameraDTO camera)
+        {
+            using (EFContext context = new EFContext())
+            {
+                SceneEntity sceneEntity = context.SceneEntities
+                    .Include(s => s.CameraDTO)
+                    .FirstOrDefault(s => s.Name == sceneName && s.OwnerId == owner);
+                CameraEntity oldCamera = sceneEntity.CameraDTO;
+                
+                if (sceneEntity != null)
+                {
+                    sceneEntity.CameraDTO = CameraEntity.FromDomain(camera);
+                    context.Set<CameraEntity>().Remove(oldCamera);
+                    context.SaveChanges();
+                }
             }
         }
 

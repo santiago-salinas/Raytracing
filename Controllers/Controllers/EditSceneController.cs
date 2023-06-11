@@ -44,19 +44,26 @@ namespace Controllers
         {
             EditSceneService.UpdateLastModificationDate(sceneDTO);
             EditSceneService.RemovePositionedModel(positionedModelDTO, sceneDTO);
-            UpdateScene(sceneDTO);
         }
 
         public void AddPositionedModel(PositionedModelDTO positionedModelDTO, SceneDTO sceneDTO)
         {
             EditSceneService.UpdateLastModificationDate(sceneDTO);
             EditSceneService.AddPositionedModel(positionedModelDTO, sceneDTO);
-            UpdateScene(sceneDTO);
         }
         public void UpdateLastModificationDate(SceneDTO sceneDTO)
         {
             EditSceneService.UpdateLastModificationDate(sceneDTO);
-            UpdateScene(sceneDTO);
+        }
+
+        public void UpdateRenderDate(SceneDTO sceneDTO)
+        {
+            EditSceneService.UpdateLastRenderDate(sceneDTO);
+        }
+
+        public void UpdateCamera(SceneDTO sceneDTO)
+        {
+            EditSceneService.UpdateCamera(sceneDTO);
         }
 
         public PpmDTO RenderScene(SceneDTO sceneDTO)
@@ -64,14 +71,9 @@ namespace Controllers
             EditSceneService.UpdateLastRenderDate(sceneDTO);
             PpmDTO render = RenderingService.RenderScene(sceneDTO);
             sceneDTO.Preview = render;
-            UpdateScene(sceneDTO);
             return render;
         }
- 
-        public void UpdateScene(SceneDTO sceneDTO)
-        {
-            SceneManagementService.UpdateScene(sceneDTO);
-        }
+
         public bool NameIsAlreadyInUse(string name, string owner)
         {
             return SceneManagementService.ContainsScene(name, owner);

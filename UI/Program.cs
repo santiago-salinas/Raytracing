@@ -43,7 +43,7 @@ namespace UI
             MaterialManagementService materialManagementService = new MaterialManagementService(eFMaterialRepository);
             //ModelManagementService modelManagementService = new ModelManagementService(memoryModelRepository);
             ModelManagementService modelManagementService = new ModelManagementService(eFModelRepository, eFSceneRepository);
-            SceneManagementService sceneManagementService = new SceneManagementService(eFSceneRepository, eFSceneRepository);
+            SceneManagementService sceneManagementService = new SceneManagementService(eFSceneRepository);
             //UserService userService = new UserService(memoryUserRepository);
             UserService userService = new UserService(eFUserRepository);
             EditSceneService editSceneService = new EditSceneService(eFSceneRepository);

@@ -92,6 +92,7 @@ namespace UI.Tabs
             {
                 if (editVectorDialog.WasModified) NotifyThatSeneWasModified();
                 lookFromButton.Text = VectorToString(sceneCamera.LookFrom);
+                _controller.UpdateCamera(_scene);
             }
         }
         private void LookAtButton_Click(object sender, EventArgs e)
@@ -104,6 +105,7 @@ namespace UI.Tabs
             {
                 if (editVectorDialog.WasModified) NotifyThatSeneWasModified();
                 lookAtButton.Text = VectorToString(sceneCamera.LookAt);
+                _controller.UpdateCamera(_scene);
             }
         }
         private void SaveButton_Click(object sender, EventArgs e)
@@ -151,7 +153,7 @@ namespace UI.Tabs
             {
                 NotifyThatSeneWasModified();
                 sceneCamera.FieldOfView = newFov;
-                _controller.UpdateScene(_scene);
+                _controller.UpdateCamera(_scene);
             }
         }
         private void LoadAvailableModels()
@@ -212,13 +214,8 @@ namespace UI.Tabs
             {
                 NotifyThatSeneWasModified();
                 sceneCamera.Aperture = newAperture;
-                _controller.UpdateScene(_scene);
+                _controller.UpdateCamera(_scene);
             }
-        }
-
-        private void checkBlur_CheckStateChanged(object sender, EventArgs e)
-        {
-            
         }
 
         private void checkBlur_CheckedChanged(object sender, EventArgs e)
@@ -234,7 +231,7 @@ namespace UI.Tabs
                 _scene.Blur = false;
             }
             NotifyThatSeneWasModified();
-            _controller.UpdateScene(_scene);
+            _controller.UpdateCamera(_scene);
         }
 
         // https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-save-files-using-the-savefiledialog-component?view=netframeworkdesktop-4.8

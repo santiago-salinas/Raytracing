@@ -49,14 +49,28 @@ namespace Services
 
         public void UpdateLastRenderDate(SceneDTO sceneDTO)
         {
-            System.DateTime date = DateTimeProvider.Now;
-            sceneDTO.LastRenderDate = date;
-            sceneDTO.LastModificationDate = date;
+            DateTime newDate = DateTimeProvider.Now;
+            sceneDTO.LastRenderDate = newDate;
+            sceneDTO.LastModificationDate = newDate;
+            string sceneName = sceneDTO.Name;
+            string owner = sceneDTO.Owner;                        
+            _sceneRepository.UpdateModificationDate(sceneName, owner, newDate);
+            _sceneRepository.UpdateRenderDate(sceneName, owner, newDate);
         }
 
         public void UpdateLastModificationDate(SceneDTO sceneDTO)
         {
-            sceneDTO.LastModificationDate = DateTimeProvider.Now;
+            string sceneName = sceneDTO.Name;
+            string owner = sceneDTO.Owner;
+            DateTime newDate = DateTimeProvider.Now;
+            sceneDTO.LastModificationDate = newDate;
+            _sceneRepository.UpdateModificationDate(sceneName, owner, newDate);
+        }
+
+        public void UpdateCamera(SceneDTO sceneDTO)
+        {
+            BLCameraDTO camera = CameraMapper.ConvertToDomainCamDTO(sceneDTO.CameraDTO);
+            _sceneRepository.UpdateCamera(sceneDTO.Name,sceneDTO.Owner,camera);
         }
 
         public void RemovePositionedModel(PositionedModelDTO posModelDTO, SceneDTO sceneDTO)
