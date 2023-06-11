@@ -47,6 +47,8 @@
     <Compile Include="Controllers\ModelManagementController.cs" />
     <Compile Include="Controllers\SceneManagementController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Exceptions\Controller-ObjectAlreadyExistsException.cs" />
+    <Compile Include="Exceptions\Controller_ArgumentException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\SphereManagementController.cs" />
   </ItemGroup>
