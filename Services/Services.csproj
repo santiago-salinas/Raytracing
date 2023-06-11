@@ -41,14 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EditSceneService.cs" />
-    <Compile Include="MaterialManagementService.cs" />
-    <Compile Include="ModelManagementService.cs" />
+    <Compile Include="Exceptions\Service_ArgumentException.cs" />
+    <Compile Include="Exceptions\Service_ObjectAlreadyExistsException.cs" />
+    <Compile Include="Exceptions\Service_ObjectHandlingException.cs" />
+    <Compile Include="Services\EditSceneService.cs" />
+    <Compile Include="Services\MaterialManagementService.cs" />
+    <Compile Include="Services\ModelManagementService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RenderingService.cs" />
-    <Compile Include="SceneManagementService.cs" />
-    <Compile Include="SphereManagementService.cs" />
-    <Compile Include="UserService.cs" />
+    <Compile Include="Services\RenderingService.cs" />
+    <Compile Include="Services\SceneManagementService.cs" />
+    <Compile Include="Services\SphereManagementService.cs" />
+    <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
@@ -59,9 +62,9 @@
       <Project>{ab995188-c650-4026-83c9-87cb778c9d89}</Project>
       <Name>DataTransferObjects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Obligatorio DA1\Repositories\Repositories.csproj">
-      <Project>{7a7be452-b92a-4aa7-bb88-3167e526a453}</Project>
-      <Name>Repositories</Name>
+    <ProjectReference Include="..\RepoInterfaces\RepoInterfaces.csproj">
+      <Project>{8bcecb32-1033-4d47-b60b-16fed3c4091a}</Project>
+      <Name>RepoInterfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

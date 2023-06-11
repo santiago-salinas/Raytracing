@@ -1,5 +1,5 @@
-﻿using BusinessLogic;
-using Controllers;
+﻿using Controllers;
+using Controllers.Exceptions;
 using DataTransferObjects;
 using System;
 using System.Windows.Forms;
@@ -38,7 +38,7 @@ namespace UI.Cards
                 _controller.RemoveMaterial(_material.Name, _material.Owner);
                 this.Parent.Controls.Remove(this);
             }
-            catch (Exception)
+            catch (Controller_ObjectHandlingException)
             {
                 deleteLabel.Visible = true;
             }

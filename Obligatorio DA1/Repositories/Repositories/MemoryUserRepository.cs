@@ -1,9 +1,10 @@
-﻿using Repositories.Interfaces;
+﻿using RepoInterfaces;
+using BusinessLogic;
 using System.Collections.Generic;
 using BusinessLogic.Exceptions;
 
 
-namespace BusinessLogic
+namespace Repositories
 {
     public class MemoryUserRepository : IUserRepository
     {

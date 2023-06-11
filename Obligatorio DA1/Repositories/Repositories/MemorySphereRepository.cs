@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using Controllers.Interfaces;
-using Repositories;
-using Repositories.Interfaces;
+using RepoInterfaces;
+using BusinessLogic;
 using BusinessLogic.Exceptions;
 
-
-namespace BusinessLogic
+namespace Repositories
 {
     public class MemorySphereRepository : ISphereRepository
     {
@@ -66,7 +64,7 @@ namespace BusinessLogic
             {
                 throw new BusinessLogicException("Owner does not have a sphere with that name");
             }
-            else if (_modelRepository.ExistsModelUsingTheSphere(sphere))
+            else if (_modelRepository.ExistsModelUsingTheSphere(name, ownerName))
             {
                 throw new BusinessLogicException("Cannot delete sphere used by existing model");
             }

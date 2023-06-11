@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.Interfaces
+namespace RepoInterfaces
 {
     public interface ISceneRepository
     {
-        void Drop();
         List<Scene> GetScenesFromUser(string owner);
         bool ContainsScene(string name, string owner);
         void AddScene(Scene newElement);
@@ -17,7 +16,7 @@ namespace Repositories.Interfaces
         void RemoveScene(string name, string owner);
         void RemoveModelFromScene(Scene scene, PositionedModel model);
         void AddModelToScene(Scene scene, PositionedModel model);
-        bool ExistsSceneUsingModel(Model model);
+        bool ExistsSceneUsingModel(string modelName, string modelOwner);
     }
 
 }

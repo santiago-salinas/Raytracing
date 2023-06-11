@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using Repositories;
-using Repositories.Interfaces;
 using BusinessLogic.Exceptions;
+using BusinessLogic;
+using RepoInterfaces;
 
-
-namespace BusinessLogic
+namespace Repositories
 {
     public class MemoryMaterialRepository : IMaterialRepository
     {
@@ -62,7 +62,7 @@ namespace BusinessLogic
         {
             Material lambertian = GetMaterial(name, owner);
 
-            if (_modelRepository.ExistsModelUsingTheMaterial(lambertian))
+            if (_modelRepository.ExistsModelUsingTheMaterial(name, owner))
             {
                 throw new BusinessLogicException("Cant delete lambertian used by existing model");
             }

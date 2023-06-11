@@ -2,6 +2,8 @@
 using BusinessLogic.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using RepoInterfaces;
+using Repositories;
 
 namespace BusinessLogic_Tests
 {

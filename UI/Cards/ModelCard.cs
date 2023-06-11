@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Controllers;
+using Controllers.Exceptions;
 using Controllers.Controllers;
 using DataTransferObjects;
 
@@ -35,7 +35,7 @@ namespace UI.Cards
                 _controller.RemoveModel(_model.Name, _model.OwnerName);
                 this.Parent.Controls.Remove(this);
             }
-            catch (Exception ex)
+            catch (Controller_ObjectHandlingException ex)
             {
                 deleteLabel.Text = ex.Message;
             }

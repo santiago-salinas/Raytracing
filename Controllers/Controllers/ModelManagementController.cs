@@ -2,7 +2,8 @@
 using Services;
 using System.Collections.Generic;
 using DataTransferObjects;
-using Controllers.Interfaces;
+using Services.Exceptions;
+using Controllers.Exceptions;
 
 namespace Controllers.Controllers
 {
@@ -21,11 +22,11 @@ namespace Controllers.Controllers
         public void AddModel(ModelDTO modelDTO)
         {
             try
-            {
+            {                
                 ModelService.AddModel(modelDTO);
-            }catch(Exception ex)
+            }catch(Service_ArgumentException ex)
             {
-                throw new Exception(ex.Message);
+                throw new Controller_ArgumentException(ex.Message);
             }
         }
 
@@ -40,9 +41,9 @@ namespace Controllers.Controllers
             {
                 ModelService.RemoveModel(name, owner);
             }
-            catch (Exception ex)
+            catch (Service_ObjectHandlingException ex)
             {
-                throw new Exception(ex.Message);
+                throw new Controller_ObjectHandlingException(ex.Message);
             }
             
         }

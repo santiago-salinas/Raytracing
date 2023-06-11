@@ -1,11 +1,11 @@
-﻿using Repositories.Interfaces;
+﻿using RepoInterfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Permissions;
 using BusinessLogic.Exceptions;
+using BusinessLogic;
 
-
-namespace BusinessLogic
+namespace Repositories
 {
     public class MemorySceneRepository : ISceneRepository
     {
@@ -61,8 +61,13 @@ namespace BusinessLogic
             _sceneList.Remove(scene);
         }
 
-        public bool ExistsSceneUsingModel(Model model)
+        public bool ExistsSceneUsingModel(string modelName, string owner)
         {
+            Model model = new Model()
+            {
+                Name = modelName,
+                Owner = owner
+            };
             Scene ret = _sceneList.Find(s => s.ContainsModel(model));
             return ret != null;
         }

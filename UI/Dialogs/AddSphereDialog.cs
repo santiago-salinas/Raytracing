@@ -3,6 +3,7 @@ using System;
 using System.Windows.Forms;
 using Controllers;
 using DataTransferObjects;
+using Controllers.Exceptions;
 
 namespace UI.Dialogs
 {
@@ -35,7 +36,7 @@ namespace UI.Dialogs
             try
             {
                 _sphereController.AddSphere(NewSphereDTO);
-            }catch (Exception ex)
+            }catch (Controller_ObjectHandlingException ex)
             {
                 statusLabel.Text = ex.Message;
                 inputsAreCorrect = false;

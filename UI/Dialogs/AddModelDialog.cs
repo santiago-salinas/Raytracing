@@ -1,6 +1,6 @@
-﻿using BusinessLogic;
-using Controllers;
+﻿using Controllers;
 using Controllers.Controllers;
+using Controllers.Exceptions;
 using DataTransferObjects;
 using System;
 using System.Collections.Generic;
@@ -37,11 +37,14 @@ namespace UI.Dialogs
             nameStatusLabel.Text = "";
             bool nameIsCorrect = true;
 
-            NewModel = new ModelDTO();
-            NewModel.Name = modelName;
-            NewModel.OwnerName = _loggedUser;
-            NewModel.Shape = _selectedShape;
-            NewModel.Material = _selectedMaterial;
+            NewModel = new ModelDTO()
+            {
+                Name = modelName,
+                OwnerName = _loggedUser,
+                Shape = _selectedShape,
+                Material = _selectedMaterial,
+            };
+
             if (previewCheckbox.Checked)
             {
                 NewModel.Preview = _controller.RenderPreview(NewModel);
@@ -55,27 +58,11 @@ namespace UI.Dialogs
             {
                 _controller.AddModel(NewModel);
             }
-            catch(Exception ex)
+            catch(Controller_ArgumentException ex)
             {
                 nameStatusLabel.Text = ex.Message;
-            }
-
-
-            /*try
-            {
-                NewModel.Name = modelName;
-            }
-            catch (ArgumentNullException)
-            {
-                nameStatusLabel.Text = "* Name cannot be empty";
                 nameIsCorrect = false;
             }
-
-            if (.ContainsModel(modelName, _loggedUser))
-            {
-                nameIsCorrect = false;
-                nameStatusLabel.Text = "* Model with that name already exists";
-            }*/
 
             if (nameIsCorrect)
             {

@@ -1,6 +1,6 @@
 ﻿using BusinessLogic;
 using DataAccess.Entities;
-using Repositories.Interfaces;
+using RepoInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,22 +41,16 @@ namespace DataAccess.Repositories
                     .Any(m => m.Name == name && m.OwnerId == user);
             }
         }
-        public bool ExistsModelUsingTheMaterial(Material material) 
+        public bool ExistsModelUsingTheMaterial(string materialName, string ownerUsername) 
         {
-            string materialName = material.Name;
-            string ownerUsername = material.Owner;
-
             using (EFContext context = new EFContext())
             {
                 return context.ModelEntities
                     .Any(m => m.Material.Name == materialName && m.OwnerId == ownerUsername);
             }
         }
-        public bool ExistsModelUsingTheSphere(Sphere sphere) 
+        public bool ExistsModelUsingTheSphere(string sphereName, string ownerUsername) 
         {
-            string sphereName = sphere.Name;
-            string ownerUsername = sphere.Owner;
-
             using (EFContext context = new EFContext())
             {
                 return context.ModelEntities

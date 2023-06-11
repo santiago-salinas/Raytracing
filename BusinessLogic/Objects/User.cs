@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogic.Exceptions;
+using System;
 using System.Linq;
 
 namespace BusinessLogic
@@ -41,12 +42,12 @@ namespace BusinessLogic
         {
             if (value.Length < _minimumUsernameLength || value.Length > _maximumUsernameLength)
             {
-                throw new ArgumentException("User name must be between 3 and 20 characters long");
+                throw new BusinessLogicException("User name must be between 3 and 20 characters long");
             }
 
             if (value.Contains(" "))
             {
-                throw new ArgumentException("User name cannot contain spaces");
+                throw new BusinessLogicException("User name cannot contain spaces");
             }
         }
 
@@ -61,7 +62,7 @@ namespace BusinessLogic
         {
             if (!(value.Length >= _minimumPasswordLength && value.Length <= _maximumPasswordLength))
             {
-                throw new ArgumentException("Password must be between 5 and 25 characters long");
+                throw new BusinessLogicException("Password must be between 5 and 25 characters long");
             }
         }
 
@@ -69,7 +70,7 @@ namespace BusinessLogic
         {
             if (!value.Any(char.IsUpper))
             {
-                throw new ArgumentException("Password must contain at least one upper case character");
+                throw new BusinessLogicException("Password must contain at least one upper case character");
             }
         }
 
@@ -77,7 +78,7 @@ namespace BusinessLogic
         {
             if (!value.Any(char.IsDigit))
             {
-                throw new ArgumentException("Password must contain at least one numerical digit");
+                throw new BusinessLogicException("Password must contain at least one numerical digit");
             }
         }
 
