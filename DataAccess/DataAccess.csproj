@@ -53,6 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EFContext.cs" />
+    <Compile Include="Entities\PositionedModelEntity.cs" />
+    <Compile Include="Entities\SceneEntity.cs" />
     <Compile Include="Entities\MaterialEntity.cs" />
     <Compile Include="Entities\MetallicEntity.cs" />
     <Compile Include="Entities\PPMEntity.cs" />
@@ -99,6 +101,10 @@
     <Compile Include="Migrations\202306081955577_model.v2.designer.cs">
       <DependentUpon>202306081955577_model.v2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306111842561_V41.cs" />
+    <Compile Include="Migrations\202306111842561_V41.designer.cs">
+      <DependentUpon>202306111842561_V41.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Entities\SphereEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -142,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202306081955577_model.v2.resx">
       <DependentUpon>202306081955577_model.v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306111842561_V41.resx">
+      <DependentUpon>202306111842561_V41.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
