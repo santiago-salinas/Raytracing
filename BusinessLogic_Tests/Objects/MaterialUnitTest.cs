@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using BusinessLogic.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -215,7 +216,7 @@ namespace BusinessLogic_Tests
             memoryMaterialRepository.AddMaterial(lambertian2);
             memoryMaterialRepository.AddMaterial(lambertian3);
 
-            List<Material> lambertians = memoryMaterialRepository.GetMaterialFromUser(user1.UserName);
+            List<Material> lambertians = memoryMaterialRepository.GetMaterialsFromUser(user1.UserName);
 
             Assert.AreEqual(2, lambertians.Count);
             Assert.IsTrue(lambertians.Contains(lambertian1));
@@ -233,7 +234,7 @@ namespace BusinessLogic_Tests
                 Password = "Password1"
             };
 
-            List<Material> lambertians = memoryMaterialRepository.GetMaterialFromUser(emptyUser.UserName);
+            List<Material> lambertians = memoryMaterialRepository.GetMaterialsFromUser(emptyUser.UserName);
 
             Assert.AreEqual(0, lambertians.Count);
         }

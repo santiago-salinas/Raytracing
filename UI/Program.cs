@@ -8,6 +8,8 @@ using Repositories;
 using DataAccess;
 using System.Security.Cryptography;
 using DataAccess.Repositories;
+using System.Threading;
+using System.Data.SqlClient;
 
 namespace UI
 {
@@ -21,11 +23,14 @@ namespace UI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Application.ThreadException += new ThreadExceptionEventHandler(ThreadException);
 
             //Sphere efSphere = new Sphere("Ef sphere", 0.5f, "Santi");
             EFSphereRepository eFSphereRepository = new EFSphereRepository();
             //eFSphereRepository.AddSphere(efSphere);
             EFUserRepository eFUserRepository = new EFUserRepository();
+            EFMaterialRepository eFMaterialRepository = new EFMaterialRepository();
+            EFModelRepository eFModelRepository = new EFModelRepository();
 
             //MemoryUserRepository memoryUserRepository = new MemoryUserRepository();
             MemorySceneRepository memorySceneRepository = new MemorySceneRepository();
@@ -34,8 +39,9 @@ namespace UI
             MemoryMaterialRepository memoryMaterialRepository = new MemoryMaterialRepository(memoryModelRepository);
 
             SphereManagementService sphereManagementService = new SphereManagementService(eFSphereRepository);
-            MaterialManagementService materialManagementService = new MaterialManagementService(memoryMaterialRepository);
-            ModelManagementService modelManagementService = new ModelManagementService(memoryModelRepository);
+            MaterialManagementService materialManagementService = new MaterialManagementService(eFMaterialRepository);
+            //ModelManagementService modelManagementService = new ModelManagementService(memoryModelRepository);
+            ModelManagementService modelManagementService = new ModelManagementService(eFModelRepository);
             SceneManagementService sceneManagementService = new SceneManagementService(memorySceneRepository);
             //UserService userService = new UserService(memoryUserRepository);
             UserService userService = new UserService(eFUserRepository);
@@ -163,6 +169,15 @@ namespace UI
             Application.Run(new LogInPage(context));
 
             Application.Exit();
+        }
+
+        static void ThreadException(object sender, ThreadExceptionEventArgs e)
+        {
+            if(e.Exception is SqlException)
+            {
+                MessageBox.Show("An error ocurred when trying to connect with the database. The application will now close.","Connection Error");
+                Application.Exit();
+            }
         }
     }
 }

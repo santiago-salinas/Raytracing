@@ -53,6 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EFContext.cs" />
+    <Compile Include="Entities\MaterialEntity.cs" />
+    <Compile Include="Entities\MetallicEntity.cs" />
     <Compile Include="Entities\PPMEntity.cs" />
     <Compile Include="Entities\LambertianEntity.cs" />
     <Compile Include="Entities\ModelEntity.cs" />
@@ -81,11 +83,30 @@
     <Compile Include="Migrations\202306072000248_V4.designer.cs">
       <DependentUpon>202306072000248_V4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306072339541_asd.cs" />
+    <Compile Include="Migrations\202306072339541_asd.designer.cs">
+      <DependentUpon>202306072339541_asd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306080024339_add-material-table.cs" />
+    <Compile Include="Migrations\202306080024339_add-material-table.designer.cs">
+      <DependentUpon>202306080024339_add-material-table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306080044336_add-material-table-v2.cs" />
+    <Compile Include="Migrations\202306080044336_add-material-table-v2.designer.cs">
+      <DependentUpon>202306080044336_add-material-table-v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202306081955577_model.v2.cs" />
+    <Compile Include="Migrations\202306081955577_model.v2.designer.cs">
+      <DependentUpon>202306081955577_model.v2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Entities\SphereEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\EFMaterialRepository.cs" />
+    <Compile Include="Repositories\EFModelRepository.cs" />
     <Compile Include="Repositories\EFSphereRepository.cs" />
     <Compile Include="Repositories\EFUserRepository.cs" />
+    <Compile Include="RepositoryException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -109,6 +130,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202306072000248_V4.resx">
       <DependentUpon>202306072000248_V4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306072339541_asd.resx">
+      <DependentUpon>202306072339541_asd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306080024339_add-material-table.resx">
+      <DependentUpon>202306080024339_add-material-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306080044336_add-material-table-v2.resx">
+      <DependentUpon>202306080044336_add-material-table-v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306081955577_model.v2.resx">
+      <DependentUpon>202306081955577_model.v2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

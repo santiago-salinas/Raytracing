@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using Controllers.Interfaces;
 using Repositories;
 using Repositories.Interfaces;
+using BusinessLogic.Exceptions;
+
 
 namespace BusinessLogic
 {

@@ -15,19 +15,28 @@ namespace DataAccess
         [Column(Order = 1)]
         public string Name { get; set; }
         [Key]
+        [ForeignKey(nameof(Owner))]
         [Column(Order = 2)]
-        public string Owner { get; set; }
+        public string OwnerId { get; set; }
+
+        public UserEntity Owner { get; set; }
         public double Radius { get; set; }
 
 
-        public static SphereEntity FromDomain (Sphere sphere)
+        public static SphereEntity FromDomain (Sphere sphere, EFContext efContext)
         {
+            string owner = sphere.Owner;
+            UserEntity userEntity;
+
+            userEntity = efContext.UserEntities.FirstOrDefault(u => u.Username == owner);
+
             SphereEntity ret = new SphereEntity()
             {
                 Name = sphere.Name,
-                Owner = sphere.Owner,
                 Radius = sphere.Radius,
+                Owner = userEntity,
             };
+
             return ret;
         }
 
@@ -36,7 +45,7 @@ namespace DataAccess
             Sphere ret = new Sphere()
             {
                 Name = entity.Name,
-                Owner = entity.Owner,
+                Owner = entity.OwnerId,
                 Radius = entity.Radius,
             };
             return ret;

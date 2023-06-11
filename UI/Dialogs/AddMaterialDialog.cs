@@ -46,7 +46,7 @@ namespace UI.Dialogs
                 Name = materialName,
                 Color = colorDTO,
                 Owner = _loggedUser,
-                Type = metallicCheck.Enabled ? "metallic" : "lambertian",
+                Type = metallicCheck.Checked ? "metallic" : "lambertian",
                 Roughness=roughnessValue,
             };
 

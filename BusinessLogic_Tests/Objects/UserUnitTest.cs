@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using BusinessLogic.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 

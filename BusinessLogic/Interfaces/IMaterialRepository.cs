@@ -9,8 +9,7 @@ namespace Repositories.Interfaces
 {
     public interface IMaterialRepository
     {
-        void Drop();
-        List<Material> GetMaterialFromUser(string owner);
+        List<Material> GetMaterialsFromUser(string owner);
         bool ContainsMaterial(string name, string user);
         void AddMaterial(Material newElement);
         Material GetMaterial(string name, string user);
