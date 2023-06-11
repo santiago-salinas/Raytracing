@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Data.Entity;
+
 using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Entities;
@@ -45,8 +47,11 @@ namespace DataAccess
 
             string materialName = model.Material.Name;
             string shapeName = model.Shape.Name;
-            MaterialEntity materialEntity = efContext.MaterialEntities.FirstOrDefault(m => m.Owner == userEntity && m.Name == materialName);
-            SphereEntity sphereEntity = efContext.SphereEntities.FirstOrDefault(s => s.Owner == userEntity && s.Name == shapeName);
+            MaterialEntity materialEntity = efContext.MaterialEntities
+                .Include(m => m.Lambertian)
+                .Include(m => m.Metallic)
+                .FirstOrDefault(m => m.OwnerId == userEntity.Username && m.Name == materialName);
+            SphereEntity sphereEntity = efContext.SphereEntities.FirstOrDefault(s => s.OwnerId == userEntity.Username && s.Name == shapeName);
 
             ModelEntity ret = new ModelEntity()
             {

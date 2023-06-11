@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\GeneralException.cs" />
-    <Compile Include="Exceptions\RepositoryException.cs" />
     <Compile Include="Interfaces\IMaterialRepository.cs" />
     <Compile Include="Interfaces\IModelRepository.cs" />
     <Compile Include="Interfaces\ISceneRepository.cs" />

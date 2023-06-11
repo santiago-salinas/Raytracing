@@ -72,7 +72,6 @@ namespace DataAccess.Repositories
                     dbContext.SaveChanges();
                 }
             }
-
         }
 
         public Sphere GetSphere(string name, string owner) 
@@ -93,7 +92,5 @@ namespace DataAccess.Repositories
             }
             return domainSphere;
         }
-
-
     }
 }

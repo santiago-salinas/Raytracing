@@ -10,7 +10,7 @@ using Controllers.Interfaces;
 using Repositories.Interfaces;
 using DataAccess.Entities;
 using System.Data.Entity.Infrastructure;
-using BusinessLogic.Exceptions;
+using DataAccess.Exceptions;
 
 namespace DataAccess.Repositories
 {
@@ -20,9 +20,9 @@ namespace DataAccess.Repositories
 
         public List<Material> GetMaterialsFromUser(string username)
         {
-            using (var context = new EFContext())
+            using (EFContext context = new EFContext())
             {
-                var materials = context.MaterialEntities
+                List<MaterialEntity> materials = context.MaterialEntities
                     .Include(m => m.Lambertian)
                     .Include(m => m.Metallic)
                     .Where(m => m.Owner.Username == username)
@@ -34,7 +34,7 @@ namespace DataAccess.Repositories
 
         public bool ContainsMaterial(string name, string user)
         {
-            using (var context = new EFContext())
+            using (EFContext context = new EFContext())
             {
                 return context.MaterialEntities
                     .Any(m => m.Name == name && m.Owner.Username == user);
@@ -49,7 +49,7 @@ namespace DataAccess.Repositories
                 {
                     UserEntity owner = context.UserEntities.FirstOrDefault(u => u.Username == newElement.Owner);
 
-                    var materialEntity = MaterialEntity.FromDomain(newElement, context);
+                    MaterialEntity materialEntity = MaterialEntity.FromDomain(newElement, context);
                     context.MaterialEntities.Add(materialEntity);
                     context.SaveChanges();
                 }
@@ -57,13 +57,12 @@ namespace DataAccess.Repositories
             catch (DbUpdateException ex)
             {
                 throw new RepositoryException("User already owns material with that name");
-            }
-            
+            }            
         }
 
         public Material GetMaterial(string name, string user)
         {
-            using (var context = new EFContext())
+            using (EFContext context = new EFContext())
             {
                 MaterialEntity materialEntity = context.MaterialEntities
                     .Include(m => m.Lambertian)
@@ -76,9 +75,9 @@ namespace DataAccess.Repositories
 
         public void RemoveMaterial(string name, string owner)
         {
-            using (var context = new EFContext())
+            using (EFContext context = new EFContext())
             {
-                var materialEntity = context.MaterialEntities
+                MaterialEntity materialEntity = context.MaterialEntities
                     .FirstOrDefault(m => m.Name == name && m.Owner.Username == owner);
 
                 if (materialEntity != null)

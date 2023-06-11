@@ -33,7 +33,7 @@ namespace DataAccess
            
             string owner = lambertian.Owner;
             Color color = lambertian.Color;
-            UserEntity userEntity = efContext.UserEntities.FirstOrDefault(u => u.Username == owner); ;
+            UserEntity userEntity = efContext.UserEntities.FirstOrDefault(u => u.Username == owner);
             LambertianEntity ret = new LambertianEntity()
             {
                 RedValue = (int)color.Red,

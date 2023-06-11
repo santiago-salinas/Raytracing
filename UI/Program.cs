@@ -30,6 +30,7 @@ namespace UI
             //eFSphereRepository.AddSphere(efSphere);
             EFUserRepository eFUserRepository = new EFUserRepository();
             EFMaterialRepository eFMaterialRepository = new EFMaterialRepository();
+            EFModelRepository eFModelRepository = new EFModelRepository();
 
             //MemoryUserRepository memoryUserRepository = new MemoryUserRepository();
             MemorySceneRepository memorySceneRepository = new MemorySceneRepository();
@@ -39,7 +40,8 @@ namespace UI
 
             SphereManagementService sphereManagementService = new SphereManagementService(eFSphereRepository);
             MaterialManagementService materialManagementService = new MaterialManagementService(eFMaterialRepository);
-            ModelManagementService modelManagementService = new ModelManagementService(memoryModelRepository);
+            //ModelManagementService modelManagementService = new ModelManagementService(memoryModelRepository);
+            ModelManagementService modelManagementService = new ModelManagementService(eFModelRepository);
             SceneManagementService sceneManagementService = new SceneManagementService(memorySceneRepository);
             //UserService userService = new UserService(memoryUserRepository);
             UserService userService = new UserService(eFUserRepository);
