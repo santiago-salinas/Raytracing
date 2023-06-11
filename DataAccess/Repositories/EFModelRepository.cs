@@ -26,6 +26,7 @@ namespace DataAccess.Repositories
                     .Include(m => m.Material.Lambertian)
                     .Include(m => m.Material.Metallic)
                     .Include(m => m.Shape)
+                    .Include(m => m.PPMEntity)
                     .Where(m => m.OwnerId == owner)
                     .ToList();
 

@@ -24,6 +24,7 @@ namespace DataAccess
         public UserEntity Owner { get; set; }
         public MaterialEntity Material { get; set; }
         public SphereEntity Shape { get; set; }
+        public PPMEntity PPMEntity { get; set; }
 
         public static Model FromEntity(ModelEntity entity)
         {
@@ -36,6 +37,7 @@ namespace DataAccess
                 Owner = entity.OwnerId,
                 Material = material,
                 Shape = shape,
+                Preview = PPMEntity.FromEntity(entity.PPMEntity),
             };
 
             return ret;
@@ -59,6 +61,7 @@ namespace DataAccess
                 Owner = userEntity,
                 Material = materialEntity,
                 Shape = sphereEntity,
+                PPMEntity = PPMEntity.FromDomain(model.Preview)
             };
 
             return ret;
