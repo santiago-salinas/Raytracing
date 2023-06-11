@@ -93,10 +93,16 @@ namespace DataAccess.Repositories
             using (EFContext context = new EFContext())
             {
                 ModelEntity modelEntity = context.ModelEntities
+                    .Include(m => m.PPMEntity)
                     .FirstOrDefault(m => m.Name == name && m.OwnerId == owner);
 
                 if (modelEntity != null)
                 {
+                    if(modelEntity.PPMEntity  != null)
+                    {
+                        context.PPMEntities.Remove(modelEntity.PPMEntity);
+                    }
+
                     context.ModelEntities.Remove(modelEntity);
                     context.SaveChanges();
                 }
