@@ -32,21 +32,21 @@ namespace UI
             EFUserRepository eFUserRepository = new EFUserRepository();
             EFMaterialRepository eFMaterialRepository = new EFMaterialRepository();
             EFModelRepository eFModelRepository = new EFModelRepository();
+            EFSceneRepository eFSceneRepository = new EFSceneRepository();
 
             //MemoryUserRepository memoryUserRepository = new MemoryUserRepository();
-            MemorySceneRepository memorySceneRepository = new MemorySceneRepository();
-            MemoryModelRepository memoryModelRepository = new MemoryModelRepository(memorySceneRepository);
+            MemoryModelRepository memoryModelRepository = new MemoryModelRepository(eFSceneRepository);
             MemorySphereRepository memorySphereRepository = new MemorySphereRepository(memoryModelRepository);
             MemoryMaterialRepository memoryMaterialRepository = new MemoryMaterialRepository(memoryModelRepository);
 
             SphereManagementService sphereManagementService = new SphereManagementService(eFSphereRepository);
             MaterialManagementService materialManagementService = new MaterialManagementService(eFMaterialRepository);
             //ModelManagementService modelManagementService = new ModelManagementService(memoryModelRepository);
-            ModelManagementService modelManagementService = new ModelManagementService(eFModelRepository,memorySceneRepository);
-            SceneManagementService sceneManagementService = new SceneManagementService(memorySceneRepository);
+            ModelManagementService modelManagementService = new ModelManagementService(eFModelRepository, eFSceneRepository);
+            SceneManagementService sceneManagementService = new SceneManagementService(eFSceneRepository);
             //UserService userService = new UserService(memoryUserRepository);
             UserService userService = new UserService(eFUserRepository);
-            EditSceneService editSceneService = new EditSceneService(memorySceneRepository);
+            EditSceneService editSceneService = new EditSceneService(eFSceneRepository);
             RenderingService renderingService = new RenderingService();
 
             SphereManagementController sphereManagementController = new SphereManagementController(sphereManagementService,modelManagementService);
@@ -141,7 +141,7 @@ namespace UI
                 CameraDTO = defaultCameraValues,
             };
 
-            memorySceneRepository.AddScene(scene1);
+            //eFSceneRepository.AddScene(scene1);
 
             scene1.AddPositionedModel(new PositionedModel()
             {

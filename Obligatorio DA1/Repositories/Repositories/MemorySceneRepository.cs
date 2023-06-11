@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Permissions;
 using BusinessLogic.Exceptions;
 using BusinessLogic;
+using System;
 
 namespace Repositories
 {
@@ -80,6 +81,22 @@ namespace Repositories
         public void RemoveModelFromScene(Scene scene, PositionedModel model) 
         {
             scene.RemovePositionedModel(model);
+        }
+
+        public void UpdateRenderDate(string sceneName, string owner, DateTime date) 
+        {
+            Scene scene = GetScene(sceneName, owner);
+            scene.UpdateLastRenderDate();
+        }
+        public void UpdateModificationDate(string sceneName, string owner, DateTime date) 
+        {
+            Scene scene = GetScene(sceneName, owner);
+            scene.UpdateLastModificationDate();
+        }
+        public void UpdateCamera(string sceneName, string owner, BLCameraDTO camera) 
+        {
+            Scene scene = GetScene(sceneName, owner);
+            scene.CameraDTO = camera;
         }
     }
 }

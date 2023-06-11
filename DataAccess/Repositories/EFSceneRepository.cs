@@ -1,0 +1,199 @@
+﻿using BusinessLogic;
+using DataAccess.Entities;
+using DataAccess.Exceptions;
+using RepoInterfaces;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.Entity;
+using System.Xml.Linq;
+
+
+namespace DataAccess.Repositories
+{
+    public class EFSceneRepository : ISceneRepository
+    {
+        public EFSceneRepository() { }
+        
+
+        public bool ContainsScene(string name, string user)
+        {
+            using (EFContext context = new EFContext())
+            {
+                return context.ModelEntities
+                    .Any(m => m.Name == name && m.OwnerId == user);
+            }
+        }
+        public void AddScene(Scene newElement)
+        {
+            try
+            {
+                using (EFContext context = new EFContext())
+                {
+                    SceneEntity sceneEntity = SceneEntity.FromDomain(newElement, context);
+                    context.SceneEntities.Add(sceneEntity);
+                    context.SaveChanges();
+                }
+            }
+            catch (DbUpdateException)
+            {
+                throw new RepositoryException("User already has a scene with that name");
+            }
+        }
+        public Scene GetScene(string name, string owner)
+        {
+            using (EFContext context = new EFContext())
+            {
+                SceneEntity sceneEntity = context.SceneEntities
+                    .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Owner))
+                    .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Lambertian))
+                    .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Metallic))
+                    .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Shape))
+                    .Include(m => m.CameraDTO)
+                    .FirstOrDefault(m => m.Name == name && m.OwnerId == owner);
+
+                return SceneEntity.FromEntity(sceneEntity);
+            }
+        }
+        public void RemoveScene(string name, string owner)
+        {
+            using (EFContext context = new EFContext())
+            {
+                SceneEntity sceneEntity = context.SceneEntities
+                    .Include(m => m.PositionedModels)
+                    .Include(m => m.CameraDTO)
+                    .FirstOrDefault(s => s.Name == name && s.OwnerId == owner);
+
+                if (sceneEntity != null)
+                {
+                    foreach (var positionedModel in sceneEntity.PositionedModels.ToList())
+                    {
+                        context.PositionedModelEntities.Remove(positionedModel);
+                    }
+
+                    context.Set<CameraEntity>().Remove(sceneEntity.CameraDTO);
+                    context.SceneEntities.Remove(sceneEntity);
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        public List<Scene> GetScenesFromUser(string owner)
+        {
+            using (EFContext context = new EFContext())
+            {
+                List<SceneEntity> scene = context.SceneEntities
+                    .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Owner))
+                    .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Lambertian))
+                    .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Metallic))
+                    .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Shape))
+
+                    .Include(m => m.CameraDTO)
+                    .Where(m => m.OwnerId == owner)
+                    .ToList();
+
+                return scene.Select(m => SceneEntity.FromEntity(m)).ToList();
+            }
+        }
+
+
+        public void RemoveModelFromScene(Scene scene, PositionedModel model)
+        {
+            using (EFContext context = new EFContext())
+            {
+                SceneEntity sceneEntity = context.SceneEntities
+                    .Include(s => s.PositionedModels.Select(pm => pm.Model))
+                    .FirstOrDefault(s => s.Name == scene.Name && s.OwnerId == scene.Owner);
+
+                PositionedModelEntity positionedModelEntity = sceneEntity.PositionedModels
+                    .FirstOrDefault(pm => pm.Model.Name == model.Model.Name);
+
+                if (positionedModelEntity != null)
+                {
+                    sceneEntity.PositionedModels.Remove(positionedModelEntity);
+                    context.PositionedModelEntities.Remove(positionedModelEntity);
+                    context.SaveChanges();
+                }
+            }
+        }
+
+
+        public void AddModelToScene(Scene scene, PositionedModel model)
+        {
+            using (EFContext context = new EFContext())
+            {
+                SceneEntity sceneEntity = context.SceneEntities
+                    .Include(s => s.PositionedModels)
+                    .FirstOrDefault(s => s.Name == scene.Name && s.OwnerId == scene.Owner);
+
+                if (sceneEntity != null)
+                {
+                    PositionedModelEntity positionedModelEntity = PositionedModelEntity.FromDomain(model, context);
+                    sceneEntity.PositionedModels.Add(positionedModelEntity);
+                    context.SaveChanges();
+                }
+            }
+        }
+
+
+        public bool ExistsSceneUsingModel(string modelName, string owner)
+        {
+            using (EFContext context = new EFContext())
+            {
+                bool exists = context.SceneEntities
+                    .Any(s => s.PositionedModels.Any(pm => pm.Model.Name == modelName && pm.Model.Name == owner));
+
+                return exists;
+            }
+        }
+
+        public void UpdateRenderDate(string sceneName, string owner, DateTime date)
+        {
+            using (EFContext context = new EFContext()) 
+            {
+                SceneEntity sceneEntity = context.SceneEntities.Find(sceneName,owner);
+
+                if (sceneEntity != null)
+                {
+                    sceneEntity.LastRenderDate = date;
+                    context.SaveChanges();
+                }
+            }
+            
+        }
+        public void UpdateModificationDate(string sceneName, string owner, DateTime date)
+        {
+            using (EFContext context = new EFContext())
+            {
+                SceneEntity sceneEntity = context.SceneEntities.Find(sceneName, owner);
+
+                if (sceneEntity != null)
+                {
+                    sceneEntity.LastModificationDate = date;
+                    context.SaveChanges();
+                }
+            }
+        }
+        public void UpdateCamera(string sceneName, string owner, BLCameraDTO camera)
+        {
+            using (EFContext context = new EFContext())
+            {
+                SceneEntity sceneEntity = context.SceneEntities
+                    .Include(s => s.CameraDTO)
+                    .FirstOrDefault(s => s.Name == sceneName && s.OwnerId == owner);
+                CameraEntity oldCamera = sceneEntity.CameraDTO;
+                
+                if (sceneEntity != null)
+                {
+                    sceneEntity.CameraDTO = CameraEntity.FromDomain(camera);
+                    context.Set<CameraEntity>().Remove(oldCamera);
+                    context.SaveChanges();
+                }
+            }
+        }
+
+    }
+}

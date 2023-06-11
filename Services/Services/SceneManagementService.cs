@@ -1,11 +1,10 @@
 ﻿using BusinessLogic;
+using BusinessLogic.Exceptions;
 using DataTransferObjects;
 using RepoInterfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Services.Exceptions;
 
 namespace Services
 {
@@ -39,19 +38,26 @@ namespace Services
 
         public void AddScene(SceneDTO newElement)
         {
-            Scene newScene = SceneMapper.ConvertToScene(newElement);
-            _sceneRepository.AddScene(newScene);
+            try
+            {
+                if(ContainsScene(newElement.Name, newElement.Owner))
+                {
+                    throw new Service_ArgumentException("User already owns scene with that name");
+                }
+                else
+                {
+                    Scene newScene = SceneMapper.ConvertToScene(newElement);
+                    _sceneRepository.AddScene(newScene);
+                }                
+            }catch (BusinessLogicException ex) 
+            {
+                throw new Service_ArgumentException(ex.Message);
+            }            
         }
 
         public Scene GetScene(string name, string owner)
         {
             return _sceneRepository.GetScene(name, owner);
-        }
-
-        public void UpdateScene(SceneDTO scene) 
-        {
-            RemoveScene(scene.Name, scene.Owner);
-            AddScene(scene);
         }
 
         public void RemoveScene(string name, string owner)
