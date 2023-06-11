@@ -56,22 +56,29 @@ namespace UI.Tabs
             lookFromButton.Text = VectorToString(lookFrom);
             lookAtButton.Text = VectorToString(lookAt);
 
-            lastModificationLabel.Text += _scene.LastModificationDate.ToString("f", new CultureInfo("en-US"));
 
-            if(_scene.LastModificationDate.Minute != _scene.LastRenderDate.Minute)
-            {
-                NotifyThatSeneWasModified();
-            }
+            string lastMod = _scene.LastModificationDate.ToString("dd/MM/yyyy h:mm:ss tt");
+            
+            lastModificationLabel.Text += lastMod;
+
+            
             fovInput.Value = fieldOfView;
             apertureInput.Value = (decimal) aperture;
             checkBlur.Checked = blurEnabled;
 
             if (_scene.Preview != null)
             {
+                string lastRen = _scene.LastRenderDate.ToString("dd/MM/yyyy h:mm:ss tt");
+
                 _imagePPM = new PPMViewer(_scene.Preview);
                 renderPanel.Controls.Add(_imagePPM);
                 saveBtn.Enabled = true;
-                lastRenderLabel.Text += _scene.LastRenderDate.ToString("f", new CultureInfo("en-US"));
+                lastRenderLabel.Text += lastRen;
+
+                if(lastMod != lastRen)
+                {
+                    outdatedStatusLabel.Visible = true;
+                }
             }
             LoadPositionedModels();
         }
@@ -128,14 +135,12 @@ namespace UI.Tabs
             saveButton.Visible = false;
             nameTextbox.ReadOnly = true;
 
+            nameSetNoteLabel.Visible = false;
+
             LoadAvailableModels();
             LoadDataFromScene(_scene);
         }
 
-        private bool NameWasChanged()
-        {
-            return _scene.Name != nameTextbox.Text;
-        }
 
         private void FovWasChanged(object sender, EventArgs e)
         {
@@ -181,7 +186,8 @@ namespace UI.Tabs
             renderPanel.Controls.Add(_imagePPM);
             saveBtn.Enabled = true;
 
-            lastRenderLabel.Text = "Last rendered: " + _scene.LastRenderDate.ToString("f", new CultureInfo("en-US")) + ":" + _scene.LastRenderDate.ToString("ss"); ;
+            lastRenderLabel.Text = "Last rendered: " + _scene.LastRenderDate.ToString("dd/MM/yyyy h:mm:ss tt");
+            lastModificationLabel.Text = "Last modified: " + _scene.LastModificationDate.ToString("dd/MM/yyyy h:mm:ss tt");
         }
         private string VectorToString(VectorDTO vector)
         {
@@ -191,7 +197,9 @@ namespace UI.Tabs
         {            
             _controller.UpdateLastModificationDate(_scene);
             DateTime newModificationDate = _scene.LastModificationDate;
-            lastModificationLabel.Text = "Last modified: " + newModificationDate.ToString("f", new CultureInfo("en-US")) + ":" + newModificationDate.ToString("ss"); ;
+            lastModificationLabel.Text = "Last modified: " + newModificationDate.ToString("dd/MM/yyyy h:mm:ss tt");
+            lastRenderLabel.Text = "Last rendered: " + _scene.LastRenderDate.ToString("dd/MM/yyyy h:mm:ss tt");
+
             outdatedStatusLabel.Visible = true;
         }
 
@@ -263,20 +271,6 @@ namespace UI.Tabs
 
                 fs.Close();
             }
-        }
-
-        private void nameTextbox_TextChanged(object sender, EventArgs e)
-        {
-            /*
-            string name = nameTextbox.Text;
-            sceneNameStatusLabel.Visible = true;
-            sceneNameStatusLabel.Text = "";
-
-            if(_controller.NameIsAlreadyInUse(name, _loggedUser))
-            {
-                sceneNameStatusLabel.Text = "Name already in use";
-            }
-            */
         }
     }
 }

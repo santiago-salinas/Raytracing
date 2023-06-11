@@ -52,6 +52,7 @@
             this.checkBlur = new System.Windows.Forms.CheckBox();
             this.saveBtn = new System.Windows.Forms.Button();
             this.sceneNameStatusLabel = new System.Windows.Forms.Label();
+            this.nameSetNoteLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fovInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.apertureInput)).BeginInit();
             this.SuspendLayout();
@@ -71,7 +72,7 @@
             // 
             this.lastModificationLabel.AutoSize = true;
             this.lastModificationLabel.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lastModificationLabel.Location = new System.Drawing.Point(734, 58);
+            this.lastModificationLabel.Location = new System.Drawing.Point(585, 58);
             this.lastModificationLabel.Name = "lastModificationLabel";
             this.lastModificationLabel.Size = new System.Drawing.Size(175, 23);
             this.lastModificationLabel.TabIndex = 2;
@@ -221,7 +222,6 @@
             this.nameTextbox.Name = "nameTextbox";
             this.nameTextbox.Size = new System.Drawing.Size(404, 51);
             this.nameTextbox.TabIndex = 19;
-            this.nameTextbox.TextChanged += new System.EventHandler(this.nameTextbox_TextChanged);
             // 
             // nameStatusLabel
             // 
@@ -336,12 +336,22 @@
             this.sceneNameStatusLabel.TabIndex = 28;
             this.sceneNameStatusLabel.Visible = false;
             // 
+            // nameSetNoteLabel
+            // 
+            this.nameSetNoteLabel.AutoSize = true;
+            this.nameSetNoteLabel.Location = new System.Drawing.Point(29, 29);
+            this.nameSetNoteLabel.Name = "nameSetNoteLabel";
+            this.nameSetNoteLabel.Size = new System.Drawing.Size(287, 13);
+            this.nameSetNoteLabel.TabIndex = 29;
+            this.nameSetNoteLabel.Text = "NOTE: Once the name has been set, it cannot be changed";
+            // 
             // EditSceneTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1275, 820);
             this.ControlBox = false;
+            this.Controls.Add(this.nameSetNoteLabel);
             this.Controls.Add(this.sceneNameStatusLabel);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.checkBlur);
@@ -403,5 +413,6 @@
         private System.Windows.Forms.CheckBox checkBlur;
         private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.Label sceneNameStatusLabel;
+        private System.Windows.Forms.Label nameSetNoteLabel;
     }
 }
