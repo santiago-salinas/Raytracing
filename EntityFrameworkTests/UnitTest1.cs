@@ -223,7 +223,7 @@ namespace EntityFrameworkTests
 
             testScene.CameraDTO = dto;
 
-            Engine motor = new Engine(testScene);
+            Engine motor = new Engine(testScene, new Camera(testScene.CameraDTO));
             motor.RandomOff();
             PPM ppm = motor.Render();
 

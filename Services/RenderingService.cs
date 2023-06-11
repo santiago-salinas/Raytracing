@@ -43,7 +43,9 @@ namespace Services
                 MaxDepth = 10,
             };
 
-            Engine renderEngine = new Engine(previewScene);
+            ICamera camera = CameraFactory(previewScene);
+
+            Engine renderEngine = new Engine(previewScene, camera);
             PPM preview = renderEngine.Render();
 
             return PPMMapper.ConvertToDTO(preview);
@@ -52,10 +54,25 @@ namespace Services
         public PpmDTO RenderScene(SceneDTO providedScene)
         {
             Scene renderScene = SceneMapper.ConvertToScene(providedScene);
-            Engine renderEngine = new Engine(renderScene); 
+
+            ICamera camera = CameraFactory(renderScene);
+            
+            Engine renderEngine = new Engine(renderScene, camera); 
             PPM render = renderEngine.Render();
 
             return PPMMapper.ConvertToDTO(render);
+        }
+
+        public ICamera CameraFactory(Scene scene)
+        {
+            if (scene.Blur)
+            {
+                return new CameraBlur(scene.CameraDTO);
+            }
+            else
+            {
+                return new Camera(scene.CameraDTO);
+            }
         }
     }
 }

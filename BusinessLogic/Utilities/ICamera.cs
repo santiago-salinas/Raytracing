@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    internal interface ICamera
+    public interface ICamera
     {
         Ray GetRay(double u, double v);
 

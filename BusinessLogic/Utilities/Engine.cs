@@ -24,19 +24,11 @@ namespace BusinessLogic
             Random = new Random();
         }
 
-        public Engine(Scene scene)
+        public Engine(Scene scene, ICamera camera)
         {
             Random = new Random();
 
-            if (scene.Blur)
-            {
-                CameraUsedToRender = new CameraBlur(scene.CameraDTO);
-            }
-            else
-            {
-                CameraUsedToRender = new Camera(scene.CameraDTO);
-            }
-            
+            CameraUsedToRender = camera;
 
             SceneToRender = scene;
             SamplesPerPixel = CameraUsedToRender.SamplesPerPixel;

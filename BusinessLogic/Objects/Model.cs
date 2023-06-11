@@ -55,7 +55,7 @@ namespace BusinessLogic
             };
 
 
-            Engine renderEngine = new Engine(testScene);
+            Engine renderEngine = new Engine(testScene, new Camera(testScene.CameraDTO));
             Preview = renderEngine.Render();
         }
 
