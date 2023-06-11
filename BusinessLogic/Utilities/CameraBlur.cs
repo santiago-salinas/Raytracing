@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    internal class CameraBlur : ICamera
+    public class CameraBlur : ICamera
     {
         public CameraBlur(BLCameraDTO dto)
         {

@@ -233,7 +233,7 @@ namespace BusinessLogic_Tests
 
             testScene.CameraDTO = dto;
 
-            Engine motor = new Engine(testScene);
+            Engine motor = new Engine(testScene, new Camera(testScene.CameraDTO));
             motor.RandomOff();
             PPM ppm = motor.Render();
 
@@ -412,7 +412,7 @@ namespace BusinessLogic_Tests
             testScene.CameraDTO = dto;
 
             testScene.Blur = true;
-            Engine motor = new Engine(testScene);
+            Engine motor = new Engine(testScene, new Camera(testScene.CameraDTO));
             motor.RandomOff();
             PPM ppm = motor.Render();
 
@@ -595,7 +595,7 @@ namespace BusinessLogic_Tests
             testScene.CameraDTO = dto;
 
             testScene.Blur = true;
-            Engine motor = new Engine(testScene);
+            Engine motor = new Engine(testScene, new Camera(testScene.CameraDTO));
             motor.RandomOff();
             PPM ppm = motor.Render();
 
