@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using BusinessLogic;
 using DataTransferObjects;
 using Services;
+using Services.Exceptions;
+using Controllers.Exceptions;
 
 
 namespace Controllers
@@ -24,9 +26,9 @@ namespace Controllers
                 SceneDTO newScene = EditSceneService.CreateNewScene(owner, name);
                 AddNewScene(newScene);
                 return newScene;
-            }catch(Exception ex)
+            }catch(Service_ArgumentException ex)
             {
-                throw new Exception(ex.Message);
+                throw new Controller_ArgumentException(ex.Message);
             }
             
         }

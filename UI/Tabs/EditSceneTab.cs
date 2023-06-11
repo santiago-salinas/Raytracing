@@ -9,6 +9,7 @@ using UI.Dialogs;
 using Controllers;
 using DataTransferObjects;
 using System.Xml.Linq;
+using Controllers.Exceptions;
 
 namespace UI.Tabs
 {
@@ -119,7 +120,7 @@ namespace UI.Tabs
                 _scene = CreateNewScene(newName);
                 EnableEditControls();
             }
-            catch (Exception ex)
+            catch (Controller_ArgumentException ex)
             {
                 sceneNameStatusLabel.Text = ex.Message;
             }
