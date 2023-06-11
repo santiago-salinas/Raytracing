@@ -69,6 +69,12 @@ namespace DataAccess.Repositories
 
                 if (sceneEntity != null)
                 {
+                    foreach (var positionedModel in sceneEntity.PositionedModels.ToList())
+                    {
+                        context.PositionedModelEntities.Remove(positionedModel);
+                    }
+
+                    context.Set<CameraEntity>().Remove(sceneEntity.CameraDTO);
                     context.SceneEntities.Remove(sceneEntity);
                     context.SaveChanges();
                 }
