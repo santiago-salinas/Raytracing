@@ -8,6 +8,7 @@ using UI.Cards;
 using UI.Dialogs;
 using Controllers;
 using DataTransferObjects;
+using System.Xml.Linq;
 
 namespace UI.Tabs
 {
@@ -25,18 +26,21 @@ namespace UI.Tabs
 
         public EditSceneTab(SceneDTO providedScene, Context context)
         {
-            InitializeComponent();            
+            InitializeComponent();
             _loggedUser = context.CurrentUser;
             _controller = context.EditSceneController;
             _isNewScene = providedScene == null;
-            _scene = _isNewScene ? CreateNewScene() : providedScene;
-            LoadAvailableModels();
-            LoadDataFromScene(_scene);
+            _scene = providedScene;
+
+            if (!_isNewScene)
+            {
+                EnableEditControls();
+            }
         }
 
-        private SceneDTO CreateNewScene()
+        private SceneDTO CreateNewScene(string name)
         {
-            return _controller.CreateNewScene(_loggedUser);
+            return _controller.CreateNewScene(_loggedUser,name);
         }
         private void LoadDataFromScene(SceneDTO providedScene)
         {
@@ -46,18 +50,35 @@ namespace UI.Tabs
             VectorDTO lookFrom = sceneCamera.LookFrom;
             VectorDTO lookAt = sceneCamera.LookAt;
             int fieldOfView = sceneCamera.FieldOfView;
+            double aperture = sceneCamera.Aperture;
+            bool blurEnabled = _scene.Blur;
 
             lookFromButton.Text = VectorToString(lookFrom);
             lookAtButton.Text = VectorToString(lookAt);
 
-            lastModificationLabel.Text += _scene.LastModificationDate.ToString("f", new CultureInfo("en-US"));
+
+            string lastMod = _scene.LastModificationDate.ToString("dd/MM/yyyy h:mm:ss tt");
+            
+            lastModificationLabel.Text += lastMod;
+
+            
             fovInput.Value = fieldOfView;
+            apertureInput.Value = (decimal) aperture;
+            checkBlur.Checked = blurEnabled;
+
             if (_scene.Preview != null)
             {
+                string lastRen = _scene.LastRenderDate.ToString("dd/MM/yyyy h:mm:ss tt");
+
                 _imagePPM = new PPMViewer(_scene.Preview);
                 renderPanel.Controls.Add(_imagePPM);
                 saveBtn.Enabled = true;
-                lastRenderLabel.Text += _scene.LastRenderDate.ToString("f", new CultureInfo("en-US"));
+                lastRenderLabel.Text += lastRen;
+
+                if(lastMod != lastRen)
+                {
+                    outdatedStatusLabel.Visible = true;
+                }
             }
             LoadPositionedModels();
         }
@@ -87,24 +108,39 @@ namespace UI.Tabs
         }
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            sceneNameStatusLabel.Visible = true;
             nameStatusLabel.Text = "";
             string newName = nameTextbox.Text.Trim();
-            bool endedCorrectly = true;
 
-           // nameStatusLabel.Text = _controller.SaveChangedName(newName);
-            
-
-            if (endedCorrectly)
+            try
             {
-                ScenesTab.LoadScenes();
-                ScenesTab.Activate();
+                _scene = CreateNewScene(newName);
+                EnableEditControls();
             }
+            catch (Exception ex)
+            {
+                sceneNameStatusLabel.Text = ex.Message;
+            }
+            
         }
 
-        private bool NameWasChanged()
+        private void EnableEditControls()
         {
-            return _scene.Name != nameTextbox.Text;
+            lookFromButton.Enabled = true;
+            lookAtButton.Enabled = true;
+            fovInput.Enabled = true;
+            checkBlur.Enabled = true;
+            renderButton.Enabled = true;
+
+            saveButton.Visible = false;
+            nameTextbox.ReadOnly = true;
+
+            nameSetNoteLabel.Visible = false;
+
+            LoadAvailableModels();
+            LoadDataFromScene(_scene);
         }
+
 
         private void FovWasChanged(object sender, EventArgs e)
         {
@@ -113,6 +149,7 @@ namespace UI.Tabs
             {
                 NotifyThatSeneWasModified();
                 sceneCamera.FieldOfView = newFov;
+                _controller.UpdateScene(_scene);
             }
         }
         private void LoadAvailableModels()
@@ -149,7 +186,8 @@ namespace UI.Tabs
             renderPanel.Controls.Add(_imagePPM);
             saveBtn.Enabled = true;
 
-            lastRenderLabel.Text = "Last rendered: " + _scene.LastRenderDate.ToString("f", new CultureInfo("en-US"));
+            lastRenderLabel.Text = "Last rendered: " + _scene.LastRenderDate.ToString("dd/MM/yyyy h:mm:ss tt");
+            lastModificationLabel.Text = "Last modified: " + _scene.LastModificationDate.ToString("dd/MM/yyyy h:mm:ss tt");
         }
         private string VectorToString(VectorDTO vector)
         {
@@ -159,7 +197,9 @@ namespace UI.Tabs
         {            
             _controller.UpdateLastModificationDate(_scene);
             DateTime newModificationDate = _scene.LastModificationDate;
-            lastModificationLabel.Text = "Last modified: " + newModificationDate.ToString("f", new CultureInfo("en-US"));
+            lastModificationLabel.Text = "Last modified: " + newModificationDate.ToString("dd/MM/yyyy h:mm:ss tt");
+            lastRenderLabel.Text = "Last rendered: " + _scene.LastRenderDate.ToString("dd/MM/yyyy h:mm:ss tt");
+
             outdatedStatusLabel.Visible = true;
         }
 
@@ -170,6 +210,7 @@ namespace UI.Tabs
             {
                 NotifyThatSeneWasModified();
                 sceneCamera.Aperture = newAperture;
+                _controller.UpdateScene(_scene);
             }
         }
 
@@ -191,6 +232,7 @@ namespace UI.Tabs
                 _scene.Blur = false;
             }
             NotifyThatSeneWasModified();
+            _controller.UpdateScene(_scene);
         }
 
         // https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-save-files-using-the-savefiledialog-component?view=netframeworkdesktop-4.8

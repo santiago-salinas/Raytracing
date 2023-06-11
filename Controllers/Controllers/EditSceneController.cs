@@ -16,54 +16,13 @@ namespace Controllers
         public ModelManagementService ModelManagementService { get; set; }
         public SceneManagementService SceneManagementService { get; set; }
         public EditSceneController() { }
-        public SceneDTO CreateNewScene(string owner)
+        public SceneDTO CreateNewScene(string owner, string name)
         {            
-            SceneDTO newScene = EditSceneService.CreateNewScene(owner);
+            SceneDTO newScene = EditSceneService.CreateNewScene(owner, name);
             AddNewScene(newScene);
             return newScene;
         }
 
-        /*public string SaveChangedName(String newName, bool isNewScene, SceneDTO sceneDTO)
-        {
-
-
-
-
-            if (newName == "")
-            {
-                return "* Scene's name cannot be blank";
-            }
-            else
-            {
-                if (isNewScene)
-                {
-                    try
-                    {
-                        _scene.Name = newName;
-                        _controller.AddNewScene(_scene);
-                        endedCorrectly = true;
-                    }
-                    catch (Exception ex)
-                    {
-                        nameStatusLabel.Text = "* " + ex.Message;
-                    }
-                }
-                else
-                {
-                    if (NameWasChanged() && _controller.NameIsAlreadyInUse(newName, _loggedUser))
-                    {
-                        nameStatusLabel.Text = "* User already owns a scene with that name";
-                    }
-                    else
-                    {
-                        _scene.Name = newName;
-                        endedCorrectly = true;
-                    }
-                }
-
-            }
-        }
-        */
         public List<ModelDTO> GetAvailableModels(string owner)
         {
             return ModelManagementService.GetModelsFromUser(owner);
@@ -101,7 +60,7 @@ namespace Controllers
             return render;
         }
  
-        private void UpdateScene(SceneDTO sceneDTO)
+        public void UpdateScene(SceneDTO sceneDTO)
         {
             SceneManagementService.UpdateScene(sceneDTO);
         }

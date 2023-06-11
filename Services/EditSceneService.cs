@@ -17,7 +17,7 @@ namespace Services
             _sceneRepository = sceneRepository;
         }
 
-        public SceneDTO CreateNewScene(string owner)
+        public SceneDTO CreateNewScene(string owner, string name)
         {
             UICameraDTO defaultCameraValues = new UICameraDTO()
             {
@@ -35,7 +35,7 @@ namespace Services
             SceneDTO newScene = new SceneDTO()
             {
                 Owner = owner,
-                Name = "Empty scene",
+                Name = name,
                 CameraDTO = defaultCameraValues,
                 PositionedModels = new List<PositionedModelDTO>(),
                 CreationDate = DateTimeProvider.Now,
@@ -48,7 +48,9 @@ namespace Services
 
         public void UpdateLastRenderDate(SceneDTO sceneDTO)
         {
-            sceneDTO.LastRenderDate = DateTimeProvider.Now;
+            System.DateTime date = DateTimeProvider.Now;
+            sceneDTO.LastRenderDate = date;
+            sceneDTO.LastModificationDate = date;
         }
 
         public void UpdateLastModificationDate(SceneDTO sceneDTO)

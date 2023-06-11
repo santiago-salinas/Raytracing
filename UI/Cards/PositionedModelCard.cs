@@ -3,6 +3,7 @@ using DataTransferObjects;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using UI.Tabs;
 
 namespace UI.Cards
 {
@@ -28,7 +29,10 @@ namespace UI.Cards
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             _controller.RemovePositionedModel(_positionedModel, _scene);
+            EditSceneTab editSceneTab = (EditSceneTab)Parent.Parent;
+            editSceneTab.NotifyThatSeneWasModified();
             this.Parent.Controls.Remove(this);
+            
         }        
 
         private string VectorToString(VectorDTO vector)

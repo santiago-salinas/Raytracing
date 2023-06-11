@@ -22,7 +22,7 @@ namespace UI.Tabs
             _mainPage = mainPage;
             _controller = context.SceneController;
             _currentUser = context.CurrentUser;
-            LoadScenes();            
+            LoadScenes();    
         }
 
         public void LoadScenes()
