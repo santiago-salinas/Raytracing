@@ -42,7 +42,6 @@ namespace UI.Tabs
             if (result == DialogResult.OK)
             {
                 ModelCard modelCard = new ModelCard(addModel.NewModel,_controller);
-                //_controller.AddModel(addModel.NewModel);
                 flowLayoutPanel.Controls.Add(modelCard);
             }
         }

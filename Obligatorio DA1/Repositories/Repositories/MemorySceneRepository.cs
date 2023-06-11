@@ -61,8 +61,13 @@ namespace Repositories
             _sceneList.Remove(scene);
         }
 
-        public bool ExistsSceneUsingModel(Model model)
+        public bool ExistsSceneUsingModel(string modelName, string owner)
         {
+            Model model = new Model()
+            {
+                Name = modelName,
+                Owner = owner
+            };
             Scene ret = _sceneList.Find(s => s.ContainsModel(model));
             return ret != null;
         }

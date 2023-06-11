@@ -3,22 +3,40 @@ using DataTransferObjects;
 using RepoInterfaces;
 using System;
 using System.Collections.Generic;
-
+using Services.Exceptions;
+using BusinessLogic.Exceptions;
 
 namespace Services
 {
     public class ModelManagementService
     {
-        private IModelRepository _modelRepository;       
+        private IModelRepository _modelRepository;
+        private ISceneRepository _sceneRepository;
 
-        public ModelManagementService(IModelRepository repository){
+        public ModelManagementService(IModelRepository repository, ISceneRepository sceneRepository)
+        {
             _modelRepository = repository;
+            _sceneRepository = sceneRepository;
         }
 
         public void AddModel(ModelDTO modelDTO)
         {
-            Model model = ModelMapper.ConvertToModel(modelDTO);
-            _modelRepository.AddModel(model);
+            try
+            {
+                if (_modelRepository.ContainsModel(modelDTO.Name, modelDTO.OwnerName))
+                {
+                    throw new Service_ArgumentException("User already owns model with that name");
+                }
+                else
+                {
+                    Model model = ModelMapper.ConvertToModel(modelDTO);
+                    _modelRepository.AddModel(model);
+                }                
+            }
+            catch(BusinessLogicException ex)
+            {
+                throw new Service_ArgumentException(ex.Message);
+            }                       
         }
 
         public List<ModelDTO> GetModelsFromUser(string owner)
@@ -31,7 +49,14 @@ namespace Services
 
         public void RemoveModel(string name, string owner)
         {
-            _modelRepository.RemoveModel(name, owner);
+            if (_sceneRepository.ExistsSceneUsingModel(name, owner))
+            {
+                throw new Service_ObjectHandlingException("Cannot remove a model that is being used by a scene");
+            }
+            else
+            {
+                _modelRepository.RemoveModel(name, owner);
+            }
         }
 
         public Model GetModel(string name, string owner)

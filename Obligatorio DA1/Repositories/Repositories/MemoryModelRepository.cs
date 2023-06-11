@@ -72,7 +72,7 @@ namespace Repositories
         {
             Model model = GetModel(name, owner);
 
-            if (_sceneRepository.ExistsSceneUsingModel(model))
+            if (_sceneRepository.ExistsSceneUsingModel(name,owner))
             {
                 throw new BusinessLogicException("Cannot delete model used by an existing scene");
             }

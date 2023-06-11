@@ -93,7 +93,7 @@ namespace BusinessLogic
         {
             foreach (PositionedModel elem in _positionedModellList)
             {
-                if (elem.Model == model) { return true; }
+                if (elem.Model.Name == model.Name && elem.Model.Owner == model.Owner) { return true; }
             }
             return false;
         }

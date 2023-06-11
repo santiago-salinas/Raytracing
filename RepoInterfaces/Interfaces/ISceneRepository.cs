@@ -16,7 +16,7 @@ namespace RepoInterfaces
         void RemoveScene(string name, string owner);
         void RemoveModelFromScene(Scene scene, PositionedModel model);
         void AddModelToScene(Scene scene, PositionedModel model);
-        bool ExistsSceneUsingModel(Model model);
+        bool ExistsSceneUsingModel(string modelName, string modelOwner);
     }
 
 }
