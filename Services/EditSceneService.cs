@@ -39,6 +39,7 @@ namespace Services
                 CameraDTO = defaultCameraValues,
                 PositionedModels = new List<PositionedModelDTO>(),
                 CreationDate = DateTimeProvider.Now,
+                LastRenderDate = DateTimeProvider.Now,
                 LastModificationDate = DateTimeProvider.Now,
                 Blur = false,
             };

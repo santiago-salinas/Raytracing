@@ -20,9 +20,9 @@ namespace DataAccess.Entities
         [Column(Order = 2)]
         public string OwnerId { get; set; }
         public UserEntity Owner { get; set; }
-        public DateTime CreationDate { get; set; }
-        public DateTime LastModificationDate { get; set; }
-        public DateTime LastRenderDate { get; set; }
+        public DateTime? CreationDate { get; set; }
+        public DateTime? LastModificationDate { get; set; }
+        public DateTime? LastRenderDate { get; set; }
         // public PPM Preview { get; set; }
         public ICollection<PositionedModelEntity> PositionedModels { get; set; }
         public CameraEntity CameraDTO { get; set; }
@@ -47,9 +47,9 @@ namespace DataAccess.Entities
             {
                 Name = entity.Name,
                 Owner = entity.OwnerId,
-                CreationDate = entity.CreationDate,
-                LastModificationDate = entity.LastModificationDate,
-                LastRenderDate = entity.LastRenderDate,
+                CreationDate = (DateTime)entity.CreationDate,
+                LastModificationDate = (DateTime)entity.LastModificationDate,
+                LastRenderDate = (DateTime) entity.LastRenderDate,
                 CameraDTO = CameraEntity.FromEntity(entity.CameraDTO),
                 Blur = entity.Blur,
                 PositionedModels = posModels

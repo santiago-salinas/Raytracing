@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
+using System.Data.Entity;
 
 namespace DataAccess.Entities
 {
@@ -38,14 +39,17 @@ namespace DataAccess.Entities
         public static PositionedModelEntity FromDomain(PositionedModel positionedModel, EFContext efContext)
         {
             Vector position = positionedModel.Position;
+
+            ModelEntity modelEntity = efContext.ModelEntities
+                .FirstOrDefault(m => m.OwnerId == positionedModel.Model.Owner && m.Name == positionedModel.Model.Name);
+
             PositionedModelEntity ret = new PositionedModelEntity()
             {
                 Id = Guid.NewGuid(),
-                Model = ModelEntity.FromDomain(positionedModel.Model,efContext),
+                Model = modelEntity,
                 PositionX = position.FirstValue,
                 PositionY = position.SecondValue,
                 PositionZ = position.ThirdValue,
-
             };
 
             return ret;

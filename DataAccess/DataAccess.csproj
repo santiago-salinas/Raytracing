@@ -114,9 +114,14 @@
     <Compile Include="Migrations\202306112029231_V5.designer.cs">
       <DependentUpon>202306112029231_V5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202306112137149_EmptyDatabase.cs" />
+    <Compile Include="Migrations\202306112137149_EmptyDatabase.designer.cs">
+      <DependentUpon>202306112137149_EmptyDatabase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Entities\SphereEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\EFSceneRepository.cs" />
     <Compile Include="Repositories\EFMaterialRepository.cs" />
     <Compile Include="Repositories\EFModelRepository.cs" />
     <Compile Include="Repositories\EFSphereRepository.cs" />
@@ -166,6 +171,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202306112029231_V5.resx">
       <DependentUpon>202306112029231_V5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202306112137149_EmptyDatabase.resx">
+      <DependentUpon>202306112137149_EmptyDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

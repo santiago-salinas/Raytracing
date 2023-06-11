@@ -22,6 +22,5 @@ namespace DataAccess
         public DbSet<PPMEntity> PPMEntities { get; set; }
         public DbSet<PositionedModelEntity> PositionedModelEntities { get; set; }
         public DbSet<SceneEntity> SceneEntities { get; set; }
-
     }
 }
