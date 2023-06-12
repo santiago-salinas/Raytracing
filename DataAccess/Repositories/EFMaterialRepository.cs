@@ -1,10 +1,8 @@
 ﻿using BusinessLogic.Objects;
 using DataAccess.Entities;
-using DataAccess.Exceptions;
 using RepoInterfaces;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 
 namespace DataAccess.Repositories
@@ -38,20 +36,13 @@ namespace DataAccess.Repositories
 
         public void AddMaterial(Material newElement)
         {
-            try
+            using (EFContext context = new EFContext())
             {
-                using (EFContext context = new EFContext())
-                {
-                    UserEntity owner = context.UserEntities.FirstOrDefault(u => u.Username == newElement.Owner);
+                UserEntity owner = context.UserEntities.FirstOrDefault(u => u.Username == newElement.Owner);
 
-                    MaterialEntity materialEntity = MaterialEntity.FromDomain(newElement, context);
-                    context.MaterialEntities.Add(materialEntity);
-                    context.SaveChanges();
-                }
-            }
-            catch (DbUpdateException ex)
-            {
-                throw new RepositoryException("User already owns material with that name");
+                MaterialEntity materialEntity = MaterialEntity.FromDomain(newElement, context);
+                context.MaterialEntities.Add(materialEntity);
+                context.SaveChanges();
             }
         }
 
@@ -76,19 +67,17 @@ namespace DataAccess.Repositories
                     .Include(m => m.Lambertian).Include(m => m.Metallic)
                     .FirstOrDefault(m => m.Name == name && m.Owner.Username == owner);
 
-                if (materialEntity != null)
+                LambertianEntity lambertianEntity = materialEntity.Lambertian;
+                MetallicEntity metallicEntity = materialEntity.Metallic;
+                if (lambertianEntity != null)
                 {
-                    LambertianEntity lambertianEntity = materialEntity.Lambertian;
-                    MetallicEntity metallicEntity = materialEntity.Metallic;
-                    if (lambertianEntity != null)
-                    {
-                        context.LambertianEntities.Remove(lambertianEntity);
-                    }
-                    else
-                    {
-                        context.MetallicEntities.Remove(metallicEntity);
-                    }
-                    context.MaterialEntities.Remove(materialEntity);
+                    context.LambertianEntities.Remove(lambertianEntity);
+                }
+                else
+                {
+                    context.MetallicEntities.Remove(metallicEntity);
+                }
+                context.MaterialEntities.Remove(materialEntity);
                     context.SaveChanges();
                 }
             }
