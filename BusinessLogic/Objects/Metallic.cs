@@ -12,13 +12,6 @@ namespace BusinessLogic.Objects
 
         public Metallic() { }
 
-        public Metallic(string name, Color color, string user)
-        {
-            Name = name;
-            Color = color;
-            Owner = user;
-        }
-
         public Color Color { get; set; }
         public double Roughness {
             get
@@ -55,14 +48,6 @@ namespace BusinessLogic.Objects
         public override string ToString()
         {
             return Type + ":\nRGB (" + Color.ToString() + ")\nRoughness: "+Roughness;
-        }
-
-        private void CheckIfStringNull(string value)
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                throw new BusinessLogicException("Name cannot be empty");
-            }
         }
 
         public override Ray GetBouncedRay(HitRecord hitRecord)

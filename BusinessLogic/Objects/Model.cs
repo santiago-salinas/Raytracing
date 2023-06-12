@@ -8,58 +8,13 @@ namespace BusinessLogic.Objects
         private string _name;
         public Model() { }
 
-        public Model(string name, Sphere shape, Material model, string owner)
-        {
-            Name = name;
-            Shape = shape;
-            Material = model;
-            Owner = owner;
-        }
-
         public HitRecord IsHitByRay(Ray ray, double tMin, double tMax, Vector position)
         {
             HitRecord hit = Shape.IsHitByRay(ray, tMin, tMax, position);
             hit = Material.IsHitByRay(hit);
             return hit;
         }
-
-        public void RenderPreview()
-        {
-            Scene testScene = new Scene();
-
-            Model model = new Model()
-            {
-                Material = this.Material,
-                Shape = new Sphere() { Radius = 1 },
-            };
-
-            Vector position = new Vector(1, 1, 1);
-            PositionedModel positionedModel = new PositionedModel()
-            {
-                Model = model,
-                Position = position
-            };
-
-            testScene.AddPositionedModel(positionedModel);
-
-
-            testScene.CameraDTO = new BLCameraDTO()
-            {
-                LookFrom = new Vector(0, 5, 0),
-                LookAt = new Vector(1, 1, 1),
-                Up = new Vector(0, 1, 0),
-                FieldOfView = 40,
-                ResolutionX = 50,
-                ResolutionY = 50,
-                SamplesPerPixel = 50,
-                MaxDepth = 10,
-            };
-
-
-            Engine renderEngine = new Engine(testScene, new Camera(testScene.CameraDTO));
-            Preview = renderEngine.Render();
-        }
-
+        
         public Ray GetBouncedRay(HitRecord hitRecord)
         {
             return Material.GetBouncedRay(hitRecord);

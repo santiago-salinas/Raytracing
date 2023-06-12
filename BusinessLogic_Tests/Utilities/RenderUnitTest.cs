@@ -597,7 +597,7 @@ namespace BusinessLogic_Tests
             testScene.CameraDTO = dto;
 
             testScene.Blur = true;
-            Engine motor = new Engine(testScene, new Camera(testScene.CameraDTO));
+            Engine motor = new Engine(testScene, new CameraBlur(testScene.CameraDTO));
             motor.RandomOff();
             PPM ppm = motor.Render();
 
