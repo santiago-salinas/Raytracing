@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessLogic;
-using BusinessLogic.Utilities;
+﻿using BusinessLogic.Utilities;
 
 namespace DataTransferObjects
 {
@@ -16,13 +10,13 @@ namespace DataTransferObjects
             {
                 FirstValue = vector.FirstValue,
                 SecondValue = vector.SecondValue,
-                ThirdValue  = vector.ThirdValue,
+                ThirdValue = vector.ThirdValue,
             };
 
             return vectorDTO;
         }
 
-        public static Vector ConvertToVector(VectorDTO dto) 
+        public static Vector ConvertToVector(VectorDTO dto)
         {
             Vector vector = new Vector()
             {

@@ -1,5 +1,5 @@
-﻿using DataTransferObjects;
-using Controllers;
+﻿using Controllers;
+using DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -23,12 +23,12 @@ namespace UI.Tabs
 
         private void AddShapeButton_Click(object sender, EventArgs e)
         {
-            AddSphereDialog addSphere = new AddSphereDialog(_currentUser,_sphereController);
+            AddSphereDialog addSphere = new AddSphereDialog(_currentUser, _sphereController);
             DialogResult result = addSphere.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-                SphereCard sphereCard = new SphereCard(addSphere.NewSphereDTO,_sphereController);              
+                SphereCard sphereCard = new SphereCard(addSphere.NewSphereDTO, _sphereController);
                 flowLayoutPanel.Controls.Add(sphereCard);
             }
         }
@@ -38,7 +38,7 @@ namespace UI.Tabs
             List<SphereDTO> sphereList = _sphereController.GetSpheresFromUser(_currentUser);
             foreach (SphereDTO elem in sphereList)
             {
-                SphereCard sphereCard = new SphereCard(elem,_sphereController);
+                SphereCard sphereCard = new SphereCard(elem, _sphereController);
                 flowLayoutPanel.Controls.Add(sphereCard);
             }
         }

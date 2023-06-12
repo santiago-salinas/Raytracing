@@ -1,21 +1,20 @@
-﻿using BusinessLogic;
+﻿using BusinessLogic.Exceptions;
+using BusinessLogic.Objects;
 using DataTransferObjects;
 using RepoInterfaces;
-using System.Collections.Generic;
-using BusinessLogic.Exceptions;
 using Services.Exceptions;
-using BusinessLogic.Objects;
+using System.Collections.Generic;
 
 namespace Services
 {
     public class MaterialManagementService
     {
         private IMaterialRepository _repository;
-            
+
 
         public MaterialManagementService(IMaterialRepository repository)
         {
-            _repository = repository;            
+            _repository = repository;
         }
 
         public void AddMaterial(MaterialDTO materialDTO)
@@ -29,20 +28,20 @@ namespace Services
                 }
                 _repository.AddMaterial(material);
             }
-            catch(BusinessLogicException ex)
+            catch (BusinessLogicException ex)
             {
                 throw new Service_ArgumentException(ex.Message);
             }
-            
+
         }
 
         public void RemoveMaterial(string name, string ownerName)
         {
-            _repository.RemoveMaterial(name, ownerName);      
+            _repository.RemoveMaterial(name, ownerName);
         }
 
         public Material GetLambertian(string name, string ownerName)
-        {            
+        {
             return _repository.GetMaterial(name, ownerName);
         }
 

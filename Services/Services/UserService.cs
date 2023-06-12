@@ -1,20 +1,14 @@
-﻿using BusinessLogic;
-using BusinessLogic.Exceptions;
-using RepoInterfaces;
-using Services.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BusinessLogic.Exceptions;
 using BusinessLogic.Objects;
 using BusinessLogic.Utilities;
+using RepoInterfaces;
+using Services.Exceptions;
 
 namespace Services
 {
     public class UserService
     {
-         private readonly IUserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
 
         public UserService(IUserRepository userRepository)
         {
@@ -45,19 +39,20 @@ namespace Services
             return isValidCombination;
         }
 
-        public void CheckUsernameValidity(string username) 
+        public void CheckUsernameValidity(string username)
         {
             try
             {
                 User.CheckUsernameValidity(username);
-            }catch (BusinessLogicException ex)
+            }
+            catch (BusinessLogicException ex)
             {
                 throw new Service_ArgumentException(ex.Message);
-            }            
+            }
         }
 
         public void CheckPasswordValidity(string password)
-        {            
+        {
             try
             {
                 User.CheckPasswordValidity(password);

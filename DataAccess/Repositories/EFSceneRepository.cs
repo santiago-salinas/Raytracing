@@ -1,24 +1,19 @@
-﻿using BusinessLogic;
+﻿using BusinessLogic.Objects;
+using BusinessLogic.Utilities;
 using DataAccess.Entities;
-using DataAccess.Exceptions;
 using RepoInterfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
-using System.Xml.Linq;
-using BusinessLogic.Objects;
-using BusinessLogic.Utilities;
 
 namespace DataAccess.Repositories
 {
     public class EFSceneRepository : ISceneRepository
     {
         public EFSceneRepository() { }
-        
+
 
         public bool ContainsScene(string name, string user)
         {
@@ -30,18 +25,11 @@ namespace DataAccess.Repositories
         }
         public void AddScene(Scene newElement)
         {
-            try
+            using (EFContext context = new EFContext())
             {
-                using (EFContext context = new EFContext())
-                {
-                    SceneEntity sceneEntity = SceneEntity.FromDomain(newElement, context);
-                    context.SceneEntities.Add(sceneEntity);
-                    context.SaveChanges();
-                }
-            }
-            catch (DbUpdateException)
-            {
-                throw new RepositoryException("User already has a scene with that name");
+                SceneEntity sceneEntity = SceneEntity.FromDomain(newElement, context);
+                context.SceneEntities.Add(sceneEntity);
+                context.SaveChanges();
             }
         }
         public Scene GetScene(string name, string owner)
@@ -53,6 +41,8 @@ namespace DataAccess.Repositories
                     .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Lambertian))
                     .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Metallic))
                     .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Shape))
+                    .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.PPMEntity))
+                    .Include(s => s.PPMEntity)
                     .Include(m => m.CameraDTO)
                     .FirstOrDefault(m => m.Name == name && m.OwnerId == owner);
 
@@ -97,6 +87,7 @@ namespace DataAccess.Repositories
                     .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Lambertian))
                     .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Metallic))
                     .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Shape))
+                    .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.PPMEntity))
                     .Include(s => s.PPMEntity)
                     .Include(m => m.CameraDTO)
                     .Where(m => m.OwnerId == owner)
@@ -151,7 +142,7 @@ namespace DataAccess.Repositories
             using (EFContext context = new EFContext())
             {
                 bool exists = context.SceneEntities
-                    .Any(s => s.PositionedModels.Any(pm => pm.Model.Name == modelName && pm.Model.Name == owner));
+                    .Any(s => s.PositionedModels.Any(pm => pm.Model.Name == modelName && pm.Model.OwnerId == owner));
 
                 return exists;
             }
@@ -159,9 +150,9 @@ namespace DataAccess.Repositories
 
         public void UpdateRenderDate(string sceneName, string owner, DateTime date)
         {
-            using (EFContext context = new EFContext()) 
+            using (EFContext context = new EFContext())
             {
-                SceneEntity sceneEntity = context.SceneEntities.Find(sceneName,owner);
+                SceneEntity sceneEntity = context.SceneEntities.Find(sceneName, owner);
 
                 if (sceneEntity != null)
                 {
@@ -169,7 +160,7 @@ namespace DataAccess.Repositories
                     context.SaveChanges();
                 }
             }
-            
+
         }
         public void UpdateModificationDate(string sceneName, string owner, DateTime date)
         {
@@ -192,7 +183,7 @@ namespace DataAccess.Repositories
                     .Include(s => s.CameraDTO)
                     .FirstOrDefault(s => s.Name == sceneName && s.OwnerId == owner);
                 CameraEntity oldCamera = sceneEntity.CameraDTO;
-                
+
                 if (sceneEntity != null)
                 {
                     sceneEntity.CameraDTO = CameraEntity.FromDomain(camera);
@@ -214,7 +205,7 @@ namespace DataAccess.Repositories
                 if (sceneEntity != null)
                 {
                     sceneEntity.PPMEntity = PPMEntity.FromDomain(preview);
-                    if(oldPreview != null)
+                    if (oldPreview != null)
                     {
                         context.PPMEntities.Remove(oldPreview);
                     }

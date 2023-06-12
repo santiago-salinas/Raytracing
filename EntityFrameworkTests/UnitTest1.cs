@@ -1,13 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Diagnostics;
-using BusinessLogic;
+﻿using BusinessLogic.Objects;
+using BusinessLogic.Utilities;
 using DataAccess;
 using DataAccess.Entities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Diagnostics;
 using System.Linq;
-using System.Collections.Generic;
-using BusinessLogic.Objects;
-using BusinessLogic.Utilities;
 
 namespace EntityFrameworkTests
 {
@@ -231,16 +229,16 @@ namespace EntityFrameworkTests
 
             //Save
             Guid id;
-           using (EFContext dbContext = new EFContext())
-           {
+            using (EFContext dbContext = new EFContext())
+            {
                 PPMEntity entity = PPMEntity.FromDomain(ppm);
                 id = entity.Id;
                 dbContext.PPMEntities.Add(entity);
                 dbContext.SaveChanges();
-           }
+            }
 
-           //Get
-           PPM domainPPM = null;
+            //Get
+            PPM domainPPM = null;
 
             using (EFContext dbContext = new EFContext())
             {
@@ -254,7 +252,7 @@ namespace EntityFrameworkTests
             Trace.WriteLine((domainPPM.GetImageAscii()));
             Assert.IsTrue(domainPPM.GetImageAscii() == ppm.GetImageAscii());
 
-            
+
         }
     }
 }

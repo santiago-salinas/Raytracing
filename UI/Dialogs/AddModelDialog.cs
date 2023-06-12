@@ -1,5 +1,4 @@
 ﻿using Controllers;
-using Controllers.Controllers;
 using Controllers.Exceptions;
 using DataTransferObjects;
 using System;
@@ -18,22 +17,26 @@ namespace UI.Dialogs
         private SphereDTO _selectedShape;
         private MaterialDTO _selectedMaterial;
         private ModelManagementController _controller;
+
+        private bool _shapeWasSelected = false;
+        private bool _materialWasSelected = false;
         public AddModelDialog(Context context)
         {
             InitializeComponent();
             _loggedUser = context.CurrentUser;
             _controller = context.ModelController;
-            
+
             _availableShapes = _controller.GetAvailableShapes(_loggedUser);
             _availableMaterials = _controller.GetAvailableMaterials(_loggedUser);
 
+            saveButton.Enabled = false;
             LoadShapeComboBox();
             LoadMaterialComboBox();
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            string modelName = nameTextBox.Text;            
+            string modelName = nameTextBox.Text;
             nameStatusLabel.Text = "";
             bool nameIsCorrect = true;
 
@@ -58,7 +61,7 @@ namespace UI.Dialogs
             {
                 _controller.AddModel(NewModel);
             }
-            catch(Controller_ArgumentException ex)
+            catch (Controller_ArgumentException ex)
             {
                 nameStatusLabel.Text = ex.Message;
                 nameIsCorrect = false;
@@ -69,17 +72,21 @@ namespace UI.Dialogs
                 DialogResult = DialogResult.OK;
             }
 
-            
+
         }
 
         private void ShapeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             _selectedShape = _availableShapes[shapeComboBox.SelectedIndex];
+            _shapeWasSelected = true;
+            if (_materialWasSelected) saveButton.Enabled = true;
         }
 
         private void MaterialComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             _selectedMaterial = _availableMaterials[materialComboBox.SelectedIndex];
+            _materialWasSelected = true;
+            if (_shapeWasSelected) saveButton.Enabled = true;
         }
 
         private void CancelButton_Click(object sender, EventArgs e)

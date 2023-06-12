@@ -1,11 +1,10 @@
-﻿using System;
-using Services;
-using System.Collections.Generic;
+﻿using Controllers.Exceptions;
 using DataTransferObjects;
+using Services;
 using Services.Exceptions;
-using Controllers.Exceptions;
+using System.Collections.Generic;
 
-namespace Controllers.Controllers
+namespace Controllers
 {
     public class ModelManagementController
     {
@@ -22,9 +21,10 @@ namespace Controllers.Controllers
         public void AddModel(ModelDTO modelDTO)
         {
             try
-            {                
+            {
                 ModelService.AddModel(modelDTO);
-            }catch(Service_ArgumentException ex)
+            }
+            catch (Service_ArgumentException ex)
             {
                 throw new Controller_ArgumentException(ex.Message);
             }
@@ -45,7 +45,7 @@ namespace Controllers.Controllers
             {
                 throw new Controller_ObjectHandlingException(ex.Message);
             }
-            
+
         }
 
         public List<MaterialDTO> GetAvailableMaterials(string owner)
@@ -59,7 +59,7 @@ namespace Controllers.Controllers
         }
 
         public PpmDTO RenderPreview(ModelDTO modelDTO)
-        {            
+        {
             return RenderingService.RenderModelPreview(modelDTO.Material);
         }
     }

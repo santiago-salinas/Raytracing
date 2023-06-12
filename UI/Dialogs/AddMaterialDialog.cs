@@ -1,9 +1,8 @@
-﻿using BusinessLogic;
+﻿using Controllers;
+using Controllers.Exceptions;
+using DataTransferObjects;
 using System;
 using System.Windows.Forms;
-using Controllers;
-using DataTransferObjects;
-using Controllers.Exceptions;
 
 namespace UI.Dialogs
 {
@@ -31,7 +30,7 @@ namespace UI.Dialogs
             int redValue = (int)redValueInput.Value;
             int greenValue = (int)greenValueInput.Value;
             int blueValue = (int)blueValueInput.Value;
-            double roughnessValue = (double) roughnessInput.Value;
+            double roughnessValue = (double)roughnessInput.Value;
 
             statusLabel.Text = "";
 
@@ -48,20 +47,21 @@ namespace UI.Dialogs
                 Color = colorDTO,
                 Owner = _loggedUser,
                 Type = metallicCheck.Checked ? "metallic" : "lambertian",
-                Roughness=roughnessValue,
+                Roughness = roughnessValue,
             };
 
             try
             {
                 _controller.AddMaterial(NewMaterial);
-            }catch (Controller_ArgumentException ex)
+            }
+            catch (Controller_ArgumentException ex)
             {
                 statusLabel.Text = ex.Message;
                 inputsAreCorrect = false;
             }
 
             if (inputsAreCorrect)
-            {                
+            {
                 DialogResult = DialogResult.OK;
             }
         }

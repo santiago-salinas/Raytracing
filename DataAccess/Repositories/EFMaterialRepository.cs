@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
-using System.Xml.Linq;
-using BusinessLogic;
-using RepoInterfaces;
+﻿using BusinessLogic.Objects;
 using DataAccess.Entities;
-using System.Data.Entity.Infrastructure;
-using DataAccess.Exceptions;
-using BusinessLogic.Objects;
+using RepoInterfaces;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 
 namespace DataAccess.Repositories
 {
@@ -43,21 +36,14 @@ namespace DataAccess.Repositories
 
         public void AddMaterial(Material newElement)
         {
-            try
+            using (EFContext context = new EFContext())
             {
-                using (EFContext context = new EFContext())
-                {
-                    UserEntity owner = context.UserEntities.FirstOrDefault(u => u.Username == newElement.Owner);
+                UserEntity owner = context.UserEntities.FirstOrDefault(u => u.Username == newElement.Owner);
 
-                    MaterialEntity materialEntity = MaterialEntity.FromDomain(newElement, context);
-                    context.MaterialEntities.Add(materialEntity);
-                    context.SaveChanges();
-                }
+                MaterialEntity materialEntity = MaterialEntity.FromDomain(newElement, context);
+                context.MaterialEntities.Add(materialEntity);
+                context.SaveChanges();
             }
-            catch (DbUpdateException ex)
-            {
-                throw new RepositoryException("User already owns material with that name");
-            }            
         }
 
         public Material GetMaterial(string name, string user)
@@ -78,24 +64,22 @@ namespace DataAccess.Repositories
             using (EFContext context = new EFContext())
             {
                 MaterialEntity materialEntity = context.MaterialEntities
-                    .Include (m => m.Lambertian) .Include(m => m.Metallic)
+                    .Include(m => m.Lambertian).Include(m => m.Metallic)
                     .FirstOrDefault(m => m.Name == name && m.Owner.Username == owner);
 
-                if (materialEntity != null)
+                LambertianEntity lambertianEntity = materialEntity.Lambertian;
+                MetallicEntity metallicEntity = materialEntity.Metallic;
+                if (lambertianEntity != null)
                 {
-                    LambertianEntity lambertianEntity = materialEntity.Lambertian;
-                    MetallicEntity metallicEntity = materialEntity.Metallic;
-                    if (lambertianEntity != null)
-                    {
-                        context.LambertianEntities.Remove(lambertianEntity);
-                    }
-                    else
-                    {
-                        context.MetallicEntities.Remove(metallicEntity);
-                    }
-                    context.MaterialEntities.Remove(materialEntity);
-                    context.SaveChanges();
+                    context.LambertianEntities.Remove(lambertianEntity);
                 }
+                else
+                {
+                    context.MetallicEntities.Remove(metallicEntity);
+                }
+                context.MaterialEntities.Remove(materialEntity);
+                context.SaveChanges();
+                
             }
         }
     }

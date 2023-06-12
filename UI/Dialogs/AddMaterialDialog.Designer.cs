@@ -206,9 +206,10 @@
             // metallicCheck
             // 
             this.metallicCheck.AutoSize = true;
-            this.metallicCheck.Location = new System.Drawing.Point(565, 254);
+            this.metallicCheck.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.metallicCheck.Location = new System.Drawing.Point(540, 260);
             this.metallicCheck.Name = "metallicCheck";
-            this.metallicCheck.Size = new System.Drawing.Size(62, 17);
+            this.metallicCheck.Size = new System.Drawing.Size(100, 23);
             this.metallicCheck.TabIndex = 40;
             this.metallicCheck.Text = "Metallic";
             this.metallicCheck.UseVisualStyleBackColor = true;
@@ -218,6 +219,7 @@
             // 
             this.roughnessInput.DecimalPlaces = 2;
             this.roughnessInput.Enabled = false;
+            this.roughnessInput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.roughnessInput.Increment = new decimal(new int[] {
             5,
             0,
@@ -230,19 +232,20 @@
             0,
             0});
             this.roughnessInput.Name = "roughnessInput";
-            this.roughnessInput.Size = new System.Drawing.Size(120, 20);
+            this.roughnessInput.Size = new System.Drawing.Size(120, 26);
             this.roughnessInput.TabIndex = 41;
             // 
             // roughnessLabel
             // 
             this.roughnessLabel.AutoSize = true;
-            this.roughnessLabel.Location = new System.Drawing.Point(534, 212);
+            this.roughnessLabel.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.roughnessLabel.Location = new System.Drawing.Point(534, 200);
             this.roughnessLabel.Name = "roughnessLabel";
-            this.roughnessLabel.Size = new System.Drawing.Size(72, 13);
+            this.roughnessLabel.Size = new System.Drawing.Size(90, 19);
             this.roughnessLabel.TabIndex = 42;
-            this.roughnessLabel.Text = "Roughness %";
+            this.roughnessLabel.Text = "Roughness";
             // 
-            // AddLambertianDialog
+            // AddMaterialDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -265,7 +268,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.newMaterialLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "AddLambertianDialog";
+            this.Name = "AddMaterialDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "New material";
             ((System.ComponentModel.ISupportInitialize)(this.redValueInput)).EndInit();

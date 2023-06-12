@@ -1,8 +1,8 @@
 ﻿using Controllers;
 using Controllers.Exceptions;
+using DataTransferObjects;
 using System;
 using System.Windows.Forms;
-using DataTransferObjects;
 
 namespace UI.Cards
 {
@@ -19,7 +19,7 @@ namespace UI.Cards
             nameLabel.Text = _sphereDTO.Name;
             radiusLabel.Text = "Radius: " + _sphereDTO.Radius.ToString();
             _controller = controller;
-        }     
+        }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {

@@ -1,14 +1,8 @@
-﻿using BusinessLogic;
+﻿using BusinessLogic.Utilities;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessLogic.Utilities;
 
 namespace DataAccess.Entities
 {
@@ -76,9 +70,9 @@ namespace DataAccess.Entities
                 {
                     System.Drawing.Color pixel = bitmap.GetPixel(column, row);
 
-                    double red = pixel.R/(double)255;
-                    double green = pixel.G/ (double)255;
-                    double blue = pixel.B/ (double)255;
+                    double red = pixel.R / (double)255;
+                    double green = pixel.G / (double)255;
+                    double blue = pixel.B / (double)255;
 
                     BusinessLogic.Utilities.Color color = new BusinessLogic.Utilities.Color(red, green, blue);
                     int rowinput = -row + ret.Heigth - 1;

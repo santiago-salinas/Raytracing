@@ -1,8 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using BusinessLogic.Exceptions;
 using BusinessLogic.Utilities;
+using System;
+using System.Collections.Generic;
 
 namespace BusinessLogic.Objects
 {
@@ -38,7 +37,7 @@ namespace BusinessLogic.Objects
         public PPM Preview { get; set; }
         public List<PositionedModel> PositionedModels
         {
-            set { _positionedModellList = value;}
+            set { _positionedModellList = value; }
             get { return _positionedModellList; }
         }
 

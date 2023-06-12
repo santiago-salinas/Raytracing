@@ -1,8 +1,7 @@
-﻿using RepoInterfaces;
-using BusinessLogic;
-using System.Collections.Generic;
-using BusinessLogic.Exceptions;
+﻿using BusinessLogic.Exceptions;
 using BusinessLogic.Objects;
+using RepoInterfaces;
+using System.Collections.Generic;
 
 namespace Repositories
 {

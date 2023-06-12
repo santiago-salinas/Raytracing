@@ -305,9 +305,10 @@
             // 
             this.checkBlur.AutoSize = true;
             this.checkBlur.Enabled = false;
+            this.checkBlur.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBlur.Location = new System.Drawing.Point(613, 200);
             this.checkBlur.Name = "checkBlur";
-            this.checkBlur.Size = new System.Drawing.Size(45, 17);
+            this.checkBlur.Size = new System.Drawing.Size(55, 23);
             this.checkBlur.TabIndex = 26;
             this.checkBlur.Text = "Use";
             this.checkBlur.UseVisualStyleBackColor = true;
@@ -316,9 +317,10 @@
             // saveBtn
             // 
             this.saveBtn.Enabled = false;
-            this.saveBtn.Location = new System.Drawing.Point(782, 598);
+            this.saveBtn.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveBtn.Location = new System.Drawing.Point(733, 598);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(75, 23);
+            this.saveBtn.Size = new System.Drawing.Size(124, 31);
             this.saveBtn.TabIndex = 27;
             this.saveBtn.Text = "Save Image";
             this.saveBtn.UseVisualStyleBackColor = true;

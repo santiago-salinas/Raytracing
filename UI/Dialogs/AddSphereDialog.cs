@@ -1,15 +1,14 @@
-﻿using BusinessLogic;
+﻿using Controllers;
+using Controllers.Exceptions;
+using DataTransferObjects;
 using System;
 using System.Windows.Forms;
-using Controllers;
-using DataTransferObjects;
-using Controllers.Exceptions;
 
 namespace UI.Dialogs
 {
     public partial class AddSphereDialog : Form
     {
-       
+
         private string _currentUser;
         public SphereDTO NewSphereDTO { get; set; }
         private SphereManagementController _sphereController;
@@ -31,19 +30,20 @@ namespace UI.Dialogs
             float radius = (float)radiusInput.Value;
             NewSphereDTO = new SphereDTO(sphereName, radius, _currentUser);
             statusLabel.Text = "";
-            bool inputsAreCorrect = true;            
+            bool inputsAreCorrect = true;
 
             try
             {
                 _sphereController.AddSphere(NewSphereDTO);
-            }catch (Controller_ObjectHandlingException ex)
+            }
+            catch (Controller_ObjectHandlingException ex)
             {
                 statusLabel.Text = ex.Message;
                 inputsAreCorrect = false;
             }
 
             if (inputsAreCorrect)
-            {                
+            {
                 DialogResult = DialogResult.OK;
             }
 

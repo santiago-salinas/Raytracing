@@ -1,15 +1,11 @@
-﻿using System;
+﻿using Controllers;
+using Controllers.Exceptions;
+using DataTransferObjects;
+using System;
 using System.Collections.Generic;
-using System.Drawing.Imaging;
-using System.Globalization;
-using System.IO;
 using System.Windows.Forms;
 using UI.Cards;
 using UI.Dialogs;
-using Controllers;
-using DataTransferObjects;
-using System.Xml.Linq;
-using Controllers.Exceptions;
 
 namespace UI.Tabs
 {
@@ -41,7 +37,7 @@ namespace UI.Tabs
 
         private SceneDTO CreateNewScene(string name)
         {
-            return _controller.CreateNewScene(_loggedUser,name);
+            return _controller.CreateNewScene(_loggedUser, name);
         }
         private void LoadDataFromScene(SceneDTO providedScene)
         {
@@ -59,12 +55,12 @@ namespace UI.Tabs
 
 
             string lastMod = _scene.LastModificationDate.ToString("dd/MM/yyyy h:mm:ss tt");
-            
+
             lastModificationLabel.Text += lastMod;
 
-            
+
             fovInput.Value = fieldOfView;
-            apertureInput.Value = (decimal) aperture;
+            apertureInput.Value = (decimal)aperture;
             checkBlur.Checked = blurEnabled;
 
             if (_scene.Preview != null)
@@ -76,7 +72,7 @@ namespace UI.Tabs
                 saveBtn.Enabled = true;
                 lastRenderLabel.Text += lastRen;
 
-                if(lastMod != lastRen)
+                if (lastMod != lastRen)
                 {
                     outdatedStatusLabel.Visible = true;
                 }
@@ -124,7 +120,7 @@ namespace UI.Tabs
             {
                 sceneNameStatusLabel.Text = ex.Message;
             }
-            
+
         }
 
         private void EnableEditControls()
@@ -163,8 +159,8 @@ namespace UI.Tabs
             List<ModelDTO> list = _controller.GetAvailableModels(_loggedUser);
             foreach (ModelDTO elem in list)
             {
-               EditSceneModelCard modelCard = new EditSceneModelCard(_controller,_scene, elem);
-               availableModelsPanel.Controls.Add(modelCard);
+                EditSceneModelCard modelCard = new EditSceneModelCard(_controller, _scene, elem);
+                availableModelsPanel.Controls.Add(modelCard);
             }
         }
         public void LoadPositionedModels()
@@ -180,10 +176,10 @@ namespace UI.Tabs
 
         private void RenderButton_Click(object sender, EventArgs e)
         {
-            
+
             renderPanel.Controls.Clear();
             outdatedStatusLabel.Visible = false;
-            
+
             PpmDTO ppm = _controller.RenderScene(_scene);
 
             _imagePPM = new PPMViewer(ppm);
@@ -199,7 +195,7 @@ namespace UI.Tabs
             return $"({vector.FirstValue} ; {vector.SecondValue} ; {vector.ThirdValue})";
         }
         public void NotifyThatSeneWasModified()
-        {            
+        {
             _controller.UpdateLastModificationDate(_scene);
             DateTime newModificationDate = _scene.LastModificationDate;
             lastModificationLabel.Text = "Last modified: " + newModificationDate.ToString("dd/MM/yyyy h:mm:ss tt");
@@ -210,7 +206,7 @@ namespace UI.Tabs
 
         private void numericAperture_ValueChanged(object sender, EventArgs e)
         {
-            double newAperture = (double) apertureInput.Value;
+            double newAperture = (double)apertureInput.Value;
             if (sceneCamera.Aperture != newAperture)
             {
                 NotifyThatSeneWasModified();
@@ -257,7 +253,7 @@ namespace UI.Tabs
                 switch (saveFileDialog1.FilterIndex)
                 {
                     case 1:
-                        this._imagePPM.GetImage().Save(fs,System.Drawing.Imaging.ImageFormat.Jpeg);
+                        this._imagePPM.GetImage().Save(fs, System.Drawing.Imaging.ImageFormat.Jpeg);
                         break;
 
                     case 2:

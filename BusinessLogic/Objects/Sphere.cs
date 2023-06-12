@@ -1,6 +1,6 @@
-﻿using System;
-using BusinessLogic.Exceptions;
+﻿using BusinessLogic.Exceptions;
 using BusinessLogic.Utilities;
+using System;
 
 namespace BusinessLogic.Objects
 {
@@ -88,7 +88,7 @@ namespace BusinessLogic.Objects
         public override bool Equals(object other)
         {
             bool nameEquals = this.Name == ((Sphere)other).Name;
-            bool ownerEquals = this.Owner == ((Sphere)other).Owner;            
+            bool ownerEquals = this.Owner == ((Sphere)other).Owner;
             return nameEquals && ownerEquals;
         }
 

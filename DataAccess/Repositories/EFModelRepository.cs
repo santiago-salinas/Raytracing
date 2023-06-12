@@ -1,16 +1,9 @@
-﻿using BusinessLogic;
-using DataAccess.Entities;
+﻿using BusinessLogic.Objects;
 using RepoInterfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.Entity;
-using System.Xml.Linq;
 using System.Data.Entity.Infrastructure;
-using DataAccess.Exceptions;
-using BusinessLogic.Objects;
+using System.Linq;
 
 namespace DataAccess.Repositories
 {
@@ -18,7 +11,7 @@ namespace DataAccess.Repositories
     {
 
         public EFModelRepository() { }
-        public List<Model> GetModelsFromUser(string owner) 
+        public List<Model> GetModelsFromUser(string owner)
         {
             using (EFContext context = new EFContext())
             {
@@ -35,15 +28,15 @@ namespace DataAccess.Repositories
             }
         }
 
-        public bool ContainsModel(string name, string user) 
-        {            
+        public bool ContainsModel(string name, string user)
+        {
             using (EFContext context = new EFContext())
             {
                 return context.ModelEntities
                     .Any(m => m.Name == name && m.OwnerId == user);
             }
         }
-        public bool ExistsModelUsingTheMaterial(string materialName, string ownerUsername) 
+        public bool ExistsModelUsingTheMaterial(string materialName, string ownerUsername)
         {
             using (EFContext context = new EFContext())
             {
@@ -51,7 +44,7 @@ namespace DataAccess.Repositories
                     .Any(m => m.Material.Name == materialName && m.OwnerId == ownerUsername);
             }
         }
-        public bool ExistsModelUsingTheSphere(string sphereName, string ownerUsername) 
+        public bool ExistsModelUsingTheSphere(string sphereName, string ownerUsername)
         {
             using (EFContext context = new EFContext())
             {
@@ -59,23 +52,16 @@ namespace DataAccess.Repositories
                     .Any(m => m.Shape.Name == sphereName && m.OwnerId == ownerUsername);
             }
         }
-        public void AddModel(Model newElement) 
+        public void AddModel(Model newElement)
         {
-            try
+            using (EFContext context = new EFContext())
             {
-                using (EFContext context = new EFContext())
-                {
-                    ModelEntity materialEntity = ModelEntity.FromDomain(newElement, context);
-                    context.ModelEntities.Add(materialEntity);
-                    context.SaveChanges();
-                }
-            }
-            catch (DbUpdateException)
-            {
-                throw new RepositoryException("User already owns model with that name");
-            }
+                ModelEntity materialEntity = ModelEntity.FromDomain(newElement, context);
+                context.ModelEntities.Add(materialEntity);
+                context.SaveChanges();
+            }            
         }
-        public Model GetModel(string name, string owner) 
+        public Model GetModel(string name, string owner)
         {
             using (EFContext context = new EFContext())
             {
@@ -89,7 +75,7 @@ namespace DataAccess.Repositories
                 return ModelEntity.FromEntity(modelEntity);
             }
         }
-        public void RemoveModel(string name, string owner) 
+        public void RemoveModel(string name, string owner)
         {
             using (EFContext context = new EFContext())
             {
@@ -99,7 +85,7 @@ namespace DataAccess.Repositories
 
                 if (modelEntity != null)
                 {
-                    if(modelEntity.PPMEntity  != null)
+                    if (modelEntity.PPMEntity != null)
                     {
                         context.PPMEntities.Remove(modelEntity.PPMEntity);
                     }

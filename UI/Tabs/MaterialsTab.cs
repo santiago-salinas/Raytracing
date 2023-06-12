@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Controllers;
+using DataTransferObjects;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using UI.Cards;
 using UI.Dialogs;
-using Controllers;
-using Controllers.Controllers;
-using DataTransferObjects;
 
 namespace UI.Tabs
 {
@@ -28,7 +27,7 @@ namespace UI.Tabs
             List<MaterialDTO> materialList = _materialController.GetMaterialsFromUser(_loggedUser);
             foreach (MaterialDTO elem in materialList)
             {
-                MaterialCard materialCard = new MaterialCard(elem,_materialController);
+                MaterialCard materialCard = new MaterialCard(elem, _materialController);
                 flowLayoutPanel.Controls.Add(materialCard);
             }
         }

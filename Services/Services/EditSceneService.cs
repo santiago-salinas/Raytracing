@@ -1,20 +1,16 @@
-﻿using BusinessLogic;
+﻿using BusinessLogic.Objects;
+using BusinessLogic.Utilities;
 using DataTransferObjects;
 using RepoInterfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessLogic.Objects;
-using BusinessLogic.Utilities;
 
 namespace Services
 {
     public class EditSceneService
     {
         private ISceneRepository _sceneRepository;
-        public EditSceneService(ISceneRepository sceneRepository) 
+        public EditSceneService(ISceneRepository sceneRepository)
         {
             _sceneRepository = sceneRepository;
         }
@@ -45,7 +41,7 @@ namespace Services
                 LastModificationDate = DateTimeProvider.Now,
                 Blur = false,
             };
- 
+
             return newScene;
         }
 
@@ -55,7 +51,7 @@ namespace Services
             sceneDTO.LastRenderDate = newDate;
             sceneDTO.LastModificationDate = newDate;
             string sceneName = sceneDTO.Name;
-            string owner = sceneDTO.Owner;                        
+            string owner = sceneDTO.Owner;
             _sceneRepository.UpdateModificationDate(sceneName, owner, newDate);
             _sceneRepository.UpdateRenderDate(sceneName, owner, newDate);
         }
@@ -72,7 +68,7 @@ namespace Services
         public void UpdateCamera(SceneDTO sceneDTO)
         {
             BLCameraDTO camera = CameraMapper.ConvertToDomainCamDTO(sceneDTO.CameraDTO);
-            _sceneRepository.UpdateCamera(sceneDTO.Name,sceneDTO.Owner,camera);
+            _sceneRepository.UpdateCamera(sceneDTO.Name, sceneDTO.Owner, camera);
         }
 
         public void UpdatePreview(SceneDTO sceneDTO)

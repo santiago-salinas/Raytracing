@@ -1,14 +1,9 @@
-﻿using BusinessLogic;
+﻿using BusinessLogic.Objects;
+using BusinessLogic.Utilities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices;
-using BusinessLogic.Objects;
-using BusinessLogic.Utilities;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
@@ -35,7 +30,7 @@ namespace DataAccess.Entities
         {
             List<PositionedModel> posModels = new List<PositionedModel>();
 
-            foreach(PositionedModelEntity elem in entity.PositionedModels)
+            foreach (PositionedModelEntity elem in entity.PositionedModels)
             {
                 PositionedModel newPosModel = new PositionedModel()
                 {
@@ -58,12 +53,12 @@ namespace DataAccess.Entities
                 Owner = entity.OwnerId,
                 CreationDate = (DateTime)entity.CreationDate,
                 LastModificationDate = (DateTime)entity.LastModificationDate,
-                LastRenderDate = (DateTime) entity.LastRenderDate,
+                LastRenderDate = (DateTime)entity.LastRenderDate,
                 CameraDTO = CameraEntity.FromEntity(entity.CameraDTO),
                 Blur = entity.Blur,
                 PositionedModels = posModels,
                 Preview = ppm
-                
+
             };
             return ret;
         }
@@ -94,7 +89,8 @@ namespace DataAccess.Entities
                 ppm = PPMEntity.FromDomain(scene.Preview);
             }
 
-            SceneEntity ret = new SceneEntity() { 
+            SceneEntity ret = new SceneEntity()
+            {
                 Name = scene.Name,
                 OwnerId = scene.Owner,
                 CreationDate = scene.CreationDate,

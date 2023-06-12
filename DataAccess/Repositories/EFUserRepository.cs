@@ -1,12 +1,7 @@
-﻿using BusinessLogic;
+﻿using BusinessLogic.Objects;
 using RepoInterfaces;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
-using BusinessLogic.Objects;
 
 namespace DataAccess
 {
@@ -18,11 +13,8 @@ namespace DataAccess
         {
             using (EFContext dbContext = new EFContext())
             {
-                var query = $"SELECT * " +
-                            $"FROM UserEntities " +
-                            $"WHERE Username = '{name}'";
-                UserEntity entityUser = dbContext.UserEntities.SqlQuery(query).FirstOrDefault();
-                return entityUser != null;
+                return dbContext.UserEntities
+                   .Any(u =>u.Username == name);
             }
         }
         public void AddUser(User user)
@@ -36,35 +28,21 @@ namespace DataAccess
         }
         public User GetUser(string username)
         {
-            User domainUser = null;
-
-            using (EFContext dbContext = new EFContext())
+            using (EFContext context = new EFContext())
             {
-                var query = $"SELECT * " +
-                            $"FROM UserEntities " +
-                            $"WHERE Username = '{username}' ";
-                UserEntity userEntity = dbContext.UserEntities.SqlQuery(query).FirstOrDefault();
+                UserEntity userEntity = context.UserEntities
+                    .FirstOrDefault(u => u.Username == username);
 
-                if (userEntity != null)
-                {
-                    domainUser = UserEntity.FromEntity(userEntity);
-                }
+                return UserEntity.FromEntity(userEntity);
             }
-            return domainUser;
         }
         public bool CheckUsernameAndPasswordCombination(string username, string password)
         {
-            UserEntity userEntity = null;
-
             using (EFContext dbContext = new EFContext())
             {
-                var query = $"SELECT * " +
-                            $"FROM UserEntities " +
-                            $"WHERE Username = '{username}' AND Password = '{password}' ";
-                userEntity = dbContext.UserEntities.SqlQuery(query).FirstOrDefault();
+                return dbContext.UserEntities
+                   .Any(u => u.Username == username && u.Password == password);
             }
-
-            return userEntity != null;
         }
     }
 }

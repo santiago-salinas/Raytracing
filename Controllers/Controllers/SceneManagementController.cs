@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using DataTransferObjects;
+﻿using DataTransferObjects;
 using Services;
 using System;
+using System.Collections.Generic;
 
 namespace Controllers
 {
@@ -25,7 +25,7 @@ namespace Controllers
             {
                 _sceneManagementService.AddScene(newElement);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }

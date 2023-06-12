@@ -1,6 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
-using BusinessLogic.Utilities;
+﻿using BusinessLogic.Utilities;
 
 namespace BusinessLogic.Objects
 {
@@ -8,12 +6,6 @@ namespace BusinessLogic.Objects
     {
         public Lambertian() { }
 
-        public Lambertian(string name, Color color, string user)
-        {
-            Name = name;
-            Color = color;
-            Owner = user;
-        }
 
         public Color Color { get; set; }
         public override Color Preview
@@ -43,7 +35,7 @@ namespace BusinessLogic.Objects
 
         public override string ToString()
         {
-            return Type+":\nRGB (" + Color.ToString() + ")";
+            return Type + ":\nRGB (" + Color.ToString() + ")";
         }
     }
 }

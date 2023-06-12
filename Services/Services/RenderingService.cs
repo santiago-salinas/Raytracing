@@ -1,13 +1,6 @@
-﻿using BusinessLogic;
-using DataTransferObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RepoInterfaces;
-using BusinessLogic.Objects;
+﻿using BusinessLogic.Objects;
 using BusinessLogic.Utilities;
+using DataTransferObjects;
 
 namespace Services
 {
@@ -16,7 +9,7 @@ namespace Services
         public RenderingService() { }
 
         public PpmDTO RenderModelPreview(MaterialDTO material)
-        {            
+        {
             Scene previewScene = new Scene();
 
             Model previewModel = new Model()
@@ -59,8 +52,8 @@ namespace Services
             Scene renderScene = SceneMapper.ConvertToScene(providedScene);
 
             ICamera camera = CameraFactory(renderScene);
-            
-            Engine renderEngine = new Engine(renderScene, camera); 
+
+            Engine renderEngine = new Engine(renderScene, camera);
             PPM render = renderEngine.Render();
 
             return PPMMapper.ConvertToDTO(render);

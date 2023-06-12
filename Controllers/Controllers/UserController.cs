@@ -1,5 +1,5 @@
-﻿using Services;
-using Controllers.Exceptions;
+﻿using Controllers.Exceptions;
+using Services;
 using Services.Exceptions;
 
 namespace Controllers
@@ -25,12 +25,13 @@ namespace Controllers
             }
         }
 
-        public void CheckPasswordValidity(string password) 
+        public void CheckPasswordValidity(string password)
         {
             try
             {
                 _userService.CheckPasswordValidity(password);
-            }catch  (Service_ArgumentException ex)
+            }
+            catch (Service_ArgumentException ex)
             {
                 throw new Controller_ArgumentException(ex.Message);
             }
@@ -40,11 +41,12 @@ namespace Controllers
             try
             {
                 _userService.SignUp(username, password);
-            }catch (Service_ObjectAlreadyExistsException ex)   
+            }
+            catch (Service_ObjectAlreadyExistsException ex)
             {
                 throw new Controller_ObjectAlreadyExistsException(ex.Message);
             }
-            
+
         }
 
         public bool Login(string username, string password)

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using BusinessLogic;
+﻿using BusinessLogic.Objects;
+using DataAccess.Entities;
 using RepoInterfaces;
-using BusinessLogic.Objects;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DataAccess.Repositories
 {
@@ -17,38 +12,26 @@ namespace DataAccess.Repositories
 
         public List<Sphere> GetSpheresFromUser(string username)
         {
-            List<Sphere> spheres = new List<Sphere>();
-
             using (EFContext dbContext = new EFContext())
             {
-                var query = $"SELECT * " +
-                            $"FROM SphereEntities " +
-                            $"WHERE OwnerId = '{username}'";
+                List<SphereEntity> spheres = dbContext.SphereEntities
+                    .Where(s => s.OwnerId == username)
+                    .ToList();
 
-                List<SphereEntity> entities = dbContext.SphereEntities.SqlQuery(query).ToList();
-
-                foreach (SphereEntity entity in entities)
-                {                    
-                    Sphere domainSphere = SphereEntity.FromEntity(entity);
-                    spheres.Add(domainSphere);                                       
-                }
+                return spheres.Select(s => SphereEntity.FromEntity(s)).ToList();
             }
-            return spheres;
         }
 
         public bool ContainsSphere(string name, string owner)
         {
             using (EFContext dbContext = new EFContext())
             {
-                var query = $"SELECT * " +
-                            $"FROM SphereEntities " +
-                            $"WHERE Name = '{name}' AND OwnerId = '{owner}'";
-                SphereEntity entitySphere = dbContext.SphereEntities.SqlQuery(query).FirstOrDefault();
-                return entitySphere != null;                
+                return dbContext.SphereEntities
+                   .Any(s => s.Name == name && s.OwnerId == owner);
             }
         }
 
-        public void AddSphere(Sphere sphere) 
+        public void AddSphere(Sphere sphere)
         {
             using (EFContext dbContext = new EFContext())
             {
@@ -58,40 +41,27 @@ namespace DataAccess.Repositories
             }
         }
 
-        public void RemoveSphere(string name, string owner) 
+        public void RemoveSphere(string name, string owner)
         {
             using (EFContext dbContext = new EFContext())
             {
-                var query = $"SELECT * " +
-                            $"FROM SphereEntities " +
-                            $"WHERE Name = '{name}' AND OwnerId = '{owner}'";
-                SphereEntity sphere = dbContext.SphereEntities.SqlQuery(query).FirstOrDefault();
+                SphereEntity sphereEntity = dbContext.SphereEntities
+                    .FirstOrDefault(m => m.Name == name && m.Owner.Username == owner);
 
-                if (sphere != null)
-                {
-                    dbContext.SphereEntities.Remove(sphere);
-                    dbContext.SaveChanges();
-                }
+                dbContext.SphereEntities.Remove(sphereEntity);                    
+                dbContext.SaveChanges();                
             }
         }
 
-        public Sphere GetSphere(string name, string owner) 
+        public Sphere GetSphere(string name, string owner)
         {
-            Sphere domainSphere = null;
-
-            using (EFContext dbContext = new EFContext())
+            using (EFContext context = new EFContext())
             {
-                var query = $"SELECT * " +
-                            $"FROM SphereEntities " +
-                            $"WHERE Name = '{name}' AND OwnerId = '{owner}'";
-                SphereEntity entitySphere = dbContext.SphereEntities.SqlQuery(query).FirstOrDefault();
+                SphereEntity sphereEntity = context.SphereEntities
+                    .FirstOrDefault(m => m.Name == name && m.OwnerId == owner);
 
-                if (entitySphere != null)
-                {
-                    domainSphere = SphereEntity.FromEntity(entitySphere);
-                }
+                return SphereEntity.FromEntity(sphereEntity);
             }
-            return domainSphere;
         }
     }
 }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BusinessLogic.Objects;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessLogic;
-using BusinessLogic.Objects;
 
 namespace DataAccess
 {

@@ -1,12 +1,10 @@
-﻿using RepoInterfaces;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Permissions;
-using BusinessLogic.Exceptions;
-using BusinessLogic;
-using System;
+﻿using BusinessLogic.Exceptions;
 using BusinessLogic.Objects;
 using BusinessLogic.Utilities;
+using RepoInterfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Repositories
 {
@@ -80,22 +78,22 @@ namespace Repositories
             scene.AddPositionedModel(model);
         }
 
-        public void RemoveModelFromScene(Scene scene, PositionedModel model) 
+        public void RemoveModelFromScene(Scene scene, PositionedModel model)
         {
             scene.RemovePositionedModel(model);
         }
 
-        public void UpdateRenderDate(string sceneName, string owner, DateTime date) 
+        public void UpdateRenderDate(string sceneName, string owner, DateTime date)
         {
             Scene scene = GetScene(sceneName, owner);
             scene.UpdateLastRenderDate();
         }
-        public void UpdateModificationDate(string sceneName, string owner, DateTime date) 
+        public void UpdateModificationDate(string sceneName, string owner, DateTime date)
         {
             Scene scene = GetScene(sceneName, owner);
             scene.UpdateLastModificationDate();
         }
-        public void UpdateCamera(string sceneName, string owner, BLCameraDTO camera) 
+        public void UpdateCamera(string sceneName, string owner, BLCameraDTO camera)
         {
             Scene scene = GetScene(sceneName, owner);
             scene.CameraDTO = camera;

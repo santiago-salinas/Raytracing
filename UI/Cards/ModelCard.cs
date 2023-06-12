@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Controllers;
+using Controllers.Exceptions;
+using DataTransferObjects;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Controllers.Exceptions;
-using Controllers.Controllers;
-using DataTransferObjects;
 
 namespace UI.Cards
 {

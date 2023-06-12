@@ -1,12 +1,10 @@
-﻿using BusinessLogic;
+﻿using Controllers;
+using DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using UI.Cards;
 using UI.Dialogs;
-using Controllers;
-using Controllers.Controllers;
-using DataTransferObjects;
 
 namespace UI.Tabs
 {
@@ -29,7 +27,7 @@ namespace UI.Tabs
             List<ModelDTO> modelList = _controller.GetModelsFromUser(_currentUser);
             foreach (ModelDTO elem in modelList)
             {
-                ModelCard modelCard = new ModelCard(elem,_controller);
+                ModelCard modelCard = new ModelCard(elem, _controller);
                 flowLayoutPanel.Controls.Add(modelCard);
             }
         }
@@ -41,7 +39,7 @@ namespace UI.Tabs
 
             if (result == DialogResult.OK)
             {
-                ModelCard modelCard = new ModelCard(addModel.NewModel,_controller);
+                ModelCard modelCard = new ModelCard(addModel.NewModel, _controller);
                 flowLayoutPanel.Controls.Add(modelCard);
             }
         }

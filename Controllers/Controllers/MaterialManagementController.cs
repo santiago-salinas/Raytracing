@@ -1,10 +1,8 @@
-﻿using Services;
-using System.Collections.Generic;
-using System;
+﻿using Controllers.Exceptions;
 using DataTransferObjects;
-using System.Xml.Linq;
+using Services;
 using Services.Exceptions;
-using Controllers.Exceptions;
+using System.Collections.Generic;
 
 namespace Controllers
 {
@@ -27,7 +25,7 @@ namespace Controllers
             catch (Service_ArgumentException ex)
             {
                 throw new Controller_ArgumentException(ex.Message);
-            }            
+            }
         }
 
         public void RemoveMaterial(string name, string ownerName)
@@ -39,10 +37,10 @@ namespace Controllers
             else
             {
                 _service.RemoveMaterial(name, ownerName);
-            }            
+            }
         }
 
-        public List<MaterialDTO> GetMaterialsFromUser(string owner) 
+        public List<MaterialDTO> GetMaterialsFromUser(string owner)
         {
             return _service.GetMaterialsFromUser(owner);
         }

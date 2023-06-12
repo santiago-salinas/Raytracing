@@ -117,7 +117,7 @@ namespace BusinessLogic.Utilities
 
         public override string ToString()
         {
-            return Red+","+Green+","+Blue;
+            return Red + "," + Green + "," + Blue;
         }
     }
 }
