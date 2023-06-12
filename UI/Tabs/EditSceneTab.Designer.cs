@@ -305,9 +305,10 @@
             // 
             this.checkBlur.AutoSize = true;
             this.checkBlur.Enabled = false;
+            this.checkBlur.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBlur.Location = new System.Drawing.Point(613, 200);
             this.checkBlur.Name = "checkBlur";
-            this.checkBlur.Size = new System.Drawing.Size(45, 17);
+            this.checkBlur.Size = new System.Drawing.Size(55, 23);
             this.checkBlur.TabIndex = 26;
             this.checkBlur.Text = "Use";
             this.checkBlur.UseVisualStyleBackColor = true;
