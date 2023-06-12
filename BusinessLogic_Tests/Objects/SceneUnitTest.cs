@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using Repositories;
 using BusinessLogic.Objects;
+using BusinessLogic.Utilities;
 
 namespace BusinessLogic_Tests
 {

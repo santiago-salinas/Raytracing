@@ -1,5 +1,6 @@
 ﻿using System;
 using BusinessLogic.Exceptions;
+using BusinessLogic.Utilities;
 
 namespace BusinessLogic.Objects
 {

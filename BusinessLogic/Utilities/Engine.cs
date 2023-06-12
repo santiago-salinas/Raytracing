@@ -1,7 +1,7 @@
 ﻿using System;
 using BusinessLogic.Objects;
 
-namespace BusinessLogic
+namespace BusinessLogic.Utilities
 {
     public class Engine
     {

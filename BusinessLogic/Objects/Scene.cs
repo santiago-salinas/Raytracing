@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using BusinessLogic.Exceptions;
-
+using BusinessLogic.Utilities;
 
 namespace BusinessLogic.Objects
 {

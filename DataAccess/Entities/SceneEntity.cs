@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using BusinessLogic.Objects;
+using BusinessLogic.Utilities;
 
 namespace DataAccess.Entities
 {

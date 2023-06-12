@@ -1,4 +1,5 @@
 ﻿using System;
+using BusinessLogic.Utilities;
 
 namespace BusinessLogic.Objects
 {

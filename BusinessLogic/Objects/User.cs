@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 
+
 namespace BusinessLogic.Objects
 {
     public class User

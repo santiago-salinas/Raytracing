@@ -1,4 +1,6 @@
-﻿namespace BusinessLogic.Objects
+﻿using BusinessLogic.Utilities;
+
+namespace BusinessLogic.Objects
 {
     public class PositionedModel
     {

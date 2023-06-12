@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Xml.Linq;
 using BusinessLogic.Objects;
+using BusinessLogic.Utilities;
 
 namespace DataAccess.Repositories
 {

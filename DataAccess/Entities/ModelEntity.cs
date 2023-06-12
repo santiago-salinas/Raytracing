@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using DataAccess.Entities;
 using BusinessLogic;
 using BusinessLogic.Objects;
+using BusinessLogic.Utilities;
 
 namespace DataAccess
 {
