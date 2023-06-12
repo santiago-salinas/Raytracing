@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Entities;
 using BusinessLogic;
+using BusinessLogic.Objects;
 
 namespace DataAccess
 {

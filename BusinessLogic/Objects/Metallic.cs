@@ -2,7 +2,7 @@
 using BusinessLogic.Exceptions;
 
 
-namespace BusinessLogic
+namespace BusinessLogic.Objects
 {
     public class Metallic : Material
     {

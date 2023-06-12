@@ -3,6 +3,7 @@ using Repositories;
 using BusinessLogic.Exceptions;
 using BusinessLogic;
 using RepoInterfaces;
+using BusinessLogic.Objects;
 
 namespace Repositories
 {

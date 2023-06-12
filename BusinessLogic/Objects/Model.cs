@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BusinessLogic
+namespace BusinessLogic.Objects
 {
     public class Model
     {

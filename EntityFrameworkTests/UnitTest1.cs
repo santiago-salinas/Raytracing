@@ -6,6 +6,7 @@ using DataAccess;
 using DataAccess.Entities;
 using System.Linq;
 using System.Collections.Generic;
+using BusinessLogic.Objects;
 
 namespace EntityFrameworkTests
 {

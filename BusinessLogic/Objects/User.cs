@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace BusinessLogic
+namespace BusinessLogic.Objects
 {
     public class User
     {

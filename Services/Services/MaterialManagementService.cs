@@ -4,6 +4,7 @@ using RepoInterfaces;
 using System.Collections.Generic;
 using BusinessLogic.Exceptions;
 using Services.Exceptions;
+using BusinessLogic.Objects;
 
 namespace Services
 {

@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using DataAccess.Entities;
 using BusinessLogic;
+using BusinessLogic.Objects;
 
 namespace DataAccess
 {

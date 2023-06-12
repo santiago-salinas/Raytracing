@@ -4,7 +4,7 @@ using System.Security.Cryptography.X509Certificates;
 using BusinessLogic.Exceptions;
 
 
-namespace BusinessLogic
+namespace BusinessLogic.Objects
 {
     public class Scene
     {

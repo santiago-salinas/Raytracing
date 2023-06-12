@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RepoInterfaces;
+using BusinessLogic.Objects;
+
 namespace Services
 {
     public class RenderingService

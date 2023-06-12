@@ -10,7 +10,7 @@ using RepoInterfaces;
 using DataAccess.Entities;
 using System.Data.Entity.Infrastructure;
 using DataAccess.Exceptions;
-
+using BusinessLogic.Objects;
 
 namespace DataAccess.Repositories
 {

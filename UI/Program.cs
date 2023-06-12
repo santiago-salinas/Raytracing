@@ -11,6 +11,7 @@ using DataAccess.Repositories;
 using System.Threading;
 using System.Data.SqlClient;
 using Repositories;
+using BusinessLogic.Objects;
 
 namespace UI
 {

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using BusinessLogic;
 using RepoInterfaces;
+using BusinessLogic.Objects;
 
 namespace DataAccess.Repositories
 {

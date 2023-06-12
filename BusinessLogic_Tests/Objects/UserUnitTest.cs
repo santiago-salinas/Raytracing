@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using RepoInterfaces;
 using Repositories;
+using BusinessLogic.Objects;
 
 namespace BusinessLogic_Tests
 {

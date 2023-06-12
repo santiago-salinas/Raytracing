@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using BusinessLogic.Objects;
 
 namespace DataTransferObjects
 {

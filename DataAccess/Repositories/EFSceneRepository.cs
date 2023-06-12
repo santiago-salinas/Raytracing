@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Xml.Linq;
-
+using BusinessLogic.Objects;
 
 namespace DataAccess.Repositories
 {

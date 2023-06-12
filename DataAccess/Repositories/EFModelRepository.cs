@@ -10,6 +10,7 @@ using System.Data.Entity;
 using System.Xml.Linq;
 using System.Data.Entity.Infrastructure;
 using DataAccess.Exceptions;
+using BusinessLogic.Objects;
 
 namespace DataAccess.Repositories
 {
