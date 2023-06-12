@@ -1,6 +1,7 @@
 ﻿using System;
+using BusinessLogic.Utilities;
 
-namespace BusinessLogic
+namespace BusinessLogic.Objects
 {
     public class Model
     {

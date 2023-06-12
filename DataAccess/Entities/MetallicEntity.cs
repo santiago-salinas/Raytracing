@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessLogic;
+using BusinessLogic.Objects;
+using BusinessLogic.Utilities;
 
 namespace DataAccess.Entities
 {

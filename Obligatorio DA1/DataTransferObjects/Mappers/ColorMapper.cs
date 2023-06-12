@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using DataTransferObjects;
 using BusinessLogic;
 using BusinessLogic.Exceptions;
-
+using BusinessLogic.Utilities;
 
 namespace DataTransferObjects
 {

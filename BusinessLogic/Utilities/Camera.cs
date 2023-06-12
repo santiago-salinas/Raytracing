@@ -1,7 +1,7 @@
 ﻿using BusinessLogic;
 using System;
 
-namespace BusinessLogic
+namespace BusinessLogic.Utilities
 {
     public class Camera : ICamera
     {

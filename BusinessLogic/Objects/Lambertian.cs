@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Xml.Linq;
+using BusinessLogic.Utilities;
 
-namespace BusinessLogic
+namespace BusinessLogic.Objects
 {
     public class Lambertian : Material
     {

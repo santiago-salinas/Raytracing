@@ -2,7 +2,7 @@
 using BusinessLogic;
 using System.Collections.Generic;
 using BusinessLogic.Exceptions;
-
+using BusinessLogic.Objects;
 
 namespace Repositories
 {

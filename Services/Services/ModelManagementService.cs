@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using Services.Exceptions;
 using BusinessLogic.Exceptions;
+using BusinessLogic.Objects;
 
 namespace Services
 {

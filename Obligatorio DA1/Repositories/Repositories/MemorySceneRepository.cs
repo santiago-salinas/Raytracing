@@ -5,6 +5,8 @@ using System.Security.Permissions;
 using BusinessLogic.Exceptions;
 using BusinessLogic;
 using System;
+using BusinessLogic.Objects;
+using BusinessLogic.Utilities;
 
 namespace Repositories
 {

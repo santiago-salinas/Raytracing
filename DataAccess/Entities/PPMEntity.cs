@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLogic.Utilities;
 
 namespace DataAccess.Entities
 {
@@ -21,7 +22,7 @@ namespace DataAccess.Entities
 
         public static PPMEntity FromDomain(PPM ppm)
         {
-            BusinessLogic.Color[,] _pixels = ppm.PixelsValues;
+            BusinessLogic.Utilities.Color[,] _pixels = ppm.PixelsValues;
             PPMEntity ret = new PPMEntity()
             {
                 Id = Guid.NewGuid(),
@@ -38,7 +39,7 @@ namespace DataAccess.Entities
             int width = ppm.Width;
             int height = ppm.Heigth;
             Bitmap bitmap = new Bitmap(width, height);
-            BusinessLogic.Color[,] pixels = ppm.PixelsValues;
+            BusinessLogic.Utilities.Color[,] pixels = ppm.PixelsValues;
 
             for (int row = 0; row < height; row++)
             {
@@ -79,7 +80,7 @@ namespace DataAccess.Entities
                     double green = pixel.G/ (double)255;
                     double blue = pixel.B/ (double)255;
 
-                    BusinessLogic.Color color = new BusinessLogic.Color(red, green, blue);
+                    BusinessLogic.Utilities.Color color = new BusinessLogic.Utilities.Color(red, green, blue);
                     int rowinput = -row + ret.Heigth - 1;
                     ret.SavePixel(rowinput, column, color);
                 }

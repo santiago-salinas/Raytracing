@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BusinessLogic;
 using DataTransferObjects;
-
+using BusinessLogic.Utilities;
 
 namespace DataTransferObjects
 {

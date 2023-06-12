@@ -1,7 +1,8 @@
 ﻿using System;
 using BusinessLogic.Exceptions;
+using BusinessLogic.Utilities;
 
-namespace BusinessLogic
+namespace BusinessLogic.Objects
 {
     public abstract class Material
     {
