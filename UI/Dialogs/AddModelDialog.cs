@@ -1,5 +1,4 @@
 ﻿using Controllers;
-using Controllers.Controllers;
 using Controllers.Exceptions;
 using DataTransferObjects;
 using System;
@@ -23,7 +22,7 @@ namespace UI.Dialogs
             InitializeComponent();
             _loggedUser = context.CurrentUser;
             _controller = context.ModelController;
-            
+
             _availableShapes = _controller.GetAvailableShapes(_loggedUser);
             _availableMaterials = _controller.GetAvailableMaterials(_loggedUser);
 
@@ -33,7 +32,7 @@ namespace UI.Dialogs
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            string modelName = nameTextBox.Text;            
+            string modelName = nameTextBox.Text;
             nameStatusLabel.Text = "";
             bool nameIsCorrect = true;
 
@@ -58,7 +57,7 @@ namespace UI.Dialogs
             {
                 _controller.AddModel(NewModel);
             }
-            catch(Controller_ArgumentException ex)
+            catch (Controller_ArgumentException ex)
             {
                 nameStatusLabel.Text = ex.Message;
                 nameIsCorrect = false;
@@ -69,7 +68,7 @@ namespace UI.Dialogs
                 DialogResult = DialogResult.OK;
             }
 
-            
+
         }
 
         private void ShapeComboBox_SelectedIndexChanged(object sender, EventArgs e)

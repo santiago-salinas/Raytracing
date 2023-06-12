@@ -1,6 +1,5 @@
-﻿using System;
-using BusinessLogic.Exceptions;
-using BusinessLogic.Utilities;
+﻿using BusinessLogic.Utilities;
+using System;
 
 namespace BusinessLogic.Objects
 {
@@ -13,12 +12,14 @@ namespace BusinessLogic.Objects
         public Metallic() { }
 
         public Color Color { get; set; }
-        public double Roughness {
+        public double Roughness
+        {
             get
             {
                 return _roughness;
             }
-            set {
+            set
+            {
                 if (ValueIsBetweenStrictBounds(value, _lowerBoundForPercentages, _upperBoundForPercentages))
                 {
                     _roughness = value;
@@ -47,7 +48,7 @@ namespace BusinessLogic.Objects
 
         public override string ToString()
         {
-            return Type + ":\nRGB (" + Color.ToString() + ")\nRoughness: "+Roughness;
+            return Type + ":\nRGB (" + Color.ToString() + ")\nRoughness: " + Roughness;
         }
 
         public override Ray GetBouncedRay(HitRecord hitRecord)
@@ -56,16 +57,16 @@ namespace BusinessLogic.Objects
             newVectorPoint = newVectorPoint.Add(Vector.GetRandomInUnitSphere().Multiply(hitRecord.Roughness));
             Ray newRay = new Ray(hitRecord.Intersection, newVectorPoint);
 
-            if(newRay.Direction.Dot(hitRecord.Normal) > 0)
+            if (newRay.Direction.Dot(hitRecord.Normal) > 0)
             {
                 return newRay;
             }
-            
+
             newRay.Nulleable = true;
             return newRay;
         }
 
-        public Vector Reflect(Vector vectorV,Vector vectorN)
+        public Vector Reflect(Vector vectorV, Vector vectorN)
         {
             double dotVN = vectorV.Dot(vectorN);
             return vectorV.Subtract(vectorN.Multiply(2 * dotVN));

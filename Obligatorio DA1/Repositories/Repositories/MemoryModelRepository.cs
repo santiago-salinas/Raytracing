@@ -1,9 +1,7 @@
-
-using System.Collections.Generic;
 using BusinessLogic.Exceptions;
-using RepoInterfaces;
-using BusinessLogic;
 using BusinessLogic.Objects;
+using RepoInterfaces;
+using System.Collections.Generic;
 
 namespace Repositories
 {
@@ -12,7 +10,7 @@ namespace Repositories
 
         private List<Model> _modelList = new List<Model>();
         private ISceneRepository _sceneRepository;
-        public MemoryModelRepository(ISceneRepository sceneRepo) 
+        public MemoryModelRepository(ISceneRepository sceneRepo)
         {
             _sceneRepository = sceneRepo;
         }
@@ -73,7 +71,7 @@ namespace Repositories
         {
             Model model = GetModel(name, owner);
 
-            if (_sceneRepository.ExistsSceneUsingModel(name,owner))
+            if (_sceneRepository.ExistsSceneUsingModel(name, owner))
             {
                 throw new BusinessLogicException("Cannot delete model used by an existing scene");
             }

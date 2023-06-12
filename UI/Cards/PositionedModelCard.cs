@@ -32,8 +32,8 @@ namespace UI.Cards
             EditSceneTab editSceneTab = (EditSceneTab)Parent.Parent;
             editSceneTab.NotifyThatSeneWasModified();
             this.Parent.Controls.Remove(this);
-            
-        }        
+
+        }
 
         private string VectorToString(VectorDTO vector)
         {

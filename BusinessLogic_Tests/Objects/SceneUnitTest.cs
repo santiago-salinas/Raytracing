@@ -1,11 +1,10 @@
-﻿using BusinessLogic;
-using BusinessLogic.Exceptions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using Repositories;
+﻿using BusinessLogic.Exceptions;
 using BusinessLogic.Objects;
 using BusinessLogic.Utilities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Repositories;
+using System;
+using System.Collections.Generic;
 
 namespace BusinessLogic_Tests
 {
@@ -169,7 +168,7 @@ namespace BusinessLogic_Tests
             Assert.IsTrue(isContainedByScene);
         }
 
-        
+
 
         [TestMethod]
         public void RemovePositionedModelFromScene()
@@ -238,11 +237,11 @@ namespace BusinessLogic_Tests
             //act            
             DateTime previousDate = _testScene.LastModificationDate;
             DateTimeProvider.Reset();
-            _testScene.AddPositionedModel(_testPositionedModel);            
+            _testScene.AddPositionedModel(_testPositionedModel);
             DateTime newDate = _testScene.LastModificationDate;
             bool lastModificationIsLater = newDate > previousDate;
             //assert
-            Assert.AreEqual(newDate,DateTimeProvider.Now);
+            Assert.AreEqual(newDate, DateTimeProvider.Now);
             Assert.IsTrue(lastModificationIsLater);
         }
 
@@ -263,7 +262,7 @@ namespace BusinessLogic_Tests
             //assert
             Assert.AreEqual(newDate, DateTimeProvider.Now);
             Assert.IsTrue(lastModificationIsLater);
-            
+
         }
 
         [TestMethod]

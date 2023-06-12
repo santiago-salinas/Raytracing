@@ -1,24 +1,20 @@
-﻿using BusinessLogic;
+﻿using BusinessLogic.Objects;
+using BusinessLogic.Utilities;
 using DataAccess.Entities;
 using DataAccess.Exceptions;
 using RepoInterfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
-using System.Xml.Linq;
-using BusinessLogic.Objects;
-using BusinessLogic.Utilities;
 
 namespace DataAccess.Repositories
 {
     public class EFSceneRepository : ISceneRepository
     {
         public EFSceneRepository() { }
-        
+
 
         public bool ContainsScene(string name, string user)
         {
@@ -159,9 +155,9 @@ namespace DataAccess.Repositories
 
         public void UpdateRenderDate(string sceneName, string owner, DateTime date)
         {
-            using (EFContext context = new EFContext()) 
+            using (EFContext context = new EFContext())
             {
-                SceneEntity sceneEntity = context.SceneEntities.Find(sceneName,owner);
+                SceneEntity sceneEntity = context.SceneEntities.Find(sceneName, owner);
 
                 if (sceneEntity != null)
                 {
@@ -169,7 +165,7 @@ namespace DataAccess.Repositories
                     context.SaveChanges();
                 }
             }
-            
+
         }
         public void UpdateModificationDate(string sceneName, string owner, DateTime date)
         {
@@ -192,7 +188,7 @@ namespace DataAccess.Repositories
                     .Include(s => s.CameraDTO)
                     .FirstOrDefault(s => s.Name == sceneName && s.OwnerId == owner);
                 CameraEntity oldCamera = sceneEntity.CameraDTO;
-                
+
                 if (sceneEntity != null)
                 {
                     sceneEntity.CameraDTO = CameraEntity.FromDomain(camera);
@@ -214,7 +210,7 @@ namespace DataAccess.Repositories
                 if (sceneEntity != null)
                 {
                     sceneEntity.PPMEntity = PPMEntity.FromDomain(preview);
-                    if(oldPreview != null)
+                    if (oldPreview != null)
                     {
                         context.PPMEntities.Remove(oldPreview);
                     }

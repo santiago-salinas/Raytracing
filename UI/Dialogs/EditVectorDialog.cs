@@ -1,6 +1,6 @@
-﻿using System;
+﻿using DataTransferObjects;
+using System;
 using System.Windows.Forms;
-using DataTransferObjects;
 
 namespace UI.Dialogs
 {

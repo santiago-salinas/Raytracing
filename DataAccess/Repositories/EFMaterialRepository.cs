@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
-using System.Xml.Linq;
-using BusinessLogic;
-using RepoInterfaces;
+﻿using BusinessLogic.Objects;
 using DataAccess.Entities;
-using System.Data.Entity.Infrastructure;
 using DataAccess.Exceptions;
-using BusinessLogic.Objects;
+using RepoInterfaces;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
 
 namespace DataAccess.Repositories
 {
@@ -57,7 +52,7 @@ namespace DataAccess.Repositories
             catch (DbUpdateException ex)
             {
                 throw new RepositoryException("User already owns material with that name");
-            }            
+            }
         }
 
         public Material GetMaterial(string name, string user)
@@ -78,7 +73,7 @@ namespace DataAccess.Repositories
             using (EFContext context = new EFContext())
             {
                 MaterialEntity materialEntity = context.MaterialEntities
-                    .Include (m => m.Lambertian) .Include(m => m.Metallic)
+                    .Include(m => m.Lambertian).Include(m => m.Metallic)
                     .FirstOrDefault(m => m.Name == name && m.Owner.Username == owner);
 
                 if (materialEntity != null)

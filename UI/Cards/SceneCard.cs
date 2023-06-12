@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Controllers;
+using DataTransferObjects;
+using System;
 using System.Globalization;
 using System.Windows.Forms;
 using UI.Tabs;
-using Controllers;
-using DataTransferObjects;
 
 namespace UI.Cards
 {
     public partial class SceneCard : UserControl
     {
-        private SceneDTO _thisScene;        
+        private SceneDTO _thisScene;
         private SceneManagementController _controller;
 
         public SceneCard(SceneManagementController controller, SceneDTO scene)

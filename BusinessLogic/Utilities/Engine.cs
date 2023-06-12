@@ -1,5 +1,5 @@
-﻿using System;
-using BusinessLogic.Objects;
+﻿using BusinessLogic.Objects;
+using System;
 
 namespace BusinessLogic.Utilities
 {
@@ -37,7 +37,7 @@ namespace BusinessLogic.Utilities
             ResolutionY = CameraUsedToRender.ResolutionY;
             MaxDepth = CameraUsedToRender.MaxDepth;
 
-           
+
         }
         private Scene SceneToRender { get; set; }
         private ICamera CameraUsedToRender { get; set; }

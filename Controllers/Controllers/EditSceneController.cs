@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessLogic;
+﻿using Controllers.Exceptions;
 using DataTransferObjects;
 using Services;
 using Services.Exceptions;
-using Controllers.Exceptions;
+using System.Collections.Generic;
 
 
 namespace Controllers
@@ -26,11 +21,12 @@ namespace Controllers
                 SceneDTO newScene = EditSceneService.CreateNewScene(owner, name);
                 AddNewScene(newScene);
                 return newScene;
-            }catch(Service_ArgumentException ex)
+            }
+            catch (Service_ArgumentException ex)
             {
                 throw new Controller_ArgumentException(ex.Message);
             }
-            
+
         }
 
         public List<ModelDTO> GetAvailableModels(string owner)

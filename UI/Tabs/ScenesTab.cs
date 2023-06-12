@@ -1,10 +1,9 @@
-﻿using BusinessLogic;
+﻿using Controllers;
+using DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using UI.Cards;
-using Controllers;
-using DataTransferObjects;
 
 namespace UI.Tabs
 {
@@ -22,7 +21,7 @@ namespace UI.Tabs
             _mainPage = mainPage;
             _controller = context.SceneController;
             _currentUser = context.CurrentUser;
-            LoadScenes();    
+            LoadScenes();
         }
 
         public void LoadScenes()
@@ -31,8 +30,8 @@ namespace UI.Tabs
             List<SceneDTO> sceneList = _controller.GetScenesFromUser(_currentUser);
             foreach (SceneDTO elem in sceneList)
             {
-               SceneCard sceneCard = new SceneCard(_controller,elem);
-               flowLayoutPanel.Controls.Add(sceneCard);
+                SceneCard sceneCard = new SceneCard(_controller, elem);
+                flowLayoutPanel.Controls.Add(sceneCard);
             }
         }
 

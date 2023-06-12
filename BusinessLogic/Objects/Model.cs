@@ -1,5 +1,5 @@
-﻿using System;
-using BusinessLogic.Utilities;
+﻿using BusinessLogic.Utilities;
+using System;
 
 namespace BusinessLogic.Objects
 {
@@ -14,7 +14,7 @@ namespace BusinessLogic.Objects
             hit = Material.IsHitByRay(hit);
             return hit;
         }
-        
+
         public Ray GetBouncedRay(HitRecord hitRecord)
         {
             return Material.GetBouncedRay(hitRecord);

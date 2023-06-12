@@ -1,7 +1,5 @@
-﻿using BusinessLogic;
-using Controllers;
+﻿using Controllers;
 using System;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace UI
@@ -26,7 +24,7 @@ namespace UI
 
             if (credentialsAreCorrect)
             {
-                
+
                 _context.CurrentUser = userNameText;
                 new MainPage(_context).Show();
                 this.Hide();

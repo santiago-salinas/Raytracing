@@ -1,9 +1,7 @@
-﻿using System;
-using System.Windows.Forms;
-using Controllers;
+﻿using Controllers;
 using Controllers.Exceptions;
-using Services;
-using DataTransferObjects;
+using System;
+using System.Windows.Forms;
 
 namespace UI
 {
@@ -16,7 +14,7 @@ namespace UI
         private Context _context;
         public SignUpPage(Context context)
         {
-            InitializeComponent();            
+            InitializeComponent();
             _controller = context.UserController;
             _context = context;
         }
@@ -26,9 +24,9 @@ namespace UI
             string username = userNameTextBox.Text;
             string password = passwordTextBox.Text;
             usernameStatusLabel.Text = "";
-            UsernameTextBoxChanged(sender,e);
+            UsernameTextBoxChanged(sender, e);
 
-            if(_usernameFieldIsCorrect && _passwordFieldIsCorrect && _confirmPasswordFieldIsCorrect)
+            if (_usernameFieldIsCorrect && _passwordFieldIsCorrect && _confirmPasswordFieldIsCorrect)
             {
                 try
                 {
@@ -40,7 +38,8 @@ namespace UI
                     signUpLabel.Visible = true;
                     usernameStatusLabel.Text = ex.Message;
                 }
-            }else
+            }
+            else
             {
                 signUpLabel.Visible = true;
             }

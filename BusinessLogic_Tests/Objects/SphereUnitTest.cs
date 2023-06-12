@@ -1,10 +1,9 @@
-﻿using BusinessLogic;
-using BusinessLogic.Exceptions;
+﻿using BusinessLogic.Exceptions;
+using BusinessLogic.Objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Repositories;
 using System;
 using System.Collections.Generic;
-using Repositories;
-using BusinessLogic.Objects;
 
 namespace BusinessLogic_Tests
 {
@@ -17,7 +16,7 @@ namespace BusinessLogic_Tests
         private string _testName;
         private string _testNullName;
         private User _testUser;
-        
+
         private MemorySphereRepository memorySphereRepository;
         private MemorySceneRepository memorySceneRepository;
         private MemoryModelRepository memoryModelRepository;

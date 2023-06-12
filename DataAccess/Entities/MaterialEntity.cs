@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using BusinessLogic.Objects;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessLogic;
-using BusinessLogic.Objects;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.Entities
 {
@@ -23,9 +17,9 @@ namespace DataAccess.Entities
         public LambertianEntity Lambertian { get; set; }
         public MetallicEntity Metallic { get; set; }
 
-        public static Material FromEntity(MaterialEntity entity) 
+        public static Material FromEntity(MaterialEntity entity)
         {
-            if(entity.Lambertian != null)
+            if (entity.Lambertian != null)
             {
                 return LambertianEntity.FromEntity(entity.Lambertian);
             }
@@ -37,7 +31,7 @@ namespace DataAccess.Entities
 
         public static MaterialEntity FromDomain(Material material, EFContext context)
         {
-            if(material.Type == "lambertian" ) 
+            if (material.Type == "lambertian")
             {
                 LambertianEntity lamEntity = LambertianEntity.FromDomain(material as Lambertian, context);
                 return lamEntity.Material;

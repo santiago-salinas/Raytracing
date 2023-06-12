@@ -1,11 +1,10 @@
-﻿using BusinessLogic;
-using BusinessLogic.Exceptions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using Repositories;
+﻿using BusinessLogic.Exceptions;
 using BusinessLogic.Objects;
 using BusinessLogic.Utilities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Repositories;
+using System;
+using System.Collections.Generic;
 
 namespace BusinessLogic_Tests
 {

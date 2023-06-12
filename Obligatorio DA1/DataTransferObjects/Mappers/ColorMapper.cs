@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataTransferObjects;
-using BusinessLogic;
-using BusinessLogic.Exceptions;
+﻿using BusinessLogic.Exceptions;
 using BusinessLogic.Utilities;
 
 namespace DataTransferObjects
@@ -48,7 +41,7 @@ namespace DataTransferObjects
 
         private static bool IsBetweenBounds(double value)
         {
-            
+
             return (value >= _lowerBound) && (value <= _upperBound);
         }
     }

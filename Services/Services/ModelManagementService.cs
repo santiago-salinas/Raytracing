@@ -1,11 +1,9 @@
-﻿using BusinessLogic;
+﻿using BusinessLogic.Exceptions;
+using BusinessLogic.Objects;
 using DataTransferObjects;
 using RepoInterfaces;
-using System;
-using System.Collections.Generic;
 using Services.Exceptions;
-using BusinessLogic.Exceptions;
-using BusinessLogic.Objects;
+using System.Collections.Generic;
 
 namespace Services
 {
@@ -32,12 +30,12 @@ namespace Services
                 {
                     Model model = ModelMapper.ConvertToModel(modelDTO);
                     _modelRepository.AddModel(model);
-                }                
+                }
             }
-            catch(BusinessLogicException ex)
+            catch (BusinessLogicException ex)
             {
                 throw new Service_ArgumentException(ex.Message);
-            }                       
+            }
         }
 
         public List<ModelDTO> GetModelsFromUser(string owner)
@@ -83,7 +81,7 @@ namespace Services
             return _modelRepository.ExistsModelUsingTheSphere(sphereName, sphereOwner);
         }
 
-        public bool ExistsModelUsingMaterial(string materialName, string materialOwner) 
+        public bool ExistsModelUsingMaterial(string materialName, string materialOwner)
         {
             return _modelRepository.ExistsModelUsingTheMaterial(materialName, materialOwner);
         }

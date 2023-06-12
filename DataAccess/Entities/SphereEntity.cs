@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BusinessLogic.Objects;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using BusinessLogic;
-using BusinessLogic.Objects;
+using System.Linq;
 
 namespace DataAccess
 {
@@ -24,7 +19,7 @@ namespace DataAccess
         public double Radius { get; set; }
 
 
-        public static SphereEntity FromDomain (Sphere sphere, EFContext efContext)
+        public static SphereEntity FromDomain(Sphere sphere, EFContext efContext)
         {
             string owner = sphere.Owner;
             UserEntity userEntity;

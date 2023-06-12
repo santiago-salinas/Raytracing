@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using BusinessLogic;
+﻿using BusinessLogic.Objects;
 using RepoInterfaces;
-using BusinessLogic.Objects;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DataAccess.Repositories
 {
@@ -28,9 +22,9 @@ namespace DataAccess.Repositories
                 List<SphereEntity> entities = dbContext.SphereEntities.SqlQuery(query).ToList();
 
                 foreach (SphereEntity entity in entities)
-                {                    
+                {
                     Sphere domainSphere = SphereEntity.FromEntity(entity);
-                    spheres.Add(domainSphere);                                       
+                    spheres.Add(domainSphere);
                 }
             }
             return spheres;
@@ -44,11 +38,11 @@ namespace DataAccess.Repositories
                             $"FROM SphereEntities " +
                             $"WHERE Name = '{name}' AND OwnerId = '{owner}'";
                 SphereEntity entitySphere = dbContext.SphereEntities.SqlQuery(query).FirstOrDefault();
-                return entitySphere != null;                
+                return entitySphere != null;
             }
         }
 
-        public void AddSphere(Sphere sphere) 
+        public void AddSphere(Sphere sphere)
         {
             using (EFContext dbContext = new EFContext())
             {
@@ -58,7 +52,7 @@ namespace DataAccess.Repositories
             }
         }
 
-        public void RemoveSphere(string name, string owner) 
+        public void RemoveSphere(string name, string owner)
         {
             using (EFContext dbContext = new EFContext())
             {
@@ -75,7 +69,7 @@ namespace DataAccess.Repositories
             }
         }
 
-        public Sphere GetSphere(string name, string owner) 
+        public Sphere GetSphere(string name, string owner)
         {
             Sphere domainSphere = null;
 

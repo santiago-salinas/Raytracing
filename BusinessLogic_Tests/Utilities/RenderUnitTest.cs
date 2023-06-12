@@ -1,8 +1,7 @@
-﻿using BusinessLogic;
+﻿using BusinessLogic.Objects;
+using BusinessLogic.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
-using BusinessLogic.Objects;
-using BusinessLogic.Utilities;
 
 namespace BusinessLogic_Tests
 {
@@ -437,7 +436,7 @@ namespace BusinessLogic_Tests
 
             _sphere1Name = "Spehere1";
             _sphere1Radius = 0.5;
-            _sphere1 = new Sphere() { Name = _sphere1Name, Radius = _sphere1Radius};
+            _sphere1 = new Sphere() { Name = _sphere1Name, Radius = _sphere1Radius };
 
             _color1 = new Color(0.9, 0.9, 0.7);
             _material1Name = "Color1";
@@ -527,7 +526,7 @@ namespace BusinessLogic_Tests
             color4 = new Color(0.6, 0.2, 0.3);
             lambertian4Name = "Color4";
             Lambertian _lambertian4;
-            _lambertian4 = new Lambertian() { Name = lambertian4Name, Color = color4};
+            _lambertian4 = new Lambertian() { Name = lambertian4Name, Color = color4 };
 
             model4Name = "Model4";
             model4 = new Model()

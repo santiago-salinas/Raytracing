@@ -1,6 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
-using BusinessLogic.Utilities;
+﻿using BusinessLogic.Utilities;
 
 namespace BusinessLogic.Objects
 {
@@ -37,7 +35,7 @@ namespace BusinessLogic.Objects
 
         public override string ToString()
         {
-            return Type+":\nRGB (" + Color.ToString() + ")";
+            return Type + ":\nRGB (" + Color.ToString() + ")";
         }
     }
 }

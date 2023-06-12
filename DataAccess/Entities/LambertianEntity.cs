@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BusinessLogic.Objects;
+using BusinessLogic.Utilities;
+using DataAccess.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using DataAccess.Entities;
-using BusinessLogic;
-using BusinessLogic.Objects;
-using BusinessLogic.Utilities;
+using System.Linq;
 
 namespace DataAccess
 {
@@ -32,7 +26,7 @@ namespace DataAccess
 
         public static LambertianEntity FromDomain(Lambertian lambertian, EFContext efContext)
         {
-           
+
             string owner = lambertian.Owner;
             Color color = lambertian.Color;
             UserEntity userEntity = efContext.UserEntities.FirstOrDefault(u => u.Username == owner);
@@ -59,9 +53,9 @@ namespace DataAccess
         {
             Color color = new Color()
             {
-                Red = (double)entity.RedValue/255,
-                Green = (double)entity.GreenValue/255,
-                Blue = (double)entity.BlueValue/255
+                Red = (double)entity.RedValue / 255,
+                Green = (double)entity.GreenValue / 255,
+                Blue = (double)entity.BlueValue / 255
             };
             Lambertian ret = new Lambertian()
             {

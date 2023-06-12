@@ -1,10 +1,5 @@
-﻿using System;
+﻿using BusinessLogic.Objects;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessLogic;
-using BusinessLogic.Objects;
 
 namespace DataTransferObjects
 {

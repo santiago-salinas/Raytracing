@@ -1,5 +1,5 @@
-﻿using DataTransferObjects;
-using Controllers;
+﻿using Controllers;
+using DataTransferObjects;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -50,7 +50,7 @@ namespace UI.Cards
                     ModelDTO = _model,
                     Position = position
                 };
-                _controller.AddPositionedModel(positionedModel,_scene);
+                _controller.AddPositionedModel(positionedModel, _scene);
                 EditSceneTab editSceneTab = (EditSceneTab)Parent.Parent;
                 editSceneTab.LoadPositionedModels();
                 editSceneTab.NotifyThatSeneWasModified();

@@ -50,7 +50,7 @@ namespace UI
             {
                 string format = "P3\r\n";
                 string maxColorRange = "255\r\n";
-                writetext.WriteLine(format + + width + " " + height + "\r\n" + maxColorRange);
+                writetext.WriteLine(format + +width + " " + height + "\r\n" + maxColorRange);
                 for (int row = 0; row < height; row++)
                 {
                     for (int column = 0; column < width; column++)
@@ -64,7 +64,7 @@ namespace UI
                 }
             }
         }
-        
+
         public Image GetImage()
         {
             return pictureBox.Image;

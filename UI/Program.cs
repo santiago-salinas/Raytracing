@@ -1,18 +1,11 @@
-﻿using BusinessLogic;
-using System;
-using System.Windows.Forms;
-using Controllers;
-using Controllers.Controllers;
-using Services;
-using RepoInterfaces;
+﻿using Controllers;
 using DataAccess;
-using System.Security.Cryptography;
 using DataAccess.Repositories;
-using System.Threading;
+using Services;
+using System;
 using System.Data.SqlClient;
-using Repositories;
-using BusinessLogic.Objects;
-using BusinessLogic.Utilities;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace UI
 {
@@ -42,7 +35,7 @@ namespace UI
             EditSceneService editSceneService = new EditSceneService(eFSceneRepository);
             RenderingService renderingService = new RenderingService();
 
-            SphereManagementController sphereManagementController = new SphereManagementController(sphereManagementService,modelManagementService);
+            SphereManagementController sphereManagementController = new SphereManagementController(sphereManagementService, modelManagementService);
             MaterialManagementController materialManagementController = new MaterialManagementController(materialManagementService, modelManagementService);
             ModelManagementController modelManagementController = new ModelManagementController();
             modelManagementController.SphereService = sphereManagementService;
@@ -72,9 +65,9 @@ namespace UI
 
         static void ThreadException(object sender, ThreadExceptionEventArgs e)
         {
-            if(e.Exception is SqlException)
+            if (e.Exception is SqlException)
             {
-                MessageBox.Show("An error ocurred when trying to connect with the database. The application will now close.","Connection Error");
+                MessageBox.Show("An error ocurred when trying to connect with the database. The application will now close.", "Connection Error");
                 Application.Exit();
             }
         }

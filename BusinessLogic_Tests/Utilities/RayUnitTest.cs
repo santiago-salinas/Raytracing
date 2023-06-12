@@ -1,6 +1,5 @@
-﻿using BusinessLogic;
+﻿using BusinessLogic.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BusinessLogic.Utilities;
 
 namespace BusinessLogic_Tests
 {

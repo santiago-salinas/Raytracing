@@ -1,11 +1,8 @@
-﻿
-using System;
-using System.Collections.Generic;
-
-using Services;
+﻿using Controllers.Exceptions;
 using DataTransferObjects;
-using Controllers.Exceptions;
+using Services;
 using Services.Exceptions;
+using System.Collections.Generic;
 
 namespace Controllers
 {
@@ -47,6 +44,6 @@ namespace Controllers
         public List<SphereDTO> GetSpheresFromUser(string owner)
         {
             return _service.GetSpheresFromUser(owner);
-        }    
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using BusinessLogic.Exceptions;
+﻿using BusinessLogic.Exceptions;
 using BusinessLogic.Utilities;
 
 namespace BusinessLogic.Objects
@@ -7,7 +6,7 @@ namespace BusinessLogic.Objects
     public abstract class Material
     {
         private string _name;
-        public abstract string Type { get;}
+        public abstract string Type { get; }
         public string Name
         {
             get { return _name; }
