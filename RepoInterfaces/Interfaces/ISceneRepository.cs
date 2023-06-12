@@ -20,6 +20,8 @@ namespace RepoInterfaces
         void UpdateRenderDate(string sceneName, string owner, DateTime date);
         void UpdateModificationDate(string sceneName, string owner, DateTime date);
         void UpdateCamera(string sceneName, string owner, BLCameraDTO camera);
+        void UpdatePreview(string sceneName, string owner, PPM ppm);
+
     }
 
 }

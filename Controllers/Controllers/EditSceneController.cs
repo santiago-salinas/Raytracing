@@ -73,6 +73,7 @@ namespace Controllers
             EditSceneService.UpdateLastRenderDate(sceneDTO);
             PpmDTO render = RenderingService.RenderScene(sceneDTO);
             sceneDTO.Preview = render;
+            EditSceneService.UpdatePreview(sceneDTO);
             return render;
         }
 

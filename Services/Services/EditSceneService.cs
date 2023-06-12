@@ -73,6 +73,12 @@ namespace Services
             _sceneRepository.UpdateCamera(sceneDTO.Name,sceneDTO.Owner,camera);
         }
 
+        public void UpdatePreview(SceneDTO sceneDTO)
+        {
+            PPM ppm = PPMMapper.ConvertToPPM(sceneDTO.Preview);
+            _sceneRepository.UpdatePreview(sceneDTO.Name, sceneDTO.Owner, ppm);
+        }
+
         public void RemovePositionedModel(PositionedModelDTO posModelDTO, SceneDTO sceneDTO)
         {
             Scene scene = GetScene(sceneDTO.Name, sceneDTO.Owner);

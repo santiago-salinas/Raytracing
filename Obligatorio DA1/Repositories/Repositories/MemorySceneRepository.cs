@@ -98,5 +98,10 @@ namespace Repositories
             Scene scene = GetScene(sceneName, owner);
             scene.CameraDTO = camera;
         }
+
+        public void UpdatePreview(string sceneName, string owner, PPM ppm)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
