@@ -54,17 +54,9 @@
     <Compile Include="Controllers\SphereManagementController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
-      <Project>{5807fdc2-139e-4ad2-97d6-0ee8dfcabb8f}</Project>
-      <Name>BusinessLogic</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Obligatorio DA1\DataTransferObjects\DataTransferObjects.csproj">
       <Project>{ab995188-c650-4026-83c9-87cb778c9d89}</Project>
       <Name>DataTransferObjects</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Obligatorio DA1\Repositories\Repositories.csproj">
-      <Project>{7a7be452-b92a-4aa7-bb88-3167e526a453}</Project>
-      <Name>Repositories</Name>
     </ProjectReference>
     <ProjectReference Include="..\RepoInterfaces\RepoInterfaces.csproj">
       <Project>{8bcecb32-1033-4d47-b60b-16fed3c4091a}</Project>

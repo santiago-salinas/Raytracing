@@ -78,8 +78,8 @@ namespace DataAccess.Repositories
                     context.MetallicEntities.Remove(metallicEntity);
                 }
                 context.MaterialEntities.Remove(materialEntity);
-                    context.SaveChanges();
-                }
+                context.SaveChanges();
+                
             }
         }
     }

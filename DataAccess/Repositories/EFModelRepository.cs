@@ -1,5 +1,4 @@
 ﻿using BusinessLogic.Objects;
-using DataAccess.Exceptions;
 using RepoInterfaces;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -55,19 +54,12 @@ namespace DataAccess.Repositories
         }
         public void AddModel(Model newElement)
         {
-            try
+            using (EFContext context = new EFContext())
             {
-                using (EFContext context = new EFContext())
-                {
-                    ModelEntity materialEntity = ModelEntity.FromDomain(newElement, context);
-                    context.ModelEntities.Add(materialEntity);
-                    context.SaveChanges();
-                }
-            }
-            catch (DbUpdateException)
-            {
-                throw new RepositoryException("User already owns model with that name");
-            }
+                ModelEntity materialEntity = ModelEntity.FromDomain(newElement, context);
+                context.ModelEntities.Add(materialEntity);
+                context.SaveChanges();
+            }            
         }
         public Model GetModel(string name, string owner)
         {

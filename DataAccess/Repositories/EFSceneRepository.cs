@@ -1,7 +1,6 @@
 ﻿using BusinessLogic.Objects;
 using BusinessLogic.Utilities;
 using DataAccess.Entities;
-using DataAccess.Exceptions;
 using RepoInterfaces;
 using System;
 using System.Collections.Generic;
@@ -26,18 +25,11 @@ namespace DataAccess.Repositories
         }
         public void AddScene(Scene newElement)
         {
-            try
+            using (EFContext context = new EFContext())
             {
-                using (EFContext context = new EFContext())
-                {
-                    SceneEntity sceneEntity = SceneEntity.FromDomain(newElement, context);
-                    context.SceneEntities.Add(sceneEntity);
-                    context.SaveChanges();
-                }
-            }
-            catch (DbUpdateException)
-            {
-                throw new RepositoryException("User already has a scene with that name");
+                SceneEntity sceneEntity = SceneEntity.FromDomain(newElement, context);
+                context.SceneEntities.Add(sceneEntity);
+                context.SaveChanges();
             }
         }
         public Scene GetScene(string name, string owner)
