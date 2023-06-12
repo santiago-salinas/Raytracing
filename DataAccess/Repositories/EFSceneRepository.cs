@@ -41,6 +41,8 @@ namespace DataAccess.Repositories
                     .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Lambertian))
                     .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Metallic))
                     .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Shape))
+                    .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.PPMEntity))
+                    .Include(s => s.PPMEntity)
                     .Include(m => m.CameraDTO)
                     .FirstOrDefault(m => m.Name == name && m.OwnerId == owner);
 
@@ -85,6 +87,7 @@ namespace DataAccess.Repositories
                     .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Lambertian))
                     .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Metallic))
                     .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Shape))
+                    .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.PPMEntity))
                     .Include(s => s.PPMEntity)
                     .Include(m => m.CameraDTO)
                     .Where(m => m.OwnerId == owner)
