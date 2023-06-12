@@ -36,8 +36,6 @@ namespace BusinessLogic.Utilities
             ResolutionX = CameraUsedToRender.ResolutionX;
             ResolutionY = CameraUsedToRender.ResolutionY;
             MaxDepth = CameraUsedToRender.MaxDepth;
-
-
         }
         private Scene SceneToRender { get; set; }
         private ICamera CameraUsedToRender { get; set; }

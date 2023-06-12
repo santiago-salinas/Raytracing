@@ -53,10 +53,11 @@ namespace UI.Tabs
             lookFromButton.Text = VectorToString(lookFrom);
             lookAtButton.Text = VectorToString(lookAt);
 
+            DateTime lastModificationDate = _scene.LastModificationDate;
+            
+            //string lastMod = lastModificationDate.ToString("dd/MM/yyyy h:mm:ss tt");
 
-            string lastMod = _scene.LastModificationDate.ToString("dd/MM/yyyy h:mm:ss tt");
-
-            lastModificationLabel.Text += lastMod;
+            lastModificationLabel.Text += lastModificationDate.ToString("dd/MM/yyyy h:mm:ss tt"); ;
 
 
             fovInput.Value = fieldOfView;
@@ -65,14 +66,13 @@ namespace UI.Tabs
 
             if (_scene.Preview != null)
             {
-                string lastRen = _scene.LastRenderDate.ToString("dd/MM/yyyy h:mm:ss tt");
-
+                DateTime lastRenderDate = _scene.LastRenderDate;               
                 _imagePPM = new PPMViewer(_scene.Preview);
                 renderPanel.Controls.Add(_imagePPM);
                 saveBtn.Enabled = true;
-                lastRenderLabel.Text += lastRen;
+                lastRenderLabel.Text += lastRenderDate.ToString("dd/MM/yyyy h:mm:ss tt");
 
-                if (lastMod != lastRen)
+                if (lastModificationDate > lastRenderDate)
                 {
                     outdatedStatusLabel.Visible = true;
                 }

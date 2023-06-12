@@ -52,7 +52,7 @@ namespace Services
             sceneDTO.LastModificationDate = newDate;
             string sceneName = sceneDTO.Name;
             string owner = sceneDTO.Owner;
-            _sceneRepository.UpdateModificationDate(sceneName, owner, newDate);
+           // _sceneRepository.UpdateModificationDate(sceneName, owner, newDate);
             _sceneRepository.UpdateRenderDate(sceneName, owner, newDate);
         }
 
