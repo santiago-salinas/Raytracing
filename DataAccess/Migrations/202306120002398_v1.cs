@@ -3,19 +3,38 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class V5 : DbMigration
+    public partial class v1 : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.PositionedModelEntities",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        PositionX = c.Double(nullable: false),
+                        PositionY = c.Double(nullable: false),
+                        PositionZ = c.Double(nullable: false),
+                        Model_Name = c.String(maxLength: 128),
+                        Model_OwnerId = c.String(maxLength: 128),
+                        SceneEntity_Name = c.String(maxLength: 128),
+                        SceneEntity_OwnerId = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.ModelEntities", t => new { t.Model_Name, t.Model_OwnerId })
+                .ForeignKey("dbo.SceneEntities", t => new { t.SceneEntity_Name, t.SceneEntity_OwnerId })
+                .Index(t => new { t.Model_Name, t.Model_OwnerId })
+                .Index(t => new { t.SceneEntity_Name, t.SceneEntity_OwnerId });
+            
             CreateTable(
                 "dbo.SceneEntities",
                 c => new
                     {
                         Name = c.String(nullable: false, maxLength: 128),
                         OwnerId = c.String(nullable: false, maxLength: 128),
-                        CreationDate = c.DateTime(nullable: false),
-                        LastModificationDate = c.DateTime(nullable: false),
-                        LastRenderDate = c.DateTime(nullable: false),
+                        CreationDate = c.DateTime(),
+                        LastModificationDate = c.DateTime(),
+                        LastRenderDate = c.DateTime(),
                         Blur = c.Boolean(nullable: false),
                         CameraDTO_Id = c.Guid(),
                     })
@@ -48,10 +67,6 @@
                     })
                 .PrimaryKey(t => t.Id);
             
-            AddColumn("dbo.PositionedModelEntities", "SceneEntity_Name", c => c.String(maxLength: 128));
-            AddColumn("dbo.PositionedModelEntities", "SceneEntity_OwnerId", c => c.String(maxLength: 128));
-            CreateIndex("dbo.PositionedModelEntities", new[] { "SceneEntity_Name", "SceneEntity_OwnerId" });
-            AddForeignKey("dbo.PositionedModelEntities", new[] { "SceneEntity_Name", "SceneEntity_OwnerId" }, "dbo.SceneEntities", new[] { "Name", "OwnerId" });
         }
         
         public override void Down()
@@ -59,13 +74,14 @@
             DropForeignKey("dbo.PositionedModelEntities", new[] { "SceneEntity_Name", "SceneEntity_OwnerId" }, "dbo.SceneEntities");
             DropForeignKey("dbo.SceneEntities", "OwnerId", "dbo.UserEntities");
             DropForeignKey("dbo.SceneEntities", "CameraDTO_Id", "dbo.CameraEntities");
+            DropForeignKey("dbo.PositionedModelEntities", new[] { "Model_Name", "Model_OwnerId" }, "dbo.ModelEntities");
             DropIndex("dbo.SceneEntities", new[] { "CameraDTO_Id" });
             DropIndex("dbo.SceneEntities", new[] { "OwnerId" });
             DropIndex("dbo.PositionedModelEntities", new[] { "SceneEntity_Name", "SceneEntity_OwnerId" });
-            DropColumn("dbo.PositionedModelEntities", "SceneEntity_OwnerId");
-            DropColumn("dbo.PositionedModelEntities", "SceneEntity_Name");
+            DropIndex("dbo.PositionedModelEntities", new[] { "Model_Name", "Model_OwnerId" });
             DropTable("dbo.CameraEntities");
             DropTable("dbo.SceneEntities");
+            DropTable("dbo.PositionedModelEntities");
         }
     }
 }

@@ -63,8 +63,9 @@ namespace DataAccess.Repositories
             using (EFContext context = new EFContext())
             {
                 SceneEntity sceneEntity = context.SceneEntities
-                    .Include(m => m.PositionedModels)
-                    .Include(m => m.CameraDTO)
+                    .Include(s => s.PositionedModels)
+                    .Include(s => s.CameraDTO)
+                    .Include(s => s.PPMEntity)
                     .FirstOrDefault(s => s.Name == name && s.OwnerId == owner);
 
                 if (sceneEntity != null)
@@ -72,6 +73,11 @@ namespace DataAccess.Repositories
                     foreach (var positionedModel in sceneEntity.PositionedModels.ToList())
                     {
                         context.PositionedModelEntities.Remove(positionedModel);
+                    }
+
+                    if (sceneEntity.PPMEntity != null)
+                    {
+                        context.PPMEntities.Remove(sceneEntity.PPMEntity);
                     }
 
                     context.Set<CameraEntity>().Remove(sceneEntity.CameraDTO);
@@ -90,7 +96,7 @@ namespace DataAccess.Repositories
                     .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Lambertian))
                     .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Metallic))
                     .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Shape))
-
+                    .Include(s => s.PPMEntity)
                     .Include(m => m.CameraDTO)
                     .Where(m => m.OwnerId == owner)
                     .ToList();
@@ -190,6 +196,27 @@ namespace DataAccess.Repositories
                 {
                     sceneEntity.CameraDTO = CameraEntity.FromDomain(camera);
                     context.Set<CameraEntity>().Remove(oldCamera);
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        public void UpdatePreview(string sceneName, string owner, PPM preview)
+        {
+            using (EFContext context = new EFContext())
+            {
+                SceneEntity sceneEntity = context.SceneEntities
+                    .Include(s => s.PPMEntity)
+                    .FirstOrDefault(s => s.Name == sceneName && s.OwnerId == owner);
+                PPMEntity oldPreview = sceneEntity.PPMEntity;
+
+                if (sceneEntity != null)
+                {
+                    sceneEntity.PPMEntity = PPMEntity.FromDomain(preview);
+                    if(oldPreview != null)
+                    {
+                        context.PPMEntities.Remove(oldPreview);
+                    }
                     context.SaveChanges();
                 }
             }

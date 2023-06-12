@@ -27,6 +27,7 @@ namespace DataAccess.Entities
         public ICollection<PositionedModelEntity> PositionedModels { get; set; }
         public CameraEntity CameraDTO { get; set; }
         public bool Blur { get; set; }
+        public PPMEntity PPMEntity { get; set; }
 
         public static Scene FromEntity(SceneEntity entity)
         {
@@ -43,6 +44,12 @@ namespace DataAccess.Entities
                 posModels.Add(newPosModel);
             }
 
+            PPM ppm = null;
+            if (entity.PPMEntity != null)
+            {
+                ppm = PPMEntity.FromEntity(entity.PPMEntity);
+            }
+
             Scene ret = new Scene()
             {
                 Name = entity.Name,
@@ -52,7 +59,9 @@ namespace DataAccess.Entities
                 LastRenderDate = (DateTime) entity.LastRenderDate,
                 CameraDTO = CameraEntity.FromEntity(entity.CameraDTO),
                 Blur = entity.Blur,
-                PositionedModels = posModels
+                PositionedModels = posModels,
+                Preview = ppm
+                
             };
             return ret;
         }
@@ -77,6 +86,12 @@ namespace DataAccess.Entities
                 posModelsEntities.Add(newPosModelEntity);
             }
 
+            PPMEntity ppm = null;
+            if (scene.Preview != null)
+            {
+                ppm = PPMEntity.FromDomain(scene.Preview);
+            }
+
             SceneEntity ret = new SceneEntity() { 
                 Name = scene.Name,
                 OwnerId = scene.Owner,
@@ -85,7 +100,8 @@ namespace DataAccess.Entities
                 LastRenderDate = scene.LastRenderDate,
                 CameraDTO = CameraEntity.FromDomain(scene.CameraDTO),
                 Blur = scene.Blur,
-                PositionedModels = posModelsEntities
+                PositionedModels = posModelsEntities,
+                PPMEntity = ppm
             };
 
             return ret;
