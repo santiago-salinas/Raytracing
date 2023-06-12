@@ -122,7 +122,7 @@ namespace BusinessLogic_Tests
             // Act
             Action act = () => _testUser.UserName = invalidUserName;
             // Assert
-            var exception = Assert.ThrowsException<ArgumentException>(act);
+            var exception = Assert.ThrowsException<BusinessLogicException>(act);
             Assert.AreEqual("User name cannot contain spaces", exception.Message);
         }
 
@@ -136,7 +136,7 @@ namespace BusinessLogic_Tests
             Action act = () => _testUser.UserName = invalidUserName;
 
             // Assert
-            var exception = Assert.ThrowsException<ArgumentException>(act);
+            var exception = Assert.ThrowsException<BusinessLogicException>(act);
             Assert.AreEqual("User name must be between 3 and 20 characters long", exception.Message);
 
         }
@@ -151,7 +151,7 @@ namespace BusinessLogic_Tests
             Action act = () => _testUser.UserName = invalidUserName;
 
             // Assert
-            var exception = Assert.ThrowsException<ArgumentException>(act);
+            var exception = Assert.ThrowsException<BusinessLogicException>(act);
             Assert.AreEqual("User name must be between 3 and 20 characters long", exception.Message);
         }
 
@@ -166,7 +166,7 @@ namespace BusinessLogic_Tests
             Action act = () => _testUser.UserName = invalidUserName;
 
             // Assert
-            var exception = Assert.ThrowsException<ArgumentException>(act);
+            var exception = Assert.ThrowsException<BusinessLogicException>(act);
             Assert.AreEqual("User name must be between 3 and 20 characters long", exception.Message);
         }
 
@@ -195,7 +195,7 @@ namespace BusinessLogic_Tests
             Action act = () => _testUser.Password = _testPassword;
 
             // Assert
-            var exception = Assert.ThrowsException<ArgumentException>(act);
+            var exception = Assert.ThrowsException<BusinessLogicException>(act);
             Assert.AreEqual("Password must be between 5 and 25 characters long", exception.Message);
         }
 
@@ -210,7 +210,7 @@ namespace BusinessLogic_Tests
             Action act = () => _testUser.Password = invalidPassword;
 
             // Assert
-            var exception = Assert.ThrowsException<ArgumentException>(act);
+            var exception = Assert.ThrowsException<BusinessLogicException>(act);
             Assert.AreEqual("Password must be between 5 and 25 characters long", exception.Message);
 
         }
@@ -225,7 +225,7 @@ namespace BusinessLogic_Tests
             Action act = () => _testUser.Password = invalidPassword;
 
             // Assert
-            var exception = Assert.ThrowsException<ArgumentException>(act);
+            var exception = Assert.ThrowsException<BusinessLogicException>(act);
             Assert.AreEqual("Password must be between 5 and 25 characters long", exception.Message);
         }
 
@@ -240,7 +240,7 @@ namespace BusinessLogic_Tests
             Action act = () => user.Password = invalidPassword;
 
             // Assert
-            var exception = Assert.ThrowsException<ArgumentException>(act);
+            var exception = Assert.ThrowsException<BusinessLogicException>(act);
             Assert.AreEqual("Password must contain at least one upper case character", exception.Message);
         }
 
@@ -255,7 +255,7 @@ namespace BusinessLogic_Tests
 
             // Assert
 
-            var exception = Assert.ThrowsException<ArgumentException>(act);
+            var exception = Assert.ThrowsException<BusinessLogicException>(act);
             Assert.AreEqual("Password must contain at least one numerical digit", exception.Message);
         }
 
