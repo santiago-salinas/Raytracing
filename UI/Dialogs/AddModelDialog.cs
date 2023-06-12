@@ -17,6 +17,9 @@ namespace UI.Dialogs
         private SphereDTO _selectedShape;
         private MaterialDTO _selectedMaterial;
         private ModelManagementController _controller;
+
+        private bool _shapeWasSelected = false;
+        private bool _materialWasSelected = false;
         public AddModelDialog(Context context)
         {
             InitializeComponent();
@@ -26,6 +29,7 @@ namespace UI.Dialogs
             _availableShapes = _controller.GetAvailableShapes(_loggedUser);
             _availableMaterials = _controller.GetAvailableMaterials(_loggedUser);
 
+            saveButton.Enabled = false;
             LoadShapeComboBox();
             LoadMaterialComboBox();
         }
@@ -74,11 +78,15 @@ namespace UI.Dialogs
         private void ShapeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             _selectedShape = _availableShapes[shapeComboBox.SelectedIndex];
+            _shapeWasSelected = true;
+            if (_materialWasSelected) saveButton.Enabled = true;
         }
 
         private void MaterialComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             _selectedMaterial = _availableMaterials[materialComboBox.SelectedIndex];
+            _materialWasSelected = true;
+            if (_shapeWasSelected) saveButton.Enabled = true;
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
