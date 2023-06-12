@@ -139,7 +139,7 @@ namespace DataAccess.Repositories
             using (EFContext context = new EFContext())
             {
                 bool exists = context.SceneEntities
-                    .Any(s => s.PositionedModels.Any(pm => pm.Model.Name == modelName && pm.Model.Name == owner));
+                    .Any(s => s.PositionedModels.Any(pm => pm.Model.Name == modelName && pm.Model.OwnerId == owner));
 
                 return exists;
             }

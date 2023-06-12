@@ -15,6 +15,10 @@ namespace DataTransferObjects
                 Info = material.ToString(),
             };
 
+            if (material.Type == "metallic")
+            {
+                materialDTO.Roughness = ((Metallic)material).Roughness;
+            }
             return materialDTO;
         }
 
