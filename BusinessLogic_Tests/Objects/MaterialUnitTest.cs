@@ -1,5 +1,5 @@
-﻿using BusinessLogic.Exceptions;
-using BusinessLogic.Objects;
+﻿using BusinessLogic.DomainObjects;
+using BusinessLogic.Exceptions;
 using BusinessLogic.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Repositories;

@@ -2,7 +2,7 @@
 using BusinessLogic.Utilities;
 using System;
 
-namespace BusinessLogic.Objects
+namespace BusinessLogic.DomainObjects
 {
     public class Sphere
     {

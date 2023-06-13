@@ -1,7 +1,7 @@
 ﻿using BusinessLogic.Exceptions;
 using BusinessLogic.Utilities;
 
-namespace BusinessLogic.Objects
+namespace BusinessLogic.DomainObjects
 {
     public abstract class Material
     {
@@ -34,8 +34,8 @@ namespace BusinessLogic.Objects
 
         public override bool Equals(object other)
         {
-            bool namesEqual = this.Name == ((Material)other).Name;
-            bool ownerEqual = this.Owner == ((Material)other).Owner;
+            bool namesEqual = Name == ((Material)other).Name;
+            bool ownerEqual = Owner == ((Material)other).Owner;
             return namesEqual && ownerEqual;
         }
 

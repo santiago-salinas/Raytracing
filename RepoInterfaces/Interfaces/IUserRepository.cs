@@ -1,4 +1,4 @@
-﻿using BusinessLogic.Objects;
+﻿using BusinessLogic.DomainObjects;
 
 namespace RepoInterfaces
 {

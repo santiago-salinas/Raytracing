@@ -1,7 +1,6 @@
-﻿using BusinessLogic.Objects;
+﻿using BusinessLogic.DomainObjects;
 using RepoInterfaces;
 using System.Linq;
-using System.Xml.Linq;
 
 namespace DataAccess
 {

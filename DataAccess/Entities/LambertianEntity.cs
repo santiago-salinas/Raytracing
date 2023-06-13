@@ -1,4 +1,4 @@
-﻿using BusinessLogic.Objects;
+﻿using BusinessLogic.DomainObjects;
 using BusinessLogic.Utilities;
 using DataAccess.Entities;
 using System.ComponentModel.DataAnnotations;

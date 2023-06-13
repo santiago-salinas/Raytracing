@@ -53,10 +53,7 @@ namespace UI.Tabs
             lookFromButton.Text = VectorToString(lookFrom);
             lookAtButton.Text = VectorToString(lookAt);
 
-            DateTime lastModificationDate = _scene.LastModificationDate;
-            
-            //string lastMod = lastModificationDate.ToString("dd/MM/yyyy h:mm:ss tt");
-
+            DateTime lastModificationDate = _scene.LastModificationDate;           
             lastModificationLabel.Text += lastModificationDate.ToString("dd/MM/yyyy h:mm:ss tt"); ;
 
 

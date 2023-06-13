@@ -1,4 +1,4 @@
-﻿using BusinessLogic.Objects;
+﻿using BusinessLogic.DomainObjects;
 using BusinessLogic.Utilities;
 using DataTransferObjects;
 

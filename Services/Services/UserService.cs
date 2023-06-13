@@ -1,5 +1,5 @@
 ﻿using BusinessLogic.Exceptions;
-using BusinessLogic.Objects;
+using BusinessLogic.DomainObjects;
 using BusinessLogic.Utilities;
 using RepoInterfaces;
 using Services.Exceptions;

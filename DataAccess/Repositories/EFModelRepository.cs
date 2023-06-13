@@ -1,4 +1,4 @@
-﻿using BusinessLogic.Objects;
+﻿using BusinessLogic.DomainObjects;
 using RepoInterfaces;
 using System.Collections.Generic;
 using System.Data.Entity;
