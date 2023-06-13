@@ -1,11 +1,10 @@
-﻿using BusinessLogic.Objects;
+﻿using BusinessLogic.DomainObjects;
 using BusinessLogic.Utilities;
 using DataAccess.Entities;
 using RepoInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 
 namespace DataAccess.Repositories

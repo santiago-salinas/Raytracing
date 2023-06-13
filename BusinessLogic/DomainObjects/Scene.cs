@@ -3,7 +3,7 @@ using BusinessLogic.Utilities;
 using System;
 using System.Collections.Generic;
 
-namespace BusinessLogic.Objects
+namespace BusinessLogic.DomainObjects
 {
     public class Scene
     {

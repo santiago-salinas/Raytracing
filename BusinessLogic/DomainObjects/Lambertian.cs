@@ -1,6 +1,6 @@
 ﻿using BusinessLogic.Utilities;
 
-namespace BusinessLogic.Objects
+namespace BusinessLogic.DomainObjects
 {
     public class Lambertian : Material
     {

@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 
 
-namespace BusinessLogic.Objects
+namespace BusinessLogic.DomainObjects
 {
     public class User
     {

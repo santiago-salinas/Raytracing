@@ -42,15 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\GeneralException.cs" />
-    <Compile Include="Objects\Material.cs" />
-    <Compile Include="Objects\Metallic.cs" />
-    <Compile Include="Objects\Lambertian.cs" />
-    <Compile Include="Objects\Model.cs" />
-    <Compile Include="Objects\PositionedModel.cs" />
-    <Compile Include="Objects\User.cs" />
+    <Compile Include="DomainObjects\Material.cs" />
+    <Compile Include="DomainObjects\Metallic.cs" />
+    <Compile Include="DomainObjects\Lambertian.cs" />
+    <Compile Include="DomainObjects\Model.cs" />
+    <Compile Include="DomainObjects\PositionedModel.cs" />
+    <Compile Include="DomainObjects\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Objects\Sphere.cs" />
-    <Compile Include="Objects\Scene.cs" />
+    <Compile Include="DomainObjects\Sphere.cs" />
+    <Compile Include="DomainObjects\Scene.cs" />
     <Compile Include="Utilities\Camera.cs" />
     <Compile Include="Utilities\CameraBlur.cs" />
     <Compile Include="Utilities\BLCameraDTO.cs" />

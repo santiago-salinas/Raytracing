@@ -1,7 +1,7 @@
 ﻿using BusinessLogic.Utilities;
 using System;
 
-namespace BusinessLogic.Objects
+namespace BusinessLogic.DomainObjects
 {
     public class Metallic : Material
     {
