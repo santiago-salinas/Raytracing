@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Utilities;
+using DataTransferObjects.DTOs;
 
-namespace DataTransferObjects
+namespace DataTransferObjects.Mappers
 {
     public static class VectorMapper
     {

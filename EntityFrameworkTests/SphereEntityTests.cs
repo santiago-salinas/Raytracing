@@ -1,11 +1,11 @@
 ﻿using BusinessLogic.DomainObjects;
 using DataAccess;
-using DataAccess.Entities;
 using DataAccess.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 
 namespace EntityFrameworkTests
 {
@@ -68,7 +68,6 @@ namespace EntityFrameworkTests
         [TestMethod]
         public void GetSphere_ExistingSphere_ReturnsSphere()
         {
-            // Arrange
             Sphere sphere = new Sphere
             {
                 Name = "Test Sphere",
@@ -83,10 +82,8 @@ namespace EntityFrameworkTests
                 dbContext.SaveChanges();
             }
 
-            // Act
             Sphere retrievedSphere = _repository.GetSphere("Test Sphere", "TestUser");
 
-            // Assert
             Assert.IsNotNull(retrievedSphere);
             Assert.AreEqual("Test Sphere", retrievedSphere.Name);
             Assert.AreEqual("TestUser", retrievedSphere.Owner);
@@ -95,7 +92,6 @@ namespace EntityFrameworkTests
         [TestMethod]
         public void RemoveSphere_ExistingSphere_SphereRemoved()
         {
-            // Arrange
             Sphere sphere = new Sphere
             {
                 Name = "Test Sphere",
@@ -110,10 +106,8 @@ namespace EntityFrameworkTests
                 dbContext.SaveChanges();
             }
 
-            // Act
             _repository.RemoveSphere("Test Sphere", "TestUser");
 
-            // Assert
             using (EFContext dbContext = new EFContext())
             {
                 List<SphereEntity> spheres = dbContext.SphereEntities.

@@ -1,5 +1,5 @@
 ﻿using Controllers.Exceptions;
-using DataTransferObjects;
+using DataTransferObjects.DTOs;
 using Services;
 using Services.Exceptions;
 using System.Collections.Generic;

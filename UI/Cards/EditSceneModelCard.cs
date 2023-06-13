@@ -1,5 +1,5 @@
 ﻿using Controllers;
-using DataTransferObjects;
+using DataTransferObjects.DTOs;
 using System;
 using System.Drawing;
 using System.Windows.Forms;

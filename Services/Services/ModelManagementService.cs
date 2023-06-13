@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Exceptions;
 using BusinessLogic.DomainObjects;
-using DataTransferObjects;
+using DataTransferObjects.DTOs;
+using DataTransferObjects.Mappers;
 using RepoInterfaces;
 using Services.Exceptions;
 using System.Collections.Generic;

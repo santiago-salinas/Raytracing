@@ -1,6 +1,8 @@
 ﻿using BusinessLogic.DomainObjects;
 using BusinessLogic.Utilities;
-using DataTransferObjects;
+using DataTransferObjects.DTOs;
+using DataTransferObjects.Mappers;
+
 
 namespace Services
 {
