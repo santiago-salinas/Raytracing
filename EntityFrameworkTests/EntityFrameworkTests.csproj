@@ -57,8 +57,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SphereEntityTests.cs" />
+    <Compile Include="PPMEntityTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -69,9 +70,29 @@
       <Project>{5807fdc2-139e-4ad2-97d6-0ee8dfcabb8f}</Project>
       <Name>BusinessLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Controllers\Controllers.csproj">
+      <Project>{373a8444-9aba-4360-a411-884816f6f2dc}</Project>
+      <Name>Controllers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{9950622b-d4c8-4b45-9a69-7fbc73807093}</Project>
       <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Obligatorio DA1\DataTransferObjects\DataTransferObjects.csproj">
+      <Project>{ab995188-c650-4026-83c9-87cb778c9d89}</Project>
+      <Name>DataTransferObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Obligatorio DA1\Repositories\Repositories.csproj">
+      <Project>{7a7be452-b92a-4aa7-bb88-3167e526a453}</Project>
+      <Name>Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepoInterfaces\RepoInterfaces.csproj">
+      <Project>{8bcecb32-1033-4d47-b60b-16fed3c4091a}</Project>
+      <Name>RepoInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{036d7a65-09f5-408f-a99d-765125df08a2}</Project>
+      <Name>Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

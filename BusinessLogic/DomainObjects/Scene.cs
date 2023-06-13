@@ -122,9 +122,13 @@ namespace BusinessLogic.DomainObjects
             if (_name != otherScene._name)
                 return false;
 
+
             if (CreationDate != otherScene.CreationDate ||
                 LastModificationDate != otherScene.LastModificationDate ||
                 LastRenderDate != otherScene.LastRenderDate)
+                return false;
+
+            if(!CameraEquals(otherScene.CameraDTO))
                 return false;
 
             if (_positionedModellList.Count != otherScene._positionedModellList.Count)
@@ -138,6 +142,24 @@ namespace BusinessLogic.DomainObjects
                     return false;
                 }
             }
+
+            return true;
+        }
+
+        private bool CameraEquals(BLCameraDTO otherCamera)
+        {
+            if(CameraDTO.Aperture != otherCamera.Aperture ||
+                CameraDTO.MaxDepth != otherCamera.MaxDepth ||
+                CameraDTO.SamplesPerPixel != otherCamera.SamplesPerPixel ||
+                !CameraDTO.Up.Equals(otherCamera.Up) ||
+                CameraDTO.FieldOfView != otherCamera.FieldOfView ||
+                !CameraDTO.LookAt.Equals(otherCamera.LookAt) ||
+                !CameraDTO.LookFrom.Equals(otherCamera.LookFrom) ||
+                CameraDTO.ResolutionY != otherCamera.ResolutionY ||
+                CameraDTO.ResolutionX != otherCamera.ResolutionX)
+                return false;
+                
+
 
             return true;
         }
