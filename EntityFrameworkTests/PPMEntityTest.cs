@@ -10,7 +10,7 @@ using System.Linq;
 namespace EntityFrameworkTests
 {
     [TestClass]
-    public class UnitTest1
+    public class PPMEntityTest
     {
         // Sphere 1
         private Model _model1;

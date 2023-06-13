@@ -87,9 +87,10 @@ namespace BusinessLogic.DomainObjects
 
         public override bool Equals(object other)
         {
-            bool nameEquals = this.Name == ((Sphere)other).Name;
-            bool ownerEquals = this.Owner == ((Sphere)other).Owner;
-            return nameEquals && ownerEquals;
+            bool nameEquals = Name == ((Sphere)other).Name;
+            bool ownerEquals = Owner == ((Sphere)other).Owner;
+            bool radiusEquals = Radius == ((Sphere)other).Radius;
+            return nameEquals && ownerEquals && radiusEquals;
         }
 
     }

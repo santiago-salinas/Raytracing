@@ -78,5 +78,14 @@ namespace BusinessLogic.DomainObjects
             hit.Roughness = Roughness;
             return hit;
         }
+
+        public override bool Equals(object other)
+        {
+            Metallic otherMetal = other as Metallic;
+            bool baseEquals = base.Equals(otherMetal);
+            bool colorEquals = Color.Equals(otherMetal.Color);
+            bool roughnessEquals = Roughness == otherMetal.Roughness;
+            return baseEquals && colorEquals && roughnessEquals;
+        }
     }
 }

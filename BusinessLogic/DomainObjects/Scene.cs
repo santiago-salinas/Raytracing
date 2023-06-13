@@ -2,6 +2,7 @@ using BusinessLogic.Exceptions;
 using BusinessLogic.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLogic.DomainObjects
 {
@@ -112,5 +113,33 @@ namespace BusinessLogic.DomainObjects
             _positionedModellList.Clear();
         }
 
+        public override bool Equals(object other)
+        {
+            Scene otherScene = (Scene)other;
+            bool nameEquals = Name == otherScene.Name;
+            bool creationDateEquals = CreationDate== otherScene.CreationDate;
+
+            if (_name != otherScene._name)
+                return false;
+
+            if (CreationDate != otherScene.CreationDate ||
+                LastModificationDate != otherScene.LastModificationDate ||
+                LastRenderDate != otherScene.LastRenderDate)
+                return false;
+
+            if (_positionedModellList.Count != otherScene._positionedModellList.Count)
+                return false;
+
+            foreach (PositionedModel positionedModel in _positionedModellList)
+            {
+                if (!otherScene._positionedModellList.Any(otherModel =>
+                    positionedModel.Equals(otherModel)))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

@@ -42,5 +42,6 @@ namespace BusinessLogic.DomainObjects
         public abstract HitRecord IsHitByRay(HitRecord hit);
 
         public override abstract string ToString();
+
     }
 }

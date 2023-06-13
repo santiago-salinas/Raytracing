@@ -37,5 +37,13 @@ namespace BusinessLogic.DomainObjects
         {
             return Type + ":\nRGB (" + Color.ToString() + ")";
         }
+
+        public override bool Equals(object other)
+        {
+            Lambertian otherLambertian = other as Lambertian;
+            bool baseEquals = base.Equals(otherLambertian);
+            bool colorEquals = Color.Equals(otherLambertian.Color);
+            return baseEquals && colorEquals;
+        }
     }
 }

@@ -52,11 +52,11 @@ namespace BusinessLogic.DomainObjects
         public override bool Equals(object other)
         {
             Model otherAsModel = other as Model;
-            bool nameEqual = this.Name == otherAsModel.Name;
-            bool shapeEqual = this.Shape == ((Model)other).Shape;
-            bool colorEqual = this.Material == ((Model)other).Material;
+            bool nameEqual = Name == otherAsModel.Name;
+            bool shapeEqual = Shape.Equals(otherAsModel.Shape);
+            bool materialEqual = Material.Equals(otherAsModel.Material);
 
-            return nameEqual && shapeEqual && colorEqual;
+            return nameEqual && shapeEqual && materialEqual;
         }
 
     }
