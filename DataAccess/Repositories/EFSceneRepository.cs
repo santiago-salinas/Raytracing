@@ -161,6 +161,22 @@ namespace DataAccess.Repositories
             }
 
         }
+
+        public void UpdateBlurSetting(string sceneName, string owner, bool blurState)
+        {
+            using (EFContext context = new EFContext())
+            {
+                SceneEntity sceneEntity = context.SceneEntities.Find(sceneName, owner);
+
+                if (sceneEntity != null)
+                {
+                    sceneEntity.Blur = blurState;
+                    context.SaveChanges();
+                }
+            }
+
+        }
+
         public void UpdateModificationDate(string sceneName, string owner, DateTime date)
         {
             using (EFContext context = new EFContext())

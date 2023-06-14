@@ -16,6 +16,8 @@ namespace RepoInterfaces
         void AddModelToScene(Scene scene, PositionedModel model);
         bool ExistsSceneUsingModel(string modelName, string modelOwner);
         void UpdateRenderDate(string sceneName, string owner, DateTime date);
+        void UpdateBlurSetting(string sceneName, string owner, bool blurState);
+
         void UpdateModificationDate(string sceneName, string owner, DateTime date);
         void UpdateCamera(string sceneName, string owner, BLCameraDTO camera);
         void UpdatePreview(string sceneName, string owner, PPM ppm);

@@ -247,11 +247,12 @@ namespace EntityFrameworkTests
                 if (entityPPM != null)
                 {
                     domainPPM = PPMEntity.FromEntity(entityPPM);
+                    dbContext.PPMEntities.Remove(entityPPM);
+
                 }
             }
             Trace.WriteLine((domainPPM.GetImageAscii()));
             Assert.IsTrue(domainPPM.GetImageAscii() == ppm.GetImageAscii());
-
 
         }
     }

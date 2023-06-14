@@ -103,5 +103,10 @@ namespace Repositories
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateBlurSetting(string sceneName, string owner, bool blurState)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

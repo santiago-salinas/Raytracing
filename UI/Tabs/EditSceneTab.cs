@@ -54,7 +54,7 @@ namespace UI.Tabs
             lookAtButton.Text = VectorToString(lookAt);
 
             DateTime lastModificationDate = _scene.LastModificationDate;           
-            lastModificationLabel.Text += lastModificationDate.ToString("dd/MM/yyyy h:mm:ss tt"); ;
+            lastModificationLabel.Text = "Last modified: " + lastModificationDate.ToString("dd/MM/yyyy h:mm:ss tt"); ;
 
 
             fovInput.Value = fieldOfView;
@@ -67,7 +67,7 @@ namespace UI.Tabs
                 _imagePPM = new PPMViewer(_scene.Preview);
                 renderPanel.Controls.Add(_imagePPM);
                 saveBtn.Enabled = true;
-                lastRenderLabel.Text += lastRenderDate.ToString("dd/MM/yyyy h:mm:ss tt");
+                lastRenderLabel.Text = "Last rendered: " + lastRenderDate.ToString("dd/MM/yyyy h:mm:ss tt");
 
                 if (lastModificationDate > lastRenderDate)
                 {
@@ -223,9 +223,9 @@ namespace UI.Tabs
             {
                 apertureInput.Enabled = false;
                 _scene.Blur = false;
-            }
-            NotifyThatSeneWasModified();
+            }            
             _controller.UpdateCamera(_scene);
+            NotifyThatSeneWasModified();
         }
 
         // https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-save-files-using-the-savefiledialog-component?view=netframeworkdesktop-4.8
