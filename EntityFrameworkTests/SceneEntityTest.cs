@@ -51,6 +51,7 @@ namespace EntityFrameworkTests
         private User _testUser;
         private SphereDTO _sphereDto;
         private MaterialDTO _matDto;
+        private Model testModel;
 
         [TestInitialize]
         public void TestInitialize()
@@ -109,7 +110,7 @@ namespace EntityFrameworkTests
                 Owner = "TestUser",
                 Radius = 10,
             };
-            Model testModel = new Model()
+            testModel = new Model()
             {
                 Name = "Test Model",
                 Shape = _testSphere,
@@ -162,6 +163,7 @@ namespace EntityFrameworkTests
             eFUserRepository.AddUser(_testUser2);
             eFMaterialRepository.AddMaterial(_testMat);
             eFSphereRepository.AddSphere(_testSphere);
+            eFModelRepository.AddModel(testModel);
             using (EFContext dbContext = new EFContext())
             {
                 _testSphereEntity = dbContext.SphereEntities
@@ -229,7 +231,7 @@ namespace EntityFrameworkTests
             editSceneController.RemovePositionedModel(_testPosModel, _testScene);
             scene = sceneController.GetScenesFromUser("TestUser")[0];
 
-            Assert.AreEqual(scene.PositionedModels.Count, 1);
+            Assert.AreEqual(scene.PositionedModels.Count, 0);
         }
 
         public void AddSceneToCollection()
@@ -257,100 +259,30 @@ namespace EntityFrameworkTests
             Assert.AreEqual(scenes.Count, 1);
 
             sceneController.RemoveScene(_testScene.Name, _testScene.Owner);
+            scenes = sceneController.GetScenesFromUser("TestUser");
             Assert.AreEqual(scenes.Count, 0);
         }
 
 
-        /*[TestMethod]
-        public void RemoveScene_ThrowsBusinessLogicException_WhenOwnerDoesNotHaveSceneWithGivenName()
-        {
-            // Arrange
-            User user1 = new User()
-            {
-                UserName = "User1",
-                Password = "Password1"
-            };
-            User user2 = new User()
-            {
-                UserName = "User2",
-                Password = "Password1"
-            };
-            Scene scene1 = new Scene()
-            {
-                Name = "scene1",
-                Owner = user1.UserName,
-            };
-            Scene scene2 = new Scene()
-            {
-                Name = "scene2",
-                Owner = user2.UserName,
-            };
-            memorySceneRepository.AddScene(scene1);
-            memorySceneRepository.AddScene(scene2);
-
-            // Act
-            Action act = () => memorySceneRepository.RemoveScene("scene1", user2.UserName);
-
-            // Assert
-            var exception = Assert.ThrowsException<BusinessLogicException>(act);
-            Assert.AreEqual("Owner does not have a scene with that name", exception.Message);
-        }
-
         [TestMethod]
-        [ExpectedException(typeof(BusinessLogicException), "Scene with the same name already exists in the collection")]
+        [ExpectedException(typeof(Controller_ArgumentException))]
         public void CantAddSceneWithNameAlreadyInCollection()
         {
-            //arrange
-            User testUser = new User()
-            {
-                UserName = "Username1"
-            };
-
-            _testScene = new Scene()
-            {
-                Name = _testName,
-                Owner = testUser.UserName
-            };
-            memorySceneRepository.AddScene(_testScene);
-
-            //act
-            Scene newScene = new Scene()
-            {
-                Name = _testName,
-                Owner = testUser.UserName
-            };
-            memorySceneRepository.AddScene(newScene);
+            sceneController.AddScene(_testScene);
+            sceneController.AddScene(_testScene);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(BusinessLogicException), "Cant delete model used by active scene")]
+        [ExpectedException(typeof(Controller_ObjectHandlingException))]
         public void CantDeleteModelFromCollectionUsedByScene()
         {
-            //arrange
-            memoryModelRepository.AddModel(_testModel);
-            _testScene.AddPositionedModel(_testPositionedModel);
-            memorySceneRepository.AddScene(_testScene);
+            sceneController.AddScene(_testScene);
+            editSceneController.AddPositionedModel(_testPosModel, _testScene);
 
-            //act
-            memoryModelRepository.RemoveModel(_testModel.Name, _testModel.Owner);
-        }
+            modelManagementController.RemoveModel(testModel.Name,testModel.Owner);
+        }       
 
-        [TestMethod]
-        public void DeleteModelAfterDeletingScene()
-        {
-            User testUser = new User();
-            testUser.UserName = "Username";
-            _testScene.Owner = testUser.UserName;
-            _testScene.CameraDTO = _testCamera;
-            memoryModelRepository.AddModel(_testModel);
-            _testScene.AddPositionedModel(_testPositionedModel);
-            memorySceneRepository.AddScene(_testScene);
-
-            memorySceneRepository.RemoveScene(_testScene.Name, testUser.UserName);
-            memoryModelRepository.RemoveModel(_testModel.Name, _testModel.Owner);
-        }
-
-        [TestMethod]
+        /*[TestMethod]
         public void ModelIsUsedByScene()
         {
 
