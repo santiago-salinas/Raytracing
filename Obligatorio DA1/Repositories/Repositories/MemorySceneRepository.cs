@@ -101,7 +101,14 @@ namespace Repositories
 
         public void UpdatePreview(string sceneName, string owner, PPM ppm)
         {
-            throw new NotImplementedException();
+            Scene scene = GetScene(sceneName, owner);
+            scene.Preview = ppm;
+        }
+
+        public void UpdateBlur(string sceneName, string owner, bool blurConfig)
+        {
+            Scene scene = GetScene(sceneName, owner);
+            scene.Blur = blurConfig;
         }
     }
 }

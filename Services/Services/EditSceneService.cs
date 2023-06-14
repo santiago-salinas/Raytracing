@@ -71,6 +71,14 @@ namespace Services
             _sceneRepository.UpdateCamera(sceneDTO.Name, sceneDTO.Owner, camera);
         }
 
+        public void UpdateBlur(SceneDTO sceneDTO)
+        {
+            bool newBlurConfig = sceneDTO.Blur;
+            string sceneName = sceneDTO.Name;
+            string owner = sceneDTO.Owner;
+            _sceneRepository.UpdateBlur(sceneName, owner, newBlurConfig);
+        }
+
         public void UpdatePreview(SceneDTO sceneDTO)
         {
             PPM ppm = PPMMapper.ConvertToPPM(sceneDTO.Preview);
