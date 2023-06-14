@@ -274,7 +274,7 @@ namespace BusinessLogic_Tests
         }
 
         [TestMethod]
-        public void Equals_UserWithSameUserName_ReturnsTrue()
+        public void Equals_UserWithSameUserNameAndPassword_ReturnsTrue()
         {
             // Arrange
             User user1 = new User()
@@ -285,7 +285,7 @@ namespace BusinessLogic_Tests
             User user2 = new User()
             {
                 UserName = "username",
-                Password = "Password2"
+                Password = "Password1"
             };
 
             // Act

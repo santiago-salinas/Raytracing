@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataTransferObjects
+namespace DataTransferObjects.DTOs
 {
     public class SceneDTO
     {

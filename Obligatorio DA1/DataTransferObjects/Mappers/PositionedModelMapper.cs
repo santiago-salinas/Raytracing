@@ -1,6 +1,6 @@
 ﻿using BusinessLogic.DomainObjects;
-
-namespace DataTransferObjects
+using DataTransferObjects.DTOs;
+namespace DataTransferObjects.Mappers
 {
     public static class PositionedModelMapper
     {

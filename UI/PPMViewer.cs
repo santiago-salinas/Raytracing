@@ -1,4 +1,4 @@
-﻿using DataTransferObjects;
+﻿using DataTransferObjects.DTOs;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;

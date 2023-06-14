@@ -1,5 +1,5 @@
 ﻿
-namespace DataTransferObjects
+namespace DataTransferObjects.DTOs
 {
     public class MaterialDTO
     {

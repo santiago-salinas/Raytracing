@@ -63,13 +63,9 @@
     <Compile Include="Entities\ModelEntity.cs" />
     <Compile Include="Entities\UserEntity.cs" />
     <Compile Include="Entities\SphereEntity.cs" />
-    <Compile Include="Migrations\202306120002398_v1.cs" />
-    <Compile Include="Migrations\202306120002398_v1.designer.cs">
-      <DependentUpon>202306120002398_v1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202306120031222_v2.cs" />
-    <Compile Include="Migrations\202306120031222_v2.designer.cs">
-      <DependentUpon>202306120031222_v2.cs</DependentUpon>
+    <Compile Include="Migrations\202306132049475_configuration.cs" />
+    <Compile Include="Migrations\202306132049475_configuration.designer.cs">
+      <DependentUpon>202306132049475_configuration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,11 +90,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202306120002398_v1.resx">
-      <DependentUpon>202306120002398_v1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202306120031222_v2.resx">
-      <DependentUpon>202306120031222_v2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202306132049475_configuration.resx">
+      <DependentUpon>202306132049475_configuration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

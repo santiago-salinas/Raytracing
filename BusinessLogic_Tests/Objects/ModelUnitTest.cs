@@ -248,16 +248,22 @@ namespace BusinessLogic_Tests
             {
                 Name = "scene1",
                 Owner = user1.UserName,
+                Shape = _testSphere,
+                Material = _testLambertian
             };
             Model model2 = new Model()
             {
                 Name = "scene2",
                 Owner = user1.UserName,
+                Shape = _testSphere,
+                Material = _testLambertian
             };
             Model model3 = new Model()
             {
                 Name = "scene3",
                 Owner = user2.UserName,
+                Shape = _testSphere,
+                Material = _testLambertian
             };
 
             memoryModelRepository.AddModel(model1);

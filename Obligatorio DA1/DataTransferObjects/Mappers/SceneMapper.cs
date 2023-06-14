@@ -1,7 +1,7 @@
 ﻿using BusinessLogic.DomainObjects;
 using System.Collections.Generic;
-
-namespace DataTransferObjects
+using DataTransferObjects.DTOs;
+namespace DataTransferObjects.Mappers
 {
     public static class SceneMapper
     {

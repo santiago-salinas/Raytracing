@@ -200,18 +200,21 @@ namespace BusinessLogic_Tests
 
             Lambertian lambertian1 = new Lambertian()
             {
-                Name = "scene1",
+                Name = "lamb1",
                 Owner = user1.UserName,
+                Color = _testColor
             };
             Lambertian lambertian2 = new Lambertian()
             {
-                Name = "scene2",
+                Name = "lamb2",
                 Owner = user1.UserName,
+                Color = _testColor
             };
             Lambertian lambertian3 = new Lambertian()
             {
-                Name = "scene3",
+                Name = "lamb3",
                 Owner = user2.UserName,
+                Color = _testColor
             };
 
             memoryMaterialRepository.AddMaterial(lambertian1);

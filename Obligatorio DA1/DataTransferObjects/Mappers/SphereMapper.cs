@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.DomainObjects;
+using DataTransferObjects.DTOs;
 
-namespace DataTransferObjects
+namespace DataTransferObjects.Mappers
 {
     public static class SphereMapper
     {

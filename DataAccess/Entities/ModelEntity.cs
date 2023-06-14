@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 
-namespace DataAccess
+namespace DataAccess.Entities
 {
     public class ModelEntity
     {

@@ -1,6 +1,6 @@
 ﻿using Controllers;
 using Controllers.Exceptions;
-using DataTransferObjects;
+using DataTransferObjects.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;

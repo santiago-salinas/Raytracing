@@ -1,6 +1,6 @@
 ﻿using BusinessLogic.Utilities;
-
-namespace DataTransferObjects
+using DataTransferObjects.DTOs;
+namespace DataTransferObjects.Mappers
 {
     public static class CameraMapper
     {

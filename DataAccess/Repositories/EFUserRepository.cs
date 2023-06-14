@@ -1,8 +1,9 @@
 ﻿using BusinessLogic.DomainObjects;
 using RepoInterfaces;
 using System.Linq;
+using DataAccess.Entities;
 
-namespace DataAccess
+namespace DataAccess.Repositories
 {
     public class EFUserRepository : IUserRepository
     {

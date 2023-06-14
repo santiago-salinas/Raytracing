@@ -85,7 +85,10 @@ namespace BusinessLogic.DomainObjects
 
         public override bool Equals(object other)
         {
-            return this.UserName == ((User)other).UserName;
+            bool usernameIsEquals = UserName == ((User)other).UserName;
+            bool passwordEquals = Password == ((User)other).Password;
+            bool registerDateEquals = RegisterDate == ((User)other).RegisterDate;
+            return usernameIsEquals && passwordEquals && registerDateEquals;
         }
     }
 }

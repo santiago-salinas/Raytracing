@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace DataAccess
+namespace DataAccess.Entities
 {
     public class UserEntity
     {

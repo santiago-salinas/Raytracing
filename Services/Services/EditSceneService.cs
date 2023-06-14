@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.DomainObjects;
 using BusinessLogic.Utilities;
-using DataTransferObjects;
+using DataTransferObjects.DTOs;
+using DataTransferObjects.Mappers;
 using RepoInterfaces;
 using System;
 using System.Collections.Generic;
@@ -52,7 +53,6 @@ namespace Services
             sceneDTO.LastModificationDate = newDate;
             string sceneName = sceneDTO.Name;
             string owner = sceneDTO.Owner;
-           // _sceneRepository.UpdateModificationDate(sceneName, owner, newDate);
             _sceneRepository.UpdateRenderDate(sceneName, owner, newDate);
         }
 
@@ -97,7 +97,5 @@ namespace Services
         {
             return _sceneRepository.GetScene(name, owner);
         }
-
-
     }
 }
