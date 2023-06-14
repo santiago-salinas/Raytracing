@@ -135,6 +135,61 @@ namespace EntityFrameworkTests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(Controller_ArgumentException))]
+        public void AddMaterial_InValidMetallic()
+        {
+            ColorDTO colorDTO = new ColorDTO()
+            {
+                Red = 1,
+                Green = 0,
+                Blue = 0,
+            };
+            MaterialDTO NewMaterial = new MaterialDTO()
+            {
+                Name = "Test Material",
+                Color = colorDTO,
+                Owner = "TestUser",
+                Type = "metallic",
+                Roughness = 4, // <-- Between 0.0 and 1.0
+            };
+
+
+            context.MaterialController.AddMaterial(NewMaterial);
+        }
+
+        [TestMethod]
+        public void RemoveMaterial_ValidMetallic_MetallicAdded()
+        {
+            ColorDTO colorDTO = new ColorDTO()
+            {
+                Red = 1,
+                Green = 0,
+                Blue = 0,
+            };
+            MaterialDTO NewMaterial = new MaterialDTO()
+            {
+                Name = "Test Material",
+                Color = colorDTO,
+                Owner = "TestUser",
+                Type = "metallic",
+                Roughness = 0.5,
+            };
+
+
+            context.MaterialController.AddMaterial(NewMaterial);
+
+            List<MaterialDTO> materialsFromUser = context.MaterialController.GetMaterialsFromUser("TestUser");
+
+            Assert.IsTrue(materialsFromUser.Count == 1);
+
+            context.MaterialController.RemoveMaterial("Test Material", "TestUser");
+
+            materialsFromUser = context.MaterialController.GetMaterialsFromUser("TestUser");
+
+            Assert.IsTrue(materialsFromUser.Count == 0);
+        }
+
+        [TestMethod]
         public void GetMaterial_ExistingMetallic_ReturnsMetallic()
         {
             Metallic metallic = new Metallic

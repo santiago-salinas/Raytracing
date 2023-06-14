@@ -86,7 +86,7 @@ namespace BusinessLogic_Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException), "Name cant be null")]
+        [ExpectedException(typeof(BusinessLogicException), "Name cant be null")]
         public void NameCantBeNullTest()
         {
             //arrange

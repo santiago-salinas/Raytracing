@@ -7,6 +7,8 @@ using System;
 using System.Linq;
 using Controllers;
 using Services;
+using Controllers.Exceptions;
+using BusinessLogic.Exceptions;
 
 namespace EntityFrameworkTests
 {
@@ -102,6 +104,61 @@ namespace EntityFrameworkTests
 
             bool containsUser = eFUserRepository.ContainsUser("TestUser");
             Assert.IsTrue(containsUser);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Controller_ObjectAlreadyExistsException))]
+        public void AddUser_ExistingUser()
+        {
+            context.UserController.SignUp("TestUser", "Password1");
+            context.UserController.SignUp("TestUser", "Password1");
+        }
+
+        [TestMethod]
+        public void CheckUser_ValidUser()
+        {            
+            context.UserController.CheckUsernameValidity("TestUser");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Controller_ArgumentException))]
+        public void CheckUser_InValidUser()
+        {
+            context.UserController.CheckUsernameValidity("TestUser Expection");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Controller_ArgumentException))]
+        public void CheckUser_InValidUser2()
+        {
+            context.UserController.CheckUsernameValidity("");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Controller_ArgumentException))]
+        public void ShortPassword()
+        {
+            context.UserController.CheckPasswordValidity("sho");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Controller_ArgumentException))]
+        public void EmptyPassword()
+        {
+            context.UserController.CheckPasswordValidity("");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Controller_ArgumentException))]
+        public void MissingNumbersPassword()
+        {
+            context.UserController.CheckPasswordValidity("MissingNumbers");
+        }
+
+        [TestMethod]
+        public void GoodPassword()
+        {
+            context.UserController.CheckPasswordValidity("Test1");
         }
 
         [TestMethod]
