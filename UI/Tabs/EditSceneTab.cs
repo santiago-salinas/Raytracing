@@ -54,11 +54,7 @@ namespace UI.Tabs
             lookAtButton.Text = VectorToString(lookAt);
 
             DateTime lastModificationDate = _scene.LastModificationDate;           
-<<<<<<< HEAD
             lastModificationLabel.Text = "Last modified: " + lastModificationDate.ToString("dd/MM/yyyy h:mm:ss tt"); ;
-=======
-            lastModificationLabel.Text += lastModificationDate.ToString("dd/MM/yyyy h:mm:ss tt");
->>>>>>> 9d03f6a6e4a28a844f2ab746b2ac311bdd4a561a
 
 
             fovInput.Value = fieldOfView;
@@ -234,16 +230,6 @@ namespace UI.Tabs
                 NotifyThatSeneWasModified();
                 _controller.UpdateBlur(_scene);
             }
-<<<<<<< HEAD
-            else
-            {
-                apertureInput.Enabled = false;
-                _scene.Blur = false;
-            }            
-            _controller.UpdateCamera(_scene);
-            NotifyThatSeneWasModified();
-=======
->>>>>>> 9d03f6a6e4a28a844f2ab746b2ac311bdd4a561a
         }
 
         // https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-save-files-using-the-savefiledialog-component?view=netframeworkdesktop-4.8
