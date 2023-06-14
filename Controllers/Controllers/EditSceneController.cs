@@ -66,6 +66,11 @@ namespace Controllers
             EditSceneService.UpdateBlurSetting(sceneDTO);
         }
 
+        public void UpdateBlur(SceneDTO sceneDTO)
+        {
+            EditSceneService.UpdateBlur(sceneDTO);
+        }
+
         public PpmDTO RenderScene(SceneDTO sceneDTO)
         {
             EditSceneService.UpdateLastRenderDate(sceneDTO);

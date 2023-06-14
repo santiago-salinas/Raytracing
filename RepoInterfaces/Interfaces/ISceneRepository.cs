@@ -19,6 +19,7 @@ namespace RepoInterfaces
         void UpdateBlurSetting(string sceneName, string owner, bool blurState);
 
         void UpdateModificationDate(string sceneName, string owner, DateTime date);
+        void UpdateBlur(string sceneName, string owner, bool BlurConfig);
         void UpdateCamera(string sceneName, string owner, BLCameraDTO camera);
         void UpdatePreview(string sceneName, string owner, PPM ppm);
 

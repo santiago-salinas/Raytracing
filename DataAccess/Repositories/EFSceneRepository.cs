@@ -208,6 +208,22 @@ namespace DataAccess.Repositories
             }
         }
 
+        public void UpdateBlur(string sceneName, string owner, bool BlurConfig)
+        {
+            using (EFContext context = new EFContext())
+            {
+                SceneEntity sceneEntity = context.SceneEntities
+                    .Include(s => s.CameraDTO)
+                    .FirstOrDefault(s => s.Name == sceneName && s.OwnerId == owner);
+
+                if (sceneEntity != null)
+                {
+                    sceneEntity.Blur = BlurConfig;
+                    context.SaveChanges();
+                }
+            }
+        }
+
         public void UpdatePreview(string sceneName, string owner, PPM preview)
         {
             using (EFContext context = new EFContext())
@@ -229,5 +245,6 @@ namespace DataAccess.Repositories
             }
         }
 
+        
     }
 }

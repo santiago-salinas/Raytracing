@@ -54,7 +54,11 @@ namespace UI.Tabs
             lookAtButton.Text = VectorToString(lookAt);
 
             DateTime lastModificationDate = _scene.LastModificationDate;           
+<<<<<<< HEAD
             lastModificationLabel.Text = "Last modified: " + lastModificationDate.ToString("dd/MM/yyyy h:mm:ss tt"); ;
+=======
+            lastModificationLabel.Text += lastModificationDate.ToString("dd/MM/yyyy h:mm:ss tt");
+>>>>>>> 9d03f6a6e4a28a844f2ab746b2ac311bdd4a561a
 
 
             fovInput.Value = fieldOfView;
@@ -185,7 +189,6 @@ namespace UI.Tabs
             saveBtn.Enabled = true;
 
             lastRenderLabel.Text = "Last rendered: " + _scene.LastRenderDate.ToString("dd/MM/yyyy h:mm:ss tt");
-            lastModificationLabel.Text = "Last modified: " + _scene.LastModificationDate.ToString("dd/MM/yyyy h:mm:ss tt");
         }
         private string VectorToString(VectorDTO vector)
         {
@@ -214,11 +217,24 @@ namespace UI.Tabs
 
         private void checkBlur_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBlur.Checked)
+            bool newBlur = checkBlur.Checked;
+
+            if(_scene.Blur != newBlur)
             {
-                apertureInput.Enabled = true;
-                _scene.Blur = true;
+                if (checkBlur.Checked)
+                {
+                    apertureInput.Enabled = true;
+                    _scene.Blur = true;
+                }
+                else
+                {
+                    apertureInput.Enabled = false;
+                    _scene.Blur = false;
+                }
+                NotifyThatSeneWasModified();
+                _controller.UpdateBlur(_scene);
             }
+<<<<<<< HEAD
             else
             {
                 apertureInput.Enabled = false;
@@ -226,6 +242,8 @@ namespace UI.Tabs
             }            
             _controller.UpdateCamera(_scene);
             NotifyThatSeneWasModified();
+=======
+>>>>>>> 9d03f6a6e4a28a844f2ab746b2ac311bdd4a561a
         }
 
         // https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-save-files-using-the-savefiledialog-component?view=netframeworkdesktop-4.8
