@@ -110,5 +110,10 @@ namespace Repositories
             Scene scene = GetScene(sceneName, owner);
             scene.Blur = blurConfig;
         }
+
+        public void UpdateBlurSetting(string sceneName, string owner, bool blurState)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

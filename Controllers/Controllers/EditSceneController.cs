@@ -59,9 +59,11 @@ namespace Controllers
             EditSceneService.UpdateLastRenderDate(sceneDTO);
         }
 
+
         public void UpdateCamera(SceneDTO sceneDTO)
         {
             EditSceneService.UpdateCamera(sceneDTO);
+            EditSceneService.UpdateBlurSetting(sceneDTO);
         }
 
         public void UpdateBlur(SceneDTO sceneDTO)

@@ -53,7 +53,16 @@ namespace Services
             sceneDTO.LastModificationDate = newDate;
             string sceneName = sceneDTO.Name;
             string owner = sceneDTO.Owner;
+            _sceneRepository.UpdateModificationDate(sceneName, owner, newDate);
             _sceneRepository.UpdateRenderDate(sceneName, owner, newDate);
+        }
+
+        public void UpdateBlurSetting(SceneDTO sceneDTO)
+        {
+            bool newState = sceneDTO.Blur;
+            string sceneName = sceneDTO.Name;
+            string owner = sceneDTO.Owner;
+            _sceneRepository.UpdateBlurSetting(sceneName, owner, newState);
         }
 
         public void UpdateLastModificationDate(SceneDTO sceneDTO)
