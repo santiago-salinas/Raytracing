@@ -10,8 +10,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DataTransferObjects.Mappers;
-using BusinessLogic.Exceptions;
+using System.Data.Entity;
 using Controllers.Exceptions;
+using Services.Exceptions;
 
 namespace EntityFrameworkTests
 {
@@ -54,11 +55,20 @@ namespace EntityFrameworkTests
             using (EFContext dbContext = new EFContext())
             {
                 UserEntity user = dbContext.UserEntities.FirstOrDefault(m => m.Username == "TestUser");
-                List<SphereEntity> spheres = dbContext.SphereEntities
-                    .Where(s => s.OwnerId == "TestUser" && s.Name.StartsWith("Test Sphere"))
+                List<MaterialEntity> materials = dbContext.MaterialEntities
+                    .Include(m => m.Lambertian)
+                    .Where(m => m.OwnerId == user.Username && m.Name.StartsWith("Material"))
                     .ToList();
-
+                List<SphereEntity> spheres = dbContext.SphereEntities
+                    .Where(m => m.OwnerId == user.Username && m.Name.StartsWith("Test Sphere"))
+                    .ToList();
+                List<ModelEntity> models = dbContext.ModelEntities
+                    .Where(m => m.OwnerId == user.Username && m.Name.StartsWith("Model"))
+                    .ToList();
+                dbContext.ModelEntities.RemoveRange(models);
                 dbContext.SphereEntities.RemoveRange(spheres);
+                dbContext.LambertianEntities.RemoveRange(materials.Select(m => m.Lambertian));
+                dbContext.MaterialEntities.RemoveRange(materials);
                 dbContext.UserEntities.Remove(user);
                 dbContext.SaveChanges();
             }
@@ -198,6 +208,45 @@ namespace EntityFrameworkTests
 
             _controller.RemoveSphere("Test Sphere", "TestUser");
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(Controller_ObjectHandlingException), "User already owns sphere with that name")]
+
+        public void AddSphereAlreadyExists_Fails()
+        {
+            SphereDTO sphere1 = new SphereDTO
+            {
+                Name = "Test Sphere",
+                OwnerName = "TestUser",
+                Radius = 10,
+            };
+            SphereDTO sphere2 = new SphereDTO
+            {
+                Name = "Test Sphere",
+                OwnerName = "TestUser",
+                Radius = 5,
+            };
+
+            _controller.AddSphere(sphere1);
+            _controller.AddSphere(sphere2);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Service_ObjectHandlingException))]
+
+        public void AddSphereWithInvalidArguments_Fails()
+        {
+            SphereDTO sphere = new SphereDTO
+            {
+                Name = "Test Sphere",
+                OwnerName = "TestUser",
+                Radius = -10,
+            };
+
+            _service.AddSphere(sphere);
+        }
+
+
     }
 
 

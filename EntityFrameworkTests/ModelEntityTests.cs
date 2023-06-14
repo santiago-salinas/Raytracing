@@ -8,16 +8,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
 using System;
+using Controllers;
+using Services;
 
 namespace EntityFrameworkTests
 {
     [TestClass]
     public class EFModelRepositoryTests
     {
-        private EFModelRepository _repository = new EFModelRepository();
-        private EFMaterialRepository _materialRepository = new EFMaterialRepository();
-        private EFSphereRepository _sphereRepository = new EFSphereRepository();
-        private EFUserRepository _userRepository = new EFUserRepository();
+        private EFSphereRepository eFSphereRepository = new EFSphereRepository();
+        private EFUserRepository eFUserRepository = new EFUserRepository();
+        private EFMaterialRepository eFMaterialRepository = new EFMaterialRepository();
+        private EFModelRepository eFModelRepository = new EFModelRepository();
+        private EFSceneRepository eFSceneRepository = new EFSceneRepository();
+
+        private SphereManagementService sphereManagementService;
+        private MaterialManagementService materialManagementService;
+        private ModelManagementService modelManagementService;
+        private SceneManagementService sceneManagementService;
+        private UserService userService;
+        private EditSceneService editSceneService;
+        private RenderingService renderingService;
+
+        private SphereManagementController sphereManagementController;
+        private MaterialManagementController materialManagementController;
+        private ModelManagementController modelManagementController;
+        private SceneManagementController sceneController;
+        private UserController userController;
+        private EditSceneController editSceneController;
+        
         private Metallic _testMat;
         private MaterialEntity _testMatEntity;
         private Sphere _testSphere;
@@ -27,7 +46,35 @@ namespace EntityFrameworkTests
         [TestInitialize]
         public void TestInitialize()
         {
-            
+            eFSphereRepository = new EFSphereRepository();
+            eFUserRepository = new EFUserRepository();
+            eFMaterialRepository = new EFMaterialRepository();
+            eFModelRepository = new EFModelRepository();
+            eFSceneRepository = new EFSceneRepository();
+
+            sphereManagementService = new SphereManagementService(eFSphereRepository);
+            materialManagementService = new MaterialManagementService(eFMaterialRepository);
+            modelManagementService = new ModelManagementService(eFModelRepository, eFSceneRepository);
+            sceneManagementService = new SceneManagementService(eFSceneRepository);
+            userService = new UserService(eFUserRepository);
+            editSceneService = new EditSceneService(eFSceneRepository);
+            renderingService = new RenderingService();
+
+            sphereManagementController = new SphereManagementController(sphereManagementService, modelManagementService);
+            materialManagementController = new MaterialManagementController(materialManagementService, modelManagementService);
+            modelManagementController = new ModelManagementController();
+            modelManagementController.SphereService = sphereManagementService;
+            modelManagementController.ModelService = modelManagementService;
+            modelManagementController.MaterialService = materialManagementService;
+            modelManagementController.RenderingService = renderingService;
+            sceneController = new SceneManagementController(sceneManagementService);
+            userController = new UserController(userService);
+            editSceneController = new EditSceneController();
+            editSceneController.ModelManagementService = modelManagementService;
+            editSceneController.EditSceneService = editSceneService;
+            editSceneController.RenderingService = renderingService;
+            editSceneController.SceneManagementService = sceneManagementService;
+
             _testUser = new User()
             {
                 UserName = "TestUser",
