@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Utilities;
+using BusinessLogic.Exceptions;
 using System;
 
 namespace BusinessLogic.DomainObjects
@@ -26,7 +27,7 @@ namespace BusinessLogic.DomainObjects
                 }
                 else
                 {
-                    throw new ArgumentException("Roughness value must be between 0 and 1");
+                    throw new BusinessLogicException("Roughness value must be between 0 and 1");
                 }
             }
         }

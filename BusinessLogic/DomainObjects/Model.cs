@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.DomainObjects;
+using BusinessLogic.Exceptions;
 using BusinessLogic.Utilities;
 using System;
 
@@ -38,7 +39,7 @@ namespace BusinessLogic.DomainObjects
         {
             if (String.IsNullOrEmpty(value))
             {
-                throw new ArgumentNullException("Name cant be null");
+                throw new BusinessLogicException("Name cant be null");
             }
         }
 

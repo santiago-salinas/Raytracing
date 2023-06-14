@@ -5,18 +5,75 @@ using DataAccess;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
+using Controllers;
+using Services;
+using Controllers.Exceptions;
+using BusinessLogic.Exceptions;
 
 namespace EntityFrameworkTests
 {
     [TestClass]
     public class EFUserRepositoryTests
     {
-        private EFUserRepository _repository;
+        EFSphereRepository eFSphereRepository;
+        EFUserRepository eFUserRepository;
+        EFMaterialRepository eFMaterialRepository;
+        EFModelRepository eFModelRepository;
+        EFSceneRepository eFSceneRepository;
+
+        SphereManagementService sphereManagementService;
+        MaterialManagementService materialManagementService;
+        ModelManagementService modelManagementService;
+        SceneManagementService sceneManagementService;
+        UserService userService;
+        EditSceneService editSceneService;
+        RenderingService renderingService;
+
+        SphereManagementController sphereManagementController;
+        MaterialManagementController materialManagementController;
+        ModelManagementController modelManagementController;
+        SceneManagementController sceneController;
+        UserController userController;
+        EditSceneController editSceneController;
+
+        Context context;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            _repository = new EFUserRepository();
+            eFSphereRepository = new EFSphereRepository();
+            eFUserRepository = new EFUserRepository();
+            eFMaterialRepository = new EFMaterialRepository();
+            eFModelRepository = new EFModelRepository();
+            eFSceneRepository = new EFSceneRepository();
+
+            sphereManagementService = new SphereManagementService(eFSphereRepository);
+            materialManagementService = new MaterialManagementService(eFMaterialRepository);
+            modelManagementService = new ModelManagementService(eFModelRepository, eFSceneRepository);
+            sceneManagementService = new SceneManagementService(eFSceneRepository);
+            userService = new UserService(eFUserRepository);
+            editSceneService = new EditSceneService(eFSceneRepository);
+            renderingService = new RenderingService();
+
+            sphereManagementController = new SphereManagementController(sphereManagementService, modelManagementService);
+            materialManagementController = new MaterialManagementController(materialManagementService, modelManagementService);
+            modelManagementController = new ModelManagementController();
+            modelManagementController.SphereService = sphereManagementService;
+            modelManagementController.ModelService = modelManagementService;
+            modelManagementController.MaterialService = materialManagementService;
+            modelManagementController.RenderingService = renderingService;
+            sceneController = new SceneManagementController(sceneManagementService);
+            userController = new UserController(userService);
+            editSceneController = new EditSceneController();
+
+            context = new Context();
+            context.SphereController = sphereManagementController;
+            context.MaterialController = materialManagementController;
+            context.ModelController = modelManagementController;
+            context.SceneController = sceneController;
+            context.UserController = userController;
+            context.EditSceneController = editSceneController;
+
         }
 
         [TestCleanup]
@@ -43,10 +100,65 @@ namespace EntityFrameworkTests
                 RegisterDate = DateTime.Now
             };
 
-            _repository.AddUser(user);
+            context.UserController.SignUp("TestUser", "Password1");
 
-            bool containsUser = _repository.ContainsUser("TestUser");
+            bool containsUser = eFUserRepository.ContainsUser("TestUser");
             Assert.IsTrue(containsUser);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Controller_ObjectAlreadyExistsException))]
+        public void AddUser_ExistingUser()
+        {
+            context.UserController.SignUp("TestUser", "Password1");
+            context.UserController.SignUp("TestUser", "Password1");
+        }
+
+        [TestMethod]
+        public void CheckUser_ValidUser()
+        {            
+            context.UserController.CheckUsernameValidity("TestUser");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Controller_ArgumentException))]
+        public void CheckUser_InValidUser()
+        {
+            context.UserController.CheckUsernameValidity("TestUser Expection");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Controller_ArgumentException))]
+        public void CheckUser_InValidUser2()
+        {
+            context.UserController.CheckUsernameValidity("");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Controller_ArgumentException))]
+        public void ShortPassword()
+        {
+            context.UserController.CheckPasswordValidity("sho");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Controller_ArgumentException))]
+        public void EmptyPassword()
+        {
+            context.UserController.CheckPasswordValidity("");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Controller_ArgumentException))]
+        public void MissingNumbersPassword()
+        {
+            context.UserController.CheckPasswordValidity("MissingNumbers");
+        }
+
+        [TestMethod]
+        public void GoodPassword()
+        {
+            context.UserController.CheckPasswordValidity("Test1");
         }
 
         [TestMethod]
@@ -66,8 +178,11 @@ namespace EntityFrameworkTests
                 dbContext.SaveChanges();
             }
 
-            User retrievedUser = _repository.GetUser("TestUser");
+            User retrievedUser = eFUserRepository.GetUser("TestUser");
 
+            bool logged = context.UserController.Login("TestUser", "Password1");
+
+            Assert.IsTrue(logged);
             Assert.IsNotNull(retrievedUser);
             Assert.AreEqual("TestUser", retrievedUser.UserName);
             Assert.AreEqual("Password1", retrievedUser.Password);
@@ -90,7 +205,7 @@ namespace EntityFrameworkTests
                 dbContext.SaveChanges();
             }
 
-            bool containsUser = _repository.ContainsUser("TestUser");
+            bool containsUser = eFUserRepository.ContainsUser("TestUser");
 
             Assert.IsTrue(containsUser);
         }
@@ -98,7 +213,7 @@ namespace EntityFrameworkTests
         [TestMethod]
         public void ContainsUser_NonexistentUser_ReturnsFalse()
         {
-            bool containsUser = _repository.ContainsUser("NonexistentUser");
+            bool containsUser = eFUserRepository.ContainsUser("NonexistentUser");
 
             Assert.IsFalse(containsUser);
         }
@@ -120,9 +235,13 @@ namespace EntityFrameworkTests
                 dbContext.SaveChanges();
             }
 
-            bool isValid = _repository.CheckUsernameAndPasswordCombination("TestUser", "Password1");
+            bool isValid = eFUserRepository.CheckUsernameAndPasswordCombination("TestUser", "Password1");
+            bool isValid2 = userController.Login("TestUser", "Password1");
+
 
             Assert.IsTrue(isValid);
+            Assert.IsTrue(isValid2);
+
         }
 
         [TestMethod]
@@ -142,9 +261,12 @@ namespace EntityFrameworkTests
                 dbContext.SaveChanges();
             }
 
-            bool isValid = _repository.CheckUsernameAndPasswordCombination("TestUser", "WrongPassword");
+            bool isValid2 = userController.Login("TestUser", "WrongPassword");
+            bool isValid = eFUserRepository.CheckUsernameAndPasswordCombination("TestUser", "WrongPassword");
+            
 
             Assert.IsFalse(isValid);
+            Assert.IsFalse(isValid2);
         }
     }
 

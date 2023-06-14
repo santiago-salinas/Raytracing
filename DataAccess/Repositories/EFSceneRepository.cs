@@ -18,7 +18,7 @@ namespace DataAccess.Repositories
         {
             using (EFContext context = new EFContext())
             {
-                return context.ModelEntities
+                return context.SceneEntities
                     .Any(m => m.Name == name && m.OwnerId == user);
             }
         }
@@ -82,14 +82,14 @@ namespace DataAccess.Repositories
             using (EFContext context = new EFContext())
             {
                 List<SceneEntity> scene = context.SceneEntities
-                    .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Owner))
-                    .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Lambertian))
-                    .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Metallic))
-                    .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Shape))
-                    .Include(m => m.PositionedModels.Select(pm => pm.Model).Select(pm => pm.PPMEntity))
+                    .Include(s => s.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Owner))
+                    .Include(s => s.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Lambertian))
+                    .Include(s => s.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Material).Select(pm => pm.Metallic))
+                    .Include(s => s.PositionedModels.Select(pm => pm.Model).Select(pm => pm.Shape))
+                    .Include(s => s.PositionedModels.Select(pm => pm.Model).Select(pm => pm.PPMEntity))
                     .Include(s => s.PPMEntity)
-                    .Include(m => m.CameraDTO)
-                    .Where(m => m.OwnerId == owner)
+                    .Include(s => s.CameraDTO)
+                    .Where(s => s.OwnerId == owner)
                     .ToList();
 
                 return scene.Select(m => SceneEntity.FromEntity(m)).ToList();

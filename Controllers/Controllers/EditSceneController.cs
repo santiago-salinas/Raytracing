@@ -80,9 +80,5 @@ namespace Controllers
             return render;
         }
 
-        public bool NameIsAlreadyInUse(string name, string owner)
-        {
-            return SceneManagementService.ContainsScene(name, owner);
-        }
     }
 }

@@ -45,7 +45,6 @@ namespace Controllers
             {
                 throw new Controller_ObjectHandlingException(ex.Message);
             }
-
         }
 
         public List<MaterialDTO> GetAvailableMaterials(string owner)

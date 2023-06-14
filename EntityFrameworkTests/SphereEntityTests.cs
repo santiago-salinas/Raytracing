@@ -1,12 +1,18 @@
 ﻿using BusinessLogic.DomainObjects;
+using Controllers;
+using DataTransferObjects.DTOs;
 using DataAccess;
 using DataAccess.Entities;
 using DataAccess.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using DataTransferObjects.Mappers;
+using System.Data.Entity;
+using Controllers.Exceptions;
+using Services.Exceptions;
 
 namespace EntityFrameworkTests
 {
@@ -15,13 +21,25 @@ namespace EntityFrameworkTests
     {
         private EFSphereRepository _repository;
         private EFUserRepository _userRepository;
+        private SphereManagementController _controller;
+        private SphereManagementService _service;
 
+        private EFSceneRepository _sceneRepository;
+        private EFModelRepository _modelRepository;
+        private EFMaterialRepository _materialRepository;
+        private ModelManagementService _modelManagementService;
         [TestInitialize]
         public void TestInitialize()
         {
             _repository = new EFSphereRepository();
             _userRepository = new EFUserRepository();
+            _modelRepository = new EFModelRepository();
+            _materialRepository = new EFMaterialRepository();
+            _service = new SphereManagementService(_repository);
+            _sceneRepository = new EFSceneRepository();
 
+            _modelManagementService = new ModelManagementService(_modelRepository,_sceneRepository);
+            _controller = new SphereManagementController(_service,_modelManagementService);
             User user = new User()
             {
                 UserName = "TestUser",
@@ -37,11 +55,20 @@ namespace EntityFrameworkTests
             using (EFContext dbContext = new EFContext())
             {
                 UserEntity user = dbContext.UserEntities.FirstOrDefault(m => m.Username == "TestUser");
-                List<SphereEntity> spheres = dbContext.SphereEntities
-                    .Where(s => s.OwnerId == "TestUser" && s.Name.StartsWith("Test Sphere"))
+                List<MaterialEntity> materials = dbContext.MaterialEntities
+                    .Include(m => m.Lambertian)
+                    .Where(m => m.OwnerId == user.Username && m.Name.StartsWith("Material"))
                     .ToList();
-
+                List<SphereEntity> spheres = dbContext.SphereEntities
+                    .Where(m => m.OwnerId == user.Username && m.Name.StartsWith("Test Sphere"))
+                    .ToList();
+                List<ModelEntity> models = dbContext.ModelEntities
+                    .Where(m => m.OwnerId == user.Username && m.Name.StartsWith("Model"))
+                    .ToList();
+                dbContext.ModelEntities.RemoveRange(models);
                 dbContext.SphereEntities.RemoveRange(spheres);
+                dbContext.LambertianEntities.RemoveRange(materials.Select(m => m.Lambertian));
+                dbContext.MaterialEntities.RemoveRange(materials);
                 dbContext.UserEntities.Remove(user);
                 dbContext.SaveChanges();
             }
@@ -56,8 +83,8 @@ namespace EntityFrameworkTests
                 Owner = "TestUser",
                 Radius = 10,
             };
-
-            _repository.AddSphere(sphere);
+            SphereDTO sphereDto = SphereMapper.ConvertToDTO(sphere);
+            _controller.AddSphere(sphereDto);
 
             List<Sphere> spheresFromUser = _repository.GetSpheresFromUser("TestUser");
 
@@ -83,11 +110,11 @@ namespace EntityFrameworkTests
                 dbContext.SaveChanges();
             }
 
-            Sphere retrievedSphere = _repository.GetSphere("Test Sphere", "TestUser");
+            List<SphereDTO> retrievedSphere = _controller.GetSpheresFromUser("TestUser");
 
-            Assert.IsNotNull(retrievedSphere);
-            Assert.AreEqual("Test Sphere", retrievedSphere.Name);
-            Assert.AreEqual("TestUser", retrievedSphere.Owner);
+            Assert.AreEqual("Test Sphere", retrievedSphere[0].Name);
+            Assert.AreEqual("TestUser", retrievedSphere[0].OwnerName);
+            Assert.AreEqual(10, retrievedSphere[0].Radius);
         }
 
         [TestMethod]
@@ -107,7 +134,7 @@ namespace EntityFrameworkTests
                 dbContext.SaveChanges();
             }
 
-            _repository.RemoveSphere("Test Sphere", "TestUser");
+            _controller.RemoveSphere("Test Sphere", "TestUser");
 
             using (EFContext dbContext = new EFContext())
             {
@@ -148,5 +175,79 @@ namespace EntityFrameworkTests
             Assert.IsTrue(containsSphere);
             Assert.IsFalse(containsSphere2);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(Controller_ObjectHandlingException),"Cannot remove a sphere that is being used by a model")]
+
+        public void RemoveSphereUsedByModel_Fails()
+        {
+            SphereDTO sphere = new SphereDTO
+            {
+                Name = "Test Sphere",
+                OwnerName = "TestUser",
+                Radius = 10,
+            };
+            MaterialDTO material = new MaterialDTO
+            {
+                Color = new ColorDTO(0, 0, 0),
+                Name = "Material",
+                Owner = "TestUser",
+                Type = "lambertian"
+            };
+            ModelDTO model = new ModelDTO
+            {
+                OwnerName = "TestUser",
+                Name = "Model",
+                Shape = sphere,
+                Material = material,
+            };
+
+            _materialRepository.AddMaterial(MaterialMapper.ConvertToMaterial(material));
+            _controller.AddSphere(sphere);
+            _modelRepository.AddModel(ModelMapper.ConvertToModel(model));
+
+            _controller.RemoveSphere("Test Sphere", "TestUser");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Controller_ObjectHandlingException), "User already owns sphere with that name")]
+
+        public void AddSphereAlreadyExists_Fails()
+        {
+            SphereDTO sphere1 = new SphereDTO
+            {
+                Name = "Test Sphere",
+                OwnerName = "TestUser",
+                Radius = 10,
+            };
+            SphereDTO sphere2 = new SphereDTO
+            {
+                Name = "Test Sphere",
+                OwnerName = "TestUser",
+                Radius = 5,
+            };
+
+            _controller.AddSphere(sphere1);
+            _controller.AddSphere(sphere2);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Service_ObjectHandlingException))]
+
+        public void AddSphereWithInvalidArguments_Fails()
+        {
+            SphereDTO sphere = new SphereDTO
+            {
+                Name = "Test Sphere",
+                OwnerName = "TestUser",
+                Radius = -10,
+            };
+
+            _service.AddSphere(sphere);
+        }
+
+
     }
+
+
 }

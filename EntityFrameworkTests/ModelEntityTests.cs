@@ -1,5 +1,7 @@
 ﻿using BusinessLogic.DomainObjects;
 using BusinessLogic.Utilities;
+using DataTransferObjects.DTOs;
+using DataTransferObjects.Mappers;
 using DataAccess.Entities;
 using DataAccess.Repositories;
 using DataAccess;
@@ -8,29 +10,87 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
 using System;
+using Controllers;
+using Services;
+using Services.Exceptions;
+using Controllers.Exceptions;
+using System.Runtime.InteropServices;
 
 namespace EntityFrameworkTests
 {
     [TestClass]
     public class EFModelRepositoryTests
     {
-        private EFModelRepository _repository = new EFModelRepository();
-        private EFMaterialRepository _materialRepository = new EFMaterialRepository();
-        private EFSphereRepository _sphereRepository = new EFSphereRepository();
-        private EFUserRepository _userRepository = new EFUserRepository();
+        private EFSphereRepository eFSphereRepository = new EFSphereRepository();
+        private EFUserRepository eFUserRepository = new EFUserRepository();
+        private EFMaterialRepository eFMaterialRepository = new EFMaterialRepository();
+        private EFModelRepository eFModelRepository = new EFModelRepository();
+        private EFSceneRepository eFSceneRepository = new EFSceneRepository();
+
+        private SphereManagementService sphereManagementService;
+        private MaterialManagementService materialManagementService;
+        private ModelManagementService modelManagementService;
+        private SceneManagementService sceneManagementService;
+        private UserService userService;
+        private EditSceneService editSceneService;
+        private RenderingService renderingService;
+
+        private SphereManagementController sphereManagementController;
+        private MaterialManagementController materialManagementController;
+        private ModelManagementController modelManagementController;
+        private SceneManagementController sceneController;
+        private UserController userController;
+        private EditSceneController editSceneController;
+        
         private Metallic _testMat;
         private MaterialEntity _testMatEntity;
         private Sphere _testSphere;
         private SphereEntity _testSphereEntity;
         private User _testUser;
+        private SphereDTO _sphereDto;
+        private MaterialDTO _matDto;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            
+            eFSphereRepository = new EFSphereRepository();
+            eFUserRepository = new EFUserRepository();
+            eFMaterialRepository = new EFMaterialRepository();
+            eFModelRepository = new EFModelRepository();
+            eFSceneRepository = new EFSceneRepository();
+
+            sphereManagementService = new SphereManagementService(eFSphereRepository);
+            materialManagementService = new MaterialManagementService(eFMaterialRepository);
+            modelManagementService = new ModelManagementService(eFModelRepository, eFSceneRepository);
+            sceneManagementService = new SceneManagementService(eFSceneRepository);
+            userService = new UserService(eFUserRepository);
+            editSceneService = new EditSceneService(eFSceneRepository);
+            renderingService = new RenderingService();
+
+            sphereManagementController = new SphereManagementController(sphereManagementService, modelManagementService);
+            materialManagementController = new MaterialManagementController(materialManagementService, modelManagementService);
+            modelManagementController = new ModelManagementController();
+            modelManagementController.SphereService = sphereManagementService;
+            modelManagementController.ModelService = modelManagementService;
+            modelManagementController.MaterialService = materialManagementService;
+            modelManagementController.RenderingService = renderingService;
+            sceneController = new SceneManagementController(sceneManagementService);
+            userController = new UserController(userService);
+            editSceneController = new EditSceneController();
+            editSceneController.ModelManagementService = modelManagementService;
+            editSceneController.EditSceneService = editSceneService;
+            editSceneController.RenderingService = renderingService;
+            editSceneController.SceneManagementService = sceneManagementService;
+
             _testUser = new User()
             {
                 UserName = "TestUser",
+                Password = "Password1",
+                RegisterDate = DateTime.Now,
+            };
+            User _testUser2 = new User()
+            {
+                UserName = "TestUser2",
                 Password = "Password1",
                 RegisterDate = DateTime.Now,
             };
@@ -47,9 +107,12 @@ namespace EntityFrameworkTests
                 Owner = "TestUser",
                 Radius = 10,
             };
-            _userRepository.AddUser(_testUser);
-            _materialRepository.AddMaterial(_testMat);
-            _sphereRepository.AddSphere(_testSphere);
+            _sphereDto = SphereMapper.ConvertToDTO(_testSphere);
+            _matDto = MaterialMapper.ConvertToDTO(_testMat);
+            eFUserRepository.AddUser(_testUser);
+            eFUserRepository.AddUser(_testUser2);
+            eFMaterialRepository.AddMaterial(_testMat);
+            eFSphereRepository.AddSphere(_testSphere);
             using (EFContext dbContext = new EFContext())
             {
                 _testSphereEntity = dbContext.SphereEntities
@@ -65,21 +128,28 @@ namespace EntityFrameworkTests
             using (EFContext dbContext = new EFContext())
             {
                 UserEntity user = dbContext.UserEntities.FirstOrDefault(m => m.Username == "TestUser");
+                UserEntity user2 = dbContext.UserEntities.FirstOrDefault(m => m.Username == "TestUser2");
                 List<MaterialEntity> materials = dbContext.MaterialEntities
                     .Include(m => m.Metallic)
-                    .Where(m => m.OwnerId == user.Username && m.Name.StartsWith("Test Material"))
                     .ToList();
                 List<SphereEntity> spheres = dbContext.SphereEntities
-                    .Where(m => m.OwnerId == user.Username && m.Name.StartsWith("Test Sphere"))
                     .ToList();
                 List<ModelEntity> models = dbContext.ModelEntities
-                    .Where(m => m.OwnerId == user.Username && m.Name.StartsWith("Test Model"))
                     .ToList();
+                List<PositionedModelEntity> positionedModels = dbContext.PositionedModelEntities
+                    .ToList();
+                List<SceneEntity> scenes = dbContext.SceneEntities
+                    .ToList();
+                List<CameraEntity> cameras = dbContext.Set<CameraEntity>().ToList();
+                dbContext.PositionedModelEntities.RemoveRange(positionedModels);
+                dbContext.SceneEntities.RemoveRange(scenes);
+                dbContext.Set<CameraEntity>().RemoveRange(cameras);
                 dbContext.ModelEntities.RemoveRange(models);
                 dbContext.SphereEntities.RemoveRange(spheres);
                 dbContext.MetallicEntities.RemoveRange(materials.Select(m => m.Metallic));
                 dbContext.MaterialEntities.RemoveRange(materials);
                 dbContext.UserEntities.Remove(user);
+                dbContext.UserEntities.Remove(user2);
                 dbContext.SaveChanges();
             }
         }
@@ -87,27 +157,26 @@ namespace EntityFrameworkTests
         [TestMethod]
         public void GetModelsFromUser_ExistingUser_ReturnsModels()
         {
-            // Arrange
             string owner = "TestUser";
-            Model model1 = new Model()
+            ModelDTO model1 = new ModelDTO()
             {
                 Name = "Test Model1",
-                Owner = owner,
-                Material = _testMat,
-                Shape = _testSphere,
+                OwnerName = owner,
+                Material = _matDto,
+                Shape = _sphereDto,
             };
-            Model model2 = new Model()
+            ModelDTO model2 = new ModelDTO()
             {
                 Name = "Test Model2",
-                Owner = owner,
-                Material = _testMat,
-                Shape = _testSphere,
+                OwnerName = owner,
+                Material = _matDto,
+                Shape = _sphereDto,
             };
-            _repository.AddModel(model1);
-            _repository.AddModel(model2);
+            modelManagementController.AddModel(model1);
+            modelManagementController.AddModel(model2);
 
 
-            List<Model> models = _repository.GetModelsFromUser(owner);
+            List<ModelDTO> models = modelManagementController.GetModelsFromUser(owner);
 
             Assert.IsNotNull(models);
             Assert.AreEqual(2, models.Count);
@@ -133,7 +202,7 @@ namespace EntityFrameworkTests
                 dbContext.ModelEntities.Add(modelEntity);
                 dbContext.SaveChanges();
             }
-            bool containsModel = _repository.ContainsModel(name, owner);
+            bool containsModel = eFModelRepository.ContainsModel(name, owner);
 
             Assert.IsTrue(containsModel);
         }
@@ -141,11 +210,10 @@ namespace EntityFrameworkTests
         [TestMethod]
         public void ContainsModel_NonexistentModel_ReturnsFalse()
         {
-
             string name = "NonexistentModel";
             string owner = "TestUser";
 
-            bool containsModel = _repository.ContainsModel(name, owner);
+            bool containsModel = eFModelRepository.ContainsModel(name, owner);
 
             Assert.IsFalse(containsModel);
         }
@@ -168,10 +236,10 @@ namespace EntityFrameworkTests
                 Material = materialEntity,
                 Shape = _testSphere
             };
-            _materialRepository.AddMaterial(materialEntity);
-            _repository.AddModel(modelEntity);
+            eFMaterialRepository.AddMaterial(materialEntity);
+            eFModelRepository.AddModel(modelEntity);
 
-            bool existsModel = _repository.ExistsModelUsingTheMaterial(materialName, ownerUsername);
+            bool existsModel = eFModelRepository.ExistsModelUsingTheMaterial(materialName, ownerUsername);
 
             Assert.IsTrue(existsModel);
         }
@@ -182,7 +250,7 @@ namespace EntityFrameworkTests
             string materialName = "NonexistentMaterial";
             string ownerUsername = "TestUser";
 
-            bool existsModel = _repository.ExistsModelUsingTheMaterial(materialName, ownerUsername);
+            bool existsModel = eFModelRepository.ExistsModelUsingTheMaterial(materialName, ownerUsername);
 
             Assert.IsFalse(existsModel);
         }
@@ -206,10 +274,10 @@ namespace EntityFrameworkTests
                 Shape = shape,
             };
 
-            _sphereRepository.AddSphere(shape);
-            _repository.AddModel(model);
+            eFSphereRepository.AddSphere(shape);
+            eFModelRepository.AddModel(model);
 
-            bool existsModel = _repository.ExistsModelUsingTheSphere(sphereName, ownerUsername);
+            bool existsModel = eFModelRepository.ExistsModelUsingTheSphere(sphereName, ownerUsername);
 
             Assert.IsTrue(existsModel);
         }
@@ -220,30 +288,33 @@ namespace EntityFrameworkTests
             string sphereName = "NonexistentSphere";
             string ownerUsername = "TestUser";
 
-            bool existsModel = _repository.ExistsModelUsingTheSphere(sphereName, ownerUsername);
+            bool existsModel = eFModelRepository.ExistsModelUsingTheSphere(sphereName, ownerUsername);
 
             Assert.IsFalse(existsModel);
         }
 
         [TestMethod]
-        public void AddModel_ValidModel_AddsModelToDatabase()
+        [ExpectedException(typeof(Controller_ArgumentException))]
+        public void AddModel_ExistingModel_Fails()
         {
             string owner = "TestUser";
-            Model newModel = new Model()
+            ModelDTO model1 = new ModelDTO()
             {
                 Name = "Test Model",
-                Owner = owner,
-                Material = _testMat,
-                Shape = _testSphere,
+                OwnerName = owner,
+                Material = _matDto,
+                Shape = _sphereDto,
+            };
+            ModelDTO model2 = new ModelDTO()
+            {
+                Name = "Test Model",
+                OwnerName = owner,
+                Material = _matDto,
+                Shape = _sphereDto,
             };
 
-            _repository.AddModel(newModel);
-            ModelEntity addedModelEntity;
-            using (EFContext dbContext = new EFContext())
-            {
-                addedModelEntity = dbContext.ModelEntities.FirstOrDefault(m => m.Name == "Test Model" && m.OwnerId == owner);
-            }
-            Assert.IsNotNull(addedModelEntity);
+            modelManagementController.AddModel(model1);
+            modelManagementController.AddModel(model2);
         }
 
         [TestMethod]
@@ -258,9 +329,9 @@ namespace EntityFrameworkTests
                 Material = _testMat,
                 Shape = _testSphere,
             };
-            _repository.AddModel(actualModel);
+            eFModelRepository.AddModel(actualModel);
 
-            Model model = _repository.GetModel(name, owner);
+            Model model = eFModelRepository.GetModel(name, owner);
 
             Assert.IsNotNull(model);
             Assert.AreEqual(actualModel, model);
@@ -272,18 +343,17 @@ namespace EntityFrameworkTests
 
             string name = "Test Model";
             string owner = "TestUser";
-            Model newModel = new Model()
+            ModelDTO newModel = new ModelDTO()
             {
                 Name = name,
-                Owner = owner,
-                Material = _testMat,
-                Shape = _testSphere,
-                Preview = null
+                OwnerName = owner,
+                Material = MaterialMapper.ConvertToDTO(_testMat),
+                Shape = SphereMapper.ConvertToDTO(_testSphere),
             };
 
-            _repository.AddModel(newModel);
+            modelManagementController.AddModel(newModel);
 
-            _repository.RemoveModel(name, owner);
+            modelManagementController.RemoveModel(name, owner);
 
             ModelEntity removedModelEntity;
             using (EFContext dbContext = new EFContext())
@@ -292,6 +362,115 @@ namespace EntityFrameworkTests
             }
             Assert.IsNull(removedModelEntity);
         }
-    }
 
+        [TestMethod]
+        public void GetAvailableMaterials_ValidOwner_ServiceGetsMaterialsFromUser()
+        {
+            string owner = "TestUser";
+            Metallic metal = new Metallic
+            {
+                Name = "Test Material1",
+                Owner = "TestUser",
+                Color = new Color(1, 0, 0),
+                Roughness = 0.5,
+            };
+            Metallic metal2 = new Metallic
+            {
+                Name = "Test Material2",
+                Owner = "TestUser",
+                Color = new Color(1, 0.6, 0),
+                Roughness = 0.1,
+            };
+
+            eFMaterialRepository.AddMaterial(metal);
+            eFMaterialRepository.AddMaterial(metal2);
+
+            List<MaterialDTO> materials = modelManagementController.GetAvailableMaterials(owner);
+
+            Assert.IsNotNull(materials);
+            Assert.AreEqual(3, materials.Count);           
+        }
+
+        [TestMethod]
+        public void GetAvailableShapes_ValidOwner_ServiceGetsSpheresFromUser()
+        {
+            string owner = "TestUser";
+            Sphere sphere = new Sphere
+            {
+                Name = "Test Sphere1",
+                Owner = "TestUser",
+                Radius = 5,
+            };
+            Sphere sphere2 = new Sphere
+            {
+                Name = "Test Sphere2",
+                Owner = "TestUser",
+                Radius = 3,
+            };
+
+            eFSphereRepository.AddSphere(sphere);
+            eFSphereRepository.AddSphere(sphere2);
+
+            List<SphereDTO> spheres = modelManagementController.GetAvailableShapes(owner);
+
+            Assert.IsNotNull(spheres);
+            Assert.AreEqual(3, spheres.Count);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Controller_ObjectHandlingException))]
+        public void RemoveModelUsedByScene_Fails()
+        {
+            VectorDTO origin = new VectorDTO(4, 2, 8);
+            VectorDTO lookAt = new VectorDTO(0, 1, -2);
+            VectorDTO vectorUp = new VectorDTO(0, 1, 0);
+            int samplesPerPixel = 100;
+            int depth = 50;
+            UICameraDTO dto = new UICameraDTO()
+            {
+                LookFrom = origin,
+                LookAt = lookAt,
+                Up = vectorUp,
+                FieldOfView = 30,
+                ResolutionX = 50,
+                ResolutionY = 50,
+                SamplesPerPixel = samplesPerPixel,
+                MaxDepth = depth,
+                Aperture = 0.2,
+            };
+
+            DateTime validDate = new DateTime(2023, 1, 1);
+            SceneDTO scene = new SceneDTO
+            {
+                Name = "TestScene",
+                Owner = "TestUser",
+                CreationDate = validDate,
+                Blur = false,
+                CameraDTO = dto,
+                LastModificationDate = validDate,
+                LastRenderDate = validDate,
+                PositionedModels = new List<PositionedModelDTO>(),
+                Preview = null
+            };
+
+            Model testModel = new Model()
+            {
+                Name = "Test Model",
+                Shape = _testSphere,
+                Material = _testMat,
+                Owner = "TestUser"
+            };
+
+            PositionedModel positiondeModel = new PositionedModel()
+            {
+                Model = testModel,
+                Position = new Vector(0, 0.5, -2)
+            };
+
+            scene.PositionedModels.Add(PositionedModelMapper.ConvertPositionedModelToDTO(positiondeModel));
+            sceneController.AddScene(scene);
+
+            modelManagementController.RemoveModel("Test Model", "TestUser");
+        }
+    }
 }
