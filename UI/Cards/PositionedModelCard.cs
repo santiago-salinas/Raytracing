@@ -1,36 +1,47 @@
-﻿using BusinessLogic;
+﻿using Controllers;
+using DataTransferObjects.DTOs;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using UI.Tabs;
 
 namespace UI.Cards
 {
     public partial class PositionedModelCard : UserControl
     {
-        private PositionedModel _positionedModel;
-        private Model _model;
-        private Scene _scene;
-        public PositionedModelCard(PositionedModel providedModel, Scene providedScene)
+        private PositionedModelDTO _positionedModel;
+        private ModelDTO _model;
+        private SceneDTO _scene;
+        private EditSceneController _controller;
+        public PositionedModelCard(PositionedModelDTO providedModel, SceneDTO providedScene, EditSceneController controller)
         {
             InitializeComponent();
             _positionedModel = providedModel;
             _scene = providedScene;
-            _model = _positionedModel.Model;
+            _model = _positionedModel.ModelDTO;
+            _controller = controller;
             modelNameLabel.Text = _model.Name;
-            positionLabel.Text = _positionedModel.Position.ToString();
+            positionLabel.Text = VectorToString(providedModel.Position);
 
             LoadPreview();
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            _scene.RemovePositionedModel(_positionedModel);
+            _controller.RemovePositionedModel(_positionedModel, _scene);
+            EditSceneTab editSceneTab = (EditSceneTab)Parent.Parent;
+            editSceneTab.NotifyThatSeneWasModified();
             this.Parent.Controls.Remove(this);
+
         }
 
+        private string VectorToString(VectorDTO vector)
+        {
+            return $"({vector.FirstValue} ; {vector.SecondValue} ; {vector.ThirdValue})";
+        }
         private void LoadPreview()
         {
-            PPM preview = _model.Preview;
+            PpmDTO preview = _model.Preview;
 
             if (preview == null)
             {
@@ -39,19 +50,18 @@ namespace UI.Cards
 
                 Panel coloredBox = new Panel();
 
-                BusinessLogic.Color materialColor = _model.Material.Color;
+                ColorDTO materialColor = _model.Material.Color;
 
                 int redValue = (int)materialColor.Red;
                 int greenValue = (int)materialColor.Green;
                 int blueValue = (int)materialColor.Blue;
 
-                System.Drawing.Color colorForBox = System.Drawing.Color.FromArgb(redValue, greenValue, blueValue);
+                Color colorForBox = Color.FromArgb(redValue, greenValue, blueValue);
                 coloredBox.BackColor = colorForBox;
                 coloredBox.Size = new Size(40, 40);
                 coloredBox.Location = new Point(previewBox.Width - coloredBox.Width, previewBox.Height - coloredBox.Height);
 
                 previewBox.Controls.Add(coloredBox);
-
             }
             else
             {

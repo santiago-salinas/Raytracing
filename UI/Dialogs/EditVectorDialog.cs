@@ -1,4 +1,4 @@
-﻿using BusinessLogic;
+﻿using DataTransferObjects.DTOs;
 using System;
 using System.Windows.Forms;
 
@@ -7,8 +7,8 @@ namespace UI.Dialogs
     public partial class EditVectorDialog : Form
     {
         public bool WasModified;
-        private Vector _vector;
-        public EditVectorDialog(Vector providedVector, string title)
+        private VectorDTO _vector;
+        public EditVectorDialog(VectorDTO providedVector, string title)
         {
             InitializeComponent();
             titleLabel.Text = title;
@@ -30,7 +30,6 @@ namespace UI.Dialogs
                 _vector.SecondValue != newYValue ||
                 _vector.ThirdValue != newZValue)
             {
-
                 WasModified = true;
             }
 

@@ -1,4 +1,5 @@
-﻿using BusinessLogic;
+﻿using Controllers;
+using Controllers.Exceptions;
 using System;
 using System.Windows.Forms;
 
@@ -6,14 +7,16 @@ namespace UI
 {
     public partial class SignUpPage : Form
     {
-        private User _createdUser = null;
         private bool _usernameFieldIsCorrect = false;
         private bool _passwordFieldIsCorrect = false;
         private bool _confirmPasswordFieldIsCorrect = false;
-        public SignUpPage()
+        private UserController _controller;
+        private Context _context;
+        public SignUpPage(Context context)
         {
             InitializeComponent();
-            _createdUser = new User();
+            _controller = context.UserController;
+            _context = context;
         }
 
         private void SignUpButton_Click(object sender, EventArgs e)
@@ -21,26 +24,25 @@ namespace UI
             string username = userNameTextBox.Text;
             string password = passwordTextBox.Text;
             usernameStatusLabel.Text = "";
-
-            if (Users.ContainsUser(username))
-            {
-                usernameStatusLabel.Text = "User with that name already exists";
-                _usernameFieldIsCorrect = false;
-            }
+            UsernameTextBoxChanged(sender, e);
 
             if (_usernameFieldIsCorrect && _passwordFieldIsCorrect && _confirmPasswordFieldIsCorrect)
             {
-                _createdUser.UserName = username;
-                _createdUser.Password = password;
-                _createdUser.RegisterDate = DateTime.Now;
-                Users.AddUser(_createdUser);
-                this.Close();
+                try
+                {
+                    _controller.SignUp(username, password);
+                    this.Close();
+                }
+                catch (Controller_ObjectAlreadyExistsException ex)
+                {
+                    signUpLabel.Visible = true;
+                    usernameStatusLabel.Text = ex.Message;
+                }
             }
             else
             {
                 signUpLabel.Visible = true;
             }
-
         }
 
         private void UsernameTextBoxChanged(object sender, EventArgs e)
@@ -51,9 +53,9 @@ namespace UI
 
             try
             {
-                _createdUser.CheckIfUserNameIsValid(username);
+                _controller.CheckUsernameValidity(username);
             }
-            catch (ArgumentException ex)
+            catch (Controller_ArgumentException ex)
             {
                 usernameStatusLabel.Text = ex.Message;
                 _usernameFieldIsCorrect = false;
@@ -67,9 +69,9 @@ namespace UI
             _passwordFieldIsCorrect = true;
             try
             {
-                _createdUser.IsValidPassword(password);
+                _controller.CheckPasswordValidity(password);
             }
-            catch (ArgumentException ex)
+            catch (Controller_ArgumentException ex)
             {
                 passwordStatusLabel.Text = ex.Message;
                 _passwordFieldIsCorrect = false;
@@ -102,7 +104,7 @@ namespace UI
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            new LogInPage().Show();
+            new LogInPage(_context).Show();
 
             base.OnFormClosing(e);
         }

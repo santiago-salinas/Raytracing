@@ -1,7 +1,8 @@
-﻿using BusinessLogic;
+﻿using Controllers;
+using Controllers.Exceptions;
+using DataTransferObjects.DTOs;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Windows.Forms;
 using UI.Cards;
 using UI.Dialogs;
@@ -10,66 +11,73 @@ namespace UI.Tabs
 {
     public partial class EditSceneTab : Form
     {
-        private Scene _scene;
-        private User _loggedUser;
+        private SceneDTO _scene;
+        private string _loggedUser;
         public ScenesTab ScenesTab;
         private bool _isNewScene;
 
-        private CameraDTO sceneCamera;
-        public EditSceneTab(Scene providedScene, User providedUser)
+        private PPMViewer _imagePPM;
+
+        private EditSceneController _controller;
+        private UICameraDTO sceneCamera;
+
+        public EditSceneTab(SceneDTO providedScene, Context context)
         {
             InitializeComponent();
-            _loggedUser = providedUser;
+            _loggedUser = context.CurrentUser;
+            _controller = context.EditSceneController;
             _isNewScene = providedScene == null;
-            _scene = _isNewScene ? CreateNewScene() : providedScene;
-            LoadAvailableModels();
-            LoadDataFromScene(_scene);
+            _scene = providedScene;
+
+            if (!_isNewScene)
+            {
+                EnableEditControls();
+            }
         }
 
-        private Scene CreateNewScene()
+        private SceneDTO CreateNewScene(string name)
         {
-            CameraDTO defaultCameraValues = new CameraDTO()
-            {
-                LookFrom = new Vector(0, 2, 0),
-                LookAt = new Vector(0, 2, 5),
-                Up = new Vector(0, 1, 0),
-                FieldOfView = 30,
-                MaxDepth = 20,
-                ResolutionX = 300,
-                ResolutionY = 200,
-                SamplesPerPixel = 50
-            };
-
-            Scene newScene = new Scene()
-            {
-                Owner = _loggedUser,
-                CameraDTO = defaultCameraValues,
-            };
-
-            return newScene;
+            return _controller.CreateNewScene(_loggedUser, name);
         }
-        private void LoadDataFromScene(Scene providedScene)
+        private void LoadDataFromScene(SceneDTO providedScene)
         {
             _scene = providedScene;
             nameTextbox.Text = providedScene.Name;
             sceneCamera = providedScene.CameraDTO;
-            Vector lookFrom = sceneCamera.LookFrom;
-            Vector lookAt = sceneCamera.LookAt;
+            VectorDTO lookFrom = sceneCamera.LookFrom;
+            VectorDTO lookAt = sceneCamera.LookAt;
             int fieldOfView = sceneCamera.FieldOfView;
-            lookFromButton.Text = lookFrom.ToString();
-            lookAtButton.Text = lookAt.ToString();
-            lastModificationLabel.Text += _scene.LastModificationDate.ToString("f", new CultureInfo("en-US"));
+            double aperture = sceneCamera.Aperture;
+            bool blurEnabled = _scene.Blur;
+
+            lookFromButton.Text = VectorToString(lookFrom);
+            lookAtButton.Text = VectorToString(lookAt);
+
+            DateTime lastModificationDate = _scene.LastModificationDate;           
+            lastModificationLabel.Text = "Last modified: " + lastModificationDate.ToString("dd/MM/yyyy h:mm:ss tt"); ;
+
+
             fovInput.Value = fieldOfView;
+            apertureInput.Value = (decimal)aperture;
+            checkBlur.Checked = blurEnabled;
+
             if (_scene.Preview != null)
             {
-                renderPanel.Controls.Add(new PPMViewer(_scene.Preview));
-                lastRenderLabel.Text += _scene.LastRenderDate.ToString("f", new CultureInfo("en-US"));
+                DateTime lastRenderDate = _scene.LastRenderDate;               
+                _imagePPM = new PPMViewer(_scene.Preview);
+                renderPanel.Controls.Add(_imagePPM);
+                saveBtn.Enabled = true;
+                lastRenderLabel.Text = "Last rendered: " + lastRenderDate.ToString("dd/MM/yyyy h:mm:ss tt");
+
+                if (lastModificationDate > lastRenderDate)
+                {
+                    outdatedStatusLabel.Visible = true;
+                }
             }
             LoadPositionedModels();
         }
         private void LookFromButton_Click(object sender, EventArgs e)
         {
-
             EditVectorDialog editVectorDialog = new EditVectorDialog(sceneCamera.LookFrom, "Look from");
             editVectorDialog.ShowDialog();
             DialogResult result = editVectorDialog.DialogResult;
@@ -77,7 +85,8 @@ namespace UI.Tabs
             if (result == DialogResult.OK)
             {
                 if (editVectorDialog.WasModified) NotifyThatSeneWasModified();
-                lookFromButton.Text = sceneCamera.LookFrom.ToString();
+                lookFromButton.Text = VectorToString(sceneCamera.LookFrom);
+                _controller.UpdateCamera(_scene);
             }
         }
         private void LookAtButton_Click(object sender, EventArgs e)
@@ -89,59 +98,47 @@ namespace UI.Tabs
             if (result == DialogResult.OK)
             {
                 if (editVectorDialog.WasModified) NotifyThatSeneWasModified();
-                lookAtButton.Text = sceneCamera.LookAt.ToString();
+                lookAtButton.Text = VectorToString(sceneCamera.LookAt);
+                _controller.UpdateCamera(_scene);
             }
         }
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            nameStatusLabel.Text = string.Empty;
+            sceneNameStatusLabel.Visible = true;
+            nameStatusLabel.Text = "";
             string newName = nameTextbox.Text.Trim();
-            bool endedCorrectly = false;
-            if (newName == "")
-            {
-                nameStatusLabel.Text = "* Scene's name cannot be blank";
-            }
-            else
-            {
-                if (_isNewScene)
-                {
-                    try
-                    {
-                        _scene.Name = newName;
-                        Scenes.AddScene(_scene);
-                        endedCorrectly = true;
-                    }
-                    catch (Exception ex)
-                    {
-                        nameStatusLabel.Text = "* " + ex.Message;
-                    }
-                }
-                else
-                {
-                    if (NameWasChanged() && Scenes.ContainsScene(newName, _loggedUser))
-                    {
-                        nameStatusLabel.Text = "* User already owns a scene with that name";
-                    }
-                    else
-                    {
-                        _scene.Name = newName;
-                        endedCorrectly = true;
-                    }
-                }
 
+            try
+            {
+                _scene = CreateNewScene(newName);
+                EnableEditControls();
+            }
+            catch (Controller_ArgumentException ex)
+            {
+                sceneNameStatusLabel.Text = ex.Message;
             }
 
-            if (endedCorrectly)
-            {
-                ScenesTab.LoadScenes();
-                ScenesTab.Activate();
-            }
         }
 
-        private bool NameWasChanged()
+        private void EnableEditControls()
         {
-            return _scene.Name != nameTextbox.Text;
+            lookFromButton.Enabled = true;
+            lookAtButton.Enabled = true;
+            fovInput.Enabled = true;
+            checkBlur.Enabled = true;
+            renderButton.Enabled = true;
+
+            saveButton.Visible = false;
+            nameTextbox.ReadOnly = true;
+
+            nameSetNoteLabel.Visible = false;
+            sceneNameStatusLabel.Visible = false;
+
+
+            LoadAvailableModels();
+            LoadDataFromScene(_scene);
         }
+
 
         private void FovWasChanged(object sender, EventArgs e)
         {
@@ -150,51 +147,127 @@ namespace UI.Tabs
             {
                 NotifyThatSeneWasModified();
                 sceneCamera.FieldOfView = newFov;
+                _controller.UpdateCamera(_scene);
             }
         }
         private void LoadAvailableModels()
         {
             availableModelsPanel.Controls.Clear();
-            List<Model> list = Models.GetModelsFromUser(_loggedUser);
-            foreach (Model elem in list)
+            List<ModelDTO> list = _controller.GetAvailableModels(_loggedUser);
+            foreach (ModelDTO elem in list)
             {
-                EditSceneModelCard modelCard = new EditSceneModelCard(_scene, elem);
+                EditSceneModelCard modelCard = new EditSceneModelCard(_controller, _scene, elem);
                 availableModelsPanel.Controls.Add(modelCard);
             }
         }
-
         public void LoadPositionedModels()
         {
             positionedModelsPanel.Controls.Clear();
-            List<PositionedModel> list = _scene.PositionedModels;
-            foreach (PositionedModel elem in list)
+            List<PositionedModelDTO> list = _scene.PositionedModels;
+            foreach (PositionedModelDTO elem in list)
             {
-                PositionedModelCard modelCard = new PositionedModelCard(elem, _scene);
+                PositionedModelCard modelCard = new PositionedModelCard(elem, _scene, _controller);
                 positionedModelsPanel.Controls.Add(modelCard);
             }
         }
 
         private void RenderButton_Click(object sender, EventArgs e)
         {
-            _scene.UpdateLastRenderDate();
-            lastRenderLabel.Text = "Last rendered: " + _scene.LastRenderDate.ToString("f", new CultureInfo("en-US"));
+
             renderPanel.Controls.Clear();
             outdatedStatusLabel.Visible = false;
 
-            Engine engine = new Engine(_scene);
-            PPM ppm = engine.Render();
-            _scene.Preview = ppm;
+            PpmDTO ppm = _controller.RenderScene(_scene);
 
-            renderPanel.Controls.Add(new PPMViewer(ppm));
+            _imagePPM = new PPMViewer(ppm);
+
+            renderPanel.Controls.Add(_imagePPM);
+            saveBtn.Enabled = true;
+
+            lastRenderLabel.Text = "Last rendered: " + _scene.LastRenderDate.ToString("dd/MM/yyyy h:mm:ss tt");
         }
-
+        private string VectorToString(VectorDTO vector)
+        {
+            return $"({vector.FirstValue} ; {vector.SecondValue} ; {vector.ThirdValue})";
+        }
         public void NotifyThatSeneWasModified()
-        {            
-            _scene.UpdateLastModificationDate();
+        {
+            _controller.UpdateLastModificationDate(_scene);
             DateTime newModificationDate = _scene.LastModificationDate;
-            lastModificationLabel.Text = "Last modified: " + newModificationDate.ToString("f", new CultureInfo("en-US"));
+            lastModificationLabel.Text = "Last modified: " + newModificationDate.ToString("dd/MM/yyyy h:mm:ss tt");
+            lastRenderLabel.Text = "Last rendered: " + _scene.LastRenderDate.ToString("dd/MM/yyyy h:mm:ss tt");
+
             outdatedStatusLabel.Visible = true;
         }
 
+        private void numericAperture_ValueChanged(object sender, EventArgs e)
+        {
+            double newAperture = (double)apertureInput.Value;
+            if (sceneCamera.Aperture != newAperture)
+            {
+                NotifyThatSeneWasModified();
+                sceneCamera.Aperture = newAperture;
+                _controller.UpdateCamera(_scene);
+            }
+        }
+
+        private void checkBlur_CheckedChanged(object sender, EventArgs e)
+        {
+            bool newBlur = checkBlur.Checked;
+
+            if(_scene.Blur != newBlur)
+            {
+                if (checkBlur.Checked)
+                {
+                    apertureInput.Enabled = true;
+                    _scene.Blur = true;
+                }
+                else
+                {
+                    apertureInput.Enabled = false;
+                    _scene.Blur = false;
+                }
+                NotifyThatSeneWasModified();
+                _controller.UpdateBlur(_scene);
+            }
+        }
+
+        // https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-save-files-using-the-savefiledialog-component?view=netframeworkdesktop-4.8
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Displays a SaveFileDialog so the user can save the Image
+            // assigned to Button2.
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "JPeg Image|*.jpg|Png Image|*.png|Ppm Image|*.ppm";
+            saveFileDialog1.Title = "Save an Image File";
+            saveFileDialog1.ShowDialog();
+
+            // If the file name is not an empty string open it for saving.
+            if (saveFileDialog1.FileName != "")
+            {
+                // Saves the Image via a FileStream created by the OpenFile method.
+                System.IO.FileStream fs =
+                    (System.IO.FileStream)saveFileDialog1.OpenFile();
+                // Saves the Image in the appropriate ImageFormat based upon the
+                // File type selected in the dialog box.
+                // NOTE that the FilterIndex property is one-based.
+                switch (saveFileDialog1.FilterIndex)
+                {
+                    case 1:
+                        this._imagePPM.GetImage().Save(fs, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        break;
+
+                    case 2:
+                        this._imagePPM.GetImage().Save(fs, System.Drawing.Imaging.ImageFormat.Png);
+                        break;
+
+                    case 3:
+                        this._imagePPM.SavePPM(fs);
+                        break;
+                }
+
+                fs.Close();
+            }
+        }
     }
 }

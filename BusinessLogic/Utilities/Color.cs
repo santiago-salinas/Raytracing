@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BusinessLogic
+namespace BusinessLogic.Utilities
 {
     public class Color
     {
@@ -13,7 +13,7 @@ namespace BusinessLogic
         private const int _maximumRGBValue = 255;
         private const double _tolerance = 0.0001;
 
-
+        public Color() { }
         public Color(double red, double green, double blue)
         {
             Red = red;
@@ -113,6 +113,11 @@ namespace BusinessLogic
             bool thirdEval = Math.Abs(Blue - otherVector.Blue) < _tolerance;
 
             return firstEval && secondEval && thirdEval;
+        }
+
+        public override string ToString()
+        {
+            return Red + "," + Green + "," + Blue;
         }
     }
 }

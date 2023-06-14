@@ -1,6 +1,7 @@
-﻿using System;
+﻿using BusinessLogic.DomainObjects;
+using System;
 
-namespace BusinessLogic
+namespace BusinessLogic.Utilities
 {
     public class Engine
     {
@@ -24,26 +25,24 @@ namespace BusinessLogic
             Random = new Random();
         }
 
-        public Engine(Scene scene)
+        public Engine(Scene scene, ICamera camera)
         {
-            Camera camera = new Camera(scene.CameraDTO);
+            Random = new Random();
+
+            CameraUsedToRender = camera;
 
             SceneToRender = scene;
-            CameraUsedToRender = camera;
-            SamplesPerPixel = camera.SamplesPerPixel;
-            ResolutionX = camera.ResolutionX;
-            ResolutionY = camera.ResolutionY;
-            MaxDepth = camera.MaxDepth;
-
-            Random = new Random();
+            SamplesPerPixel = CameraUsedToRender.SamplesPerPixel;
+            ResolutionX = CameraUsedToRender.ResolutionX;
+            ResolutionY = CameraUsedToRender.ResolutionY;
+            MaxDepth = CameraUsedToRender.MaxDepth;
         }
         private Scene SceneToRender { get; set; }
-        private Camera CameraUsedToRender { get; set; }
+        private ICamera CameraUsedToRender { get; set; }
         private int SamplesPerPixel { get; }
         private int ResolutionX { get; }
         private int ResolutionY { get; }
         private int MaxDepth { get; }
-
 
         public void RandomOff()
         {
@@ -115,6 +114,7 @@ namespace BusinessLogic
 
             if (closestObjectHitRecord.IsHit)
             {
+                closestObjectHitRecord.Inray = ray;
                 return GetColor(closestObject, closestObjectHitRecord, depthLeft);
             }
             else
@@ -152,6 +152,12 @@ namespace BusinessLogic
             if (depthLeft > _zero)
             {
                 Ray bouncedRay = positionedModel.GetBouncedRay(hitRecord);
+
+                if (bouncedRay.Nulleable)
+                {
+                    return new Color(_zero, _zero, _zero);
+                }
+
                 Color color = shootRay(bouncedRay, depthLeft - 1);
                 Color attenuation = hitRecord.Attenuation;
                 return new Color((color.Red * attenuation.Red) / _attenuationDivisor,

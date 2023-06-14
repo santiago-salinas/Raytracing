@@ -1,5 +1,8 @@
-﻿using BusinessLogic;
+﻿using BusinessLogic.Exceptions;
+using BusinessLogic.DomainObjects;
+using BusinessLogic.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Repositories;
 using System;
 using System.Collections.Generic;
 
@@ -20,11 +23,22 @@ namespace BusinessLogic_Tests
         private string _lambertianName;
         private Color _color;
 
-        private User _testUser;
+        private string _testUser;
+
+        private MemorySceneRepository memorySceneRepository;
+        private MemoryModelRepository memoryModelRepository;
+        private MemorySphereRepository memorySphereRepository;
+        private MemoryMaterialRepository memoryLambertianRepository;
 
         [TestInitialize]
         public void Initialize()
         {
+            memorySceneRepository = new MemorySceneRepository();
+            memoryModelRepository = new MemoryModelRepository(memorySceneRepository);
+            memorySphereRepository = new MemorySphereRepository(memoryModelRepository);
+            memoryLambertianRepository = new MemoryMaterialRepository(memoryModelRepository);
+
+
             _modelName = "Wooden ball";
             _testNullName = string.Empty;
 
@@ -44,11 +58,7 @@ namespace BusinessLogic_Tests
                 Color = _color,
             };
 
-            _testUser = new User()
-            {
-                UserName = "Username1",
-
-            };
+            _testUser = "Username1";
 
             _testModel = new Model()
             {
@@ -76,7 +86,7 @@ namespace BusinessLogic_Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException), "Name cant be null")]
+        [ExpectedException(typeof(BusinessLogicException), "Name cant be null")]
         public void NameCantBeNullTest()
         {
             //arrange
@@ -122,8 +132,8 @@ namespace BusinessLogic_Tests
         public void AddModelToCollection()
         {
             //act
-            Models.AddModel(_testModel);
-            bool added = Models.ContainsModel(_testModel.Name, _testUser);
+            memoryModelRepository.AddModel(_testModel);
+            bool added = memoryModelRepository.ContainsModel(_testModel.Name, _testUser);
             //assert
             Assert.IsTrue(added);
         }
@@ -132,8 +142,8 @@ namespace BusinessLogic_Tests
         public void GetModelFromCollection()
         {
             //act
-            Models.AddModel(_testModel);
-            Model getModel = Models.GetModel(_modelName, _testUser);
+            memoryModelRepository.AddModel(_testModel);
+            Model getModel = memoryModelRepository.GetModel(_modelName, _testUser);
             //assert
             Assert.ReferenceEquals(_testModel, getModel);
         }
@@ -142,10 +152,10 @@ namespace BusinessLogic_Tests
         [ExpectedException(typeof(BusinessLogicException), "Model does not exist in the collection")]
         public void RemoveModelFromCollection()
         {
-            Models.AddModel(_testModel);
+            memoryModelRepository.AddModel(_testModel);
             //act
-            Models.RemoveModel(_modelName, _testUser);
-            Models.GetModel(_modelName, _testUser);
+            memoryModelRepository.RemoveModel(_modelName, _testUser);
+            memoryModelRepository.GetModel(_modelName, _testUser);
         }
 
         [TestMethod]
@@ -153,7 +163,7 @@ namespace BusinessLogic_Tests
         public void CantRemoveModelNotInCollection()
         {
             //act
-            Models.RemoveModel(_modelName, _testUser);
+            memoryModelRepository.RemoveModel(_modelName, _testUser);
         }
 
         [TestMethod]
@@ -161,7 +171,7 @@ namespace BusinessLogic_Tests
         public void CantAddModelWithNameAlreadyInCollection()
         {
             //arrange
-            Models.AddModel(_testModel);
+            memoryModelRepository.AddModel(_testModel);
             Model newModel = new Model()
             {
                 Name = _modelName,
@@ -171,7 +181,7 @@ namespace BusinessLogic_Tests
             };
 
             //act
-            Models.AddModel(newModel);
+            memoryModelRepository.AddModel(newModel);
         }
 
         [TestMethod]
@@ -179,14 +189,13 @@ namespace BusinessLogic_Tests
         public void CantDeleteSphereFromCollectionUsedByModel()
         {
 
-            //arrange
-            User testUser = new User();
-            _testSphere.Owner = testUser;
+            //arrange           
+            _testSphere.Owner = _testUser;
 
-            Spheres.AddSphere(_testSphere);
-            Models.AddModel(_testModel);
+            memorySphereRepository.AddSphere(_testSphere);
+            memoryModelRepository.AddModel(_testModel);
             //act
-            Spheres.RemoveSphere(_sphereName, testUser);
+            memorySphereRepository.RemoveSphere(_sphereName, _testUser);
         }
 
         [TestMethod]
@@ -194,11 +203,11 @@ namespace BusinessLogic_Tests
         public void CantDeleteLambertianFromCollectionUsedByModel()
         {
             //arrange
-            Lambertians.AddLambertian(_testLambertian);
+            memoryLambertianRepository.AddMaterial(_testLambertian);
             _testLambertian.Owner = _testUser;
-            Models.AddModel(_testModel);
+            memoryModelRepository.AddModel(_testModel);
             //act
-            Lambertians.RemoveLambertian(_lambertianName, _testUser);
+            memoryLambertianRepository.RemoveMaterial(_lambertianName, _testUser);
         }
 
         [TestMethod]
@@ -207,17 +216,17 @@ namespace BusinessLogic_Tests
             //arrange                                    
             _testSphere.Owner = _testUser;
             _testLambertian.Owner = _testUser;
-            Spheres.AddSphere(_testSphere);
-            Lambertians.AddLambertian(_testLambertian);
-            Models.AddModel(_testModel);
-            Models.RemoveModel(_modelName, _testUser);
+            memorySphereRepository.AddSphere(_testSphere);
+            memoryLambertianRepository.AddMaterial(_testLambertian);
+            memoryModelRepository.AddModel(_testModel);
+            memoryModelRepository.RemoveModel(_modelName, _testUser);
 
             //act
-            Spheres.RemoveSphere(_sphereName, _testUser);
-            Lambertians.RemoveLambertian(_lambertianName, _testUser);
+            memorySphereRepository.RemoveSphere(_sphereName, _testUser);
+            memoryLambertianRepository.RemoveMaterial(_lambertianName, _testUser);
             //assert
-            bool sphereDeleted = !Spheres.ContainsSphere(_sphereName, _testUser);
-            bool lambertianDeleted = !Lambertians.ContainsLambertian(_lambertianName, _testUser);
+            bool sphereDeleted = !memorySphereRepository.ContainsSphere(_sphereName, _testUser);
+            bool lambertianDeleted = !memoryLambertianRepository.ContainsMaterial(_lambertianName, _testUser);
             Assert.IsTrue(sphereDeleted && lambertianDeleted);
         }
 
@@ -238,24 +247,30 @@ namespace BusinessLogic_Tests
             Model model1 = new Model()
             {
                 Name = "scene1",
-                Owner = user1,
+                Owner = user1.UserName,
+                Shape = _testSphere,
+                Material = _testLambertian
             };
             Model model2 = new Model()
             {
                 Name = "scene2",
-                Owner = user1,
+                Owner = user1.UserName,
+                Shape = _testSphere,
+                Material = _testLambertian
             };
             Model model3 = new Model()
             {
                 Name = "scene3",
-                Owner = user2,
+                Owner = user2.UserName,
+                Shape = _testSphere,
+                Material = _testLambertian
             };
 
-            Models.AddModel(model1);
-            Models.AddModel(model2);
-            Models.AddModel(model3);
+            memoryModelRepository.AddModel(model1);
+            memoryModelRepository.AddModel(model2);
+            memoryModelRepository.AddModel(model3);
 
-            List<Model> models = Models.GetModelsFromUser(user1);
+            List<Model> models = memoryModelRepository.GetModelsFromUser(user1.UserName);
 
             Assert.AreEqual(2, models.Count);
             Assert.IsTrue(models.Contains(model1));
@@ -273,7 +288,7 @@ namespace BusinessLogic_Tests
                 Password = "Password1"
             };
 
-            List<Model> models = Models.GetModelsFromUser(emptyUser);
+            List<Model> models = memoryModelRepository.GetModelsFromUser(emptyUser.UserName);
 
             Assert.AreEqual(0, models.Count);
         }
@@ -281,9 +296,9 @@ namespace BusinessLogic_Tests
         [TestCleanup]
         public void TearDown()
         {
-            Spheres.Drop();
-            Lambertians.Drop();
-            Models.Drop();
+            memorySphereRepository.Drop();
+            memoryLambertianRepository.Drop();
+            memoryModelRepository.Drop();
 
         }
     }

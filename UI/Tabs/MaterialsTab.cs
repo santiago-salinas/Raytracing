@@ -1,4 +1,5 @@
-﻿using BusinessLogic;
+﻿using Controllers;
+using DataTransferObjects.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -9,34 +10,37 @@ namespace UI.Tabs
 {
     public partial class MaterialsTab : Form
     {
-        private User _loggedUser;
-        public MaterialsTab(User loggedUser)
+        private string _loggedUser;
+        private Context _context;
+        private MaterialManagementController _materialController;
+        public MaterialsTab(Context context)
         {
             InitializeComponent();
-            this._loggedUser = loggedUser;
+            _context = context;
+            _loggedUser = context.CurrentUser;
+            _materialController = context.MaterialController;
             LoadMaterials();
         }
 
         private void LoadMaterials()
         {
-            List<Lambertian> lambertianList = Lambertians.GetLambertiansFromUser(_loggedUser);
-            foreach (Lambertian elem in lambertianList)
+            List<MaterialDTO> materialList = _materialController.GetMaterialsFromUser(_loggedUser);
+            foreach (MaterialDTO elem in materialList)
             {
-                LambertianCard lambertianCard = new LambertianCard(elem);
-                flowLayoutPanel.Controls.Add(lambertianCard);
+                MaterialCard materialCard = new MaterialCard(elem, _materialController);
+                flowLayoutPanel.Controls.Add(materialCard);
             }
         }
 
         private void AddMaterialButton_Click(object sender, EventArgs e)
         {
-            AddLambertianDialog addMaterial = new AddLambertianDialog(_loggedUser);
+            AddMaterialDialog addMaterial = new AddMaterialDialog(_context);
             DialogResult result = addMaterial.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-                LambertianCard materialCard = new LambertianCard(addMaterial.NewLambertian);
-                Lambertians.AddLambertian(addMaterial.NewLambertian);
-                flowLayoutPanel.Controls.Add(materialCard);
+                flowLayoutPanel.Controls.Clear();
+                LoadMaterials();
             }
         }
     }

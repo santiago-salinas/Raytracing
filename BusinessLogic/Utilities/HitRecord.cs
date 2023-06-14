@@ -1,5 +1,5 @@
 ﻿
-namespace BusinessLogic
+namespace BusinessLogic.Utilities
 {
     public class HitRecord
     {
@@ -12,5 +12,8 @@ namespace BusinessLogic
         public Vector Normal { get; set; }
 
         public Color Attenuation { get; set; }
+        public Ray Inray { get; set; }
+        public double Roughness { get; set; }
+
     }
 }

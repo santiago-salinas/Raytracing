@@ -1,5 +1,7 @@
-﻿using BusinessLogic;
+﻿using BusinessLogic.DomainObjects;
+using BusinessLogic.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 namespace BusinessLogic_Tests
 {
     [TestClass]

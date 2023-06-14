@@ -1,4 +1,6 @@
-﻿using BusinessLogic;
+﻿using Controllers;
+using Controllers.Exceptions;
+using DataTransferObjects.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -7,20 +9,27 @@ namespace UI.Dialogs
 {
     public partial class AddModelDialog : Form
     {
-        public Model NewModel = new Model();
-        private List<Sphere> _availableShapes;
-        private List<Lambertian> _availableLambertians;
-        private User _loggedUser;
+        public ModelDTO NewModel;
+        private List<SphereDTO> _availableShapes;
+        private List<MaterialDTO> _availableMaterials;
+        private string _loggedUser;
 
-        private Sphere _selectedShape;
-        private Lambertian _selectedMaterial;
-        public AddModelDialog(User loggedUser)
+        private SphereDTO _selectedShape;
+        private MaterialDTO _selectedMaterial;
+        private ModelManagementController _controller;
+
+        private bool _shapeWasSelected = false;
+        private bool _materialWasSelected = false;
+        public AddModelDialog(Context context)
         {
             InitializeComponent();
-            this._loggedUser = loggedUser;
-            this._availableShapes = Spheres.GetSpheresFromUser(loggedUser);
-            this._availableLambertians = Lambertians.GetLambertiansFromUser(loggedUser);
+            _loggedUser = context.CurrentUser;
+            _controller = context.ModelController;
 
+            _availableShapes = _controller.GetAvailableShapes(_loggedUser);
+            _availableMaterials = _controller.GetAvailableMaterials(_loggedUser);
+
+            saveButton.Enabled = false;
             LoadShapeComboBox();
             LoadMaterialComboBox();
         }
@@ -31,44 +40,53 @@ namespace UI.Dialogs
             nameStatusLabel.Text = "";
             bool nameIsCorrect = true;
 
-            try
+            NewModel = new ModelDTO()
             {
-                NewModel.Name = modelName;
+                Name = modelName,
+                OwnerName = _loggedUser,
+                Shape = _selectedShape,
+                Material = _selectedMaterial,
+            };
+
+            if (previewCheckbox.Checked)
+            {
+                NewModel.Preview = _controller.RenderPreview(NewModel);
             }
-            catch (ArgumentNullException)
+            else
             {
-                nameStatusLabel.Text = "* Name cannot be empty";
-                nameIsCorrect = false;
+                NewModel.Preview = null;
             }
 
-            if (Models.ContainsModel(modelName, _loggedUser))
+            try
             {
+                _controller.AddModel(NewModel);
+            }
+            catch (Controller_ArgumentException ex)
+            {
+                nameStatusLabel.Text = ex.Message;
                 nameIsCorrect = false;
-                nameStatusLabel.Text = "* Model with that name already exists";
             }
 
             if (nameIsCorrect)
             {
-                NewModel.Owner = _loggedUser;
-                NewModel.Shape = _selectedShape;
-                NewModel.Material = _selectedMaterial;
                 DialogResult = DialogResult.OK;
             }
 
-            if (previewCheckbox.Checked)
-            {
-                NewModel.RenderPreview();
-            }
+
         }
 
         private void ShapeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             _selectedShape = _availableShapes[shapeComboBox.SelectedIndex];
+            _shapeWasSelected = true;
+            if (_materialWasSelected) saveButton.Enabled = true;
         }
 
         private void MaterialComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _selectedMaterial = _availableLambertians[materialComboBox.SelectedIndex];
+            _selectedMaterial = _availableMaterials[materialComboBox.SelectedIndex];
+            _materialWasSelected = true;
+            if (_shapeWasSelected) saveButton.Enabled = true;
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -78,7 +96,7 @@ namespace UI.Dialogs
 
         private void LoadShapeComboBox()
         {
-            foreach (Sphere elem in _availableShapes)
+            foreach (SphereDTO elem in _availableShapes)
             {
                 shapeComboBox.Items.Add(elem.Name);
             }
@@ -86,7 +104,7 @@ namespace UI.Dialogs
 
         private void LoadMaterialComboBox()
         {
-            foreach (Lambertian elem in _availableLambertians)
+            foreach (MaterialDTO elem in _availableMaterials)
             {
                 materialComboBox.Items.Add(elem.Name);
             }

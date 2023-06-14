@@ -1,4 +1,6 @@
-﻿using BusinessLogic;
+﻿using Controllers;
+using Controllers.Exceptions;
+using DataTransferObjects.DTOs;
 using System;
 using System.Windows.Forms;
 
@@ -7,34 +9,29 @@ namespace UI.Cards
     public partial class SphereCard : UserControl
     {
 
-        private Sphere _sphere;
-        public SphereCard()
+        private SphereDTO _sphereDTO;
+        private SphereManagementController _controller;
+
+        public SphereCard(SphereDTO sphereDTO, SphereManagementController controller)
         {
             InitializeComponent();
+            _sphereDTO = sphereDTO;
+            nameLabel.Text = _sphereDTO.Name;
+            radiusLabel.Text = "Radius: " + _sphereDTO.Radius.ToString();
+            _controller = controller;
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             try
             {
-                Spheres.RemoveSphere(_sphere.Name, _sphere.Owner);
-                this.Parent.Controls.Remove(this);
+                _controller.RemoveSphere(_sphereDTO.Name, _sphereDTO.OwnerName);
+                Parent.Controls.Remove(this);
             }
-            catch (BusinessLogicException)
+            catch (Controller_ObjectHandlingException)
             {
                 deleteLabel.Visible = true;
             }
         }
-
-
-        public SphereCard(Sphere sphere)
-        {
-            InitializeComponent();
-            this._sphere = sphere;
-            nameLabel.Text = sphere.Name;
-            radiusLabel.Text = "Radius: " + sphere.Radius.ToString();
-
-        }
-
     }
 }

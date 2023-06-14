@@ -1,4 +1,4 @@
-﻿namespace BusinessLogic
+﻿namespace BusinessLogic.Utilities
 {
     public class Ray
     {
@@ -7,7 +7,10 @@
         {
             Origin = vectorOrigin;
             Direction = vectorDirection;
+            Nulleable = false;
         }
+
+        public bool Nulleable { get; set; }
 
         public Vector Origin { get; set; }
 

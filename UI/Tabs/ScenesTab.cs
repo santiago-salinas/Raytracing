@@ -1,4 +1,5 @@
-﻿using BusinessLogic;
+﻿using Controllers;
+using DataTransferObjects.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -8,24 +9,28 @@ namespace UI.Tabs
 {
     public partial class ScenesTab : Form
     {
-        private User _loggedUser;
+        private string _currentUser;
         public EditSceneTab SceneEditDialog;
         private MainPage _mainPage;
-        public ScenesTab(User loggedUser, MainPage mainPage)
+        private SceneManagementController _controller;
+        private Context _context;
+        public ScenesTab(Context context, MainPage mainPage)
         {
             InitializeComponent();
-            this._loggedUser = loggedUser;
+            _context = context;
+            _mainPage = mainPage;
+            _controller = context.SceneController;
+            _currentUser = context.CurrentUser;
             LoadScenes();
-            this._mainPage = mainPage;
         }
 
         public void LoadScenes()
         {
             flowLayoutPanel.Controls.Clear();
-            List<Scene> sceneList = Scenes.GetScenesFromUser(_loggedUser);
-            foreach (Scene elem in sceneList)
+            List<SceneDTO> sceneList = _controller.GetScenesFromUser(_currentUser);
+            foreach (SceneDTO elem in sceneList)
             {
-                SceneCard sceneCard = new SceneCard(elem);
+                SceneCard sceneCard = new SceneCard(_controller, elem);
                 flowLayoutPanel.Controls.Add(sceneCard);
             }
         }
@@ -35,11 +40,11 @@ namespace UI.Tabs
             LoadSceneEditTab(null);
         }
 
-        public void LoadSceneEditTab(Scene scene)
+        public void LoadSceneEditTab(SceneDTO scene)
         {
             if (SceneEditDialog == null)
             {
-                EditSceneTab sceneEditDialog = new EditSceneTab(scene, _loggedUser);
+                EditSceneTab sceneEditDialog = new EditSceneTab(scene, _context);
                 sceneEditDialog.ScenesTab = this;
                 sceneEditDialog.FormClosed += EditSceneClosed;
                 sceneEditDialog.MdiParent = _mainPage;

@@ -47,7 +47,14 @@
             this.renderPanel = new System.Windows.Forms.Panel();
             this.lookFromButton = new System.Windows.Forms.Button();
             this.lookAtButton = new System.Windows.Forms.Button();
+            this.apertureInput = new System.Windows.Forms.NumericUpDown();
+            this.apertureLabel = new System.Windows.Forms.Label();
+            this.checkBlur = new System.Windows.Forms.CheckBox();
+            this.saveBtn = new System.Windows.Forms.Button();
+            this.sceneNameStatusLabel = new System.Windows.Forms.Label();
+            this.nameSetNoteLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fovInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.apertureInput)).BeginInit();
             this.SuspendLayout();
             // 
             // saveButton
@@ -57,7 +64,7 @@
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(106, 51);
             this.saveButton.TabIndex = 0;
-            this.saveButton.Text = "Change name";
+            this.saveButton.Text = "Confirm Name";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
@@ -65,7 +72,7 @@
             // 
             this.lastModificationLabel.AutoSize = true;
             this.lastModificationLabel.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lastModificationLabel.Location = new System.Drawing.Point(734, 58);
+            this.lastModificationLabel.Location = new System.Drawing.Point(585, 58);
             this.lastModificationLabel.Name = "lastModificationLabel";
             this.lastModificationLabel.Size = new System.Drawing.Size(175, 23);
             this.lastModificationLabel.TabIndex = 2;
@@ -103,6 +110,7 @@
             // 
             // fovInput
             // 
+            this.fovInput.Enabled = false;
             this.fovInput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fovInput.Location = new System.Drawing.Point(427, 168);
             this.fovInput.Maximum = new decimal(new int[] {
@@ -164,6 +172,7 @@
             // renderButton
             // 
             this.renderButton.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.renderButton.Enabled = false;
             this.renderButton.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.renderButton.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.renderButton.Location = new System.Drawing.Point(712, 216);
@@ -234,6 +243,7 @@
             // 
             // lookFromButton
             // 
+            this.lookFromButton.Enabled = false;
             this.lookFromButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lookFromButton.Location = new System.Drawing.Point(22, 160);
             this.lookFromButton.Name = "lookFromButton";
@@ -245,6 +255,7 @@
             // 
             // lookAtButton
             // 
+            this.lookAtButton.Enabled = false;
             this.lookAtButton.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lookAtButton.Location = new System.Drawing.Point(221, 160);
             this.lookAtButton.Name = "lookAtButton";
@@ -254,12 +265,99 @@
             this.lookAtButton.UseVisualStyleBackColor = true;
             this.lookAtButton.Click += new System.EventHandler(this.LookAtButton_Click);
             // 
+            // apertureInput
+            // 
+            this.apertureInput.DecimalPlaces = 1;
+            this.apertureInput.Enabled = false;
+            this.apertureInput.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.apertureInput.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.apertureInput.Location = new System.Drawing.Point(578, 168);
+            this.apertureInput.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.apertureInput.Name = "apertureInput";
+            this.apertureInput.Size = new System.Drawing.Size(120, 26);
+            this.apertureInput.TabIndex = 24;
+            this.apertureInput.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.apertureInput.ValueChanged += new System.EventHandler(this.numericAperture_ValueChanged);
+            // 
+            // apertureLabel
+            // 
+            this.apertureLabel.AutoSize = true;
+            this.apertureLabel.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.apertureLabel.Location = new System.Drawing.Point(598, 135);
+            this.apertureLabel.Name = "apertureLabel";
+            this.apertureLabel.Size = new System.Drawing.Size(72, 18);
+            this.apertureLabel.TabIndex = 25;
+            this.apertureLabel.Text = "Aperture";
+            // 
+            // checkBlur
+            // 
+            this.checkBlur.AutoSize = true;
+            this.checkBlur.Enabled = false;
+            this.checkBlur.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBlur.Location = new System.Drawing.Point(613, 200);
+            this.checkBlur.Name = "checkBlur";
+            this.checkBlur.Size = new System.Drawing.Size(55, 23);
+            this.checkBlur.TabIndex = 26;
+            this.checkBlur.Text = "Use";
+            this.checkBlur.UseVisualStyleBackColor = true;
+            this.checkBlur.CheckedChanged += new System.EventHandler(this.checkBlur_CheckedChanged);
+            // 
+            // saveBtn
+            // 
+            this.saveBtn.Enabled = false;
+            this.saveBtn.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveBtn.Location = new System.Drawing.Point(733, 598);
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(124, 31);
+            this.saveBtn.TabIndex = 27;
+            this.saveBtn.Text = "Save Image";
+            this.saveBtn.UseVisualStyleBackColor = true;
+            this.saveBtn.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // sceneNameStatusLabel
+            // 
+            this.sceneNameStatusLabel.AutoSize = true;
+            this.sceneNameStatusLabel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sceneNameStatusLabel.ForeColor = System.Drawing.Color.Red;
+            this.sceneNameStatusLabel.Location = new System.Drawing.Point(45, 99);
+            this.sceneNameStatusLabel.Name = "sceneNameStatusLabel";
+            this.sceneNameStatusLabel.Size = new System.Drawing.Size(0, 15);
+            this.sceneNameStatusLabel.TabIndex = 28;
+            this.sceneNameStatusLabel.Visible = false;
+            // 
+            // nameSetNoteLabel
+            // 
+            this.nameSetNoteLabel.AutoSize = true;
+            this.nameSetNoteLabel.Location = new System.Drawing.Point(29, 29);
+            this.nameSetNoteLabel.Name = "nameSetNoteLabel";
+            this.nameSetNoteLabel.Size = new System.Drawing.Size(287, 13);
+            this.nameSetNoteLabel.TabIndex = 29;
+            this.nameSetNoteLabel.Text = "NOTE: Once the name has been set, it cannot be changed";
+            // 
             // EditSceneTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1275, 820);
             this.ControlBox = false;
+            this.Controls.Add(this.nameSetNoteLabel);
+            this.Controls.Add(this.sceneNameStatusLabel);
+            this.Controls.Add(this.saveBtn);
+            this.Controls.Add(this.checkBlur);
+            this.Controls.Add(this.apertureLabel);
+            this.Controls.Add(this.apertureInput);
             this.Controls.Add(this.lookAtButton);
             this.Controls.Add(this.lookFromButton);
             this.Controls.Add(this.renderPanel);
@@ -284,6 +382,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "sceneEditTab";
             ((System.ComponentModel.ISupportInitialize)(this.fovInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.apertureInput)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -310,5 +409,11 @@
         private System.Windows.Forms.Panel renderPanel;
         private System.Windows.Forms.Button lookFromButton;
         private System.Windows.Forms.Button lookAtButton;
+        private System.Windows.Forms.NumericUpDown apertureInput;
+        private System.Windows.Forms.Label apertureLabel;
+        private System.Windows.Forms.CheckBox checkBlur;
+        private System.Windows.Forms.Button saveBtn;
+        private System.Windows.Forms.Label sceneNameStatusLabel;
+        private System.Windows.Forms.Label nameSetNoteLabel;
     }
 }

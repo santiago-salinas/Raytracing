@@ -1,4 +1,5 @@
-﻿using BusinessLogic;
+﻿using Controllers;
+using DataTransferObjects.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -9,33 +10,36 @@ namespace UI.Tabs
 {
     public partial class ModelsTab : Form
     {
-        private User _loggedUser;
-        public ModelsTab(User loggedUser)
+        private string _currentUser;
+        private Context _context;
+        private ModelManagementController _controller;
+        public ModelsTab(Context context)
         {
             InitializeComponent();
-            this._loggedUser = loggedUser;
+            _context = context;
+            _currentUser = context.CurrentUser;
+            _controller = context.ModelController;
             LoadModels();
         }
 
         private void LoadModels()
         {
-            List<Model> modelList = Models.GetModelsFromUser(_loggedUser);
-            foreach (Model elem in modelList)
+            List<ModelDTO> modelList = _controller.GetModelsFromUser(_currentUser);
+            foreach (ModelDTO elem in modelList)
             {
-                ModelCard modelCard = new ModelCard(elem);
+                ModelCard modelCard = new ModelCard(elem, _controller);
                 flowLayoutPanel.Controls.Add(modelCard);
             }
         }
 
         private void AddModelButton_Click(object sender, EventArgs e)
         {
-            AddModelDialog addModel = new AddModelDialog(_loggedUser);
+            AddModelDialog addModel = new AddModelDialog(_context);
             DialogResult result = addModel.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-                ModelCard modelCard = new ModelCard(addModel.NewModel);
-                Models.AddModel(addModel.NewModel);
+                ModelCard modelCard = new ModelCard(addModel.NewModel, _controller);
                 flowLayoutPanel.Controls.Add(modelCard);
             }
         }

@@ -1,5 +1,8 @@
-﻿using BusinessLogic;
+﻿using BusinessLogic.Exceptions;
+using BusinessLogic.DomainObjects;
+using BusinessLogic.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Repositories;
 using System;
 
 namespace BusinessLogic_Tests
@@ -11,9 +14,20 @@ namespace BusinessLogic_Tests
         private String _testUserName;
         private String _testPassword;
 
+        private MemoryUserRepository memoryUserRepository;
+        private MemorySceneRepository memorySceneRepository;
+        private MemoryModelRepository memoryModelRepository;
+        private MemorySphereRepository memorySphereRepository;
+        private MemoryMaterialRepository memoryMaterialRepository;
+
         [TestInitialize]
         public void Initialize()
         {
+            memoryUserRepository = new MemoryUserRepository();
+            memorySceneRepository = new MemorySceneRepository();
+            memoryModelRepository = new MemoryModelRepository(memorySceneRepository);
+            memorySphereRepository = new MemorySphereRepository(memoryModelRepository);
+            memoryMaterialRepository = new MemoryMaterialRepository(memoryModelRepository);
 
             _testUserName = "TestUsername";
             _testPassword = "Abc123";
@@ -28,7 +42,7 @@ namespace BusinessLogic_Tests
         [TestCleanup]
         public void Cleanup()
         {
-            Users.Drop();
+            memoryUserRepository.Drop();
         }
 
         [TestMethod]
@@ -108,7 +122,7 @@ namespace BusinessLogic_Tests
             // Act
             Action act = () => _testUser.UserName = invalidUserName;
             // Assert
-            var exception = Assert.ThrowsException<ArgumentException>(act);
+            var exception = Assert.ThrowsException<BusinessLogicException>(act);
             Assert.AreEqual("User name cannot contain spaces", exception.Message);
         }
 
@@ -122,7 +136,7 @@ namespace BusinessLogic_Tests
             Action act = () => _testUser.UserName = invalidUserName;
 
             // Assert
-            var exception = Assert.ThrowsException<ArgumentException>(act);
+            var exception = Assert.ThrowsException<BusinessLogicException>(act);
             Assert.AreEqual("User name must be between 3 and 20 characters long", exception.Message);
 
         }
@@ -137,7 +151,7 @@ namespace BusinessLogic_Tests
             Action act = () => _testUser.UserName = invalidUserName;
 
             // Assert
-            var exception = Assert.ThrowsException<ArgumentException>(act);
+            var exception = Assert.ThrowsException<BusinessLogicException>(act);
             Assert.AreEqual("User name must be between 3 and 20 characters long", exception.Message);
         }
 
@@ -152,7 +166,7 @@ namespace BusinessLogic_Tests
             Action act = () => _testUser.UserName = invalidUserName;
 
             // Assert
-            var exception = Assert.ThrowsException<ArgumentException>(act);
+            var exception = Assert.ThrowsException<BusinessLogicException>(act);
             Assert.AreEqual("User name must be between 3 and 20 characters long", exception.Message);
         }
 
@@ -181,7 +195,7 @@ namespace BusinessLogic_Tests
             Action act = () => _testUser.Password = _testPassword;
 
             // Assert
-            var exception = Assert.ThrowsException<ArgumentException>(act);
+            var exception = Assert.ThrowsException<BusinessLogicException>(act);
             Assert.AreEqual("Password must be between 5 and 25 characters long", exception.Message);
         }
 
@@ -196,7 +210,7 @@ namespace BusinessLogic_Tests
             Action act = () => _testUser.Password = invalidPassword;
 
             // Assert
-            var exception = Assert.ThrowsException<ArgumentException>(act);
+            var exception = Assert.ThrowsException<BusinessLogicException>(act);
             Assert.AreEqual("Password must be between 5 and 25 characters long", exception.Message);
 
         }
@@ -211,7 +225,7 @@ namespace BusinessLogic_Tests
             Action act = () => _testUser.Password = invalidPassword;
 
             // Assert
-            var exception = Assert.ThrowsException<ArgumentException>(act);
+            var exception = Assert.ThrowsException<BusinessLogicException>(act);
             Assert.AreEqual("Password must be between 5 and 25 characters long", exception.Message);
         }
 
@@ -226,7 +240,7 @@ namespace BusinessLogic_Tests
             Action act = () => user.Password = invalidPassword;
 
             // Assert
-            var exception = Assert.ThrowsException<ArgumentException>(act);
+            var exception = Assert.ThrowsException<BusinessLogicException>(act);
             Assert.AreEqual("Password must contain at least one upper case character", exception.Message);
         }
 
@@ -241,7 +255,7 @@ namespace BusinessLogic_Tests
 
             // Assert
 
-            var exception = Assert.ThrowsException<ArgumentException>(act);
+            var exception = Assert.ThrowsException<BusinessLogicException>(act);
             Assert.AreEqual("Password must contain at least one numerical digit", exception.Message);
         }
 
@@ -249,18 +263,18 @@ namespace BusinessLogic_Tests
         public void ContainsUser_ReturnsTrue_WhenUserExists()
         {
             // Arrange
-            Users.AddUser(_testUser);
+            memoryUserRepository.AddUser(_testUser);
             string name = _testUser.UserName;
 
             // Act
-            var actual = Users.ContainsUser(name);
+            var actual = memoryUserRepository.ContainsUser(name);
 
             // Assert
             Assert.IsTrue(actual);
         }
 
         [TestMethod]
-        public void Equals_UserWithSameUserName_ReturnsTrue()
+        public void Equals_UserWithSameUserNameAndPassword_ReturnsTrue()
         {
             // Arrange
             User user1 = new User()
@@ -271,7 +285,7 @@ namespace BusinessLogic_Tests
             User user2 = new User()
             {
                 UserName = "username",
-                Password = "Password2"
+                Password = "Password1"
             };
 
             // Act
@@ -307,10 +321,10 @@ namespace BusinessLogic_Tests
         public void ContainsUser_ReturnsFalse_WhenUserDoesNotExist()
         {
             // Arrange
-            Users.AddUser(_testUser);
+            memoryUserRepository.AddUser(_testUser);
 
             // Act
-            var actual = Users.ContainsUser("another name");
+            var actual = memoryUserRepository.ContainsUser("another name");
 
             // Assert
             Assert.IsFalse(actual);
@@ -327,10 +341,10 @@ namespace BusinessLogic_Tests
             };
 
             // Act
-            Users.AddUser(newUser);
+            memoryUserRepository.AddUser(newUser);
 
             // Assert
-            Assert.IsTrue(Users.ContainsUser(_testUserName));
+            Assert.IsTrue(memoryUserRepository.ContainsUser(_testUserName));
         }
 
         [TestMethod]
@@ -338,7 +352,7 @@ namespace BusinessLogic_Tests
         {
             // Arrange
 
-            Users.AddUser(_testUser);
+            memoryUserRepository.AddUser(_testUser);
             var newUser = new User()
             {
                 UserName = _testUserName,
@@ -346,7 +360,7 @@ namespace BusinessLogic_Tests
             };
 
             // Act & Assert
-            Assert.ThrowsException<BusinessLogicException>(() => Users.AddUser(newUser));
+            Assert.ThrowsException<BusinessLogicException>(() => memoryUserRepository.AddUser(newUser));
         }
 
         [TestMethod]
@@ -358,10 +372,10 @@ namespace BusinessLogic_Tests
                 UserName = _testUserName,
                 Password = _testPassword
             };
-            Users.AddUser(newUser);
+            memoryUserRepository.AddUser(newUser);
 
             // Act
-            var actual = Users.GetUser(_testUserName);
+            var actual = memoryUserRepository.GetUser(_testUserName);
 
             // Assert
             Assert.AreEqual(newUser, actual);
@@ -371,17 +385,17 @@ namespace BusinessLogic_Tests
         public void GetUser_ThrowsBusinessLogicException_WhenUserDoesNotExist()
         {
             // Arrange & Act & Assert
-            Assert.ThrowsException<BusinessLogicException>(() => Users.GetUser(_testUserName));
+            Assert.ThrowsException<BusinessLogicException>(() => memoryUserRepository.GetUser(_testUserName));
         }
 
         [TestMethod]
         public void CheckUsernameAndPasswordCombination_ReturnsTrue_WhenCombinationExists()
         {
             // Arrange
-            Users.AddUser(_testUser);
+            memoryUserRepository.AddUser(_testUser);
 
             // Act
-            bool actual = Users.CheckUsernameAndPasswordCombination(_testUser.UserName, _testUser.Password);
+            bool actual = memoryUserRepository.CheckUsernameAndPasswordCombination(_testUser.UserName, _testUser.Password);
 
             // Assert
             Assert.IsTrue(actual);
@@ -391,10 +405,10 @@ namespace BusinessLogic_Tests
         public void CheckUsernameAndPasswordCombination_ReturnsFalse_WhenCombinationDoesNotExist()
         {
             // Arrange
-            Users.AddUser(_testUser);
+            memoryUserRepository.AddUser(_testUser);
 
             // Act
-            var actual = Users.CheckUsernameAndPasswordCombination(_testUser.UserName, "password2");
+            var actual = memoryUserRepository.CheckUsernameAndPasswordCombination(_testUser.UserName, "password2");
 
             // Assert
             Assert.IsFalse(actual);

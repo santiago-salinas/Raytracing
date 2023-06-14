@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\Obligatorio DA1\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\Obligatorio DA1\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,7 +36,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\Obligatorio DA1\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\Obligatorio DA1\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -52,11 +62,11 @@
     <Compile Include="Cards\EditSceneModelCard.designer.cs">
       <DependentUpon>EditSceneModelCard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Cards\LambertianCard.cs">
+    <Compile Include="Cards\MaterialCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Cards\LambertianCard.Designer.cs">
-      <DependentUpon>LambertianCard.cs</DependentUpon>
+    <Compile Include="Cards\MaterialCard.Designer.cs">
+      <DependentUpon>MaterialCard.cs</DependentUpon>
     </Compile>
     <Compile Include="Cards\ModelCard.cs">
       <SubType>UserControl</SubType>
@@ -82,11 +92,11 @@
     <Compile Include="Cards\SceneCard.Designer.cs">
       <DependentUpon>SceneCard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\AddLambertianDialog.cs">
+    <Compile Include="Dialogs\AddMaterialDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\AddLambertianDialog.Designer.cs">
-      <DependentUpon>AddLambertianDialog.cs</DependentUpon>
+    <Compile Include="Dialogs\AddMaterialDialog.Designer.cs">
+      <DependentUpon>AddMaterialDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\AddModelDialog.cs">
       <SubType>Form</SubType>
@@ -165,8 +175,8 @@
     <EmbeddedResource Include="Cards\EditSceneModelCard.resx">
       <DependentUpon>EditSceneModelCard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Cards\LambertianCard.resx">
-      <DependentUpon>LambertianCard.cs</DependentUpon>
+    <EmbeddedResource Include="Cards\MaterialCard.resx">
+      <DependentUpon>MaterialCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Cards\ModelCard.resx">
       <DependentUpon>ModelCard.cs</DependentUpon>
@@ -180,8 +190,8 @@
     <EmbeddedResource Include="Cards\SphereCard.resx">
       <DependentUpon>SphereCard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\AddLambertianDialog.resx">
-      <DependentUpon>AddLambertianDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\AddMaterialDialog.resx">
+      <DependentUpon>AddMaterialDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\AddModelDialog.resx">
       <DependentUpon>AddModelDialog.cs</DependentUpon>
@@ -227,6 +237,7 @@
     <EmbeddedResource Include="Tabs\ShapesTab.resx">
       <DependentUpon>ShapesTab.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -241,9 +252,29 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
-      <Project>{5807fdc2-139e-4ad2-97d6-0ee8dfcabb8f}</Project>
-      <Name>BusinessLogic</Name>
+    <ProjectReference Include="..\Controllers\Controllers.csproj">
+      <Project>{373a8444-9aba-4360-a411-884816f6f2dc}</Project>
+      <Name>Controllers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{9950622b-d4c8-4b45-9a69-7fbc73807093}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Obligatorio DA1\DataTransferObjects\DataTransferObjects.csproj">
+      <Project>{ab995188-c650-4026-83c9-87cb778c9d89}</Project>
+      <Name>DataTransferObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Obligatorio DA1\Repositories\Repositories.csproj">
+      <Project>{7a7be452-b92a-4aa7-bb88-3167e526a453}</Project>
+      <Name>Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepoInterfaces\RepoInterfaces.csproj">
+      <Project>{8bcecb32-1033-4d47-b60b-16fed3c4091a}</Project>
+      <Name>RepoInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{036d7a65-09f5-408f-a99d-765125df08a2}</Project>
+      <Name>Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -256,4 +287,12 @@
     <None Include="Resources\no-img-placeholder.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\Obligatorio DA1\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\Obligatorio DA1\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\Obligatorio DA1\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\Obligatorio DA1\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\Obligatorio DA1\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\Obligatorio DA1\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
 </Project>

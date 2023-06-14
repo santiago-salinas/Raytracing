@@ -1,4 +1,4 @@
-﻿using BusinessLogic;
+﻿using BusinessLogic.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BusinessLogic_Tests
