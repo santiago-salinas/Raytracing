@@ -1,5 +1,7 @@
 ﻿using BusinessLogic.DomainObjects;
 using BusinessLogic.Utilities;
+using DataTransferObjects.DTOs;
+using DataTransferObjects.Mappers;
 using DataAccess.Entities;
 using DataAccess.Repositories;
 using DataAccess;
@@ -10,6 +12,8 @@ using System.Data.Entity;
 using System;
 using Controllers;
 using Services;
+using Services.Exceptions;
+using Controllers.Exceptions;
 
 namespace EntityFrameworkTests
 {
@@ -42,6 +46,8 @@ namespace EntityFrameworkTests
         private Sphere _testSphere;
         private SphereEntity _testSphereEntity;
         private User _testUser;
+        private SphereDTO _sphereDto;
+        private MaterialDTO _matDto;
 
         [TestInitialize]
         public void TestInitialize()
@@ -94,6 +100,8 @@ namespace EntityFrameworkTests
                 Owner = "TestUser",
                 Radius = 10,
             };
+            _sphereDto = SphereMapper.ConvertToDTO(_testSphere);
+            _matDto = MaterialMapper.ConvertToDTO(_testMat);
             eFUserRepository.AddUser(_testUser);
             eFMaterialRepository.AddMaterial(_testMat);
             eFSphereRepository.AddSphere(_testSphere);
@@ -134,27 +142,26 @@ namespace EntityFrameworkTests
         [TestMethod]
         public void GetModelsFromUser_ExistingUser_ReturnsModels()
         {
-            // Arrange
             string owner = "TestUser";
-            Model model1 = new Model()
+            ModelDTO model1 = new ModelDTO()
             {
                 Name = "Test Model1",
-                Owner = owner,
-                Material = _testMat,
-                Shape = _testSphere,
+                OwnerName = owner,
+                Material = _matDto,
+                Shape = _sphereDto,
             };
-            Model model2 = new Model()
+            ModelDTO model2 = new ModelDTO()
             {
                 Name = "Test Model2",
-                Owner = owner,
-                Material = _testMat,
-                Shape = _testSphere,
+                OwnerName = owner,
+                Material = _matDto,
+                Shape = _sphereDto,
             };
-            eFModelRepository.AddModel(model1);
-            eFModelRepository.AddModel(model2);
+            modelManagementController.AddModel(model1);
+            modelManagementController.AddModel(model2);
 
 
-            List<Model> models = eFModelRepository.GetModelsFromUser(owner);
+            List<ModelDTO> models = modelManagementController.GetModelsFromUser(owner);
 
             Assert.IsNotNull(models);
             Assert.AreEqual(2, models.Count);
@@ -188,7 +195,6 @@ namespace EntityFrameworkTests
         [TestMethod]
         public void ContainsModel_NonexistentModel_ReturnsFalse()
         {
-
             string name = "NonexistentModel";
             string owner = "TestUser";
 
@@ -273,24 +279,27 @@ namespace EntityFrameworkTests
         }
 
         [TestMethod]
-        public void AddModel_ValidModel_AddsModelToDatabase()
+        [ExpectedException(typeof(Controller_ArgumentException))]
+        public void AddModel_ExistingModel_Fails()
         {
             string owner = "TestUser";
-            Model newModel = new Model()
+            ModelDTO model1 = new ModelDTO()
             {
                 Name = "Test Model",
-                Owner = owner,
-                Material = _testMat,
-                Shape = _testSphere,
+                OwnerName = owner,
+                Material = _matDto,
+                Shape = _sphereDto,
+            };
+            ModelDTO model2 = new ModelDTO()
+            {
+                Name = "Test Model",
+                OwnerName = owner,
+                Material = _matDto,
+                Shape = _sphereDto,
             };
 
-            eFModelRepository.AddModel(newModel);
-            ModelEntity addedModelEntity;
-            using (EFContext dbContext = new EFContext())
-            {
-                addedModelEntity = dbContext.ModelEntities.FirstOrDefault(m => m.Name == "Test Model" && m.OwnerId == owner);
-            }
-            Assert.IsNotNull(addedModelEntity);
+            modelManagementController.AddModel(model1);
+            modelManagementController.AddModel(model2);
         }
 
         [TestMethod]
