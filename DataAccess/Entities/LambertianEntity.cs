@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
-namespace DataAccess
+namespace DataAccess.Entities
 {
     public class LambertianEntity
     {

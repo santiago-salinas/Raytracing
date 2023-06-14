@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.DomainObjects;
 using DataAccess;
+using DataAccess.Entities;
 using DataAccess.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
