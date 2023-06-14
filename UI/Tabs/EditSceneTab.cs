@@ -54,7 +54,7 @@ namespace UI.Tabs
             lookAtButton.Text = VectorToString(lookAt);
 
             DateTime lastModificationDate = _scene.LastModificationDate;           
-            lastModificationLabel.Text += lastModificationDate.ToString("dd/MM/yyyy h:mm:ss tt"); ;
+            lastModificationLabel.Text += lastModificationDate.ToString("dd/MM/yyyy h:mm:ss tt");
 
 
             fovInput.Value = fieldOfView;
@@ -185,7 +185,6 @@ namespace UI.Tabs
             saveBtn.Enabled = true;
 
             lastRenderLabel.Text = "Last rendered: " + _scene.LastRenderDate.ToString("dd/MM/yyyy h:mm:ss tt");
-            lastModificationLabel.Text = "Last modified: " + _scene.LastModificationDate.ToString("dd/MM/yyyy h:mm:ss tt");
         }
         private string VectorToString(VectorDTO vector)
         {
@@ -214,18 +213,23 @@ namespace UI.Tabs
 
         private void checkBlur_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBlur.Checked)
+            bool newBlur = checkBlur.Checked;
+
+            if(_scene.Blur != newBlur)
             {
-                apertureInput.Enabled = true;
-                _scene.Blur = true;
+                if (checkBlur.Checked)
+                {
+                    apertureInput.Enabled = true;
+                    _scene.Blur = true;
+                }
+                else
+                {
+                    apertureInput.Enabled = false;
+                    _scene.Blur = false;
+                }
+                NotifyThatSeneWasModified();
+                _controller.UpdateBlur(_scene);
             }
-            else
-            {
-                apertureInput.Enabled = false;
-                _scene.Blur = false;
-            }
-            NotifyThatSeneWasModified();
-            _controller.UpdateCamera(_scene);
         }
 
         // https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-save-files-using-the-savefiledialog-component?view=netframeworkdesktop-4.8
