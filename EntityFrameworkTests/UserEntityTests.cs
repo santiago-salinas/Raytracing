@@ -98,7 +98,7 @@ namespace EntityFrameworkTests
                 RegisterDate = DateTime.Now
             };
 
-            eFUserRepository.AddUser(user);
+            context.UserController.SignUp("TestUser", "Password1");
 
             bool containsUser = eFUserRepository.ContainsUser("TestUser");
             Assert.IsTrue(containsUser);
@@ -123,6 +123,9 @@ namespace EntityFrameworkTests
 
             User retrievedUser = eFUserRepository.GetUser("TestUser");
 
+            bool logged = context.UserController.Login("TestUser", "Password1");
+
+            Assert.IsTrue(logged);
             Assert.IsNotNull(retrievedUser);
             Assert.AreEqual("TestUser", retrievedUser.UserName);
             Assert.AreEqual("Password1", retrievedUser.Password);
@@ -176,8 +179,12 @@ namespace EntityFrameworkTests
             }
 
             bool isValid = eFUserRepository.CheckUsernameAndPasswordCombination("TestUser", "Password1");
+            bool isValid2 = userController.Login("TestUser", "Password1");
+
 
             Assert.IsTrue(isValid);
+            Assert.IsTrue(isValid2);
+
         }
 
         [TestMethod]
@@ -197,9 +204,12 @@ namespace EntityFrameworkTests
                 dbContext.SaveChanges();
             }
 
+            bool isValid2 = userController.Login("TestUser", "WrongPassword");
             bool isValid = eFUserRepository.CheckUsernameAndPasswordCombination("TestUser", "WrongPassword");
+            
 
             Assert.IsFalse(isValid);
+            Assert.IsFalse(isValid2);
         }
     }
 

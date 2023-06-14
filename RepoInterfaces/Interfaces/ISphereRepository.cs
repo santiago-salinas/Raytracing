@@ -9,7 +9,6 @@ namespace RepoInterfaces
         List<Sphere> GetSpheresFromUser(string ownerName);
         bool ContainsSphere(string name, string ownerName);
         void AddSphere(Sphere newElement);
-        Sphere GetSphere(string name, string ownerName);
         void RemoveSphere(string name, string ownerName);
     }
 }

@@ -53,15 +53,5 @@ namespace DataAccess.Repositories
             }
         }
 
-        public Sphere GetSphere(string name, string owner)
-        {
-            using (EFContext context = new EFContext())
-            {
-                SphereEntity sphereEntity = context.SphereEntities
-                    .FirstOrDefault(m => m.Name == name && m.OwnerId == owner);
-
-                return SphereEntity.FromEntity(sphereEntity);
-            }
-        }
     }
 }
