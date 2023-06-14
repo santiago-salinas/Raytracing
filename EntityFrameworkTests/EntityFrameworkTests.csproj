@@ -62,6 +62,7 @@
     <Compile Include="SphereEntityTests.cs" />
     <Compile Include="PPMEntityTest.cs" />
     <Compile Include="MaterialEntityTests.cs" />
+    <Compile Include="SceneEntityTest.cs" />
     <Compile Include="UserEntityTests.cs" />
   </ItemGroup>
   <ItemGroup>

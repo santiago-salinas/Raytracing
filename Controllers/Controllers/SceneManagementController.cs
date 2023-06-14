@@ -1,5 +1,7 @@
-﻿using DataTransferObjects.DTOs;
+﻿using Controllers.Exceptions;
+using DataTransferObjects.DTOs;
 using Services;
+using Services.Exceptions;
 using System;
 using System.Collections.Generic;
 
@@ -25,9 +27,9 @@ namespace Controllers
             {
                 _sceneManagementService.AddScene(newElement);
             }
-            catch (Exception ex)
+            catch (Service_ArgumentException ex)
             {
-                throw new Exception(ex.Message);
+                throw new Controller_ArgumentException(ex.Message);
             }
         }
 
