@@ -14,6 +14,7 @@ namespace BusinessLogic_Tests
         private Scene _testScene;
         private string _testName;
         private string _testNullName;
+        private BLCameraDTO _testCamera;
 
         private Model _testModel;
         private string _modelName;
@@ -93,6 +94,26 @@ namespace BusinessLogic_Tests
             {
                 Model = _testModel,
                 Position = _testPosition
+            };
+
+            Vector origin = new Vector(4, 2, 8);
+
+            Vector lookAt = new Vector(0, 0.5, -2);
+            Vector vectorUp = new Vector(0, 1, 0);
+
+            int samplesPerPixel = 100;
+            int depth = 50;
+
+            _testCamera = new BLCameraDTO()
+            {
+                LookFrom = origin,
+                LookAt = lookAt,
+                Up = vectorUp,
+                FieldOfView = 40,
+                ResolutionX = 50,
+                ResolutionY = 50,
+                SamplesPerPixel = samplesPerPixel,
+                MaxDepth = depth,
             };
 
             DateTimeProvider.Reset();
@@ -289,6 +310,7 @@ namespace BusinessLogic_Tests
             User testUser = new User();
             testUser.UserName = "Username";
             _testScene.Owner = testUser.UserName;
+            _testScene.CameraDTO = _testCamera;
             //act
             memorySceneRepository.AddScene(_testScene);
             bool added = memorySceneRepository.ContainsScene(_testScene.Name, testUser.UserName);
@@ -318,6 +340,7 @@ namespace BusinessLogic_Tests
             User testUser = new User();
             testUser.UserName = "Username";
             _testScene.Owner = testUser.UserName;
+            _testScene.CameraDTO = _testCamera;
             memorySceneRepository.AddScene(_testScene);
             //act
             memorySceneRepository.RemoveScene(_testName, testUser.UserName);
@@ -402,15 +425,14 @@ namespace BusinessLogic_Tests
         [TestMethod]
         public void DeleteModelAfterDeletingScene()
         {
-            //arrange
             User testUser = new User();
             testUser.UserName = "Username";
             _testScene.Owner = testUser.UserName;
+            _testScene.CameraDTO = _testCamera;
             memoryModelRepository.AddModel(_testModel);
             _testScene.AddPositionedModel(_testPositionedModel);
             memorySceneRepository.AddScene(_testScene);
 
-            //act
             memorySceneRepository.RemoveScene(_testScene.Name, testUser.UserName);
             memoryModelRepository.RemoveModel(_testModel.Name, _testModel.Owner);
         }
@@ -419,15 +441,15 @@ namespace BusinessLogic_Tests
         public void ModelIsUsedByScene()
         {
 
-            //arrange
             _testUser = "Username";
             _testScene.Owner = _testUser;
+            _testScene.CameraDTO = _testCamera;
             Assert.IsFalse(_testScene.ContainsModel(_testModel));
             _testModel.Owner = _testUser;
             memoryModelRepository.AddModel(_testModel);
-            //act
+
             _testScene.AddPositionedModel(_testPositionedModel);
-            //assert
+
             Assert.IsTrue(_testScene.ContainsModel(_testModel));
             _testScene.RemovePositionedModel(_testPositionedModel);
             Assert.IsFalse(_testScene.ContainsModel(_testModel));
@@ -451,17 +473,20 @@ namespace BusinessLogic_Tests
             {
                 Name = "scene1",
                 Owner = user1.UserName,
+                CameraDTO = _testCamera
             };
             Scene scene2 = new Scene()
             {
                 Name = "scene2",
                 Owner = user1.UserName,
-            };
+                CameraDTO = _testCamera
+        };
             Scene scene3 = new Scene()
             {
                 Name = "scene3",
                 Owner = user2.UserName,
-            };
+                CameraDTO = _testCamera
+        };
 
             memorySceneRepository.AddScene(scene1);
             memorySceneRepository.AddScene(scene2);
@@ -478,7 +503,6 @@ namespace BusinessLogic_Tests
         public void GetScenesFromUser_ShouldReturnEmptyListIfNoScenesOwnedByUser()
         {
 
-            //Arrange
             User emptyUser = new User()
             {
                 UserName = "TestUser",

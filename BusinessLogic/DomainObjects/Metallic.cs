@@ -43,7 +43,7 @@ namespace BusinessLogic.DomainObjects
 
         public override string Type
         {
-            get { return "metallic"; }
+            get { return "metallic"; } 
         }
 
         public override string ToString()

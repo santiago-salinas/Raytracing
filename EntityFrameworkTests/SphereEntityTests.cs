@@ -117,5 +117,35 @@ namespace EntityFrameworkTests
                 Assert.AreEqual(0, spheres.Count);
             }
         }
+
+        [TestMethod]
+        public void ContainsSphere_Test()
+        {
+            Sphere sphere = new Sphere
+            {
+                Name = "Test Sphere",
+                Owner = "TestUser",
+                Radius = 10,
+            };
+            Sphere sphere2 = new Sphere
+            {
+                Name = "Test Sphere2",
+                Owner = "TestUser",
+                Radius = 10,
+            };
+
+            using (EFContext dbContext = new EFContext())
+            {
+                SphereEntity sphereEntity = SphereEntity.FromDomain(sphere, dbContext);
+                dbContext.SphereEntities.Add(sphereEntity);
+                dbContext.SaveChanges();
+            }
+
+            bool containsSphere = _repository.ContainsSphere("Test Sphere", "TestUser");
+            bool containsSphere2 = _repository.ContainsSphere("Test Sphere2", "TestUser");
+
+            Assert.IsTrue(containsSphere);
+            Assert.IsFalse(containsSphere2);
+        }
     }
 }

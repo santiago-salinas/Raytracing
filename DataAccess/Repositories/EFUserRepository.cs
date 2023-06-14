@@ -2,7 +2,7 @@
 using RepoInterfaces;
 using System.Linq;
 
-namespace DataAccess
+namespace DataAccess.Repositories
 {
     public class EFUserRepository : IUserRepository
     {
