@@ -42,16 +42,6 @@ namespace Services
             _repository.RemoveMaterial(name, ownerName);
         }
 
-        public Material GetLambertian(string name, string ownerName)
-        {
-            return _repository.GetMaterial(name, ownerName);
-        }
-
-        public bool ContainsLambertian(string lambertianName, string ownerName)
-        {
-            return _repository.ContainsMaterial(lambertianName, ownerName);
-        }
-
         public List<MaterialDTO> GetMaterialsFromUser(string owner)
         {
             List<Material> lambertians = _repository.GetMaterialsFromUser(owner);

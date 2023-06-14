@@ -15,6 +15,7 @@ using Services;
 using Services.Exceptions;
 using Controllers.Exceptions;
 using System.Runtime.InteropServices;
+using System.Data.Entity.Core.Metadata.Edm;
 
 namespace EntityFrameworkTests
 {
@@ -51,7 +52,7 @@ namespace EntityFrameworkTests
         private User _testUser;
         private SphereDTO _sphereDto;
         private MaterialDTO _matDto;
-        private Model testModel;
+        private Model _testModel;
 
         [TestInitialize]
         public void TestInitialize()
@@ -110,7 +111,7 @@ namespace EntityFrameworkTests
                 Owner = "TestUser",
                 Radius = 10,
             };
-            testModel = new Model()
+            _testModel = new Model()
             {
                 Name = "Test Model",
                 Shape = _testSphere,
@@ -120,7 +121,7 @@ namespace EntityFrameworkTests
 
             PositionedModel positiondeModel = new PositionedModel()
             {
-                Model = testModel,
+                Model = _testModel,
                 Position = new Vector(0, 0.5, -2)
             };
 
@@ -135,8 +136,8 @@ namespace EntityFrameworkTests
                 LookAt = lookAt,
                 Up = vectorUp,
                 FieldOfView = 30,
-                ResolutionX = 50,
-                ResolutionY = 50,
+                ResolutionX = 5,
+                ResolutionY = 5,
                 SamplesPerPixel = samplesPerPixel,
                 MaxDepth = depth,
                 Aperture = 0.2,
@@ -163,7 +164,7 @@ namespace EntityFrameworkTests
             eFUserRepository.AddUser(_testUser2);
             eFMaterialRepository.AddMaterial(_testMat);
             eFSphereRepository.AddSphere(_testSphere);
-            eFModelRepository.AddModel(testModel);
+            eFModelRepository.AddModel(_testModel);
             using (EFContext dbContext = new EFContext())
             {
                 _testSphereEntity = dbContext.SphereEntities
@@ -189,11 +190,14 @@ namespace EntityFrameworkTests
                     .ToList();
                 List<PositionedModelEntity> positionedModels = dbContext.PositionedModelEntities
                     .ToList();
-                List<SceneEntity> scenes = dbContext.SceneEntities
+                List<SceneEntity> scenes = dbContext.SceneEntities                    
                     .ToList();
                 List<CameraEntity> cameras = dbContext.Set<CameraEntity>().ToList();
+                List<PPMEntity> previews = dbContext.PPMEntities.ToList();
+
                 dbContext.PositionedModelEntities.RemoveRange(positionedModels);
                 dbContext.SceneEntities.RemoveRange(scenes);
+                dbContext.PPMEntities.RemoveRange(previews);
                 dbContext.Set<CameraEntity>().RemoveRange(cameras);
                 dbContext.ModelEntities.RemoveRange(models);
                 dbContext.SphereEntities.RemoveRange(spheres);
@@ -234,6 +238,7 @@ namespace EntityFrameworkTests
             Assert.AreEqual(scene.PositionedModels.Count, 0);
         }
 
+        [TestMethod]
         public void AddSceneToCollection()
         {
             sceneController.AddScene(_testScene);
@@ -255,6 +260,7 @@ namespace EntityFrameworkTests
         public void RemoveSceneFromCollection()
         {
             sceneController.AddScene(_testScene);
+            editSceneController.AddPositionedModel(_testPosModel, _testScene);
             List<SceneDTO> scenes = sceneController.GetScenesFromUser("TestUser");
             Assert.AreEqual(scenes.Count, 1);
 
@@ -279,84 +285,98 @@ namespace EntityFrameworkTests
             sceneController.AddScene(_testScene);
             editSceneController.AddPositionedModel(_testPosModel, _testScene);
 
-            modelManagementController.RemoveModel(testModel.Name,testModel.Owner);
-        }       
-
-        /*[TestMethod]
-        public void ModelIsUsedByScene()
-        {
-
-            _testUser = "Username";
-            _testScene.Owner = _testUser;
-            _testScene.CameraDTO = _testCamera;
-            Assert.IsFalse(_testScene.ContainsModel(_testModel));
-            _testModel.Owner = _testUser;
-            memoryModelRepository.AddModel(_testModel);
-
-            _testScene.AddPositionedModel(_testPositionedModel);
-
-            Assert.IsTrue(_testScene.ContainsModel(_testModel));
-            _testScene.RemovePositionedModel(_testPositionedModel);
-            Assert.IsFalse(_testScene.ContainsModel(_testModel));
+            modelManagementController.RemoveModel(_testModel.Name,_testModel.Owner);
         }
 
         [TestMethod]
-        public void GetScenesFromUser_ShouldReturnScenesOwnedByUser()
+       public void UpdatePreviewTest()
+       {
+            sceneController.AddScene(_testScene);
+            editSceneController.AddPositionedModel(_testPosModel, _testScene);
+            SceneDTO sceneDTO = sceneController.GetScenesFromUser("TestUser")[0];
+            Assert.IsNull(sceneDTO.Preview);
+            editSceneController.RenderScene(sceneDTO);
+            sceneDTO = sceneController.GetScenesFromUser("TestUser")[0];
+            PPM previewFromDB = PPMMapper.ConvertToPPM(sceneDTO.Preview);
+
+            Assert.IsNotNull(previewFromDB);
+       }
+
+        [TestMethod]
+        public void UpdateDates()
         {
-            User user1 = new User()
-            {
-                UserName = "User1",
-                Password = "Password1"
-            };
-            User user2 = new User()
-            {
-                UserName = "User2",
-                Password = "Password1"
-            };
+            sceneController.AddScene(_testScene);
+            SceneDTO sceneDTO = sceneController.GetScenesFromUser("TestUser")[0];
 
-            Scene scene1 = new Scene()
-            {
-                Name = "scene1",
-                Owner = user1.UserName,
-                CameraDTO = _testCamera
-            };
-            Scene scene2 = new Scene()
-            {
-                Name = "scene2",
-                Owner = user1.UserName,
-                CameraDTO = _testCamera
-            };
-            Scene scene3 = new Scene()
-            {
-                Name = "scene3",
-                Owner = user2.UserName,
-                CameraDTO = _testCamera
-            };
+            DateTime previuosRenDate = sceneDTO.LastRenderDate;
+            DateTime previuosModDate = sceneDTO.LastModificationDate;
+            DateTimeProvider.Now = DateTime.Now.AddDays(1);
+            editSceneController.UpdateRenderDate(sceneDTO);
+            editSceneController.UpdateLastModificationDate(sceneDTO);
 
-            memorySceneRepository.AddScene(scene1);
-            memorySceneRepository.AddScene(scene2);
-            memorySceneRepository.AddScene(scene3);
+            sceneDTO = sceneController.GetScenesFromUser("TestUser")[0];
 
-            List<Scene> scenes = memorySceneRepository.GetScenesFromUser(user1.UserName);
-
-            Assert.AreEqual(2, scenes.Count);
-            Assert.IsTrue(scenes.Contains(scene1));
-            Assert.IsTrue(scenes.Contains(scene2));
+            Assert.AreNotEqual(previuosModDate, sceneDTO.LastModificationDate);
+            Assert.AreNotEqual(previuosRenDate, sceneDTO.LastRenderDate);
         }
 
         [TestMethod]
-        public void GetScenesFromUser_ShouldReturnEmptyListIfNoScenesOwnedByUser()
+        public void UpdateCamera()
         {
+            editSceneController.AddNewScene(_testScene);
+            SceneDTO sceneDTO = sceneController.GetScenesFromUser("TestUser")[0];
+            UICameraDTO oldCam = sceneDTO.CameraDTO;
 
-            User emptyUser = new User()
+            sceneDTO.CameraDTO.SamplesPerPixel = 10;
+            editSceneController.UpdateCamera(sceneDTO);
+
+            sceneDTO = sceneController.GetScenesFromUser("TestUser")[0];
+
+            Assert.AreNotEqual(sceneDTO.CameraDTO, oldCam);
+
+        }
+
+        [TestMethod]
+        public void CreateNewScene()
+        {
+            SceneDTO scene = editSceneController.CreateNewScene("TestUser", "Test Scene");
+            Assert.IsNotNull(scene);
+        }
+
+        [TestMethod]
+        public void RenderModelPreview()
+        {
+            PpmDTO preview = renderingService.RenderModelPreview(MaterialMapper.ConvertToDTO(_testMat));
+            Assert.IsNotNull(preview);
+        }
+
+        [TestMethod]
+        public void GetAvailableModels()
+        {
+            ModelDTO model1 = new ModelDTO()
             {
-                UserName = "TestUser",
-                Password = "Password1"
+                Material = _matDto,
+                Name = "Test Model2",
+                OwnerName = "TestUser",
+                Shape = _sphereDto,
             };
 
-            List<Scene> scenes = memorySceneRepository.GetScenesFromUser(emptyUser.UserName);
+            ModelDTO model2 = new ModelDTO()
+            {
+                Material = _matDto,
+                Name = "Test Model3",
+                OwnerName = "TestUser",
+                Shape = _sphereDto,
+            };
 
-            Assert.AreEqual(0, scenes.Count);
-        }*/
+            modelManagementController.AddModel(model2);
+            modelManagementController.AddModel(model1);
+
+            List<ModelDTO> models = editSceneController.GetAvailableModels("TestUser");
+
+            Assert.AreEqual(models.Count, 3);
+        }
+
+        
     }
 }
