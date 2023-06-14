@@ -1,12 +1,17 @@
 ﻿using BusinessLogic.DomainObjects;
+using Controllers;
+using DataTransferObjects.DTOs;
 using DataAccess;
 using DataAccess.Entities;
 using DataAccess.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using DataTransferObjects.Mappers;
+using BusinessLogic.Exceptions;
+using Controllers.Exceptions;
 
 namespace EntityFrameworkTests
 {
@@ -15,13 +20,25 @@ namespace EntityFrameworkTests
     {
         private EFSphereRepository _repository;
         private EFUserRepository _userRepository;
+        private SphereManagementController _controller;
+        private SphereManagementService _service;
 
+        private EFSceneRepository _sceneRepository;
+        private EFModelRepository _modelRepository;
+        private EFMaterialRepository _materialRepository;
+        private ModelManagementService _modelManagementService;
         [TestInitialize]
         public void TestInitialize()
         {
             _repository = new EFSphereRepository();
             _userRepository = new EFUserRepository();
+            _modelRepository = new EFModelRepository();
+            _materialRepository = new EFMaterialRepository();
+            _service = new SphereManagementService(_repository);
+            _sceneRepository = new EFSceneRepository();
 
+            _modelManagementService = new ModelManagementService(_modelRepository,_sceneRepository);
+            _controller = new SphereManagementController(_service,_modelManagementService);
             User user = new User()
             {
                 UserName = "TestUser",
@@ -56,8 +73,8 @@ namespace EntityFrameworkTests
                 Owner = "TestUser",
                 Radius = 10,
             };
-
-            _repository.AddSphere(sphere);
+            SphereDTO sphereDto = SphereMapper.ConvertToDTO(sphere);
+            _controller.AddSphere(sphereDto);
 
             List<Sphere> spheresFromUser = _repository.GetSpheresFromUser("TestUser");
 
@@ -83,11 +100,11 @@ namespace EntityFrameworkTests
                 dbContext.SaveChanges();
             }
 
-            Sphere retrievedSphere = _repository.GetSphere("Test Sphere", "TestUser");
+            List<SphereDTO> retrievedSphere = _controller.GetSpheresFromUser("TestUser");
 
-            Assert.IsNotNull(retrievedSphere);
-            Assert.AreEqual("Test Sphere", retrievedSphere.Name);
-            Assert.AreEqual("TestUser", retrievedSphere.Owner);
+            Assert.AreEqual("Test Sphere", retrievedSphere[0].Name);
+            Assert.AreEqual("TestUser", retrievedSphere[0].OwnerName);
+            Assert.AreEqual(10, retrievedSphere[0].Radius);
         }
 
         [TestMethod]
@@ -107,7 +124,7 @@ namespace EntityFrameworkTests
                 dbContext.SaveChanges();
             }
 
-            _repository.RemoveSphere("Test Sphere", "TestUser");
+            _controller.RemoveSphere("Test Sphere", "TestUser");
 
             using (EFContext dbContext = new EFContext())
             {
@@ -148,5 +165,40 @@ namespace EntityFrameworkTests
             Assert.IsTrue(containsSphere);
             Assert.IsFalse(containsSphere2);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(Controller_ObjectHandlingException),"Cannot remove a sphere that is being used by a model")]
+
+        public void RemoveSphereUsedByModel_Fails()
+        {
+            SphereDTO sphere = new SphereDTO
+            {
+                Name = "Test Sphere",
+                OwnerName = "TestUser",
+                Radius = 10,
+            };
+            MaterialDTO material = new MaterialDTO
+            {
+                Color = new ColorDTO(0, 0, 0),
+                Name = "Material",
+                Owner = "TestUser",
+                Type = "lambertian"
+            };
+            ModelDTO model = new ModelDTO
+            {
+                OwnerName = "TestUser",
+                Name = "Model",
+                Shape = sphere,
+                Material = material,
+            };
+
+            _materialRepository.AddMaterial(MaterialMapper.ConvertToMaterial(material));
+            _controller.AddSphere(sphere);
+            _modelRepository.AddModel(ModelMapper.ConvertToModel(model));
+
+            _controller.RemoveSphere("Test Sphere", "TestUser");
+        }
     }
+
+
 }
