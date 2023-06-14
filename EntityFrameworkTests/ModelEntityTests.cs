@@ -94,9 +94,9 @@ namespace EntityFrameworkTests
                 Owner = "TestUser",
                 Radius = 10,
             };
-            _userRepository.AddUser(_testUser);
-            _materialRepository.AddMaterial(_testMat);
-            _sphereRepository.AddSphere(_testSphere);
+            eFUserRepository.AddUser(_testUser);
+            eFMaterialRepository.AddMaterial(_testMat);
+            eFSphereRepository.AddSphere(_testSphere);
             using (EFContext dbContext = new EFContext())
             {
                 _testSphereEntity = dbContext.SphereEntities
@@ -150,11 +150,11 @@ namespace EntityFrameworkTests
                 Material = _testMat,
                 Shape = _testSphere,
             };
-            _repository.AddModel(model1);
-            _repository.AddModel(model2);
+            eFModelRepository.AddModel(model1);
+            eFModelRepository.AddModel(model2);
 
 
-            List<Model> models = _repository.GetModelsFromUser(owner);
+            List<Model> models = eFModelRepository.GetModelsFromUser(owner);
 
             Assert.IsNotNull(models);
             Assert.AreEqual(2, models.Count);
@@ -180,7 +180,7 @@ namespace EntityFrameworkTests
                 dbContext.ModelEntities.Add(modelEntity);
                 dbContext.SaveChanges();
             }
-            bool containsModel = _repository.ContainsModel(name, owner);
+            bool containsModel = eFModelRepository.ContainsModel(name, owner);
 
             Assert.IsTrue(containsModel);
         }
@@ -192,7 +192,7 @@ namespace EntityFrameworkTests
             string name = "NonexistentModel";
             string owner = "TestUser";
 
-            bool containsModel = _repository.ContainsModel(name, owner);
+            bool containsModel = eFModelRepository.ContainsModel(name, owner);
 
             Assert.IsFalse(containsModel);
         }
@@ -215,10 +215,10 @@ namespace EntityFrameworkTests
                 Material = materialEntity,
                 Shape = _testSphere
             };
-            _materialRepository.AddMaterial(materialEntity);
-            _repository.AddModel(modelEntity);
+            eFMaterialRepository.AddMaterial(materialEntity);
+            eFModelRepository.AddModel(modelEntity);
 
-            bool existsModel = _repository.ExistsModelUsingTheMaterial(materialName, ownerUsername);
+            bool existsModel = eFModelRepository.ExistsModelUsingTheMaterial(materialName, ownerUsername);
 
             Assert.IsTrue(existsModel);
         }
@@ -229,7 +229,7 @@ namespace EntityFrameworkTests
             string materialName = "NonexistentMaterial";
             string ownerUsername = "TestUser";
 
-            bool existsModel = _repository.ExistsModelUsingTheMaterial(materialName, ownerUsername);
+            bool existsModel = eFModelRepository.ExistsModelUsingTheMaterial(materialName, ownerUsername);
 
             Assert.IsFalse(existsModel);
         }
@@ -253,10 +253,10 @@ namespace EntityFrameworkTests
                 Shape = shape,
             };
 
-            _sphereRepository.AddSphere(shape);
-            _repository.AddModel(model);
+            eFSphereRepository.AddSphere(shape);
+            eFModelRepository.AddModel(model);
 
-            bool existsModel = _repository.ExistsModelUsingTheSphere(sphereName, ownerUsername);
+            bool existsModel = eFModelRepository.ExistsModelUsingTheSphere(sphereName, ownerUsername);
 
             Assert.IsTrue(existsModel);
         }
@@ -267,7 +267,7 @@ namespace EntityFrameworkTests
             string sphereName = "NonexistentSphere";
             string ownerUsername = "TestUser";
 
-            bool existsModel = _repository.ExistsModelUsingTheSphere(sphereName, ownerUsername);
+            bool existsModel = eFModelRepository.ExistsModelUsingTheSphere(sphereName, ownerUsername);
 
             Assert.IsFalse(existsModel);
         }
@@ -284,7 +284,7 @@ namespace EntityFrameworkTests
                 Shape = _testSphere,
             };
 
-            _repository.AddModel(newModel);
+            eFModelRepository.AddModel(newModel);
             ModelEntity addedModelEntity;
             using (EFContext dbContext = new EFContext())
             {
@@ -305,9 +305,9 @@ namespace EntityFrameworkTests
                 Material = _testMat,
                 Shape = _testSphere,
             };
-            _repository.AddModel(actualModel);
+            eFModelRepository.AddModel(actualModel);
 
-            Model model = _repository.GetModel(name, owner);
+            Model model = eFModelRepository.GetModel(name, owner);
 
             Assert.IsNotNull(model);
             Assert.AreEqual(actualModel, model);
@@ -328,9 +328,9 @@ namespace EntityFrameworkTests
                 Preview = null
             };
 
-            _repository.AddModel(newModel);
+            eFModelRepository.AddModel(newModel);
 
-            _repository.RemoveModel(name, owner);
+            eFModelRepository.RemoveModel(name, owner);
 
             ModelEntity removedModelEntity;
             using (EFContext dbContext = new EFContext())
