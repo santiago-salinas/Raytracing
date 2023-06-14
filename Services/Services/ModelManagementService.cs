@@ -59,11 +59,6 @@ namespace Services
             }
         }
 
-        public Model GetModel(string name, string owner)
-        {
-            return _modelRepository.GetModel(name, owner);
-        }
-
         private List<ModelDTO> ConvertToModelDTOs(List<Model> models)
         {
             List<ModelDTO> modelDTOs = new List<ModelDTO>();

@@ -14,6 +14,7 @@ using Controllers;
 using Services;
 using Services.Exceptions;
 using Controllers.Exceptions;
+using System.Runtime.InteropServices;
 
 namespace EntityFrameworkTests
 {
@@ -87,6 +88,12 @@ namespace EntityFrameworkTests
                 Password = "Password1",
                 RegisterDate = DateTime.Now,
             };
+            User _testUser2 = new User()
+            {
+                UserName = "TestUser2",
+                Password = "Password1",
+                RegisterDate = DateTime.Now,
+            };
             _testMat = new Metallic
             {
                 Name = "Test Material",
@@ -103,6 +110,7 @@ namespace EntityFrameworkTests
             _sphereDto = SphereMapper.ConvertToDTO(_testSphere);
             _matDto = MaterialMapper.ConvertToDTO(_testMat);
             eFUserRepository.AddUser(_testUser);
+            eFUserRepository.AddUser(_testUser2);
             eFMaterialRepository.AddMaterial(_testMat);
             eFSphereRepository.AddSphere(_testSphere);
             using (EFContext dbContext = new EFContext())
@@ -120,21 +128,28 @@ namespace EntityFrameworkTests
             using (EFContext dbContext = new EFContext())
             {
                 UserEntity user = dbContext.UserEntities.FirstOrDefault(m => m.Username == "TestUser");
+                UserEntity user2 = dbContext.UserEntities.FirstOrDefault(m => m.Username == "TestUser2");
                 List<MaterialEntity> materials = dbContext.MaterialEntities
                     .Include(m => m.Metallic)
-                    .Where(m => m.OwnerId == user.Username && m.Name.StartsWith("Test Material"))
                     .ToList();
                 List<SphereEntity> spheres = dbContext.SphereEntities
-                    .Where(m => m.OwnerId == user.Username && m.Name.StartsWith("Test Sphere"))
                     .ToList();
                 List<ModelEntity> models = dbContext.ModelEntities
-                    .Where(m => m.OwnerId == user.Username && m.Name.StartsWith("Test Model"))
                     .ToList();
+                List<PositionedModelEntity> positionedModels = dbContext.PositionedModelEntities
+                    .ToList();
+                List<SceneEntity> scenes = dbContext.SceneEntities
+                    .ToList();
+                List<CameraEntity> cameras = dbContext.Set<CameraEntity>().ToList();
+                dbContext.PositionedModelEntities.RemoveRange(positionedModels);
+                dbContext.SceneEntities.RemoveRange(scenes);
+                dbContext.Set<CameraEntity>().RemoveRange(cameras);
                 dbContext.ModelEntities.RemoveRange(models);
                 dbContext.SphereEntities.RemoveRange(spheres);
                 dbContext.MetallicEntities.RemoveRange(materials.Select(m => m.Metallic));
                 dbContext.MaterialEntities.RemoveRange(materials);
                 dbContext.UserEntities.Remove(user);
+                dbContext.UserEntities.Remove(user2);
                 dbContext.SaveChanges();
             }
         }
@@ -328,18 +343,17 @@ namespace EntityFrameworkTests
 
             string name = "Test Model";
             string owner = "TestUser";
-            Model newModel = new Model()
+            ModelDTO newModel = new ModelDTO()
             {
                 Name = name,
-                Owner = owner,
-                Material = _testMat,
-                Shape = _testSphere,
-                Preview = null
+                OwnerName = owner,
+                Material = MaterialMapper.ConvertToDTO(_testMat),
+                Shape = SphereMapper.ConvertToDTO(_testSphere),
             };
 
-            eFModelRepository.AddModel(newModel);
+            modelManagementController.AddModel(newModel);
 
-            eFModelRepository.RemoveModel(name, owner);
+            modelManagementController.RemoveModel(name, owner);
 
             ModelEntity removedModelEntity;
             using (EFContext dbContext = new EFContext())
@@ -348,6 +362,115 @@ namespace EntityFrameworkTests
             }
             Assert.IsNull(removedModelEntity);
         }
-    }
 
+        [TestMethod]
+        public void GetAvailableMaterials_ValidOwner_ServiceGetsMaterialsFromUser()
+        {
+            string owner = "TestUser";
+            Metallic metal = new Metallic
+            {
+                Name = "Test Material1",
+                Owner = "TestUser",
+                Color = new Color(1, 0, 0),
+                Roughness = 0.5,
+            };
+            Metallic metal2 = new Metallic
+            {
+                Name = "Test Material2",
+                Owner = "TestUser",
+                Color = new Color(1, 0.6, 0),
+                Roughness = 0.1,
+            };
+
+            eFMaterialRepository.AddMaterial(metal);
+            eFMaterialRepository.AddMaterial(metal2);
+
+            List<MaterialDTO> materials = modelManagementController.GetAvailableMaterials(owner);
+
+            Assert.IsNotNull(materials);
+            Assert.AreEqual(3, materials.Count);           
+        }
+
+        [TestMethod]
+        public void GetAvailableShapes_ValidOwner_ServiceGetsSpheresFromUser()
+        {
+            string owner = "TestUser";
+            Sphere sphere = new Sphere
+            {
+                Name = "Test Sphere1",
+                Owner = "TestUser",
+                Radius = 5,
+            };
+            Sphere sphere2 = new Sphere
+            {
+                Name = "Test Sphere2",
+                Owner = "TestUser",
+                Radius = 3,
+            };
+
+            eFSphereRepository.AddSphere(sphere);
+            eFSphereRepository.AddSphere(sphere2);
+
+            List<SphereDTO> spheres = modelManagementController.GetAvailableShapes(owner);
+
+            Assert.IsNotNull(spheres);
+            Assert.AreEqual(3, spheres.Count);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Controller_ObjectHandlingException))]
+        public void RemoveModelUsedByScene_Fails()
+        {
+            VectorDTO origin = new VectorDTO(4, 2, 8);
+            VectorDTO lookAt = new VectorDTO(0, 1, -2);
+            VectorDTO vectorUp = new VectorDTO(0, 1, 0);
+            int samplesPerPixel = 100;
+            int depth = 50;
+            UICameraDTO dto = new UICameraDTO()
+            {
+                LookFrom = origin,
+                LookAt = lookAt,
+                Up = vectorUp,
+                FieldOfView = 30,
+                ResolutionX = 50,
+                ResolutionY = 50,
+                SamplesPerPixel = samplesPerPixel,
+                MaxDepth = depth,
+                Aperture = 0.2,
+            };
+
+            DateTime validDate = new DateTime(2023, 1, 1);
+            SceneDTO scene = new SceneDTO
+            {
+                Name = "TestScene",
+                Owner = "TestUser",
+                CreationDate = validDate,
+                Blur = false,
+                CameraDTO = dto,
+                LastModificationDate = validDate,
+                LastRenderDate = validDate,
+                PositionedModels = new List<PositionedModelDTO>(),
+                Preview = null
+            };
+
+            Model testModel = new Model()
+            {
+                Name = "Test Model",
+                Shape = _testSphere,
+                Material = _testMat,
+                Owner = "TestUser"
+            };
+
+            PositionedModel positiondeModel = new PositionedModel()
+            {
+                Model = testModel,
+                Position = new Vector(0, 0.5, -2)
+            };
+
+            scene.PositionedModels.Add(PositionedModelMapper.ConvertPositionedModelToDTO(positiondeModel));
+            sceneController.AddScene(scene);
+
+            modelManagementController.RemoveModel("Test Model", "TestUser");
+        }
+    }
 }
